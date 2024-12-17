@@ -43,48 +43,48 @@ export type u32 = number;
  */
 export enum ActionType {
   // Balances Pallet
-  BalancesTransferAllowDeath = 'balances_transfer', // intentionally removed "AllowDeath" from string const
-  BalancesTransferKeepAlive = 'balances_transferKeepAlive',
-  BalancesTransferAll = 'balances_transferAll',
+  BalancesTransferAllowDeath = 'balancesTransfer',
+  BalancesTransferKeepAlive = 'balancesTransferKeepAlive',
+  BalancesTransferAll = 'balancesTransferAll',
 
   // Nfts Pallet
-  NftsCreateCollection = 'nfts_createCollection',
-  NftsDestroyCollection = 'nfts_destroyCollection',
+  NftsCreateCollection = 'nftsCreateCollection',
+  NftsDestroyCollection = 'nftsDestroyCollection',
 
-  NftsTransferCollectionOwnership = 'nfts_transferCollectionOwnership',
-  NftsAcceptCollectionOwnership = 'nfts_acceptCollectionOwnership',
-  NftsSetCollectionMetadata = 'nfts_setCollectionMetadata',
-  NftsClearCollectionMetadata = 'nfts_clearCollectionMetadata',
+  NftsTransferCollectionOwnership = 'nftsTransferCollectionOwnership',
+  NftsAcceptCollectionOwnership = 'nftsAcceptCollectionOwnership',
+  NftsSetCollectionMetadata = 'nftsSetCollectionMetadata',
+  NftsClearCollectionMetadata = 'nftsClearCollectionMetadata',
 
-  NftsMintItem = 'nfts_mintItem',
-  NftsBurnItem = 'nfts_burnItem',
-  NftsTransferItem = 'nfts_transferItem',
-  NftsLockItemTransfer = 'nfts_lockItemTransfer',
-  NftsUnlockItemTransfer = 'nfts_unlockItemTransfer',
-  NftsSetItemMetadata = 'nfts_setItemMetadata',
-  NftsClearItemMetadata = 'nfts_clearItemMetadata',
+  NftsMintItem = 'nftsMintItem',
+  NftsBurnItem = 'nftsBurnItem',
+  NftsTransferItem = 'nftsTransferItem',
+  NftsLockItemTransfer = 'nftsLockItemTransfer',
+  NftsUnlockItemTransfer = 'nftsUnlockItemTransfer',
+  NftsSetItemMetadata = 'nftsSetItemMetadata',
+  NftsClearItemMetadata = 'nftsClearItemMetadata',
 
   // Assets Pallet
-  AssetsCreate = 'assets_create',
+  AssetsCreate = 'assetsCreate',
 
-  AssetsStartDestroy = 'assets_startDestroy',
-  AssetsDestroyAccounts = 'assets_destroyAccounts',
-  AssetsDestroyApprovals = 'assets_destroyApprovals',
-  AssetsFinishDestroy = 'assets_finishDestroy',
+  AssetsStartDestroy = 'assetsStartDestroy',
+  AssetsDestroyAccounts = 'assetsDestroyAccounts',
+  AssetsDestroyApprovals = 'assetsDestroyApprovals',
+  AssetsFinishDestroy = 'assetsFinishDestroy',
 
-  AssetsMint = 'assets_mint',
-  AssetsBurn = 'assets_burn',
-  AssetsTransfer = 'assets_transfer',
-  AssetsTransferKeepAlive = 'assets_transferKeepAlive',
-  AssetsForceTransfer = 'assets_forceTransfer',
-  AssetsFreezeAccount = 'assets_freezeAccount',
-  AssetsThawAccount = 'assets_thawAccount',
+  AssetsMint = 'assetsMint',
+  AssetsBurn = 'assetsBurn',
+  AssetsTransfer = 'assetsTransfer',
+  AssetsTransferKeepAlive = 'assetsTransferKeepAlive',
+  AssetsForceTransfer = 'assetsForceTransfer',
+  AssetsFreezeAccount = 'assetsFreezeAccount',
+  AssetsThawAccount = 'assetsThawAccount',
 
-  AssetsFreezeAsset = 'assets_freezeAsset',
-  AssetsThawAsset = 'assets_thawAsset',
-  AssetsTransferOwnership = 'assets_transferOwnership',
-  AssetsSetMinBalance = 'assets_setMinBalance',
-  AssetsSetMetadata = 'assets_setMetadata',
+  AssetsFreezeAsset = 'assetsFreezeAsset',
+  AssetsThawAsset = 'assetsThawAsset',
+  AssetsTransferOwnership = 'assetsTransferOwnership',
+  AssetsSetMinBalance = 'assetsSetMinBalance',
+  AssetsSetMetadata = 'assetsSetMetadata',
 }
 
 // Balances Pallet Arguments

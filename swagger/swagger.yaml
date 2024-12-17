@@ -168,7 +168,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['balances_transfer']
+          enum: ['balancesTransfer']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -195,7 +195,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['balances_transferKeepAlive']
+          enum: ['balancesTransferKeepAlive']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -222,7 +222,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['balances_transferAll']
+          enum: ['balancesTransferAll']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -241,7 +241,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_createCollection']
+          enum: ['nftsCreateCollection']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -279,7 +279,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_destroyCollection']
+          enum: ['nftsDestroyCollection']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -306,7 +306,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_transferCollectionOwnership']
+          enum: ['nftsTransferCollectionOwnership']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -330,7 +330,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_acceptCollectionOwnership']
+          enum: ['nftsAcceptCollectionOwnership']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -357,7 +357,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_setCollectionMetadata']
+          enum: ['nftsSetCollectionMetadata']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -381,7 +381,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_clearCollectionMetadata']
+          enum: ['nftsClearCollectionMetadata']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -411,7 +411,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_mintItem']
+          enum: ['nftsMintItem']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -438,7 +438,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_burnItem']
+          enum: ['nftsBurnItem']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -468,7 +468,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_transferItem']
+          enum: ['nftsTransferItem']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -495,7 +495,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_lockItemTransfer']
+          enum: ['nftsLockItemTransfer']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -522,7 +522,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_unlockItemTransfer']
+          enum: ['nftsUnlockItemTransfer']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -552,7 +552,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_setItemMetadata']
+          enum: ['nftsSetItemMetadata']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -579,7 +579,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['nfts_clearItemMetadata']
+          enum: ['nftsClearItemMetadata']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -603,7 +603,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_create']
+          enum: ['assetsCreate']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -627,7 +627,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_startDestroy']
+          enum: ['assetsStartDestroy']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -651,7 +651,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_destroyAccounts']
+          enum: ['assetsDestroyAccounts']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -675,7 +675,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_destroyApprovals']
+          enum: ['assetsDestroyApprovals']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -699,7 +699,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_finishDestroy']
+          enum: ['assetsFinishDestroy']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -726,7 +726,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_transferOwnership']
+          enum: ['assetsTransferOwnership']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -753,7 +753,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_setMinBalance']
+          enum: ['assetsSetMinBalance']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -780,7 +780,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_setMetadata']
+          enum: ['assetsSetMetadata']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -804,7 +804,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_freezeAsset']
+          enum: ['assetsFreezeAsset']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -828,7 +828,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_thawAsset']
+          enum: ['assetsThawAsset']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -858,7 +858,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_mint']
+          enum: ['assetsMint']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -888,7 +888,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_burn']
+          enum: ['assetsBurn']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -918,7 +918,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_transfer']
+          enum: ['assetsTransfer']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -948,7 +948,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_transferKeepAlive']
+          enum: ['assetsTransferKeepAlive']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -981,7 +981,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_forceTransfer']
+          enum: ['assetsForceTransfer']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -1008,7 +1008,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_freezeAccount']
+          enum: ['assetsFreezeAccount']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -1035,7 +1035,7 @@ components:
       properties:
         actionType:
           type: string
-          enum: ['assets_thawAccount']
+          enum: ['assetsThawAccount']
         origin:
           $ref: '#/components/schemas/CTActionOrigin'
         arguments:
@@ -1050,7 +1050,7 @@ components:
         - $ref: '#/components/schemas/NftsDestroyCollectionAction'
         - $ref: '#/components/schemas/NftsTransferCollectionOwnershipAction'
         - $ref: '#/components/schemas/NftsAcceptCollectionOwnershipAction'
-        - $ref: '#/components/schemas/NftsSetCollectionMetadataAction'
+        - $ref: '#/components/schemas/nftsSetCollectionMetadataAction'
         - $ref: '#/components/schemas/NftsClearCollectionMetadataAction'
         - $ref: '#/components/schemas/NftsMintItemAction'
         - $ref: '#/components/schemas/NftsBurnItemAction'
