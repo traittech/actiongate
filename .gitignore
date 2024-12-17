@@ -1,0 +1,6 @@
+/node_modules
+config.json
+/src/mocks/datagate/node_modules/
+/dist
+actiongate.log
+.yarn

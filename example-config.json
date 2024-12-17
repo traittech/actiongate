@@ -1,0 +1,28 @@
+{
+  "api_keys_enabled": true,
+  "api_keys": ["api-key-1", "api-key-2"],
+  "api_ssl_enabled": false,
+  "api_ssl": {
+    "sslKeyPath": "/path/to/ssl/key.pem",
+    "sslCertPath": "/path/to/ssl/cert.pem"
+  },
+  "datagate_api": {
+    "uri": "https://api.trait.tech"
+  },
+  "tx_build": {
+    "tx_life_time": 64
+  },
+  "blockchain": {
+    "ss58_code": 5335
+  },
+  "admin_keys": [
+    {
+      "id": "ADMIN_1",
+      "private_key": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "logs": {
+    "logLevel": "debug",
+    "logFile": "actiongate.log"
+  }
+}

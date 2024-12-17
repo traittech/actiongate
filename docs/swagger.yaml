@@ -1,0 +1,1185 @@
+openapi: 3.1.0
+info:
+  title: ActionGate API
+  version: 0.1.0
+  description: API for submitting transactions to the TRAIT blockchain.
+
+servers:
+  - url: http://0.0.0.0:8080
+    description: Local server
+
+paths:
+  /submit/clearing_transaction:
+    post:
+      summary: Submit a clearing transaction
+      description: Submits a clearing transaction and returns the transaction hash.
+      tags:
+        - Transactions
+      requestBody:
+        description: Payload for submitting a clearing transaction
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClearingTransactionPayload'
+      responses:
+        '200':
+          description: Transaction submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClearingTransactionResponse'
+        '400':
+          description: Bad Request - Missing or invalid required fields in payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found - Signatory not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /submit/transaction:
+    post:
+      summary: Submit a transaction
+      description: Submits a transaction and returns the transaction hash.
+      tags:
+        - Transactions
+      requestBody:
+        description: Payload for submitting a transaction
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionPayload'
+      responses:
+        '200':
+          description: Transaction submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+        '400':
+          description: Bad Request - Missing required fields in payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found - Signatory not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    CTActionOrigin:
+      description: The origin type for each Action in CT.
+      oneOf:
+        - type: object
+          properties:
+            AppAgentId:
+              type: object
+              description: The ID of the application agent.
+        - type: object
+          properties:
+            AppAgentAddress:
+              type: string
+              description: The address of the application agent.
+        - type: object
+          properties:
+            TransactionalAddressId:
+              type: object
+              description: The ID of the transactional address.
+        - type: object
+          properties:
+            TransactionalAddress:
+              type: object
+              description: The transactional address.
+        - type: object
+          properties:
+            NamedAddress:
+              type: object
+              description: The named address.
+        - type: object
+          properties:
+            NamedAddressName:
+              type: object
+              description: The name of the named address.
+
+    BlockchainAddress:
+      type: string
+      description: The address on the blockchain. Typically, it is a string of alphanumeric characters.
+
+    Balance:
+      type: number
+      description: The balance, represented as a numeric value.
+
+    CollectionId:
+      type: number
+      description: A unique identifier for a collection. Typically, it is a numeric value.
+
+    ItemId:
+      type: number
+      description: A unique identifier for an item in the collection. Typically, it is a numeric value.
+
+    AssetId:
+      type: number
+      description: A unique identifier for an asset. Typically, it is a numeric value.
+
+    u32:
+      type: number
+      description: A 32-bit unsigned integer. Typically used to represent small range numbers.
+
+    BalancesTransferAllowDeathArguments:
+      type: object
+      required:
+        - dest
+        - value
+      properties:
+        dest:
+          $ref: '#/components/schemas/BlockchainAddress'
+        value:
+          $ref: '#/components/schemas/Balance'
+
+    BalancesTransferAllowDeathAction:
+      type: object
+      description: Represents a transfer of funds from one account to another.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['balances_transfer']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/BalancesTransferAllowDeathArguments'
+
+    BalancesTransferKeepAliveArguments:
+      type: object
+      required:
+        - dest
+        - value
+      properties:
+        dest:
+          $ref: '#/components/schemas/BlockchainAddress'
+        value:
+          $ref: '#/components/schemas/Balance'
+
+    BalancesTransferKeepAliveAction:
+      type: object
+      description: Represents a transfer of funds with a "keep alive" feature for the transaction.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['balances_transferKeepAlive']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/BalancesTransferKeepAliveArguments'
+
+    BalancesTransferAllArguments:
+      type: object
+      required:
+        - dest
+        - keepAlive
+      properties:
+        dest:
+          $ref: '#/components/schemas/BlockchainAddress'
+        keepAlive:
+          type: boolean
+
+    BalancesTransferAllAction:
+      type: object
+      description: Represents a transfer of all funds to the destination address with an option to keep the transaction alive.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['balances_transferAll']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/BalancesTransferAllArguments'
+
+    NftsCreateCollectionArguments:
+      type: object
+      enum: [{}]
+    NftsCreateCollectionAction:
+      type: object
+      description: Represents the action of creating a new NFT collection.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_createCollection']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsCreateCollectionArguments'
+
+    NftsDestroyCollectionArguments:
+      type: object
+      required:
+        - collection
+        - witness
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        witness:
+          type: object
+          required:
+            - itemMetadatas
+            - itemConfigs
+            - attributes
+          properties:
+            itemMetadatas:
+              $ref: '#/components/schemas/u32'
+            itemConfigs:
+              $ref: '#/components/schemas/u32'
+            attributes:
+              $ref: '#/components/schemas/u32'
+
+    NftsDestroyCollectionAction:
+      type: object
+      description: Represents the action of destroying an NFT collection.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_destroyCollection']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsDestroyCollectionArguments'
+
+    NftsTransferCollectionOwnershipArguments:
+      type: object
+      required:
+        - collection
+        - newOwner
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        newOwner:
+          $ref: '#/components/schemas/BlockchainAddress'
+
+    NftsTransferCollectionOwnershipAction:
+      type: object
+      description: Represents the action of transferring ownership of an NFT collection.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_transferCollectionOwnership']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsTransferCollectionOwnershipArguments'
+
+    NftsAcceptCollectionOwnershipArguments:
+      type: object
+      required:
+        - collection
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+
+    NftsAcceptCollectionOwnershipAction:
+      type: object
+      description: Represents the action of accepting ownership of an NFT collection.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_acceptCollectionOwnership']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsAcceptCollectionOwnershipArguments'
+
+    NftsSetCollectionMetadataArguments:
+      type: object
+      required:
+        - collection
+        - data
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        data:
+          type: string
+
+    NftsSetCollectionMetadataAction:
+      type: object
+      description: Represents the action of setting metadata for an NFT collection.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_setCollectionMetadata']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsSetCollectionMetadataArguments'
+
+    NftsClearCollectionMetadataArguments:
+      type: object
+      required:
+        - collection
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+
+    NftsClearCollectionMetadataAction:
+      type: object
+      description: Represents the action of clearing metadata for an NFT collection.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_clearCollectionMetadata']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsClearCollectionMetadataArguments'
+
+    NftsMintItemArguments:
+      type: object
+      required:
+        - collection
+        - item
+        - mintTo
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        item:
+          $ref: '#/components/schemas/ItemId'
+        mintTo:
+          $ref: '#/components/schemas/BlockchainAddress'
+
+    NftsMintItemAction:
+      type: object
+      description: Represents the action of minting an NFT item.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_mintItem']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsMintItemArguments'
+
+    NftsBurnItemArguments:
+      type: object
+      required:
+        - collection
+        - item
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        item:
+          $ref: '#/components/schemas/ItemId'
+
+    NftsBurnItemAction:
+      type: object
+      description: Represents the action of burning an NFT item.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_burnItem']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsBurnItemArguments'
+
+    NftsTransferItemArguments:
+      type: object
+      required:
+        - collection
+        - item
+        - dest
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        item:
+          $ref: '#/components/schemas/ItemId'
+        dest:
+          $ref: '#/components/schemas/BlockchainAddress'
+
+    NftsTransferItemAction:
+      type: object
+      description: Represents the action of transferring an NFT item to another account.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_transferItem']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsTransferItemArguments'
+
+    NftsLockItemTransferArguments:
+      type: object
+      required:
+        - collection
+        - item
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        item:
+          $ref: '#/components/schemas/ItemId'
+
+    NftsLockItemTransferAction:
+      type: object
+      description: Represents the action of locking an NFT item transfer to prevent it from being transferred.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_lockItemTransfer']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsLockItemTransferArguments'
+
+    NftsUnlockItemTransferArguments:
+      type: object
+      required:
+        - collection
+        - item
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        item:
+          $ref: '#/components/schemas/ItemId'
+
+    NftsUnlockItemTransferAction:
+      type: object
+      description: Represents the action of unlocking an NFT item transfer to allow it to be transferred.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_unlockItemTransfer']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsUnlockItemTransferArguments'
+
+    NftsSetItemMetadataArguments:
+      type: object
+      required:
+        - collection
+        - item
+        - data
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        item:
+          $ref: '#/components/schemas/ItemId'
+        data:
+          type: string
+
+    NftsSetItemMetadataAction:
+      type: object
+      description: Represents the action of setting metadata for an NFT item.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_setItemMetadata']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsSetItemMetadataArguments'
+
+    NftsClearItemMetadataArguments:
+      type: object
+      required:
+        - collection
+        - item
+      properties:
+        collection:
+          $ref: '#/components/schemas/CollectionId'
+        item:
+          $ref: '#/components/schemas/ItemId'
+
+    NftsClearItemMetadataAction:
+      type: object
+      description: Represents the action of clearing metadata for an NFT item.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['nfts_clearItemMetadata']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/NftsClearItemMetadataArguments'
+
+    AssetsCreateArguments:
+      type: object
+      required:
+        - minBalance
+      properties:
+        minBalance:
+          $ref: '#/components/schemas/Balance'
+
+    AssetsCreateAction:
+      type: object
+      description: Represents the action of creating a new asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_create']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsCreateArguments'
+
+    AssetsStartDestroyArguments:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+
+    AssetsStartDestroyAction:
+      type: object
+      description: Represents the action of starting the destruction of an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_startDestroy']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsStartDestroyArguments'
+
+    AssetsDestroyAccountsArguments:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+
+    AssetsDestroyAccountsAction:
+      type: object
+      description: Represents the action of destroying accounts associated with an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_destroyAccounts']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsDestroyAccountsArguments'
+
+    AssetsDestroyApprovalsArguments:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+
+    AssetsDestroyApprovalsAction:
+      type: object
+      description: Represents the action of destroying approvals associated with an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_destroyApprovals']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsDestroyApprovalsArguments'
+
+    AssetsFinishDestroyArguments:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+
+    AssetsFinishDestroyAction:
+      type: object
+      description: Represents the action of finishing the destruction of an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_finishDestroy']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsFinishDestroyArguments'
+
+    AssetsTransferOwnershipArguments:
+      type: object
+      required:
+        - id
+        - owner
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        owner:
+          $ref: '#/components/schemas/BlockchainAddress'
+
+    AssetsTransferOwnershipAction:
+      type: object
+      description: Represents the action of transferring ownership of an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_transferOwnership']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsTransferOwnershipArguments'
+
+    AssetsSetMinBalanceArguments:
+      type: object
+      required:
+        - id
+        - minBalance
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        minBalance:
+          $ref: '#/components/schemas/Balance'
+
+    AssetsSetMinBalanceAction:
+      type: object
+      description: Represents the action of setting the minimum balance for an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_setMinBalance']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsSetMinBalanceArguments'
+
+    AssetsSetMetadataArguments:
+      type: object
+      required:
+        - id
+        - data
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        data:
+          type: string
+
+    AssetsSetMetadataAction:
+      type: object
+      description: Represents the action of setting metadata for an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_setMetadata']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsSetMetadataArguments'
+
+    AssetsFreezeAssetArguments:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+
+    AssetsFreezeAssetAction:
+      type: object
+      description: Represents the action of freezing an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_freezeAsset']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsFreezeAssetArguments'
+
+    AssetsThawAssetArguments:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+
+    AssetsThawAssetAction:
+      type: object
+      description: Represents the action of thawing an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_thawAsset']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsThawAssetArguments'
+
+    AssetsMintArguments:
+      type: object
+      required:
+        - id
+        - beneficiary
+        - amount
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        beneficiary:
+          $ref: '#/components/schemas/BlockchainAddress'
+        amount:
+          $ref: '#/components/schemas/Balance'
+
+    AssetsMintAction:
+      type: object
+      description: Represents the action of minting assets to an account.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_mint']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsMintArguments'
+
+    AssetsBurnArguments:
+      type: object
+      required:
+        - id
+        - who
+        - amount
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        who:
+          $ref: '#/components/schemas/BlockchainAddress'
+        amount:
+          $ref: '#/components/schemas/Balance'
+
+    AssetsBurnAction:
+      type: object
+      description: Represents the action of burning assets from an account.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_burn']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsBurnArguments'
+
+    AssetsTransferArguments:
+      type: object
+      required:
+        - id
+        - target
+        - amount
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        target:
+          $ref: '#/components/schemas/BlockchainAddress'
+        amount:
+          $ref: '#/components/schemas/Balance'
+
+    AssetsTransferAction:
+      type: object
+      description: Represents the action of transferring assets to another account.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_transfer']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsTransferArguments'
+
+    AssetsTransferKeepAliveArguments:
+      type: object
+      required:
+        - id
+        - target
+        - amount
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        target:
+          $ref: '#/components/schemas/BlockchainAddress'
+        amount:
+          $ref: '#/components/schemas/Balance'
+
+    AssetsTransferKeepAliveAction:
+      type: object
+      description: Represents the action of transferring an asset with a keep-alive option.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_transferKeepAlive']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsTransferKeepAliveArguments'
+
+    AssetsForceTransferArguments:
+      type: object
+      required:
+        - id
+        - source
+        - dest
+        - amount
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        source:
+          $ref: '#/components/schemas/BlockchainAddress'
+        dest:
+          $ref: '#/components/schemas/BlockchainAddress'
+        amount:
+          $ref: '#/components/schemas/Balance'
+
+    AssetsForceTransferAction:
+      type: object
+      description: Represents the action of force transferring an asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_forceTransfer']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsForceTransferArguments'
+
+    AssetsFreezeAccountArguments:
+      type: object
+      required:
+        - id
+        - who
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        who:
+          $ref: '#/components/schemas/BlockchainAddress'
+
+    AssetsFreezeAccountAction:
+      type: object
+      description: Represents the action of freezing an account for a specific asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_freezeAccount']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsFreezeAccountArguments'
+
+    AssetsThawAccountArguments:
+      type: object
+      required:
+        - id
+        - who
+      properties:
+        id:
+          $ref: '#/components/schemas/AssetId'
+        who:
+          $ref: '#/components/schemas/BlockchainAddress'
+
+    AssetsThawAccountAction:
+      type: object
+      description: Represents the action of thawing an account for a specific asset.
+      required:
+        - actionType
+        - origin
+        - arguments
+      properties:
+        actionType:
+          type: string
+          enum: ['assets_thawAccount']
+        origin:
+          $ref: '#/components/schemas/CTActionOrigin'
+        arguments:
+          $ref: '#/components/schemas/AssetsThawAccountArguments'
+
+    CTAction:
+      oneOf:
+        - $ref: '#/components/schemas/BalancesTransferAllowDeathAction'
+        - $ref: '#/components/schemas/BalancesTransferKeepAliveAction'
+        - $ref: '#/components/schemas/BalancesTransferAllAction'
+        - $ref: '#/components/schemas/NftsCreateCollectionAction'
+        - $ref: '#/components/schemas/NftsDestroyCollectionAction'
+        - $ref: '#/components/schemas/NftsTransferCollectionOwnershipAction'
+        - $ref: '#/components/schemas/NftsAcceptCollectionOwnershipAction'
+        - $ref: '#/components/schemas/NftsSetCollectionMetadataAction'
+        - $ref: '#/components/schemas/NftsClearCollectionMetadataAction'
+        - $ref: '#/components/schemas/NftsMintItemAction'
+        - $ref: '#/components/schemas/NftsBurnItemAction'
+        - $ref: '#/components/schemas/NftsTransferItemAction'
+        - $ref: '#/components/schemas/NftsLockItemTransferAction'
+        - $ref: '#/components/schemas/NftsUnlockItemTransferAction'
+        - $ref: '#/components/schemas/NftsSetItemMetadataAction'
+        - $ref: '#/components/schemas/NftsClearItemMetadataAction'
+        - $ref: '#/components/schemas/AssetsCreateAction'
+        - $ref: '#/components/schemas/AssetsStartDestroyAction'
+        - $ref: '#/components/schemas/AssetsDestroyAccountsAction'
+        - $ref: '#/components/schemas/AssetsDestroyApprovalsAction'
+        - $ref: '#/components/schemas/AssetsFinishDestroyAction'
+        - $ref: '#/components/schemas/AssetsTransferOwnershipAction'
+        - $ref: '#/components/schemas/AssetsSetMinBalanceAction'
+        - $ref: '#/components/schemas/AssetsSetMetadataAction'
+        - $ref: '#/components/schemas/AssetsFreezeAssetAction'
+        - $ref: '#/components/schemas/AssetsThawAssetAction'
+        - $ref: '#/components/schemas/AssetsMintAction'
+        - $ref: '#/components/schemas/AssetsBurnAction'
+        - $ref: '#/components/schemas/AssetsTransferAction'
+        - $ref: '#/components/schemas/AssetsTransferKeepAliveAction'
+        - $ref: '#/components/schemas/AssetsForceTransferAction'
+        - $ref: '#/components/schemas/AssetsFreezeAccountAction'
+        - $ref: '#/components/schemas/AssetsThawAccountAction'
+
+    CTAtomic:
+      type: object
+      description: An atomic operation.
+      properties:
+        actions:
+          type: array
+          description: A list of actions that make up the atomic operation.
+          items:
+            $ref: '#/components/schemas/CTAction'
+
+    ClearingTransactionPayload:
+      type: object
+      required:
+        - signatory
+        - app_agent_id
+        - atomics
+      properties:
+        signatory:
+          type: string
+          description: The signatory responsible for the transaction.
+        app_agent_id:
+          type: integer
+          description: The ID of the application agent initiating the transaction.
+        atomics:
+          type: array
+          description: A list of atomic operations included in the transaction.
+          items:
+            $ref: '#/components/schemas/CTAtomic'
+
+    TransactionPayload:
+      type: object
+      required:
+        - signatory
+        - module_name
+        - function_name
+        - arguments
+      properties:
+        signatory:
+          type: string
+          description: The signatory responsible for the transaction.
+        module_name:
+          type: string
+          description: The name of the module where the function to be executed is defined.
+        function_name:
+          type: string
+          description: The name of the function to be executed.
+        arguments:
+          type: array
+          description: The arguments to be passed to the function.
+          items:
+            type: string
+
+    TransactionResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status of the transaction.
+        tx_hash:
+          type: string
+          description: The transaction hash, if available.
+        error_code:
+          type: number
+          description: An error code, if the transaction failed.
+        error_description:
+          type: string
+          description: A description of the error, if the transaction failed.
+
+    ClearingTransactionResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: The status of the transaction.
+        tx_hash:
+          type: string
+          description: The transaction hash, if available.
+        error_code:
+          type: number
+          description: An error code, if the transaction failed.
+        error_description:
+          type: string
+          description: A description of the error, if the transaction failed.
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the response.
+        error_code:
+          type: number
+          description: Error code.
+        error_description:
+          type: string
+          description: Error description.
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+
+# Apply the API key globally to all operations
+security:
+  - ApiKeyAuth: []
