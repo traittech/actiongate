@@ -1,4 +1,4 @@
-# Actiongate
+# ActionGate
 
 The app provides a convenient REST API to submit new transactions to the TRAIT blockchain.
 
@@ -75,7 +75,7 @@ Config file terms explained:
 
 ## API Endpoints
 
-Detailed API documentation is available in `/docs/API.md`
+Detailed API documentation is available in [API Documentation](/docs/API.md)
 
 ### Submit Transaction
 
@@ -97,89 +97,6 @@ Description: Submits a clearing transaction using typed actions.
 Controller: clearingtransactionController.submitClearingTransaction
 ```
 
-#### Typed Actions
-
-ActionGate now supports typed actions for common pallets, making it easier to interact with the blockchain without needing to know the internal module and function names. Here are some examples:
-
-1. Balances Transfer
-
-```json
-{
-  "signatory": "ADMIN_1",
-  "app_agent_id": 1,
-  "atomics": [
-    {
-      "actions": [
-        {
-          "action": "balances_transferKeepAlive",
-          "origin": {
-            "appagentaddress": "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL"
-          },
-          "arguments": {
-            "dest": "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL",
-            "value": 1000
-          }
-        }
-      ]
-    }
-  ]
-}
-```
-
-2. NFT Mint
-
-```json
-{
-  "signatory": "ADMIN_1",
-  "app_agent_id": 1,
-  "atomics": [
-    {
-      "actions": [
-        {
-          "action": "nft_mintCollection",
-          "origin": {
-            "appagentaddress": "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL"
-          },
-          "arguments": {
-            "metadata": "ipfs://QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG",
-            "max": 1000,
-            "symbol": "MYNFT"
-          }
-        }
-      ]
-    }
-  ]
-}
-```
-
-3. Assets Transfer
-
-```json
-{
-  "signatory": "ADMIN_1",
-  "app_agent_id": 1,
-  "atomics": [
-    {
-      "actions": [
-        {
-          "action": "assets_transfer",
-          "origin": {
-            "appagentaddress": "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL"
-          },
-          "arguments": {
-            "id": 1,
-            "target": "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL",
-            "amount": 1000
-          }
-        }
-      ]
-    }
-  ]
-}
-```
-
-For a complete list of supported actions and their arguments, please refer to the [API Documentation](/docs/API.md).
-
 ## Running the Application
 
 ```bash
@@ -195,8 +112,7 @@ A mock datagate has been provided for local testing, to run mock datagate, you c
 1. Ensure you are running a trait parachain node
 2. Update the node endpoint in /mocks/data/app.js
 3. `cd mocks/datagate`
-4. `npm i`
-   5 `node app.js`
+4. `npm i` && `node app.js`
 
 This will start a local mock of data gate at port 7000
 
