@@ -75,7 +75,7 @@ Config file terms explained:
 
 ## API Endpoints
 
-Detailed API documentation is available in [API Documentation](/docs/API.md)
+Detailed API documentation is available in [API Documentation](api_docs/API.md)
 
 ### Submit Transaction
 
