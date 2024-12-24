@@ -35,7 +35,7 @@ async function requestMeta(endpoint: string) {
 }
 
 (async function main() {
-  const filename = 'latest.ts';
+  const filename = 'latest.json';
 
   const args = process.argv.slice(2);
 
@@ -67,7 +67,7 @@ async function requestMeta(endpoint: string) {
 
   const meta = await requestMeta(endpoint);
 
-  fs.writeFileSync(outputPath, `export default '${meta}`);
+  fs.writeFileSync(outputPath, JSON.stringify({ latest: meta }));
 
   console.info(`Metadata generated and saved: ${outputPath}`);
 
