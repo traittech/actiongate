@@ -19,7 +19,8 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "prettier": "prettier --write .",
-    "generate:meta": "tsx node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.mjs --endpoint wss://rpc-2.trait.tech --output ./src/interfaces"
+    "fetch:meta": "tsx ./src/chain/metadata/scripts/latest.ts --endpoint https://rpc-2.trait.tech --output ./src/chain/metadata/generated",
+    "generate:meta": "tsx node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.mjs --endpoint wss://rpc-2.trait.tech --output ./src/chain/interfaces"
   },
   "dependencies": {
     "@polkadot/api": "^15.0.2",
