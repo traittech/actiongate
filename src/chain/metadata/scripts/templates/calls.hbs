@@ -1,0 +1,58 @@
+// Auto-generated, do not edit
+/* eslint-disable */
+
+import { defineMethod } from '@substrate/txwrapper-core';
+
+// import type lookup before we augment - in some environments
+// this is required to allow for ambient/previous definitions
+import '@polkadot/api-base/types/submittable';
+
+import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
+
+{{{ importsAll }}}
+
+{{#each modules}}
+
+{{#each items}}
+
+export type {{{argsName}}} = {
+  {{#each params}}
+  {{#if this.description}}
+  /**
+  * {{{this.description}}}
+  */
+  {{/if}}
+  {{{this.name}}}: {{{this.type}}}
+  {{/each}}
+};
+
+/**
+{{#if description}}
+ * {{description}}
+{{/if}}
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function {{{functionName}}}(
+  args: {{{argsName}}},
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        // @ts-expect-error Needed until types are updated in txwrapper-core
+        args,
+        name: '{{{methodName}}}',
+        pallet: '{{{sectionName}}}',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+{{/each}}
+{{/each}}

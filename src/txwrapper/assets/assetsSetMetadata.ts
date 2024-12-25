@@ -21,7 +21,6 @@ export interface AssetsSetMetadataArgs {
 
 /**
  * Set metadata of a fungible token.
- *
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
