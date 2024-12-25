@@ -9,6 +9,8 @@ import { compareName, createImports, getSimilarTypes, initMeta, setImports, writ
 
 import metadataJson from '../generated/latest.json';
 
+import { ActionType } from '../../../types/api/clearingTransaction';
+
 import type { Vec, Text } from '@polkadot/types';
 
 function readTemplate(name: string) {
@@ -19,6 +21,9 @@ function readTemplate(name: string) {
 }
 
 const generateForMetaTemplate = Handlebars.compile(readTemplate('calls'));
+
+// Actions whitelist
+const ALLOWED_FUNCTIONS = Object.values(ActionType);
 
 const MAPPED_NAMES: any = {
   class: 'clazz',
@@ -84,64 +89,74 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
   const { lookup, pallets } = metadata.asLatest;
 
   const modules = pallets
-    .sort(compareName)
-    .filter(({ calls }) => calls.isSome)
-    .map(({ calls, name }) => {
-      const sectionName = stringCamelCase(name);
+    .reduce<any[]>((acc, pallet) => {
+      const { calls, name } = pallet;
 
-      const items = lookup.getSiType(calls.unwrap().type).def.asVariant.variants
-        .map(({ docs, fields, name: methodName }) => {
-          const name = stringCamelCase(methodName);
-          const functionName = `${sectionName}${stringPascalCase(name)}`;
-          const argsName = `${stringPascalCase(functionName)}Args`;
+      if (!calls.isSome) return acc;
 
-          const typesInfo = fields.map(({ name, type, typeName }, index) => {
-            const typeDef = registry.lookup.getTypeDef(type);
-            return [
-                name.isSome
-                    ? mapName(name.unwrap())
-                    : `param${index}`,
-                typeName.isSome
-                    ? typeName.toString()
-                    : typeDef.type,
-                typeDef.isFromSi
-                    ? typeDef.type
-                    : typeDef.lookupName || typeDef.type
-            ];
-          });
+      const palletName = stringCamelCase(name);
 
-          const { description, args } = getFunctionDescription(docs);
+      const palletCalls = lookup.getSiType(calls.unwrap().type).def.asVariant.variants;
 
-          const params = typesInfo.map(([name, , typeStr]) => {
-            const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
+      const items = palletCalls.reduce<any[]>((acc, { docs, fields, name: methodName }) => {
+        const functionName = `${palletName}${stringPascalCase(methodName)}`;
 
-            setImports(allDefs, imports, [typeStr, ...similarTypes]);
+        if (!ALLOWED_FUNCTIONS.includes(functionName as any)) return acc;
 
-            return {
-              name,
-              type: similarTypes.join(' | '),
-              description: args[name] ?? '',
-            }
-          });
+        const name = stringCamelCase(methodName);
+        const argsName = `${stringPascalCase(functionName)}Args`;
+
+        const typesInfo = fields.map(({ name, type, typeName }, index) => {
+          const typeDef = registry.lookup.getTypeDef(type);
+          return [
+              name.isSome
+                  ? mapName(name.unwrap())
+                  : `param${index}`,
+              typeName.isSome
+                  ? typeName.toString()
+                  : typeDef.type,
+              typeDef.isFromSi
+                  ? typeDef.type
+                  : typeDef.lookupName || typeDef.type
+          ];
+        });
+
+        const { description, args } = getFunctionDescription(docs);
+
+        const params = typesInfo.map(([name, , typeStr]) => {
+          const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
+
+          setImports(allDefs, imports, [typeStr, ...similarTypes]);
 
           return {
-            description,
-            functionName,
-            sectionName,
-            methodName,
-            argsName,
-            params,
-            // for ordering
             name,
-          };
-        })
-        .sort(compareName);
+            type: similarTypes.join(' | '),
+            description: args[name] ?? '',
+          }
+        });
 
-      return {
+        acc.push({
+          description,
+          functionName,
+          palletName,
+          methodName,
+          argsName,
+          params,
+          // for ordering
+          name,
+        });
+
+        return acc;
+      }, [])
+      .sort(compareName);
+
+      acc.push({
         items,
-        name: sectionName
-      };
-    })
+        name: palletName
+      });
+
+      return acc;
+    }, [])
     .sort(compareName);
 
   return generateForMetaTemplate({

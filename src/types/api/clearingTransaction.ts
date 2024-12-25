@@ -43,7 +43,7 @@ export type u32 = number;
  */
 export enum ActionType {
   // Balances Pallet
-  BalancesTransferAllowDeath = 'balancesTransfer',
+  BalancesTransferAllowDeath = 'balancesTransferAllowDeath',
   BalancesTransferKeepAlive = 'balancesTransferKeepAlive',
   BalancesTransferAll = 'balancesTransferAll',
 
