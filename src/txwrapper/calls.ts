@@ -6,11 +6,45 @@ import { defineMethod } from '@substrate/txwrapper-core';
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 import type {
-  BlockchainAddress,
+  BlockchainGenericAddress,
+  BlockchainGenericId,
   Balance,
-  AssetId,
+  CTAction,
   NftWitness
 } from '../types/api/common';
+
+/**
+ * Arguments required to submit a Clearing transaction.
+ */
+export type AppTransactionsSubmitClearingTransactionArgs = {
+  appAgentId: BlockchainGenericId;
+  atomics: CTAction[][];
+};
+
+/**
+ * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function appTransactionsSubmitClearingTransaction(
+  args: AppTransactionsSubmitClearingTransactionArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'submit_clearing_transaction',
+        pallet: 'appTransactions',
+      },
+      ...info,
+    },
+    options
+  );
+}
 
 /**
  * Arguments required to reduce the balance of &#x60;who&#x60; by as much as possible up to &#x60;amount&#x60; assets of &#x60;id&#x60;.
@@ -19,11 +53,11 @@ export type AssetsBurnArgs = {
   /**
   *  The identifier of the asset to have some amount burned.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The account to be debited from.
   */
-  who: BlockchainAddress;
+  who: BlockchainGenericAddress;
   /**
   *  The maximum amount by which `who`'s balance should be reduced.
   */
@@ -90,7 +124,7 @@ export type AssetsDestroyAccountsArgs = {
   /**
   *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
 };
 
 /**
@@ -125,7 +159,7 @@ export type AssetsDestroyApprovalsArgs = {
   /**
   *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
 };
 
 /**
@@ -160,7 +194,7 @@ export type AssetsFinishDestroyArgs = {
   /**
   *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
 };
 
 /**
@@ -195,15 +229,15 @@ export type AssetsForceTransferArgs = {
   /**
   *  The identifier of the asset to have some amount transferred.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The account to be debited.
   */
-  source: BlockchainAddress;
+  source: BlockchainGenericAddress;
   /**
   *  The account to be credited.
   */
-  dest: BlockchainAddress;
+  dest: BlockchainGenericAddress;
   /**
   *  The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.
   */
@@ -242,11 +276,11 @@ export type AssetsFreezeArgs = {
   /**
   *  The identifier of the asset to be frozen.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The account to be frozen.
   */
-  who: BlockchainAddress;
+  who: BlockchainGenericAddress;
 };
 
 /**
@@ -281,7 +315,7 @@ export type AssetsFreezeAssetArgs = {
   /**
   *  The identifier of the asset to be frozen.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
 };
 
 /**
@@ -316,11 +350,11 @@ export type AssetsMintArgs = {
   /**
   *  The identifier of the asset to have some amount minted.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The account to be credited with the minted assets.
   */
-  beneficiary: BlockchainAddress;
+  beneficiary: BlockchainGenericAddress;
   /**
   *  The amount of the asset to be minted.
   */
@@ -359,7 +393,7 @@ export type AssetsSetMetadataArgs = {
   /**
   *  The identifier of the asset to update.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The data of metadata. Limited in length by `StringLimit`.
   */
@@ -398,7 +432,7 @@ export type AssetsSetMinBalanceArgs = {
   /**
   *  The identifier of the asset.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The new value of `min_balance`.
   */
@@ -437,7 +471,7 @@ export type AssetsStartDestroyArgs = {
   /**
   *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
 };
 
 /**
@@ -472,11 +506,11 @@ export type AssetsThawArgs = {
   /**
   *  The identifier of the asset to be frozen.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The account to be unfrozen.
   */
-  who: BlockchainAddress;
+  who: BlockchainGenericAddress;
 };
 
 /**
@@ -511,7 +545,7 @@ export type AssetsThawAssetArgs = {
   /**
   *  The identifier of the asset to be thawed.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
 };
 
 /**
@@ -546,11 +580,11 @@ export type AssetsTransferArgs = {
   /**
   *  The identifier of the asset to have some amount transferred.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The account to be credited.
   */
-  target: BlockchainAddress;
+  target: BlockchainGenericAddress;
   /**
   *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
   */
@@ -589,11 +623,11 @@ export type AssetsTransferKeepAliveArgs = {
   /**
   *  The identifier of the asset to have some amount transferred.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The account to be credited.
   */
-  target: BlockchainAddress;
+  target: BlockchainGenericAddress;
   /**
   *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
   */
@@ -632,11 +666,11 @@ export type AssetsTransferOwnershipArgs = {
   /**
   *  The identifier of the asset.
   */
-  id: AssetId;
+  id: BlockchainGenericId;
   /**
   *  The new Owner of this asset.
   */
-  owner: BlockchainAddress;
+  owner: BlockchainGenericAddress;
 };
 
 /**
@@ -671,7 +705,7 @@ export type BalancesTransferAllArgs = {
   /**
   *  The recipient of the transfer.
   */
-  dest: BlockchainAddress;
+  dest: BlockchainGenericAddress;
   keepAlive: boolean;
 };
 
@@ -704,7 +738,7 @@ export function balancesTransferAll(
  * Arguments required to transfer some liquid free balance to another account.
  */
 export type BalancesTransferAllowDeathArgs = {
-  dest: BlockchainAddress;
+  dest: BlockchainGenericAddress;
   value: Balance;
 };
 
@@ -737,7 +771,7 @@ export function balancesTransferAllowDeath(
  * Arguments required to same as the [&#x60;transfer_allow_death&#x60;] call, but with a check that the transfer will not
  */
 export type BalancesTransferKeepAliveArgs = {
-  dest: BlockchainAddress;
+  dest: BlockchainGenericAddress;
   value: Balance;
 };
 
@@ -773,11 +807,11 @@ export type NftsBurnArgs = {
   /**
   *  The collection of the item to be burned.
   */
-  collection: AssetId;
+  collection: BlockchainGenericId;
   /**
   *  The item to be burned.
   */
-  item: AssetId;
+  item: BlockchainGenericId;
 };
 
 /**
@@ -812,7 +846,7 @@ export type NftsClearCollectionMetadataArgs = {
   /**
   *  The identifier of the collection whose metadata to clear.
   */
-  collection: AssetId;
+  collection: BlockchainGenericId;
 };
 
 /**
@@ -847,11 +881,11 @@ export type NftsClearMetadataArgs = {
   /**
   *  The identifier of the collection whose item's metadata to clear.
   */
-  collection: AssetId;
+  collection: BlockchainGenericId;
   /**
   *  The identifier of the item whose metadata to clear.
   */
-  item: AssetId;
+  item: BlockchainGenericId;
 };
 
 /**
@@ -913,7 +947,7 @@ export type NftsDestroyArgs = {
   /**
   *  The identifier of the collection to be destroyed.
   */
-  collection: AssetId;
+  collection: BlockchainGenericId;
   /**
   *  Information on the items minted in the collection. This must be correct.
   */
@@ -952,11 +986,11 @@ export type NftsLockItemTransferArgs = {
   /**
   *  The collection of the item to be changed.
   */
-  collection: AssetId;
+  collection: BlockchainGenericId;
   /**
   *  The item to become non-transferable.
   */
-  item: AssetId;
+  item: BlockchainGenericId;
 };
 
 /**
@@ -985,9 +1019,9 @@ export function nftsLockItemTransfer(
 }
 
 export type NftsMintArgs = {
-  collection: AssetId;
-  item: AssetId;
-  mintTo: BlockchainAddress;
+  collection: BlockchainGenericId;
+  item: BlockchainGenericId;
+  mintTo: BlockchainGenericAddress;
 };
 
 /**
@@ -1056,7 +1090,7 @@ export type NftsSetCollectionMetadataArgs = {
   /**
   *  The identifier of the item whose metadata to update.
   */
-  collection: AssetId;
+  collection: BlockchainGenericId;
   /**
   *  The general information of this item. Limited in length by `StringLimit`.
   */
@@ -1095,11 +1129,11 @@ export type NftsSetMetadataArgs = {
   /**
   *  The identifier of the collection whose item's metadata to set.
   */
-  collection: AssetId;
+  collection: BlockchainGenericId;
   /**
   *  The identifier of the item whose metadata to set.
   */
-  item: AssetId;
+  item: BlockchainGenericId;
   /**
   *  The general information of this item. Limited in length by `StringLimit`.
   */
@@ -1138,15 +1172,15 @@ export type NftsTransferArgs = {
   /**
   *  The collection of the item to be transferred.
   */
-  collection: AssetId;
+  collection: BlockchainGenericId;
   /**
   *  The item to be transferred.
   */
-  item: AssetId;
+  item: BlockchainGenericId;
   /**
   *  The account to receive ownership of the item.
   */
-  dest: BlockchainAddress;
+  dest: BlockchainGenericAddress;
 };
 
 /**
@@ -1181,8 +1215,8 @@ export type NftsTransferOwnershipArgs = {
   /**
   *  The collection whose owner should be changed.
   */
-  collection: AssetId;
-  newOwner: BlockchainAddress;
+  collection: BlockchainGenericId;
+  newOwner: BlockchainGenericAddress;
 };
 
 /**
@@ -1217,11 +1251,11 @@ export type NftsUnlockItemTransferArgs = {
   /**
   *  The collection of the item to be changed.
   */
-  collection: AssetId;
+  collection: BlockchainGenericId;
   /**
   *  The item to become transferable.
   */
-  item: AssetId;
+  item: BlockchainGenericId;
 };
 
 /**

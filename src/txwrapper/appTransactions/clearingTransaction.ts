@@ -1,9 +1,6 @@
-import {
-  type BaseTxInfo,
-  defineMethod,
-  type OptionsWithMeta,
-  type UnsignedTransaction,
-} from '@substrate/txwrapper-core';
+import { defineMethod } from '@substrate/txwrapper-core';
+
+import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 import type { CTActionOrigin } from '../../types/api/clearingTransaction';
 
