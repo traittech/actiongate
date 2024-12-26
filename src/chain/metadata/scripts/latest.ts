@@ -1,6 +1,7 @@
 import fs from 'node:fs';
-import fetch from 'node-fetch';
 import path from 'node:path';
+
+import fetch from 'node-fetch';
 
 async function rpcRequest(endpoint: string, module: string, method: string, params: any[] = []) {
   const rpcMethod = [module, method].join('_');
@@ -23,11 +24,11 @@ async function rpcRequest(endpoint: string, module: string, method: string, para
   const data = await response.json();
 
   return data;
-};
+}
 
 async function requestMeta(endpoint: string) {
   const module = 'state';
-  const method = 'getMetadata'
+  const method = 'getMetadata';
 
   const response = await rpcRequest(endpoint, module, method);
 
@@ -55,7 +56,7 @@ async function requestMeta(endpoint: string) {
     console.info('Process exit');
   }
 
-  const dirPath = path.join(process.cwd(), outputDir)
+  const dirPath = path.join(process.cwd(), outputDir);
 
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath);

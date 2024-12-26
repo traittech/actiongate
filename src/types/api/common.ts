@@ -39,7 +39,7 @@ export type CTAtomicActionGeneric<ActionTypeName extends ActionType, ActionArgs>
    * The arguments for the action.
    */
   arguments: ActionArgs;
-}
+};
 
 /**
  * Common blockchain types

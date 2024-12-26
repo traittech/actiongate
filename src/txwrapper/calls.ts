@@ -11,7 +11,7 @@ import type {
   BlockchainGenericBalance,
   BlockchainGenericId,
   CTAtomicActionGeneric,
-  NftWitness
+  NftWitness,
 } from '../types/api/common';
 
 /**
@@ -58,16 +58,16 @@ export type CTAtomicAction =
  */
 export type AssetsBurnArgs = {
   /**
-  *  The identifier of the asset to have some amount burned.
-  */
+   *  The identifier of the asset to have some amount burned.
+   */
   id: BlockchainGenericId;
   /**
-  *  The account to be debited from.
-  */
+   *  The account to be debited from.
+   */
   who: BlockchainGenericAddress;
   /**
-  *  The maximum amount by which `who`'s balance should be reduced.
-  */
+   *  The maximum amount by which `who`'s balance should be reduced.
+   */
   amount: BlockchainGenericBalance;
 };
 
@@ -96,7 +96,10 @@ export function assetsBurn(
   );
 }
 
-export type AssetsBurnAction = CTAtomicActionGeneric<ActionType.AssetsBurn, AssetsBurnArgs>;
+export type AssetsBurnAction = CTAtomicActionGeneric<
+  ActionType.AssetsBurn,
+  AssetsBurnArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -128,7 +131,10 @@ export function assetsCreate(
   );
 }
 
-export type AssetsCreateAction = CTAtomicActionGeneric<ActionType.AssetsCreate, AssetsCreateArgs>;
+export type AssetsCreateAction = CTAtomicActionGeneric<
+  ActionType.AssetsCreate,
+  AssetsCreateArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -137,8 +143,8 @@ export type AssetsCreateAction = CTAtomicActionGeneric<ActionType.AssetsCreate, 
  */
 export type AssetsDestroyAccountsArgs = {
   /**
-  *  The identifier of the asset to be destroyed. This must identify an existing asset.
-  */
+   *  The identifier of the asset to be destroyed. This must identify an existing asset.
+   */
   id: BlockchainGenericId;
 };
 
@@ -167,7 +173,10 @@ export function assetsDestroyAccounts(
   );
 }
 
-export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<ActionType.AssetsDestroyAccounts, AssetsDestroyAccountsArgs>;
+export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<
+  ActionType.AssetsDestroyAccounts,
+  AssetsDestroyAccountsArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -176,8 +185,8 @@ export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<ActionType.Asset
  */
 export type AssetsDestroyApprovalsArgs = {
   /**
-  *  The identifier of the asset to be destroyed. This must identify an existing asset.
-  */
+   *  The identifier of the asset to be destroyed. This must identify an existing asset.
+   */
   id: BlockchainGenericId;
 };
 
@@ -206,7 +215,10 @@ export function assetsDestroyApprovals(
   );
 }
 
-export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<ActionType.AssetsDestroyApprovals, AssetsDestroyApprovalsArgs>;
+export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<
+  ActionType.AssetsDestroyApprovals,
+  AssetsDestroyApprovalsArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -215,8 +227,8 @@ export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<ActionType.Asse
  */
 export type AssetsFinishDestroyArgs = {
   /**
-  *  The identifier of the asset to be destroyed. This must identify an existing asset.
-  */
+   *  The identifier of the asset to be destroyed. This must identify an existing asset.
+   */
   id: BlockchainGenericId;
 };
 
@@ -245,7 +257,10 @@ export function assetsFinishDestroy(
   );
 }
 
-export type AssetsFinishDestroyAction = CTAtomicActionGeneric<ActionType.AssetsFinishDestroy, AssetsFinishDestroyArgs>;
+export type AssetsFinishDestroyAction = CTAtomicActionGeneric<
+  ActionType.AssetsFinishDestroy,
+  AssetsFinishDestroyArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -254,20 +269,20 @@ export type AssetsFinishDestroyAction = CTAtomicActionGeneric<ActionType.AssetsF
  */
 export type AssetsForceTransferArgs = {
   /**
-  *  The identifier of the asset to have some amount transferred.
-  */
+   *  The identifier of the asset to have some amount transferred.
+   */
   id: BlockchainGenericId;
   /**
-  *  The account to be debited.
-  */
+   *  The account to be debited.
+   */
   source: BlockchainGenericAddress;
   /**
-  *  The account to be credited.
-  */
+   *  The account to be credited.
+   */
   dest: BlockchainGenericAddress;
   /**
-  *  The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.
-  */
+   *  The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.
+   */
   amount: BlockchainGenericBalance;
 };
 
@@ -296,7 +311,10 @@ export function assetsForceTransfer(
   );
 }
 
-export type AssetsForceTransferAction = CTAtomicActionGeneric<ActionType.AssetsForceTransfer, AssetsForceTransferArgs>;
+export type AssetsForceTransferAction = CTAtomicActionGeneric<
+  ActionType.AssetsForceTransfer,
+  AssetsForceTransferArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -305,12 +323,12 @@ export type AssetsForceTransferAction = CTAtomicActionGeneric<ActionType.AssetsF
  */
 export type AssetsFreezeArgs = {
   /**
-  *  The identifier of the asset to be frozen.
-  */
+   *  The identifier of the asset to be frozen.
+   */
   id: BlockchainGenericId;
   /**
-  *  The account to be frozen.
-  */
+   *  The account to be frozen.
+   */
   who: BlockchainGenericAddress;
 };
 
@@ -339,7 +357,10 @@ export function assetsFreeze(
   );
 }
 
-export type AssetsFreezeAction = CTAtomicActionGeneric<ActionType.AssetsFreezeAccount, AssetsFreezeArgs>;
+export type AssetsFreezeAction = CTAtomicActionGeneric<
+  ActionType.AssetsFreezeAccount,
+  AssetsFreezeArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -348,8 +369,8 @@ export type AssetsFreezeAction = CTAtomicActionGeneric<ActionType.AssetsFreezeAc
  */
 export type AssetsFreezeAssetArgs = {
   /**
-  *  The identifier of the asset to be frozen.
-  */
+   *  The identifier of the asset to be frozen.
+   */
   id: BlockchainGenericId;
 };
 
@@ -378,7 +399,10 @@ export function assetsFreezeAsset(
   );
 }
 
-export type AssetsFreezeAssetAction = CTAtomicActionGeneric<ActionType.AssetsFreezeAsset, AssetsFreezeAssetArgs>;
+export type AssetsFreezeAssetAction = CTAtomicActionGeneric<
+  ActionType.AssetsFreezeAsset,
+  AssetsFreezeAssetArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -387,16 +411,16 @@ export type AssetsFreezeAssetAction = CTAtomicActionGeneric<ActionType.AssetsFre
  */
 export type AssetsMintArgs = {
   /**
-  *  The identifier of the asset to have some amount minted.
-  */
+   *  The identifier of the asset to have some amount minted.
+   */
   id: BlockchainGenericId;
   /**
-  *  The account to be credited with the minted assets.
-  */
+   *  The account to be credited with the minted assets.
+   */
   beneficiary: BlockchainGenericAddress;
   /**
-  *  The amount of the asset to be minted.
-  */
+   *  The amount of the asset to be minted.
+   */
   amount: BlockchainGenericBalance;
 };
 
@@ -425,7 +449,10 @@ export function assetsMint(
   );
 }
 
-export type AssetsMintAction = CTAtomicActionGeneric<ActionType.AssetsMint, AssetsMintArgs>;
+export type AssetsMintAction = CTAtomicActionGeneric<
+  ActionType.AssetsMint,
+  AssetsMintArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -434,12 +461,12 @@ export type AssetsMintAction = CTAtomicActionGeneric<ActionType.AssetsMint, Asse
  */
 export type AssetsSetMetadataArgs = {
   /**
-  *  The identifier of the asset to update.
-  */
+   *  The identifier of the asset to update.
+   */
   id: BlockchainGenericId;
   /**
-  *  The data of metadata. Limited in length by `StringLimit`.
-  */
+   *  The data of metadata. Limited in length by `StringLimit`.
+   */
   data: string;
 };
 
@@ -468,7 +495,10 @@ export function assetsSetMetadata(
   );
 }
 
-export type AssetsSetMetadataAction = CTAtomicActionGeneric<ActionType.AssetsSetMetadata, AssetsSetMetadataArgs>;
+export type AssetsSetMetadataAction = CTAtomicActionGeneric<
+  ActionType.AssetsSetMetadata,
+  AssetsSetMetadataArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -477,12 +507,12 @@ export type AssetsSetMetadataAction = CTAtomicActionGeneric<ActionType.AssetsSet
  */
 export type AssetsSetMinBalanceArgs = {
   /**
-  *  The identifier of the asset.
-  */
+   *  The identifier of the asset.
+   */
   id: BlockchainGenericId;
   /**
-  *  The new value of `min_balance`.
-  */
+   *  The new value of `min_balance`.
+   */
   minBalance: BlockchainGenericBalance;
 };
 
@@ -511,7 +541,10 @@ export function assetsSetMinBalance(
   );
 }
 
-export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<ActionType.AssetsSetMinBalance, AssetsSetMinBalanceArgs>;
+export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<
+  ActionType.AssetsSetMinBalance,
+  AssetsSetMinBalanceArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -520,8 +553,8 @@ export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<ActionType.AssetsS
  */
 export type AssetsStartDestroyArgs = {
   /**
-  *  The identifier of the asset to be destroyed. This must identify an existing asset.
-  */
+   *  The identifier of the asset to be destroyed. This must identify an existing asset.
+   */
   id: BlockchainGenericId;
 };
 
@@ -550,7 +583,10 @@ export function assetsStartDestroy(
   );
 }
 
-export type AssetsStartDestroyAction = CTAtomicActionGeneric<ActionType.AssetsStartDestroy, AssetsStartDestroyArgs>;
+export type AssetsStartDestroyAction = CTAtomicActionGeneric<
+  ActionType.AssetsStartDestroy,
+  AssetsStartDestroyArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -559,12 +595,12 @@ export type AssetsStartDestroyAction = CTAtomicActionGeneric<ActionType.AssetsSt
  */
 export type AssetsThawArgs = {
   /**
-  *  The identifier of the asset to be frozen.
-  */
+   *  The identifier of the asset to be frozen.
+   */
   id: BlockchainGenericId;
   /**
-  *  The account to be unfrozen.
-  */
+   *  The account to be unfrozen.
+   */
   who: BlockchainGenericAddress;
 };
 
@@ -593,7 +629,10 @@ export function assetsThaw(
   );
 }
 
-export type AssetsThawAction = CTAtomicActionGeneric<ActionType.AssetsThawAccount, AssetsThawArgs>;
+export type AssetsThawAction = CTAtomicActionGeneric<
+  ActionType.AssetsThawAccount,
+  AssetsThawArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -602,8 +641,8 @@ export type AssetsThawAction = CTAtomicActionGeneric<ActionType.AssetsThawAccoun
  */
 export type AssetsThawAssetArgs = {
   /**
-  *  The identifier of the asset to be thawed.
-  */
+   *  The identifier of the asset to be thawed.
+   */
   id: BlockchainGenericId;
 };
 
@@ -632,7 +671,10 @@ export function assetsThawAsset(
   );
 }
 
-export type AssetsThawAssetAction = CTAtomicActionGeneric<ActionType.AssetsThawAsset, AssetsThawAssetArgs>;
+export type AssetsThawAssetAction = CTAtomicActionGeneric<
+  ActionType.AssetsThawAsset,
+  AssetsThawAssetArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -641,16 +683,16 @@ export type AssetsThawAssetAction = CTAtomicActionGeneric<ActionType.AssetsThawA
  */
 export type AssetsTransferArgs = {
   /**
-  *  The identifier of the asset to have some amount transferred.
-  */
+   *  The identifier of the asset to have some amount transferred.
+   */
   id: BlockchainGenericId;
   /**
-  *  The account to be credited.
-  */
+   *  The account to be credited.
+   */
   target: BlockchainGenericAddress;
   /**
-  *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
-  */
+   *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
+   */
   amount: BlockchainGenericBalance;
 };
 
@@ -679,7 +721,10 @@ export function assetsTransfer(
   );
 }
 
-export type AssetsTransferAction = CTAtomicActionGeneric<ActionType.AssetsTransfer, AssetsTransferArgs>;
+export type AssetsTransferAction = CTAtomicActionGeneric<
+  ActionType.AssetsTransfer,
+  AssetsTransferArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -688,16 +733,16 @@ export type AssetsTransferAction = CTAtomicActionGeneric<ActionType.AssetsTransf
  */
 export type AssetsTransferKeepAliveArgs = {
   /**
-  *  The identifier of the asset to have some amount transferred.
-  */
+   *  The identifier of the asset to have some amount transferred.
+   */
   id: BlockchainGenericId;
   /**
-  *  The account to be credited.
-  */
+   *  The account to be credited.
+   */
   target: BlockchainGenericAddress;
   /**
-  *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
-  */
+   *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
+   */
   amount: BlockchainGenericBalance;
 };
 
@@ -726,7 +771,10 @@ export function assetsTransferKeepAlive(
   );
 }
 
-export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.AssetsTransferKeepAlive, AssetsTransferKeepAliveArgs>;
+export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<
+  ActionType.AssetsTransferKeepAlive,
+  AssetsTransferKeepAliveArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -735,12 +783,12 @@ export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.Ass
  */
 export type AssetsTransferOwnershipArgs = {
   /**
-  *  The identifier of the asset.
-  */
+   *  The identifier of the asset.
+   */
   id: BlockchainGenericId;
   /**
-  *  The new Owner of this asset.
-  */
+   *  The new Owner of this asset.
+   */
   owner: BlockchainGenericAddress;
 };
 
@@ -769,7 +817,10 @@ export function assetsTransferOwnership(
   );
 }
 
-export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<ActionType.AssetsTransferOwnership, AssetsTransferOwnershipArgs>;
+export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<
+  ActionType.AssetsTransferOwnership,
+  AssetsTransferOwnershipArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -778,8 +829,8 @@ export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<ActionType.Ass
  */
 export type BalancesTransferAllArgs = {
   /**
-  *  The recipient of the transfer.
-  */
+   *  The recipient of the transfer.
+   */
   dest: BlockchainGenericAddress;
   keepAlive: boolean;
 };
@@ -809,7 +860,10 @@ export function balancesTransferAll(
   );
 }
 
-export type BalancesTransferAllAction = CTAtomicActionGeneric<ActionType.BalancesTransferAll, BalancesTransferAllArgs>;
+export type BalancesTransferAllAction = CTAtomicActionGeneric<
+  ActionType.BalancesTransferAll,
+  BalancesTransferAllArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -846,7 +900,10 @@ export function balancesTransferAllowDeath(
   );
 }
 
-export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<ActionType.BalancesTransferAllowDeath, BalancesTransferAllowDeathArgs>;
+export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<
+  ActionType.BalancesTransferAllowDeath,
+  BalancesTransferAllowDeathArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -883,7 +940,10 @@ export function balancesTransferKeepAlive(
   );
 }
 
-export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.BalancesTransferKeepAlive, BalancesTransferKeepAliveArgs>;
+export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<
+  ActionType.BalancesTransferKeepAlive,
+  BalancesTransferKeepAliveArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -892,12 +952,12 @@ export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.B
  */
 export type NftsBurnArgs = {
   /**
-  *  The collection of the item to be burned.
-  */
+   *  The collection of the item to be burned.
+   */
   collection: BlockchainGenericId;
   /**
-  *  The item to be burned.
-  */
+   *  The item to be burned.
+   */
   item: BlockchainGenericId;
 };
 
@@ -926,7 +986,10 @@ export function nftsBurn(
   );
 }
 
-export type NftsBurnAction = CTAtomicActionGeneric<ActionType.NftsBurnItem, NftsBurnArgs>;
+export type NftsBurnAction = CTAtomicActionGeneric<
+  ActionType.NftsBurnItem,
+  NftsBurnArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -935,8 +998,8 @@ export type NftsBurnAction = CTAtomicActionGeneric<ActionType.NftsBurnItem, Nfts
  */
 export type NftsClearCollectionMetadataArgs = {
   /**
-  *  The identifier of the collection whose metadata to clear.
-  */
+   *  The identifier of the collection whose metadata to clear.
+   */
   collection: BlockchainGenericId;
 };
 
@@ -965,7 +1028,10 @@ export function nftsClearCollectionMetadata(
   );
 }
 
-export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<ActionType.NftsClearCollectionMetadata, NftsClearCollectionMetadataArgs>;
+export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<
+  ActionType.NftsClearCollectionMetadata,
+  NftsClearCollectionMetadataArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -974,12 +1040,12 @@ export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<ActionType
  */
 export type NftsClearMetadataArgs = {
   /**
-  *  The identifier of the collection whose item's metadata to clear.
-  */
+   *  The identifier of the collection whose item's metadata to clear.
+   */
   collection: BlockchainGenericId;
   /**
-  *  The identifier of the item whose metadata to clear.
-  */
+   *  The identifier of the item whose metadata to clear.
+   */
   item: BlockchainGenericId;
 };
 
@@ -1008,7 +1074,10 @@ export function nftsClearMetadata(
   );
 }
 
-export type NftsClearMetadataAction = CTAtomicActionGeneric<ActionType.NftsClearItemMetadata, NftsClearMetadataArgs>;
+export type NftsClearMetadataAction = CTAtomicActionGeneric<
+  ActionType.NftsClearItemMetadata,
+  NftsClearMetadataArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1039,7 +1108,10 @@ export function nftsCreate(
   );
 }
 
-export type NftsCreateAction = CTAtomicActionGeneric<ActionType.NftsCreateCollection, NftsCreateArgs>;
+export type NftsCreateAction = CTAtomicActionGeneric<
+  ActionType.NftsCreateCollection,
+  NftsCreateArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1048,12 +1120,12 @@ export type NftsCreateAction = CTAtomicActionGeneric<ActionType.NftsCreateCollec
  */
 export type NftsDestroyArgs = {
   /**
-  *  The identifier of the collection to be destroyed.
-  */
+   *  The identifier of the collection to be destroyed.
+   */
   collection: BlockchainGenericId;
   /**
-  *  Information on the items minted in the collection. This must be correct.
-  */
+   *  Information on the items minted in the collection. This must be correct.
+   */
   witness: NftWitness;
 };
 
@@ -1082,7 +1154,10 @@ export function nftsDestroy(
   );
 }
 
-export type NftsDestroyAction = CTAtomicActionGeneric<ActionType.NftsDestroyCollection, NftsDestroyArgs>;
+export type NftsDestroyAction = CTAtomicActionGeneric<
+  ActionType.NftsDestroyCollection,
+  NftsDestroyArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1091,12 +1166,12 @@ export type NftsDestroyAction = CTAtomicActionGeneric<ActionType.NftsDestroyColl
  */
 export type NftsLockItemTransferArgs = {
   /**
-  *  The collection of the item to be changed.
-  */
+   *  The collection of the item to be changed.
+   */
   collection: BlockchainGenericId;
   /**
-  *  The item to become non-transferable.
-  */
+   *  The item to become non-transferable.
+   */
   item: BlockchainGenericId;
 };
 
@@ -1125,7 +1200,10 @@ export function nftsLockItemTransfer(
   );
 }
 
-export type NftsLockItemTransferAction = CTAtomicActionGeneric<ActionType.NftsLockItemTransfer, NftsLockItemTransferArgs>;
+export type NftsLockItemTransferAction = CTAtomicActionGeneric<
+  ActionType.NftsLockItemTransfer,
+  NftsLockItemTransferArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1159,7 +1237,10 @@ export function nftsMint(
   );
 }
 
-export type NftsMintAction = CTAtomicActionGeneric<ActionType.NftsMintItem, NftsMintArgs>;
+export type NftsMintAction = CTAtomicActionGeneric<
+  ActionType.NftsMintItem,
+  NftsMintArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1168,8 +1249,8 @@ export type NftsMintAction = CTAtomicActionGeneric<ActionType.NftsMintItem, Nfts
  */
 export type NftsSetAcceptOwnershipArgs = {
   /**
-  *  The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.
-  */
+   *  The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.
+   */
   maybeCollection: number | null | undefined;
 };
 
@@ -1198,7 +1279,10 @@ export function nftsSetAcceptOwnership(
   );
 }
 
-export type NftsSetAcceptOwnershipAction = CTAtomicActionGeneric<ActionType.NftsAcceptCollectionOwnership, NftsSetAcceptOwnershipArgs>;
+export type NftsSetAcceptOwnershipAction = CTAtomicActionGeneric<
+  ActionType.NftsAcceptCollectionOwnership,
+  NftsSetAcceptOwnershipArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1207,12 +1291,12 @@ export type NftsSetAcceptOwnershipAction = CTAtomicActionGeneric<ActionType.Nfts
  */
 export type NftsSetCollectionMetadataArgs = {
   /**
-  *  The identifier of the item whose metadata to update.
-  */
+   *  The identifier of the item whose metadata to update.
+   */
   collection: BlockchainGenericId;
   /**
-  *  The general information of this item. Limited in length by `StringLimit`.
-  */
+   *  The general information of this item. Limited in length by `StringLimit`.
+   */
   data: string;
 };
 
@@ -1241,7 +1325,10 @@ export function nftsSetCollectionMetadata(
   );
 }
 
-export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<ActionType.NftsSetCollectionMetadata, NftsSetCollectionMetadataArgs>;
+export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<
+  ActionType.NftsSetCollectionMetadata,
+  NftsSetCollectionMetadataArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1250,16 +1337,16 @@ export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<ActionType.N
  */
 export type NftsSetMetadataArgs = {
   /**
-  *  The identifier of the collection whose item's metadata to set.
-  */
+   *  The identifier of the collection whose item's metadata to set.
+   */
   collection: BlockchainGenericId;
   /**
-  *  The identifier of the item whose metadata to set.
-  */
+   *  The identifier of the item whose metadata to set.
+   */
   item: BlockchainGenericId;
   /**
-  *  The general information of this item. Limited in length by `StringLimit`.
-  */
+   *  The general information of this item. Limited in length by `StringLimit`.
+   */
   data: string;
 };
 
@@ -1288,7 +1375,10 @@ export function nftsSetMetadata(
   );
 }
 
-export type NftsSetMetadataAction = CTAtomicActionGeneric<ActionType.NftsSetItemMetadata, NftsSetMetadataArgs>;
+export type NftsSetMetadataAction = CTAtomicActionGeneric<
+  ActionType.NftsSetItemMetadata,
+  NftsSetMetadataArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1297,16 +1387,16 @@ export type NftsSetMetadataAction = CTAtomicActionGeneric<ActionType.NftsSetItem
  */
 export type NftsTransferArgs = {
   /**
-  *  The collection of the item to be transferred.
-  */
+   *  The collection of the item to be transferred.
+   */
   collection: BlockchainGenericId;
   /**
-  *  The item to be transferred.
-  */
+   *  The item to be transferred.
+   */
   item: BlockchainGenericId;
   /**
-  *  The account to receive ownership of the item.
-  */
+   *  The account to receive ownership of the item.
+   */
   dest: BlockchainGenericAddress;
 };
 
@@ -1335,7 +1425,10 @@ export function nftsTransfer(
   );
 }
 
-export type NftsTransferAction = CTAtomicActionGeneric<ActionType.NftsTransferItem, NftsTransferArgs>;
+export type NftsTransferAction = CTAtomicActionGeneric<
+  ActionType.NftsTransferItem,
+  NftsTransferArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1344,8 +1437,8 @@ export type NftsTransferAction = CTAtomicActionGeneric<ActionType.NftsTransferIt
  */
 export type NftsTransferOwnershipArgs = {
   /**
-  *  The collection whose owner should be changed.
-  */
+   *  The collection whose owner should be changed.
+   */
   collection: BlockchainGenericId;
   newOwner: BlockchainGenericAddress;
 };
@@ -1375,7 +1468,10 @@ export function nftsTransferOwnership(
   );
 }
 
-export type NftsTransferOwnershipAction = CTAtomicActionGeneric<ActionType.NftsTransferCollectionOwnership, NftsTransferOwnershipArgs>;
+export type NftsTransferOwnershipAction = CTAtomicActionGeneric<
+  ActionType.NftsTransferCollectionOwnership,
+  NftsTransferOwnershipArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1384,12 +1480,12 @@ export type NftsTransferOwnershipAction = CTAtomicActionGeneric<ActionType.NftsT
  */
 export type NftsUnlockItemTransferArgs = {
   /**
-  *  The collection of the item to be changed.
-  */
+   *  The collection of the item to be changed.
+   */
   collection: BlockchainGenericId;
   /**
-  *  The item to become transferable.
-  */
+   *  The item to become transferable.
+   */
   item: BlockchainGenericId;
 };
 
@@ -1418,7 +1514,10 @@ export function nftsUnlockItemTransfer(
   );
 }
 
-export type NftsUnlockItemTransferAction = CTAtomicActionGeneric<ActionType.NftsUnlockItemTransfer, NftsUnlockItemTransferArgs>;
+export type NftsUnlockItemTransferAction = CTAtomicActionGeneric<
+  ActionType.NftsUnlockItemTransfer,
+  NftsUnlockItemTransferArgs
+>;
 
 /*---------------------------------------------------------------------------------- */
 

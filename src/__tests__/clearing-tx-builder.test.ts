@@ -7,8 +7,8 @@ import { createClearingTransactionAndBroadcast } from '../functions/clearing-tx-
 import logger from '../functions/logger';
 import { ActionType } from '../types/api/actions';
 
-import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
 import type { CTAtomicAction } from '../txwrapper/calls';
+import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
 
 // Mock config
 jest.mock('../functions/config', () => ({

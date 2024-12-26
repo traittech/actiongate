@@ -1,8 +1,7 @@
 import { defineMethod } from '@substrate/txwrapper-core';
 
-import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
-
 import type { CTAction } from '../../types/api/common';
+import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 /**
  * Arguments required to create a clearing transaction.

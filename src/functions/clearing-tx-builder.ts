@@ -5,14 +5,13 @@ import { loadConfig } from '../functions/config';
 import * as txwrapper from '../txwrapper/calls';
 import { ActionType } from '../types/api/actions';
 
-import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
-import type { CTAction } from '../types/api/common';
-import type { CTAtomicAction } from '../txwrapper/calls';
-
 import logger from './logger';
 import { signWith } from './signer';
 import { generateTxMetadata, buildUnsignedTransaction } from './tx-helper';
 
+import type { CTAtomicAction } from '../txwrapper/calls';
+import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
+import type { CTAction } from '../types/api/common';
 import type { KeyringPair } from '@polkadot/keyring/types';
 
 const config = loadConfig();
@@ -104,274 +103,142 @@ function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: 
   switch (action.actionType) {
     // Balances Pallet
     case ActionType.BalancesTransferAllowDeath: {
-      unsigned = txwrapper.balancesTransferAllowDeath(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.balancesTransferAllowDeath(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.BalancesTransferKeepAlive: {
-      unsigned = txwrapper.balancesTransferKeepAlive(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.balancesTransferKeepAlive(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.BalancesTransferAll: {
-      unsigned = txwrapper.balancesTransferAll(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.balancesTransferAll(action.arguments, baseTxInfo, options);
       break;
     }
 
     // Nfts Pallet
     case ActionType.NftsCreateCollection: {
-      unsigned = txwrapper.nftsCreate(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsCreate(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsDestroyCollection: {
-      unsigned = txwrapper.nftsDestroy(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsDestroy(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsTransferCollectionOwnership: {
-      unsigned = txwrapper.nftsTransferOwnership(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsTransferOwnership(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsAcceptCollectionOwnership: {
-      unsigned = txwrapper.nftsSetAcceptOwnership(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsSetAcceptOwnership(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsSetCollectionMetadata: {
-      unsigned = txwrapper.nftsSetCollectionMetadata(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsSetCollectionMetadata(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsClearCollectionMetadata: {
-      unsigned = txwrapper.nftsClearCollectionMetadata(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsClearCollectionMetadata(action.arguments, baseTxInfo, options);
       break;
     }
 
     case ActionType.NftsMintItem: {
-      unsigned = txwrapper.nftsMint(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsMint(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsBurnItem: {
-      unsigned = txwrapper.nftsBurn(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsBurn(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsTransferItem: {
-      unsigned = txwrapper.nftsTransfer(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsTransfer(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsLockItemTransfer: {
-      unsigned = txwrapper.nftsLockItemTransfer(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsLockItemTransfer(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsUnlockItemTransfer: {
-      unsigned = txwrapper.nftsUnlockItemTransfer(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsUnlockItemTransfer(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsSetItemMetadata: {
-      unsigned = txwrapper.nftsSetMetadata(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsSetMetadata(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.NftsClearItemMetadata: {
-      unsigned = txwrapper.nftsClearMetadata(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.nftsClearMetadata(action.arguments, baseTxInfo, options);
       break;
     }
 
     // Assets Pallet
     case ActionType.AssetsCreate: {
-      unsigned = txwrapper.assetsCreate(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsCreate(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsStartDestroy: {
-      unsigned = txwrapper.assetsStartDestroy(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsStartDestroy(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsDestroyAccounts: {
-      unsigned = txwrapper.assetsDestroyAccounts(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsDestroyAccounts(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsDestroyApprovals: {
-      unsigned = txwrapper.assetsDestroyApprovals(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsDestroyApprovals(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsFinishDestroy: {
-      unsigned = txwrapper.assetsFinishDestroy(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsFinishDestroy(action.arguments, baseTxInfo, options);
       break;
     }
 
     case ActionType.AssetsTransferOwnership: {
-      unsigned = txwrapper.assetsTransferOwnership(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsTransferOwnership(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsSetMinBalance: {
-      unsigned = txwrapper.assetsSetMinBalance(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsSetMinBalance(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsSetMetadata: {
-      unsigned = txwrapper.assetsSetMetadata(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsSetMetadata(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsFreezeAsset: {
-      unsigned = txwrapper.assetsFreezeAsset(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsFreezeAsset(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsThawAsset: {
-      unsigned = txwrapper.assetsThawAsset(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsThawAsset(action.arguments, baseTxInfo, options);
       break;
     }
 
     case ActionType.AssetsMint: {
-      unsigned = txwrapper.assetsMint(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsMint(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsBurn: {
-      unsigned = txwrapper.assetsBurn(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsBurn(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsTransfer: {
-      unsigned = txwrapper.assetsTransfer(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsTransfer(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsTransferKeepAlive: {
-      unsigned = txwrapper.assetsTransferKeepAlive(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsTransferKeepAlive(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsForceTransfer: {
-      unsigned = txwrapper.assetsForceTransfer(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsForceTransfer(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsFreezeAccount: {
-      unsigned = txwrapper.assetsFreeze(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsFreeze(action.arguments, baseTxInfo, options);
       break;
     }
     case ActionType.AssetsThawAccount: {
-      unsigned = txwrapper.assetsThaw(
-        action.arguments,
-        baseTxInfo,
-        options
-      );
+      unsigned = txwrapper.assetsThaw(action.arguments, baseTxInfo, options);
       break;
     }
 

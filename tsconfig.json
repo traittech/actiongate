@@ -7,12 +7,10 @@
     "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "resolveJsonModule": true,
+    "resolveJsonModule": true
   },
   "paths": {
-    "@/*": [
-      "src/*"
-    ]
+    "@/*": ["src/*"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

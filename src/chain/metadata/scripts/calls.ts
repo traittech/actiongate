@@ -1,16 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import Handlebars from 'handlebars';
+import { compareName, createImports, getSimilarTypes, initMeta, setImports, writeFile } from '@polkadot/typegen/util';
 import * as defaultDefs from '@polkadot/types/interfaces/definitions';
 import lookupDefinitions from '@polkadot/types-augment/lookup/definitions';
 import { stringCamelCase, stringPascalCase } from '@polkadot/util';
-import { compareName, createImports, getSimilarTypes, initMeta, setImports, writeFile } from '@polkadot/typegen/util';
-
-import metadataJson from '../generated/latest.json';
+import Handlebars from 'handlebars';
 
 import { ActionType } from '../../../types/api/actions';
 import { BlockchainOverridesMap } from '../../../types/api/overrides';
+import metadataJson from '../generated/latest.json';
 
 import type { Vec, Text } from '@polkadot/types';
 
@@ -25,7 +24,7 @@ const generateForMetaTemplate = Handlebars.compile(readTemplate('calls'));
 
 const MAPPED_NAMES: any = {
   class: 'clazz',
-  new: 'updated'
+  new: 'updated',
 };
 
 function mapName(_name: any) {
@@ -57,7 +56,7 @@ function getFunctionDescription(docs: Vec<Text>) {
       headerPartsCollected = true;
 
       const [argNameQuoted, argDescription] = text.slice(2).split(':');
-      const argName = stringCamelCase(argNameQuoted.replace(/\`/g, ''));
+      const argName = stringCamelCase(argNameQuoted.replace(/`/g, ''));
 
       currentArgName = argName;
       currentArgDesc.push(argDescription);
@@ -69,9 +68,7 @@ function getFunctionDescription(docs: Vec<Text>) {
   }
 
   const full = description.join(' ');
-  const short = description[0]
-    ? description[0].charAt(0).toLowerCase() + description[0].slice(1)
-    : '';
+  const short = description[0] ? description[0].charAt(0).toLowerCase() + description[0].slice(1) : '';
 
   return {
     full,
@@ -90,19 +87,19 @@ function generator(
 
   const allTypes = {
     '@polkadot/types-augment': {
-        lookup: {
-            ...lookupDefinitions,
-            ...customLookupDefinitions
-        }
+      lookup: {
+        ...lookupDefinitions,
+        ...customLookupDefinitions,
+      },
     },
     '@polkadot/types/interfaces': defaultDefs,
-    ...extraTypes
+    ...extraTypes,
   };
 
   const imports = createImports(allTypes);
 
   const allDefs = Object.entries(allTypes).reduce((defs, [path, obj]) => {
-      return Object.entries(obj).reduce((defs, [key, value]) => ({ ...defs, [`${path}/${key}`]: value }), defs);
+    return Object.entries(obj).reduce((defs, [key, value]) => ({ ...defs, [`${path}/${key}`]: value }), defs);
   }, {});
 
   const { lookup, pallets } = metadata.asLatest;
@@ -119,74 +116,69 @@ function generator(
 
       const palletCalls = lookup.getSiType(calls.unwrap().type).def.asVariant.variants;
 
-      const items = palletCalls.reduce<any[]>((acc, { docs, fields, name: methodName }) => {
-        const functionName = `${palletName}${stringPascalCase(methodName)}`;
+      const items = palletCalls
+        .reduce<any[]>((acc, { docs, fields, name: methodName }) => {
+          const functionName = `${palletName}${stringPascalCase(methodName)}`;
 
-        const actionName = allowedFunctions.find(([key, val]) => val === functionName)?.[0];
+          const actionName = allowedFunctions.find(([key, val]) => val === functionName)?.[0];
 
-        if (!actionName) return acc;
+          if (!actionName) return acc;
 
-        const name = stringCamelCase(methodName);
-        const argsTypeName = `${stringPascalCase(functionName)}Args`;
-        const actionTypeName = `${stringPascalCase(functionName)}Action`;
+          const name = stringCamelCase(methodName);
+          const argsTypeName = `${stringPascalCase(functionName)}Args`;
+          const actionTypeName = `${stringPascalCase(functionName)}Action`;
 
-        ctAtomicActions.push(actionTypeName);
+          ctAtomicActions.push(actionTypeName);
 
-        const typesInfo = fields.map(({ name, type, typeName }, index) => {
-          const typeDef = registry.lookup.getTypeDef(type);
-          return [
-              name.isSome
-                  ? mapName(name.unwrap())
-                  : `param${index}`,
-              typeName.isSome
-                  ? typeName.toString()
-                  : typeDef.type,
-              typeDef.isFromSi
-                  ? typeDef.type
-                  : typeDef.lookupName || typeDef.type
-          ];
-        });
+          const typesInfo = fields.map(({ name, type, typeName }, index) => {
+            const typeDef = registry.lookup.getTypeDef(type);
+            return [
+              name.isSome ? mapName(name.unwrap()) : `param${index}`,
+              typeName.isSome ? typeName.toString() : typeDef.type,
+              typeDef.isFromSi ? typeDef.type : typeDef.lookupName || typeDef.type,
+            ];
+          });
 
-        const documentation = getFunctionDescription(docs);
+          const documentation = getFunctionDescription(docs);
 
-        const params = typesInfo.map(([name, , typeStr]) => {
-          const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
+          const params = typesInfo.map(([name, , typeStr]) => {
+            const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
 
-          let type = similarTypes.join(' | ');
+            let type = similarTypes.join(' | ');
 
-          if (BlockchainOverridesMap.has(type)) {
-            type = BlockchainOverridesMap.get(type) as string;
-          } else {
-            setImports(allDefs, imports, [typeStr, ...similarTypes]);
-          }
+            if (BlockchainOverridesMap.has(type)) {
+              type = BlockchainOverridesMap.get(type) as string;
+            } else {
+              setImports(allDefs, imports, [typeStr, ...similarTypes]);
+            }
 
-          return {
+            return {
+              name,
+              type,
+              description: documentation.args[name] ?? '',
+            };
+          });
+
+          acc.push({
+            documentation,
+            functionName,
+            palletName,
+            methodName,
+            argsTypeName,
+            actionName,
+            actionTypeName,
+            params,
+            // for ordering
             name,
-            type,
-            description: documentation.args[name] ?? '',
-          }
-        });
+          });
 
-        acc.push({
-          documentation,
-          functionName,
-          palletName,
-          methodName,
-          argsTypeName,
-          actionName,
-          actionTypeName,
-          params,
-          // for ordering
-          name,
-        });
-
-        return acc;
-      }, [])
-      .sort(compareName);
+          return acc;
+        }, [])
+        .sort(compareName);
 
       acc.push({
         items,
-        name: palletName
+        name: palletName,
       });
 
       return acc;
@@ -198,11 +190,13 @@ function generator(
     modules,
     ctAtomicActions,
     types: [
-      ...Object.keys(imports.localTypes).sort().map((packagePath) => ({
+      ...Object.keys(imports.localTypes)
+        .sort()
+        .map((packagePath) => ({
           file: packagePath.replace('@polkadot/types-augment', '@polkadot/types'),
-          types: Object.keys(imports.localTypes[packagePath])
-      }))
-    ]
+          types: Object.keys(imports.localTypes[packagePath]),
+        })),
+    ],
   });
 }
 
@@ -215,5 +209,5 @@ function generator(
 
   const templateGenerator = () => generator(metadataHex, Object.entries(ActionType));
 
-  writeFile(dest, templateGenerator)
+  writeFile(dest, templateGenerator);
 })();
