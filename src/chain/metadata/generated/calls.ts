@@ -85,7 +85,7 @@ export function assetsCreate(
 
 export type AssetsDestroyAccountsArgs = {
   /**
-  *  The identifier of the asset to be destroyed. This must identify an existing
+  *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
   id: u32 | AnyNumber | Uint8Array
 };
@@ -118,7 +118,7 @@ export function assetsDestroyAccounts(
 
 export type AssetsDestroyApprovalsArgs = {
   /**
-  *  The identifier of the asset to be destroyed. This must identify an existing
+  *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
   id: u32 | AnyNumber | Uint8Array
 };
@@ -151,7 +151,7 @@ export function assetsDestroyApprovals(
 
 export type AssetsFinishDestroyArgs = {
   /**
-  *  The identifier of the asset to be destroyed. This must identify an existing
+  *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
   id: u32 | AnyNumber | Uint8Array
 };
@@ -196,7 +196,7 @@ export type AssetsForceTransferArgs = {
   */
   dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
   /**
-  *  The amount by which the `source`'s balance of assets should be reduced and
+  *  The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.
   */
   amount: Compact<u128> | AnyNumber | Uint8Array
 };
@@ -377,7 +377,7 @@ export function assetsSetMinBalance(
 
 export type AssetsStartDestroyArgs = {
   /**
-  *  The identifier of the asset to be destroyed. This must identify an existing
+  *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
   id: u32 | AnyNumber | Uint8Array
 };
@@ -451,7 +451,7 @@ export type AssetsTransferArgs = {
   */
   target: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
   /**
-  *  The amount by which the sender's balance of assets should be reduced and
+  *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
   */
   amount: Compact<u128> | AnyNumber | Uint8Array
 };
@@ -492,7 +492,7 @@ export type AssetsTransferKeepAliveArgs = {
   */
   target: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
   /**
-  *  The amount by which the sender's balance of assets should be reduced and
+  *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
   */
   amount: Compact<u128> | AnyNumber | Uint8Array
 };
@@ -565,9 +565,6 @@ export type BalancesTransferAllArgs = {
   *  The recipient of the transfer.
   */
   dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
-  /**
-  *  A boolean to determine if the `transfer_all` operation should send all
-  */
   keepAlive: bool | boolean | Uint8Array
 };
 

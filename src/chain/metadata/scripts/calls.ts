@@ -36,27 +36,37 @@ function mapName(_name: any) {
 }
 
 function getFunctionDescription(docs: Vec<Text>) {
-  let description: string[] = [];
-  let args: Record<string, string> = {};
+  const description: string[] = [];
+  const args: Record<string, string> = {};
 
   const parts = docs.toArray();
 
   let headerPartsCollected = false;
+  let currentArgName = '';
+  let currentArgDesc = [];
 
   for (const part of parts) {
-    const text = part.toString();
+    const text = part.toString().trim();
+    const isNewArg = text.startsWith('-');
 
-    if (text.startsWith('-')) {
+    if ((!text || isNewArg) && currentArgName) {
+      args[currentArgName] = currentArgDesc.join(' ');
+      currentArgName = '';
+      currentArgDesc = [];
+    }
+
+    if (isNewArg) {
       headerPartsCollected = true;
 
       const [argNameQuoted, argDescription] = text.slice(2).split(':');
       const argName = stringCamelCase(argNameQuoted.replace(/\`/g, ''));
 
-      args[argName] = argDescription;
+      currentArgName = argName;
+      currentArgDesc.push(argDescription);
+    } else if (currentArgName) {
+      currentArgDesc.push(text);
     } else if (!headerPartsCollected && text) {
       description.push(text);
-    } else {
-      continue;
     }
   }
 
