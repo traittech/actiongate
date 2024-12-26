@@ -3,29 +3,31 @@
 
 import { defineMethod } from '@substrate/txwrapper-core';
 
-// import type lookup before we augment - in some environments
-// this is required to allow for ambient/previous definitions
-import '@polkadot/api-base/types/submittable';
-
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
-import type { Bytes, Compact, bool, u128, u32 } from '@polkadot/types-codec';
-import type { AnyNumber } from '@polkadot/types-codec/types';
-import type { MultiAddress } from '@polkadot/types/interfaces/runtime';
+import type {
+  BlockchainAddress,
+  Balance,
+  AssetId,
+  NftWitness
+} from '../types/api/common';
 
+/**
+ * Arguments required to reduce the balance of &#x60;who&#x60; by as much as possible up to &#x60;amount&#x60; assets of &#x60;id&#x60;.
+ */
 export type AssetsBurnArgs = {
   /**
   *  The identifier of the asset to have some amount burned.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
   /**
   *  The account to be debited from.
   */
-  who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
+  who: BlockchainAddress;
   /**
   *  The maximum amount by which `who`'s balance should be reduced.
   */
-  amount: Compact<u128> | AnyNumber | Uint8Array
+  amount: Balance;
 };
 
 /**
@@ -43,7 +45,6 @@ export function assetsBurn(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'burn',
         pallet: 'assets',
@@ -55,7 +56,7 @@ export function assetsBurn(
 }
 
 export type AssetsCreateArgs = {
-  minBalance: u128 | AnyNumber | Uint8Array
+  minBalance: Balance;
 };
 
 /**
@@ -72,7 +73,6 @@ export function assetsCreate(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'create',
         pallet: 'assets',
@@ -83,11 +83,14 @@ export function assetsCreate(
   );
 }
 
+/**
+ * Arguments required to destroy all accounts associated with a given asset.
+ */
 export type AssetsDestroyAccountsArgs = {
   /**
   *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
 };
 
 /**
@@ -105,7 +108,6 @@ export function assetsDestroyAccounts(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'destroy_accounts',
         pallet: 'assets',
@@ -116,11 +118,14 @@ export function assetsDestroyAccounts(
   );
 }
 
+/**
+ * Arguments required to destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).
+ */
 export type AssetsDestroyApprovalsArgs = {
   /**
   *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
 };
 
 /**
@@ -138,7 +143,6 @@ export function assetsDestroyApprovals(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'destroy_approvals',
         pallet: 'assets',
@@ -149,11 +153,14 @@ export function assetsDestroyApprovals(
   );
 }
 
+/**
+ * Arguments required to complete destroying asset and unreserve currency.
+ */
 export type AssetsFinishDestroyArgs = {
   /**
   *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
 };
 
 /**
@@ -171,7 +178,6 @@ export function assetsFinishDestroy(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'finish_destroy',
         pallet: 'assets',
@@ -182,23 +188,26 @@ export function assetsFinishDestroy(
   );
 }
 
+/**
+ * Arguments required to move some assets from one account to another.
+ */
 export type AssetsForceTransferArgs = {
   /**
   *  The identifier of the asset to have some amount transferred.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
   /**
   *  The account to be debited.
   */
-  source: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
+  source: BlockchainAddress;
   /**
   *  The account to be credited.
   */
-  dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
+  dest: BlockchainAddress;
   /**
   *  The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.
   */
-  amount: Compact<u128> | AnyNumber | Uint8Array
+  amount: Balance;
 };
 
 /**
@@ -216,7 +225,6 @@ export function assetsForceTransfer(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'force_transfer',
         pallet: 'assets',
@@ -227,11 +235,53 @@ export function assetsForceTransfer(
   );
 }
 
+/**
+ * Arguments required to disallow further unprivileged transfers of an asset &#x60;id&#x60; from an account &#x60;who&#x60;. &#x60;who&#x60;
+ */
+export type AssetsFreezeArgs = {
+  /**
+  *  The identifier of the asset to be frozen.
+  */
+  id: AssetId;
+  /**
+  *  The account to be frozen.
+  */
+  who: BlockchainAddress;
+};
+
+/**
+ * Disallow further unprivileged transfers of an asset &#x60;id&#x60; from an account &#x60;who&#x60;. &#x60;who&#x60; must already exist as an entry in &#x60;Account&#x60;s of the asset. If you want to freeze an account that does not have an entry, use &#x60;touch_other&#x60; first. Origin must be Signed and the sender should be the Freezer of the asset &#x60;id&#x60;.
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function assetsFreeze(
+  args: AssetsFreezeArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'freeze',
+        pallet: 'assets',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to disallow further unprivileged transfers for the asset class.
+ */
 export type AssetsFreezeAssetArgs = {
   /**
   *  The identifier of the asset to be frozen.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
 };
 
 /**
@@ -249,7 +299,6 @@ export function assetsFreezeAsset(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'freeze_asset',
         pallet: 'assets',
@@ -260,19 +309,22 @@ export function assetsFreezeAsset(
   );
 }
 
+/**
+ * Arguments required to mint assets of a particular class.
+ */
 export type AssetsMintArgs = {
   /**
   *  The identifier of the asset to have some amount minted.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
   /**
   *  The account to be credited with the minted assets.
   */
-  beneficiary: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
+  beneficiary: BlockchainAddress;
   /**
   *  The amount of the asset to be minted.
   */
-  amount: Compact<u128> | AnyNumber | Uint8Array
+  amount: Balance;
 };
 
 /**
@@ -290,7 +342,6 @@ export function assetsMint(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'mint',
         pallet: 'assets',
@@ -301,15 +352,18 @@ export function assetsMint(
   );
 }
 
+/**
+ * Arguments required to set the raw metadata for an asset.
+ */
 export type AssetsSetMetadataArgs = {
   /**
   *  The identifier of the asset to update.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
   /**
   *  The data of metadata. Limited in length by `StringLimit`.
   */
-  data: Bytes | string | Uint8Array
+  data: string;
 };
 
 /**
@@ -327,7 +381,6 @@ export function assetsSetMetadata(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'set_metadata',
         pallet: 'assets',
@@ -338,15 +391,18 @@ export function assetsSetMetadata(
   );
 }
 
+/**
+ * Arguments required to sets the minimum balance of an asset.
+ */
 export type AssetsSetMinBalanceArgs = {
   /**
   *  The identifier of the asset.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
   /**
   *  The new value of `min_balance`.
   */
-  minBalance: u128 | AnyNumber | Uint8Array
+  minBalance: Balance;
 };
 
 /**
@@ -364,7 +420,6 @@ export function assetsSetMinBalance(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'set_min_balance',
         pallet: 'assets',
@@ -375,11 +430,14 @@ export function assetsSetMinBalance(
   );
 }
 
+/**
+ * Arguments required to start the process of destroying a fungible asset class.
+ */
 export type AssetsStartDestroyArgs = {
   /**
   *  The identifier of the asset to be destroyed. This must identify an existing asset.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
 };
 
 /**
@@ -397,7 +455,6 @@ export function assetsStartDestroy(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'start_destroy',
         pallet: 'assets',
@@ -408,11 +465,53 @@ export function assetsStartDestroy(
   );
 }
 
+/**
+ * Arguments required to allow unprivileged transfers to and from an account again.
+ */
+export type AssetsThawArgs = {
+  /**
+  *  The identifier of the asset to be frozen.
+  */
+  id: AssetId;
+  /**
+  *  The account to be unfrozen.
+  */
+  who: BlockchainAddress;
+};
+
+/**
+ * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset &#x60;id&#x60;.
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function assetsThaw(
+  args: AssetsThawArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'thaw',
+        pallet: 'assets',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to allow unprivileged transfers for the asset again.
+ */
 export type AssetsThawAssetArgs = {
   /**
   *  The identifier of the asset to be thawed.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
 };
 
 /**
@@ -430,7 +529,6 @@ export function assetsThawAsset(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'thaw_asset',
         pallet: 'assets',
@@ -441,19 +539,22 @@ export function assetsThawAsset(
   );
 }
 
+/**
+ * Arguments required to move some assets from the sender account to another.
+ */
 export type AssetsTransferArgs = {
   /**
   *  The identifier of the asset to have some amount transferred.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
   /**
   *  The account to be credited.
   */
-  target: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
+  target: BlockchainAddress;
   /**
   *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
   */
-  amount: Compact<u128> | AnyNumber | Uint8Array
+  amount: Balance;
 };
 
 /**
@@ -471,7 +572,6 @@ export function assetsTransfer(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'transfer',
         pallet: 'assets',
@@ -482,19 +582,22 @@ export function assetsTransfer(
   );
 }
 
+/**
+ * Arguments required to move some assets from the sender account to another, keeping the sender account alive.
+ */
 export type AssetsTransferKeepAliveArgs = {
   /**
   *  The identifier of the asset to have some amount transferred.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
   /**
   *  The account to be credited.
   */
-  target: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
+  target: BlockchainAddress;
   /**
   *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
   */
-  amount: Compact<u128> | AnyNumber | Uint8Array
+  amount: Balance;
 };
 
 /**
@@ -512,7 +615,6 @@ export function assetsTransferKeepAlive(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'transfer_keep_alive',
         pallet: 'assets',
@@ -523,15 +625,18 @@ export function assetsTransferKeepAlive(
   );
 }
 
+/**
+ * Arguments required to change the Owner of an asset.
+ */
 export type AssetsTransferOwnershipArgs = {
   /**
   *  The identifier of the asset.
   */
-  id: u32 | AnyNumber | Uint8Array
+  id: AssetId;
   /**
   *  The new Owner of this asset.
   */
-  owner: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
+  owner: BlockchainAddress;
 };
 
 /**
@@ -549,7 +654,6 @@ export function assetsTransferOwnership(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'transfer_ownership',
         pallet: 'assets',
@@ -560,12 +664,15 @@ export function assetsTransferOwnership(
   );
 }
 
+/**
+ * Arguments required to transfer the entire transferable balance from the caller account.
+ */
 export type BalancesTransferAllArgs = {
   /**
   *  The recipient of the transfer.
   */
-  dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
-  keepAlive: bool | boolean | Uint8Array
+  dest: BlockchainAddress;
+  keepAlive: boolean;
 };
 
 /**
@@ -583,7 +690,6 @@ export function balancesTransferAll(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'transfer_all',
         pallet: 'balances',
@@ -594,9 +700,12 @@ export function balancesTransferAll(
   );
 }
 
+/**
+ * Arguments required to transfer some liquid free balance to another account.
+ */
 export type BalancesTransferAllowDeathArgs = {
-  dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
-  value: Compact<u128> | AnyNumber | Uint8Array
+  dest: BlockchainAddress;
+  value: Balance;
 };
 
 /**
@@ -614,7 +723,6 @@ export function balancesTransferAllowDeath(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'transfer_allow_death',
         pallet: 'balances',
@@ -625,9 +733,12 @@ export function balancesTransferAllowDeath(
   );
 }
 
+/**
+ * Arguments required to same as the [&#x60;transfer_allow_death&#x60;] call, but with a check that the transfer will not
+ */
 export type BalancesTransferKeepAliveArgs = {
-  dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array
-  value: Compact<u128> | AnyNumber | Uint8Array
+  dest: BlockchainAddress;
+  value: Balance;
 };
 
 /**
@@ -645,7 +756,6 @@ export function balancesTransferKeepAlive(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'transfer_keep_alive',
         pallet: 'balances',
@@ -656,11 +766,53 @@ export function balancesTransferKeepAlive(
   );
 }
 
+/**
+ * Arguments required to destroy a single item.
+ */
+export type NftsBurnArgs = {
+  /**
+  *  The collection of the item to be burned.
+  */
+  collection: AssetId;
+  /**
+  *  The item to be burned.
+  */
+  item: AssetId;
+};
+
+/**
+ * Destroy a single item. The origin must conform to &#x60;ForceOrigin&#x60; or must be Signed and the signing account must be the owner of the &#x60;item&#x60;.
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function nftsBurn(
+  args: NftsBurnArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'burn',
+        pallet: 'nfts',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to clear the metadata for a collection.
+ */
 export type NftsClearCollectionMetadataArgs = {
   /**
   *  The identifier of the collection whose metadata to clear.
   */
-  collection: u32 | AnyNumber | Uint8Array
+  collection: AssetId;
 };
 
 /**
@@ -678,7 +830,6 @@ export function nftsClearCollectionMetadata(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'clear_collection_metadata',
         pallet: 'nfts',
@@ -689,15 +840,123 @@ export function nftsClearCollectionMetadata(
   );
 }
 
+/**
+ * Arguments required to clear the metadata for an item.
+ */
+export type NftsClearMetadataArgs = {
+  /**
+  *  The identifier of the collection whose item's metadata to clear.
+  */
+  collection: AssetId;
+  /**
+  *  The identifier of the item whose metadata to clear.
+  */
+  item: AssetId;
+};
+
+/**
+ * Clear the metadata for an item. Origin must be either &#x60;ForceOrigin&#x60; or Signed and the sender should be the Admin of the &#x60;collection&#x60;. Any deposit is freed for the collection&#x27;s owner.
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function nftsClearMetadata(
+  args: NftsClearMetadataArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'clear_metadata',
+        pallet: 'nfts',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+export type NftsCreateArgs = {
+};
+
+/**
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function nftsCreate(
+  args: NftsCreateArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'create',
+        pallet: 'nfts',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to destroy a collection of fungible items.
+ */
+export type NftsDestroyArgs = {
+  /**
+  *  The identifier of the collection to be destroyed.
+  */
+  collection: AssetId;
+  /**
+  *  Information on the items minted in the collection. This must be correct.
+  */
+  witness: NftWitness;
+};
+
+/**
+ * Destroy a collection of fungible items. The origin must conform to &#x60;ForceOrigin&#x60; or must be &#x60;Signed&#x60; and the sender must be the owner of the &#x60;collection&#x60;. NOTE: The collection must have 0 items to be destroyed.
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function nftsDestroy(
+  args: NftsDestroyArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'destroy',
+        pallet: 'nfts',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to disallow further unprivileged transfer of an item.
+ */
 export type NftsLockItemTransferArgs = {
   /**
   *  The collection of the item to be changed.
   */
-  collection: u32 | AnyNumber | Uint8Array
+  collection: AssetId;
   /**
   *  The item to become non-transferable.
   */
-  item: u32 | AnyNumber | Uint8Array
+  item: AssetId;
 };
 
 /**
@@ -715,7 +974,6 @@ export function nftsLockItemTransfer(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'lock_item_transfer',
         pallet: 'nfts',
@@ -726,15 +984,83 @@ export function nftsLockItemTransfer(
   );
 }
 
+export type NftsMintArgs = {
+  collection: AssetId;
+  item: AssetId;
+  mintTo: BlockchainAddress;
+};
+
+/**
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function nftsMint(
+  args: NftsMintArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'mint',
+        pallet: 'nfts',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to set (or reset) the acceptance of ownership for a particular account.
+ */
+export type NftsSetAcceptOwnershipArgs = {
+  /**
+  *  The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.
+  */
+  maybeCollection: number | null | undefined;
+};
+
+/**
+ * Set (or reset) the acceptance of ownership for a particular account. Origin must be &#x60;Signed&#x60; and if &#x60;maybe_collection&#x60; is &#x60;Some&#x60;, then the signer must have a provider reference.
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function nftsSetAcceptOwnership(
+  args: NftsSetAcceptOwnershipArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'set_accept_ownership',
+        pallet: 'nfts',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to set the metadata for a collection.
+ */
 export type NftsSetCollectionMetadataArgs = {
   /**
   *  The identifier of the item whose metadata to update.
   */
-  collection: u32 | AnyNumber | Uint8Array
+  collection: AssetId;
   /**
   *  The general information of this item. Limited in length by `StringLimit`.
   */
-  data: Bytes | string | Uint8Array
+  data: string;
 };
 
 /**
@@ -752,7 +1078,6 @@ export function nftsSetCollectionMetadata(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'set_collection_metadata',
         pallet: 'nfts',
@@ -763,15 +1088,140 @@ export function nftsSetCollectionMetadata(
   );
 }
 
+/**
+ * Arguments required to set the metadata for an item.
+ */
+export type NftsSetMetadataArgs = {
+  /**
+  *  The identifier of the collection whose item's metadata to set.
+  */
+  collection: AssetId;
+  /**
+  *  The identifier of the item whose metadata to set.
+  */
+  item: AssetId;
+  /**
+  *  The general information of this item. Limited in length by `StringLimit`.
+  */
+  data: string;
+};
+
+/**
+ * Set the metadata for an item. Origin must be either &#x60;ForceOrigin&#x60; or Signed and the sender should be the Admin of the &#x60;collection&#x60;. If the origin is Signed, then funds of signer are reserved according to the formula: &#x60;MetadataDepositBase + DepositPerByte * data.len&#x60; taking into account any already reserved funds.
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function nftsSetMetadata(
+  args: NftsSetMetadataArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'set_metadata',
+        pallet: 'nfts',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to move an item from the sender account to another.
+ */
+export type NftsTransferArgs = {
+  /**
+  *  The collection of the item to be transferred.
+  */
+  collection: AssetId;
+  /**
+  *  The item to be transferred.
+  */
+  item: AssetId;
+  /**
+  *  The account to receive ownership of the item.
+  */
+  dest: BlockchainAddress;
+};
+
+/**
+ * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function nftsTransfer(
+  args: NftsTransferArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'transfer',
+        pallet: 'nfts',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to change the Owner of a collection.
+ */
+export type NftsTransferOwnershipArgs = {
+  /**
+  *  The collection whose owner should be changed.
+  */
+  collection: AssetId;
+  newOwner: BlockchainAddress;
+};
+
+/**
+ * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the &#x60;collection&#x60;.
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function nftsTransferOwnership(
+  args: NftsTransferOwnershipArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: 'transfer_ownership',
+        pallet: 'nfts',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+/**
+ * Arguments required to re-allow unprivileged transfer of an item.
+ */
 export type NftsUnlockItemTransferArgs = {
   /**
   *  The collection of the item to be changed.
   */
-  collection: u32 | AnyNumber | Uint8Array
+  collection: AssetId;
   /**
   *  The item to become transferable.
   */
-  item: u32 | AnyNumber | Uint8Array
+  item: AssetId;
 };
 
 /**
@@ -789,7 +1239,6 @@ export function nftsUnlockItemTransfer(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: 'unlock_item_transfer',
         pallet: 'nfts',

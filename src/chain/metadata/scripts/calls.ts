@@ -9,7 +9,8 @@ import { compareName, createImports, getSimilarTypes, initMeta, setImports, writ
 
 import metadataJson from '../generated/latest.json';
 
-import { ActionType } from '../../../types/api/clearingTransaction';
+import { ActionType } from '../../../types/api/actions';
+import { BlockchainOverridesMap } from '../../../types/api/overrides';
 
 import type { Vec, Text } from '@polkadot/types';
 
@@ -70,13 +71,24 @@ function getFunctionDescription(docs: Vec<Text>) {
     }
   }
 
+  const full = description.join(' ');
+  const short = description[0]
+    ? description[0].charAt(0).toLowerCase() + description[0].slice(1)
+    : '';
+
   return {
-    description: description.join(' '),
+    full,
+    short,
     args,
   };
 }
 
-function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) {
+function generator(
+  meta: string,
+  allowedFunctions: string[] = [],
+  extraTypes = {},
+  customLookupDefinitions = {}
+) {
   const { metadata, registry } = initMeta(meta as any, extraTypes);
 
   const allTypes = {
@@ -111,7 +123,7 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
       const items = palletCalls.reduce<any[]>((acc, { docs, fields, name: methodName }) => {
         const functionName = `${palletName}${stringPascalCase(methodName)}`;
 
-        if (!ALLOWED_FUNCTIONS.includes(functionName as any)) return acc;
+        if (allowedFunctions.length && !allowedFunctions.includes(functionName as any)) return acc;
 
         const name = stringCamelCase(methodName);
         const argsName = `${stringPascalCase(functionName)}Args`;
@@ -131,22 +143,28 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
           ];
         });
 
-        const { description, args } = getFunctionDescription(docs);
+        const documentation = getFunctionDescription(docs);
 
         const params = typesInfo.map(([name, , typeStr]) => {
           const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
 
-          setImports(allDefs, imports, [typeStr, ...similarTypes]);
+          let type = similarTypes.join(' | ');
+
+          if (BlockchainOverridesMap.has(type)) {
+            type = BlockchainOverridesMap.get(type) as string;
+          } else {
+            setImports(allDefs, imports, [typeStr, ...similarTypes]);
+          }
 
           return {
             name,
-            type: similarTypes.join(' | '),
-            description: args[name] ?? '',
+            type,
+            description: documentation.args[name] ?? '',
           }
         });
 
         acc.push({
-          description,
+          documentation,
           functionName,
           palletName,
           methodName,
@@ -184,8 +202,9 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
 (async function main() {
   const metadataHex = metadataJson.latest as any;
 
-  const dest = path.join(__dirname, '..', 'generated/calls.ts');
-  const templateGenerator = () => generator(metadataHex);
+  const dest = path.join(process.cwd(), './src/txwrapper/calls.ts');
+
+  const templateGenerator = () => generator(metadataHex, ALLOWED_FUNCTIONS);
 
   writeFile(dest, templateGenerator)
 })();

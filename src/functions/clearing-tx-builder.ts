@@ -3,7 +3,8 @@ import { construct, methods, UnsignedTransaction, OptionsWithMeta, BaseTxInfo } 
 import { TransactionService } from '../adapter/datagate';
 import { loadConfig } from '../functions/config';
 import * as txwrapper from '../txwrapper';
-import { ClearingTransactionPayload, ActionType, CTAction } from '../types/api/clearingTransaction';
+import { ActionType } from '../types/api/actions';
+import type { ClearingTransactionPayload, CTAction } from '../types/api/clearingTransaction';
 
 import logger from './logger';
 import { signWith } from './signer';

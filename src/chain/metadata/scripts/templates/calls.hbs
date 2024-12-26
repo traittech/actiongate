@@ -3,18 +3,24 @@
 
 import { defineMethod } from '@substrate/txwrapper-core';
 
-// import type lookup before we augment - in some environments
-// this is required to allow for ambient/previous definitions
-import '@polkadot/api-base/types/submittable';
-
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
-{{{ importsAll }}}
+import type {
+  BlockchainAddress,
+  Balance,
+  AssetId,
+  NftWitness
+} from '../types/api/common';
 
 {{#each modules}}
 
 {{#each items}}
 
+{{#if documentation.short}}
+/**
+ * Arguments required to {{documentation.short}}
+ */
+{{/if}}
 export type {{{argsName}}} = {
   {{#each params}}
   {{#if this.description}}
@@ -22,13 +28,13 @@ export type {{{argsName}}} = {
   * {{{this.description}}}
   */
   {{/if}}
-  {{{this.name}}}: {{{this.type}}}
+  {{{this.name}}}: {{{this.type}}};
   {{/each}}
 };
 
 /**
-{{#if description}}
- * {{description}}
+{{#if documentation.full}}
+ * {{documentation.full}}
 {{/if}}
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
@@ -43,7 +49,6 @@ export function {{{functionName}}}(
   return defineMethod(
     {
       method: {
-        // @ts-expect-error Needed until types are updated in txwrapper-core
         args,
         name: '{{{methodName}}}',
         pallet: '{{{palletName}}}',

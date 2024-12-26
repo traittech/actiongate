@@ -1,3 +1,14 @@
+import { ActionType } from './actions';
+
+import type {
+  BlockchainAddress,
+  Balance,
+  CollectionId,
+  ItemId,
+  AssetId,
+  u32,
+} from './common';
+
 /**
  * Payload for a clearing transaction.
  */
@@ -26,65 +37,6 @@ export interface CTAtomic {
    * A list of actions that make up the atomic operation.
    */
   actions: CTAction[];
-}
-
-/**
- * Common blockchain types
- */
-export type BlockchainAddress = string;
-export type Balance = number;
-export type CollectionId = number;
-export type ItemId = number;
-export type AssetId = number;
-export type u32 = number;
-
-/**
- * Represents the type of action to be performed
- */
-export enum ActionType {
-  // Balances Pallet
-  BalancesTransferAllowDeath = 'balancesTransferAllowDeath',
-  BalancesTransferKeepAlive = 'balancesTransferKeepAlive',
-  BalancesTransferAll = 'balancesTransferAll',
-
-  // Nfts Pallet
-  NftsCreateCollection = 'nftsCreateCollection',
-  NftsDestroyCollection = 'nftsDestroyCollection',
-
-  NftsTransferCollectionOwnership = 'nftsTransferCollectionOwnership',
-  NftsAcceptCollectionOwnership = 'nftsAcceptCollectionOwnership',
-  NftsSetCollectionMetadata = 'nftsSetCollectionMetadata',
-  NftsClearCollectionMetadata = 'nftsClearCollectionMetadata',
-
-  NftsMintItem = 'nftsMintItem',
-  NftsBurnItem = 'nftsBurnItem',
-  NftsTransferItem = 'nftsTransferItem',
-  NftsLockItemTransfer = 'nftsLockItemTransfer',
-  NftsUnlockItemTransfer = 'nftsUnlockItemTransfer',
-  NftsSetItemMetadata = 'nftsSetItemMetadata',
-  NftsClearItemMetadata = 'nftsClearItemMetadata',
-
-  // Assets Pallet
-  AssetsCreate = 'assetsCreate',
-
-  AssetsStartDestroy = 'assetsStartDestroy',
-  AssetsDestroyAccounts = 'assetsDestroyAccounts',
-  AssetsDestroyApprovals = 'assetsDestroyApprovals',
-  AssetsFinishDestroy = 'assetsFinishDestroy',
-
-  AssetsMint = 'assetsMint',
-  AssetsBurn = 'assetsBurn',
-  AssetsTransfer = 'assetsTransfer',
-  AssetsTransferKeepAlive = 'assetsTransferKeepAlive',
-  AssetsForceTransfer = 'assetsForceTransfer',
-  AssetsFreezeAccount = 'assetsFreezeAccount',
-  AssetsThawAccount = 'assetsThawAccount',
-
-  AssetsFreezeAsset = 'assetsFreezeAsset',
-  AssetsThawAsset = 'assetsThawAsset',
-  AssetsTransferOwnership = 'assetsTransferOwnership',
-  AssetsSetMinBalance = 'assetsSetMinBalance',
-  AssetsSetMetadata = 'assetsSetMetadata',
 }
 
 // Balances Pallet Arguments

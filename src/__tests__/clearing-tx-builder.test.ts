@@ -5,8 +5,9 @@ import Keyring from '@polkadot/keyring';
 
 import { createClearingTransactionAndBroadcast } from '../functions/clearing-tx-builder';
 import logger from '../functions/logger';
-import {
-  ActionType,
+import { ActionType } from '../types/api/actions';
+
+import type {
   ClearingTransactionPayload,
   BalancesTransferKeepAliveArguments,
   CTAction,
