@@ -276,7 +276,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
     }
 
     case ActionType.AssetsTransferOwnership: {
-      unsigned = txwrapper.assetsTransferOwnership(
+      unsigned = txwrapperCalls.assetsTransferOwnership(
         action.arguments,
         baseTxInfo,
         options
