@@ -1,13 +1,40 @@
 import { ActionType } from './actions';
 
 import type {
-  BlockchainAddress,
-  Balance,
-  CollectionId,
-  ItemId,
-  AssetId,
-  u32,
-} from './common';
+  BalancesTransferAllowDeathArgs,
+  BalancesTransferKeepAliveArgs,
+  BalancesTransferAllArgs,
+  NftsCreateArgs,
+  NftsDestroyArgs,
+  NftsTransferOwnershipArgs,
+  NftsSetAcceptOwnershipArgs,
+  NftsSetCollectionMetadataArgs,
+  NftsClearCollectionMetadataArgs,
+  NftsMintArgs,
+  NftsBurnArgs,
+  NftsTransferArgs,
+  NftsLockItemTransferArgs,
+  NftsUnlockItemTransferArgs,
+  NftsSetMetadataArgs,
+  NftsClearMetadataArgs,
+  AssetsCreateArgs,
+  AssetsStartDestroyArgs,
+  AssetsDestroyAccountsArgs,
+  AssetsDestroyApprovalsArgs,
+  AssetsFinishDestroyArgs,
+  AssetsTransferOwnershipArgs,
+  AssetsSetMinBalanceArgs,
+  AssetsSetMetadataArgs,
+  AssetsFreezeAssetArgs,
+  AssetsThawAssetArgs,
+  AssetsMintArgs,
+  AssetsBurnArgs,
+  AssetsTransferArgs,
+  AssetsTransferKeepAliveArgs,
+  AssetsForceTransferArgs,
+  AssetsFreezeArgs,
+  AssetsThawArgs,
+} from '../../txwrapper/calls';
 
 /**
  * Payload for a clearing transaction.
@@ -41,11 +68,6 @@ export interface CTAtomic {
 
 // Balances Pallet Arguments
 
-export interface BalancesTransferAllowDeathArguments {
-  dest: BlockchainAddress;
-  value: Balance;
-}
-
 export interface BalancesTransferAllowDeathAction {
   /**
    * The type of action to be performed
@@ -60,12 +82,7 @@ export interface BalancesTransferAllowDeathAction {
   /**
    * The arguments for the action.
    */
-  arguments: BalancesTransferAllowDeathArguments;
-}
-
-export interface BalancesTransferKeepAliveArguments {
-  dest: BlockchainAddress;
-  value: Balance;
+  arguments: BalancesTransferAllowDeathArgs;
 }
 
 export interface BalancesTransferKeepAliveAction {
@@ -82,12 +99,7 @@ export interface BalancesTransferKeepAliveAction {
   /**
    * The arguments for the action.
    */
-  arguments: BalancesTransferKeepAliveArguments;
-}
-
-export interface BalancesTransferAllArguments {
-  dest: BlockchainAddress;
-  keepAlive: boolean;
+  arguments: BalancesTransferKeepAliveArgs;
 }
 
 export interface BalancesTransferAllAction {
@@ -104,13 +116,10 @@ export interface BalancesTransferAllAction {
   /**
    * The arguments for the action.
    */
-  arguments: BalancesTransferAllArguments;
+  arguments: BalancesTransferAllArgs;
 }
 
 // Nfts Pallet Arguments
-
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface NftsCreateCollectionArguments {}
 
 export interface NftsCreateCollectionAction {
   /**
@@ -126,16 +135,7 @@ export interface NftsCreateCollectionAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsCreateCollectionArguments;
-}
-
-export interface NftsDestroyCollectionArguments {
-  collection: CollectionId;
-  witness: {
-    itemMetadatas: u32;
-    itemConfigs: u32;
-    attributes: u32;
-  };
+  arguments: NftsCreateArgs;
 }
 
 export interface NftsDestroyCollectionAction {
@@ -152,12 +152,7 @@ export interface NftsDestroyCollectionAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsDestroyCollectionArguments;
-}
-
-export interface NftsTransferCollectionOwnershipArguments {
-  collection: CollectionId;
-  newOwner: BlockchainAddress;
+  arguments: NftsDestroyArgs;
 }
 
 export interface NftsTransferCollectionOwnershipAction {
@@ -174,11 +169,7 @@ export interface NftsTransferCollectionOwnershipAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsTransferCollectionOwnershipArguments;
-}
-
-export interface NftsAcceptCollectionOwnershipArguments {
-  collection: CollectionId;
+  arguments: NftsTransferOwnershipArgs;
 }
 
 export interface NftsAcceptCollectionOwnershipAction {
@@ -195,12 +186,7 @@ export interface NftsAcceptCollectionOwnershipAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsAcceptCollectionOwnershipArguments;
-}
-
-export interface NftsSetCollectionMetadataArguments {
-  collection: CollectionId;
-  data: string;
+  arguments: NftsSetAcceptOwnershipArgs;
 }
 
 export interface NftsSetCollectionMetadataAction {
@@ -217,11 +203,7 @@ export interface NftsSetCollectionMetadataAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsSetCollectionMetadataArguments;
-}
-
-export interface NftsClearCollectionMetadataArguments {
-  collection: CollectionId;
+  arguments: NftsSetCollectionMetadataArgs;
 }
 
 export interface NftsClearCollectionMetadataAction {
@@ -238,13 +220,7 @@ export interface NftsClearCollectionMetadataAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsClearCollectionMetadataArguments;
-}
-
-export interface NftsMintItemArguments {
-  collection: CollectionId;
-  item: ItemId;
-  mintTo: BlockchainAddress;
+  arguments: NftsClearCollectionMetadataArgs;
 }
 
 export interface NftsMintItemAction {
@@ -261,12 +237,7 @@ export interface NftsMintItemAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsMintItemArguments;
-}
-
-export interface NftsBurnItemArguments {
-  collection: CollectionId;
-  item: ItemId;
+  arguments: NftsMintArgs;
 }
 
 export interface NftsBurnItemAction {
@@ -283,13 +254,7 @@ export interface NftsBurnItemAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsBurnItemArguments;
-}
-
-export interface NftsTransferItemArguments {
-  collection: CollectionId;
-  item: ItemId;
-  dest: BlockchainAddress;
+  arguments: NftsBurnArgs;
 }
 
 export interface NftsTransferItemAction {
@@ -306,12 +271,7 @@ export interface NftsTransferItemAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsTransferItemArguments;
-}
-
-export interface NftsLockItemTransferArguments {
-  collection: CollectionId;
-  item: ItemId;
+  arguments: NftsTransferArgs;
 }
 
 export interface NftsLockItemTransferAction {
@@ -328,12 +288,7 @@ export interface NftsLockItemTransferAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsLockItemTransferArguments;
-}
-
-export interface NftsUnlockItemTransferArguments {
-  collection: CollectionId;
-  item: ItemId;
+  arguments: NftsLockItemTransferArgs;
 }
 
 export interface NftsUnlockItemTransferAction {
@@ -350,13 +305,7 @@ export interface NftsUnlockItemTransferAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsUnlockItemTransferArguments;
-}
-
-export interface NftsSetItemMetadataArguments {
-  collection: CollectionId;
-  item: ItemId;
-  data: string;
+  arguments: NftsUnlockItemTransferArgs;
 }
 
 export interface NftsSetItemMetadataAction {
@@ -373,12 +322,7 @@ export interface NftsSetItemMetadataAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsSetItemMetadataArguments;
-}
-
-export interface NftsClearItemMetadataArguments {
-  collection: CollectionId;
-  item: ItemId;
+  arguments: NftsSetMetadataArgs;
 }
 
 export interface NftsClearItemMetadataAction {
@@ -395,14 +339,10 @@ export interface NftsClearItemMetadataAction {
   /**
    * The arguments for the action.
    */
-  arguments: NftsClearItemMetadataArguments;
+  arguments: NftsClearMetadataArgs;
 }
 
 // Assets Pallet Arguments
-
-export interface AssetsCreateArguments {
-  minBalance: Balance;
-}
 
 export interface AssetsCreateAction {
   /**
@@ -418,11 +358,7 @@ export interface AssetsCreateAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsCreateArguments;
-}
-
-export interface AssetsStartDestroyArguments {
-  id: AssetId;
+  arguments: AssetsCreateArgs;
 }
 
 export interface AssetsStartDestroyAction {
@@ -439,11 +375,7 @@ export interface AssetsStartDestroyAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsStartDestroyArguments;
-}
-
-export interface AssetsDestroyAccountsArguments {
-  id: AssetId;
+  arguments: AssetsStartDestroyArgs;
 }
 
 export interface AssetsDestroyAccountsAction {
@@ -460,11 +392,7 @@ export interface AssetsDestroyAccountsAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsDestroyAccountsArguments;
-}
-
-export interface AssetsDestroyApprovalsArguments {
-  id: AssetId;
+  arguments: AssetsDestroyAccountsArgs;
 }
 
 export interface AssetsDestroyApprovalsAction {
@@ -481,11 +409,7 @@ export interface AssetsDestroyApprovalsAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsDestroyApprovalsArguments;
-}
-
-export interface AssetsFinishDestroyArguments {
-  id: AssetId;
+  arguments: AssetsDestroyApprovalsArgs;
 }
 
 export interface AssetsFinishDestroyAction {
@@ -502,12 +426,7 @@ export interface AssetsFinishDestroyAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsFinishDestroyArguments;
-}
-
-export interface AssetsTransferOwnershipArguments {
-  id: AssetId;
-  owner: BlockchainAddress;
+  arguments: AssetsFinishDestroyArgs;
 }
 
 export interface AssetsTransferOwnershipAction {
@@ -524,12 +443,7 @@ export interface AssetsTransferOwnershipAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsTransferOwnershipArguments;
-}
-
-export interface AssetsSetMinBalanceArguments {
-  id: AssetId;
-  minBalance: Balance;
+  arguments: AssetsTransferOwnershipArgs;
 }
 
 export interface AssetsSetMinBalanceAction {
@@ -546,12 +460,7 @@ export interface AssetsSetMinBalanceAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsSetMinBalanceArguments;
-}
-
-export interface AssetsSetMetadataArguments {
-  id: AssetId;
-  data: string;
+  arguments: AssetsSetMinBalanceArgs;
 }
 
 export interface AssetsSetMetadataAction {
@@ -568,11 +477,7 @@ export interface AssetsSetMetadataAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsSetMetadataArguments;
-}
-
-export interface AssetsFreezeAssetArguments {
-  id: AssetId;
+  arguments: AssetsSetMetadataArgs;
 }
 
 export interface AssetsFreezeAssetAction {
@@ -589,11 +494,7 @@ export interface AssetsFreezeAssetAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsFreezeAssetArguments;
-}
-
-export interface AssetsThawAssetArguments {
-  id: AssetId;
+  arguments: AssetsFreezeAssetArgs;
 }
 
 export interface AssetsThawAssetAction {
@@ -610,13 +511,7 @@ export interface AssetsThawAssetAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsThawAssetArguments;
-}
-
-export interface AssetsMintArguments {
-  id: AssetId;
-  beneficiary: BlockchainAddress;
-  amount: Balance;
+  arguments: AssetsThawAssetArgs;
 }
 
 export interface AssetsMintAction {
@@ -633,13 +528,7 @@ export interface AssetsMintAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsMintArguments;
-}
-
-export interface AssetsBurnArguments {
-  id: AssetId;
-  who: BlockchainAddress;
-  amount: Balance;
+  arguments: AssetsMintArgs;
 }
 
 export interface AssetsBurnAction {
@@ -656,13 +545,7 @@ export interface AssetsBurnAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsBurnArguments;
-}
-
-export interface AssetsTransferArguments {
-  id: AssetId;
-  target: BlockchainAddress;
-  amount: Balance;
+  arguments: AssetsBurnArgs;
 }
 
 export interface AssetsTransferAction {
@@ -679,13 +562,7 @@ export interface AssetsTransferAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsTransferArguments;
-}
-
-export interface AssetsTransferKeepAliveArguments {
-  id: AssetId;
-  target: BlockchainAddress;
-  amount: Balance;
+  arguments: AssetsTransferArgs;
 }
 
 export interface AssetsTransferKeepAliveAction {
@@ -702,14 +579,7 @@ export interface AssetsTransferKeepAliveAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsTransferKeepAliveArguments;
-}
-
-export interface AssetsForceTransferArguments {
-  id: AssetId;
-  source: BlockchainAddress;
-  dest: BlockchainAddress;
-  amount: Balance;
+  arguments: AssetsTransferKeepAliveArgs;
 }
 
 export interface AssetsForceTransferAction {
@@ -726,12 +596,7 @@ export interface AssetsForceTransferAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsForceTransferArguments;
-}
-
-export interface AssetsFreezeAccountArguments {
-  id: AssetId;
-  who: BlockchainAddress;
+  arguments: AssetsForceTransferArgs;
 }
 
 export interface AssetsFreezeAccountAction {
@@ -748,12 +613,7 @@ export interface AssetsFreezeAccountAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsFreezeAccountArguments;
-}
-
-export interface AssetsThawAccountArguments {
-  id: AssetId;
-  who: BlockchainAddress;
+  arguments: AssetsFreezeArgs;
 }
 
 export interface AssetsThawAccountAction {
@@ -770,7 +630,7 @@ export interface AssetsThawAccountAction {
   /**
    * The arguments for the action.
    */
-  arguments: AssetsThawAccountArguments;
+  arguments: AssetsThawArgs;
 }
 
 /**
