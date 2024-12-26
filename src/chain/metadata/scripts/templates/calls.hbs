@@ -5,13 +5,22 @@ import { defineMethod } from '@substrate/txwrapper-core';
 
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
+import type { ActionType } from '../types/api/actions';
 import type {
   BlockchainGenericAddress,
   BlockchainGenericBalance,
   BlockchainGenericId,
-  CTAction,
+  CTAtomicActionGeneric,
   NftWitness
 } from '../types/api/common';
+
+/**
+ * Represents a single action within an atomic operation.
+ */
+export type CTAtomicAction =
+{{#each ctAtomicActions}}
+  | {{{this}}}
+{{/each}};
 
 {{#each modules}}
 
@@ -22,7 +31,7 @@ import type {
  * Arguments required to {{documentation.short}}
  */
 {{/if}}
-export type {{{argsName}}} = {
+export type {{{argsTypeName}}} = {
   {{#each params}}
   {{#if this.description}}
   /**
@@ -43,7 +52,7 @@ export type {{{argsName}}} = {
  * @returns An unsigned transaction.
  */
 export function {{{functionName}}}(
-  args: {{{argsName}}},
+  args: {{{argsTypeName}}},
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -59,6 +68,10 @@ export function {{{functionName}}}(
     options
   );
 }
+
+export type {{{actionTypeName}}} = CTAtomicActionGeneric<ActionType.{{{actionName}}}, {{{argsTypeName}}}>;
+
+/*---------------------------------------------------------------------------------- */
 
 {{/each}}
 {{/each}}

@@ -1,1 +1,1 @@
-export { CTAction, ClearingTransactionArgs, clearingTransaction } from './clearingTransaction';
+export { ClearingTransactionArgs, clearingTransaction } from './clearingTransaction';

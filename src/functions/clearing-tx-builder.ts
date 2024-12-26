@@ -2,10 +2,12 @@ import { construct, UnsignedTransaction, OptionsWithMeta, BaseTxInfo } from '@su
 
 import { TransactionService } from '../adapter/datagate';
 import { loadConfig } from '../functions/config';
-import * as txwrapper from '../txwrapper';
-import * as txwrapperCalls from '../txwrapper/calls';
+import * as txwrapper from '../txwrapper/calls';
 import { ActionType } from '../types/api/actions';
-import type { ClearingTransactionPayload, CTAction } from '../types/api/clearingTransaction';
+
+import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
+import type { CTAction } from '../types/api/common';
+import type { CTAtomicAction } from '../txwrapper/calls';
 
 import logger from './logger';
 import { signWith } from './signer';
@@ -34,15 +36,15 @@ export async function createClearingTransactionAndBroadcast(
     logger.debug('Generating transaction metadata...');
     const { registry, baseTxInfo, options } = await generateTxMetadata(pair);
 
-    const unsignedAtomics: txwrapper.CTAction[][] = [];
+    const unsignedAtomics: CTAction[][] = [];
 
     // Build unsigned atomics
     logger.info(`Building unsigned atomics with payload ${payload}`);
     for (const atomic of payload.atomics) {
-      const unsignedActions: txwrapper.CTAction[] = [];
+      const unsignedActions: CTAction[] = [];
 
       for (const action of atomic.actions) {
-        const actionTxType: txwrapper.CTAction = buildCTAction(action, baseTxInfo, options);
+        const actionTxType: CTAction = buildCTAction(action, baseTxInfo, options);
         unsignedActions.push(actionTxType);
       }
 
@@ -95,14 +97,14 @@ export async function createClearingTransactionAndBroadcast(
   }
 }
 
-function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): txwrapper.CTAction {
+function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): CTAction {
   let unsigned: UnsignedTransaction;
 
   // Handle different action types
   switch (action.actionType) {
     // Balances Pallet
     case ActionType.BalancesTransferAllowDeath: {
-      unsigned = txwrapperCalls.balancesTransferAllowDeath(
+      unsigned = txwrapper.balancesTransferAllowDeath(
         action.arguments,
         baseTxInfo,
         options
@@ -110,7 +112,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.BalancesTransferKeepAlive: {
-      unsigned = txwrapperCalls.balancesTransferKeepAlive(
+      unsigned = txwrapper.balancesTransferKeepAlive(
         action.arguments,
         baseTxInfo,
         options
@@ -118,7 +120,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.BalancesTransferAll: {
-      unsigned = txwrapperCalls.balancesTransferAll(
+      unsigned = txwrapper.balancesTransferAll(
         action.arguments,
         baseTxInfo,
         options
@@ -128,7 +130,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
 
     // Nfts Pallet
     case ActionType.NftsCreateCollection: {
-      unsigned = txwrapperCalls.nftsCreate(
+      unsigned = txwrapper.nftsCreate(
         action.arguments,
         baseTxInfo,
         options
@@ -136,7 +138,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsDestroyCollection: {
-      unsigned = txwrapperCalls.nftsDestroy(
+      unsigned = txwrapper.nftsDestroy(
         action.arguments,
         baseTxInfo,
         options
@@ -144,7 +146,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsTransferCollectionOwnership: {
-      unsigned = txwrapperCalls.nftsTransferOwnership(
+      unsigned = txwrapper.nftsTransferOwnership(
         action.arguments,
         baseTxInfo,
         options
@@ -152,7 +154,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsAcceptCollectionOwnership: {
-      unsigned = txwrapperCalls.nftsSetAcceptOwnership(
+      unsigned = txwrapper.nftsSetAcceptOwnership(
         action.arguments,
         baseTxInfo,
         options
@@ -160,7 +162,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsSetCollectionMetadata: {
-      unsigned = txwrapperCalls.nftsSetCollectionMetadata(
+      unsigned = txwrapper.nftsSetCollectionMetadata(
         action.arguments,
         baseTxInfo,
         options
@@ -168,7 +170,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsClearCollectionMetadata: {
-      unsigned = txwrapperCalls.nftsClearCollectionMetadata(
+      unsigned = txwrapper.nftsClearCollectionMetadata(
         action.arguments,
         baseTxInfo,
         options
@@ -177,7 +179,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
     }
 
     case ActionType.NftsMintItem: {
-      unsigned = txwrapperCalls.nftsMint(
+      unsigned = txwrapper.nftsMint(
         action.arguments,
         baseTxInfo,
         options
@@ -185,7 +187,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsBurnItem: {
-      unsigned = txwrapperCalls.nftsBurn(
+      unsigned = txwrapper.nftsBurn(
         action.arguments,
         baseTxInfo,
         options
@@ -193,7 +195,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsTransferItem: {
-      unsigned = txwrapperCalls.nftsTransfer(
+      unsigned = txwrapper.nftsTransfer(
         action.arguments,
         baseTxInfo,
         options
@@ -201,7 +203,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsLockItemTransfer: {
-      unsigned = txwrapperCalls.nftsLockItemTransfer(
+      unsigned = txwrapper.nftsLockItemTransfer(
         action.arguments,
         baseTxInfo,
         options
@@ -209,7 +211,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsUnlockItemTransfer: {
-      unsigned = txwrapperCalls.nftsUnlockItemTransfer(
+      unsigned = txwrapper.nftsUnlockItemTransfer(
         action.arguments,
         baseTxInfo,
         options
@@ -217,7 +219,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsSetItemMetadata: {
-      unsigned = txwrapperCalls.nftsSetMetadata(
+      unsigned = txwrapper.nftsSetMetadata(
         action.arguments,
         baseTxInfo,
         options
@@ -225,7 +227,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.NftsClearItemMetadata: {
-      unsigned = txwrapperCalls.nftsClearMetadata(
+      unsigned = txwrapper.nftsClearMetadata(
         action.arguments,
         baseTxInfo,
         options
@@ -235,7 +237,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
 
     // Assets Pallet
     case ActionType.AssetsCreate: {
-      unsigned = txwrapperCalls.assetsCreate(
+      unsigned = txwrapper.assetsCreate(
         action.arguments,
         baseTxInfo,
         options
@@ -243,7 +245,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsStartDestroy: {
-      unsigned = txwrapperCalls.assetsStartDestroy(
+      unsigned = txwrapper.assetsStartDestroy(
         action.arguments,
         baseTxInfo,
         options
@@ -251,7 +253,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsDestroyAccounts: {
-      unsigned = txwrapperCalls.assetsDestroyAccounts(
+      unsigned = txwrapper.assetsDestroyAccounts(
         action.arguments,
         baseTxInfo,
         options
@@ -259,7 +261,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsDestroyApprovals: {
-      unsigned = txwrapperCalls.assetsDestroyApprovals(
+      unsigned = txwrapper.assetsDestroyApprovals(
         action.arguments,
         baseTxInfo,
         options
@@ -267,7 +269,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsFinishDestroy: {
-      unsigned = txwrapperCalls.assetsFinishDestroy(
+      unsigned = txwrapper.assetsFinishDestroy(
         action.arguments,
         baseTxInfo,
         options
@@ -276,7 +278,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
     }
 
     case ActionType.AssetsTransferOwnership: {
-      unsigned = txwrapperCalls.assetsTransferOwnership(
+      unsigned = txwrapper.assetsTransferOwnership(
         action.arguments,
         baseTxInfo,
         options
@@ -284,7 +286,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsSetMinBalance: {
-      unsigned = txwrapperCalls.assetsSetMinBalance(
+      unsigned = txwrapper.assetsSetMinBalance(
         action.arguments,
         baseTxInfo,
         options
@@ -292,7 +294,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsSetMetadata: {
-      unsigned = txwrapperCalls.assetsSetMetadata(
+      unsigned = txwrapper.assetsSetMetadata(
         action.arguments,
         baseTxInfo,
         options
@@ -300,7 +302,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsFreezeAsset: {
-      unsigned = txwrapperCalls.assetsFreezeAsset(
+      unsigned = txwrapper.assetsFreezeAsset(
         action.arguments,
         baseTxInfo,
         options
@@ -308,7 +310,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsThawAsset: {
-      unsigned = txwrapperCalls.assetsThawAsset(
+      unsigned = txwrapper.assetsThawAsset(
         action.arguments,
         baseTxInfo,
         options
@@ -317,7 +319,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
     }
 
     case ActionType.AssetsMint: {
-      unsigned = txwrapperCalls.assetsMint(
+      unsigned = txwrapper.assetsMint(
         action.arguments,
         baseTxInfo,
         options
@@ -325,7 +327,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsBurn: {
-      unsigned = txwrapperCalls.assetsBurn(
+      unsigned = txwrapper.assetsBurn(
         action.arguments,
         baseTxInfo,
         options
@@ -333,7 +335,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsTransfer: {
-      unsigned = txwrapperCalls.assetsTransfer(
+      unsigned = txwrapper.assetsTransfer(
         action.arguments,
         baseTxInfo,
         options
@@ -341,7 +343,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsTransferKeepAlive: {
-      unsigned = txwrapperCalls.assetsTransferKeepAlive(
+      unsigned = txwrapper.assetsTransferKeepAlive(
         action.arguments,
         baseTxInfo,
         options
@@ -349,7 +351,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsForceTransfer: {
-      unsigned = txwrapperCalls.assetsForceTransfer(
+      unsigned = txwrapper.assetsForceTransfer(
         action.arguments,
         baseTxInfo,
         options
@@ -357,7 +359,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsFreezeAccount: {
-      unsigned = txwrapperCalls.assetsFreeze(
+      unsigned = txwrapper.assetsFreeze(
         action.arguments,
         baseTxInfo,
         options
@@ -365,7 +367,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       break;
     }
     case ActionType.AssetsThawAccount: {
-      unsigned = txwrapperCalls.assetsThaw(
+      unsigned = txwrapper.assetsThaw(
         action.arguments,
         baseTxInfo,
         options
@@ -382,7 +384,7 @@ function buildCTAction(action: CTAction, baseTxInfo: BaseTxInfo, options: Option
       }
   }
 
-  const actionTxType: txwrapper.CTAction = [action.origin, unsigned.method];
+  const actionTxType: CTAction = [action.origin, unsigned.method];
 
   return actionTxType;
 }

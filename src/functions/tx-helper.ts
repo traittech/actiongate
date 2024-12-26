@@ -10,7 +10,6 @@ import {
 
 import { TransactionService } from '../adapter/datagate';
 import { clearingTransaction } from '../txwrapper/appTransactions/clearingTransaction';
-import { nftsTransfer } from '../txwrapper/nfts/nftsTransfer';
 import { TxMetadata } from '../types/tx';
 
 import { loadConfig } from './config';
@@ -69,18 +68,6 @@ export function buildUnsignedTransaction(
         amount: params[2],
         id: params[1],
         target: params[0],
-      },
-      info,
-      options
-    );
-  }
-
-  if (moduleName === 'nfts' && functionName === 'transfer') {
-    return nftsTransfer(
-      {
-        collection: params[1],
-        dest: params[0],
-        item: params[2],
       },
       info,
       options

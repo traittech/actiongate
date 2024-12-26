@@ -5,46 +5,53 @@ import { defineMethod } from '@substrate/txwrapper-core';
 
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
+import type { ActionType } from '../types/api/actions';
 import type {
   BlockchainGenericAddress,
   BlockchainGenericBalance,
   BlockchainGenericId,
-  CTAction,
+  CTAtomicActionGeneric,
   NftWitness
 } from '../types/api/common';
 
 /**
- * Arguments required to submit a Clearing transaction.
+ * Represents a single action within an atomic operation.
  */
-export type AppTransactionsSubmitClearingTransactionArgs = {
-  appAgentId: BlockchainGenericId;
-  atomics: CTAction[][];
-};
-
-/**
- * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
- */
-export function appTransactionsSubmitClearingTransaction(
-  args: AppTransactionsSubmitClearingTransactionArgs,
-  info: BaseTxInfo,
-  options: OptionsWithMeta
-): UnsignedTransaction {
-  return defineMethod(
-    {
-      method: {
-        args,
-        name: 'submit_clearing_transaction',
-        pallet: 'appTransactions',
-      },
-      ...info,
-    },
-    options
-  );
-}
+export type CTAtomicAction =
+  | BalancesTransferAllowDeathAction
+  | BalancesTransferKeepAliveAction
+  | BalancesTransferAllAction
+  | AssetsCreateAction
+  | AssetsStartDestroyAction
+  | AssetsDestroyAccountsAction
+  | AssetsDestroyApprovalsAction
+  | AssetsFinishDestroyAction
+  | AssetsMintAction
+  | AssetsBurnAction
+  | AssetsTransferAction
+  | AssetsTransferKeepAliveAction
+  | AssetsForceTransferAction
+  | AssetsFreezeAction
+  | AssetsThawAction
+  | AssetsFreezeAssetAction
+  | AssetsThawAssetAction
+  | AssetsTransferOwnershipAction
+  | AssetsSetMetadataAction
+  | AssetsSetMinBalanceAction
+  | NftsCreateAction
+  | NftsDestroyAction
+  | NftsMintAction
+  | NftsBurnAction
+  | NftsTransferAction
+  | NftsLockItemTransferAction
+  | NftsUnlockItemTransferAction
+  | NftsTransferOwnershipAction
+  | NftsSetMetadataAction
+  | NftsClearMetadataAction
+  | NftsSetCollectionMetadataAction
+  | NftsClearCollectionMetadataAction
+  | NftsSetAcceptOwnershipAction
+;
 
 /**
  * Arguments required to reduce the balance of &#x60;who&#x60; by as much as possible up to &#x60;amount&#x60; assets of &#x60;id&#x60;.
@@ -89,6 +96,10 @@ export function assetsBurn(
   );
 }
 
+export type AssetsBurnAction = CTAtomicActionGeneric<ActionType.AssetsBurn, AssetsBurnArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 export type AssetsCreateArgs = {
   minBalance: BlockchainGenericBalance;
 };
@@ -116,6 +127,10 @@ export function assetsCreate(
     options
   );
 }
+
+export type AssetsCreateAction = CTAtomicActionGeneric<ActionType.AssetsCreate, AssetsCreateArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to destroy all accounts associated with a given asset.
@@ -152,6 +167,10 @@ export function assetsDestroyAccounts(
   );
 }
 
+export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<ActionType.AssetsDestroyAccounts, AssetsDestroyAccountsArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).
  */
@@ -187,6 +206,10 @@ export function assetsDestroyApprovals(
   );
 }
 
+export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<ActionType.AssetsDestroyApprovals, AssetsDestroyApprovalsArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to complete destroying asset and unreserve currency.
  */
@@ -221,6 +244,10 @@ export function assetsFinishDestroy(
     options
   );
 }
+
+export type AssetsFinishDestroyAction = CTAtomicActionGeneric<ActionType.AssetsFinishDestroy, AssetsFinishDestroyArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to move some assets from one account to another.
@@ -269,6 +296,10 @@ export function assetsForceTransfer(
   );
 }
 
+export type AssetsForceTransferAction = CTAtomicActionGeneric<ActionType.AssetsForceTransfer, AssetsForceTransferArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to disallow further unprivileged transfers of an asset &#x60;id&#x60; from an account &#x60;who&#x60;. &#x60;who&#x60;
  */
@@ -308,6 +339,10 @@ export function assetsFreeze(
   );
 }
 
+export type AssetsFreezeAction = CTAtomicActionGeneric<ActionType.AssetsFreezeAccount, AssetsFreezeArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to disallow further unprivileged transfers for the asset class.
  */
@@ -342,6 +377,10 @@ export function assetsFreezeAsset(
     options
   );
 }
+
+export type AssetsFreezeAssetAction = CTAtomicActionGeneric<ActionType.AssetsFreezeAsset, AssetsFreezeAssetArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to mint assets of a particular class.
@@ -386,6 +425,10 @@ export function assetsMint(
   );
 }
 
+export type AssetsMintAction = CTAtomicActionGeneric<ActionType.AssetsMint, AssetsMintArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to set the raw metadata for an asset.
  */
@@ -424,6 +467,10 @@ export function assetsSetMetadata(
     options
   );
 }
+
+export type AssetsSetMetadataAction = CTAtomicActionGeneric<ActionType.AssetsSetMetadata, AssetsSetMetadataArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to sets the minimum balance of an asset.
@@ -464,6 +511,10 @@ export function assetsSetMinBalance(
   );
 }
 
+export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<ActionType.AssetsSetMinBalance, AssetsSetMinBalanceArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to start the process of destroying a fungible asset class.
  */
@@ -498,6 +549,10 @@ export function assetsStartDestroy(
     options
   );
 }
+
+export type AssetsStartDestroyAction = CTAtomicActionGeneric<ActionType.AssetsStartDestroy, AssetsStartDestroyArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to allow unprivileged transfers to and from an account again.
@@ -538,6 +593,10 @@ export function assetsThaw(
   );
 }
 
+export type AssetsThawAction = CTAtomicActionGeneric<ActionType.AssetsThawAccount, AssetsThawArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to allow unprivileged transfers for the asset again.
  */
@@ -572,6 +631,10 @@ export function assetsThawAsset(
     options
   );
 }
+
+export type AssetsThawAssetAction = CTAtomicActionGeneric<ActionType.AssetsThawAsset, AssetsThawAssetArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to move some assets from the sender account to another.
@@ -616,6 +679,10 @@ export function assetsTransfer(
   );
 }
 
+export type AssetsTransferAction = CTAtomicActionGeneric<ActionType.AssetsTransfer, AssetsTransferArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to move some assets from the sender account to another, keeping the sender account alive.
  */
@@ -659,6 +726,10 @@ export function assetsTransferKeepAlive(
   );
 }
 
+export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.AssetsTransferKeepAlive, AssetsTransferKeepAliveArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to change the Owner of an asset.
  */
@@ -698,6 +769,10 @@ export function assetsTransferOwnership(
   );
 }
 
+export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<ActionType.AssetsTransferOwnership, AssetsTransferOwnershipArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to transfer the entire transferable balance from the caller account.
  */
@@ -734,6 +809,10 @@ export function balancesTransferAll(
   );
 }
 
+export type BalancesTransferAllAction = CTAtomicActionGeneric<ActionType.BalancesTransferAll, BalancesTransferAllArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to transfer some liquid free balance to another account.
  */
@@ -767,6 +846,10 @@ export function balancesTransferAllowDeath(
   );
 }
 
+export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<ActionType.BalancesTransferAllowDeath, BalancesTransferAllowDeathArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to same as the [&#x60;transfer_allow_death&#x60;] call, but with a check that the transfer will not
  */
@@ -799,6 +882,10 @@ export function balancesTransferKeepAlive(
     options
   );
 }
+
+export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.BalancesTransferKeepAlive, BalancesTransferKeepAliveArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to destroy a single item.
@@ -839,6 +926,10 @@ export function nftsBurn(
   );
 }
 
+export type NftsBurnAction = CTAtomicActionGeneric<ActionType.NftsBurnItem, NftsBurnArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to clear the metadata for a collection.
  */
@@ -873,6 +964,10 @@ export function nftsClearCollectionMetadata(
     options
   );
 }
+
+export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<ActionType.NftsClearCollectionMetadata, NftsClearCollectionMetadataArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to clear the metadata for an item.
@@ -913,6 +1008,10 @@ export function nftsClearMetadata(
   );
 }
 
+export type NftsClearMetadataAction = CTAtomicActionGeneric<ActionType.NftsClearItemMetadata, NftsClearMetadataArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 export type NftsCreateArgs = {
 };
 
@@ -939,6 +1038,10 @@ export function nftsCreate(
     options
   );
 }
+
+export type NftsCreateAction = CTAtomicActionGeneric<ActionType.NftsCreateCollection, NftsCreateArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to destroy a collection of fungible items.
@@ -979,6 +1082,10 @@ export function nftsDestroy(
   );
 }
 
+export type NftsDestroyAction = CTAtomicActionGeneric<ActionType.NftsDestroyCollection, NftsDestroyArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to disallow further unprivileged transfer of an item.
  */
@@ -1018,6 +1125,10 @@ export function nftsLockItemTransfer(
   );
 }
 
+export type NftsLockItemTransferAction = CTAtomicActionGeneric<ActionType.NftsLockItemTransfer, NftsLockItemTransferArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 export type NftsMintArgs = {
   collection: BlockchainGenericId;
   item: BlockchainGenericId;
@@ -1047,6 +1158,10 @@ export function nftsMint(
     options
   );
 }
+
+export type NftsMintAction = CTAtomicActionGeneric<ActionType.NftsMintItem, NftsMintArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to set (or reset) the acceptance of ownership for a particular account.
@@ -1082,6 +1197,10 @@ export function nftsSetAcceptOwnership(
     options
   );
 }
+
+export type NftsSetAcceptOwnershipAction = CTAtomicActionGeneric<ActionType.NftsAcceptCollectionOwnership, NftsSetAcceptOwnershipArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to set the metadata for a collection.
@@ -1121,6 +1240,10 @@ export function nftsSetCollectionMetadata(
     options
   );
 }
+
+export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<ActionType.NftsSetCollectionMetadata, NftsSetCollectionMetadataArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to set the metadata for an item.
@@ -1165,6 +1288,10 @@ export function nftsSetMetadata(
   );
 }
 
+export type NftsSetMetadataAction = CTAtomicActionGeneric<ActionType.NftsSetItemMetadata, NftsSetMetadataArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to move an item from the sender account to another.
  */
@@ -1208,6 +1335,10 @@ export function nftsTransfer(
   );
 }
 
+export type NftsTransferAction = CTAtomicActionGeneric<ActionType.NftsTransferItem, NftsTransferArgs>;
+
+/*---------------------------------------------------------------------------------- */
+
 /**
  * Arguments required to change the Owner of a collection.
  */
@@ -1243,6 +1374,10 @@ export function nftsTransferOwnership(
     options
   );
 }
+
+export type NftsTransferOwnershipAction = CTAtomicActionGeneric<ActionType.NftsTransferCollectionOwnership, NftsTransferOwnershipArgs>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to re-allow unprivileged transfer of an item.
@@ -1282,4 +1417,8 @@ export function nftsUnlockItemTransfer(
     options
   );
 }
+
+export type NftsUnlockItemTransferAction = CTAtomicActionGeneric<ActionType.NftsUnlockItemTransfer, NftsUnlockItemTransferArgs>;
+
+/*---------------------------------------------------------------------------------- */
 

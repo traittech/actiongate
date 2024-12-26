@@ -23,9 +23,6 @@ function readTemplate(name: string) {
 
 const generateForMetaTemplate = Handlebars.compile(readTemplate('calls'));
 
-// Actions whitelist
-const ALLOWED_FUNCTIONS = Object.values(ActionType);
-
 const MAPPED_NAMES: any = {
   class: 'clazz',
   new: 'updated'
@@ -85,7 +82,7 @@ function getFunctionDescription(docs: Vec<Text>) {
 
 function generator(
   meta: string,
-  allowedFunctions: string[] = [],
+  allowedFunctions: [string, ActionType][],
   extraTypes = {},
   customLookupDefinitions = {}
 ) {
@@ -110,6 +107,8 @@ function generator(
 
   const { lookup, pallets } = metadata.asLatest;
 
+  const ctAtomicActions: string[] = [];
+
   const modules = pallets
     .reduce<any[]>((acc, pallet) => {
       const { calls, name } = pallet;
@@ -123,10 +122,15 @@ function generator(
       const items = palletCalls.reduce<any[]>((acc, { docs, fields, name: methodName }) => {
         const functionName = `${palletName}${stringPascalCase(methodName)}`;
 
-        if (allowedFunctions.length && !allowedFunctions.includes(functionName as any)) return acc;
+        const actionName = allowedFunctions.find(([key, val]) => val === functionName)?.[0];
+
+        if (!actionName) return acc;
 
         const name = stringCamelCase(methodName);
-        const argsName = `${stringPascalCase(functionName)}Args`;
+        const argsTypeName = `${stringPascalCase(functionName)}Args`;
+        const actionTypeName = `${stringPascalCase(functionName)}Action`;
+
+        ctAtomicActions.push(actionTypeName);
 
         const typesInfo = fields.map(({ name, type, typeName }, index) => {
           const typeDef = registry.lookup.getTypeDef(type);
@@ -168,7 +172,9 @@ function generator(
           functionName,
           palletName,
           methodName,
-          argsName,
+          argsTypeName,
+          actionName,
+          actionTypeName,
           params,
           // for ordering
           name,
@@ -190,6 +196,7 @@ function generator(
   return generateForMetaTemplate({
     imports,
     modules,
+    ctAtomicActions,
     types: [
       ...Object.keys(imports.localTypes).sort().map((packagePath) => ({
           file: packagePath.replace('@polkadot/types-augment', '@polkadot/types'),
@@ -200,11 +207,13 @@ function generator(
 }
 
 (async function main() {
+  console.log(Object.entries(ActionType));
+
   const metadataHex = metadataJson.latest as any;
 
   const dest = path.join(process.cwd(), './src/txwrapper/calls.ts');
 
-  const templateGenerator = () => generator(metadataHex, ALLOWED_FUNCTIONS);
+  const templateGenerator = () => generator(metadataHex, Object.entries(ActionType));
 
   writeFile(dest, templateGenerator)
 })();

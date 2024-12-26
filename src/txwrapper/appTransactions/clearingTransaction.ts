@@ -2,20 +2,7 @@ import { defineMethod } from '@substrate/txwrapper-core';
 
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
-import type { CTActionOrigin } from '../../types/api/clearingTransaction';
-
-/**
- * Represents an action in a clearing transaction.
- */
-export type CTAction = [
-  // The origin of the action
-  CTActionOrigin,
-  /**
-   * The call to be made by the action
-   * To take advantage of txwrapper methods, this could be UnsignedTransaction.method.
-   */
-  { callIndex?: string; args?: string } | string,
-];
+import type { CTAction } from '../../types/api/common';
 
 /**
  * Arguments required to create a clearing transaction.

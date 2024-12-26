@@ -1,4 +1,15 @@
-import type { CTActionOrigin } from './clearingTransaction';
+import type { ActionType } from './actions';
+
+/**
+ * The origin type for each Action in CT
+ */
+export type CTActionOrigin =
+  | { AppAgentId: any }
+  | { AppAgentAddress: string }
+  | { TransactionalAddressId: any }
+  | { TransactionalAddress: any }
+  | { NamedAddress: any }
+  | { NamedAddressName: any };
 
 /**
  * Represents an action in a clearing transaction.
@@ -12,6 +23,23 @@ export type CTAction = [
    */
   { callIndex?: string; args?: string } | string,
 ];
+
+export type CTAtomicActionGeneric<ActionTypeName extends ActionType, ActionArgs> = {
+  /**
+   * The type of action to be performed
+   */
+  actionType: ActionTypeName;
+
+  /**
+   * The origin responsible for the transaction.
+   */
+  origin: CTActionOrigin;
+
+  /**
+   * The arguments for the action.
+   */
+  arguments: ActionArgs;
+}
 
 /**
  * Common blockchain types

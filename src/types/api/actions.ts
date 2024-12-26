@@ -3,8 +3,6 @@
  * [Note] Action value must match blockchain method!
  */
 export enum ActionType {
-  // App Transactions Pallet
-  AppTransactionsSubmitClearingTransaction = 'appTransactionsSubmitClearingTransaction',
   // Balances Pallet
   BalancesTransferAllowDeath = 'balancesTransferAllowDeath',
   BalancesTransferKeepAlive = 'balancesTransferKeepAlive',
