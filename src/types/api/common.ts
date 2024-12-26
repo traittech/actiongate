@@ -22,7 +22,7 @@ export type BlockchainGenericAddress = string;
 // Asset Id, Collection Id, Agent Id
 export type BlockchainGenericId = number;
 
-export type Balance = number;
+export type BlockchainGenericBalance = number;
 
 export type NftWitness = {
   itemMetadatas: number;

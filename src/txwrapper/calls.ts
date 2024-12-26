@@ -7,8 +7,8 @@ import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrat
 
 import type {
   BlockchainGenericAddress,
+  BlockchainGenericBalance,
   BlockchainGenericId,
-  Balance,
   CTAction,
   NftWitness
 } from '../types/api/common';
@@ -61,7 +61,7 @@ export type AssetsBurnArgs = {
   /**
   *  The maximum amount by which `who`'s balance should be reduced.
   */
-  amount: Balance;
+  amount: BlockchainGenericBalance;
 };
 
 /**
@@ -90,7 +90,7 @@ export function assetsBurn(
 }
 
 export type AssetsCreateArgs = {
-  minBalance: Balance;
+  minBalance: BlockchainGenericBalance;
 };
 
 /**
@@ -241,7 +241,7 @@ export type AssetsForceTransferArgs = {
   /**
   *  The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.
   */
-  amount: Balance;
+  amount: BlockchainGenericBalance;
 };
 
 /**
@@ -358,7 +358,7 @@ export type AssetsMintArgs = {
   /**
   *  The amount of the asset to be minted.
   */
-  amount: Balance;
+  amount: BlockchainGenericBalance;
 };
 
 /**
@@ -436,7 +436,7 @@ export type AssetsSetMinBalanceArgs = {
   /**
   *  The new value of `min_balance`.
   */
-  minBalance: Balance;
+  minBalance: BlockchainGenericBalance;
 };
 
 /**
@@ -588,7 +588,7 @@ export type AssetsTransferArgs = {
   /**
   *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
   */
-  amount: Balance;
+  amount: BlockchainGenericBalance;
 };
 
 /**
@@ -631,7 +631,7 @@ export type AssetsTransferKeepAliveArgs = {
   /**
   *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
   */
-  amount: Balance;
+  amount: BlockchainGenericBalance;
 };
 
 /**
@@ -739,7 +739,7 @@ export function balancesTransferAll(
  */
 export type BalancesTransferAllowDeathArgs = {
   dest: BlockchainGenericAddress;
-  value: Balance;
+  value: BlockchainGenericBalance;
 };
 
 /**
@@ -772,7 +772,7 @@ export function balancesTransferAllowDeath(
  */
 export type BalancesTransferKeepAliveArgs = {
   dest: BlockchainGenericAddress;
-  value: Balance;
+  value: BlockchainGenericBalance;
 };
 
 /**

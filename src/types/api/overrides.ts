@@ -1,7 +1,7 @@
 export const BlockchainOverridesMap = new Map<string, string>();
 
-BlockchainOverridesMap.set('u128 | AnyNumber | Uint8Array', 'Balance');
-BlockchainOverridesMap.set('Compact<u128> | AnyNumber | Uint8Array', 'Balance');
+BlockchainOverridesMap.set('u128 | AnyNumber | Uint8Array', 'BlockchainGenericBalance');
+BlockchainOverridesMap.set('Compact<u128> | AnyNumber | Uint8Array', 'BlockchainGenericBalance');
 BlockchainOverridesMap.set('u32 | AnyNumber | Uint8Array', 'BlockchainGenericId');
 BlockchainOverridesMap.set('Bytes | string | Uint8Array', 'string');
 BlockchainOverridesMap.set('bool | boolean | Uint8Array', 'boolean');
