@@ -168,7 +168,7 @@ function generator(
             documentation,
             functionName,
             palletName,
-            methodName,
+            methodName: name,
             argsTypeName,
             actionName,
             actionTypeName,

@@ -127,7 +127,7 @@ export function assetsDestroyAccounts(
     {
       method: {
         args,
-        name: 'destroy_accounts',
+        name: 'destroyAccounts',
         pallet: 'assets',
       },
       ...info,
@@ -169,7 +169,7 @@ export function assetsDestroyApprovals(
     {
       method: {
         args,
-        name: 'destroy_approvals',
+        name: 'destroyApprovals',
         pallet: 'assets',
       },
       ...info,
@@ -211,7 +211,7 @@ export function assetsFinishDestroy(
     {
       method: {
         args,
-        name: 'finish_destroy',
+        name: 'finishDestroy',
         pallet: 'assets',
       },
       ...info,
@@ -265,7 +265,7 @@ export function assetsForceTransfer(
     {
       method: {
         args,
-        name: 'force_transfer',
+        name: 'forceTransfer',
         pallet: 'assets',
       },
       ...info,
@@ -353,7 +353,7 @@ export function assetsFreezeAsset(
     {
       method: {
         args,
-        name: 'freeze_asset',
+        name: 'freezeAsset',
         pallet: 'assets',
       },
       ...info,
@@ -449,7 +449,7 @@ export function assetsSetMetadata(
     {
       method: {
         args,
-        name: 'set_metadata',
+        name: 'setMetadata',
         pallet: 'assets',
       },
       ...info,
@@ -495,7 +495,7 @@ export function assetsSetMinBalance(
     {
       method: {
         args,
-        name: 'set_min_balance',
+        name: 'setMinBalance',
         pallet: 'assets',
       },
       ...info,
@@ -537,7 +537,7 @@ export function assetsStartDestroy(
     {
       method: {
         args,
-        name: 'start_destroy',
+        name: 'startDestroy',
         pallet: 'assets',
       },
       ...info,
@@ -625,7 +625,7 @@ export function assetsThawAsset(
     {
       method: {
         args,
-        name: 'thaw_asset',
+        name: 'thawAsset',
         pallet: 'assets',
       },
       ...info,
@@ -725,7 +725,7 @@ export function assetsTransferKeepAlive(
     {
       method: {
         args,
-        name: 'transfer_keep_alive',
+        name: 'transferKeepAlive',
         pallet: 'assets',
       },
       ...info,
@@ -771,7 +771,7 @@ export function assetsTransferOwnership(
     {
       method: {
         args,
-        name: 'transfer_ownership',
+        name: 'transferOwnership',
         pallet: 'assets',
       },
       ...info,
@@ -814,7 +814,7 @@ export function balancesTransferAll(
     {
       method: {
         args,
-        name: 'transfer_all',
+        name: 'transferAll',
         pallet: 'balances',
       },
       ...info,
@@ -854,7 +854,7 @@ export function balancesTransferAllowDeath(
     {
       method: {
         args,
-        name: 'transfer_allow_death',
+        name: 'transferAllowDeath',
         pallet: 'balances',
       },
       ...info,
@@ -894,7 +894,7 @@ export function balancesTransferKeepAlive(
     {
       method: {
         args,
-        name: 'transfer_keep_alive',
+        name: 'transferKeepAlive',
         pallet: 'balances',
       },
       ...info,
@@ -982,7 +982,7 @@ export function nftsClearCollectionMetadata(
     {
       method: {
         args,
-        name: 'clear_collection_metadata',
+        name: 'clearCollectionMetadata',
         pallet: 'nfts',
       },
       ...info,
@@ -1028,7 +1028,7 @@ export function nftsClearMetadata(
     {
       method: {
         args,
-        name: 'clear_metadata',
+        name: 'clearMetadata',
         pallet: 'nfts',
       },
       ...info,
@@ -1154,7 +1154,7 @@ export function nftsLockItemTransfer(
     {
       method: {
         args,
-        name: 'lock_item_transfer',
+        name: 'lockItemTransfer',
         pallet: 'nfts',
       },
       ...info,
@@ -1233,7 +1233,7 @@ export function nftsSetAcceptOwnership(
     {
       method: {
         args,
-        name: 'set_accept_ownership',
+        name: 'setAcceptOwnership',
         pallet: 'nfts',
       },
       ...info,
@@ -1279,7 +1279,7 @@ export function nftsSetCollectionMetadata(
     {
       method: {
         args,
-        name: 'set_collection_metadata',
+        name: 'setCollectionMetadata',
         pallet: 'nfts',
       },
       ...info,
@@ -1329,7 +1329,7 @@ export function nftsSetMetadata(
     {
       method: {
         args,
-        name: 'set_metadata',
+        name: 'setMetadata',
         pallet: 'nfts',
       },
       ...info,
@@ -1422,7 +1422,7 @@ export function nftsTransferOwnership(
     {
       method: {
         args,
-        name: 'transfer_ownership',
+        name: 'transferOwnership',
         pallet: 'nfts',
       },
       ...info,
@@ -1468,7 +1468,7 @@ export function nftsUnlockItemTransfer(
     {
       method: {
         args,
-        name: 'unlock_item_transfer',
+        name: 'unlockItemTransfer',
         pallet: 'nfts',
       },
       ...info,
