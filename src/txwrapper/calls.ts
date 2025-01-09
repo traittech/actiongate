@@ -5,53 +5,16 @@ import { defineMethod } from '@substrate/txwrapper-core';
 
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
-import type { ActionType } from '../types/api/actions';
 import type {
   BlockchainGenericAddress,
   BlockchainGenericBalance,
   BlockchainGenericId,
+  CTAction,
   CTAtomicActionGeneric,
   NftWitness,
 } from '../types/api/common';
 
-/**
- * Represents a single action within an atomic operation.
- */
-export type CTAtomicAction =
-  | BalancesTransferAllowDeathAction
-  | BalancesTransferKeepAliveAction
-  | BalancesTransferAllAction
-  | AssetsCreateAction
-  | AssetsStartDestroyAction
-  | AssetsDestroyAccountsAction
-  | AssetsDestroyApprovalsAction
-  | AssetsFinishDestroyAction
-  | AssetsMintAction
-  | AssetsBurnAction
-  | AssetsTransferAction
-  | AssetsTransferKeepAliveAction
-  | AssetsForceTransferAction
-  | AssetsFreezeAction
-  | AssetsThawAction
-  | AssetsFreezeAssetAction
-  | AssetsThawAssetAction
-  | AssetsTransferOwnershipAction
-  | AssetsSetMetadataAction
-  | AssetsSetMinBalanceAction
-  | NftsCreateAction
-  | NftsDestroyAction
-  | NftsMintAction
-  | NftsBurnAction
-  | NftsTransferAction
-  | NftsLockItemTransferAction
-  | NftsUnlockItemTransferAction
-  | NftsTransferOwnershipAction
-  | NftsSetMetadataAction
-  | NftsClearMetadataAction
-  | NftsSetCollectionMetadataAction
-  | NftsClearCollectionMetadataAction
-  | NftsSetAcceptOwnershipAction
-;
+import { ActionType } from '../types/api/actions';
 
 /**
  * Arguments required to reduce the balance of `who` by as much as possible up to `amount` assets of `id`.
@@ -321,7 +284,7 @@ export type AssetsForceTransferAction = CTAtomicActionGeneric<
 /**
  * Arguments required to disallow further unprivileged transfers of an asset `id` from an account `who`. `who`
  */
-export type AssetsFreezeArgs = {
+export type AssetsFreezeAccountArgs = {
   /**
    *  The identifier of the asset to be frozen.
    */
@@ -340,7 +303,7 @@ export type AssetsFreezeArgs = {
  * @returns An unsigned transaction.
  */
 export function assetsFreeze(
-  args: AssetsFreezeArgs,
+  args: AssetsFreezeAccountArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -357,9 +320,9 @@ export function assetsFreeze(
   );
 }
 
-export type AssetsFreezeAction = CTAtomicActionGeneric<
+export type AssetsFreezeAccountAction = CTAtomicActionGeneric<
   ActionType.AssetsFreezeAccount,
-  AssetsFreezeArgs
+  AssetsFreezeAccountArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -593,7 +556,7 @@ export type AssetsStartDestroyAction = CTAtomicActionGeneric<
 /**
  * Arguments required to allow unprivileged transfers to and from an account again.
  */
-export type AssetsThawArgs = {
+export type AssetsThawAccountArgs = {
   /**
    *  The identifier of the asset to be frozen.
    */
@@ -612,7 +575,7 @@ export type AssetsThawArgs = {
  * @returns An unsigned transaction.
  */
 export function assetsThaw(
-  args: AssetsThawArgs,
+  args: AssetsThawAccountArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -629,9 +592,9 @@ export function assetsThaw(
   );
 }
 
-export type AssetsThawAction = CTAtomicActionGeneric<
+export type AssetsThawAccountAction = CTAtomicActionGeneric<
   ActionType.AssetsThawAccount,
-  AssetsThawArgs
+  AssetsThawAccountArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -950,7 +913,7 @@ export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<
 /**
  * Arguments required to destroy a single item.
  */
-export type NftsBurnArgs = {
+export type NftsBurnItemArgs = {
   /**
    *  The collection of the item to be burned.
    */
@@ -969,7 +932,7 @@ export type NftsBurnArgs = {
  * @returns An unsigned transaction.
  */
 export function nftsBurn(
-  args: NftsBurnArgs,
+  args: NftsBurnItemArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -986,9 +949,9 @@ export function nftsBurn(
   );
 }
 
-export type NftsBurnAction = CTAtomicActionGeneric<
+export type NftsBurnItemAction = CTAtomicActionGeneric<
   ActionType.NftsBurnItem,
-  NftsBurnArgs
+  NftsBurnItemArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -1038,7 +1001,7 @@ export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<
 /**
  * Arguments required to clear the metadata for an item.
  */
-export type NftsClearMetadataArgs = {
+export type NftsClearItemMetadataArgs = {
   /**
    *  The identifier of the collection whose item's metadata to clear.
    */
@@ -1057,7 +1020,7 @@ export type NftsClearMetadataArgs = {
  * @returns An unsigned transaction.
  */
 export function nftsClearMetadata(
-  args: NftsClearMetadataArgs,
+  args: NftsClearItemMetadataArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -1074,14 +1037,14 @@ export function nftsClearMetadata(
   );
 }
 
-export type NftsClearMetadataAction = CTAtomicActionGeneric<
+export type NftsClearItemMetadataAction = CTAtomicActionGeneric<
   ActionType.NftsClearItemMetadata,
-  NftsClearMetadataArgs
+  NftsClearItemMetadataArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
 
-export type NftsCreateArgs = {
+export type NftsCreateCollectionArgs = {
 };
 
 /**
@@ -1091,7 +1054,7 @@ export type NftsCreateArgs = {
  * @returns An unsigned transaction.
  */
 export function nftsCreate(
-  args: NftsCreateArgs,
+  args: NftsCreateCollectionArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -1108,9 +1071,9 @@ export function nftsCreate(
   );
 }
 
-export type NftsCreateAction = CTAtomicActionGeneric<
+export type NftsCreateCollectionAction = CTAtomicActionGeneric<
   ActionType.NftsCreateCollection,
-  NftsCreateArgs
+  NftsCreateCollectionArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -1118,7 +1081,7 @@ export type NftsCreateAction = CTAtomicActionGeneric<
 /**
  * Arguments required to destroy a collection of fungible items.
  */
-export type NftsDestroyArgs = {
+export type NftsDestroyCollectionArgs = {
   /**
    *  The identifier of the collection to be destroyed.
    */
@@ -1137,7 +1100,7 @@ export type NftsDestroyArgs = {
  * @returns An unsigned transaction.
  */
 export function nftsDestroy(
-  args: NftsDestroyArgs,
+  args: NftsDestroyCollectionArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -1154,9 +1117,9 @@ export function nftsDestroy(
   );
 }
 
-export type NftsDestroyAction = CTAtomicActionGeneric<
+export type NftsDestroyCollectionAction = CTAtomicActionGeneric<
   ActionType.NftsDestroyCollection,
-  NftsDestroyArgs
+  NftsDestroyCollectionArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -1207,7 +1170,7 @@ export type NftsLockItemTransferAction = CTAtomicActionGeneric<
 
 /*---------------------------------------------------------------------------------- */
 
-export type NftsMintArgs = {
+export type NftsMintItemArgs = {
   collection: BlockchainGenericId;
   item: BlockchainGenericId;
   mintTo: BlockchainGenericAddress;
@@ -1220,7 +1183,7 @@ export type NftsMintArgs = {
  * @returns An unsigned transaction.
  */
 export function nftsMint(
-  args: NftsMintArgs,
+  args: NftsMintItemArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -1237,9 +1200,9 @@ export function nftsMint(
   );
 }
 
-export type NftsMintAction = CTAtomicActionGeneric<
+export type NftsMintItemAction = CTAtomicActionGeneric<
   ActionType.NftsMintItem,
-  NftsMintArgs
+  NftsMintItemArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -1247,7 +1210,7 @@ export type NftsMintAction = CTAtomicActionGeneric<
 /**
  * Arguments required to set (or reset) the acceptance of ownership for a particular account.
  */
-export type NftsSetAcceptOwnershipArgs = {
+export type NftsAcceptCollectionOwnershipArgs = {
   /**
    *  The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.
    */
@@ -1262,7 +1225,7 @@ export type NftsSetAcceptOwnershipArgs = {
  * @returns An unsigned transaction.
  */
 export function nftsSetAcceptOwnership(
-  args: NftsSetAcceptOwnershipArgs,
+  args: NftsAcceptCollectionOwnershipArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -1279,9 +1242,9 @@ export function nftsSetAcceptOwnership(
   );
 }
 
-export type NftsSetAcceptOwnershipAction = CTAtomicActionGeneric<
+export type NftsAcceptCollectionOwnershipAction = CTAtomicActionGeneric<
   ActionType.NftsAcceptCollectionOwnership,
-  NftsSetAcceptOwnershipArgs
+  NftsAcceptCollectionOwnershipArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -1335,7 +1298,7 @@ export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<
 /**
  * Arguments required to set the metadata for an item.
  */
-export type NftsSetMetadataArgs = {
+export type NftsSetItemMetadataArgs = {
   /**
    *  The identifier of the collection whose item's metadata to set.
    */
@@ -1358,7 +1321,7 @@ export type NftsSetMetadataArgs = {
  * @returns An unsigned transaction.
  */
 export function nftsSetMetadata(
-  args: NftsSetMetadataArgs,
+  args: NftsSetItemMetadataArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -1375,9 +1338,9 @@ export function nftsSetMetadata(
   );
 }
 
-export type NftsSetMetadataAction = CTAtomicActionGeneric<
+export type NftsSetItemMetadataAction = CTAtomicActionGeneric<
   ActionType.NftsSetItemMetadata,
-  NftsSetMetadataArgs
+  NftsSetItemMetadataArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -1385,7 +1348,7 @@ export type NftsSetMetadataAction = CTAtomicActionGeneric<
 /**
  * Arguments required to move an item from the sender account to another.
  */
-export type NftsTransferArgs = {
+export type NftsTransferItemArgs = {
   /**
    *  The collection of the item to be transferred.
    */
@@ -1408,7 +1371,7 @@ export type NftsTransferArgs = {
  * @returns An unsigned transaction.
  */
 export function nftsTransfer(
-  args: NftsTransferArgs,
+  args: NftsTransferItemArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -1425,9 +1388,9 @@ export function nftsTransfer(
   );
 }
 
-export type NftsTransferAction = CTAtomicActionGeneric<
+export type NftsTransferItemAction = CTAtomicActionGeneric<
   ActionType.NftsTransferItem,
-  NftsTransferArgs
+  NftsTransferItemArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -1435,7 +1398,7 @@ export type NftsTransferAction = CTAtomicActionGeneric<
 /**
  * Arguments required to change the Owner of a collection.
  */
-export type NftsTransferOwnershipArgs = {
+export type NftsTransferCollectionOwnershipArgs = {
   /**
    *  The collection whose owner should be changed.
    */
@@ -1451,7 +1414,7 @@ export type NftsTransferOwnershipArgs = {
  * @returns An unsigned transaction.
  */
 export function nftsTransferOwnership(
-  args: NftsTransferOwnershipArgs,
+  args: NftsTransferCollectionOwnershipArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -1468,9 +1431,9 @@ export function nftsTransferOwnership(
   );
 }
 
-export type NftsTransferOwnershipAction = CTAtomicActionGeneric<
+export type NftsTransferCollectionOwnershipAction = CTAtomicActionGeneric<
   ActionType.NftsTransferCollectionOwnership,
-  NftsTransferOwnershipArgs
+  NftsTransferCollectionOwnershipArgs
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -1521,3 +1484,188 @@ export type NftsUnlockItemTransferAction = CTAtomicActionGeneric<
 
 /*---------------------------------------------------------------------------------- */
 
+/**
+ * Represents a single action within an atomic operation.
+ */
+export type CTAtomicAction =
+  | BalancesTransferAllowDeathAction
+  | BalancesTransferKeepAliveAction
+  | BalancesTransferAllAction
+  | AssetsCreateAction
+  | AssetsStartDestroyAction
+  | AssetsDestroyAccountsAction
+  | AssetsDestroyApprovalsAction
+  | AssetsFinishDestroyAction
+  | AssetsMintAction
+  | AssetsBurnAction
+  | AssetsTransferAction
+  | AssetsTransferKeepAliveAction
+  | AssetsForceTransferAction
+  | AssetsFreezeAccountAction
+  | AssetsThawAccountAction
+  | AssetsFreezeAssetAction
+  | AssetsThawAssetAction
+  | AssetsTransferOwnershipAction
+  | AssetsSetMetadataAction
+  | AssetsSetMinBalanceAction
+  | NftsCreateCollectionAction
+  | NftsDestroyCollectionAction
+  | NftsMintItemAction
+  | NftsBurnItemAction
+  | NftsTransferItemAction
+  | NftsLockItemTransferAction
+  | NftsUnlockItemTransferAction
+  | NftsTransferCollectionOwnershipAction
+  | NftsSetItemMetadataAction
+  | NftsClearItemMetadataAction
+  | NftsSetCollectionMetadataAction
+  | NftsClearCollectionMetadataAction
+  | NftsAcceptCollectionOwnershipAction
+;
+
+export function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): CTAction {
+  let unsigned: UnsignedTransaction;
+
+  // Handle different action types
+  switch (action.actionType) {
+    case ActionType.BalancesTransferAllowDeath: {
+      unsigned = balancesTransferAllowDeath(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.BalancesTransferKeepAlive: {
+      unsigned = balancesTransferKeepAlive(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.BalancesTransferAll: {
+      unsigned = balancesTransferAll(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsCreate: {
+      unsigned = assetsCreate(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsStartDestroy: {
+      unsigned = assetsStartDestroy(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsDestroyAccounts: {
+      unsigned = assetsDestroyAccounts(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsDestroyApprovals: {
+      unsigned = assetsDestroyApprovals(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsFinishDestroy: {
+      unsigned = assetsFinishDestroy(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsMint: {
+      unsigned = assetsMint(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsBurn: {
+      unsigned = assetsBurn(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsTransfer: {
+      unsigned = assetsTransfer(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsTransferKeepAlive: {
+      unsigned = assetsTransferKeepAlive(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsForceTransfer: {
+      unsigned = assetsForceTransfer(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsFreezeAccount: {
+      unsigned = assetsFreeze(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsThawAccount: {
+      unsigned = assetsThaw(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsFreezeAsset: {
+      unsigned = assetsFreezeAsset(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsThawAsset: {
+      unsigned = assetsThawAsset(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsTransferOwnership: {
+      unsigned = assetsTransferOwnership(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsSetMetadata: {
+      unsigned = assetsSetMetadata(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.AssetsSetMinBalance: {
+      unsigned = assetsSetMinBalance(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsCreateCollection: {
+      unsigned = nftsCreate(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsDestroyCollection: {
+      unsigned = nftsDestroy(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsMintItem: {
+      unsigned = nftsMint(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsBurnItem: {
+      unsigned = nftsBurn(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsTransferItem: {
+      unsigned = nftsTransfer(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsLockItemTransfer: {
+      unsigned = nftsLockItemTransfer(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsUnlockItemTransfer: {
+      unsigned = nftsUnlockItemTransfer(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsTransferCollectionOwnership: {
+      unsigned = nftsTransferOwnership(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsSetItemMetadata: {
+      unsigned = nftsSetMetadata(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsClearItemMetadata: {
+      unsigned = nftsClearMetadata(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsSetCollectionMetadata: {
+      unsigned = nftsSetCollectionMetadata(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsClearCollectionMetadata: {
+      unsigned = nftsClearCollectionMetadata(action.arguments, baseTxInfo, options);
+      break;
+    }
+    case ActionType.NftsAcceptCollectionOwnership: {
+      unsigned = nftsSetAcceptOwnership(action.arguments, baseTxInfo, options);
+      break;
+    }
+
+    default:
+      throw new Error('CT action has no "actionType"');
+  }
+
+  const actionTxType: CTAction = [action.origin, unsigned.method];
+
+  return actionTxType;
+}

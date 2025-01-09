@@ -5,22 +5,16 @@ import { defineMethod } from '@substrate/txwrapper-core';
 
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
-import type { ActionType } from '../types/api/actions';
 import type {
   BlockchainGenericAddress,
   BlockchainGenericBalance,
   BlockchainGenericId,
+  CTAction,
   CTAtomicActionGeneric,
   NftWitness,
 } from '../types/api/common';
 
-/**
- * Represents a single action within an atomic operation.
- */
-export type CTAtomicAction =
-{{#each ctAtomicActions}}
-  | {{{this}}}
-{{/each}};
+import { ActionType } from '../types/api/actions';
 
 {{#each modules}}
 
@@ -78,3 +72,34 @@ export type {{{actionTypeName}}} = CTAtomicActionGeneric<
 
 {{/each}}
 {{/each}}
+
+
+/**
+ * Represents a single action within an atomic operation.
+ */
+export type CTAtomicAction =
+{{#each ctAtomicActions}}
+  | {{{this.actionType}}}
+{{/each}};
+
+
+export function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): CTAction {
+  let unsigned: UnsignedTransaction;
+
+  // Handle different action types
+  switch (action.actionType) {
+  {{#each ctAtomicActions}}
+    case ActionType.{{{this.actionName}}}: {
+      unsigned = {{{this.method}}}(action.arguments, baseTxInfo, options);
+      break;
+    }
+  {{/each}}
+
+    default:
+      throw new Error('CT action has no "actionType"');
+  }
+
+  const actionTxType: CTAction = [action.origin, unsigned.method];
+
+  return actionTxType;
+}

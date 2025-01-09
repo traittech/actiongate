@@ -104,7 +104,7 @@ function generator(
 
   const { lookup, pallets } = metadata.asLatest;
 
-  const ctAtomicActions: string[] = [];
+  const ctAtomicActions: { method: string; actionName: string; actionType: string; }[] = [];
 
   const modules = pallets
     .reduce<any[]>((acc, pallet) => {
@@ -120,15 +120,20 @@ function generator(
         .reduce<any[]>((acc, { docs, fields, name: methodName }) => {
           const functionName = `${palletName}${stringPascalCase(methodName)}`;
 
-          const actionName = allowedFunctions.find(([key, val]) => val === functionName)?.[0];
+          const allowedTuple = allowedFunctions.find(([key, val]) => val === functionName);
 
-          if (!actionName) return acc;
+          if (!allowedTuple) return acc;
 
+          const [actionName] = allowedTuple;
           const name = stringCamelCase(methodName);
-          const argsTypeName = `${stringPascalCase(functionName)}Args`;
-          const actionTypeName = `${stringPascalCase(functionName)}Action`;
+          const actionTypeName = `${actionName}Action`;
+          const argsTypeName = `${actionName}Args`;
 
-          ctAtomicActions.push(actionTypeName);
+          ctAtomicActions.push({
+            method: functionName,
+            actionName,
+            actionType: actionTypeName,
+          });
 
           const typesInfo = fields.map(({ name, type, typeName }, index) => {
             const typeDef = registry.lookup.getTypeDef(type);
