@@ -5,12 +5,10 @@ import Keyring from '@polkadot/keyring';
 
 import { createClearingTransactionAndBroadcast } from '../functions/clearing-tx-builder';
 import logger from '../functions/logger';
-import {
-  ActionType,
-  ClearingTransactionPayload,
-  BalancesTransferKeepAliveArguments,
-  CTAction,
-} from '../types/api/clearingTransaction';
+import { ActionType } from '../types/api/actions';
+
+import type { CTAtomicAction } from '../txwrapper/calls';
+import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
 
 // Mock config
 jest.mock('../functions/config', () => ({
@@ -234,8 +232,8 @@ describe('Clearing Transaction Builder', () => {
                 arguments: {
                   dest: aliceAddress,
                   value: 1000,
-                } as BalancesTransferKeepAliveArguments,
-              } as CTAction,
+                },
+              } as CTAtomicAction,
             ],
           },
         ],

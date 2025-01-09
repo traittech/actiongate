@@ -6,7 +6,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "resolveJsonModule": true
+  },
+  "paths": {
+    "@/*": ["src/*"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

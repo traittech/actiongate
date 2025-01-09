@@ -1,0 +1,80 @@
+// Auto-generated, do not edit
+/* eslint-disable */
+
+import { defineMethod } from '@substrate/txwrapper-core';
+
+import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
+
+import type { ActionType } from '../types/api/actions';
+import type {
+  BlockchainGenericAddress,
+  BlockchainGenericBalance,
+  BlockchainGenericId,
+  CTAtomicActionGeneric,
+  NftWitness,
+} from '../types/api/common';
+
+/**
+ * Represents a single action within an atomic operation.
+ */
+export type CTAtomicAction =
+{{#each ctAtomicActions}}
+  | {{{this}}}
+{{/each}};
+
+{{#each modules}}
+
+{{#each items}}
+
+{{#if documentation.short}}
+/**
+ * Arguments required to {{documentation.short}}
+ */
+{{/if}}
+export type {{{argsTypeName}}} = {
+  {{#each params}}
+  {{#if this.description}}
+  /**
+   * {{{this.description}}}
+   */
+  {{/if}}
+  {{{this.name}}}: {{{this.type}}};
+  {{/each}}
+};
+
+/**
+{{#if documentation.full}}
+ * {{documentation.full}}
+{{/if}}
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function {{{functionName}}}(
+  args: {{{argsTypeName}}},
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name: '{{{methodName}}}',
+        pallet: '{{{palletName}}}',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+export type {{{actionTypeName}}} = CTAtomicActionGeneric<
+  ActionType.{{{actionName}}},
+  {{{argsTypeName}}}
+>;
+
+/*---------------------------------------------------------------------------------- */
+
+{{/each}}
+{{/each}}

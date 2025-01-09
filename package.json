@@ -18,12 +18,15 @@
     "test": "jest",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "generate:meta": "tsx ./src/chain/metadata/scripts/latest.ts --endpoint https://rpc-2.trait.tech --output ./src/chain/metadata/generated",
+    "generate:calls": "tsx ./src/chain/metadata/scripts/calls.ts",
+    "generate:interfaces": "tsx node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain.mjs --endpoint wss://rpc-2.trait.tech --output ./src/chain/interfaces"
   },
   "dependencies": {
-    "@polkadot/api": "^14.3.1",
+    "@polkadot/api": "^15.0.2",
     "@polkadot/keyring": "^13.2.3",
-    "@polkadot/rpc-provider": "^14.3.1",
+    "@polkadot/rpc-provider": "^15.0.2",
     "@substrate/txwrapper-polkadot": "^7.5.3",
     "@traittech/trait-keyless": "^0.1.4",
     "axios": "^1.7.9",
@@ -35,6 +38,7 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
+    "@polkadot/typegen": "^15.0.2",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
@@ -52,6 +56,7 @@
     "prettier": "^3.4.2",
     "ts-jest": "^29.2.5",
     "ts-node-dev": "^2.0.0",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.1"
   },
