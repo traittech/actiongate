@@ -3,7 +3,7 @@
 
 import { defineMethod } from '@substrate/txwrapper-core';
 
-import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
+import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 import type {
   BlockchainGenericAddress,
@@ -25,7 +25,7 @@ import { ActionType } from '../types/api/actions';
  * Arguments required to {{{documentation.short}}}
  */
 {{/if}}
-export type {{{argsTypeName}}} = {
+export interface {{{argsTypeName}}} extends Args {
   {{#each params}}
   {{#if this.description}}
   /**

@@ -3,7 +3,7 @@
 
 import { defineMethod } from '@substrate/txwrapper-core';
 
-import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
+import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 import type {
   BlockchainGenericAddress,
@@ -19,7 +19,7 @@ import { ActionType } from '../types/api/actions';
 /**
  * Arguments required to reduce the balance of `who` by as much as possible up to `amount` assets of `id`.
  */
-export type AssetsBurnArgs = {
+export interface AssetsBurnArgs extends Args {
   /**
    *  The identifier of the asset to have some amount burned.
    */
@@ -66,7 +66,7 @@ export type AssetsBurnAction = CTAtomicActionGeneric<
 
 /*---------------------------------------------------------------------------------- */
 
-export type AssetsCreateArgs = {
+export interface AssetsCreateArgs extends Args {
   minBalance: BlockchainGenericBalance;
 };
 
@@ -104,7 +104,7 @@ export type AssetsCreateAction = CTAtomicActionGeneric<
 /**
  * Arguments required to destroy all accounts associated with a given asset.
  */
-export type AssetsDestroyAccountsArgs = {
+export interface AssetsDestroyAccountsArgs extends Args {
   /**
    *  The identifier of the asset to be destroyed. This must identify an existing asset.
    */
@@ -146,7 +146,7 @@ export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<
 /**
  * Arguments required to destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).
  */
-export type AssetsDestroyApprovalsArgs = {
+export interface AssetsDestroyApprovalsArgs extends Args {
   /**
    *  The identifier of the asset to be destroyed. This must identify an existing asset.
    */
@@ -188,7 +188,7 @@ export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<
 /**
  * Arguments required to complete destroying asset and unreserve currency.
  */
-export type AssetsFinishDestroyArgs = {
+export interface AssetsFinishDestroyArgs extends Args {
   /**
    *  The identifier of the asset to be destroyed. This must identify an existing asset.
    */
@@ -230,7 +230,7 @@ export type AssetsFinishDestroyAction = CTAtomicActionGeneric<
 /**
  * Arguments required to move some assets from one account to another.
  */
-export type AssetsForceTransferArgs = {
+export interface AssetsForceTransferArgs extends Args {
   /**
    *  The identifier of the asset to have some amount transferred.
    */
@@ -284,7 +284,7 @@ export type AssetsForceTransferAction = CTAtomicActionGeneric<
 /**
  * Arguments required to disallow further unprivileged transfers of an asset `id` from an account `who`. `who`
  */
-export type AssetsFreezeAccountArgs = {
+export interface AssetsFreezeAccountArgs extends Args {
   /**
    *  The identifier of the asset to be frozen.
    */
@@ -330,7 +330,7 @@ export type AssetsFreezeAccountAction = CTAtomicActionGeneric<
 /**
  * Arguments required to disallow further unprivileged transfers for the asset class.
  */
-export type AssetsFreezeAssetArgs = {
+export interface AssetsFreezeAssetArgs extends Args {
   /**
    *  The identifier of the asset to be frozen.
    */
@@ -372,7 +372,7 @@ export type AssetsFreezeAssetAction = CTAtomicActionGeneric<
 /**
  * Arguments required to mint assets of a particular class.
  */
-export type AssetsMintArgs = {
+export interface AssetsMintArgs extends Args {
   /**
    *  The identifier of the asset to have some amount minted.
    */
@@ -422,7 +422,7 @@ export type AssetsMintAction = CTAtomicActionGeneric<
 /**
  * Arguments required to set the raw metadata for an asset.
  */
-export type AssetsSetMetadataArgs = {
+export interface AssetsSetMetadataArgs extends Args {
   /**
    *  The identifier of the asset to update.
    */
@@ -468,7 +468,7 @@ export type AssetsSetMetadataAction = CTAtomicActionGeneric<
 /**
  * Arguments required to sets the minimum balance of an asset.
  */
-export type AssetsSetMinBalanceArgs = {
+export interface AssetsSetMinBalanceArgs extends Args {
   /**
    *  The identifier of the asset.
    */
@@ -514,7 +514,7 @@ export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<
 /**
  * Arguments required to start the process of destroying a fungible asset class.
  */
-export type AssetsStartDestroyArgs = {
+export interface AssetsStartDestroyArgs extends Args {
   /**
    *  The identifier of the asset to be destroyed. This must identify an existing asset.
    */
@@ -556,7 +556,7 @@ export type AssetsStartDestroyAction = CTAtomicActionGeneric<
 /**
  * Arguments required to allow unprivileged transfers to and from an account again.
  */
-export type AssetsThawAccountArgs = {
+export interface AssetsThawAccountArgs extends Args {
   /**
    *  The identifier of the asset to be frozen.
    */
@@ -602,7 +602,7 @@ export type AssetsThawAccountAction = CTAtomicActionGeneric<
 /**
  * Arguments required to allow unprivileged transfers for the asset again.
  */
-export type AssetsThawAssetArgs = {
+export interface AssetsThawAssetArgs extends Args {
   /**
    *  The identifier of the asset to be thawed.
    */
@@ -644,7 +644,7 @@ export type AssetsThawAssetAction = CTAtomicActionGeneric<
 /**
  * Arguments required to move some assets from the sender account to another.
  */
-export type AssetsTransferArgs = {
+export interface AssetsTransferArgs extends Args {
   /**
    *  The identifier of the asset to have some amount transferred.
    */
@@ -694,7 +694,7 @@ export type AssetsTransferAction = CTAtomicActionGeneric<
 /**
  * Arguments required to move some assets from the sender account to another, keeping the sender account alive.
  */
-export type AssetsTransferKeepAliveArgs = {
+export interface AssetsTransferKeepAliveArgs extends Args {
   /**
    *  The identifier of the asset to have some amount transferred.
    */
@@ -744,7 +744,7 @@ export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<
 /**
  * Arguments required to change the Owner of an asset.
  */
-export type AssetsTransferOwnershipArgs = {
+export interface AssetsTransferOwnershipArgs extends Args {
   /**
    *  The identifier of the asset.
    */
@@ -790,7 +790,7 @@ export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<
 /**
  * Arguments required to transfer the entire transferable balance from the caller account.
  */
-export type BalancesTransferAllArgs = {
+export interface BalancesTransferAllArgs extends Args {
   /**
    *  The recipient of the transfer.
    */
@@ -833,7 +833,7 @@ export type BalancesTransferAllAction = CTAtomicActionGeneric<
 /**
  * Arguments required to transfer some liquid free balance to another account.
  */
-export type BalancesTransferAllowDeathArgs = {
+export interface BalancesTransferAllowDeathArgs extends Args {
   dest: BlockchainGenericAddress;
   value: BlockchainGenericBalance;
 };
@@ -873,7 +873,7 @@ export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<
 /**
  * Arguments required to same as the [`transfer_allow_death`] call, but with a check that the transfer will not
  */
-export type BalancesTransferKeepAliveArgs = {
+export interface BalancesTransferKeepAliveArgs extends Args {
   dest: BlockchainGenericAddress;
   value: BlockchainGenericBalance;
 };
@@ -913,7 +913,7 @@ export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<
 /**
  * Arguments required to destroy a single item.
  */
-export type NftsBurnItemArgs = {
+export interface NftsBurnItemArgs extends Args {
   /**
    *  The collection of the item to be burned.
    */
@@ -959,7 +959,7 @@ export type NftsBurnItemAction = CTAtomicActionGeneric<
 /**
  * Arguments required to clear the metadata for a collection.
  */
-export type NftsClearCollectionMetadataArgs = {
+export interface NftsClearCollectionMetadataArgs extends Args {
   /**
    *  The identifier of the collection whose metadata to clear.
    */
@@ -1001,7 +1001,7 @@ export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<
 /**
  * Arguments required to clear the metadata for an item.
  */
-export type NftsClearItemMetadataArgs = {
+export interface NftsClearItemMetadataArgs extends Args {
   /**
    *  The identifier of the collection whose item's metadata to clear.
    */
@@ -1044,7 +1044,7 @@ export type NftsClearItemMetadataAction = CTAtomicActionGeneric<
 
 /*---------------------------------------------------------------------------------- */
 
-export type NftsCreateCollectionArgs = {
+export interface NftsCreateCollectionArgs extends Args {
 };
 
 /**
@@ -1081,7 +1081,7 @@ export type NftsCreateCollectionAction = CTAtomicActionGeneric<
 /**
  * Arguments required to destroy a collection of fungible items.
  */
-export type NftsDestroyCollectionArgs = {
+export interface NftsDestroyCollectionArgs extends Args {
   /**
    *  The identifier of the collection to be destroyed.
    */
@@ -1127,7 +1127,7 @@ export type NftsDestroyCollectionAction = CTAtomicActionGeneric<
 /**
  * Arguments required to disallow further unprivileged transfer of an item.
  */
-export type NftsLockItemTransferArgs = {
+export interface NftsLockItemTransferArgs extends Args {
   /**
    *  The collection of the item to be changed.
    */
@@ -1170,7 +1170,7 @@ export type NftsLockItemTransferAction = CTAtomicActionGeneric<
 
 /*---------------------------------------------------------------------------------- */
 
-export type NftsMintItemArgs = {
+export interface NftsMintItemArgs extends Args {
   collection: BlockchainGenericId;
   item: BlockchainGenericId;
   mintTo: BlockchainGenericAddress;
@@ -1210,7 +1210,7 @@ export type NftsMintItemAction = CTAtomicActionGeneric<
 /**
  * Arguments required to set (or reset) the acceptance of ownership for a particular account.
  */
-export type NftsAcceptCollectionOwnershipArgs = {
+export interface NftsAcceptCollectionOwnershipArgs extends Args {
   /**
    *  The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.
    */
@@ -1252,7 +1252,7 @@ export type NftsAcceptCollectionOwnershipAction = CTAtomicActionGeneric<
 /**
  * Arguments required to set the metadata for a collection.
  */
-export type NftsSetCollectionMetadataArgs = {
+export interface NftsSetCollectionMetadataArgs extends Args {
   /**
    *  The identifier of the item whose metadata to update.
    */
@@ -1298,7 +1298,7 @@ export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<
 /**
  * Arguments required to set the metadata for an item.
  */
-export type NftsSetItemMetadataArgs = {
+export interface NftsSetItemMetadataArgs extends Args {
   /**
    *  The identifier of the collection whose item's metadata to set.
    */
@@ -1348,7 +1348,7 @@ export type NftsSetItemMetadataAction = CTAtomicActionGeneric<
 /**
  * Arguments required to move an item from the sender account to another.
  */
-export type NftsTransferItemArgs = {
+export interface NftsTransferItemArgs extends Args {
   /**
    *  The collection of the item to be transferred.
    */
@@ -1398,7 +1398,7 @@ export type NftsTransferItemAction = CTAtomicActionGeneric<
 /**
  * Arguments required to change the Owner of a collection.
  */
-export type NftsTransferCollectionOwnershipArgs = {
+export interface NftsTransferCollectionOwnershipArgs extends Args {
   /**
    *  The collection whose owner should be changed.
    */
@@ -1441,7 +1441,7 @@ export type NftsTransferCollectionOwnershipAction = CTAtomicActionGeneric<
 /**
  * Arguments required to re-allow unprivileged transfer of an item.
  */
-export type NftsUnlockItemTransferArgs = {
+export interface NftsUnlockItemTransferArgs extends Args {
   /**
    *  The collection of the item to be changed.
    */
