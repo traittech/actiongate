@@ -82,21 +82,34 @@ export type CTAtomicAction =
   | {{{this.actionType}}}
 {{/each}};
 
-
+/**
+ * Builds clearing transaction action from atomic action.
+ * @param action - Atomic action.
+ * @param baseTxInfo - Base transaction information.
+ * @param options - Additional options including the registry and metadata RPC.
+ * @returns An action in clearing transaction.
+ */
 export function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): CTAction {
+  const { actionType, arguments: args } = action;
+
   let unsigned: UnsignedTransaction;
 
   // Handle different action types
-  switch (action.actionType) {
+  switch (actionType) {
   {{#each ctAtomicActions}}
     case ActionType.{{{this.actionName}}}: {
-      unsigned = {{{this.method}}}(action.arguments, baseTxInfo, options);
+      unsigned = {{{this.method}}}(args, baseTxInfo, options);
       break;
     }
   {{/each}}
 
-    default:
-      throw new Error('CT action has no "actionType"');
+    default: {
+      if (actionType) {
+        throw new Error(`Unsupported action type: ${actionType}`);
+      } else {
+        throw new Error('CT action has no "actionType"');
+      }
+    }
   }
 
   const actionTxType: CTAction = [action.origin, unsigned.method];
