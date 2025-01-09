@@ -201,8 +201,6 @@ function generator(
 }
 
 (async function main() {
-  console.log(Object.entries(ActionType));
-
   const metadataHex = metadataJson.latest as any;
 
   const dest = path.join(process.cwd(), './src/txwrapper/calls.ts');

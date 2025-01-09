@@ -54,7 +54,7 @@ export type CTAtomicAction =
 ;
 
 /**
- * Arguments required to reduce the balance of &#x60;who&#x60; by as much as possible up to &#x60;amount&#x60; assets of &#x60;id&#x60;.
+ * Arguments required to reduce the balance of `who` by as much as possible up to `amount` assets of `id`.
  */
 export type AssetsBurnArgs = {
   /**
@@ -72,7 +72,7 @@ export type AssetsBurnArgs = {
 };
 
 /**
- * Reduce the balance of &#x60;who&#x60; by as much as possible up to &#x60;amount&#x60; assets of &#x60;id&#x60;. Origin must be Signed and the sender should be the Manager of the asset &#x60;id&#x60;. Bails with &#x60;NoAccount&#x60; if the &#x60;who&#x60; is already dead.
+ * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -149,7 +149,7 @@ export type AssetsDestroyAccountsArgs = {
 };
 
 /**
- * Destroy all accounts associated with a given asset. &#x60;destroy_accounts&#x60; should only be called after &#x60;start_destroy&#x60; has been called, and the asset is in a &#x60;Destroying&#x60; state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy &#x60;RemoveItemsLimit&#x60; accounts at a time.
+ * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -191,7 +191,7 @@ export type AssetsDestroyApprovalsArgs = {
 };
 
 /**
- * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). &#x60;destroy_approvals&#x60; should only be called after &#x60;start_destroy&#x60; has been called, and the asset is in a &#x60;Destroying&#x60; state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy &#x60;RemoveItemsLimit&#x60; approvals at a time.
+ * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -233,7 +233,7 @@ export type AssetsFinishDestroyArgs = {
 };
 
 /**
- * Complete destroying asset and unreserve currency. &#x60;finish_destroy&#x60; should only be called after &#x60;start_destroy&#x60; has been called, and the asset is in a &#x60;Destroying&#x60; state. All accounts or approvals should be destroyed before hand.
+ * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -287,7 +287,7 @@ export type AssetsForceTransferArgs = {
 };
 
 /**
- * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset &#x60;id&#x60;.
+ * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -319,7 +319,7 @@ export type AssetsForceTransferAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to disallow further unprivileged transfers of an asset &#x60;id&#x60; from an account &#x60;who&#x60;. &#x60;who&#x60;
+ * Arguments required to disallow further unprivileged transfers of an asset `id` from an account `who`. `who`
  */
 export type AssetsFreezeArgs = {
   /**
@@ -333,7 +333,7 @@ export type AssetsFreezeArgs = {
 };
 
 /**
- * Disallow further unprivileged transfers of an asset &#x60;id&#x60; from an account &#x60;who&#x60;. &#x60;who&#x60; must already exist as an entry in &#x60;Account&#x60;s of the asset. If you want to freeze an account that does not have an entry, use &#x60;touch_other&#x60; first. Origin must be Signed and the sender should be the Freezer of the asset &#x60;id&#x60;.
+ * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -375,7 +375,7 @@ export type AssetsFreezeAssetArgs = {
 };
 
 /**
- * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset &#x60;id&#x60;.
+ * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -425,7 +425,7 @@ export type AssetsMintArgs = {
 };
 
 /**
- * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset &#x60;id&#x60;.
+ * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -471,7 +471,7 @@ export type AssetsSetMetadataArgs = {
 };
 
 /**
- * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset &#x60;id&#x60;. Funds of sender are reserved according to the formula: &#x60;MetadataDepositBase + MetadataDepositPerByte * (data.len)&#x60; taking into account any already reserved funds.
+ * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -517,7 +517,7 @@ export type AssetsSetMinBalanceArgs = {
 };
 
 /**
- * Sets the minimum balance of an asset. Only works if there aren&#x27;t any accounts that are holding the asset or if the new value of &#x60;min_balance&#x60; is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset &#x60;id&#x60;.
+ * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -559,7 +559,7 @@ export type AssetsStartDestroyArgs = {
 };
 
 /**
- * Start the process of destroying a fungible asset class. &#x60;start_destroy&#x60; is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to &#x60;ForceOrigin&#x60; or must be &#x60;Signed&#x60; by the asset&#x27;s &#x60;owner&#x60;.
+ * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -605,7 +605,7 @@ export type AssetsThawArgs = {
 };
 
 /**
- * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset &#x60;id&#x60;.
+ * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -647,7 +647,7 @@ export type AssetsThawAssetArgs = {
 };
 
 /**
- * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset &#x60;id&#x60;.
+ * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -793,7 +793,7 @@ export type AssetsTransferOwnershipArgs = {
 };
 
 /**
- * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset &#x60;id&#x60;.
+ * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -836,7 +836,7 @@ export type BalancesTransferAllArgs = {
 };
 
 /**
- * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when &#x60;keep_alive&#x60; is &#x60;true&#x60;), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
+ * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -876,7 +876,7 @@ export type BalancesTransferAllowDeathArgs = {
 };
 
 /**
- * Transfer some liquid free balance to another account. &#x60;transfer_allow_death&#x60; will set the &#x60;FreeBalance&#x60; of the sender and receiver. If the sender&#x27;s account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be &#x60;Signed&#x60; by the transactor.
+ * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -908,7 +908,7 @@ export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to same as the [&#x60;transfer_allow_death&#x60;] call, but with a check that the transfer will not
+ * Arguments required to same as the [`transfer_allow_death`] call, but with a check that the transfer will not
  */
 export type BalancesTransferKeepAliveArgs = {
   dest: BlockchainGenericAddress;
@@ -916,7 +916,7 @@ export type BalancesTransferKeepAliveArgs = {
 };
 
 /**
- * Same as the [&#x60;transfer_allow_death&#x60;] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [&#x60;transfer_allow_death&#x60;] instead. [&#x60;transfer_allow_death&#x60;]: struct.Pallet.html#method.transfer
+ * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -962,7 +962,7 @@ export type NftsBurnArgs = {
 };
 
 /**
- * Destroy a single item. The origin must conform to &#x60;ForceOrigin&#x60; or must be Signed and the signing account must be the owner of the &#x60;item&#x60;.
+ * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -1004,7 +1004,7 @@ export type NftsClearCollectionMetadataArgs = {
 };
 
 /**
- * Clear the metadata for a collection. Origin must be either &#x60;ForceOrigin&#x60; or &#x60;Signed&#x60; and the sender should be the Admin of the &#x60;collection&#x60;. Any deposit is freed for the collection&#x27;s owner.
+ * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -1050,7 +1050,7 @@ export type NftsClearMetadataArgs = {
 };
 
 /**
- * Clear the metadata for an item. Origin must be either &#x60;ForceOrigin&#x60; or Signed and the sender should be the Admin of the &#x60;collection&#x60;. Any deposit is freed for the collection&#x27;s owner.
+ * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -1130,7 +1130,7 @@ export type NftsDestroyArgs = {
 };
 
 /**
- * Destroy a collection of fungible items. The origin must conform to &#x60;ForceOrigin&#x60; or must be &#x60;Signed&#x60; and the sender must be the owner of the &#x60;collection&#x60;. NOTE: The collection must have 0 items to be destroyed.
+ * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -1176,7 +1176,7 @@ export type NftsLockItemTransferArgs = {
 };
 
 /**
- * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the &#x60;collection&#x60;.
+ * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -1255,7 +1255,7 @@ export type NftsSetAcceptOwnershipArgs = {
 };
 
 /**
- * Set (or reset) the acceptance of ownership for a particular account. Origin must be &#x60;Signed&#x60; and if &#x60;maybe_collection&#x60; is &#x60;Some&#x60;, then the signer must have a provider reference.
+ * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -1301,7 +1301,7 @@ export type NftsSetCollectionMetadataArgs = {
 };
 
 /**
- * Set the metadata for a collection. Origin must be either &#x60;ForceOrigin&#x60; or &#x60;Signed&#x60; and the sender should be the Admin of the &#x60;collection&#x60;. If the origin is &#x60;Signed&#x60;, then funds of signer are reserved according to the formula: &#x60;MetadataDepositBase + DepositPerByte * data.len&#x60; taking into account any already reserved funds.
+ * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -1351,7 +1351,7 @@ export type NftsSetMetadataArgs = {
 };
 
 /**
- * Set the metadata for an item. Origin must be either &#x60;ForceOrigin&#x60; or Signed and the sender should be the Admin of the &#x60;collection&#x60;. If the origin is Signed, then funds of signer are reserved according to the formula: &#x60;MetadataDepositBase + DepositPerByte * data.len&#x60; taking into account any already reserved funds.
+ * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -1444,7 +1444,7 @@ export type NftsTransferOwnershipArgs = {
 };
 
 /**
- * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the &#x60;collection&#x60;.
+ * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
@@ -1490,7 +1490,7 @@ export type NftsUnlockItemTransferArgs = {
 };
 
 /**
- * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the &#x60;collection&#x60;.
+ * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
