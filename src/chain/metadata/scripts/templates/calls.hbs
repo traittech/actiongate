@@ -6,9 +6,11 @@ import { defineMethod } from '@substrate/txwrapper-core';
 import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 import type {
-  BlockchainGenericAddress,
+  BlockchainGenericAccount,
   BlockchainGenericBalance,
+  BlockchainGenericBoolean,
   BlockchainGenericId,
+  BlockchainGenericText,
   CTAction,
   CTAtomicActionGeneric,
   NftWitness,
@@ -32,7 +34,7 @@ export interface {{{argsTypeName}}} extends Args {
    * {{{this.description}}}
    */
   {{/if}}
-  {{{this.name}}}: {{{this.type}}};
+  {{{this.name}}}{{#if this.isOptional}}?{{/if}}: {{{this.type}}};
   {{/each}}
 };
 

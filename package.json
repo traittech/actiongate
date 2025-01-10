@@ -35,7 +35,8 @@
     "express": "^4.21.2",
     "js-yaml": "^4.1.0",
     "swagger-ui-express": "5.0.1",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@polkadot/typegen": "^15.0.2",

@@ -6,9 +6,11 @@ import { defineMethod } from '@substrate/txwrapper-core';
 import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 import type {
-  BlockchainGenericAddress,
+  BlockchainGenericAccount,
   BlockchainGenericBalance,
+  BlockchainGenericBoolean,
   BlockchainGenericId,
+  BlockchainGenericText,
   CTAction,
   CTAtomicActionGeneric,
   NftWitness,
@@ -27,7 +29,7 @@ export interface AssetsBurnArgs extends Args {
   /**
    *  The account to be debited from.
    */
-  who: BlockchainGenericAddress;
+  who: BlockchainGenericAccount;
   /**
    *  The maximum amount by which `who`'s balance should be reduced.
    */
@@ -238,11 +240,11 @@ export interface AssetsForceTransferArgs extends Args {
   /**
    *  The account to be debited.
    */
-  source: BlockchainGenericAddress;
+  source: BlockchainGenericAccount;
   /**
    *  The account to be credited.
    */
-  dest: BlockchainGenericAddress;
+  dest: BlockchainGenericAccount;
   /**
    *  The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.
    */
@@ -292,7 +294,7 @@ export interface AssetsFreezeAccountArgs extends Args {
   /**
    *  The account to be frozen.
    */
-  who: BlockchainGenericAddress;
+  who: BlockchainGenericAccount;
 };
 
 /**
@@ -380,7 +382,7 @@ export interface AssetsMintArgs extends Args {
   /**
    *  The account to be credited with the minted assets.
    */
-  beneficiary: BlockchainGenericAddress;
+  beneficiary: BlockchainGenericAccount;
   /**
    *  The amount of the asset to be minted.
    */
@@ -430,7 +432,7 @@ export interface AssetsSetMetadataArgs extends Args {
   /**
    *  The data of metadata. Limited in length by `StringLimit`.
    */
-  data: string;
+  data: BlockchainGenericText;
 };
 
 /**
@@ -564,7 +566,7 @@ export interface AssetsThawAccountArgs extends Args {
   /**
    *  The account to be unfrozen.
    */
-  who: BlockchainGenericAddress;
+  who: BlockchainGenericAccount;
 };
 
 /**
@@ -652,7 +654,7 @@ export interface AssetsTransferArgs extends Args {
   /**
    *  The account to be credited.
    */
-  target: BlockchainGenericAddress;
+  target: BlockchainGenericAccount;
   /**
    *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
    */
@@ -702,7 +704,7 @@ export interface AssetsTransferKeepAliveArgs extends Args {
   /**
    *  The account to be credited.
    */
-  target: BlockchainGenericAddress;
+  target: BlockchainGenericAccount;
   /**
    *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
    */
@@ -752,7 +754,7 @@ export interface AssetsTransferOwnershipArgs extends Args {
   /**
    *  The new Owner of this asset.
    */
-  owner: BlockchainGenericAddress;
+  owner: BlockchainGenericAccount;
 };
 
 /**
@@ -794,8 +796,8 @@ export interface BalancesTransferAllArgs extends Args {
   /**
    *  The recipient of the transfer.
    */
-  dest: BlockchainGenericAddress;
-  keepAlive: boolean;
+  dest: BlockchainGenericAccount;
+  keepAlive: BlockchainGenericBoolean;
 };
 
 /**
@@ -834,7 +836,7 @@ export type BalancesTransferAllAction = CTAtomicActionGeneric<
  * Arguments required to transfer some liquid free balance to another account.
  */
 export interface BalancesTransferAllowDeathArgs extends Args {
-  dest: BlockchainGenericAddress;
+  dest: BlockchainGenericAccount;
   value: BlockchainGenericBalance;
 };
 
@@ -874,7 +876,7 @@ export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<
  * Arguments required to same as the [`transfer_allow_death`] call, but with a check that the transfer will not
  */
 export interface BalancesTransferKeepAliveArgs extends Args {
-  dest: BlockchainGenericAddress;
+  dest: BlockchainGenericAccount;
   value: BlockchainGenericBalance;
 };
 
@@ -1173,7 +1175,7 @@ export type NftsLockItemTransferAction = CTAtomicActionGeneric<
 export interface NftsMintItemArgs extends Args {
   collection: BlockchainGenericId;
   item: BlockchainGenericId;
-  mintTo: BlockchainGenericAddress;
+  mintTo: BlockchainGenericAccount;
 };
 
 /**
@@ -1214,7 +1216,7 @@ export interface NftsAcceptCollectionOwnershipArgs extends Args {
   /**
    *  The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.
    */
-  maybeCollection: number | null | undefined;
+  maybeCollection?: BlockchainGenericId;
 };
 
 /**
@@ -1260,7 +1262,7 @@ export interface NftsSetCollectionMetadataArgs extends Args {
   /**
    *  The general information of this item. Limited in length by `StringLimit`.
    */
-  data: string;
+  data: BlockchainGenericText;
 };
 
 /**
@@ -1310,7 +1312,7 @@ export interface NftsSetItemMetadataArgs extends Args {
   /**
    *  The general information of this item. Limited in length by `StringLimit`.
    */
-  data: string;
+  data: BlockchainGenericText;
 };
 
 /**
@@ -1360,7 +1362,7 @@ export interface NftsTransferItemArgs extends Args {
   /**
    *  The account to receive ownership of the item.
    */
-  dest: BlockchainGenericAddress;
+  dest: BlockchainGenericAccount;
 };
 
 /**
@@ -1403,7 +1405,7 @@ export interface NftsTransferCollectionOwnershipArgs extends Args {
    *  The collection whose owner should be changed.
    */
   collection: BlockchainGenericId;
-  newOwner: BlockchainGenericAddress;
+  newOwner: BlockchainGenericAccount;
 };
 
 /**

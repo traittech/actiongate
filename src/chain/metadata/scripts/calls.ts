@@ -147,13 +147,22 @@ function generator(
           const documentation = getFunctionDescription(docs);
 
           const params = typesInfo.map(([name, , typeStr]) => {
-            const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
+            let isOptional = false;
+            let type = typeStr;
 
-            let type = similarTypes.join(' | ');
+            const regex = /(.*?)?<(.*?)>/g;
+            const matches = regex.exec(typeStr);
+
+            if (matches) {
+              isOptional = matches[1] === 'Option';
+              type = matches[2] ?? type;
+            }
 
             if (BlockchainOverridesMap.has(type)) {
               type = BlockchainOverridesMap.get(type) as string;
             } else {
+              const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
+              type = similarTypes.join(' | ');
               setImports(allDefs, imports, [typeStr, ...similarTypes]);
             }
 
@@ -161,6 +170,7 @@ function generator(
               name,
               type,
               description: documentation.args[name] ?? '',
+              isOptional,
             };
           });
 

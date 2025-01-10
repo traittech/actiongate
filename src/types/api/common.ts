@@ -28,29 +28,45 @@ export type CTAtomicActionGeneric<ActionTypeName extends ActionType, ActionArgs>
   /**
    * The type of action to be performed
    */
-  actionType: ActionTypeName;
 
+  actionType: ActionTypeName;
   /**
    * The origin responsible for the transaction.
    */
-  origin: CTActionOrigin;
 
+  origin: CTActionOrigin;
   /**
    * The arguments for the action.
    */
   arguments: ActionArgs;
 };
 
+// Common blockchain types
+
 /**
- * Common blockchain types
+ * Blockchain account address, represented by SS58 string
  */
+export type BlockchainGenericAccount = string;
 
-export type BlockchainGenericAddress = string;
-
-// Asset Id, Collection Id, Agent Id
+/**
+ * Asset Id, Collection Id, Agent Id (u32)
+ */
 export type BlockchainGenericId = number;
 
+/**
+ * Amount, Balance (u128)
+ */
 export type BlockchainGenericBalance = number;
+
+/**
+ * Text or metadata represented by string (Bytes). Limit is defined in `StringLimit` const. 
+ */
+export type BlockchainGenericText = string;
+
+/**
+ * Boolean type for blockchain (bool)
+ */
+export type BlockchainGenericBoolean = boolean;
 
 export type NftWitness = {
   itemMetadatas: number;
