@@ -11,7 +11,7 @@ const isAnyNumberInRange = (min: bigint, max: bigint) => isAnyNumberLike.pipe(
     .lte(max, `Value must be fewer or equal to ${max}`)
 );
 
-export const BlockchainGenericAddressSchema = z
+export const BlockchainGenericAccountSchema = z
   .string()
   .length(ss58_LENGTH, { message: `String must be exactly ${ss58_LENGTH} characters long` })
   .refine((v) => isValidSS58(v), { message: 'String is not valid SS58 encoded address' });

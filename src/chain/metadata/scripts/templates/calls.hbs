@@ -1,6 +1,8 @@
 // Auto-generated, do not edit
 /* eslint-disable */
 
+import { z } from 'zod';
+
 import { defineMethod } from '@substrate/txwrapper-core';
 
 import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
@@ -17,6 +19,8 @@ import type {
 } from '../types/api/common';
 
 import { ActionType } from '../types/api/actions';
+
+import * as schema from '../validator/schemas/common';
 
 {{#each modules}}
 
@@ -38,6 +42,12 @@ export interface {{{argsTypeName}}} extends Args {
   {{/each}}
 };
 
+const {{{argsTypeName}}}Schema = z.object({
+  {{#each params}}
+  {{{this.name}}}: {{#if this.isOptional}}z.optional({{/if}}schema.{{{this.type}}}Schema{{#if this.isOptional}}){{/if}},
+  {{/each}}
+});
+
 /**
 {{#if documentation.full}}
  * {{{documentation.full}}}
@@ -52,6 +62,9 @@ export function {{{functionName}}}(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  {{{argsTypeName}}}Schema.parse(args);
+
   return defineMethod(
     {
       method: {

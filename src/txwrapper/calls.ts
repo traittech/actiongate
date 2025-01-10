@@ -1,6 +1,8 @@
 // Auto-generated, do not edit
 /* eslint-disable */
 
+import { z } from 'zod';
+
 import { defineMethod } from '@substrate/txwrapper-core';
 
 import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
@@ -17,6 +19,8 @@ import type {
 } from '../types/api/common';
 
 import { ActionType } from '../types/api/actions';
+
+import * as schema from '../validator/schemas/common';
 
 /**
  * Arguments required to reduce the balance of `who` by as much as possible up to `amount` assets of `id`.
@@ -36,6 +40,12 @@ export interface AssetsBurnArgs extends Args {
   amount: BlockchainGenericBalance;
 };
 
+const AssetsBurnArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  who: schema.BlockchainGenericAccountSchema,
+  amount: schema.BlockchainGenericBalanceSchema,
+});
+
 /**
  * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
  * @param args - The arguments of the transaction.
@@ -48,6 +58,9 @@ export function assetsBurn(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsBurnArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -72,6 +85,10 @@ export interface AssetsCreateArgs extends Args {
   minBalance: BlockchainGenericBalance;
 };
 
+const AssetsCreateArgsSchema = z.object({
+  minBalance: schema.BlockchainGenericBalanceSchema,
+});
+
 /**
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
@@ -83,6 +100,9 @@ export function assetsCreate(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsCreateArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -113,6 +133,10 @@ export interface AssetsDestroyAccountsArgs extends Args {
   id: BlockchainGenericId;
 };
 
+const AssetsDestroyAccountsArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
  * @param args - The arguments of the transaction.
@@ -125,6 +149,9 @@ export function assetsDestroyAccounts(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsDestroyAccountsArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -155,6 +182,10 @@ export interface AssetsDestroyApprovalsArgs extends Args {
   id: BlockchainGenericId;
 };
 
+const AssetsDestroyApprovalsArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
  * @param args - The arguments of the transaction.
@@ -167,6 +198,9 @@ export function assetsDestroyApprovals(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsDestroyApprovalsArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -197,6 +231,10 @@ export interface AssetsFinishDestroyArgs extends Args {
   id: BlockchainGenericId;
 };
 
+const AssetsFinishDestroyArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
  * @param args - The arguments of the transaction.
@@ -209,6 +247,9 @@ export function assetsFinishDestroy(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsFinishDestroyArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -251,6 +292,13 @@ export interface AssetsForceTransferArgs extends Args {
   amount: BlockchainGenericBalance;
 };
 
+const AssetsForceTransferArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  source: schema.BlockchainGenericAccountSchema,
+  dest: schema.BlockchainGenericAccountSchema,
+  amount: schema.BlockchainGenericBalanceSchema,
+});
+
 /**
  * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
  * @param args - The arguments of the transaction.
@@ -263,6 +311,9 @@ export function assetsForceTransfer(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsForceTransferArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -297,6 +348,11 @@ export interface AssetsFreezeAccountArgs extends Args {
   who: BlockchainGenericAccount;
 };
 
+const AssetsFreezeAccountArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  who: schema.BlockchainGenericAccountSchema,
+});
+
 /**
  * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  * @param args - The arguments of the transaction.
@@ -309,6 +365,9 @@ export function assetsFreeze(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsFreezeAccountArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -339,6 +398,10 @@ export interface AssetsFreezeAssetArgs extends Args {
   id: BlockchainGenericId;
 };
 
+const AssetsFreezeAssetArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  * @param args - The arguments of the transaction.
@@ -351,6 +414,9 @@ export function assetsFreezeAsset(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsFreezeAssetArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -389,6 +455,12 @@ export interface AssetsMintArgs extends Args {
   amount: BlockchainGenericBalance;
 };
 
+const AssetsMintArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  beneficiary: schema.BlockchainGenericAccountSchema,
+  amount: schema.BlockchainGenericBalanceSchema,
+});
+
 /**
  * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
  * @param args - The arguments of the transaction.
@@ -401,6 +473,9 @@ export function assetsMint(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsMintArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -435,6 +510,11 @@ export interface AssetsSetMetadataArgs extends Args {
   data: BlockchainGenericText;
 };
 
+const AssetsSetMetadataArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  data: schema.BlockchainGenericTextSchema,
+});
+
 /**
  * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
  * @param args - The arguments of the transaction.
@@ -447,6 +527,9 @@ export function assetsSetMetadata(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsSetMetadataArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -481,6 +564,11 @@ export interface AssetsSetMinBalanceArgs extends Args {
   minBalance: BlockchainGenericBalance;
 };
 
+const AssetsSetMinBalanceArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  minBalance: schema.BlockchainGenericBalanceSchema,
+});
+
 /**
  * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
  * @param args - The arguments of the transaction.
@@ -493,6 +581,9 @@ export function assetsSetMinBalance(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsSetMinBalanceArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -523,6 +614,10 @@ export interface AssetsStartDestroyArgs extends Args {
   id: BlockchainGenericId;
 };
 
+const AssetsStartDestroyArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
  * @param args - The arguments of the transaction.
@@ -535,6 +630,9 @@ export function assetsStartDestroy(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsStartDestroyArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -569,6 +667,11 @@ export interface AssetsThawAccountArgs extends Args {
   who: BlockchainGenericAccount;
 };
 
+const AssetsThawAccountArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  who: schema.BlockchainGenericAccountSchema,
+});
+
 /**
  * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
  * @param args - The arguments of the transaction.
@@ -581,6 +684,9 @@ export function assetsThaw(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsThawAccountArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -611,6 +717,10 @@ export interface AssetsThawAssetArgs extends Args {
   id: BlockchainGenericId;
 };
 
+const AssetsThawAssetArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
  * @param args - The arguments of the transaction.
@@ -623,6 +733,9 @@ export function assetsThawAsset(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsThawAssetArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -661,6 +774,12 @@ export interface AssetsTransferArgs extends Args {
   amount: BlockchainGenericBalance;
 };
 
+const AssetsTransferArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  target: schema.BlockchainGenericAccountSchema,
+  amount: schema.BlockchainGenericBalanceSchema,
+});
+
 /**
  * Move some assets from the sender account to another. Origin must be Signed.
  * @param args - The arguments of the transaction.
@@ -673,6 +792,9 @@ export function assetsTransfer(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsTransferArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -711,6 +833,12 @@ export interface AssetsTransferKeepAliveArgs extends Args {
   amount: BlockchainGenericBalance;
 };
 
+const AssetsTransferKeepAliveArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  target: schema.BlockchainGenericAccountSchema,
+  amount: schema.BlockchainGenericBalanceSchema,
+});
+
 /**
  * Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.
  * @param args - The arguments of the transaction.
@@ -723,6 +851,9 @@ export function assetsTransferKeepAlive(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsTransferKeepAliveArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -757,6 +888,11 @@ export interface AssetsTransferOwnershipArgs extends Args {
   owner: BlockchainGenericAccount;
 };
 
+const AssetsTransferOwnershipArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  owner: schema.BlockchainGenericAccountSchema,
+});
+
 /**
  * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
  * @param args - The arguments of the transaction.
@@ -769,6 +905,9 @@ export function assetsTransferOwnership(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  AssetsTransferOwnershipArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -800,6 +939,11 @@ export interface BalancesTransferAllArgs extends Args {
   keepAlive: BlockchainGenericBoolean;
 };
 
+const BalancesTransferAllArgsSchema = z.object({
+  dest: schema.BlockchainGenericAccountSchema,
+  keepAlive: schema.BlockchainGenericBooleanSchema,
+});
+
 /**
  * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
  * @param args - The arguments of the transaction.
@@ -812,6 +956,9 @@ export function balancesTransferAll(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  BalancesTransferAllArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -840,6 +987,11 @@ export interface BalancesTransferAllowDeathArgs extends Args {
   value: BlockchainGenericBalance;
 };
 
+const BalancesTransferAllowDeathArgsSchema = z.object({
+  dest: schema.BlockchainGenericAccountSchema,
+  value: schema.BlockchainGenericBalanceSchema,
+});
+
 /**
  * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
  * @param args - The arguments of the transaction.
@@ -852,6 +1004,9 @@ export function balancesTransferAllowDeath(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  BalancesTransferAllowDeathArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -880,6 +1035,11 @@ export interface BalancesTransferKeepAliveArgs extends Args {
   value: BlockchainGenericBalance;
 };
 
+const BalancesTransferKeepAliveArgsSchema = z.object({
+  dest: schema.BlockchainGenericAccountSchema,
+  value: schema.BlockchainGenericBalanceSchema,
+});
+
 /**
  * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
  * @param args - The arguments of the transaction.
@@ -892,6 +1052,9 @@ export function balancesTransferKeepAlive(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  BalancesTransferKeepAliveArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -926,6 +1089,11 @@ export interface NftsBurnItemArgs extends Args {
   item: BlockchainGenericId;
 };
 
+const NftsBurnItemArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  item: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
  * @param args - The arguments of the transaction.
@@ -938,6 +1106,9 @@ export function nftsBurn(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsBurnItemArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -968,6 +1139,10 @@ export interface NftsClearCollectionMetadataArgs extends Args {
   collection: BlockchainGenericId;
 };
 
+const NftsClearCollectionMetadataArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  * @param args - The arguments of the transaction.
@@ -980,6 +1155,9 @@ export function nftsClearCollectionMetadata(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsClearCollectionMetadataArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1014,6 +1192,11 @@ export interface NftsClearItemMetadataArgs extends Args {
   item: BlockchainGenericId;
 };
 
+const NftsClearItemMetadataArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  item: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  * @param args - The arguments of the transaction.
@@ -1026,6 +1209,9 @@ export function nftsClearMetadata(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsClearItemMetadataArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1049,6 +1235,9 @@ export type NftsClearItemMetadataAction = CTAtomicActionGeneric<
 export interface NftsCreateCollectionArgs extends Args {
 };
 
+const NftsCreateCollectionArgsSchema = z.object({
+});
+
 /**
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
@@ -1060,6 +1249,9 @@ export function nftsCreate(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsCreateCollectionArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1094,6 +1286,11 @@ export interface NftsDestroyCollectionArgs extends Args {
   witness: NftWitness;
 };
 
+const NftsDestroyCollectionArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  witness: schema.NftWitnessSchema,
+});
+
 /**
  * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
  * @param args - The arguments of the transaction.
@@ -1106,6 +1303,9 @@ export function nftsDestroy(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsDestroyCollectionArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1140,6 +1340,11 @@ export interface NftsLockItemTransferArgs extends Args {
   item: BlockchainGenericId;
 };
 
+const NftsLockItemTransferArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  item: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
  * @param args - The arguments of the transaction.
@@ -1152,6 +1357,9 @@ export function nftsLockItemTransfer(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsLockItemTransferArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1178,6 +1386,12 @@ export interface NftsMintItemArgs extends Args {
   mintTo: BlockchainGenericAccount;
 };
 
+const NftsMintItemArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  item: schema.BlockchainGenericIdSchema,
+  mintTo: schema.BlockchainGenericAccountSchema,
+});
+
 /**
  * @param args - The arguments of the transaction.
  * @param info - Base transaction information.
@@ -1189,6 +1403,9 @@ export function nftsMint(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsMintItemArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1219,6 +1436,10 @@ export interface NftsAcceptCollectionOwnershipArgs extends Args {
   maybeCollection?: BlockchainGenericId;
 };
 
+const NftsAcceptCollectionOwnershipArgsSchema = z.object({
+  maybeCollection: z.optional(schema.BlockchainGenericIdSchema),
+});
+
 /**
  * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
  * @param args - The arguments of the transaction.
@@ -1231,6 +1452,9 @@ export function nftsSetAcceptOwnership(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsAcceptCollectionOwnershipArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1265,6 +1489,11 @@ export interface NftsSetCollectionMetadataArgs extends Args {
   data: BlockchainGenericText;
 };
 
+const NftsSetCollectionMetadataArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  data: schema.BlockchainGenericTextSchema,
+});
+
 /**
  * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  * @param args - The arguments of the transaction.
@@ -1277,6 +1506,9 @@ export function nftsSetCollectionMetadata(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsSetCollectionMetadataArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1315,6 +1547,12 @@ export interface NftsSetItemMetadataArgs extends Args {
   data: BlockchainGenericText;
 };
 
+const NftsSetItemMetadataArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  item: schema.BlockchainGenericIdSchema,
+  data: schema.BlockchainGenericTextSchema,
+});
+
 /**
  * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  * @param args - The arguments of the transaction.
@@ -1327,6 +1565,9 @@ export function nftsSetMetadata(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsSetItemMetadataArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1365,6 +1606,12 @@ export interface NftsTransferItemArgs extends Args {
   dest: BlockchainGenericAccount;
 };
 
+const NftsTransferItemArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  item: schema.BlockchainGenericIdSchema,
+  dest: schema.BlockchainGenericAccountSchema,
+});
+
 /**
  * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
  * @param args - The arguments of the transaction.
@@ -1377,6 +1624,9 @@ export function nftsTransfer(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsTransferItemArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1408,6 +1658,11 @@ export interface NftsTransferCollectionOwnershipArgs extends Args {
   newOwner: BlockchainGenericAccount;
 };
 
+const NftsTransferCollectionOwnershipArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  newOwner: schema.BlockchainGenericAccountSchema,
+});
+
 /**
  * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
  * @param args - The arguments of the transaction.
@@ -1420,6 +1675,9 @@ export function nftsTransferOwnership(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsTransferCollectionOwnershipArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
@@ -1454,6 +1712,11 @@ export interface NftsUnlockItemTransferArgs extends Args {
   item: BlockchainGenericId;
 };
 
+const NftsUnlockItemTransferArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  item: schema.BlockchainGenericIdSchema,
+});
+
 /**
  * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
  * @param args - The arguments of the transaction.
@@ -1466,6 +1729,9 @@ export function nftsUnlockItemTransfer(
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  // throws error if validation is failed
+  NftsUnlockItemTransferArgsSchema.parse(args);
+
   return defineMethod(
     {
       method: {
