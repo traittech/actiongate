@@ -44,6 +44,11 @@ export type CTAtomicActionGeneric<ActionTypeName extends ActionType, ActionArgs>
 // Common blockchain types
 
 /**
+ * Number presented as plain number or string
+ */
+export type Numberish = number | string;
+
+/**
  * Blockchain account address, represented by SS58 string
  */
 export type BlockchainGenericAccount = string;
@@ -51,12 +56,12 @@ export type BlockchainGenericAccount = string;
 /**
  * Asset Id, Collection Id, Agent Id (u32)
  */
-export type BlockchainGenericId = number;
+export type BlockchainGenericId = Numberish;
 
 /**
  * Amount, Balance (u128)
  */
-export type BlockchainGenericBalance = number;
+export type BlockchainGenericBalance = Numberish;
 
 /**
  * Text or metadata represented by string (Bytes). Limit is defined in `StringLimit` const. 
@@ -69,7 +74,7 @@ export type BlockchainGenericText = string;
 export type BlockchainGenericBoolean = boolean;
 
 export type NftWitness = {
-  itemMetadatas: number;
-  itemConfigs: number;
-  attributes: number;
+  itemMetadatas: Numberish;
+  itemConfigs: Numberish;
+  attributes: Numberish;
 };

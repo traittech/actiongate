@@ -36,7 +36,7 @@ export async function createClearingTransactionAndBroadcast(
     const unsignedAtomics: CTAction[][] = [];
 
     // Build unsigned atomics
-    logger.info(`Building unsigned atomics with payload ${payload}`);
+    logger.info(`Building unsigned atomics with payload:`, JSON.stringify(payload));
     for (const atomic of payload.atomics) {
       const unsignedActions: CTAction[] = [];
 
@@ -88,8 +88,8 @@ export async function createClearingTransactionAndBroadcast(
     logger.debug(broadcast);
 
     return expectedTxHash;
-  } catch (error) {
+  } catch (error: any) {
     logger.error('Error creating and broadcasting clearing transaction:', error);
-    throw new Error(`Failed to create and broadcast clearing transaction: ${error}`);
+    throw new Error(error);
   }
 }
