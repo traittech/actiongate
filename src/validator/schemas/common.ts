@@ -11,17 +11,29 @@ const isAnyNumberInRange = (min: bigint, max: bigint) => isAnyNumberLike.pipe(
     .lte(max, `Value must be fewer or equal to ${max}`)
 );
 
+const u32Schema = isAnyNumberInRange(u32_MIN, u32_MAX);
+
+const u128Schema = isAnyNumberInRange(u128_MIN, u128_MAX);
+
+const booleanSchema = z.boolean();
+
 export const BlockchainGenericAccountSchema = z
   .string()
   .length(ss58_LENGTH, { message: `String must be exactly ${ss58_LENGTH} characters long` })
   .refine((v) => isValidSS58(v), { message: 'String is not valid SS58 encoded address' });
 
-export const BlockchainGenericIdSchema = isAnyNumberInRange(u32_MIN, u32_MAX);
+export const BlockchainGenericIdSchema = u32Schema;
 
-export const BlockchainGenericBalanceSchema = isAnyNumberInRange(u128_MIN, u128_MAX);
+export const BlockchainGenericBalanceSchema = u128Schema;
 
-export const BlockchainGenericBooleanSchema = z.boolean();
+export const BlockchainGenericBooleanSchema = booleanSchema;
 
 export const BlockchainGenericTextSchema = z
   .string()
   .max(text_MAX_LENGTH, { message: `String must be fewer or equal ${text_MAX_LENGTH} characters long` });
+
+export const NftWitnessSchema = z.object({
+  itemMetadatas: u32Schema,
+  itemConfigs: u32Schema,
+  attributes: u32Schema,
+})
