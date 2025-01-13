@@ -55,4 +55,4 @@ export const NftWitnessSchema = z.object({
   itemMetadatas: u32Schema,
   itemConfigs: u32Schema,
   attributes: u32Schema,
-})
+});

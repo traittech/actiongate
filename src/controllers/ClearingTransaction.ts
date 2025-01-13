@@ -5,6 +5,7 @@ import { createClearingTransactionAndBroadcast } from '../functions/clearing-tx-
 import { loadConfig, getPrivateKeyById } from '../functions/config';
 import logger from '../functions/logger';
 import { ClearingTransactionPayload, ClearingTransactionResponse } from '../types/api/clearingTransaction';
+import { ClearingTransactionPayloadSchema } from '../validator/schemas/clearingTransaction';
 
 const config = loadConfig();
 const keyring = new Keyring({ type: 'sr25519' });
@@ -23,8 +24,10 @@ const submitClearingTransaction = async (req: Request, res: Response, next: Next
     const payload: ClearingTransactionPayload = req.body;
 
     // Validate required fields (basic validation)
-    if (!payload.signatory || typeof payload.app_agent_id !== 'number') {
-      logger.error('Missing or invalid required fields in payload');
+    try {
+      ClearingTransactionPayloadSchema.parse(payload);
+    } catch (error) {
+      logger.error('Missing or invalid required fields in payload', error);
       res.status(400).json({
         status: 'failed',
         error_code: 400,
