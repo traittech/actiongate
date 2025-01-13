@@ -59,12 +59,12 @@ export function assetsBurn(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsBurnArgsSchema.parse(args);
+  const validArgs = AssetsBurnArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'burn',
         pallet: 'assets',
       },
@@ -101,12 +101,12 @@ export function assetsCreate(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsCreateArgsSchema.parse(args);
+  const validArgs = AssetsCreateArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'create',
         pallet: 'assets',
       },
@@ -150,12 +150,12 @@ export function assetsDestroyAccounts(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsDestroyAccountsArgsSchema.parse(args);
+  const validArgs = AssetsDestroyAccountsArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'destroyAccounts',
         pallet: 'assets',
       },
@@ -199,12 +199,12 @@ export function assetsDestroyApprovals(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsDestroyApprovalsArgsSchema.parse(args);
+  const validArgs = AssetsDestroyApprovalsArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'destroyApprovals',
         pallet: 'assets',
       },
@@ -248,12 +248,12 @@ export function assetsFinishDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsFinishDestroyArgsSchema.parse(args);
+  const validArgs = AssetsFinishDestroyArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'finishDestroy',
         pallet: 'assets',
       },
@@ -312,12 +312,12 @@ export function assetsForceTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsForceTransferArgsSchema.parse(args);
+  const validArgs = AssetsForceTransferArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'forceTransfer',
         pallet: 'assets',
       },
@@ -366,12 +366,12 @@ export function assetsFreeze(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsFreezeAccountArgsSchema.parse(args);
+  const validArgs = AssetsFreezeAccountArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'freeze',
         pallet: 'assets',
       },
@@ -415,12 +415,12 @@ export function assetsFreezeAsset(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsFreezeAssetArgsSchema.parse(args);
+  const validArgs = AssetsFreezeAssetArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'freezeAsset',
         pallet: 'assets',
       },
@@ -474,12 +474,12 @@ export function assetsMint(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsMintArgsSchema.parse(args);
+  const validArgs = AssetsMintArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'mint',
         pallet: 'assets',
       },
@@ -528,12 +528,12 @@ export function assetsSetMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsSetMetadataArgsSchema.parse(args);
+  const validArgs = AssetsSetMetadataArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'setMetadata',
         pallet: 'assets',
       },
@@ -582,12 +582,12 @@ export function assetsSetMinBalance(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsSetMinBalanceArgsSchema.parse(args);
+  const validArgs = AssetsSetMinBalanceArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'setMinBalance',
         pallet: 'assets',
       },
@@ -631,12 +631,12 @@ export function assetsStartDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsStartDestroyArgsSchema.parse(args);
+  const validArgs = AssetsStartDestroyArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'startDestroy',
         pallet: 'assets',
       },
@@ -685,12 +685,12 @@ export function assetsThaw(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsThawAccountArgsSchema.parse(args);
+  const validArgs = AssetsThawAccountArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'thaw',
         pallet: 'assets',
       },
@@ -734,12 +734,12 @@ export function assetsThawAsset(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsThawAssetArgsSchema.parse(args);
+  const validArgs = AssetsThawAssetArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'thawAsset',
         pallet: 'assets',
       },
@@ -793,12 +793,12 @@ export function assetsTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsTransferArgsSchema.parse(args);
+  const validArgs = AssetsTransferArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'transfer',
         pallet: 'assets',
       },
@@ -852,12 +852,12 @@ export function assetsTransferKeepAlive(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsTransferKeepAliveArgsSchema.parse(args);
+  const validArgs = AssetsTransferKeepAliveArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'transferKeepAlive',
         pallet: 'assets',
       },
@@ -906,12 +906,12 @@ export function assetsTransferOwnership(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsTransferOwnershipArgsSchema.parse(args);
+  const validArgs = AssetsTransferOwnershipArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'transferOwnership',
         pallet: 'assets',
       },
@@ -957,12 +957,12 @@ export function balancesTransferAll(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  BalancesTransferAllArgsSchema.parse(args);
+  const validArgs = BalancesTransferAllArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'transferAll',
         pallet: 'balances',
       },
@@ -1005,12 +1005,12 @@ export function balancesTransferAllowDeath(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  BalancesTransferAllowDeathArgsSchema.parse(args);
+  const validArgs = BalancesTransferAllowDeathArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'transferAllowDeath',
         pallet: 'balances',
       },
@@ -1053,12 +1053,12 @@ export function balancesTransferKeepAlive(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  BalancesTransferKeepAliveArgsSchema.parse(args);
+  const validArgs = BalancesTransferKeepAliveArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'transferKeepAlive',
         pallet: 'balances',
       },
@@ -1107,12 +1107,12 @@ export function nftsBurn(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsBurnItemArgsSchema.parse(args);
+  const validArgs = NftsBurnItemArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'burn',
         pallet: 'nfts',
       },
@@ -1156,12 +1156,12 @@ export function nftsClearCollectionMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsClearCollectionMetadataArgsSchema.parse(args);
+  const validArgs = NftsClearCollectionMetadataArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'clearCollectionMetadata',
         pallet: 'nfts',
       },
@@ -1210,12 +1210,12 @@ export function nftsClearMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsClearItemMetadataArgsSchema.parse(args);
+  const validArgs = NftsClearItemMetadataArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'clearMetadata',
         pallet: 'nfts',
       },
@@ -1250,12 +1250,12 @@ export function nftsCreate(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsCreateCollectionArgsSchema.parse(args);
+  const validArgs = NftsCreateCollectionArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'create',
         pallet: 'nfts',
       },
@@ -1304,12 +1304,12 @@ export function nftsDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsDestroyCollectionArgsSchema.parse(args);
+  const validArgs = NftsDestroyCollectionArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'destroy',
         pallet: 'nfts',
       },
@@ -1358,12 +1358,12 @@ export function nftsLockItemTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsLockItemTransferArgsSchema.parse(args);
+  const validArgs = NftsLockItemTransferArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'lockItemTransfer',
         pallet: 'nfts',
       },
@@ -1404,12 +1404,12 @@ export function nftsMint(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsMintItemArgsSchema.parse(args);
+  const validArgs = NftsMintItemArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'mint',
         pallet: 'nfts',
       },
@@ -1453,12 +1453,12 @@ export function nftsSetAcceptOwnership(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsAcceptCollectionOwnershipArgsSchema.parse(args);
+  const validArgs = NftsAcceptCollectionOwnershipArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'setAcceptOwnership',
         pallet: 'nfts',
       },
@@ -1507,12 +1507,12 @@ export function nftsSetCollectionMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsSetCollectionMetadataArgsSchema.parse(args);
+  const validArgs = NftsSetCollectionMetadataArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'setCollectionMetadata',
         pallet: 'nfts',
       },
@@ -1566,12 +1566,12 @@ export function nftsSetMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsSetItemMetadataArgsSchema.parse(args);
+  const validArgs = NftsSetItemMetadataArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'setMetadata',
         pallet: 'nfts',
       },
@@ -1625,12 +1625,12 @@ export function nftsTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsTransferItemArgsSchema.parse(args);
+  const validArgs = NftsTransferItemArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'transfer',
         pallet: 'nfts',
       },
@@ -1676,12 +1676,12 @@ export function nftsTransferOwnership(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsTransferCollectionOwnershipArgsSchema.parse(args);
+  const validArgs = NftsTransferCollectionOwnershipArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'transferOwnership',
         pallet: 'nfts',
       },
@@ -1730,12 +1730,12 @@ export function nftsUnlockItemTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsUnlockItemTransferArgsSchema.parse(args);
+  const validArgs = NftsUnlockItemTransferArgsSchema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: 'unlockItemTransfer',
         pallet: 'nfts',
       },

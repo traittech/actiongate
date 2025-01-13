@@ -63,12 +63,12 @@ export function {{{functionName}}}(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  {{{argsTypeName}}}Schema.parse(args);
+  const validArgs = {{{argsTypeName}}}Schema.parse(args);
 
   return defineMethod(
     {
       method: {
-        args,
+        args: validArgs,
         name: '{{{methodName}}}',
         pallet: '{{{palletName}}}',
       },
