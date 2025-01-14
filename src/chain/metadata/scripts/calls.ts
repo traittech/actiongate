@@ -104,7 +104,14 @@ function generator(
 
   const { lookup, pallets } = metadata.asLatest;
 
-  const ctAtomicActions: { method: string; actionName: string; actionType: string; }[] = [];
+  const ctAtomicActions: {
+    pallet: string;
+    method: string;
+    function: string;
+    actionName: string;
+    actionType: string;
+    argsTypeName: string;
+  }[] = [];
 
   const modules = pallets
     .reduce<any[]>((acc, pallet) => {
@@ -118,9 +125,11 @@ function generator(
 
       const items = palletCalls
         .reduce<any[]>((acc, { docs, fields, name: methodName }) => {
-          const functionName = `${palletName}${stringPascalCase(methodName)}`;
+          const method = stringCamelCase(methodName);
+          const actionValue = `${palletName}.${method}`;
+          const functionName = `${palletName}${stringPascalCase(method)}`;
 
-          const allowedTuple = allowedFunctions.find(([key, val]) => val === functionName);
+          const allowedTuple = allowedFunctions.find(([key, val]) => val === actionValue);
 
           if (!allowedTuple) return acc;
 
@@ -130,9 +139,12 @@ function generator(
           const argsTypeName = `${actionName}Args`;
 
           ctAtomicActions.push({
-            method: functionName,
+            pallet: palletName,
+            method,
+            function: functionName,
             actionName,
             actionType: actionTypeName,
+            argsTypeName,
           });
 
           const typesInfo = fields.map(({ name, type, typeName }, index) => {

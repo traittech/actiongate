@@ -13,7 +13,6 @@ import type {
   BlockchainGenericBoolean,
   BlockchainGenericId,
   BlockchainGenericText,
-  CTAction,
   CTAtomicActionGeneric,
   NftWitness,
 } from '../types/api/common';
@@ -1792,162 +1791,168 @@ export type CTAtomicAction =
 ;
 
 /**
- * Builds clearing transaction action from atomic action.
- * @param action - Atomic action.
- * @param baseTxInfo - Base transaction information.
- * @param options - Additional options including the registry and metadata RPC.
- * @returns An action in clearing transaction.
+ * Represents an action args
  */
-export function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): CTAction {
-  const { actionType, arguments: args } = action;
+export type ActionArgs = CTAtomicAction['arguments'];
 
+/**
+ * Builds an unsigned transaction based on the provided `ActionType`.
+ *
+ * @param actionType - transaction `ActionType`
+ * @param args - The arguments for the extrinsic function.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ *
+ * @throws If the transaction is unsupported.
+ */
+export function buildUnsignedTxFromActionType(
+  actionType: ActionType,
+  args: ActionArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
   let unsigned: UnsignedTransaction;
 
   // Handle different action types
   switch (actionType) {
     case ActionType.BalancesTransferAllowDeath: {
-      unsigned = balancesTransferAllowDeath(args, baseTxInfo, options);
+      unsigned = balancesTransferAllowDeath(args as BalancesTransferAllowDeathArgs, info, options);
       break;
     }
     case ActionType.BalancesTransferKeepAlive: {
-      unsigned = balancesTransferKeepAlive(args, baseTxInfo, options);
+      unsigned = balancesTransferKeepAlive(args as BalancesTransferKeepAliveArgs, info, options);
       break;
     }
     case ActionType.BalancesTransferAll: {
-      unsigned = balancesTransferAll(args, baseTxInfo, options);
+      unsigned = balancesTransferAll(args as BalancesTransferAllArgs, info, options);
       break;
     }
     case ActionType.AssetsCreate: {
-      unsigned = assetsCreate(args, baseTxInfo, options);
+      unsigned = assetsCreate(args as AssetsCreateArgs, info, options);
       break;
     }
     case ActionType.AssetsStartDestroy: {
-      unsigned = assetsStartDestroy(args, baseTxInfo, options);
+      unsigned = assetsStartDestroy(args as AssetsStartDestroyArgs, info, options);
       break;
     }
     case ActionType.AssetsDestroyAccounts: {
-      unsigned = assetsDestroyAccounts(args, baseTxInfo, options);
+      unsigned = assetsDestroyAccounts(args as AssetsDestroyAccountsArgs, info, options);
       break;
     }
     case ActionType.AssetsDestroyApprovals: {
-      unsigned = assetsDestroyApprovals(args, baseTxInfo, options);
+      unsigned = assetsDestroyApprovals(args as AssetsDestroyApprovalsArgs, info, options);
       break;
     }
     case ActionType.AssetsFinishDestroy: {
-      unsigned = assetsFinishDestroy(args, baseTxInfo, options);
+      unsigned = assetsFinishDestroy(args as AssetsFinishDestroyArgs, info, options);
       break;
     }
     case ActionType.AssetsMint: {
-      unsigned = assetsMint(args, baseTxInfo, options);
+      unsigned = assetsMint(args as AssetsMintArgs, info, options);
       break;
     }
     case ActionType.AssetsBurn: {
-      unsigned = assetsBurn(args, baseTxInfo, options);
+      unsigned = assetsBurn(args as AssetsBurnArgs, info, options);
       break;
     }
     case ActionType.AssetsTransfer: {
-      unsigned = assetsTransfer(args, baseTxInfo, options);
+      unsigned = assetsTransfer(args as AssetsTransferArgs, info, options);
       break;
     }
     case ActionType.AssetsTransferKeepAlive: {
-      unsigned = assetsTransferKeepAlive(args, baseTxInfo, options);
+      unsigned = assetsTransferKeepAlive(args as AssetsTransferKeepAliveArgs, info, options);
       break;
     }
     case ActionType.AssetsForceTransfer: {
-      unsigned = assetsForceTransfer(args, baseTxInfo, options);
+      unsigned = assetsForceTransfer(args as AssetsForceTransferArgs, info, options);
       break;
     }
     case ActionType.AssetsFreezeAccount: {
-      unsigned = assetsFreeze(args, baseTxInfo, options);
+      unsigned = assetsFreeze(args as AssetsFreezeAccountArgs, info, options);
       break;
     }
     case ActionType.AssetsThawAccount: {
-      unsigned = assetsThaw(args, baseTxInfo, options);
+      unsigned = assetsThaw(args as AssetsThawAccountArgs, info, options);
       break;
     }
     case ActionType.AssetsFreezeAsset: {
-      unsigned = assetsFreezeAsset(args, baseTxInfo, options);
+      unsigned = assetsFreezeAsset(args as AssetsFreezeAssetArgs, info, options);
       break;
     }
     case ActionType.AssetsThawAsset: {
-      unsigned = assetsThawAsset(args, baseTxInfo, options);
+      unsigned = assetsThawAsset(args as AssetsThawAssetArgs, info, options);
       break;
     }
     case ActionType.AssetsTransferOwnership: {
-      unsigned = assetsTransferOwnership(args, baseTxInfo, options);
+      unsigned = assetsTransferOwnership(args as AssetsTransferOwnershipArgs, info, options);
       break;
     }
     case ActionType.AssetsSetMetadata: {
-      unsigned = assetsSetMetadata(args, baseTxInfo, options);
+      unsigned = assetsSetMetadata(args as AssetsSetMetadataArgs, info, options);
       break;
     }
     case ActionType.AssetsSetMinBalance: {
-      unsigned = assetsSetMinBalance(args, baseTxInfo, options);
+      unsigned = assetsSetMinBalance(args as AssetsSetMinBalanceArgs, info, options);
       break;
     }
     case ActionType.NftsCreateCollection: {
-      unsigned = nftsCreate(args, baseTxInfo, options);
+      unsigned = nftsCreate(args as NftsCreateCollectionArgs, info, options);
       break;
     }
     case ActionType.NftsDestroyCollection: {
-      unsigned = nftsDestroy(args, baseTxInfo, options);
+      unsigned = nftsDestroy(args as NftsDestroyCollectionArgs, info, options);
       break;
     }
     case ActionType.NftsMintItem: {
-      unsigned = nftsMint(args, baseTxInfo, options);
+      unsigned = nftsMint(args as NftsMintItemArgs, info, options);
       break;
     }
     case ActionType.NftsBurnItem: {
-      unsigned = nftsBurn(args, baseTxInfo, options);
+      unsigned = nftsBurn(args as NftsBurnItemArgs, info, options);
       break;
     }
     case ActionType.NftsTransferItem: {
-      unsigned = nftsTransfer(args, baseTxInfo, options);
+      unsigned = nftsTransfer(args as NftsTransferItemArgs, info, options);
       break;
     }
     case ActionType.NftsLockItemTransfer: {
-      unsigned = nftsLockItemTransfer(args, baseTxInfo, options);
+      unsigned = nftsLockItemTransfer(args as NftsLockItemTransferArgs, info, options);
       break;
     }
     case ActionType.NftsUnlockItemTransfer: {
-      unsigned = nftsUnlockItemTransfer(args, baseTxInfo, options);
+      unsigned = nftsUnlockItemTransfer(args as NftsUnlockItemTransferArgs, info, options);
       break;
     }
     case ActionType.NftsTransferCollectionOwnership: {
-      unsigned = nftsTransferOwnership(args, baseTxInfo, options);
+      unsigned = nftsTransferOwnership(args as NftsTransferCollectionOwnershipArgs, info, options);
       break;
     }
     case ActionType.NftsSetItemMetadata: {
-      unsigned = nftsSetMetadata(args, baseTxInfo, options);
+      unsigned = nftsSetMetadata(args as NftsSetItemMetadataArgs, info, options);
       break;
     }
     case ActionType.NftsClearItemMetadata: {
-      unsigned = nftsClearMetadata(args, baseTxInfo, options);
+      unsigned = nftsClearMetadata(args as NftsClearItemMetadataArgs, info, options);
       break;
     }
     case ActionType.NftsSetCollectionMetadata: {
-      unsigned = nftsSetCollectionMetadata(args, baseTxInfo, options);
+      unsigned = nftsSetCollectionMetadata(args as NftsSetCollectionMetadataArgs, info, options);
       break;
     }
     case ActionType.NftsClearCollectionMetadata: {
-      unsigned = nftsClearCollectionMetadata(args, baseTxInfo, options);
+      unsigned = nftsClearCollectionMetadata(args as NftsClearCollectionMetadataArgs, info, options);
       break;
     }
     case ActionType.NftsAcceptCollectionOwnership: {
-      unsigned = nftsSetAcceptOwnership(args, baseTxInfo, options);
+      unsigned = nftsSetAcceptOwnership(args as NftsAcceptCollectionOwnershipArgs, info, options);
       break;
     }
 
     default: {
-      if (actionType) {
-        throw new Error(`Unsupported action type: ${actionType}`);
-      } else {
-        throw new Error('CT action has no "actionType"');
-      }
+      throw new Error(`Unsupported transaction type: ${actionType}`);
     }
   }
 
-  const actionTxType: CTAction = [action.origin, unsigned.method];
-
-  return actionTxType;
+  return unsigned;
 }

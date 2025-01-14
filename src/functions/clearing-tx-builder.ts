@@ -2,11 +2,10 @@ import { construct } from '@substrate/txwrapper-polkadot';
 
 import { TransactionService } from '../adapter/datagate';
 import { loadConfig } from '../functions/config';
-import { buildCTAction } from '../txwrapper/calls';
 
 import logger from './logger';
 import { signWith } from './signer';
-import { generateTxMetadata, buildUnsignedTransaction } from './tx-helper';
+import { generateTxMetadata, buildUnsignedTransaction, buildCTAction } from './tx-helper';
 
 import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
 import type { CTAction } from '../types/api/common';

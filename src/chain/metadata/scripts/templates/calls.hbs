@@ -13,7 +13,6 @@ import type {
   BlockchainGenericBoolean,
   BlockchainGenericId,
   BlockchainGenericText,
-  CTAction,
   CTAtomicActionGeneric,
   NftWitness,
 } from '../types/api/common';
@@ -98,36 +97,42 @@ export type CTAtomicAction =
 {{/each}};
 
 /**
- * Builds clearing transaction action from atomic action.
- * @param action - Atomic action.
- * @param baseTxInfo - Base transaction information.
- * @param options - Additional options including the registry and metadata RPC.
- * @returns An action in clearing transaction.
+ * Represents an action args
  */
-export function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): CTAction {
-  const { actionType, arguments: args } = action;
+export type ActionArgs = CTAtomicAction['arguments'];
 
+/**
+ * Builds an unsigned transaction based on the provided `ActionType`.
+ *
+ * @param actionType - transaction `ActionType`
+ * @param args - The arguments for the extrinsic function.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ *
+ * @throws If the transaction is unsupported.
+ */
+export function buildUnsignedTxFromActionType(
+  actionType: ActionType,
+  args: ActionArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
   let unsigned: UnsignedTransaction;
 
   // Handle different action types
   switch (actionType) {
   {{#each ctAtomicActions}}
     case ActionType.{{{this.actionName}}}: {
-      unsigned = {{{this.method}}}(args, baseTxInfo, options);
+      unsigned = {{{this.function}}}(args as {{{this.argsTypeName}}}, info, options);
       break;
     }
   {{/each}}
 
     default: {
-      if (actionType) {
-        throw new Error(`Unsupported action type: ${actionType}`);
-      } else {
-        throw new Error('CT action has no "actionType"');
-      }
+      throw new Error(`Unsupported transaction type: ${actionType}`);
     }
   }
 
-  const actionTxType: CTAction = [action.origin, unsigned.method];
-
-  return actionTxType;
+  return unsigned;
 }
