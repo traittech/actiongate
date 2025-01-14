@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { loadConfig, getPrivateKeyById } from '../functions/config';
 import logger from '../functions/logger';
-import { createSignedTransactionAndBroadcast } from '../functions/tx-builder';
+import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
 import { TransactionPayload, TransactionResponse } from '../types/api/transaction';
 
 const config = loadConfig();

@@ -1,7 +1,7 @@
 import { Keyring } from '@polkadot/api';
 import { Request, Response, NextFunction } from 'express';
 
-import { createClearingTransactionAndBroadcast } from '../functions/clearing-tx-builder';
+import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import { loadConfig, getPrivateKeyById } from '../functions/config';
 import logger from '../functions/logger';
 import { ClearingTransactionPayload, ClearingTransactionResponse } from '../types/api/clearingTransaction';

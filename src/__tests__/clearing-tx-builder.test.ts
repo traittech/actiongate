@@ -3,7 +3,7 @@ import * as path from 'path';
 
 import Keyring from '@polkadot/keyring';
 
-import { createClearingTransactionAndBroadcast } from '../functions/clearing-tx-builder';
+import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import logger from '../functions/logger';
 import { ActionType } from '../types/api/actions';
 

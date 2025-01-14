@@ -1,11 +1,11 @@
 import { construct } from '@substrate/txwrapper-polkadot';
 
-import { TransactionService } from '../adapter/datagate';
-import { loadConfig } from '../functions/config';
+import { TransactionService } from '../../adapter/datagate';
+import { loadConfig } from '../config';
 
-import logger from './logger';
-import { signWith } from './signer';
-import { generateTxMetadata, buildUnsignedTransaction } from './tx-helper';
+import logger from '../logger';
+import { signWith } from '../signer';
+import { generateTxMetadata, buildUnsignedTransaction } from '../tx-helper';
 
 import type { KeyringPair } from '@polkadot/keyring/types';
 
