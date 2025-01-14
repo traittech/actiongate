@@ -1,14 +1,8 @@
-import {
-  ClearingTransactionPayload,
-  ClearingTransactionResponse,
-  CTActionOrigin,
-  BalancesTransferKeepAliveArguments,
-  CTAction,
-  CTAtomic,
-  ActionType,
-  NftsMintItemArguments,
-  NftsSetItemMetadataArguments,
-} from '../src/types/api/clearingTransaction';
+import { ActionType } from '../src/types/api/actions';
+
+import type { ClearingTransactionPayload, ClearingTransactionResponse, CTAtomic } from '../src/types/api/clearingTransaction';
+import type { CTActionOrigin } from '../src/types/api/common';
+import type { CTAtomicAction, NftsMintItemArgs, NftsSetItemMetadataArgs } from '../src/txwrapper/calls';
 
 // API endpoint
 const CLEARING_TRANSACTION_ENDPOINT = 'localhost:8080/submit/clearing_transaction';
@@ -36,12 +30,12 @@ const clearingTransactionHeaders = new Headers({
 const actionOneOrigin: CTActionOrigin = {
   AppAgentId: 1000,
 };
-const actionOneArgs: NftsMintItemArguments = {
+const actionOneArgs: NftsMintItemArgs = {
   collection: 1000,
   item: 1,
   mintTo: 'ttrQFvYHrkh9LtUJSBdr9qNk63Rv8pKWDXtUtqhCA3wTBY8EM',
 };
-const actionOne: CTAction = {
+const actionOne: CTAtomicAction = {
   actionType: ActionType.NftsMintItem,
   origin: actionOneOrigin,
   arguments: actionOneArgs,
@@ -51,12 +45,12 @@ const actionOne: CTAction = {
 const actionTwoOrigin: CTActionOrigin = {
   AppAgentAddress: 'ttrQFvYHrGzMthGLMaqY5BT84sK7R6bKyAjih9rmNEXm5TqLd',
 };
-const actionTwoArgs: NftsSetItemMetadataArguments = {
+const actionTwoArgs: NftsSetItemMetadataArgs = {
   collection: 1000,
   item: 1,
   data: 'https://trait-wallet-demo-account.trait.tech/game-a/nft-collection-a-a/nft-token-a-a-c/nft-token-a-a-c.json',
 };
-const actionTwo: CTAction = {
+const actionTwo: CTAtomicAction = {
   actionType: ActionType.NftsSetItemMetadata,
   origin: actionTwoOrigin,
   arguments: actionTwoArgs,

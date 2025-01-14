@@ -18,7 +18,7 @@ const txService = new TransactionService(config.datagate_api.uri);
  * @param pair - The keyring pair to sign with.
  * @param moduleName - The module name of the extrinsic.
  * @param functionName - The function name of the extrinsic.
- * @param params - The parameters for the extrinsic function.
+ * @param args - The arguments for the extrinsic function.
  * @returns The transaction hash.
  *
  * @throws Will throw an error if there is an issue during transaction creation or broadcasting.
@@ -27,7 +27,7 @@ export async function createSignedTransactionAndBroadcast(
   pair: KeyringPair,
   moduleName: string,
   functionName: string,
-  params: any[]
+  args: any
 ): Promise<string> {
   try {
     // Generate metadata, base transaction info, and options
@@ -36,9 +36,9 @@ export async function createSignedTransactionAndBroadcast(
 
     // Build the unsigned transaction
     logger.info(
-      `Building unsigned transaction for module: ${moduleName}, function: ${functionName} with params ${params}`
+      `Building unsigned transaction for module: ${moduleName}, function: ${functionName} with args: ${args}`
     );
-    const unsigned = buildUnsignedTransaction(moduleName, functionName, params, baseTxInfo, options);
+    const unsigned = buildUnsignedTransaction(moduleName, functionName, args, baseTxInfo, options);
 
     // Construct the signing payload from the unsigned transaction
     logger.debug('Constructing signing payload...');

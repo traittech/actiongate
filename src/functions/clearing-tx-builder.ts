@@ -53,7 +53,10 @@ export async function createClearingTransactionAndBroadcast(
     const unsigned = buildUnsignedTransaction(
       'appTransactions',
       'submitClearingTransaction',
-      [payload.app_agent_id, unsignedAtomics],
+      {
+        appAgentId: payload.app_agent_id,
+        atomics: unsignedAtomics
+      },
       baseTxInfo,
       options
     );
