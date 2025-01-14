@@ -22,6 +22,26 @@ import { ActionType } from '../../types/api/actions';
 
 import * as schema from '../../validator/schemas';
 
+export function constructUnsignedTransaction(
+  pallet: string,
+  name: string,
+  args: Args,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name,
+        pallet,
+      },
+      ...info,
+    },
+    options
+  );
+}
+
 /**
  * Arguments required to submit a Clearing transaction.
  */
@@ -50,17 +70,7 @@ export function appTransactionsSubmitClearingTransaction(
   // throws error if validation is failed
   const validArgs = AppTransactionsSubmitClearingTransactionArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'submitClearingTransaction',
-        pallet: 'appTransactions',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('appTransactions', 'submitClearingTransaction', validArgs, info, options);
 }
 
 export type AppTransactionsSubmitClearingTransactionAction = CTAtomicActionGeneric<
@@ -109,17 +119,7 @@ export function assetsBurn(
   // throws error if validation is failed
   const validArgs = AssetsBurnArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'burn',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'burn', validArgs, info, options);
 }
 
 export type AssetsBurnAction = CTAtomicActionGeneric<
@@ -151,17 +151,7 @@ export function assetsCreate(
   // throws error if validation is failed
   const validArgs = AssetsCreateArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'create',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'create', validArgs, info, options);
 }
 
 export type AssetsCreateAction = CTAtomicActionGeneric<
@@ -200,17 +190,7 @@ export function assetsDestroyAccounts(
   // throws error if validation is failed
   const validArgs = AssetsDestroyAccountsArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'destroyAccounts',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'destroyAccounts', validArgs, info, options);
 }
 
 export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<
@@ -249,17 +229,7 @@ export function assetsDestroyApprovals(
   // throws error if validation is failed
   const validArgs = AssetsDestroyApprovalsArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'destroyApprovals',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'destroyApprovals', validArgs, info, options);
 }
 
 export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<
@@ -298,17 +268,7 @@ export function assetsFinishDestroy(
   // throws error if validation is failed
   const validArgs = AssetsFinishDestroyArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'finishDestroy',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'finishDestroy', validArgs, info, options);
 }
 
 export type AssetsFinishDestroyAction = CTAtomicActionGeneric<
@@ -362,17 +322,7 @@ export function assetsForceTransfer(
   // throws error if validation is failed
   const validArgs = AssetsForceTransferArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'forceTransfer',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'forceTransfer', validArgs, info, options);
 }
 
 export type AssetsForceTransferAction = CTAtomicActionGeneric<
@@ -416,17 +366,7 @@ export function assetsFreeze(
   // throws error if validation is failed
   const validArgs = AssetsFreezeAccountArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'freeze',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'freeze', validArgs, info, options);
 }
 
 export type AssetsFreezeAccountAction = CTAtomicActionGeneric<
@@ -465,17 +405,7 @@ export function assetsFreezeAsset(
   // throws error if validation is failed
   const validArgs = AssetsFreezeAssetArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'freezeAsset',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'freezeAsset', validArgs, info, options);
 }
 
 export type AssetsFreezeAssetAction = CTAtomicActionGeneric<
@@ -524,17 +454,7 @@ export function assetsMint(
   // throws error if validation is failed
   const validArgs = AssetsMintArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'mint',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'mint', validArgs, info, options);
 }
 
 export type AssetsMintAction = CTAtomicActionGeneric<
@@ -578,17 +498,7 @@ export function assetsSetMetadata(
   // throws error if validation is failed
   const validArgs = AssetsSetMetadataArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'setMetadata',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'setMetadata', validArgs, info, options);
 }
 
 export type AssetsSetMetadataAction = CTAtomicActionGeneric<
@@ -632,17 +542,7 @@ export function assetsSetMinBalance(
   // throws error if validation is failed
   const validArgs = AssetsSetMinBalanceArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'setMinBalance',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'setMinBalance', validArgs, info, options);
 }
 
 export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<
@@ -681,17 +581,7 @@ export function assetsStartDestroy(
   // throws error if validation is failed
   const validArgs = AssetsStartDestroyArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'startDestroy',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'startDestroy', validArgs, info, options);
 }
 
 export type AssetsStartDestroyAction = CTAtomicActionGeneric<
@@ -735,17 +625,7 @@ export function assetsThaw(
   // throws error if validation is failed
   const validArgs = AssetsThawAccountArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'thaw',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'thaw', validArgs, info, options);
 }
 
 export type AssetsThawAccountAction = CTAtomicActionGeneric<
@@ -784,17 +664,7 @@ export function assetsThawAsset(
   // throws error if validation is failed
   const validArgs = AssetsThawAssetArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'thawAsset',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'thawAsset', validArgs, info, options);
 }
 
 export type AssetsThawAssetAction = CTAtomicActionGeneric<
@@ -843,17 +713,7 @@ export function assetsTransfer(
   // throws error if validation is failed
   const validArgs = AssetsTransferArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'transfer',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'transfer', validArgs, info, options);
 }
 
 export type AssetsTransferAction = CTAtomicActionGeneric<
@@ -902,17 +762,7 @@ export function assetsTransferKeepAlive(
   // throws error if validation is failed
   const validArgs = AssetsTransferKeepAliveArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'transferKeepAlive',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'transferKeepAlive', validArgs, info, options);
 }
 
 export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<
@@ -956,17 +806,7 @@ export function assetsTransferOwnership(
   // throws error if validation is failed
   const validArgs = AssetsTransferOwnershipArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'transferOwnership',
-        pallet: 'assets',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('assets', 'transferOwnership', validArgs, info, options);
 }
 
 export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<
@@ -1007,17 +847,7 @@ export function balancesTransferAll(
   // throws error if validation is failed
   const validArgs = BalancesTransferAllArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'transferAll',
-        pallet: 'balances',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('balances', 'transferAll', validArgs, info, options);
 }
 
 export type BalancesTransferAllAction = CTAtomicActionGeneric<
@@ -1055,17 +885,7 @@ export function balancesTransferAllowDeath(
   // throws error if validation is failed
   const validArgs = BalancesTransferAllowDeathArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'transferAllowDeath',
-        pallet: 'balances',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('balances', 'transferAllowDeath', validArgs, info, options);
 }
 
 export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<
@@ -1103,17 +923,7 @@ export function balancesTransferKeepAlive(
   // throws error if validation is failed
   const validArgs = BalancesTransferKeepAliveArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'transferKeepAlive',
-        pallet: 'balances',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('balances', 'transferKeepAlive', validArgs, info, options);
 }
 
 export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<
@@ -1157,17 +967,7 @@ export function nftsBurn(
   // throws error if validation is failed
   const validArgs = NftsBurnItemArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'burn',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'burn', validArgs, info, options);
 }
 
 export type NftsBurnItemAction = CTAtomicActionGeneric<
@@ -1206,17 +1006,7 @@ export function nftsClearCollectionMetadata(
   // throws error if validation is failed
   const validArgs = NftsClearCollectionMetadataArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'clearCollectionMetadata',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'clearCollectionMetadata', validArgs, info, options);
 }
 
 export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<
@@ -1260,17 +1050,7 @@ export function nftsClearMetadata(
   // throws error if validation is failed
   const validArgs = NftsClearItemMetadataArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'clearMetadata',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'clearMetadata', validArgs, info, options);
 }
 
 export type NftsClearItemMetadataAction = CTAtomicActionGeneric<
@@ -1300,17 +1080,7 @@ export function nftsCreate(
   // throws error if validation is failed
   const validArgs = NftsCreateCollectionArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'create',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'create', validArgs, info, options);
 }
 
 export type NftsCreateCollectionAction = CTAtomicActionGeneric<
@@ -1354,17 +1124,7 @@ export function nftsDestroy(
   // throws error if validation is failed
   const validArgs = NftsDestroyCollectionArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'destroy',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'destroy', validArgs, info, options);
 }
 
 export type NftsDestroyCollectionAction = CTAtomicActionGeneric<
@@ -1408,17 +1168,7 @@ export function nftsLockItemTransfer(
   // throws error if validation is failed
   const validArgs = NftsLockItemTransferArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'lockItemTransfer',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'lockItemTransfer', validArgs, info, options);
 }
 
 export type NftsLockItemTransferAction = CTAtomicActionGeneric<
@@ -1454,17 +1204,7 @@ export function nftsMint(
   // throws error if validation is failed
   const validArgs = NftsMintItemArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'mint',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'mint', validArgs, info, options);
 }
 
 export type NftsMintItemAction = CTAtomicActionGeneric<
@@ -1503,17 +1243,7 @@ export function nftsSetAcceptOwnership(
   // throws error if validation is failed
   const validArgs = NftsAcceptCollectionOwnershipArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'setAcceptOwnership',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'setAcceptOwnership', validArgs, info, options);
 }
 
 export type NftsAcceptCollectionOwnershipAction = CTAtomicActionGeneric<
@@ -1557,17 +1287,7 @@ export function nftsSetCollectionMetadata(
   // throws error if validation is failed
   const validArgs = NftsSetCollectionMetadataArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'setCollectionMetadata',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'setCollectionMetadata', validArgs, info, options);
 }
 
 export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<
@@ -1616,17 +1336,7 @@ export function nftsSetMetadata(
   // throws error if validation is failed
   const validArgs = NftsSetItemMetadataArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'setMetadata',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'setMetadata', validArgs, info, options);
 }
 
 export type NftsSetItemMetadataAction = CTAtomicActionGeneric<
@@ -1675,17 +1385,7 @@ export function nftsTransfer(
   // throws error if validation is failed
   const validArgs = NftsTransferItemArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'transfer',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'transfer', validArgs, info, options);
 }
 
 export type NftsTransferItemAction = CTAtomicActionGeneric<
@@ -1726,17 +1426,7 @@ export function nftsTransferOwnership(
   // throws error if validation is failed
   const validArgs = NftsTransferCollectionOwnershipArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'transferOwnership',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'transferOwnership', validArgs, info, options);
 }
 
 export type NftsTransferCollectionOwnershipAction = CTAtomicActionGeneric<
@@ -1780,17 +1470,7 @@ export function nftsUnlockItemTransfer(
   // throws error if validation is failed
   const validArgs = NftsUnlockItemTransferArgsSchema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: 'unlockItemTransfer',
-        pallet: 'nfts',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('nfts', 'unlockItemTransfer', validArgs, info, options);
 }
 
 export type NftsUnlockItemTransferAction = CTAtomicActionGeneric<

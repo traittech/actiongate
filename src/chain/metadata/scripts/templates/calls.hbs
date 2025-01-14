@@ -22,6 +22,26 @@ import { ActionType } from '../../types/api/actions';
 
 import * as schema from '../../validator/schemas';
 
+export function constructUnsignedTransaction(
+  pallet: string,
+  name: string,
+  args: Args,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  return defineMethod(
+    {
+      method: {
+        args,
+        name,
+        pallet,
+      },
+      ...info,
+    },
+    options
+  );
+}
+
 {{#each modules}}
 
 {{#each items}}
@@ -65,17 +85,7 @@ export function {{{functionName}}}(
   // throws error if validation is failed
   const validArgs = {{{argsTypeName}}}Schema.parse(args);
 
-  return defineMethod(
-    {
-      method: {
-        args: validArgs,
-        name: '{{{methodName}}}',
-        pallet: '{{{palletName}}}',
-      },
-      ...info,
-    },
-    options
-  );
+  return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', validArgs, info, options);
 }
 
 export type {{{actionTypeName}}} = CTAtomicActionGeneric<

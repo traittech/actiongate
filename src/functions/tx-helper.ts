@@ -22,7 +22,7 @@ const txService = new TransactionService(config.datagate_api.uri);
  * @param moduleName - The name of the module.
  * @param methodName - The name of the method within the module.
  * @param args - The arguments for the extrinsic function.
- * @param info - Base transaction information.
+ * @param baseTxInfo - Base transaction information.
  * @param options - Additional options with metadata.
  * @returns An unsigned transaction.
  *
@@ -32,12 +32,12 @@ export function buildUnsignedTransaction(
   moduleName: string,
   methodName: string,
   args: ActionArgs,
-  info: BaseTxInfo,
+  baseTxInfo: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // create action type from module and method
   const actionType = `${moduleName}.${methodName}` as ActionType;
-  const unsigned = buildUnsignedTxFromActionType(actionType, args, info, options);
+  const unsigned = buildUnsignedTxFromActionType(actionType, args, baseTxInfo, options);
 
   return unsigned;
 }
