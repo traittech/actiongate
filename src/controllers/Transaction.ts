@@ -4,7 +4,8 @@ import { Request, Response, NextFunction } from 'express';
 import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
 import { loadConfig, getPrivateKeyById } from '../functions/config';
 import logger from '../functions/logger';
-import { TransactionPayload, TransactionResponse } from '../types/api/transaction';
+
+import type { TransactionPayload, TransactionResponse } from '../types/api/transaction';
 
 const config = loadConfig();
 const keyring = new Keyring({ type: 'sr25519' });

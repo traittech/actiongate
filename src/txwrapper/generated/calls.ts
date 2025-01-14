@@ -5,7 +5,7 @@ import { z } from 'zod';
 
 import { defineMethod } from '@substrate/txwrapper-core';
 
-import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
+import type { Args, BaseTxInfo, OptionsWithMeta, TxInfo, TxMethod, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 import type {
   BlockchainGenericAccount,
@@ -16,7 +16,7 @@ import type {
   CTAtomicActionGeneric,
   CTAtomicActions,
   NftWitness,
-} from '../../types/api/common';
+} from '../../types/api';
 
 import { ActionType } from '../../types/api/actions';
 
@@ -26,20 +26,13 @@ export function constructUnsignedTransaction(
   pallet: string,
   name: string,
   args: Args,
-  info: BaseTxInfo,
+  baseTxInfo: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
-  return defineMethod(
-    {
-      method: {
-        args,
-        name,
-        pallet,
-      },
-      ...info,
-    },
-    options
-  );
+  const txMethod: TxMethod = { args, name, pallet };
+  const txInfo: TxInfo = { method: txMethod, ...baseTxInfo };
+
+  return defineMethod(txInfo, options);
 }
 
 /**

@@ -9,7 +9,7 @@ import { loadConfig } from './config';
 import logger from './logger';
 
 import type { ActionArgs, CTAtomicAction } from '../txwrapper';
-import type { CTAction } from '../types/api/common';
+import type { CTAction } from '../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 

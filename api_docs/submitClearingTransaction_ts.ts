@@ -5,8 +5,8 @@ import type {
   ClearingTransactionPayload,
   ClearingTransactionResponse,
   CTAtomic,
-} from '../src/types/api/clearingTransaction';
-import type { CTActionOrigin } from '../src/types/api/common';
+  CTActionOrigin,
+} from '../src/types/api';
 
 // API endpoint
 const CLEARING_TRANSACTION_ENDPOINT = 'localhost:8080/submit/clearing_transaction';

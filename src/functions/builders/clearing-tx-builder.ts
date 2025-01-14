@@ -6,8 +6,7 @@ import logger from '../logger';
 import { signWith } from '../signer';
 import { generateTxMetadata, buildUnsignedTransaction, buildCTAction } from '../tx-helper';
 
-import type { ClearingTransactionPayload } from '../../types/api/clearingTransaction';
-import type { CTAction, CTAtomicActions } from '../../types/api/common';
+import type { CTAction, CTAtomicActions, ClearingTransactionPayload } from '../../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
 
 const config = loadConfig();

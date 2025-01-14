@@ -1,4 +1,4 @@
-import { string, z } from 'zod';
+import { z } from 'zod';
 
 import { ActionType } from '../../types/api/actions';
 
