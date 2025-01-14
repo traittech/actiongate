@@ -162,10 +162,10 @@ function generator(
             let isOptional = false;
             let type = typeStr;
 
-            const regex = /(.*?)?<(.*?)>/g;
+            const regex = /^(.*?)?<(.*?)>$/g;
             const matches = regex.exec(typeStr);
 
-            if (matches) {
+            if (matches && ['Compact', 'Option'].includes(matches[1])) {
               isOptional = matches[1] === 'Option';
               type = matches[2] ?? type;
             }
@@ -230,7 +230,7 @@ function generator(
 (async function main() {
   const metadataHex = metadataJson.latest as any;
 
-  const dest = path.join(process.cwd(), './src/txwrapper/calls.ts');
+  const dest = path.join(process.cwd(), './src/txwrapper/generated/calls.ts');
 
   const templateGenerator = () => generator(metadataHex, Object.entries(ActionType));
 

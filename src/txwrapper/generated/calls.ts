@@ -14,12 +14,61 @@ import type {
   BlockchainGenericId,
   BlockchainGenericText,
   CTAtomicActionGeneric,
+  CTAtomicActions,
   NftWitness,
-} from '../types/api/common';
+} from '../../types/api/common';
 
-import { ActionType } from '../types/api/actions';
+import { ActionType } from '../../types/api/actions';
 
-import * as schema from '../validator/schemas/common';
+import * as schema from '../../validator/schemas';
+
+/**
+ * Arguments required to submit a Clearing transaction.
+ */
+export interface AppTransactionsSubmitClearingTransactionArgs extends Args {
+  appAgentId: BlockchainGenericId;
+  atomics: CTAtomicActions;
+};
+
+const AppTransactionsSubmitClearingTransactionArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  atomics: schema.CTAtomicActionsSchema,
+});
+
+/**
+ * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
+ * @param args - The arguments of the transaction.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ */
+export function appTransactionsSubmitClearingTransaction(
+  args: AppTransactionsSubmitClearingTransactionArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  const validArgs = AppTransactionsSubmitClearingTransactionArgsSchema.parse(args);
+
+  return defineMethod(
+    {
+      method: {
+        args: validArgs,
+        name: 'submitClearingTransaction',
+        pallet: 'appTransactions',
+      },
+      ...info,
+    },
+    options
+  );
+}
+
+export type AppTransactionsSubmitClearingTransactionAction = CTAtomicActionGeneric<
+  ActionType.AppTransactionsSubmitClearingTransaction,
+  AppTransactionsSubmitClearingTransactionArgs
+>;
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to reduce the balance of `who` by as much as possible up to `amount` assets of `id`.
@@ -1788,6 +1837,7 @@ export type CTAtomicAction =
   | NftsSetCollectionMetadataAction
   | NftsClearCollectionMetadataAction
   | NftsAcceptCollectionOwnershipAction
+  | AppTransactionsSubmitClearingTransactionAction
 ;
 
 /**
@@ -1946,6 +1996,10 @@ export function buildUnsignedTxFromActionType(
     }
     case ActionType.NftsAcceptCollectionOwnership: {
       unsigned = nftsSetAcceptOwnership(args as NftsAcceptCollectionOwnershipArgs, info, options);
+      break;
+    }
+    case ActionType.AppTransactionsSubmitClearingTransaction: {
+      unsigned = appTransactionsSubmitClearingTransaction(args as AppTransactionsSubmitClearingTransactionArgs, info, options);
       break;
     }
 

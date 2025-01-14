@@ -8,7 +8,7 @@ import { signWith } from '../signer';
 import { generateTxMetadata, buildUnsignedTransaction, buildCTAction } from '../tx-helper';
 
 import type { ClearingTransactionPayload } from '../../types/api/clearingTransaction';
-import type { CTAction } from '../../types/api/common';
+import type { CTAction, CTAtomicActions } from '../../types/api/common';
 import type { KeyringPair } from '@polkadot/keyring/types';
 
 const config = loadConfig();
@@ -32,7 +32,7 @@ export async function createClearingTransactionAndBroadcast(
     logger.debug('Generating transaction metadata...');
     const { registry, baseTxInfo, options } = await generateTxMetadata(pair);
 
-    const unsignedAtomics: CTAction[][] = [];
+    const unsignedAtomics: CTAtomicActions = [];
 
     // Build unsigned atomics
     logger.info(`Building unsigned atomics with payload:`, JSON.stringify(payload));

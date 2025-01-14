@@ -24,6 +24,11 @@ export type CTAction = [
   { callIndex?: string; args?: string } | string,
 ];
 
+/**
+ * A nested array of actions (Vec<Vec<Action>> in rust).
+ */
+export type CTAtomicActions = CTAction[][];
+
 export type CTAtomicActionGeneric<ActionTypeName extends ActionType, ActionArgs> = {
   /**
    * The type of action to be performed

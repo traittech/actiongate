@@ -7,9 +7,9 @@ import { loadConfig } from './config';
 import logger from './logger';
 
 import { ActionType } from '../types/api/actions';
-import { buildUnsignedTxFromActionType } from '../txwrapper/calls';
+import { buildUnsignedTxFromActionType } from '../txwrapper';
 
-import type { ActionArgs, CTAtomicAction } from '../txwrapper/calls';
+import type { ActionArgs, CTAtomicAction } from '../txwrapper';
 import type { CTAction } from '../types/api/common';
 
 import type { KeyringPair } from '@polkadot/keyring/types';

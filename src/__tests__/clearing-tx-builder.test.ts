@@ -10,7 +10,7 @@ import { ActionType } from '../types/api/actions';
 import { u32_MIN, u32_MAX, u128_MAX, ss58_LENGTH, text_MAX_LENGTH } from '../validator/consts';
 
 import type { ZodIssue } from 'zod';
-import type { CTAtomicAction } from '../txwrapper/calls';
+import type { CTAtomicAction } from '../txwrapper';
 import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
 
 // Mock config

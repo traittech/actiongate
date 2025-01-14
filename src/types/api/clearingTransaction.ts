@@ -1,4 +1,4 @@
-import type { CTAtomicAction } from '../../txwrapper/calls';
+import type { CTAtomicAction } from '../../txwrapper';
 
 /**
  * Represents an atomic operation.

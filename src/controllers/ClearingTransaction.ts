@@ -5,7 +5,7 @@ import { createClearingTransactionAndBroadcast } from '../functions/builders/cle
 import { loadConfig, getPrivateKeyById } from '../functions/config';
 import logger from '../functions/logger';
 import { ClearingTransactionPayload, ClearingTransactionResponse } from '../types/api/clearingTransaction';
-import { ClearingTransactionPayloadSchema } from '../validator/schemas/clearingTransaction';
+import { ClearingTransactionPayloadSchema } from '../validator/schemas';
 
 const config = loadConfig();
 const keyring = new Keyring({ type: 'sr25519' });

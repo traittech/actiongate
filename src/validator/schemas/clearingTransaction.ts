@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { string, z } from "zod";
 
 import { ActionType } from '../../types/api/actions';
 
@@ -19,11 +19,24 @@ export const CTActionOriginSchema = z.union([
   z.object({ NamedAddressName: z.any() }),
 ]);
 
+export const CTActionSchema = z.tuple([
+  CTActionOriginSchema,
+  z.union([
+    z.object({
+      callIndex: z.string(),
+      args: z.string(),
+    }).partial(),
+    z.string(),
+  ]),
+]);
+
 export const CTAtomicActionSchema = z.object({
   actionType: ActionTypeSchema,
   origin: CTActionOriginSchema,
   arguments: ActionArgsSchema,
 });
+
+export const CTAtomicActionsSchema = z.array(z.array(CTActionSchema));
 
 export const CTAtomicSchema = z.object({
   actions: z.array(CTAtomicActionSchema),

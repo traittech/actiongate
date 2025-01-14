@@ -14,12 +14,13 @@ import type {
   BlockchainGenericId,
   BlockchainGenericText,
   CTAtomicActionGeneric,
+  CTAtomicActions,
   NftWitness,
-} from '../types/api/common';
+} from '../../types/api/common';
 
-import { ActionType } from '../types/api/actions';
+import { ActionType } from '../../types/api/actions';
 
-import * as schema from '../validator/schemas/common';
+import * as schema from '../../validator/schemas';
 
 {{#each modules}}
 
