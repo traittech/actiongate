@@ -6,6 +6,7 @@ import logger from '../logger';
 import { signWith } from '../signer';
 import { generateTxMetadata, buildUnsignedTransaction } from '../tx-helper';
 
+import type { ActionArgs } from '../../txwrapper';
 import type { KeyringPair } from '@polkadot/keyring/types';
 
 const config = loadConfig();
@@ -26,7 +27,7 @@ export async function createSignedTransactionAndBroadcast(
   pair: KeyringPair,
   moduleName: string,
   functionName: string,
-  args: any
+  args: ActionArgs
 ): Promise<string> {
   try {
     // Generate metadata, base transaction info, and options

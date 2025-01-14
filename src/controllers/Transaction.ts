@@ -23,7 +23,7 @@ const submitTransaction = async (req: Request, res: Response, next: NextFunction
     const payload: TransactionPayload = req.body;
 
     // Validate required fields (basic validation)
-    if (!payload.signatory || !payload.module_name || !payload.function_name || !Array.isArray(payload.arguments)) {
+    if (!payload.signatory || !payload.module_name || !payload.function_name || !payload.arguments) {
       logger.error('Missing required fields in payload');
       res.status(400).json({
         status: 'failed',

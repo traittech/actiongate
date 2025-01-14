@@ -1,3 +1,5 @@
+import type { Args } from '@substrate/txwrapper-core';
+
 /**
  * Payload for a transaction.
  */
@@ -20,7 +22,7 @@ export interface TransactionPayload {
   /**
    * The arguments to be passed to the function.
    */
-  arguments: any[];
+  arguments: Args;
 }
 
 /**
