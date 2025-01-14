@@ -8,8 +8,8 @@ import { stringCamelCase, stringPascalCase } from '@polkadot/util';
 import Handlebars from 'handlebars';
 
 import { ActionType } from '../../../types/api/actions';
-import { BlockchainOverridesMap } from '../overrides';
 import metadataJson from '../generated/latest.json';
+import { BlockchainOverridesMap } from '../overrides';
 
 import type { Vec, Text } from '@polkadot/types';
 

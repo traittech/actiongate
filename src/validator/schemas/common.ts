@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 import { isValidSS58 } from '../checks';
 import { u32_MIN, u32_MAX, u128_MIN, u128_MAX, ss58_LENGTH, text_MAX_LENGTH } from '../consts';
@@ -9,17 +9,19 @@ import { u32_MIN, u32_MAX, u128_MIN, u128_MAX, ss58_LENGTH, text_MAX_LENGTH } fr
 const isNumberish = z.union([z.string(), z.number()]);
 
 /**
- * Utility for creating a number validation range
- * @param min 
- * @param max 
- * @returns Number as string to prevent overflow
+ * Utility for creating a number validation range: [`min`; `max`]
+ * @param min min bigint value
+ * @param max max bigint value
+ * @returns Number presented as string - to prevent overflow
  */
-const isNumberishInRange = (min: bigint, max: bigint) => isNumberish.pipe(
-  z.coerce.bigint()
-    .gte(min, `Value must be greater or equal to ${min}`)
-    .lte(max, `Value must be fewer or equal to ${max}`)
-    .transform((v) => v.toString())
-);
+const isNumberishInRange = (min: bigint, max: bigint) =>
+  isNumberish.pipe(
+    z.coerce
+      .bigint()
+      .gte(min, `Value must be greater or equal to ${min}`)
+      .lte(max, `Value must be fewer or equal to ${max}`)
+      .transform((v) => v.toString())
+  );
 
 /**
  * `u32` number validation schema

@@ -6,12 +6,11 @@ import Keyring from '@polkadot/keyring';
 import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import logger from '../functions/logger';
 import { ActionType } from '../types/api/actions';
-
 import { u32_MIN, u32_MAX, u128_MAX, ss58_LENGTH, text_MAX_LENGTH } from '../validator/consts';
 
-import type { ZodIssue } from 'zod';
 import type { CTAtomicAction } from '../txwrapper';
 import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
+import type { ZodIssue } from 'zod';
 
 // Mock config
 jest.mock('../functions/config', () => ({
@@ -272,7 +271,7 @@ describe('Clearing Transaction Builder', () => {
       try {
         await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
       } catch (error) {
-        const errors = JSON.parse(((error as any).message)) as ZodIssue[];
+        const errors = JSON.parse((error as any).message) as ZodIssue[];
         const collectionError = errors.find((e) => e.path[0] === 'collection');
         const itemError = errors.find((e) => e.path[0] === 'item');
 
@@ -304,7 +303,7 @@ describe('Clearing Transaction Builder', () => {
       try {
         await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
       } catch (error) {
-        const errors = JSON.parse(((error as any).message)) as ZodIssue[];
+        const errors = JSON.parse((error as any).message) as ZodIssue[];
         const destErrors = errors.filter((e) => e.path[0] === 'dest');
         const valueErrors = errors.filter((e) => e.path[0] === 'value');
 
@@ -325,7 +324,7 @@ describe('Clearing Transaction Builder', () => {
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   dest: aliceAddress.slice(0, -1).concat('z'), // invalid encoded ss58
-                  keepAlive: true
+                  keepAlive: true,
                 },
               } as CTAtomicAction,
             ],
@@ -336,7 +335,7 @@ describe('Clearing Transaction Builder', () => {
       try {
         await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
       } catch (error) {
-        const errors = JSON.parse(((error as any).message)) as ZodIssue[];
+        const errors = JSON.parse((error as any).message) as ZodIssue[];
         const destErrors = errors.filter((e) => e.path[0] === 'dest');
 
         expect(destErrors[0]?.message).toEqual(`String is not valid SS58 encoded address`);
@@ -366,7 +365,7 @@ describe('Clearing Transaction Builder', () => {
       try {
         await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
       } catch (error) {
-        const errors = JSON.parse(((error as any).message)) as ZodIssue[];
+        const errors = JSON.parse((error as any).message) as ZodIssue[];
         const dataErrors = errors.filter((e) => e.path[0] === 'data');
 
         expect(dataErrors[0]?.message).toEqual(`String must be fewer or equal ${text_MAX_LENGTH} characters long`);

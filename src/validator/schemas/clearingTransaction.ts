@@ -1,4 +1,4 @@
-import { string, z } from "zod";
+import { string, z } from 'zod';
 
 import { ActionType } from '../../types/api/actions';
 
@@ -22,10 +22,12 @@ export const CTActionOriginSchema = z.union([
 export const CTActionSchema = z.tuple([
   CTActionOriginSchema,
   z.union([
-    z.object({
-      callIndex: z.string(),
-      args: z.string(),
-    }).partial(),
+    z
+      .object({
+        callIndex: z.string(),
+        args: z.string(),
+      })
+      .partial(),
     z.string(),
   ]),
 ]);
@@ -46,4 +48,4 @@ export const ClearingTransactionPayloadSchema = z.object({
   signatory: SignatorySchema,
   app_agent_id: AppAgentIdSchema,
   atomics: z.array(CTAtomicSchema),
-})
+});

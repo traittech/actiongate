@@ -2,7 +2,6 @@ import { construct } from '@substrate/txwrapper-polkadot';
 
 import { TransactionService } from '../../adapter/datagate';
 import { loadConfig } from '../config';
-
 import logger from '../logger';
 import { signWith } from '../signer';
 import { generateTxMetadata, buildUnsignedTransaction, buildCTAction } from '../tx-helper';
@@ -54,7 +53,7 @@ export async function createClearingTransactionAndBroadcast(
       'submitClearingTransaction',
       {
         appAgentId: payload.app_agent_id,
-        atomics: unsignedAtomics
+        atomics: unsignedAtomics,
       },
       baseTxInfo,
       options

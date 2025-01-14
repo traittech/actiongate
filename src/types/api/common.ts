@@ -69,7 +69,7 @@ export type BlockchainGenericId = Numberish;
 export type BlockchainGenericBalance = Numberish;
 
 /**
- * Text or metadata represented by string (Bytes). Limit is defined in `StringLimit` const. 
+ * Text or metadata represented by string (Bytes). Limit is defined in `StringLimit` const.
  */
 export type BlockchainGenericText = string;
 

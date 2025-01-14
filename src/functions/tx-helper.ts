@@ -1,17 +1,15 @@
 import { deriveAddress, getRegistry, PolkadotSS58Format } from '@substrate/txwrapper-polkadot';
 
 import { TransactionService } from '../adapter/datagate';
+import { buildUnsignedTxFromActionType } from '../txwrapper';
+import { ActionType } from '../types/api/actions';
 import { TxMetadata } from '../types/tx';
 
 import { loadConfig } from './config';
 import logger from './logger';
 
-import { ActionType } from '../types/api/actions';
-import { buildUnsignedTxFromActionType } from '../txwrapper';
-
 import type { ActionArgs, CTAtomicAction } from '../txwrapper';
 import type { CTAction } from '../types/api/common';
-
 import type { KeyringPair } from '@polkadot/keyring/types';
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
@@ -52,9 +50,7 @@ export function buildUnsignedTransaction(
  * @returns An action in clearing transaction.
  */
 export function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): CTAction {
-  const { actionType, arguments: args } = action;
-
-  const unsigned = buildUnsignedTxFromActionType(actionType, args, baseTxInfo, options);
+  const unsigned = buildUnsignedTxFromActionType(action.actionType, action.arguments, baseTxInfo, options);
   const ctAction: CTAction = [action.origin, unsigned.method];
 
   return ctAction;
