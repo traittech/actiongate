@@ -104,12 +104,7 @@ function generator(
 
   const { lookup, pallets } = metadata.asLatest;
 
-  const ctAtomicActions: {
-    pallet: string;
-    method: string;
-    function: string;
-    actionName: string;
-  }[] = [];
+  const ctAtomicActions: Array<{ function: string; actionName: string; }> = [];
 
   const modules = pallets
     .reduce<any[]>((acc, pallet) => {
@@ -124,22 +119,23 @@ function generator(
       const items = palletCalls
         .reduce<any[]>((acc, { docs, fields, name: methodName }) => {
           const method = stringCamelCase(methodName);
-          const actionValue = `${palletName}.${method}`;
           const functionName = `${palletName}${stringPascalCase(method)}`;
+          const actionValue = `${palletName}.${method}`;
+
+          let actionName = stringPascalCase(functionName);
 
           const allowedTuple = allowedFunctions.find(([key, val]) => val === actionValue);
 
-          if (!allowedTuple) return acc;
+          if (!allowedTuple) {
+            return acc;
+          } else {
+            actionName = allowedTuple[0];
 
-          const [actionName] = allowedTuple;
-          const name = stringCamelCase(methodName);
-
-          ctAtomicActions.push({
-            pallet: palletName,
-            method,
-            function: functionName,
-            actionName,
-          });
+            ctAtomicActions.push({
+              function: functionName,
+              actionName,
+            });
+          }
 
           const typesInfo = fields.map(({ name, type, typeName }, index) => {
             const typeDef = registry.lookup.getTypeDef(type);
@@ -184,11 +180,11 @@ function generator(
             documentation,
             functionName,
             palletName,
-            methodName: name,
+            methodName: method,
             actionName,
             params,
             // for ordering
-            name,
+            name: method,
           });
 
           return acc;

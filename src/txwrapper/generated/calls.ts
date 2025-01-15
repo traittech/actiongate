@@ -50,10 +50,10 @@ const AppTransactionsSubmitClearingTransactionArgsSchema = z.object({
 
 /**
  * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AppTransactionsSubmitClearingTransactionArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function appTransactionsSubmitClearingTransaction(
   args: AppTransactionsSubmitClearingTransactionArgs,
@@ -99,10 +99,10 @@ const AssetsBurnArgsSchema = z.object({
 
 /**
  * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsBurnArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsBurn(
   args: AssetsBurnArgs,
@@ -131,10 +131,10 @@ const AssetsCreateArgsSchema = z.object({
 });
 
 /**
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsCreateArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsCreate(
   args: AssetsCreateArgs,
@@ -170,10 +170,10 @@ const AssetsDestroyAccountsArgsSchema = z.object({
 
 /**
  * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsDestroyAccountsArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsDestroyAccounts(
   args: AssetsDestroyAccountsArgs,
@@ -209,10 +209,10 @@ const AssetsDestroyApprovalsArgsSchema = z.object({
 
 /**
  * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsDestroyApprovalsArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsDestroyApprovals(
   args: AssetsDestroyApprovalsArgs,
@@ -248,10 +248,10 @@ const AssetsFinishDestroyArgsSchema = z.object({
 
 /**
  * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsFinishDestroyArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsFinishDestroy(
   args: AssetsFinishDestroyArgs,
@@ -302,10 +302,10 @@ const AssetsForceTransferArgsSchema = z.object({
 
 /**
  * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsForceTransferArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsForceTransfer(
   args: AssetsForceTransferArgs,
@@ -346,10 +346,10 @@ const AssetsFreezeAccountArgsSchema = z.object({
 
 /**
  * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsFreezeAccountArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsFreeze(
   args: AssetsFreezeAccountArgs,
@@ -385,10 +385,10 @@ const AssetsFreezeAssetArgsSchema = z.object({
 
 /**
  * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsFreezeAssetArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsFreezeAsset(
   args: AssetsFreezeAssetArgs,
@@ -434,10 +434,10 @@ const AssetsMintArgsSchema = z.object({
 
 /**
  * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsMintArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsMint(
   args: AssetsMintArgs,
@@ -478,10 +478,10 @@ const AssetsSetMetadataArgsSchema = z.object({
 
 /**
  * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsSetMetadataArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsSetMetadata(
   args: AssetsSetMetadataArgs,
@@ -522,10 +522,10 @@ const AssetsSetMinBalanceArgsSchema = z.object({
 
 /**
  * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsSetMinBalanceArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsSetMinBalance(
   args: AssetsSetMinBalanceArgs,
@@ -561,10 +561,10 @@ const AssetsStartDestroyArgsSchema = z.object({
 
 /**
  * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsStartDestroyArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsStartDestroy(
   args: AssetsStartDestroyArgs,
@@ -605,10 +605,10 @@ const AssetsThawAccountArgsSchema = z.object({
 
 /**
  * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsThawAccountArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsThaw(
   args: AssetsThawAccountArgs,
@@ -644,10 +644,10 @@ const AssetsThawAssetArgsSchema = z.object({
 
 /**
  * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsThawAssetArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsThawAsset(
   args: AssetsThawAssetArgs,
@@ -693,10 +693,10 @@ const AssetsTransferArgsSchema = z.object({
 
 /**
  * Move some assets from the sender account to another. Origin must be Signed.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsTransferArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsTransfer(
   args: AssetsTransferArgs,
@@ -742,10 +742,10 @@ const AssetsTransferKeepAliveArgsSchema = z.object({
 
 /**
  * Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsTransferKeepAliveArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsTransferKeepAlive(
   args: AssetsTransferKeepAliveArgs,
@@ -786,10 +786,10 @@ const AssetsTransferOwnershipArgsSchema = z.object({
 
 /**
  * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link AssetsTransferOwnershipArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function assetsTransferOwnership(
   args: AssetsTransferOwnershipArgs,
@@ -827,10 +827,10 @@ const BalancesTransferAllArgsSchema = z.object({
 
 /**
  * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link BalancesTransferAllArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function balancesTransferAll(
   args: BalancesTransferAllArgs,
@@ -865,10 +865,10 @@ const BalancesTransferAllowDeathArgsSchema = z.object({
 
 /**
  * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link BalancesTransferAllowDeathArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function balancesTransferAllowDeath(
   args: BalancesTransferAllowDeathArgs,
@@ -903,10 +903,10 @@ const BalancesTransferKeepAliveArgsSchema = z.object({
 
 /**
  * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link BalancesTransferKeepAliveArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function balancesTransferKeepAlive(
   args: BalancesTransferKeepAliveArgs,
@@ -947,10 +947,10 @@ const NftsBurnItemArgsSchema = z.object({
 
 /**
  * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsBurnItemArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsBurn(
   args: NftsBurnItemArgs,
@@ -986,10 +986,10 @@ const NftsClearCollectionMetadataArgsSchema = z.object({
 
 /**
  * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsClearCollectionMetadataArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsClearCollectionMetadata(
   args: NftsClearCollectionMetadataArgs,
@@ -1030,10 +1030,10 @@ const NftsClearItemMetadataArgsSchema = z.object({
 
 /**
  * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsClearItemMetadataArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsClearMetadata(
   args: NftsClearItemMetadataArgs,
@@ -1060,10 +1060,10 @@ const NftsCreateCollectionArgsSchema = z.object({
 });
 
 /**
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsCreateCollectionArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsCreate(
   args: NftsCreateCollectionArgs,
@@ -1104,10 +1104,10 @@ const NftsDestroyCollectionArgsSchema = z.object({
 
 /**
  * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsDestroyCollectionArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsDestroy(
   args: NftsDestroyCollectionArgs,
@@ -1148,10 +1148,10 @@ const NftsLockItemTransferArgsSchema = z.object({
 
 /**
  * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsLockItemTransferArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsLockItemTransfer(
   args: NftsLockItemTransferArgs,
@@ -1184,10 +1184,10 @@ const NftsMintItemArgsSchema = z.object({
 });
 
 /**
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsMintItemArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsMint(
   args: NftsMintItemArgs,
@@ -1223,10 +1223,10 @@ const NftsAcceptCollectionOwnershipArgsSchema = z.object({
 
 /**
  * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsAcceptCollectionOwnershipArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsSetAcceptOwnership(
   args: NftsAcceptCollectionOwnershipArgs,
@@ -1267,10 +1267,10 @@ const NftsSetCollectionMetadataArgsSchema = z.object({
 
 /**
  * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsSetCollectionMetadataArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsSetCollectionMetadata(
   args: NftsSetCollectionMetadataArgs,
@@ -1316,10 +1316,10 @@ const NftsSetItemMetadataArgsSchema = z.object({
 
 /**
  * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsSetItemMetadataArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsSetMetadata(
   args: NftsSetItemMetadataArgs,
@@ -1365,10 +1365,10 @@ const NftsTransferItemArgsSchema = z.object({
 
 /**
  * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsTransferItemArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsTransfer(
   args: NftsTransferItemArgs,
@@ -1406,10 +1406,10 @@ const NftsTransferCollectionOwnershipArgsSchema = z.object({
 
 /**
  * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsTransferCollectionOwnershipArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsTransferOwnership(
   args: NftsTransferCollectionOwnershipArgs,
@@ -1450,10 +1450,10 @@ const NftsUnlockItemTransferArgsSchema = z.object({
 
 /**
  * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link NftsUnlockItemTransferArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function nftsUnlockItemTransfer(
   args: NftsUnlockItemTransferArgs,

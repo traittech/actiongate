@@ -65,10 +65,10 @@ const {{{actionName}}}ArgsSchema = z.object({
 {{#if documentation.full}}
  * {{{documentation.full}}}
 {{/if}}
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+ * @param args - The arguments of the transaction. {@link {{{actionName}}}Args}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function {{{functionName}}}(
   args: {{{actionName}}}Args,
