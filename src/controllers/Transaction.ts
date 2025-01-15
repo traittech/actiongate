@@ -4,6 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
 import { loadConfig, getPrivateKeyById } from '../functions/config';
 import logger from '../functions/logger';
+import { TransactionPayloadSchema } from '../validator/schemas';
 
 import type { TransactionPayload, TransactionResponse } from '../types/api/transaction';
 
@@ -24,12 +25,14 @@ const submitTransaction = async (req: Request, res: Response, next: NextFunction
     const payload: TransactionPayload = req.body;
 
     // Validate required fields (basic validation)
-    if (!payload.signatory || !payload.module_name || !payload.function_name || !payload.arguments) {
-      logger.error('Missing required fields in payload');
+    try {
+      TransactionPayloadSchema.parse(payload);
+    } catch (error) {
+      logger.error('Missing or invalid required fields in payload', error);
       res.status(400).json({
         status: 'failed',
         error_code: 400,
-        error_description: 'Missing required fields in payload',
+        error_description: 'Missing or invalid required fields in payload',
       });
       return;
     }

@@ -2,13 +2,11 @@ import { z } from 'zod';
 
 import { ActionType } from '../../types/api/actions';
 
-export const SignatorySchema = z.string();
+import { ArgsSchema, SignatorySchema } from './transaction';
 
 export const AppAgentIdSchema = z.number().min(0);
 
 export const ActionTypeSchema = z.nativeEnum(ActionType);
-
-export const ActionArgsSchema = z.object({}).passthrough(); // matches any args objects
 
 export const CTActionOriginSchema = z.union([
   z.object({ AppAgentId: z.any() }),
@@ -35,7 +33,7 @@ export const CTActionSchema = z.tuple([
 export const CTAtomicActionSchema = z.object({
   actionType: ActionTypeSchema,
   origin: CTActionOriginSchema,
-  arguments: ActionArgsSchema,
+  arguments: ArgsSchema,
 });
 
 export const CTAtomicActionsSchema = z.array(z.array(CTActionSchema));
