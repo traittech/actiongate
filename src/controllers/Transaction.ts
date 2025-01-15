@@ -1,15 +1,14 @@
-import { Keyring } from '@polkadot/api';
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 
 import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
 import { loadConfig, getPrivateKeyById } from '../functions/config';
 import logger from '../functions/logger';
+import { getKeyringPairByPrivateKey } from '../functions/keyring';
 import { TransactionPayloadSchema } from '../validator/schemas';
 
 import type { TransactionPayload, TransactionResponse } from '../types/api/transaction';
 
 const config = loadConfig();
-const keyring = new Keyring({ type: 'sr25519' });
 
 /**
  * Controller to handle transaction submission.
@@ -50,10 +49,7 @@ const submitTransaction = async (req: Request, res: Response, next: NextFunction
       return;
     }
 
-    // Add the key pair to the keyring
-    const callerKeyPair = keyring.addFromUri(privateKey);
-    keyring.setSS58Format(config.blockchain.ss58_code);
-    logger.info(`Calling Account: ${callerKeyPair.address}`);
+    const callerKeyPair = getKeyringPairByPrivateKey(privateKey);
 
     // Create and broadcast the signed transaction
     logger.info('Creating and broadcasting signed transaction...');

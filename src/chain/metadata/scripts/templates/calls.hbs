@@ -62,8 +62,12 @@ const {{{actionName}}}ArgsSchema = z.object({
 });
 
 /**
+ * @name {{{functionName}}}
+{{#if documentation.short}}
+ * @summary {{{documentation.short}}}
+{{/if}}
 {{#if documentation.full}}
- * {{{documentation.full}}}
+ * @description {{{documentation.full}}}
 {{/if}}
  * @param args - The arguments of the transaction. {@link {{{actionName}}}Args}
  * @param info - Base transaction information. {@link BaseTxInfo}

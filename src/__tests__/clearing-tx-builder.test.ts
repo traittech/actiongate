@@ -64,8 +64,7 @@ describe('Clearing Transaction Builder', () => {
   const aliceAddress = 'ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s';
 
   const keyring = new Keyring({ ss58Format: 5335, type: 'ed25519' });
-  keyring.addFromMnemonic(aliceMnemonic);
-  const aliceKeyringPair = keyring.getPairs()[0];
+  const aliceKeyringPair = keyring.addFromMnemonic(aliceMnemonic);
 
   describe('Balances Pallet', () => {
     it('should build balances_transferKeepAlive transaction', async () => {

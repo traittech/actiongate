@@ -67,8 +67,8 @@ function getFunctionDescription(docs: Vec<Text>) {
     }
   }
 
-  const full = description.join(' ');
-  const short = description[0] ? description[0].charAt(0).toLowerCase() + description[0].slice(1) : '';
+  const short = description[0] ?? '';
+  const full = short ? description.slice(1).join(' ') : '';
 
   return {
     full,

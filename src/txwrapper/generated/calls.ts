@@ -36,7 +36,7 @@ export function constructUnsignedTransaction(
 }
 
 /**
- * Arguments required to submit a Clearing transaction.
+ * Arguments required to Submit a Clearing transaction.
  */
 export interface AppTransactionsSubmitClearingTransactionArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -49,7 +49,9 @@ const AppTransactionsSubmitClearingTransactionArgsSchema = z.object({
 });
 
 /**
- * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
+ * @name appTransactionsSubmitClearingTransaction
+ * @summary Submit a Clearing transaction.
+ * @description CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
  * @param args - The arguments of the transaction. {@link AppTransactionsSubmitClearingTransactionArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -74,7 +76,7 @@ export type AppTransactionsSubmitClearingTransactionAction = CTAtomicActionGener
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to reduce the balance of `who` by as much as possible up to `amount` assets of `id`.
+ * Arguments required to Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.
  */
 export interface AssetsBurnArgs extends Args {
   /**
@@ -98,7 +100,9 @@ const AssetsBurnArgsSchema = z.object({
 });
 
 /**
- * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
+ * @name assetsBurn
+ * @summary Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.
+ * @description Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
  * @param args - The arguments of the transaction. {@link AssetsBurnArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -131,6 +135,7 @@ const AssetsCreateArgsSchema = z.object({
 });
 
 /**
+ * @name assetsCreate
  * @param args - The arguments of the transaction. {@link AssetsCreateArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -155,7 +160,7 @@ export type AssetsCreateAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to destroy all accounts associated with a given asset.
+ * Arguments required to Destroy all accounts associated with a given asset.
  */
 export interface AssetsDestroyAccountsArgs extends Args {
   /**
@@ -169,7 +174,9 @@ const AssetsDestroyAccountsArgsSchema = z.object({
 });
 
 /**
- * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
+ * @name assetsDestroyAccounts
+ * @summary Destroy all accounts associated with a given asset.
+ * @description `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
  * @param args - The arguments of the transaction. {@link AssetsDestroyAccountsArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -194,7 +201,7 @@ export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).
+ * Arguments required to Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).
  */
 export interface AssetsDestroyApprovalsArgs extends Args {
   /**
@@ -208,7 +215,9 @@ const AssetsDestroyApprovalsArgsSchema = z.object({
 });
 
 /**
- * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
+ * @name assetsDestroyApprovals
+ * @summary Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).
+ * @description `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
  * @param args - The arguments of the transaction. {@link AssetsDestroyApprovalsArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -233,7 +242,7 @@ export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to complete destroying asset and unreserve currency.
+ * Arguments required to Complete destroying asset and unreserve currency.
  */
 export interface AssetsFinishDestroyArgs extends Args {
   /**
@@ -247,7 +256,9 @@ const AssetsFinishDestroyArgsSchema = z.object({
 });
 
 /**
- * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
+ * @name assetsFinishDestroy
+ * @summary Complete destroying asset and unreserve currency.
+ * @description `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
  * @param args - The arguments of the transaction. {@link AssetsFinishDestroyArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -272,7 +283,7 @@ export type AssetsFinishDestroyAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to move some assets from one account to another.
+ * Arguments required to Move some assets from one account to another.
  */
 export interface AssetsForceTransferArgs extends Args {
   /**
@@ -301,7 +312,9 @@ const AssetsForceTransferArgsSchema = z.object({
 });
 
 /**
- * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ * @name assetsForceTransfer
+ * @summary Move some assets from one account to another.
+ * @description Origin must be Signed and the sender should be the Admin of the asset `id`.
  * @param args - The arguments of the transaction. {@link AssetsForceTransferArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -326,7 +339,7 @@ export type AssetsForceTransferAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to disallow further unprivileged transfers of an asset `id` from an account `who`. `who`
+ * Arguments required to Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`
  */
 export interface AssetsFreezeAccountArgs extends Args {
   /**
@@ -345,7 +358,9 @@ const AssetsFreezeAccountArgsSchema = z.object({
 });
 
 /**
- * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ * @name assetsFreeze
+ * @summary Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`
+ * @description must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  * @param args - The arguments of the transaction. {@link AssetsFreezeAccountArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -370,7 +385,7 @@ export type AssetsFreezeAccountAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to disallow further unprivileged transfers for the asset class.
+ * Arguments required to Disallow further unprivileged transfers for the asset class.
  */
 export interface AssetsFreezeAssetArgs extends Args {
   /**
@@ -384,7 +399,9 @@ const AssetsFreezeAssetArgsSchema = z.object({
 });
 
 /**
- * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ * @name assetsFreezeAsset
+ * @summary Disallow further unprivileged transfers for the asset class.
+ * @description Origin must be Signed and the sender should be the Freezer of the asset `id`.
  * @param args - The arguments of the transaction. {@link AssetsFreezeAssetArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -409,7 +426,7 @@ export type AssetsFreezeAssetAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to mint assets of a particular class.
+ * Arguments required to Mint assets of a particular class.
  */
 export interface AssetsMintArgs extends Args {
   /**
@@ -433,7 +450,9 @@ const AssetsMintArgsSchema = z.object({
 });
 
 /**
- * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
+ * @name assetsMint
+ * @summary Mint assets of a particular class.
+ * @description The origin must be Signed and the sender must be the Issuer of the asset `id`.
  * @param args - The arguments of the transaction. {@link AssetsMintArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -458,7 +477,7 @@ export type AssetsMintAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to set the raw metadata for an asset.
+ * Arguments required to Set the raw metadata for an asset.
  */
 export interface AssetsSetMetadataArgs extends Args {
   /**
@@ -477,7 +496,9 @@ const AssetsSetMetadataArgsSchema = z.object({
 });
 
 /**
- * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
+ * @name assetsSetMetadata
+ * @summary Set the raw metadata for an asset.
+ * @description Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
  * @param args - The arguments of the transaction. {@link AssetsSetMetadataArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -502,7 +523,7 @@ export type AssetsSetMetadataAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to sets the minimum balance of an asset.
+ * Arguments required to Sets the minimum balance of an asset.
  */
 export interface AssetsSetMinBalanceArgs extends Args {
   /**
@@ -521,7 +542,9 @@ const AssetsSetMinBalanceArgsSchema = z.object({
 });
 
 /**
- * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
+ * @name assetsSetMinBalance
+ * @summary Sets the minimum balance of an asset.
+ * @description Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
  * @param args - The arguments of the transaction. {@link AssetsSetMinBalanceArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -546,7 +569,7 @@ export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to start the process of destroying a fungible asset class.
+ * Arguments required to Start the process of destroying a fungible asset class.
  */
 export interface AssetsStartDestroyArgs extends Args {
   /**
@@ -560,7 +583,9 @@ const AssetsStartDestroyArgsSchema = z.object({
 });
 
 /**
- * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
+ * @name assetsStartDestroy
+ * @summary Start the process of destroying a fungible asset class.
+ * @description `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
  * @param args - The arguments of the transaction. {@link AssetsStartDestroyArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -585,7 +610,7 @@ export type AssetsStartDestroyAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to allow unprivileged transfers to and from an account again.
+ * Arguments required to Allow unprivileged transfers to and from an account again.
  */
 export interface AssetsThawAccountArgs extends Args {
   /**
@@ -604,7 +629,9 @@ const AssetsThawAccountArgsSchema = z.object({
 });
 
 /**
- * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ * @name assetsThaw
+ * @summary Allow unprivileged transfers to and from an account again.
+ * @description Origin must be Signed and the sender should be the Admin of the asset `id`.
  * @param args - The arguments of the transaction. {@link AssetsThawAccountArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -629,7 +656,7 @@ export type AssetsThawAccountAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to allow unprivileged transfers for the asset again.
+ * Arguments required to Allow unprivileged transfers for the asset again.
  */
 export interface AssetsThawAssetArgs extends Args {
   /**
@@ -643,7 +670,9 @@ const AssetsThawAssetArgsSchema = z.object({
 });
 
 /**
- * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ * @name assetsThawAsset
+ * @summary Allow unprivileged transfers for the asset again.
+ * @description Origin must be Signed and the sender should be the Admin of the asset `id`.
  * @param args - The arguments of the transaction. {@link AssetsThawAssetArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -668,7 +697,7 @@ export type AssetsThawAssetAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to move some assets from the sender account to another.
+ * Arguments required to Move some assets from the sender account to another.
  */
 export interface AssetsTransferArgs extends Args {
   /**
@@ -692,7 +721,9 @@ const AssetsTransferArgsSchema = z.object({
 });
 
 /**
- * Move some assets from the sender account to another. Origin must be Signed.
+ * @name assetsTransfer
+ * @summary Move some assets from the sender account to another.
+ * @description Origin must be Signed.
  * @param args - The arguments of the transaction. {@link AssetsTransferArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -717,7 +748,7 @@ export type AssetsTransferAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to move some assets from the sender account to another, keeping the sender account alive.
+ * Arguments required to Move some assets from the sender account to another, keeping the sender account alive.
  */
 export interface AssetsTransferKeepAliveArgs extends Args {
   /**
@@ -741,7 +772,9 @@ const AssetsTransferKeepAliveArgsSchema = z.object({
 });
 
 /**
- * Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.
+ * @name assetsTransferKeepAlive
+ * @summary Move some assets from the sender account to another, keeping the sender account alive.
+ * @description Origin must be Signed.
  * @param args - The arguments of the transaction. {@link AssetsTransferKeepAliveArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -766,7 +799,7 @@ export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to change the Owner of an asset.
+ * Arguments required to Change the Owner of an asset.
  */
 export interface AssetsTransferOwnershipArgs extends Args {
   /**
@@ -785,7 +818,9 @@ const AssetsTransferOwnershipArgsSchema = z.object({
 });
 
 /**
- * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
+ * @name assetsTransferOwnership
+ * @summary Change the Owner of an asset.
+ * @description Origin must be Signed and the sender should be the Owner of the asset `id`.
  * @param args - The arguments of the transaction. {@link AssetsTransferOwnershipArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -810,7 +845,7 @@ export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to transfer the entire transferable balance from the caller account.
+ * Arguments required to Transfer the entire transferable balance from the caller account.
  */
 export interface BalancesTransferAllArgs extends Args {
   /**
@@ -826,7 +861,9 @@ const BalancesTransferAllArgsSchema = z.object({
 });
 
 /**
- * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
+ * @name balancesTransferAll
+ * @summary Transfer the entire transferable balance from the caller account.
+ * @description NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
  * @param args - The arguments of the transaction. {@link BalancesTransferAllArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -851,7 +888,7 @@ export type BalancesTransferAllAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to transfer some liquid free balance to another account.
+ * Arguments required to Transfer some liquid free balance to another account.
  */
 export interface BalancesTransferAllowDeathArgs extends Args {
   dest: BlockchainGenericAccount;
@@ -864,7 +901,9 @@ const BalancesTransferAllowDeathArgsSchema = z.object({
 });
 
 /**
- * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
+ * @name balancesTransferAllowDeath
+ * @summary Transfer some liquid free balance to another account.
+ * @description `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
  * @param args - The arguments of the transaction. {@link BalancesTransferAllowDeathArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -889,7 +928,7 @@ export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to same as the [`transfer_allow_death`] call, but with a check that the transfer will not
+ * Arguments required to Same as the [`transfer_allow_death`] call, but with a check that the transfer will not
  */
 export interface BalancesTransferKeepAliveArgs extends Args {
   dest: BlockchainGenericAccount;
@@ -902,7 +941,9 @@ const BalancesTransferKeepAliveArgsSchema = z.object({
 });
 
 /**
- * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
+ * @name balancesTransferKeepAlive
+ * @summary Same as the [`transfer_allow_death`] call, but with a check that the transfer will not
+ * @description kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
  * @param args - The arguments of the transaction. {@link BalancesTransferKeepAliveArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -927,7 +968,7 @@ export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to destroy a single item.
+ * Arguments required to Destroy a single item.
  */
 export interface NftsBurnItemArgs extends Args {
   /**
@@ -946,7 +987,9 @@ const NftsBurnItemArgsSchema = z.object({
 });
 
 /**
- * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
+ * @name nftsBurn
+ * @summary Destroy a single item.
+ * @description The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
  * @param args - The arguments of the transaction. {@link NftsBurnItemArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -971,7 +1014,7 @@ export type NftsBurnItemAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to clear the metadata for a collection.
+ * Arguments required to Clear the metadata for a collection.
  */
 export interface NftsClearCollectionMetadataArgs extends Args {
   /**
@@ -985,7 +1028,9 @@ const NftsClearCollectionMetadataArgsSchema = z.object({
 });
 
 /**
- * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ * @name nftsClearCollectionMetadata
+ * @summary Clear the metadata for a collection.
+ * @description Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  * @param args - The arguments of the transaction. {@link NftsClearCollectionMetadataArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1010,7 +1055,7 @@ export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to clear the metadata for an item.
+ * Arguments required to Clear the metadata for an item.
  */
 export interface NftsClearItemMetadataArgs extends Args {
   /**
@@ -1029,7 +1074,9 @@ const NftsClearItemMetadataArgsSchema = z.object({
 });
 
 /**
- * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ * @name nftsClearMetadata
+ * @summary Clear the metadata for an item.
+ * @description Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  * @param args - The arguments of the transaction. {@link NftsClearItemMetadataArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1060,6 +1107,7 @@ const NftsCreateCollectionArgsSchema = z.object({
 });
 
 /**
+ * @name nftsCreate
  * @param args - The arguments of the transaction. {@link NftsCreateCollectionArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1084,7 +1132,7 @@ export type NftsCreateCollectionAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to destroy a collection of fungible items.
+ * Arguments required to Destroy a collection of fungible items.
  */
 export interface NftsDestroyCollectionArgs extends Args {
   /**
@@ -1103,7 +1151,9 @@ const NftsDestroyCollectionArgsSchema = z.object({
 });
 
 /**
- * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
+ * @name nftsDestroy
+ * @summary Destroy a collection of fungible items.
+ * @description The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
  * @param args - The arguments of the transaction. {@link NftsDestroyCollectionArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1128,7 +1178,7 @@ export type NftsDestroyCollectionAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to disallow further unprivileged transfer of an item.
+ * Arguments required to Disallow further unprivileged transfer of an item.
  */
 export interface NftsLockItemTransferArgs extends Args {
   /**
@@ -1147,7 +1197,9 @@ const NftsLockItemTransferArgsSchema = z.object({
 });
 
 /**
- * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ * @name nftsLockItemTransfer
+ * @summary Disallow further unprivileged transfer of an item.
+ * @description Origin must be Signed and the sender should be the Freezer of the `collection`.
  * @param args - The arguments of the transaction. {@link NftsLockItemTransferArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1184,6 +1236,7 @@ const NftsMintItemArgsSchema = z.object({
 });
 
 /**
+ * @name nftsMint
  * @param args - The arguments of the transaction. {@link NftsMintItemArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1208,7 +1261,7 @@ export type NftsMintItemAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to set (or reset) the acceptance of ownership for a particular account.
+ * Arguments required to Set (or reset) the acceptance of ownership for a particular account.
  */
 export interface NftsAcceptCollectionOwnershipArgs extends Args {
   /**
@@ -1222,7 +1275,9 @@ const NftsAcceptCollectionOwnershipArgsSchema = z.object({
 });
 
 /**
- * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
+ * @name nftsSetAcceptOwnership
+ * @summary Set (or reset) the acceptance of ownership for a particular account.
+ * @description Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
  * @param args - The arguments of the transaction. {@link NftsAcceptCollectionOwnershipArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1247,7 +1302,7 @@ export type NftsAcceptCollectionOwnershipAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to set the metadata for a collection.
+ * Arguments required to Set the metadata for a collection.
  */
 export interface NftsSetCollectionMetadataArgs extends Args {
   /**
@@ -1266,7 +1321,9 @@ const NftsSetCollectionMetadataArgsSchema = z.object({
 });
 
 /**
- * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ * @name nftsSetCollectionMetadata
+ * @summary Set the metadata for a collection.
+ * @description Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  * @param args - The arguments of the transaction. {@link NftsSetCollectionMetadataArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1291,7 +1348,7 @@ export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to set the metadata for an item.
+ * Arguments required to Set the metadata for an item.
  */
 export interface NftsSetItemMetadataArgs extends Args {
   /**
@@ -1315,7 +1372,9 @@ const NftsSetItemMetadataArgsSchema = z.object({
 });
 
 /**
- * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ * @name nftsSetMetadata
+ * @summary Set the metadata for an item.
+ * @description Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  * @param args - The arguments of the transaction. {@link NftsSetItemMetadataArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1340,7 +1399,7 @@ export type NftsSetItemMetadataAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to move an item from the sender account to another.
+ * Arguments required to Move an item from the sender account to another.
  */
 export interface NftsTransferItemArgs extends Args {
   /**
@@ -1364,7 +1423,9 @@ const NftsTransferItemArgsSchema = z.object({
 });
 
 /**
- * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
+ * @name nftsTransfer
+ * @summary Move an item from the sender account to another.
+ * @description Origin must be Signed and the signing account must be either:
  * @param args - The arguments of the transaction. {@link NftsTransferItemArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1389,7 +1450,7 @@ export type NftsTransferItemAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to change the Owner of a collection.
+ * Arguments required to Change the Owner of a collection.
  */
 export interface NftsTransferCollectionOwnershipArgs extends Args {
   /**
@@ -1405,7 +1466,9 @@ const NftsTransferCollectionOwnershipArgsSchema = z.object({
 });
 
 /**
- * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
+ * @name nftsTransferOwnership
+ * @summary Change the Owner of a collection.
+ * @description Origin must be Signed and the sender should be the Owner of the `collection`.
  * @param args - The arguments of the transaction. {@link NftsTransferCollectionOwnershipArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1430,7 +1493,7 @@ export type NftsTransferCollectionOwnershipAction = CTAtomicActionGeneric<
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to re-allow unprivileged transfer of an item.
+ * Arguments required to Re-allow unprivileged transfer of an item.
  */
 export interface NftsUnlockItemTransferArgs extends Args {
   /**
@@ -1449,7 +1512,9 @@ const NftsUnlockItemTransferArgsSchema = z.object({
 });
 
 /**
- * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ * @name nftsUnlockItemTransfer
+ * @summary Re-allow unprivileged transfer of an item.
+ * @description Origin must be Signed and the sender should be the Freezer of the `collection`.
  * @param args - The arguments of the transaction. {@link NftsUnlockItemTransferArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}

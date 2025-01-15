@@ -1,15 +1,14 @@
-import { Keyring } from '@polkadot/api';
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 
 import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import { loadConfig, getPrivateKeyById } from '../functions/config';
 import logger from '../functions/logger';
+import { getKeyringPairByPrivateKey } from '../functions/keyring';
 import { ClearingTransactionPayloadSchema } from '../validator/schemas';
 
 import type { ClearingTransactionPayload, ClearingTransactionResponse } from '../types/api/clearingTransaction';
 
 const config = loadConfig();
-const keyring = new Keyring({ type: 'sr25519' });
 
 /**
  * Controller to handle the submission of a clearing transaction.
@@ -50,10 +49,7 @@ const submitClearingTransaction = async (req: Request, res: Response, next: Next
       return;
     }
 
-    // Add the key pair to the keyring
-    const callerKeyPair = keyring.addFromUri(privateKey);
-    keyring.setSS58Format(config.blockchain.ss58_code);
-    logger.info(`Calling Account: ${callerKeyPair.address}`);
+    const callerKeyPair = getKeyringPairByPrivateKey(privateKey);
 
     // Create and broadcast the signed clearing transaction
     logger.info('Creating and broadcasting signed clearing transaction...');

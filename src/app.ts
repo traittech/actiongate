@@ -25,8 +25,8 @@ if (config.api_ssl_enabled) {
   https
     .createServer(
       {
-        key: fs.readFileSync(loadConfig().api_ssl.sslKeyPath),
-        cert: fs.readFileSync(loadConfig().api_ssl.sslCertPath),
+        key: fs.readFileSync(config.api_ssl.sslKeyPath),
+        cert: fs.readFileSync(config.api_ssl.sslCertPath),
       },
       app
     )
