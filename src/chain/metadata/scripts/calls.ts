@@ -109,8 +109,6 @@ function generator(
     method: string;
     function: string;
     actionName: string;
-    actionType: string;
-    argsTypeName: string;
   }[] = [];
 
   const modules = pallets
@@ -135,16 +133,12 @@ function generator(
 
           const [actionName] = allowedTuple;
           const name = stringCamelCase(methodName);
-          const actionTypeName = `${actionName}Action`;
-          const argsTypeName = `${actionName}Args`;
 
           ctAtomicActions.push({
             pallet: palletName,
             method,
             function: functionName,
             actionName,
-            actionType: actionTypeName,
-            argsTypeName,
           });
 
           const typesInfo = fields.map(({ name, type, typeName }, index) => {
@@ -191,9 +185,7 @@ function generator(
             functionName,
             palletName,
             methodName: name,
-            argsTypeName,
             actionName,
-            actionTypeName,
             params,
             // for ordering
             name,

@@ -44,7 +44,7 @@ export function constructUnsignedTransaction(
  * Arguments required to {{{documentation.short}}}
  */
 {{/if}}
-export interface {{{argsTypeName}}} extends Args {
+export interface {{{actionName}}}Args extends Args {
   {{#each params}}
   {{#if this.description}}
   /**
@@ -55,7 +55,7 @@ export interface {{{argsTypeName}}} extends Args {
   {{/each}}
 };
 
-const {{{argsTypeName}}}Schema = z.object({
+const {{{actionName}}}ArgsSchema = z.object({
   {{#each params}}
   {{{this.name}}}: {{#if this.isOptional}}z.optional({{/if}}schema.{{{this.type}}}Schema{{#if this.isOptional}}){{/if}},
   {{/each}}
@@ -71,19 +71,19 @@ const {{{argsTypeName}}}Schema = z.object({
  * @returns An unsigned transaction.
  */
 export function {{{functionName}}}(
-  args: {{{argsTypeName}}},
+  args: {{{actionName}}}Args,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = {{{argsTypeName}}}Schema.parse(args);
+  const validArgs = {{{actionName}}}ArgsSchema.parse(args);
 
   return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', validArgs, info, options);
 }
 
-export type {{{actionTypeName}}} = CTAtomicActionGeneric<
+export type {{{actionName}}}Action = CTAtomicActionGeneric<
   ActionType.{{{actionName}}},
-  {{{argsTypeName}}}
+  {{{actionName}}}Args
 >;
 
 /*---------------------------------------------------------------------------------- */
@@ -97,7 +97,7 @@ export type {{{actionTypeName}}} = CTAtomicActionGeneric<
  */
 export type CTAtomicAction =
 {{#each ctAtomicActions}}
-  | {{{this.actionType}}}
+  | {{{this.actionName}}}Action
 {{/each}};
 
 /**
@@ -128,7 +128,7 @@ export function buildUnsignedTxFromActionType(
   switch (actionType) {
   {{#each ctAtomicActions}}
     case ActionType.{{{this.actionName}}}: {
-      unsigned = {{{this.function}}}(args as {{{this.argsTypeName}}}, info, options);
+      unsigned = {{{this.function}}}(args as {{{this.actionName}}}Args, info, options);
       break;
     }
   {{/each}}
