@@ -6,7 +6,7 @@ import logger from '../logger';
 import { signWith } from '../signer';
 import { generateTxMetadata, buildUnsignedTransaction } from '../tx-helper';
 
-import type { ActionArgs } from '../../txwrapper';
+import type { TransactionPayload } from '../../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
 
 const config = loadConfig();
@@ -16,20 +16,18 @@ const txService = new TransactionService(config.datagate_api.uri);
  * Creates a signed transaction and broadcasts it.
  *
  * @param pair - The keyring pair to sign with.
- * @param moduleName - The module name of the extrinsic.
- * @param functionName - The function name of the extrinsic.
- * @param args - The arguments for the extrinsic function.
+ * @param payload - The payload of the extrinsic.
  * @returns The transaction hash.
  *
  * @throws Will throw an error if there is an issue during transaction creation or broadcasting.
  */
 export async function createSignedTransactionAndBroadcast(
   pair: KeyringPair,
-  moduleName: string,
-  functionName: string,
-  args: ActionArgs
+  payload: TransactionPayload,
 ): Promise<string> {
   try {
+    const { module_name: moduleName, function_name: functionName, arguments: args } = payload;
+
     // Generate metadata, base transaction info, and options
     logger.debug('Generating transaction metadata...');
     const { registry, baseTxInfo, options } = await generateTxMetadata(pair);

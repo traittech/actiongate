@@ -17,17 +17,19 @@ export const CTActionOriginSchema = z.union([
   z.object({ NamedAddressName: z.any() }),
 ]);
 
+export const CTActionCallSchema = z.union([
+  z
+    .object({
+      callIndex: z.string(),
+      args: z.string(),
+    })
+    .partial(),
+  z.string(),
+]);
+
 export const CTActionSchema = z.tuple([
   CTActionOriginSchema,
-  z.union([
-    z
-      .object({
-        callIndex: z.string(),
-        args: z.string(),
-      })
-      .partial(),
-    z.string(),
-  ]),
+  CTActionCallSchema,
 ]);
 
 export const CTAtomicActionSchema = z.object({

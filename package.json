@@ -9,12 +9,12 @@
     "type": "git",
     "url": "git+https://github.com/traittech/actiongate.git"
   },
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
     "prepare": "husky",
-    "build": "npx tsc",
-    "start": "npx tsc && node dist/app.js",
-    "dev": "nodemon src/app.ts",
+    "build": "npx tsoa spec-and-routes && npx tsc",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "test": "jest",
     "lint": "eslint",
     "lint:fix": "eslint --fix",

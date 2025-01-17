@@ -1,0 +1,2161 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"TransactionResponse": {
+				"description": "Response from a transaction request.",
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "The status of the transaction."
+					},
+					"tx_hash": {
+						"type": "string",
+						"description": "The transaction hash, if available."
+					},
+					"error_code": {
+						"type": "number",
+						"format": "double",
+						"description": "An error code, if the transaction failed."
+					},
+					"error_description": {
+						"type": "string",
+						"description": "A description of the error, if the transaction failed."
+					}
+				},
+				"required": [
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AnyJson": {
+				"anyOf": [
+					{
+						"type": "string"
+					},
+					{
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"type": "boolean"
+					},
+					{
+						"items": {
+							"$ref": "#/components/schemas/AnyJson"
+						},
+						"type": "array"
+					},
+					{
+						"properties": {},
+						"additionalProperties": {
+							"$ref": "#/components/schemas/AnyJson"
+						},
+						"type": "object"
+					}
+				],
+				"nullable": true
+			},
+			"Record_string.AnyJson_": {
+				"properties": {},
+				"additionalProperties": {
+					"$ref": "#/components/schemas/AnyJson"
+				},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"Args": {
+				"$ref": "#/components/schemas/Record_string.AnyJson_",
+				"description": "Base Argument object for methods."
+			},
+			"TransactionPayload": {
+				"description": "Payload for a transaction.",
+				"properties": {
+					"signatory": {
+						"type": "string",
+						"description": "The signatory responsible for the transaction."
+					},
+					"module_name": {
+						"type": "string",
+						"description": "The name of the module where the function to be executed is defined."
+					},
+					"function_name": {
+						"type": "string",
+						"description": "The name of the function to be executed."
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/Args",
+						"description": "The arguments to be passed to the function."
+					}
+				},
+				"required": [
+					"signatory",
+					"module_name",
+					"function_name",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ActionType.BalancesTransferAllowDeath": {
+				"enum": [
+					"balances.transferAllowDeath"
+				],
+				"type": "string"
+			},
+			"CTActionOrigin": {
+				"anyOf": [
+					{
+						"properties": {
+							"AppAgentId": {}
+						},
+						"required": [
+							"AppAgentId"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"AppAgentAddress": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"AppAgentAddress"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"TransactionalAddressId": {}
+						},
+						"required": [
+							"TransactionalAddressId"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"TransactionalAddress": {}
+						},
+						"required": [
+							"TransactionalAddress"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"NamedAddress": {}
+						},
+						"required": [
+							"NamedAddress"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"NamedAddressName": {}
+						},
+						"required": [
+							"NamedAddressName"
+						],
+						"type": "object"
+					}
+				],
+				"description": "The origin type for each Action in CT"
+			},
+			"BlockchainGenericAccount": {
+				"type": "string",
+				"description": "Blockchain account address, represented by SS58 string"
+			},
+			"Numberish": {
+				"anyOf": [
+					{
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"type": "string"
+					}
+				],
+				"description": "Number presented as plain number or string"
+			},
+			"BlockchainGenericBalance": {
+				"$ref": "#/components/schemas/Numberish",
+				"description": "Amount, Balance (u128)"
+			},
+			"BalancesTransferAllowDeathArgs": {
+				"description": "Arguments required to Transfer some liquid free balance to another account.",
+				"properties": {
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					},
+					"value": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"dest",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.BalancesTransferAllowDeath.BalancesTransferAllowDeathArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferAllowDeathArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.BalancesTransferAllowDeath",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"BalancesTransferAllowDeathAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.BalancesTransferAllowDeath.BalancesTransferAllowDeathArgs_"
+			},
+			"ActionType.BalancesTransferKeepAlive": {
+				"enum": [
+					"balances.transferKeepAlive"
+				],
+				"type": "string"
+			},
+			"BalancesTransferKeepAliveArgs": {
+				"description": "Arguments required to Same as the [`transfer_allow_death`] call, but with a check that the transfer will not",
+				"properties": {
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					},
+					"value": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"dest",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.BalancesTransferKeepAlive.BalancesTransferKeepAliveArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.BalancesTransferKeepAlive",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"BalancesTransferKeepAliveAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.BalancesTransferKeepAlive.BalancesTransferKeepAliveArgs_"
+			},
+			"ActionType.BalancesTransferAll": {
+				"enum": [
+					"balances.transferAll"
+				],
+				"type": "string"
+			},
+			"BlockchainGenericBoolean": {
+				"type": "boolean",
+				"description": "Boolean type for blockchain (bool)"
+			},
+			"BalancesTransferAllArgs": {
+				"description": "Arguments required to Transfer the entire transferable balance from the caller account.",
+				"properties": {
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The recipient of the transfer."
+					},
+					"keepAlive": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					}
+				},
+				"required": [
+					"dest",
+					"keepAlive"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.BalancesTransferAll.BalancesTransferAllArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferAllArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.BalancesTransferAll",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"BalancesTransferAllAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.BalancesTransferAll.BalancesTransferAllArgs_"
+			},
+			"ActionType.AssetsCreate": {
+				"enum": [
+					"assets.create"
+				],
+				"type": "string"
+			},
+			"AssetsCreateArgs": {
+				"properties": {
+					"minBalance": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"minBalance"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsCreate.AssetsCreateArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsCreateArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsCreate",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsCreateAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsCreate.AssetsCreateArgs_"
+			},
+			"ActionType.AssetsStartDestroy": {
+				"enum": [
+					"assets.startDestroy"
+				],
+				"type": "string"
+			},
+			"BlockchainGenericId": {
+				"$ref": "#/components/schemas/Numberish",
+				"description": "Asset Id, Collection Id, Agent Id (u32)"
+			},
+			"AssetsStartDestroyArgs": {
+				"description": "Arguments required to Start the process of destroying a fungible asset class.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsStartDestroy.AssetsStartDestroyArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsStartDestroyArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsStartDestroy",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsStartDestroyAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsStartDestroy.AssetsStartDestroyArgs_"
+			},
+			"ActionType.AssetsDestroyAccounts": {
+				"enum": [
+					"assets.destroyAccounts"
+				],
+				"type": "string"
+			},
+			"AssetsDestroyAccountsArgs": {
+				"description": "Arguments required to Destroy all accounts associated with a given asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsDestroyAccounts.AssetsDestroyAccountsArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsDestroyAccountsArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsDestroyAccounts",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsDestroyAccountsAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsDestroyAccounts.AssetsDestroyAccountsArgs_"
+			},
+			"ActionType.AssetsDestroyApprovals": {
+				"enum": [
+					"assets.destroyApprovals"
+				],
+				"type": "string"
+			},
+			"AssetsDestroyApprovalsArgs": {
+				"description": "Arguments required to Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsDestroyApprovals.AssetsDestroyApprovalsArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsDestroyApprovalsArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsDestroyApprovals",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsDestroyApprovalsAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsDestroyApprovals.AssetsDestroyApprovalsArgs_"
+			},
+			"ActionType.AssetsFinishDestroy": {
+				"enum": [
+					"assets.finishDestroy"
+				],
+				"type": "string"
+			},
+			"AssetsFinishDestroyArgs": {
+				"description": "Arguments required to Complete destroying asset and unreserve currency.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsFinishDestroy.AssetsFinishDestroyArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsFinishDestroyArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsFinishDestroy",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsFinishDestroyAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsFinishDestroy.AssetsFinishDestroyArgs_"
+			},
+			"ActionType.AssetsMint": {
+				"enum": [
+					"assets.mint"
+				],
+				"type": "string"
+			},
+			"AssetsMintArgs": {
+				"description": "Arguments required to Mint assets of a particular class.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount minted."
+					},
+					"beneficiary": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited with the minted assets."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount of the asset to be minted."
+					}
+				},
+				"required": [
+					"id",
+					"beneficiary",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsMint.AssetsMintArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsMintArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsMint",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsMintAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsMint.AssetsMintArgs_"
+			},
+			"ActionType.AssetsBurn": {
+				"enum": [
+					"assets.burn"
+				],
+				"type": "string"
+			},
+			"AssetsBurnArgs": {
+				"description": "Arguments required to Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount burned."
+					},
+					"who": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be debited from."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The maximum amount by which `who`'s balance should be reduced."
+					}
+				},
+				"required": [
+					"id",
+					"who",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsBurn.AssetsBurnArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsBurnArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsBurn",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsBurnAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsBurn.AssetsBurnArgs_"
+			},
+			"ActionType.AssetsTransfer": {
+				"enum": [
+					"assets.transfer"
+				],
+				"type": "string"
+			},
+			"AssetsTransferArgs": {
+				"description": "Arguments required to Move some assets from the sender account to another.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount transferred."
+					},
+					"target": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero."
+					}
+				},
+				"required": [
+					"id",
+					"target",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsTransfer.AssetsTransferArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsTransfer",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsTransferAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsTransfer.AssetsTransferArgs_"
+			},
+			"ActionType.AssetsTransferKeepAlive": {
+				"enum": [
+					"assets.transferKeepAlive"
+				],
+				"type": "string"
+			},
+			"AssetsTransferKeepAliveArgs": {
+				"description": "Arguments required to Move some assets from the sender account to another, keeping the sender account alive.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount transferred."
+					},
+					"target": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero."
+					}
+				},
+				"required": [
+					"id",
+					"target",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsTransferKeepAlive.AssetsTransferKeepAliveArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsTransferKeepAlive",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsTransferKeepAliveAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsTransferKeepAlive.AssetsTransferKeepAliveArgs_"
+			},
+			"ActionType.AssetsForceTransfer": {
+				"enum": [
+					"assets.forceTransfer"
+				],
+				"type": "string"
+			},
+			"AssetsForceTransferArgs": {
+				"description": "Arguments required to Move some assets from one account to another.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount transferred."
+					},
+					"source": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be debited."
+					},
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero."
+					}
+				},
+				"required": [
+					"id",
+					"source",
+					"dest",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsForceTransfer.AssetsForceTransferArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsForceTransferArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsForceTransfer",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsForceTransferAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsForceTransfer.AssetsForceTransferArgs_"
+			},
+			"ActionType.AssetsFreezeAccount": {
+				"enum": [
+					"assets.freeze"
+				],
+				"type": "string"
+			},
+			"AssetsFreezeAccountArgs": {
+				"description": "Arguments required to Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be frozen."
+					},
+					"who": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be frozen."
+					}
+				},
+				"required": [
+					"id",
+					"who"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsFreezeAccount.AssetsFreezeAccountArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsFreezeAccountArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsFreezeAccount",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsFreezeAccountAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsFreezeAccount.AssetsFreezeAccountArgs_"
+			},
+			"ActionType.AssetsThawAccount": {
+				"enum": [
+					"assets.thaw"
+				],
+				"type": "string"
+			},
+			"AssetsThawAccountArgs": {
+				"description": "Arguments required to Allow unprivileged transfers to and from an account again.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be frozen."
+					},
+					"who": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be unfrozen."
+					}
+				},
+				"required": [
+					"id",
+					"who"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsThawAccount.AssetsThawAccountArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsThawAccountArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsThawAccount",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsThawAccountAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsThawAccount.AssetsThawAccountArgs_"
+			},
+			"ActionType.AssetsFreezeAsset": {
+				"enum": [
+					"assets.freezeAsset"
+				],
+				"type": "string"
+			},
+			"AssetsFreezeAssetArgs": {
+				"description": "Arguments required to Disallow further unprivileged transfers for the asset class.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be frozen."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsFreezeAsset.AssetsFreezeAssetArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsFreezeAssetArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsFreezeAsset",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsFreezeAssetAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsFreezeAsset.AssetsFreezeAssetArgs_"
+			},
+			"ActionType.AssetsThawAsset": {
+				"enum": [
+					"assets.thawAsset"
+				],
+				"type": "string"
+			},
+			"AssetsThawAssetArgs": {
+				"description": "Arguments required to Allow unprivileged transfers for the asset again.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be thawed."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsThawAsset.AssetsThawAssetArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsThawAssetArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsThawAsset",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsThawAssetAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsThawAsset.AssetsThawAssetArgs_"
+			},
+			"ActionType.AssetsTransferOwnership": {
+				"enum": [
+					"assets.transferOwnership"
+				],
+				"type": "string"
+			},
+			"AssetsTransferOwnershipArgs": {
+				"description": "Arguments required to Change the Owner of an asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset."
+					},
+					"owner": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The new Owner of this asset."
+					}
+				},
+				"required": [
+					"id",
+					"owner"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsTransferOwnership.AssetsTransferOwnershipArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferOwnershipArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsTransferOwnership",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsTransferOwnershipAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsTransferOwnership.AssetsTransferOwnershipArgs_"
+			},
+			"ActionType.AssetsSetMetadata": {
+				"enum": [
+					"assets.setMetadata"
+				],
+				"type": "string"
+			},
+			"BlockchainGenericText": {
+				"type": "string",
+				"description": "Text or metadata represented by string (Bytes). Limit is defined in `StringLimit` const."
+			},
+			"AssetsSetMetadataArgs": {
+				"description": "Arguments required to Set the raw metadata for an asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to update."
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The data of metadata. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"id",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsSetMetadata.AssetsSetMetadataArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsSetMetadataArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsSetMetadata",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsSetMetadataAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsSetMetadata.AssetsSetMetadataArgs_"
+			},
+			"ActionType.AssetsSetMinBalance": {
+				"enum": [
+					"assets.setMinBalance"
+				],
+				"type": "string"
+			},
+			"AssetsSetMinBalanceArgs": {
+				"description": "Arguments required to Sets the minimum balance of an asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset."
+					},
+					"minBalance": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The new value of `min_balance`."
+					}
+				},
+				"required": [
+					"id",
+					"minBalance"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AssetsSetMinBalance.AssetsSetMinBalanceArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsSetMinBalanceArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AssetsSetMinBalance",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AssetsSetMinBalanceAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AssetsSetMinBalance.AssetsSetMinBalanceArgs_"
+			},
+			"ActionType.NftsCreateCollection": {
+				"enum": [
+					"nfts.create"
+				],
+				"type": "string"
+			},
+			"NftsCreateCollectionArgs": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsCreateCollection.NftsCreateCollectionArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsCreateCollectionArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsCreateCollection",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsCreateCollectionAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsCreateCollection.NftsCreateCollectionArgs_"
+			},
+			"ActionType.NftsDestroyCollection": {
+				"enum": [
+					"nfts.destroy"
+				],
+				"type": "string"
+			},
+			"NftWitness": {
+				"properties": {
+					"attributes": {
+						"$ref": "#/components/schemas/Numberish"
+					},
+					"itemConfigs": {
+						"$ref": "#/components/schemas/Numberish"
+					},
+					"itemMetadatas": {
+						"$ref": "#/components/schemas/Numberish"
+					}
+				},
+				"required": [
+					"attributes",
+					"itemConfigs",
+					"itemMetadatas"
+				],
+				"type": "object"
+			},
+			"NftsDestroyCollectionArgs": {
+				"description": "Arguments required to Destroy a collection of fungible items.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection to be destroyed."
+					},
+					"witness": {
+						"$ref": "#/components/schemas/NftWitness",
+						"description": "Information on the items minted in the collection. This must be correct."
+					}
+				},
+				"required": [
+					"collection",
+					"witness"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsDestroyCollection.NftsDestroyCollectionArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsDestroyCollectionArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsDestroyCollection",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsDestroyCollectionAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsDestroyCollection.NftsDestroyCollectionArgs_"
+			},
+			"ActionType.NftsMintItem": {
+				"enum": [
+					"nfts.mint"
+				],
+				"type": "string"
+			},
+			"NftsMintItemArgs": {
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"mintTo": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"collection",
+					"item",
+					"mintTo"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsMintItem.NftsMintItemArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsMintItemArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsMintItem",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsMintItemAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsMintItem.NftsMintItemArgs_"
+			},
+			"ActionType.NftsBurnItem": {
+				"enum": [
+					"nfts.burn"
+				],
+				"type": "string"
+			},
+			"NftsBurnItemArgs": {
+				"description": "Arguments required to Destroy a single item.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be burned."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to be burned."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsBurnItem.NftsBurnItemArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsBurnItemArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsBurnItem",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsBurnItemAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsBurnItem.NftsBurnItemArgs_"
+			},
+			"ActionType.NftsTransferItem": {
+				"enum": [
+					"nfts.transfer"
+				],
+				"type": "string"
+			},
+			"NftsTransferItemArgs": {
+				"description": "Arguments required to Move an item from the sender account to another.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be transferred."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to be transferred."
+					},
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to receive ownership of the item."
+					}
+				},
+				"required": [
+					"collection",
+					"item",
+					"dest"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsTransferItem.NftsTransferItemArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsTransferItemArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsTransferItem",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsTransferItemAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsTransferItem.NftsTransferItemArgs_"
+			},
+			"ActionType.NftsLockItemTransfer": {
+				"enum": [
+					"nfts.lockItemTransfer"
+				],
+				"type": "string"
+			},
+			"NftsLockItemTransferArgs": {
+				"description": "Arguments required to Disallow further unprivileged transfer of an item.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be changed."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to become non-transferable."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsLockItemTransfer.NftsLockItemTransferArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsLockItemTransferArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsLockItemTransfer",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsLockItemTransferAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsLockItemTransfer.NftsLockItemTransferArgs_"
+			},
+			"ActionType.NftsUnlockItemTransfer": {
+				"enum": [
+					"nfts.unlockItemTransfer"
+				],
+				"type": "string"
+			},
+			"NftsUnlockItemTransferArgs": {
+				"description": "Arguments required to Re-allow unprivileged transfer of an item.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be changed."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to become transferable."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsUnlockItemTransfer.NftsUnlockItemTransferArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsUnlockItemTransferArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsUnlockItemTransfer",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsUnlockItemTransferAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsUnlockItemTransfer.NftsUnlockItemTransferArgs_"
+			},
+			"ActionType.NftsTransferCollectionOwnership": {
+				"enum": [
+					"nfts.transferOwnership"
+				],
+				"type": "string"
+			},
+			"NftsTransferCollectionOwnershipArgs": {
+				"description": "Arguments required to Change the Owner of a collection.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection whose owner should be changed."
+					},
+					"newOwner": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"collection",
+					"newOwner"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsTransferCollectionOwnership.NftsTransferCollectionOwnershipArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsTransferCollectionOwnership",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsTransferCollectionOwnershipAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsTransferCollectionOwnership.NftsTransferCollectionOwnershipArgs_"
+			},
+			"ActionType.NftsSetItemMetadata": {
+				"enum": [
+					"nfts.setMetadata"
+				],
+				"type": "string"
+			},
+			"NftsSetItemMetadataArgs": {
+				"description": "Arguments required to Set the metadata for an item.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose item's metadata to set."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the item whose metadata to set."
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The general information of this item. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"collection",
+					"item",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsSetItemMetadata.NftsSetItemMetadataArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsSetItemMetadataArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsSetItemMetadata",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsSetItemMetadataAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsSetItemMetadata.NftsSetItemMetadataArgs_"
+			},
+			"ActionType.NftsClearItemMetadata": {
+				"enum": [
+					"nfts.clearMetadata"
+				],
+				"type": "string"
+			},
+			"NftsClearItemMetadataArgs": {
+				"description": "Arguments required to Clear the metadata for an item.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose item's metadata to clear."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the item whose metadata to clear."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsClearItemMetadata.NftsClearItemMetadataArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsClearItemMetadataArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsClearItemMetadata",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsClearItemMetadataAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsClearItemMetadata.NftsClearItemMetadataArgs_"
+			},
+			"ActionType.NftsSetCollectionMetadata": {
+				"enum": [
+					"nfts.setCollectionMetadata"
+				],
+				"type": "string"
+			},
+			"NftsSetCollectionMetadataArgs": {
+				"description": "Arguments required to Set the metadata for a collection.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the item whose metadata to update."
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The general information of this item. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"collection",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsSetCollectionMetadata.NftsSetCollectionMetadataArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsSetCollectionMetadataArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsSetCollectionMetadata",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsSetCollectionMetadataAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsSetCollectionMetadata.NftsSetCollectionMetadataArgs_"
+			},
+			"ActionType.NftsClearCollectionMetadata": {
+				"enum": [
+					"nfts.clearCollectionMetadata"
+				],
+				"type": "string"
+			},
+			"NftsClearCollectionMetadataArgs": {
+				"description": "Arguments required to Clear the metadata for a collection.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose metadata to clear."
+					}
+				},
+				"required": [
+					"collection"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsClearCollectionMetadata.NftsClearCollectionMetadataArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsClearCollectionMetadataArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsClearCollectionMetadata",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsClearCollectionMetadataAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsClearCollectionMetadata.NftsClearCollectionMetadataArgs_"
+			},
+			"ActionType.NftsAcceptCollectionOwnership": {
+				"enum": [
+					"nfts.setAcceptOwnership"
+				],
+				"type": "string"
+			},
+			"NftsAcceptCollectionOwnershipArgs": {
+				"description": "Arguments required to Set (or reset) the acceptance of ownership for a particular account.",
+				"properties": {
+					"maybeCollection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal."
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.NftsAcceptCollectionOwnership.NftsAcceptCollectionOwnershipArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.NftsAcceptCollectionOwnership",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"NftsAcceptCollectionOwnershipAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.NftsAcceptCollectionOwnership.NftsAcceptCollectionOwnershipArgs_"
+			},
+			"ActionType.AppTransactionsSubmitClearingTransaction": {
+				"enum": [
+					"appTransactions.submitClearingTransaction"
+				],
+				"type": "string"
+			},
+			"CTActionCall": {
+				"anyOf": [
+					{
+						"properties": {
+							"args": {
+								"type": "string"
+							},
+							"callIndex": {
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					{
+						"type": "string"
+					}
+				],
+				"description": "Call presented as object, or\nthe encoded method (with arguments) in hex."
+			},
+			"CTAction": {
+				"items": {
+					"anyOf": [
+						{
+							"$ref": "#/components/schemas/CTActionOrigin"
+						},
+						{
+							"$ref": "#/components/schemas/CTActionCall"
+						}
+					]
+				},
+				"type": "array",
+				"description": "Represents an action in a clearing transaction."
+			},
+			"CTAtomicActions": {
+				"items": {
+					"items": {
+						"$ref": "#/components/schemas/CTAction"
+					},
+					"type": "array"
+				},
+				"type": "array",
+				"description": "A nested array of actions (Vec<Vec<Action>> in rust)."
+			},
+			"AppTransactionsSubmitClearingTransactionArgs": {
+				"description": "Arguments required to Submit a Clearing transaction.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"atomics": {
+						"$ref": "#/components/schemas/CTAtomicActions"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"atomics"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicActionGeneric_ActionType.AppTransactionsSubmitClearingTransaction.AppTransactionsSubmitClearingTransactionArgs_": {
+				"properties": {
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionArgs",
+						"description": "The arguments for the action."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					},
+					"actionType": {
+						"$ref": "#/components/schemas/ActionType.AppTransactionsSubmitClearingTransaction",
+						"description": "The type of action to be performed"
+					}
+				},
+				"required": [
+					"arguments",
+					"origin",
+					"actionType"
+				],
+				"type": "object"
+			},
+			"AppTransactionsSubmitClearingTransactionAction": {
+				"$ref": "#/components/schemas/CTAtomicActionGeneric_ActionType.AppTransactionsSubmitClearingTransaction.AppTransactionsSubmitClearingTransactionArgs_"
+			},
+			"CTAtomicAction": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllowDeathAction"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveAction"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsCreateAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsStartDestroyAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyAccountsAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyApprovalsAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFinishDestroyAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsMintAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsBurnAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsForceTransferAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAccountAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAccountAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAssetAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAssetAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferOwnershipAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMinBalanceAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsCreateCollectionAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsDestroyCollectionAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsMintItemAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsBurnItemAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferItemAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsLockItemTransferAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsUnlockItemTransferAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetItemMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearItemMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetCollectionMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearCollectionMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipAction"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionAction"
+					}
+				],
+				"description": "Represents a single action within an atomic operation."
+			},
+			"CTAtomic": {
+				"description": "Represents an atomic operation.",
+				"properties": {
+					"actions": {
+						"items": {
+							"$ref": "#/components/schemas/CTAtomicAction"
+						},
+						"type": "array",
+						"description": "A list of actions that make up the atomic operation."
+					}
+				},
+				"required": [
+					"actions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ClearingTransactionPayload": {
+				"description": "Payload for a clearing transaction.",
+				"properties": {
+					"signatory": {
+						"type": "string",
+						"description": "The signatory responsible for the transaction."
+					},
+					"app_agent_id": {
+						"type": "number",
+						"format": "double",
+						"description": "The ID of the application agent initiating the transaction."
+					},
+					"atomics": {
+						"items": {
+							"$ref": "#/components/schemas/CTAtomic"
+						},
+						"type": "array",
+						"description": "A list of atomic operations included in the transaction."
+					}
+				},
+				"required": [
+					"signatory",
+					"app_agent_id",
+					"atomics"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "@traittech/actiongate",
+		"version": "0.1.0",
+		"description": "The app provides a convenient REST API to submit new transactions to the TRAIT blockchain.",
+		"license": {
+			"name": "Apache-2.0"
+		},
+		"contact": {
+			"name": "TRAIT Team"
+		}
+	},
+	"paths": {
+		"/submit/transaction": {
+			"post": {
+				"operationId": "SubmitTransaction",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TransactionPayload"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/submit/clearing_transaction": {
+			"post": {
+				"operationId": "SubmitClearingTransaction",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ClearingTransactionPayload"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

@@ -13,17 +13,28 @@ export type CTActionOrigin =
   | { NamedAddressName: any };
 
 /**
+ * Call presented as object, or
+ * the encoded method (with arguments) in hex.
+ */
+export type CTActionCall = { callIndex?: string; args?: string } | string;
+
+/**
  * Represents an action in a clearing transaction.
  */
-export type CTAction = [
-  // The origin of the action
-  CTActionOrigin,
-  /**
-   * The call to be made by the action
-   * To take advantage of txwrapper methods, this could be UnsignedTransaction.method.
-   */
-  { callIndex?: string; args?: string } | string,
-];
+export type CTAction = Array<CTActionOrigin | CTActionCall>;
+
+// /**
+//  * Represents an action in a clearing transaction.
+//  */
+// export type CTAction = [
+//   // The origin of the action
+//   CTActionOrigin,
+//   /**
+//    * The call to be made by the action
+//    * To take advantage of txwrapper methods, this could be UnsignedTransaction.method.
+//    */
+//   CTActionCall,
+// ];
 
 /**
  * A nested array of actions (Vec<Vec<Action>> in rust).

@@ -1,84 +1,126 @@
-import type { Request, Response, NextFunction } from 'express';
+import {
+  Body,
+  Controller,
+  Get,
+  Path,
+  Post,
+  Query,
+  Route,
+  SuccessResponse,
+} from "tsoa";
 
 import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
+import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import { loadConfig, getPrivateKeyById } from '../functions/config';
 import logger from '../functions/logger';
 import { getKeyringPairByPrivateKey } from '../functions/keyring';
-import { TransactionPayloadSchema } from '../validator/schemas';
+import { TransactionPayloadSchema, ClearingTransactionPayloadSchema } from '../validator/schemas';
 
 import type { TransactionPayload, TransactionResponse } from '../types/api/transaction';
+import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
 
 const config = loadConfig();
 
 /**
  * Controller to handle transaction submission.
- *
- * @param req - The Express Request object.
- * @param res - The Express Response object.
- * @param next - The Express NextFunction callback to pass control to the next middleware.
  */
-const submitTransaction = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  try {
-    // Extract and validate the payload
-    logger.info('>> submitTransaction endpoint ');
-    const payload: TransactionPayload = req.body;
+@Route('submit')
+export class SubmitTransactionsController extends Controller {
+  protected readonly config = loadConfig();
 
-    // Validate required fields (basic validation)
-    try {
-      TransactionPayloadSchema.parse(payload);
-    } catch (error) {
-      logger.error('Missing or invalid required fields in payload', error);
-      res.status(400).json({
-        status: 'failed',
-        error_code: 400,
-        error_description: 'Missing or invalid required fields in payload',
-      });
-      return;
-    }
+  protected onSuccess(signedTxHash: string): TransactionResponse {
+    logger.info('Transaction submitted successfully');
 
-    // Retrieve the private key for the signatory
-    logger.info('Retrieving private key for the signatory...');
-    const privateKey = getPrivateKeyById(config, payload.signatory);
-    if (!privateKey) {
-      logger.error('Signatory not found');
-      res.status(404).json({
-        status: 'failed',
-        error_code: 404,
-        error_description: 'Signatory not found',
-      });
-      return;
-    }
-
-    const callerKeyPair = getKeyringPairByPrivateKey(privateKey);
-
-    // Create and broadcast the signed transaction
-    logger.info('Creating and broadcasting signed transaction...');
-    const signedTx = await createSignedTransactionAndBroadcast(
-      callerKeyPair,
-      payload.module_name,
-      payload.function_name,
-      payload.arguments
-    );
+    this.setStatus(200);
 
     // Create response based on the processing result
     const response: TransactionResponse = {
       status: 'TransactionSubmitted',
-      tx_hash: signedTx,
+      tx_hash: signedTxHash,
     };
 
-    // Send the response
-    logger.info('Transaction submitted successfully');
-    res.json(response);
-  } catch (error) {
-    logger.error('Error creating and broadcasting transaction:', error);
-    // Handle unexpected errors
-    res.status(500).json({
-      status: 'failed',
-      error_code: 500,
-      error_description: 'Internal server error',
-    });
-    next(error);
+    return response;
   }
-};
 
-export default { submitTransaction };
+  protected onError(code: number, description: string, error?: any): TransactionResponse {
+    logger.error(description, error);
+
+    this.setStatus(code);
+
+    const response: TransactionResponse = {
+      status: 'failed',
+      error_code: code,
+      error_description: description,
+    };
+
+    return response;
+  }
+
+  @Post('/transaction')
+  public async submitTransaction(@Body() payload: TransactionPayload): Promise<TransactionResponse> {
+    try {
+      logger.info('>> submitTransaction endpoint');
+
+      // Validate required fields (basic validation)
+      try {
+        TransactionPayloadSchema.parse(payload);
+      } catch (error) {
+        return this.onError(400, 'Missing or invalid required fields in payload', error);
+      }
+
+      // Retrieve the private key for the signatory
+      logger.info('Retrieving private key for the signatory...');
+
+      const privateKey = getPrivateKeyById(config, payload.signatory);
+
+      if (!privateKey) {
+        return this.onError(404, 'Signatory not found');
+      }
+
+      const callerKeyPair = getKeyringPairByPrivateKey(privateKey);
+
+      // Create and broadcast the signed transaction
+      logger.info('Creating and broadcasting signed transaction...');
+
+      const signedTx = await createSignedTransactionAndBroadcast(callerKeyPair, payload);
+
+      return this.onSuccess(signedTx);
+    } catch(error) {
+      return this.onError(500, 'Error creating and broadcasting transaction', error);
+    }
+  }
+
+  @Post('/clearing_transaction')
+  public async submitClearingTransaction(@Body() payload: ClearingTransactionPayload): Promise<TransactionResponse> {
+    try {
+      logger.info('>> submitClearingTransaction endpoint');
+  
+      // Validate required fields (basic validation)
+      try {
+        ClearingTransactionPayloadSchema.parse(payload);
+      } catch (error) {
+        return this.onError(400, 'Missing or invalid required fields in payload', error);
+      }
+
+      // Retrieve the private key for the signatory
+      logger.debug('Retrieving private key for the signatory...');
+
+      const privateKey = getPrivateKeyById(config, payload.signatory);
+
+      if (!privateKey) {
+        return this.onError(404, 'Signatory not found');
+      }
+
+      const callerKeyPair = getKeyringPairByPrivateKey(privateKey);
+
+      // Create and broadcast the signed clearing transaction
+      logger.info('Creating and broadcasting signed clearing transaction...');
+
+      const signedTx = await createClearingTransactionAndBroadcast(callerKeyPair, payload);
+  
+      return this.onSuccess(signedTx);
+    } catch (error) {
+      return this.onError(500, 'Error creating and broadcasting clearing transaction', error);
+    }
+  }
+}

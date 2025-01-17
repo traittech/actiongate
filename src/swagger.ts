@@ -1,10 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+import SwaggerUi from 'swagger-ui-express';
+import swaggerDocument from './docs/swagger.json';
 
-import jsyaml from 'js-yaml';
-import swaggerUi from 'swagger-ui-express';
-
-const swaggerFilePath = path.join(__dirname, '../swagger/swagger.yaml');
-const swaggerSpec = jsyaml.load(fs.readFileSync(swaggerFilePath, 'utf8')) as object;
-
-export { swaggerSpec, swaggerUi };
+export { SwaggerUi, swaggerDocument };

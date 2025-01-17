@@ -1,13 +1,12 @@
-import express, { Request, Response, NextFunction } from 'express';
+import { Router } from 'express';
 
-import clearingtransactionController from '../controllers/ClearingTransaction';
-import transactionController from '../controllers/Transaction';
+import { RegisterRoutes } from './api';
 import { loadConfig } from '../functions/config';
 import checkApiKey from '../middleware/apikey';
 import enforceHttps from '../middleware/enforceHttps';
-import { swaggerSpec, swaggerUi } from '../swagger';
+import { SwaggerUi, swaggerDocument } from '../swagger';
 
-const router = express.Router();
+export const router = Router();
 
 // Apply checkApiKey middleware to all routes
 router.use(checkApiKey);
@@ -16,12 +15,13 @@ if (!loadConfig().api_ssl_enabled) {
   router.use(enforceHttps);
 }
 
+// Controllers routes
+RegisterRoutes(router);
+
 // Define route handlers
-router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+router.use('/api-docs', SwaggerUi.serve, SwaggerUi.setup(swaggerDocument));
 router.use('/api-docs.json', (req, res) => {
-  res.json(swaggerSpec);
+  res.json(swaggerDocument);
 });
-router.post('/submit/transaction', transactionController.submitTransaction);
-router.post('/submit/clearing_transaction', clearingtransactionController.submitClearingTransaction);
 
 export default router;
