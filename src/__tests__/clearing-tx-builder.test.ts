@@ -258,8 +258,8 @@ describe('Clearing Transaction Builder', () => {
                 actionType: ActionType.NftsLockItemTransfer,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
-                  collection: (u32_MIN - BigInt(1)).toString(), // error: fewer than min
-                  item: (u32_MAX + BigInt(1)).toString(), // error: greater than max
+                  collection: Number(u32_MIN - BigInt(1)), // error: fewer than min
+                  item: Number(u32_MAX + BigInt(1)), // error: greater than max
                 },
               } as CTAtomicAction,
             ],

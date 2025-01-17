@@ -14,7 +14,7 @@ export const u32_MAX = BigInt('4294967295');
 export const u128_MIN = BigInt(0);
 
 /**
- * The largest value that can be represented by `u128` integer type (2128 − 1).
+ * The largest value that can be represented by `u128` integer type (2^128 − 1).
  */
 export const u128_MAX = BigInt('340282366920938463463374607431768211455');
 

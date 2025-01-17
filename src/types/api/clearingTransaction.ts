@@ -5,16 +5,33 @@ import type { CTAtomicAction } from '../../txwrapper';
  * The origin type for each Action in CT
  */
 export type CTActionOrigin =
-  | { AppAgentId: any }
-  | { AppAgentAddress: string }
-  | { TransactionalAddressId: any }
-  | { TransactionalAddress: any }
-  | { NamedAddress: any }
-  | { NamedAddressName: any };
+  | {
+      /** The ID of the application agent. */
+      AppAgentId: any
+    }
+  | {
+      /** The address of the application agent. */
+      AppAgentAddress: string
+    }
+  | {
+      /** The ID of the transactional address. */
+      TransactionalAddressId: any
+    }
+  | {
+      /** The transactional address. */
+      TransactionalAddress: any
+    }
+  | {
+      /** The named address. */
+      NamedAddress: any
+    }
+  | {
+      /** The name of the named address. */
+      NamedAddressName: any
+    };
 
 /**
- * Call presented as object, or
- * the encoded method (with arguments) in hex.
+ * Action call presented as object, or string encoded method (with arguments) in hex.
  */
 export type CTActionCall = { callIndex?: string; args?: string } | string;
 

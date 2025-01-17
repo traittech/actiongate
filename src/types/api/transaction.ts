@@ -25,20 +25,14 @@ export interface TransactionPayload {
   arguments: Args;
 }
 
-/**
- * Response from a transaction request.
- */
-export interface TransactionResponse {
+export interface BaseTransactionResponse {
   /**
    * The status of the transaction.
    */
   status: string;
+}
 
-  /**
-   * The transaction hash, if available.
-   */
-  tx_hash?: string;
-
+export interface TransactionErrorResponse extends BaseTransactionResponse {
   /**
    * An error code, if the transaction failed.
    */
@@ -49,3 +43,16 @@ export interface TransactionResponse {
    */
   error_description?: string;
 }
+
+export interface TransactionSuccessResponse extends BaseTransactionResponse {
+  /**
+   * The transaction hash, if available.
+   */
+  tx_hash: string;
+}
+
+
+/**
+ * Response from a transaction request.
+ */
+export type TransactionResponse = TransactionSuccessResponse | TransactionErrorResponse;

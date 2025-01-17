@@ -7,8 +7,7 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"TransactionResponse": {
-				"description": "Response from a transaction request.",
+			"TransactionSuccessResponse": {
 				"properties": {
 					"status": {
 						"type": "string",
@@ -17,6 +16,20 @@
 					"tx_hash": {
 						"type": "string",
 						"description": "The transaction hash, if available."
+					}
+				},
+				"required": [
+					"status",
+					"tx_hash"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionErrorResponse": {
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "The status of the transaction."
 					},
 					"error_code": {
 						"type": "number",
@@ -33,6 +46,17 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"TransactionResponse": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/TransactionSuccessResponse"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionErrorResponse"
+					}
+				],
+				"description": "Response from a transaction request."
 			},
 			"AnyJson": {
 				"anyOf": [
@@ -113,7 +137,9 @@
 				"anyOf": [
 					{
 						"properties": {
-							"AppAgentId": {}
+							"AppAgentId": {
+								"description": "The ID of the application agent."
+							}
 						},
 						"required": [
 							"AppAgentId"
@@ -123,7 +149,8 @@
 					{
 						"properties": {
 							"AppAgentAddress": {
-								"type": "string"
+								"type": "string",
+								"description": "The address of the application agent."
 							}
 						},
 						"required": [
@@ -133,7 +160,9 @@
 					},
 					{
 						"properties": {
-							"TransactionalAddressId": {}
+							"TransactionalAddressId": {
+								"description": "The ID of the transactional address."
+							}
 						},
 						"required": [
 							"TransactionalAddressId"
@@ -142,7 +171,9 @@
 					},
 					{
 						"properties": {
-							"TransactionalAddress": {}
+							"TransactionalAddress": {
+								"description": "The transactional address."
+							}
 						},
 						"required": [
 							"TransactionalAddress"
@@ -151,7 +182,9 @@
 					},
 					{
 						"properties": {
-							"NamedAddress": {}
+							"NamedAddress": {
+								"description": "The named address."
+							}
 						},
 						"required": [
 							"NamedAddress"
@@ -160,7 +193,9 @@
 					},
 					{
 						"properties": {
-							"NamedAddressName": {}
+							"NamedAddressName": {
+								"description": "The name of the named address."
+							}
 						},
 						"required": [
 							"NamedAddressName"
@@ -172,9 +207,9 @@
 			},
 			"BlockchainGenericAccount": {
 				"type": "string",
-				"description": "Blockchain account address, represented by SS58 string"
+				"description": "The account address on the blockchain.\nTypically, it is a string of alphanumeric characters, encoded in SS58 format."
 			},
-			"Numberish": {
+			"UINT128": {
 				"anyOf": [
 					{
 						"type": "number",
@@ -184,14 +219,16 @@
 						"type": "string"
 					}
 				],
-				"description": "Number presented as plain number or string"
+				"description": "Numeric value, presented as plain number or string",
+				"minimum": 0,
+				"maximum": 3.402823669209385e+38
 			},
 			"BlockchainGenericBalance": {
-				"$ref": "#/components/schemas/Numberish",
-				"description": "Amount, Balance (u128)"
+				"$ref": "#/components/schemas/UINT128",
+				"description": "The balance, represented as a numeric value (number or string)."
 			},
 			"BalancesTransferAllowDeathArgs": {
-				"description": "Arguments required to Transfer some liquid free balance to another account.",
+				"description": "Arguments required to Transfer some liquid free balance to another account.\n\n`dest`\n\n`value`",
 				"properties": {
 					"dest": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount"
@@ -239,7 +276,7 @@
 				"type": "string"
 			},
 			"BalancesTransferKeepAliveArgs": {
-				"description": "Arguments required to Same as the [`transfer_allow_death`] call, but with a check that the transfer will not",
+				"description": "Arguments required to Same as the [`transfer_allow_death`] call, but with a check that the transfer will not\n\n`dest`\n\n`value`",
 				"properties": {
 					"dest": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount"
@@ -291,7 +328,7 @@
 				"description": "Boolean type for blockchain (bool)"
 			},
 			"BalancesTransferAllArgs": {
-				"description": "Arguments required to Transfer the entire transferable balance from the caller account.",
+				"description": "Arguments required to Transfer the entire transferable balance from the caller account.\n\n`dest` - The recipient of the transfer.\n\n`keepAlive`",
 				"properties": {
 					"dest": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount",
@@ -340,6 +377,7 @@
 				"type": "string"
 			},
 			"AssetsCreateArgs": {
+				"description": "\n`minBalance`",
 				"properties": {
 					"minBalance": {
 						"$ref": "#/components/schemas/BlockchainGenericBalance"
@@ -382,12 +420,19 @@
 				],
 				"type": "string"
 			},
+			"UINT32": {
+				"type": "integer",
+				"format": "int32",
+				"description": "Numeric value, presented as plain number",
+				"minimum": 0,
+				"maximum": 4294967295
+			},
 			"BlockchainGenericId": {
-				"$ref": "#/components/schemas/Numberish",
-				"description": "Asset Id, Collection Id, Agent Id (u32)"
+				"$ref": "#/components/schemas/UINT32",
+				"description": "A unique identifier (Asset, Collection, Agent).\nTypically, it is a numeric value."
 			},
 			"AssetsStartDestroyArgs": {
-				"description": "Arguments required to Start the process of destroying a fungible asset class.",
+				"description": "Arguments required to Start the process of destroying a fungible asset class.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -432,7 +477,7 @@
 				"type": "string"
 			},
 			"AssetsDestroyAccountsArgs": {
-				"description": "Arguments required to Destroy all accounts associated with a given asset.",
+				"description": "Arguments required to Destroy all accounts associated with a given asset.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -477,7 +522,7 @@
 				"type": "string"
 			},
 			"AssetsDestroyApprovalsArgs": {
-				"description": "Arguments required to Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).",
+				"description": "Arguments required to Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -522,7 +567,7 @@
 				"type": "string"
 			},
 			"AssetsFinishDestroyArgs": {
-				"description": "Arguments required to Complete destroying asset and unreserve currency.",
+				"description": "Arguments required to Complete destroying asset and unreserve currency.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -567,7 +612,7 @@
 				"type": "string"
 			},
 			"AssetsMintArgs": {
-				"description": "Arguments required to Mint assets of a particular class.",
+				"description": "Arguments required to Mint assets of a particular class.\n\n`id` - The identifier of the asset to have some amount minted.\n\n`beneficiary` - The account to be credited with the minted assets.\n\n`amount` - The amount of the asset to be minted.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -622,7 +667,7 @@
 				"type": "string"
 			},
 			"AssetsBurnArgs": {
-				"description": "Arguments required to Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.",
+				"description": "Arguments required to Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.\n\n`id` - The identifier of the asset to have some amount burned.\n\n`who` - The account to be debited from.\n\n`amount` - The maximum amount by which `who`'s balance should be reduced.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -677,7 +722,7 @@
 				"type": "string"
 			},
 			"AssetsTransferArgs": {
-				"description": "Arguments required to Move some assets from the sender account to another.",
+				"description": "Arguments required to Move some assets from the sender account to another.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -732,7 +777,7 @@
 				"type": "string"
 			},
 			"AssetsTransferKeepAliveArgs": {
-				"description": "Arguments required to Move some assets from the sender account to another, keeping the sender account alive.",
+				"description": "Arguments required to Move some assets from the sender account to another, keeping the sender account alive.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -787,7 +832,7 @@
 				"type": "string"
 			},
 			"AssetsForceTransferArgs": {
-				"description": "Arguments required to Move some assets from one account to another.",
+				"description": "Arguments required to Move some assets from one account to another.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`source` - The account to be debited.\n\n`dest` - The account to be credited.\n\n`amount` - The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -847,7 +892,7 @@
 				"type": "string"
 			},
 			"AssetsFreezeAccountArgs": {
-				"description": "Arguments required to Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`",
+				"description": "Arguments required to Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`\n\n`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be frozen.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -897,7 +942,7 @@
 				"type": "string"
 			},
 			"AssetsThawAccountArgs": {
-				"description": "Arguments required to Allow unprivileged transfers to and from an account again.",
+				"description": "Arguments required to Allow unprivileged transfers to and from an account again.\n\n`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be unfrozen.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -947,7 +992,7 @@
 				"type": "string"
 			},
 			"AssetsFreezeAssetArgs": {
-				"description": "Arguments required to Disallow further unprivileged transfers for the asset class.",
+				"description": "Arguments required to Disallow further unprivileged transfers for the asset class.\n\n`id` - The identifier of the asset to be frozen.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -992,7 +1037,7 @@
 				"type": "string"
 			},
 			"AssetsThawAssetArgs": {
-				"description": "Arguments required to Allow unprivileged transfers for the asset again.",
+				"description": "Arguments required to Allow unprivileged transfers for the asset again.\n\n`id` - The identifier of the asset to be thawed.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1037,7 +1082,7 @@
 				"type": "string"
 			},
 			"AssetsTransferOwnershipArgs": {
-				"description": "Arguments required to Change the Owner of an asset.",
+				"description": "Arguments required to Change the Owner of an asset.\n\n`id` - The identifier of the asset.\n\n`owner` - The new Owner of this asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1088,10 +1133,11 @@
 			},
 			"BlockchainGenericText": {
 				"type": "string",
-				"description": "Text or metadata represented by string (Bytes). Limit is defined in `StringLimit` const."
+				"description": "Text or metadata represented by string.\nCharacters limit is defined in `StringLimit` const on blockchain.",
+				"maxLength": 256
 			},
 			"AssetsSetMetadataArgs": {
-				"description": "Arguments required to Set the raw metadata for an asset.",
+				"description": "Arguments required to Set the raw metadata for an asset.\n\n`id` - The identifier of the asset to update.\n\n`data` - The data of metadata. Limited in length by `StringLimit`.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1141,7 +1187,7 @@
 				"type": "string"
 			},
 			"AssetsSetMinBalanceArgs": {
-				"description": "Arguments required to Sets the minimum balance of an asset.",
+				"description": "Arguments required to Sets the minimum balance of an asset.\n\n`id` - The identifier of the asset.\n\n`minBalance` - The new value of `min_balance`.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1229,13 +1275,13 @@
 			"NftWitness": {
 				"properties": {
 					"attributes": {
-						"$ref": "#/components/schemas/Numberish"
+						"$ref": "#/components/schemas/UINT32"
 					},
 					"itemConfigs": {
-						"$ref": "#/components/schemas/Numberish"
+						"$ref": "#/components/schemas/UINT32"
 					},
 					"itemMetadatas": {
-						"$ref": "#/components/schemas/Numberish"
+						"$ref": "#/components/schemas/UINT32"
 					}
 				},
 				"required": [
@@ -1246,7 +1292,7 @@
 				"type": "object"
 			},
 			"NftsDestroyCollectionArgs": {
-				"description": "Arguments required to Destroy a collection of fungible items.",
+				"description": "Arguments required to Destroy a collection of fungible items.\n\n`collection` - The identifier of the collection to be destroyed.\n\n`witness` - Information on the items minted in the collection. This must be correct.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1296,6 +1342,7 @@
 				"type": "string"
 			},
 			"NftsMintItemArgs": {
+				"description": "\n`collection`\n\n`item`\n\n`mintTo`",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -1347,7 +1394,7 @@
 				"type": "string"
 			},
 			"NftsBurnItemArgs": {
-				"description": "Arguments required to Destroy a single item.",
+				"description": "Arguments required to Destroy a single item.\n\n`collection` - The collection of the item to be burned.\n\n`item` - The item to be burned.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1397,7 +1444,7 @@
 				"type": "string"
 			},
 			"NftsTransferItemArgs": {
-				"description": "Arguments required to Move an item from the sender account to another.",
+				"description": "Arguments required to Move an item from the sender account to another.\n\n`collection` - The collection of the item to be transferred.\n\n`item` - The item to be transferred.\n\n`dest` - The account to receive ownership of the item.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1452,7 +1499,7 @@
 				"type": "string"
 			},
 			"NftsLockItemTransferArgs": {
-				"description": "Arguments required to Disallow further unprivileged transfer of an item.",
+				"description": "Arguments required to Disallow further unprivileged transfer of an item.\n\n`collection` - The collection of the item to be changed.\n\n`item` - The item to become non-transferable.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1502,7 +1549,7 @@
 				"type": "string"
 			},
 			"NftsUnlockItemTransferArgs": {
-				"description": "Arguments required to Re-allow unprivileged transfer of an item.",
+				"description": "Arguments required to Re-allow unprivileged transfer of an item.\n\n`collection` - The collection of the item to be changed.\n\n`item` - The item to become transferable.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1552,7 +1599,7 @@
 				"type": "string"
 			},
 			"NftsTransferCollectionOwnershipArgs": {
-				"description": "Arguments required to Change the Owner of a collection.",
+				"description": "Arguments required to Change the Owner of a collection.\n\n`collection` - The collection whose owner should be changed.\n\n`newOwner`",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1601,7 +1648,7 @@
 				"type": "string"
 			},
 			"NftsSetItemMetadataArgs": {
-				"description": "Arguments required to Set the metadata for an item.",
+				"description": "Arguments required to Set the metadata for an item.\n\n`collection` - The identifier of the collection whose item's metadata to set.\n\n`item` - The identifier of the item whose metadata to set.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1656,7 +1703,7 @@
 				"type": "string"
 			},
 			"NftsClearItemMetadataArgs": {
-				"description": "Arguments required to Clear the metadata for an item.",
+				"description": "Arguments required to Clear the metadata for an item.\n\n`collection` - The identifier of the collection whose item's metadata to clear.\n\n`item` - The identifier of the item whose metadata to clear.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1706,7 +1753,7 @@
 				"type": "string"
 			},
 			"NftsSetCollectionMetadataArgs": {
-				"description": "Arguments required to Set the metadata for a collection.",
+				"description": "Arguments required to Set the metadata for a collection.\n\n`collection` - The identifier of the item whose metadata to update.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1756,7 +1803,7 @@
 				"type": "string"
 			},
 			"NftsClearCollectionMetadataArgs": {
-				"description": "Arguments required to Clear the metadata for a collection.",
+				"description": "Arguments required to Clear the metadata for a collection.\n\n`collection` - The identifier of the collection whose metadata to clear.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1801,7 +1848,7 @@
 				"type": "string"
 			},
 			"NftsAcceptCollectionOwnershipArgs": {
-				"description": "Arguments required to Set (or reset) the acceptance of ownership for a particular account.",
+				"description": "Arguments required to Set (or reset) the acceptance of ownership for a particular account.\n\n`maybeCollection` - The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.",
 				"properties": {
 					"maybeCollection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1859,7 +1906,7 @@
 						"type": "string"
 					}
 				],
-				"description": "Call presented as object, or\nthe encoded method (with arguments) in hex."
+				"description": "Action call presented as object, or string encoded method (with arguments) in hex."
 			},
 			"CTAction": {
 				"items": {
@@ -1886,7 +1933,7 @@
 				"description": "A nested array of actions (Vec<Vec<Action>> in rust)."
 			},
 			"AppTransactionsSubmitClearingTransactionArgs": {
-				"description": "Arguments required to Submit a Clearing transaction.",
+				"description": "Arguments required to Submit a Clearing transaction.\n\n`appAgentId`\n\n`atomics`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -2080,7 +2127,13 @@
 				"additionalProperties": false
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"ApiKeyAuth": {
+				"type": "apiKey",
+				"name": "X-API-KEY",
+				"in": "header"
+			}
+		}
 	},
 	"info": {
 		"title": "@traittech/actiongate",
@@ -2099,7 +2152,7 @@
 				"operationId": "SubmitTransaction",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Submitted transaction hash",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -2107,16 +2160,79 @@
 								}
 							}
 						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 400,
+											"error_description": "Missing required fields in payload"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 404,
+											"error_description": "Signatory not found"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 500,
+											"error_description": "Error creating and broadcasting transaction"
+										}
+									}
+								}
+							}
+						}
 					}
 				},
+				"summary": "Submit a transaction",
+				"tags": [
+					"Transactions"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
+					"description": "Payload for submitting a transaction",
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/TransactionPayload"
+								"$ref": "#/components/schemas/TransactionPayload",
+								"description": "Payload for submitting a transaction"
 							}
 						}
 					}
@@ -2128,7 +2244,7 @@
 				"operationId": "SubmitClearingTransaction",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Submitted transaction hash",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -2136,16 +2252,79 @@
 								}
 							}
 						}
+					},
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 400,
+											"error_description": "Missing required fields in payload"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 404,
+											"error_description": "Signatory not found"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 500,
+											"error_description": "Error creating and broadcasting clearing transaction"
+										}
+									}
+								}
+							}
+						}
 					}
 				},
+				"summary": "Submit a clearing transaction",
+				"tags": [
+					"Transactions"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
+					"description": "Payload for submitting a clearing transaction",
 					"required": true,
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/ClearingTransactionPayload"
+								"$ref": "#/components/schemas/ClearingTransactionPayload",
+								"description": "Payload for submitting a clearing transaction"
 							}
 						}
 					}
@@ -2155,7 +2334,8 @@
 	},
 	"servers": [
 		{
-			"url": "/"
+			"url": "http://localhost:8080",
+			"description": "Local server"
 		}
 	]
 }

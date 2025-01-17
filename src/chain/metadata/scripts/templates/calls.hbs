@@ -39,11 +39,15 @@ export function constructUnsignedTransaction(
 
 {{#each items}}
 
-{{#if documentation.short}}
 /**
+{{#if documentation.short}}
  * Arguments required to {{{documentation.short}}}
- */
 {{/if}}
+{{#each params}}
+ *
+ * `{{{this.name}}}`{{#if this.description}} -{{{this.description}}}{{/if}}
+{{/each}}
+ */
 export interface {{{actionName}}}Args extends Args {
   {{#each params}}
   {{#if this.description}}

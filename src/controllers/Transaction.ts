@@ -1,12 +1,10 @@
 import {
   Body,
   Controller,
-  Get,
-  Path,
   Post,
-  Query,
   Route,
-  SuccessResponse,
+  Response,
+  Tags,
 } from "tsoa";
 
 import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
@@ -16,10 +14,8 @@ import logger from '../functions/logger';
 import { getKeyringPairByPrivateKey } from '../functions/keyring';
 import { TransactionPayloadSchema, ClearingTransactionPayloadSchema } from '../validator/schemas';
 
-import type { TransactionPayload, TransactionResponse } from '../types/api/transaction';
+import type { TransactionPayload, TransactionResponse, TransactionErrorResponse, TransactionSuccessResponse } from '../types/api/transaction';
 import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
-
-const config = loadConfig();
 
 /**
  * Controller to handle transaction submission.
@@ -28,26 +24,38 @@ const config = loadConfig();
 export class SubmitTransactionsController extends Controller {
   protected readonly config = loadConfig();
 
-  protected onSuccess(signedTxHash: string): TransactionResponse {
+  /**
+   * @description Helper to return success transaction response
+   * @param hash Transaction hash
+   * @returns Transaction response {@link TransactionSuccessResponse}
+   */
+  protected onSuccess(hash: string): TransactionSuccessResponse {
     logger.info('Transaction submitted successfully');
 
     this.setStatus(200);
 
     // Create response based on the processing result
-    const response: TransactionResponse = {
+    const response: TransactionSuccessResponse = {
       status: 'TransactionSubmitted',
-      tx_hash: signedTxHash,
+      tx_hash: hash,
     };
 
     return response;
   }
 
-  protected onError(code: number, description: string, error?: any): TransactionResponse {
+  /**
+   * @description Helper to return error transaction response
+   * @param code HTTP error code
+   * @param description Text description of error
+   * @param error `Error` runtime object
+   * @returns Transaction response {@link TransactionErrorResponse}
+   */
+  protected onError(code: number, description: string, error?: any): TransactionErrorResponse {
     logger.error(description, error);
 
     this.setStatus(code);
 
-    const response: TransactionResponse = {
+    const response: TransactionErrorResponse = {
       status: 'failed',
       error_code: code,
       error_description: description,
@@ -56,7 +64,33 @@ export class SubmitTransactionsController extends Controller {
     return response;
   }
 
+  /**
+   * @summary Submit a transaction
+   * @description Submits a transaction and returns the transaction hash.
+   * @param payload Payload for submitting a transaction
+   * @returns Submitted transaction hash
+   */
   @Post('/transaction')
+  @Tags('Transactions')
+  @Response<TransactionSuccessResponse>(200, 'Success', {
+    status: 'TransactionSubmitted',
+    tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7'
+  })
+  @Response<TransactionErrorResponse>(400, 'Bad Request', {
+    status: 'failed',
+    error_code: 400,
+    error_description: 'Missing required fields in payload'
+  })
+  @Response<TransactionErrorResponse>(404, 'Not Found', {
+    status: 'failed',
+    error_code: 404,
+    error_description: 'Signatory not found'
+  })
+  @Response<TransactionErrorResponse>(500, 'Internal Server Error', {
+    status: 'failed',
+    error_code: 500,
+    error_description: 'Error creating and broadcasting transaction'
+  })
   public async submitTransaction(@Body() payload: TransactionPayload): Promise<TransactionResponse> {
     try {
       logger.info('>> submitTransaction endpoint');
@@ -71,7 +105,7 @@ export class SubmitTransactionsController extends Controller {
       // Retrieve the private key for the signatory
       logger.info('Retrieving private key for the signatory...');
 
-      const privateKey = getPrivateKeyById(config, payload.signatory);
+      const privateKey = getPrivateKeyById(this.config, payload.signatory);
 
       if (!privateKey) {
         return this.onError(404, 'Signatory not found');
@@ -90,7 +124,33 @@ export class SubmitTransactionsController extends Controller {
     }
   }
 
+  /**
+   * @summary Submit a clearing transaction
+   * @description Submits a clearing transaction and returns the transaction hash.
+   * @param payload Payload for submitting a clearing transaction
+   * @returns Submitted transaction hash
+   */
   @Post('/clearing_transaction')
+  @Tags('Transactions')
+  @Response<TransactionSuccessResponse>(200, 'Success', {
+    status: 'TransactionSubmitted',
+    tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7'
+  })
+  @Response<TransactionErrorResponse>(400, 'Bad Request', {
+    status: 'failed',
+    error_code: 400,
+    error_description: 'Missing required fields in payload'
+  })
+  @Response<TransactionErrorResponse>(404, 'Not Found', {
+    status: 'failed',
+    error_code: 404,
+    error_description: 'Signatory not found'
+  })
+  @Response<TransactionErrorResponse>(500, 'Internal Server Error', {
+    status: 'failed',
+    error_code: 500,
+    error_description: 'Error creating and broadcasting clearing transaction'
+  })
   public async submitClearingTransaction(@Body() payload: ClearingTransactionPayload): Promise<TransactionResponse> {
     try {
       logger.info('>> submitClearingTransaction endpoint');
@@ -105,7 +165,7 @@ export class SubmitTransactionsController extends Controller {
       // Retrieve the private key for the signatory
       logger.debug('Retrieving private key for the signatory...');
 
-      const privateKey = getPrivateKeyById(config, payload.signatory);
+      const privateKey = getPrivateKeyById(this.config, payload.signatory);
 
       if (!privateKey) {
         return this.onError(404, 'Signatory not found');

@@ -1,27 +1,43 @@
 // Common blockchain types
 
 /**
- * Number presented as plain number or string
+ * Numeric value, presented as plain number
+ * @isInt
+ * @minimum 0
+ * @maximum 4294967295
  */
-export type Numberish = number | string;
+export type UINT32 = number;
 
 /**
- * Blockchain account address, represented by SS58 string
+ * Numeric value, presented as plain number or string
+ * @inLong
+ * @minimum 0
+ * @maximum 340282366920938463463374607431768211455
+ */
+export type UINT128 = number | string;
+
+/**
+ * The account address on the blockchain.
+ * Typically, it is a string of alphanumeric characters, encoded in SS58 format.
  */
 export type BlockchainGenericAccount = string;
 
 /**
- * Asset Id, Collection Id, Agent Id (u32)
+ * A unique identifier (Asset, Collection, Agent).
+ * Typically, it is a numeric value.
  */
-export type BlockchainGenericId = Numberish;
+export type BlockchainGenericId = UINT32;
 
 /**
- * Amount, Balance (u128)
+ * The balance, represented as a numeric value (number or string).
  */
-export type BlockchainGenericBalance = Numberish;
+export type BlockchainGenericBalance = UINT128;
 
 /**
- * Text or metadata represented by string (Bytes). Limit is defined in `StringLimit` const.
+ * Text or metadata represented by string.
+ * Characters limit is defined in `StringLimit` const on blockchain.
+ * @isString
+ * @maxLength 256
  */
 export type BlockchainGenericText = string;
 
@@ -31,7 +47,7 @@ export type BlockchainGenericText = string;
 export type BlockchainGenericBoolean = boolean;
 
 export type NftWitness = {
-  itemMetadatas: Numberish;
-  itemConfigs: Numberish;
-  attributes: Numberish;
+  itemMetadatas: UINT32;
+  itemConfigs: UINT32;
+  attributes: UINT32;
 };
