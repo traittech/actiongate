@@ -10,9 +10,9 @@ export type UINT32 = number;
 
 /**
  * Numeric value, presented as plain number or string
- * @inLong
- * @minimum 0
- * @maximum 340282366920938463463374607431768211455
+ * 
+ * `min`: 0  
+ * `max`: 340282366920938463463374607431768211455
  */
 export type UINT128 = number | string;
 
@@ -29,7 +29,7 @@ export type BlockchainGenericAccount = string;
 export type BlockchainGenericId = UINT32;
 
 /**
- * The balance, represented as a numeric value (number or string).
+ * The balance, represented as a numeric value.
  */
 export type BlockchainGenericBalance = UINT128;
 

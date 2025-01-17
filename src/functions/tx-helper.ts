@@ -8,7 +8,7 @@ import { TxMetadata } from '../types/tx';
 import { loadConfig } from './config';
 import logger from './logger';
 
-import type { ActionArgs, CTAtomicAction } from '../txwrapper';
+import type { TransactionArgs, CTAtomicAction } from '../txwrapper';
 import type { CTAction } from '../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
@@ -31,7 +31,7 @@ const txService = new TransactionService(config.datagate_api.uri);
 export function buildUnsignedTransaction(
   moduleName: string,
   methodName: string,
-  args: ActionArgs,
+  args: TransactionArgs,
   baseTxInfo: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {

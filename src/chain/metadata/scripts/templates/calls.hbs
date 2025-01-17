@@ -109,9 +109,12 @@ export type CTAtomicAction =
 {{/each}};
 
 /**
- * Represents an action args
+ * Represents a transaction args
  */
-export type ActionArgs = CTAtomicAction['arguments'];
+export type TransactionArgs =
+{{#each ctAtomicActions}}
+  | {{{this.actionName}}}Args
+{{/each}};
 
 /**
  * Builds an unsigned transaction based on the provided `ActionType`.
@@ -126,7 +129,7 @@ export type ActionArgs = CTAtomicAction['arguments'];
  */
 export function buildUnsignedTxFromActionType(
   actionType: ActionType,
-  args: ActionArgs,
+  args: TransactionArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {

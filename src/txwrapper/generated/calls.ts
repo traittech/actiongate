@@ -1717,9 +1717,44 @@ export type CTAtomicAction =
 ;
 
 /**
- * Represents an action args
+ * Represents a transaction args
  */
-export type ActionArgs = CTAtomicAction['arguments'];
+export type TransactionArgs =
+  | BalancesTransferAllowDeathArgs
+  | BalancesTransferKeepAliveArgs
+  | BalancesTransferAllArgs
+  | AssetsCreateArgs
+  | AssetsStartDestroyArgs
+  | AssetsDestroyAccountsArgs
+  | AssetsDestroyApprovalsArgs
+  | AssetsFinishDestroyArgs
+  | AssetsMintArgs
+  | AssetsBurnArgs
+  | AssetsTransferArgs
+  | AssetsTransferKeepAliveArgs
+  | AssetsForceTransferArgs
+  | AssetsFreezeAccountArgs
+  | AssetsThawAccountArgs
+  | AssetsFreezeAssetArgs
+  | AssetsThawAssetArgs
+  | AssetsTransferOwnershipArgs
+  | AssetsSetMetadataArgs
+  | AssetsSetMinBalanceArgs
+  | NftsCreateCollectionArgs
+  | NftsDestroyCollectionArgs
+  | NftsMintItemArgs
+  | NftsBurnItemArgs
+  | NftsTransferItemArgs
+  | NftsLockItemTransferArgs
+  | NftsUnlockItemTransferArgs
+  | NftsTransferCollectionOwnershipArgs
+  | NftsSetItemMetadataArgs
+  | NftsClearItemMetadataArgs
+  | NftsSetCollectionMetadataArgs
+  | NftsClearCollectionMetadataArgs
+  | NftsAcceptCollectionOwnershipArgs
+  | AppTransactionsSubmitClearingTransactionArgs
+;
 
 /**
  * Builds an unsigned transaction based on the provided `ActionType`.
@@ -1734,7 +1769,7 @@ export type ActionArgs = CTAtomicAction['arguments'];
  */
 export function buildUnsignedTxFromActionType(
   actionType: ActionType,
-  args: ActionArgs,
+  args: TransactionArgs,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
