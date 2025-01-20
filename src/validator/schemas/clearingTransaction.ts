@@ -1,12 +1,8 @@
 import { z } from 'zod';
 
-import { ActionType } from '../../types/api/actions';
-
-import { ArgsSchema, SignatorySchema } from './transaction';
+import { ArgsSchema, ActionTypeSchema, SignatorySchema } from './transaction';
 
 export const AppAgentIdSchema = z.number().min(0);
-
-export const ActionTypeSchema = z.nativeEnum(ActionType);
 
 export const CTActionOriginSchema = z.union([
   z.object({ AppAgentId: z.any() }),
@@ -46,6 +42,6 @@ export const CTAtomicSchema = z.object({
 
 export const ClearingTransactionPayloadSchema = z.object({
   signatory: SignatorySchema,
-  app_agent_id: AppAgentIdSchema,
+  appAgentId: AppAgentIdSchema,
   atomics: z.array(CTAtomicSchema),
 });

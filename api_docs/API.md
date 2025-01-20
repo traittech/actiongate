@@ -15,7 +15,7 @@ POST /submit/clearing_transaction
 ```typescript
 {
   "signatory": string,
-  "app_agent_id": number,
+  "appAgentId": number,
   "atomics": [
     {
       "actions": Action[]
@@ -46,6 +46,6 @@ Error responses will include a message explaining what went wrong:
 
 ```json
 {
-  "error": "Unsupported action type: unknown_action"
+  "error": "Unsupported transaction type: unknown_action"
 }
 ```

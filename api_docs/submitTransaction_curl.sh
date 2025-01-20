@@ -12,14 +12,14 @@ REQUEST_HEADERS=(
 # Request body
 TRANSACTION_REQUEST='{
   "signatory": "ADMIN_1",
-  "module_name": "assets",
-  "function_name": "transfer",
-  "arguments": [
-    "ttrENnXUfsdTDFwweKjK1dSvCXcAtVVQ9xgARy8iBisAFfc5e",
-    "200",
-    "200"
-  ],
-  "origin": "ttrENnXUfsdTDFwweKjK1dSvCXcAtVVQ9xgARy8iBisAFfc5e"
+  "tx": {
+    "actionType": "assets.transfer",
+    "arguments": {
+      "id": 200,
+      "target": "ttrENnXUfsdTDFwweKjK1dSvCXcAtVVQ9xgARy8iBisAFfc5e",
+      "amount": "200"
+    }
+  }
 }'
 
 # Execute the curl command

@@ -70,7 +70,7 @@ describe('Clearing Transaction Builder', () => {
     it('should build balances_transferKeepAlive transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -94,7 +94,7 @@ describe('Clearing Transaction Builder', () => {
     it('should build balances_transfer transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -120,7 +120,7 @@ describe('Clearing Transaction Builder', () => {
     it('should build nft_mintCollection transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -146,7 +146,7 @@ describe('Clearing Transaction Builder', () => {
     it('should build nft_mintItem transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -173,7 +173,7 @@ describe('Clearing Transaction Builder', () => {
     it('should build assets_create transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -196,7 +196,7 @@ describe('Clearing Transaction Builder', () => {
     it('should build assets_transfer transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -223,7 +223,7 @@ describe('Clearing Transaction Builder', () => {
     it('should throw error for unsupported action type', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -241,7 +241,7 @@ describe('Clearing Transaction Builder', () => {
       };
 
       await expect(createClearingTransactionAndBroadcast(aliceKeyringPair, payload)).rejects.toThrow(
-        'Unsupported action type: unknown_action'
+        'Unsupported transaction type: unknown_action'
       );
     });
   });
@@ -250,7 +250,7 @@ describe('Clearing Transaction Builder', () => {
     it('Action args: Numbers with overflow (u32)', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -282,7 +282,7 @@ describe('Clearing Transaction Builder', () => {
     it('Action args: Invalid address length & Number with overflow (u128)', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -314,7 +314,7 @@ describe('Clearing Transaction Builder', () => {
     it('Action args: Invalid ss58 address', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
@@ -344,7 +344,7 @@ describe('Clearing Transaction Builder', () => {
     it('Action args: Invalid metadata text length', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [

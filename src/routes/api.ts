@@ -36,6 +36,11 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"union","subSchemas":[{"ref":"TransactionSuccessResponse"},{"ref":"TransactionErrorResponse"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.BalancesTransferAllowDeath": {
+        "dataType": "refEnum",
+        "enums": ["balances.transferAllowDeath"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BlockchainGenericAccount": {
         "dataType": "refAlias",
         "type": {"dataType":"string","validators":{}},
@@ -43,7 +48,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UINT128": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"string"}],"validators":{"minimum":{"value":0},"maximum":{"value":3.402823669209385e+38}}},
+        "type": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"string"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BlockchainGenericBalance": {
@@ -70,6 +75,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.BalancesTransferAllowDeath.BalancesTransferAllowDeathArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.BalancesTransferAllowDeath","required":true},
+            "arguments": {"ref":"BalancesTransferAllowDeathArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BalancesTransferAllowDeathTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.BalancesTransferAllowDeath.BalancesTransferAllowDeathArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.BalancesTransferKeepAlive": {
+        "dataType": "refEnum",
+        "enums": ["balances.transferKeepAlive"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BalancesTransferKeepAliveArgs": {
         "dataType": "refObject",
         "properties": {
@@ -77,6 +101,25 @@ const models: TsoaRoute.Models = {
             "value": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.BalancesTransferKeepAlive.BalancesTransferKeepAliveArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.BalancesTransferKeepAlive","required":true},
+            "arguments": {"ref":"BalancesTransferKeepAliveArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BalancesTransferKeepAliveTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.BalancesTransferKeepAlive.BalancesTransferKeepAliveArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.BalancesTransferAll": {
+        "dataType": "refEnum",
+        "enums": ["balances.transferAll"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BlockchainGenericBoolean": {
@@ -93,12 +136,50 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.BalancesTransferAll.BalancesTransferAllArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.BalancesTransferAll","required":true},
+            "arguments": {"ref":"BalancesTransferAllArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BalancesTransferAllTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.BalancesTransferAll.BalancesTransferAllArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsCreate": {
+        "dataType": "refEnum",
+        "enums": ["assets.create"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsCreateArgs": {
         "dataType": "refObject",
         "properties": {
             "minBalance": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsCreate.AssetsCreateArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsCreate","required":true},
+            "arguments": {"ref":"AssetsCreateArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsCreateTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsCreate.AssetsCreateArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsStartDestroy": {
+        "dataType": "refEnum",
+        "enums": ["assets.startDestroy"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UINT32": {
@@ -119,12 +200,50 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsStartDestroy.AssetsStartDestroyArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsStartDestroy","required":true},
+            "arguments": {"ref":"AssetsStartDestroyArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsStartDestroyTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsStartDestroy.AssetsStartDestroyArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsDestroyAccounts": {
+        "dataType": "refEnum",
+        "enums": ["assets.destroyAccounts"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsDestroyAccountsArgs": {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsDestroyAccounts.AssetsDestroyAccountsArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsDestroyAccounts","required":true},
+            "arguments": {"ref":"AssetsDestroyAccountsArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsDestroyAccountsTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsDestroyAccounts.AssetsDestroyAccountsArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsDestroyApprovals": {
+        "dataType": "refEnum",
+        "enums": ["assets.destroyApprovals"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsDestroyApprovalsArgs": {
@@ -135,12 +254,50 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsDestroyApprovals.AssetsDestroyApprovalsArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsDestroyApprovals","required":true},
+            "arguments": {"ref":"AssetsDestroyApprovalsArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsDestroyApprovalsTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsDestroyApprovals.AssetsDestroyApprovalsArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsFinishDestroy": {
+        "dataType": "refEnum",
+        "enums": ["assets.finishDestroy"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsFinishDestroyArgs": {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsFinishDestroy.AssetsFinishDestroyArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsFinishDestroy","required":true},
+            "arguments": {"ref":"AssetsFinishDestroyArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsFinishDestroyTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsFinishDestroy.AssetsFinishDestroyArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsMint": {
+        "dataType": "refEnum",
+        "enums": ["assets.mint"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsMintArgs": {
@@ -153,6 +310,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsMint.AssetsMintArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsMint","required":true},
+            "arguments": {"ref":"AssetsMintArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsMintTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsMint.AssetsMintArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsBurn": {
+        "dataType": "refEnum",
+        "enums": ["assets.burn"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsBurnArgs": {
         "dataType": "refObject",
         "properties": {
@@ -161,6 +337,25 @@ const models: TsoaRoute.Models = {
             "amount": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsBurn.AssetsBurnArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsBurn","required":true},
+            "arguments": {"ref":"AssetsBurnArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsBurnTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsBurn.AssetsBurnArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsTransfer": {
+        "dataType": "refEnum",
+        "enums": ["assets.transfer"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsTransferArgs": {
@@ -173,6 +368,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsTransfer.AssetsTransferArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsTransfer","required":true},
+            "arguments": {"ref":"AssetsTransferArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsTransferTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsTransfer.AssetsTransferArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsTransferKeepAlive": {
+        "dataType": "refEnum",
+        "enums": ["assets.transferKeepAlive"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsTransferKeepAliveArgs": {
         "dataType": "refObject",
         "properties": {
@@ -181,6 +395,25 @@ const models: TsoaRoute.Models = {
             "amount": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsTransferKeepAlive.AssetsTransferKeepAliveArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsTransferKeepAlive","required":true},
+            "arguments": {"ref":"AssetsTransferKeepAliveArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsTransferKeepAliveTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsTransferKeepAlive.AssetsTransferKeepAliveArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsForceTransfer": {
+        "dataType": "refEnum",
+        "enums": ["assets.forceTransfer"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsForceTransferArgs": {
@@ -194,6 +427,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsForceTransfer.AssetsForceTransferArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsForceTransfer","required":true},
+            "arguments": {"ref":"AssetsForceTransferArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsForceTransferTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsForceTransfer.AssetsForceTransferArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsFreezeAccount": {
+        "dataType": "refEnum",
+        "enums": ["assets.freeze"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsFreezeAccountArgs": {
         "dataType": "refObject",
         "properties": {
@@ -201,6 +453,25 @@ const models: TsoaRoute.Models = {
             "who": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsFreezeAccount.AssetsFreezeAccountArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsFreezeAccount","required":true},
+            "arguments": {"ref":"AssetsFreezeAccountArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsFreezeAccountTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsFreezeAccount.AssetsFreezeAccountArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsThawAccount": {
+        "dataType": "refEnum",
+        "enums": ["assets.thaw"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsThawAccountArgs": {
@@ -212,12 +483,50 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsThawAccount.AssetsThawAccountArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsThawAccount","required":true},
+            "arguments": {"ref":"AssetsThawAccountArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsThawAccountTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsThawAccount.AssetsThawAccountArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsFreezeAsset": {
+        "dataType": "refEnum",
+        "enums": ["assets.freezeAsset"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsFreezeAssetArgs": {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsFreezeAsset.AssetsFreezeAssetArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsFreezeAsset","required":true},
+            "arguments": {"ref":"AssetsFreezeAssetArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsFreezeAssetTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsFreezeAsset.AssetsFreezeAssetArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsThawAsset": {
+        "dataType": "refEnum",
+        "enums": ["assets.thawAsset"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsThawAssetArgs": {
@@ -228,6 +537,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsThawAsset.AssetsThawAssetArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsThawAsset","required":true},
+            "arguments": {"ref":"AssetsThawAssetArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsThawAssetTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsThawAsset.AssetsThawAssetArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsTransferOwnership": {
+        "dataType": "refEnum",
+        "enums": ["assets.transferOwnership"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsTransferOwnershipArgs": {
         "dataType": "refObject",
         "properties": {
@@ -235,6 +563,25 @@ const models: TsoaRoute.Models = {
             "owner": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsTransferOwnership.AssetsTransferOwnershipArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsTransferOwnership","required":true},
+            "arguments": {"ref":"AssetsTransferOwnershipArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsTransferOwnershipTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsTransferOwnership.AssetsTransferOwnershipArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsSetMetadata": {
+        "dataType": "refEnum",
+        "enums": ["assets.setMetadata"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BlockchainGenericText": {
@@ -251,6 +598,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsSetMetadata.AssetsSetMetadataArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsSetMetadata","required":true},
+            "arguments": {"ref":"AssetsSetMetadataArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsSetMetadataTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsSetMetadata.AssetsSetMetadataArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AssetsSetMinBalance": {
+        "dataType": "refEnum",
+        "enums": ["assets.setMinBalance"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsSetMinBalanceArgs": {
         "dataType": "refObject",
         "properties": {
@@ -260,11 +626,49 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.AssetsSetMinBalance.AssetsSetMinBalanceArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsSetMinBalance","required":true},
+            "arguments": {"ref":"AssetsSetMinBalanceArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsSetMinBalanceTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.AssetsSetMinBalance.AssetsSetMinBalanceArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsCreateCollection": {
+        "dataType": "refEnum",
+        "enums": ["nfts.create"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsCreateCollectionArgs": {
         "dataType": "refObject",
         "properties": {
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsCreateCollection.NftsCreateCollectionArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsCreateCollection","required":true},
+            "arguments": {"ref":"NftsCreateCollectionArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsCreateCollectionTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsCreateCollection.NftsCreateCollectionArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsDestroyCollection": {
+        "dataType": "refEnum",
+        "enums": ["nfts.destroy"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftWitness": {
@@ -281,6 +685,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsDestroyCollection.NftsDestroyCollectionArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsDestroyCollection","required":true},
+            "arguments": {"ref":"NftsDestroyCollectionArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsDestroyCollectionTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsDestroyCollection.NftsDestroyCollectionArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsMintItem": {
+        "dataType": "refEnum",
+        "enums": ["nfts.mint"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsMintItemArgs": {
         "dataType": "refObject",
         "properties": {
@@ -291,6 +714,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsMintItem.NftsMintItemArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsMintItem","required":true},
+            "arguments": {"ref":"NftsMintItemArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsMintItemTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsMintItem.NftsMintItemArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsBurnItem": {
+        "dataType": "refEnum",
+        "enums": ["nfts.burn"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsBurnItemArgs": {
         "dataType": "refObject",
         "properties": {
@@ -298,6 +740,25 @@ const models: TsoaRoute.Models = {
             "item": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsBurnItem.NftsBurnItemArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsBurnItem","required":true},
+            "arguments": {"ref":"NftsBurnItemArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsBurnItemTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsBurnItem.NftsBurnItemArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsTransferItem": {
+        "dataType": "refEnum",
+        "enums": ["nfts.transfer"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsTransferItemArgs": {
@@ -310,6 +771,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsTransferItem.NftsTransferItemArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsTransferItem","required":true},
+            "arguments": {"ref":"NftsTransferItemArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsTransferItemTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsTransferItem.NftsTransferItemArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsLockItemTransfer": {
+        "dataType": "refEnum",
+        "enums": ["nfts.lockItemTransfer"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsLockItemTransferArgs": {
         "dataType": "refObject",
         "properties": {
@@ -317,6 +797,25 @@ const models: TsoaRoute.Models = {
             "item": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsLockItemTransfer.NftsLockItemTransferArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsLockItemTransfer","required":true},
+            "arguments": {"ref":"NftsLockItemTransferArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsLockItemTransferTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsLockItemTransfer.NftsLockItemTransferArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsUnlockItemTransfer": {
+        "dataType": "refEnum",
+        "enums": ["nfts.unlockItemTransfer"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsUnlockItemTransferArgs": {
@@ -328,6 +827,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsUnlockItemTransfer.NftsUnlockItemTransferArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsUnlockItemTransfer","required":true},
+            "arguments": {"ref":"NftsUnlockItemTransferArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsUnlockItemTransferTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsUnlockItemTransfer.NftsUnlockItemTransferArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsTransferCollectionOwnership": {
+        "dataType": "refEnum",
+        "enums": ["nfts.transferOwnership"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsTransferCollectionOwnershipArgs": {
         "dataType": "refObject",
         "properties": {
@@ -335,6 +853,25 @@ const models: TsoaRoute.Models = {
             "newOwner": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsTransferCollectionOwnership.NftsTransferCollectionOwnershipArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsTransferCollectionOwnership","required":true},
+            "arguments": {"ref":"NftsTransferCollectionOwnershipArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsTransferCollectionOwnershipTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsTransferCollectionOwnership.NftsTransferCollectionOwnershipArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsSetItemMetadata": {
+        "dataType": "refEnum",
+        "enums": ["nfts.setMetadata"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsSetItemMetadataArgs": {
@@ -347,6 +884,25 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsSetItemMetadata.NftsSetItemMetadataArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsSetItemMetadata","required":true},
+            "arguments": {"ref":"NftsSetItemMetadataArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsSetItemMetadataTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsSetItemMetadata.NftsSetItemMetadataArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsClearItemMetadata": {
+        "dataType": "refEnum",
+        "enums": ["nfts.clearMetadata"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsClearItemMetadataArgs": {
         "dataType": "refObject",
         "properties": {
@@ -354,6 +910,25 @@ const models: TsoaRoute.Models = {
             "item": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsClearItemMetadata.NftsClearItemMetadataArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsClearItemMetadata","required":true},
+            "arguments": {"ref":"NftsClearItemMetadataArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsClearItemMetadataTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsClearItemMetadata.NftsClearItemMetadataArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsSetCollectionMetadata": {
+        "dataType": "refEnum",
+        "enums": ["nfts.setCollectionMetadata"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsSetCollectionMetadataArgs": {
@@ -365,12 +940,50 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsSetCollectionMetadata.NftsSetCollectionMetadataArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsSetCollectionMetadata","required":true},
+            "arguments": {"ref":"NftsSetCollectionMetadataArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsSetCollectionMetadataTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsSetCollectionMetadata.NftsSetCollectionMetadataArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsClearCollectionMetadata": {
+        "dataType": "refEnum",
+        "enums": ["nfts.clearCollectionMetadata"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsClearCollectionMetadataArgs": {
         "dataType": "refObject",
         "properties": {
             "collection": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsClearCollectionMetadata.NftsClearCollectionMetadataArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsClearCollectionMetadata","required":true},
+            "arguments": {"ref":"NftsClearCollectionMetadataArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsClearCollectionMetadataTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsClearCollectionMetadata.NftsClearCollectionMetadataArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.NftsAcceptCollectionOwnership": {
+        "dataType": "refEnum",
+        "enums": ["nfts.setAcceptOwnership"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsAcceptCollectionOwnershipArgs": {
@@ -381,9 +994,28 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxGeneric_ActionType.NftsAcceptCollectionOwnership.NftsAcceptCollectionOwnershipArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsAcceptCollectionOwnership","required":true},
+            "arguments": {"ref":"NftsAcceptCollectionOwnershipArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsAcceptCollectionOwnershipTx": {
+        "dataType": "refAlias",
+        "type": {"ref":"TxGeneric_ActionType.NftsAcceptCollectionOwnership.NftsAcceptCollectionOwnershipArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType.AppTransactionsSubmitClearingTransaction": {
+        "dataType": "refEnum",
+        "enums": ["appTransactions.submitClearingTransaction"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTActionOrigin": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"nestedObjectLiteral","nestedProperties":{"AppAgentId":{"dataType":"any","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"AppAgentAddress":{"dataType":"string","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"TransactionalAddressId":{"dataType":"any","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"TransactionalAddress":{"dataType":"any","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"NamedAddress":{"dataType":"any","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"NamedAddressName":{"dataType":"any","required":true}}}],"validators":{}},
+        "type": {"dataType":"union","subSchemas":[{"dataType":"nestedObjectLiteral","nestedProperties":{"AppAgentId":{"ref":"BlockchainGenericId","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"AppAgentAddress":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"TransactionalAddressId":{"ref":"BlockchainGenericId","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"TransactionalAddress":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"NamedAddress":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"NamedAddressName":{"dataType":"any","required":true}}}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTActionCall": {
@@ -410,30 +1042,42 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionArgs": {
+    "TxGeneric_ActionType.AppTransactionsSubmitClearingTransaction.AppTransactionsSubmitClearingTransactionArgs_": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AppTransactionsSubmitClearingTransaction","required":true},
+            "arguments": {"ref":"AppTransactionsSubmitClearingTransactionArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppTransactionsSubmitClearingTransactionTx": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"ref":"BalancesTransferAllowDeathArgs"},{"ref":"BalancesTransferKeepAliveArgs"},{"ref":"BalancesTransferAllArgs"},{"ref":"AssetsCreateArgs"},{"ref":"AssetsStartDestroyArgs"},{"ref":"AssetsDestroyAccountsArgs"},{"ref":"AssetsDestroyApprovalsArgs"},{"ref":"AssetsFinishDestroyArgs"},{"ref":"AssetsMintArgs"},{"ref":"AssetsBurnArgs"},{"ref":"AssetsTransferArgs"},{"ref":"AssetsTransferKeepAliveArgs"},{"ref":"AssetsForceTransferArgs"},{"ref":"AssetsFreezeAccountArgs"},{"ref":"AssetsThawAccountArgs"},{"ref":"AssetsFreezeAssetArgs"},{"ref":"AssetsThawAssetArgs"},{"ref":"AssetsTransferOwnershipArgs"},{"ref":"AssetsSetMetadataArgs"},{"ref":"AssetsSetMinBalanceArgs"},{"ref":"NftsCreateCollectionArgs"},{"ref":"NftsDestroyCollectionArgs"},{"ref":"NftsMintItemArgs"},{"ref":"NftsBurnItemArgs"},{"ref":"NftsTransferItemArgs"},{"ref":"NftsLockItemTransferArgs"},{"ref":"NftsUnlockItemTransferArgs"},{"ref":"NftsTransferCollectionOwnershipArgs"},{"ref":"NftsSetItemMetadataArgs"},{"ref":"NftsClearItemMetadataArgs"},{"ref":"NftsSetCollectionMetadataArgs"},{"ref":"NftsClearCollectionMetadataArgs"},{"ref":"NftsAcceptCollectionOwnershipArgs"},{"ref":"AppTransactionsSubmitClearingTransactionArgs"}],"validators":{}},
+        "type": {"ref":"TxGeneric_ActionType.AppTransactionsSubmitClearingTransaction.AppTransactionsSubmitClearingTransactionArgs_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxAction": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"ref":"BalancesTransferAllowDeathTx"},{"ref":"BalancesTransferKeepAliveTx"},{"ref":"BalancesTransferAllTx"},{"ref":"AssetsCreateTx"},{"ref":"AssetsStartDestroyTx"},{"ref":"AssetsDestroyAccountsTx"},{"ref":"AssetsDestroyApprovalsTx"},{"ref":"AssetsFinishDestroyTx"},{"ref":"AssetsMintTx"},{"ref":"AssetsBurnTx"},{"ref":"AssetsTransferTx"},{"ref":"AssetsTransferKeepAliveTx"},{"ref":"AssetsForceTransferTx"},{"ref":"AssetsFreezeAccountTx"},{"ref":"AssetsThawAccountTx"},{"ref":"AssetsFreezeAssetTx"},{"ref":"AssetsThawAssetTx"},{"ref":"AssetsTransferOwnershipTx"},{"ref":"AssetsSetMetadataTx"},{"ref":"AssetsSetMinBalanceTx"},{"ref":"NftsCreateCollectionTx"},{"ref":"NftsDestroyCollectionTx"},{"ref":"NftsMintItemTx"},{"ref":"NftsBurnItemTx"},{"ref":"NftsTransferItemTx"},{"ref":"NftsLockItemTransferTx"},{"ref":"NftsUnlockItemTransferTx"},{"ref":"NftsTransferCollectionOwnershipTx"},{"ref":"NftsSetItemMetadataTx"},{"ref":"NftsClearItemMetadataTx"},{"ref":"NftsSetCollectionMetadataTx"},{"ref":"NftsClearCollectionMetadataTx"},{"ref":"NftsAcceptCollectionOwnershipTx"},{"ref":"AppTransactionsSubmitClearingTransactionTx"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "TransactionPayload": {
         "dataType": "refObject",
         "properties": {
             "signatory": {"dataType":"string","required":true},
-            "module_name": {"dataType":"string","required":true},
-            "function_name": {"dataType":"string","required":true},
-            "arguments": {"ref":"TransactionArgs","required":true},
+            "tx": {"ref":"TxAction","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.BalancesTransferAllowDeath": {
-        "dataType": "refEnum",
-        "enums": ["balances.transferAllowDeath"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.BalancesTransferAllowDeath.BalancesTransferAllowDeathArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"BalancesTransferAllowDeathArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.BalancesTransferAllowDeath","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.BalancesTransferAllowDeath","required":true},
+            "arguments": {"ref":"BalancesTransferAllowDeathArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BalancesTransferAllowDeathAction": {
@@ -441,14 +1085,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.BalancesTransferAllowDeath.BalancesTransferAllowDeathArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.BalancesTransferKeepAlive": {
-        "dataType": "refEnum",
-        "enums": ["balances.transferKeepAlive"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.BalancesTransferKeepAlive.BalancesTransferKeepAliveArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"BalancesTransferKeepAliveArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.BalancesTransferKeepAlive","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.BalancesTransferKeepAlive","required":true},
+            "arguments": {"ref":"BalancesTransferKeepAliveArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BalancesTransferKeepAliveAction": {
@@ -456,14 +1100,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.BalancesTransferKeepAlive.BalancesTransferKeepAliveArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.BalancesTransferAll": {
-        "dataType": "refEnum",
-        "enums": ["balances.transferAll"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.BalancesTransferAll.BalancesTransferAllArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"BalancesTransferAllArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.BalancesTransferAll","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.BalancesTransferAll","required":true},
+            "arguments": {"ref":"BalancesTransferAllArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BalancesTransferAllAction": {
@@ -471,14 +1115,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.BalancesTransferAll.BalancesTransferAllArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsCreate": {
-        "dataType": "refEnum",
-        "enums": ["assets.create"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsCreate.AssetsCreateArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsCreateArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsCreate","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsCreate","required":true},
+            "arguments": {"ref":"AssetsCreateArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsCreateAction": {
@@ -486,14 +1130,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsCreate.AssetsCreateArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsStartDestroy": {
-        "dataType": "refEnum",
-        "enums": ["assets.startDestroy"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsStartDestroy.AssetsStartDestroyArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsStartDestroyArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsStartDestroy","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsStartDestroy","required":true},
+            "arguments": {"ref":"AssetsStartDestroyArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsStartDestroyAction": {
@@ -501,14 +1145,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsStartDestroy.AssetsStartDestroyArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsDestroyAccounts": {
-        "dataType": "refEnum",
-        "enums": ["assets.destroyAccounts"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsDestroyAccounts.AssetsDestroyAccountsArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsDestroyAccountsArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsDestroyAccounts","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsDestroyAccounts","required":true},
+            "arguments": {"ref":"AssetsDestroyAccountsArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsDestroyAccountsAction": {
@@ -516,14 +1160,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsDestroyAccounts.AssetsDestroyAccountsArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsDestroyApprovals": {
-        "dataType": "refEnum",
-        "enums": ["assets.destroyApprovals"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsDestroyApprovals.AssetsDestroyApprovalsArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsDestroyApprovalsArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsDestroyApprovals","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsDestroyApprovals","required":true},
+            "arguments": {"ref":"AssetsDestroyApprovalsArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsDestroyApprovalsAction": {
@@ -531,14 +1175,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsDestroyApprovals.AssetsDestroyApprovalsArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsFinishDestroy": {
-        "dataType": "refEnum",
-        "enums": ["assets.finishDestroy"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsFinishDestroy.AssetsFinishDestroyArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsFinishDestroyArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsFinishDestroy","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsFinishDestroy","required":true},
+            "arguments": {"ref":"AssetsFinishDestroyArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsFinishDestroyAction": {
@@ -546,14 +1190,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsFinishDestroy.AssetsFinishDestroyArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsMint": {
-        "dataType": "refEnum",
-        "enums": ["assets.mint"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsMint.AssetsMintArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsMintArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsMint","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsMint","required":true},
+            "arguments": {"ref":"AssetsMintArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsMintAction": {
@@ -561,14 +1205,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsMint.AssetsMintArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsBurn": {
-        "dataType": "refEnum",
-        "enums": ["assets.burn"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsBurn.AssetsBurnArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsBurnArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsBurn","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsBurn","required":true},
+            "arguments": {"ref":"AssetsBurnArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsBurnAction": {
@@ -576,14 +1220,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsBurn.AssetsBurnArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsTransfer": {
-        "dataType": "refEnum",
-        "enums": ["assets.transfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsTransfer.AssetsTransferArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsTransferArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsTransfer","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsTransfer","required":true},
+            "arguments": {"ref":"AssetsTransferArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsTransferAction": {
@@ -591,14 +1235,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsTransfer.AssetsTransferArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsTransferKeepAlive": {
-        "dataType": "refEnum",
-        "enums": ["assets.transferKeepAlive"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsTransferKeepAlive.AssetsTransferKeepAliveArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsTransferKeepAliveArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsTransferKeepAlive","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsTransferKeepAlive","required":true},
+            "arguments": {"ref":"AssetsTransferKeepAliveArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsTransferKeepAliveAction": {
@@ -606,14 +1250,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsTransferKeepAlive.AssetsTransferKeepAliveArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsForceTransfer": {
-        "dataType": "refEnum",
-        "enums": ["assets.forceTransfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsForceTransfer.AssetsForceTransferArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsForceTransferArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsForceTransfer","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsForceTransfer","required":true},
+            "arguments": {"ref":"AssetsForceTransferArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsForceTransferAction": {
@@ -621,14 +1265,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsForceTransfer.AssetsForceTransferArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsFreezeAccount": {
-        "dataType": "refEnum",
-        "enums": ["assets.freeze"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsFreezeAccount.AssetsFreezeAccountArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsFreezeAccountArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsFreezeAccount","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsFreezeAccount","required":true},
+            "arguments": {"ref":"AssetsFreezeAccountArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsFreezeAccountAction": {
@@ -636,14 +1280,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsFreezeAccount.AssetsFreezeAccountArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsThawAccount": {
-        "dataType": "refEnum",
-        "enums": ["assets.thaw"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsThawAccount.AssetsThawAccountArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsThawAccountArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsThawAccount","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsThawAccount","required":true},
+            "arguments": {"ref":"AssetsThawAccountArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsThawAccountAction": {
@@ -651,14 +1295,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsThawAccount.AssetsThawAccountArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsFreezeAsset": {
-        "dataType": "refEnum",
-        "enums": ["assets.freezeAsset"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsFreezeAsset.AssetsFreezeAssetArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsFreezeAssetArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsFreezeAsset","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsFreezeAsset","required":true},
+            "arguments": {"ref":"AssetsFreezeAssetArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsFreezeAssetAction": {
@@ -666,14 +1310,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsFreezeAsset.AssetsFreezeAssetArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsThawAsset": {
-        "dataType": "refEnum",
-        "enums": ["assets.thawAsset"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsThawAsset.AssetsThawAssetArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsThawAssetArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsThawAsset","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsThawAsset","required":true},
+            "arguments": {"ref":"AssetsThawAssetArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsThawAssetAction": {
@@ -681,14 +1325,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsThawAsset.AssetsThawAssetArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsTransferOwnership": {
-        "dataType": "refEnum",
-        "enums": ["assets.transferOwnership"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsTransferOwnership.AssetsTransferOwnershipArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsTransferOwnershipArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsTransferOwnership","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsTransferOwnership","required":true},
+            "arguments": {"ref":"AssetsTransferOwnershipArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsTransferOwnershipAction": {
@@ -696,14 +1340,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsTransferOwnership.AssetsTransferOwnershipArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsSetMetadata": {
-        "dataType": "refEnum",
-        "enums": ["assets.setMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsSetMetadata.AssetsSetMetadataArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsSetMetadataArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsSetMetadata","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsSetMetadata","required":true},
+            "arguments": {"ref":"AssetsSetMetadataArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsSetMetadataAction": {
@@ -711,14 +1355,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsSetMetadata.AssetsSetMetadataArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AssetsSetMinBalance": {
-        "dataType": "refEnum",
-        "enums": ["assets.setMinBalance"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AssetsSetMinBalance.AssetsSetMinBalanceArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AssetsSetMinBalanceArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AssetsSetMinBalance","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AssetsSetMinBalance","required":true},
+            "arguments": {"ref":"AssetsSetMinBalanceArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsSetMinBalanceAction": {
@@ -726,14 +1370,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.AssetsSetMinBalance.AssetsSetMinBalanceArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsCreateCollection": {
-        "dataType": "refEnum",
-        "enums": ["nfts.create"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsCreateCollection.NftsCreateCollectionArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsCreateCollectionArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsCreateCollection","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsCreateCollection","required":true},
+            "arguments": {"ref":"NftsCreateCollectionArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsCreateCollectionAction": {
@@ -741,14 +1385,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsCreateCollection.NftsCreateCollectionArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsDestroyCollection": {
-        "dataType": "refEnum",
-        "enums": ["nfts.destroy"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsDestroyCollection.NftsDestroyCollectionArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsDestroyCollectionArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsDestroyCollection","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsDestroyCollection","required":true},
+            "arguments": {"ref":"NftsDestroyCollectionArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsDestroyCollectionAction": {
@@ -756,14 +1400,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsDestroyCollection.NftsDestroyCollectionArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsMintItem": {
-        "dataType": "refEnum",
-        "enums": ["nfts.mint"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsMintItem.NftsMintItemArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsMintItemArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsMintItem","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsMintItem","required":true},
+            "arguments": {"ref":"NftsMintItemArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsMintItemAction": {
@@ -771,14 +1415,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsMintItem.NftsMintItemArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsBurnItem": {
-        "dataType": "refEnum",
-        "enums": ["nfts.burn"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsBurnItem.NftsBurnItemArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsBurnItemArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsBurnItem","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsBurnItem","required":true},
+            "arguments": {"ref":"NftsBurnItemArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsBurnItemAction": {
@@ -786,14 +1430,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsBurnItem.NftsBurnItemArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsTransferItem": {
-        "dataType": "refEnum",
-        "enums": ["nfts.transfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsTransferItem.NftsTransferItemArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsTransferItemArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsTransferItem","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsTransferItem","required":true},
+            "arguments": {"ref":"NftsTransferItemArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsTransferItemAction": {
@@ -801,14 +1445,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsTransferItem.NftsTransferItemArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsLockItemTransfer": {
-        "dataType": "refEnum",
-        "enums": ["nfts.lockItemTransfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsLockItemTransfer.NftsLockItemTransferArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsLockItemTransferArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsLockItemTransfer","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsLockItemTransfer","required":true},
+            "arguments": {"ref":"NftsLockItemTransferArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsLockItemTransferAction": {
@@ -816,14 +1460,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsLockItemTransfer.NftsLockItemTransferArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsUnlockItemTransfer": {
-        "dataType": "refEnum",
-        "enums": ["nfts.unlockItemTransfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsUnlockItemTransfer.NftsUnlockItemTransferArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsUnlockItemTransferArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsUnlockItemTransfer","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsUnlockItemTransfer","required":true},
+            "arguments": {"ref":"NftsUnlockItemTransferArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsUnlockItemTransferAction": {
@@ -831,14 +1475,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsUnlockItemTransfer.NftsUnlockItemTransferArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsTransferCollectionOwnership": {
-        "dataType": "refEnum",
-        "enums": ["nfts.transferOwnership"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsTransferCollectionOwnership.NftsTransferCollectionOwnershipArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsTransferCollectionOwnershipArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsTransferCollectionOwnership","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsTransferCollectionOwnership","required":true},
+            "arguments": {"ref":"NftsTransferCollectionOwnershipArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsTransferCollectionOwnershipAction": {
@@ -846,14 +1490,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsTransferCollectionOwnership.NftsTransferCollectionOwnershipArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsSetItemMetadata": {
-        "dataType": "refEnum",
-        "enums": ["nfts.setMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsSetItemMetadata.NftsSetItemMetadataArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsSetItemMetadataArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsSetItemMetadata","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsSetItemMetadata","required":true},
+            "arguments": {"ref":"NftsSetItemMetadataArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsSetItemMetadataAction": {
@@ -861,14 +1505,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsSetItemMetadata.NftsSetItemMetadataArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsClearItemMetadata": {
-        "dataType": "refEnum",
-        "enums": ["nfts.clearMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsClearItemMetadata.NftsClearItemMetadataArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsClearItemMetadataArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsClearItemMetadata","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsClearItemMetadata","required":true},
+            "arguments": {"ref":"NftsClearItemMetadataArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsClearItemMetadataAction": {
@@ -876,14 +1520,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsClearItemMetadata.NftsClearItemMetadataArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsSetCollectionMetadata": {
-        "dataType": "refEnum",
-        "enums": ["nfts.setCollectionMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsSetCollectionMetadata.NftsSetCollectionMetadataArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsSetCollectionMetadataArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsSetCollectionMetadata","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsSetCollectionMetadata","required":true},
+            "arguments": {"ref":"NftsSetCollectionMetadataArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsSetCollectionMetadataAction": {
@@ -891,14 +1535,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsSetCollectionMetadata.NftsSetCollectionMetadataArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsClearCollectionMetadata": {
-        "dataType": "refEnum",
-        "enums": ["nfts.clearCollectionMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsClearCollectionMetadata.NftsClearCollectionMetadataArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsClearCollectionMetadataArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsClearCollectionMetadata","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsClearCollectionMetadata","required":true},
+            "arguments": {"ref":"NftsClearCollectionMetadataArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsClearCollectionMetadataAction": {
@@ -906,14 +1550,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsClearCollectionMetadata.NftsClearCollectionMetadataArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.NftsAcceptCollectionOwnership": {
-        "dataType": "refEnum",
-        "enums": ["nfts.setAcceptOwnership"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.NftsAcceptCollectionOwnership.NftsAcceptCollectionOwnershipArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"NftsAcceptCollectionOwnershipArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.NftsAcceptCollectionOwnership","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.NftsAcceptCollectionOwnership","required":true},
+            "arguments": {"ref":"NftsAcceptCollectionOwnershipArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsAcceptCollectionOwnershipAction": {
@@ -921,14 +1565,14 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"CTAtomicActionGeneric_ActionType.NftsAcceptCollectionOwnership.NftsAcceptCollectionOwnershipArgs_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType.AppTransactionsSubmitClearingTransaction": {
-        "dataType": "refEnum",
-        "enums": ["appTransactions.submitClearingTransaction"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicActionGeneric_ActionType.AppTransactionsSubmitClearingTransaction.AppTransactionsSubmitClearingTransactionArgs_": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"arguments":{"ref":"AppTransactionsSubmitClearingTransactionArgs","required":true},"origin":{"ref":"CTActionOrigin","required":true},"actionType":{"ref":"ActionType.AppTransactionsSubmitClearingTransaction","required":true}},"validators":{}},
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ActionType.AppTransactionsSubmitClearingTransaction","required":true},
+            "arguments": {"ref":"AppTransactionsSubmitClearingTransactionArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AppTransactionsSubmitClearingTransactionAction": {
@@ -953,7 +1597,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "signatory": {"dataType":"string","required":true},
-            "app_agent_id": {"dataType":"double","required":true},
+            "appAgentId": {"dataType":"double","required":true},
             "atomics": {"dataType":"array","array":{"dataType":"refObject","ref":"CTAtomic"},"required":true},
         },
         "additionalProperties": false,

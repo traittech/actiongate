@@ -68,7 +68,7 @@ const atomic: CTAtomic = {
 // Define the clearing transaction payload
 const clearingTransactionPayload: ClearingTransactionPayload = {
   signatory: 'ADMIN_1',
-  app_agent_id: 1000,
+  appAgentId: 1000,
   atomics: [atomic],
 };
 

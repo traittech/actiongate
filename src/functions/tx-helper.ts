@@ -1,46 +1,19 @@
 import { deriveAddress, getRegistry, PolkadotSS58Format } from '@substrate/txwrapper-polkadot';
 
 import { TransactionService } from '../adapter/datagate';
-import { buildUnsignedTxFromActionType } from '../txwrapper';
-import { ActionType } from '../types/api/actions';
+import { buildUnsignedTransaction } from '../txwrapper';
 import { TxMetadata } from '../types/tx';
 
 import { loadConfig } from './config';
 import logger from './logger';
 
-import type { TransactionArgs, CTAtomicAction } from '../txwrapper';
+import type { CTAtomicAction, TxAction } from '../txwrapper';
 import type { CTAction } from '../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
 import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 const config = loadConfig();
 const txService = new TransactionService(config.datagate_api.uri);
-
-/**
- * Builds an unsigned transaction based on the provided module and method names and args.
- *
- * @param moduleName - The name of the module.
- * @param methodName - The name of the method within the module.
- * @param args - The arguments for the extrinsic function.
- * @param baseTxInfo - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
- *
- * @throws If the transaction is unsupported.
- */
-export function buildUnsignedTransaction(
-  moduleName: string,
-  methodName: string,
-  args: TransactionArgs,
-  baseTxInfo: BaseTxInfo,
-  options: OptionsWithMeta
-): UnsignedTransaction {
-  // create action type from module and method
-  const actionType = `${moduleName}.${methodName}` as ActionType;
-  const unsigned = buildUnsignedTxFromActionType(actionType, args, baseTxInfo, options);
-
-  return unsigned;
-}
 
 /**
  * Builds clearing transaction action from atomic action.
@@ -50,7 +23,7 @@ export function buildUnsignedTransaction(
  * @returns An action in clearing transaction.
  */
 export function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): CTAction {
-  const unsigned = buildUnsignedTxFromActionType(action.actionType, action.arguments, baseTxInfo, options);
+  const unsigned = buildUnsignedTransaction(action, baseTxInfo, options);
   const ctAction: CTAction = [action.origin, unsigned.method];
 
   return ctAction;

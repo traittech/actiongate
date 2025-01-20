@@ -1,4 +1,17 @@
-import type { TransactionArgs } from '../../txwrapper';
+import type { ActionType } from './actions';
+import type { TxAction, TransactionArgs } from '../../txwrapper';
+
+export interface TxGeneric<TxType extends ActionType, TxArgs extends TransactionArgs> {
+  /**
+   * The type of transaction to be performed
+   */
+  actionType: TxType;
+
+  /**
+   * The arguments for the transaction.
+   */
+  arguments: TxArgs;
+}
 
 /**
  * Payload for a transaction.
@@ -10,19 +23,9 @@ export interface TransactionPayload {
   signatory: string;
 
   /**
-   * The name of the module where the function to be executed is defined.
+   * Transaction data
    */
-  module_name: string;
-
-  /**
-   * The name of the function to be executed.
-   */
-  function_name: string;
-
-  /**
-   * The arguments to be passed to the function.
-   */
-  arguments: TransactionArgs;
+  tx: TxAction;
 }
 
 export interface BaseTransactionResponse {

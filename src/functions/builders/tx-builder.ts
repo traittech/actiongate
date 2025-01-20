@@ -4,7 +4,8 @@ import { TransactionService } from '../../adapter/datagate';
 import { loadConfig } from '../config';
 import logger from '../logger';
 import { signWith } from '../signer';
-import { generateTxMetadata, buildUnsignedTransaction } from '../tx-helper';
+import { generateTxMetadata } from '../tx-helper';
+import { buildUnsignedTransaction } from '../../txwrapper';
 
 import type { TransactionPayload } from '../../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
@@ -26,7 +27,7 @@ export async function createSignedTransactionAndBroadcast(
   payload: TransactionPayload,
 ): Promise<string> {
   try {
-    const { module_name: moduleName, function_name: functionName, arguments: args } = payload;
+    const { actionType, arguments: args } = payload.tx;
 
     // Generate metadata, base transaction info, and options
     logger.debug('Generating transaction metadata...');
@@ -34,9 +35,9 @@ export async function createSignedTransactionAndBroadcast(
 
     // Build the unsigned transaction
     logger.info(
-      `Building unsigned transaction for module: ${moduleName}, function: ${functionName} with args: ${args}`
+      `Building unsigned transaction for: ${actionType}, with args: ${args}`
     );
-    const unsigned = buildUnsignedTransaction(moduleName, functionName, args, baseTxInfo, options);
+    const unsigned = buildUnsignedTransaction(payload.tx, baseTxInfo, options);
 
     // Construct the signing payload from the unsigned transaction
     logger.debug('Constructing signing payload...');

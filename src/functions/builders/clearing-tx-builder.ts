@@ -4,7 +4,9 @@ import { TransactionService } from '../../adapter/datagate';
 import { loadConfig } from '../config';
 import logger from '../logger';
 import { signWith } from '../signer';
-import { generateTxMetadata, buildUnsignedTransaction, buildCTAction } from '../tx-helper';
+import { generateTxMetadata, buildCTAction } from '../tx-helper';
+import { buildUnsignedTransaction } from '../../txwrapper';
+import { ActionType } from '../../types/api/actions';
 
 import type { CTAction, CTAtomicActions, ClearingTransactionPayload } from '../../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
@@ -48,11 +50,12 @@ export async function createClearingTransactionAndBroadcast(
     // Build the unsigned clearing transaction
     logger.debug('Building unsigned clearing transaction...');
     const unsigned = buildUnsignedTransaction(
-      'appTransactions',
-      'submitClearingTransaction',
       {
-        appAgentId: payload.app_agent_id,
-        atomics: unsignedAtomics,
+        actionType: ActionType.AppTransactionsSubmitClearingTransaction,
+        arguments: {
+          appAgentId: payload.appAgentId,
+          atomics: unsignedAtomics,
+        }
       },
       baseTxInfo,
       options

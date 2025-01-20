@@ -1,5 +1,6 @@
 import type { ActionType } from './actions';
-import type { CTAtomicAction } from '../../txwrapper';
+import type { BlockchainGenericId, BlockchainGenericAccount } from './common';
+import type { CTAtomicAction, TransactionArgs } from '../../txwrapper';
 
 /**
  * The origin type for each Action in CT
@@ -7,23 +8,23 @@ import type { CTAtomicAction } from '../../txwrapper';
 export type CTActionOrigin =
   | {
       /** The ID of the application agent. */
-      AppAgentId: any
+      AppAgentId: BlockchainGenericId
     }
   | {
       /** The address of the application agent. */
-      AppAgentAddress: string
+      AppAgentAddress: BlockchainGenericAccount
     }
   | {
       /** The ID of the transactional address. */
-      TransactionalAddressId: any
+      TransactionalAddressId: BlockchainGenericId
     }
   | {
       /** The transactional address. */
-      TransactionalAddress: any
+      TransactionalAddress: BlockchainGenericAccount
     }
   | {
       /** The named address. */
-      NamedAddress: any
+      NamedAddress: BlockchainGenericAccount
     }
   | {
       /** The name of the named address. */
@@ -37,6 +38,8 @@ export type CTActionCall = { callIndex?: string; args?: string } | string;
 
 /**
  * Represents an action in a clearing transaction.
+ * [WARNING]: this is not a correct type, because `openapi v3` doesn't support `tuple` type.
+ * The correct tuple type is [CTActionOrigin, CTActionCall], commented below
  */
 export type CTAction = Array<CTActionOrigin | CTActionCall>;
 
@@ -58,21 +61,21 @@ export type CTAction = Array<CTActionOrigin | CTActionCall>;
  */
 export type CTAtomicActions = CTAction[][];
 
-export type CTAtomicActionGeneric<ActionTypeName extends ActionType, ActionArgs> = {
+export interface CTAtomicActionGeneric<CTActionType extends ActionType, CTActionArgs extends TransactionArgs> {
   /**
-   * The type of action to be performed
+   * The type of transaction to be performed
    */
+  actionType: CTActionType;
 
-  actionType: ActionTypeName;
+  /**
+   * The arguments for the transaction.
+   */
+  arguments: CTActionArgs;
+
   /**
    * The origin responsible for the transaction.
    */
-
   origin: CTActionOrigin;
-  /**
-   * The arguments for the action.
-   */
-  arguments: ActionArgs;
 };
 
 /**
@@ -97,7 +100,7 @@ export interface ClearingTransactionPayload {
   /**
    * The ID of the application agent initiating the transaction.
    */
-  app_agent_id: number;
+  appAgentId: number;
 
   /**
    * A list of atomic operations included in the transaction.

@@ -13,6 +13,7 @@ import type {
   BlockchainGenericBoolean,
   BlockchainGenericId,
   BlockchainGenericText,
+  TxGeneric,
   CTAtomicActionGeneric,
   CTAtomicActions,
   NftWitness,
@@ -84,15 +85,14 @@ export function {{{functionName}}}(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = {{{actionName}}}ArgsSchema.parse(args);
+  {{{actionName}}}ArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', validArgs, info, options);
+  return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', args, info, options);
 }
 
-export type {{{actionName}}}Action = CTAtomicActionGeneric<
-  ActionType.{{{actionName}}},
-  {{{actionName}}}Args
->;
+export type {{{actionName}}}Tx = TxGeneric<ActionType.{{{actionName}}}, {{{actionName}}}Args>;
+
+export type {{{actionName}}}Action = CTAtomicActionGeneric<ActionType.{{{actionName}}}, {{{actionName}}}Args>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -109,6 +109,14 @@ export type CTAtomicAction =
 {{/each}};
 
 /**
+ * Represents a single transaction
+ */
+export type TxAction =
+{{#each ctAtomicActions}}
+  | {{{this.actionName}}}Tx
+{{/each}};
+
+/**
  * Represents a transaction args
  */
 export type TransactionArgs =
@@ -117,29 +125,29 @@ export type TransactionArgs =
 {{/each}};
 
 /**
- * Builds an unsigned transaction based on the provided `ActionType`.
+ * Builds an unsigned transaction based on the provided transaction action.
  *
- * @param actionType - transaction `ActionType`
- * @param args - The arguments for the extrinsic function.
+ * @param tx - Transaction action.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
  * @returns An unsigned transaction.
  *
  * @throws If the transaction is unsupported.
  */
-export function buildUnsignedTxFromActionType(
-  actionType: ActionType,
-  args: TransactionArgs,
+export function buildUnsignedTransaction(
+  tx: TxAction,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  const { actionType, arguments: args } = tx;
+
   let unsigned: UnsignedTransaction;
 
   // Handle different action types
   switch (actionType) {
   {{#each ctAtomicActions}}
     case ActionType.{{{this.actionName}}}: {
-      unsigned = {{{this.function}}}(args as {{{this.actionName}}}Args, info, options);
+      unsigned = {{{this.function}}}(args, info, options);
       break;
     }
   {{/each}}

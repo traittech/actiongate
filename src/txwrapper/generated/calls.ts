@@ -13,6 +13,7 @@ import type {
   BlockchainGenericBoolean,
   BlockchainGenericId,
   BlockchainGenericText,
+  TxGeneric,
   CTAtomicActionGeneric,
   CTAtomicActions,
   NftWitness,
@@ -67,15 +68,14 @@ export function appTransactionsSubmitClearingTransaction(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AppTransactionsSubmitClearingTransactionArgsSchema.parse(args);
+  AppTransactionsSubmitClearingTransactionArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appTransactions', 'submitClearingTransaction', validArgs, info, options);
+  return constructUnsignedTransaction('appTransactions', 'submitClearingTransaction', args, info, options);
 }
 
-export type AppTransactionsSubmitClearingTransactionAction = CTAtomicActionGeneric<
-  ActionType.AppTransactionsSubmitClearingTransaction,
-  AppTransactionsSubmitClearingTransactionArgs
->;
+export type AppTransactionsSubmitClearingTransactionTx = TxGeneric<ActionType.AppTransactionsSubmitClearingTransaction, AppTransactionsSubmitClearingTransactionArgs>;
+
+export type AppTransactionsSubmitClearingTransactionAction = CTAtomicActionGeneric<ActionType.AppTransactionsSubmitClearingTransaction, AppTransactionsSubmitClearingTransactionArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -124,15 +124,14 @@ export function assetsBurn(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsBurnArgsSchema.parse(args);
+  AssetsBurnArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'burn', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'burn', args, info, options);
 }
 
-export type AssetsBurnAction = CTAtomicActionGeneric<
-  ActionType.AssetsBurn,
-  AssetsBurnArgs
->;
+export type AssetsBurnTx = TxGeneric<ActionType.AssetsBurn, AssetsBurnArgs>;
+
+export type AssetsBurnAction = CTAtomicActionGeneric<ActionType.AssetsBurn, AssetsBurnArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -161,15 +160,14 @@ export function assetsCreate(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsCreateArgsSchema.parse(args);
+  AssetsCreateArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'create', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'create', args, info, options);
 }
 
-export type AssetsCreateAction = CTAtomicActionGeneric<
-  ActionType.AssetsCreate,
-  AssetsCreateArgs
->;
+export type AssetsCreateTx = TxGeneric<ActionType.AssetsCreate, AssetsCreateArgs>;
+
+export type AssetsCreateAction = CTAtomicActionGeneric<ActionType.AssetsCreate, AssetsCreateArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -204,15 +202,14 @@ export function assetsDestroyAccounts(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsDestroyAccountsArgsSchema.parse(args);
+  AssetsDestroyAccountsArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'destroyAccounts', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'destroyAccounts', args, info, options);
 }
 
-export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<
-  ActionType.AssetsDestroyAccounts,
-  AssetsDestroyAccountsArgs
->;
+export type AssetsDestroyAccountsTx = TxGeneric<ActionType.AssetsDestroyAccounts, AssetsDestroyAccountsArgs>;
+
+export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<ActionType.AssetsDestroyAccounts, AssetsDestroyAccountsArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -247,15 +244,14 @@ export function assetsDestroyApprovals(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsDestroyApprovalsArgsSchema.parse(args);
+  AssetsDestroyApprovalsArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'destroyApprovals', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'destroyApprovals', args, info, options);
 }
 
-export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<
-  ActionType.AssetsDestroyApprovals,
-  AssetsDestroyApprovalsArgs
->;
+export type AssetsDestroyApprovalsTx = TxGeneric<ActionType.AssetsDestroyApprovals, AssetsDestroyApprovalsArgs>;
+
+export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<ActionType.AssetsDestroyApprovals, AssetsDestroyApprovalsArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -290,15 +286,14 @@ export function assetsFinishDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsFinishDestroyArgsSchema.parse(args);
+  AssetsFinishDestroyArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'finishDestroy', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'finishDestroy', args, info, options);
 }
 
-export type AssetsFinishDestroyAction = CTAtomicActionGeneric<
-  ActionType.AssetsFinishDestroy,
-  AssetsFinishDestroyArgs
->;
+export type AssetsFinishDestroyTx = TxGeneric<ActionType.AssetsFinishDestroy, AssetsFinishDestroyArgs>;
+
+export type AssetsFinishDestroyAction = CTAtomicActionGeneric<ActionType.AssetsFinishDestroy, AssetsFinishDestroyArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -354,15 +349,14 @@ export function assetsForceTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsForceTransferArgsSchema.parse(args);
+  AssetsForceTransferArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'forceTransfer', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'forceTransfer', args, info, options);
 }
 
-export type AssetsForceTransferAction = CTAtomicActionGeneric<
-  ActionType.AssetsForceTransfer,
-  AssetsForceTransferArgs
->;
+export type AssetsForceTransferTx = TxGeneric<ActionType.AssetsForceTransfer, AssetsForceTransferArgs>;
+
+export type AssetsForceTransferAction = CTAtomicActionGeneric<ActionType.AssetsForceTransfer, AssetsForceTransferArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -404,15 +398,14 @@ export function assetsFreeze(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsFreezeAccountArgsSchema.parse(args);
+  AssetsFreezeAccountArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'freeze', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'freeze', args, info, options);
 }
 
-export type AssetsFreezeAccountAction = CTAtomicActionGeneric<
-  ActionType.AssetsFreezeAccount,
-  AssetsFreezeAccountArgs
->;
+export type AssetsFreezeAccountTx = TxGeneric<ActionType.AssetsFreezeAccount, AssetsFreezeAccountArgs>;
+
+export type AssetsFreezeAccountAction = CTAtomicActionGeneric<ActionType.AssetsFreezeAccount, AssetsFreezeAccountArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -447,15 +440,14 @@ export function assetsFreezeAsset(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsFreezeAssetArgsSchema.parse(args);
+  AssetsFreezeAssetArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'freezeAsset', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'freezeAsset', args, info, options);
 }
 
-export type AssetsFreezeAssetAction = CTAtomicActionGeneric<
-  ActionType.AssetsFreezeAsset,
-  AssetsFreezeAssetArgs
->;
+export type AssetsFreezeAssetTx = TxGeneric<ActionType.AssetsFreezeAsset, AssetsFreezeAssetArgs>;
+
+export type AssetsFreezeAssetAction = CTAtomicActionGeneric<ActionType.AssetsFreezeAsset, AssetsFreezeAssetArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -504,15 +496,14 @@ export function assetsMint(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsMintArgsSchema.parse(args);
+  AssetsMintArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'mint', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'mint', args, info, options);
 }
 
-export type AssetsMintAction = CTAtomicActionGeneric<
-  ActionType.AssetsMint,
-  AssetsMintArgs
->;
+export type AssetsMintTx = TxGeneric<ActionType.AssetsMint, AssetsMintArgs>;
+
+export type AssetsMintAction = CTAtomicActionGeneric<ActionType.AssetsMint, AssetsMintArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -554,15 +545,14 @@ export function assetsSetMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsSetMetadataArgsSchema.parse(args);
+  AssetsSetMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'setMetadata', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'setMetadata', args, info, options);
 }
 
-export type AssetsSetMetadataAction = CTAtomicActionGeneric<
-  ActionType.AssetsSetMetadata,
-  AssetsSetMetadataArgs
->;
+export type AssetsSetMetadataTx = TxGeneric<ActionType.AssetsSetMetadata, AssetsSetMetadataArgs>;
+
+export type AssetsSetMetadataAction = CTAtomicActionGeneric<ActionType.AssetsSetMetadata, AssetsSetMetadataArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -604,15 +594,14 @@ export function assetsSetMinBalance(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsSetMinBalanceArgsSchema.parse(args);
+  AssetsSetMinBalanceArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'setMinBalance', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'setMinBalance', args, info, options);
 }
 
-export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<
-  ActionType.AssetsSetMinBalance,
-  AssetsSetMinBalanceArgs
->;
+export type AssetsSetMinBalanceTx = TxGeneric<ActionType.AssetsSetMinBalance, AssetsSetMinBalanceArgs>;
+
+export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<ActionType.AssetsSetMinBalance, AssetsSetMinBalanceArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -647,15 +636,14 @@ export function assetsStartDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsStartDestroyArgsSchema.parse(args);
+  AssetsStartDestroyArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'startDestroy', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'startDestroy', args, info, options);
 }
 
-export type AssetsStartDestroyAction = CTAtomicActionGeneric<
-  ActionType.AssetsStartDestroy,
-  AssetsStartDestroyArgs
->;
+export type AssetsStartDestroyTx = TxGeneric<ActionType.AssetsStartDestroy, AssetsStartDestroyArgs>;
+
+export type AssetsStartDestroyAction = CTAtomicActionGeneric<ActionType.AssetsStartDestroy, AssetsStartDestroyArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -697,15 +685,14 @@ export function assetsThaw(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsThawAccountArgsSchema.parse(args);
+  AssetsThawAccountArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'thaw', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'thaw', args, info, options);
 }
 
-export type AssetsThawAccountAction = CTAtomicActionGeneric<
-  ActionType.AssetsThawAccount,
-  AssetsThawAccountArgs
->;
+export type AssetsThawAccountTx = TxGeneric<ActionType.AssetsThawAccount, AssetsThawAccountArgs>;
+
+export type AssetsThawAccountAction = CTAtomicActionGeneric<ActionType.AssetsThawAccount, AssetsThawAccountArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -740,15 +727,14 @@ export function assetsThawAsset(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsThawAssetArgsSchema.parse(args);
+  AssetsThawAssetArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'thawAsset', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'thawAsset', args, info, options);
 }
 
-export type AssetsThawAssetAction = CTAtomicActionGeneric<
-  ActionType.AssetsThawAsset,
-  AssetsThawAssetArgs
->;
+export type AssetsThawAssetTx = TxGeneric<ActionType.AssetsThawAsset, AssetsThawAssetArgs>;
+
+export type AssetsThawAssetAction = CTAtomicActionGeneric<ActionType.AssetsThawAsset, AssetsThawAssetArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -797,15 +783,14 @@ export function assetsTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsTransferArgsSchema.parse(args);
+  AssetsTransferArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'transfer', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'transfer', args, info, options);
 }
 
-export type AssetsTransferAction = CTAtomicActionGeneric<
-  ActionType.AssetsTransfer,
-  AssetsTransferArgs
->;
+export type AssetsTransferTx = TxGeneric<ActionType.AssetsTransfer, AssetsTransferArgs>;
+
+export type AssetsTransferAction = CTAtomicActionGeneric<ActionType.AssetsTransfer, AssetsTransferArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -854,15 +839,14 @@ export function assetsTransferKeepAlive(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsTransferKeepAliveArgsSchema.parse(args);
+  AssetsTransferKeepAliveArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'transferKeepAlive', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'transferKeepAlive', args, info, options);
 }
 
-export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<
-  ActionType.AssetsTransferKeepAlive,
-  AssetsTransferKeepAliveArgs
->;
+export type AssetsTransferKeepAliveTx = TxGeneric<ActionType.AssetsTransferKeepAlive, AssetsTransferKeepAliveArgs>;
+
+export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.AssetsTransferKeepAlive, AssetsTransferKeepAliveArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -904,15 +888,14 @@ export function assetsTransferOwnership(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = AssetsTransferOwnershipArgsSchema.parse(args);
+  AssetsTransferOwnershipArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'transferOwnership', validArgs, info, options);
+  return constructUnsignedTransaction('assets', 'transferOwnership', args, info, options);
 }
 
-export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<
-  ActionType.AssetsTransferOwnership,
-  AssetsTransferOwnershipArgs
->;
+export type AssetsTransferOwnershipTx = TxGeneric<ActionType.AssetsTransferOwnership, AssetsTransferOwnershipArgs>;
+
+export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<ActionType.AssetsTransferOwnership, AssetsTransferOwnershipArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -951,15 +934,14 @@ export function balancesTransferAll(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = BalancesTransferAllArgsSchema.parse(args);
+  BalancesTransferAllArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('balances', 'transferAll', validArgs, info, options);
+  return constructUnsignedTransaction('balances', 'transferAll', args, info, options);
 }
 
-export type BalancesTransferAllAction = CTAtomicActionGeneric<
-  ActionType.BalancesTransferAll,
-  BalancesTransferAllArgs
->;
+export type BalancesTransferAllTx = TxGeneric<ActionType.BalancesTransferAll, BalancesTransferAllArgs>;
+
+export type BalancesTransferAllAction = CTAtomicActionGeneric<ActionType.BalancesTransferAll, BalancesTransferAllArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -995,15 +977,14 @@ export function balancesTransferAllowDeath(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = BalancesTransferAllowDeathArgsSchema.parse(args);
+  BalancesTransferAllowDeathArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('balances', 'transferAllowDeath', validArgs, info, options);
+  return constructUnsignedTransaction('balances', 'transferAllowDeath', args, info, options);
 }
 
-export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<
-  ActionType.BalancesTransferAllowDeath,
-  BalancesTransferAllowDeathArgs
->;
+export type BalancesTransferAllowDeathTx = TxGeneric<ActionType.BalancesTransferAllowDeath, BalancesTransferAllowDeathArgs>;
+
+export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<ActionType.BalancesTransferAllowDeath, BalancesTransferAllowDeathArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1039,15 +1020,14 @@ export function balancesTransferKeepAlive(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = BalancesTransferKeepAliveArgsSchema.parse(args);
+  BalancesTransferKeepAliveArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('balances', 'transferKeepAlive', validArgs, info, options);
+  return constructUnsignedTransaction('balances', 'transferKeepAlive', args, info, options);
 }
 
-export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<
-  ActionType.BalancesTransferKeepAlive,
-  BalancesTransferKeepAliveArgs
->;
+export type BalancesTransferKeepAliveTx = TxGeneric<ActionType.BalancesTransferKeepAlive, BalancesTransferKeepAliveArgs>;
+
+export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.BalancesTransferKeepAlive, BalancesTransferKeepAliveArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1089,15 +1069,14 @@ export function nftsBurn(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsBurnItemArgsSchema.parse(args);
+  NftsBurnItemArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'burn', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'burn', args, info, options);
 }
 
-export type NftsBurnItemAction = CTAtomicActionGeneric<
-  ActionType.NftsBurnItem,
-  NftsBurnItemArgs
->;
+export type NftsBurnItemTx = TxGeneric<ActionType.NftsBurnItem, NftsBurnItemArgs>;
+
+export type NftsBurnItemAction = CTAtomicActionGeneric<ActionType.NftsBurnItem, NftsBurnItemArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1132,15 +1111,14 @@ export function nftsClearCollectionMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsClearCollectionMetadataArgsSchema.parse(args);
+  NftsClearCollectionMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'clearCollectionMetadata', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'clearCollectionMetadata', args, info, options);
 }
 
-export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<
-  ActionType.NftsClearCollectionMetadata,
-  NftsClearCollectionMetadataArgs
->;
+export type NftsClearCollectionMetadataTx = TxGeneric<ActionType.NftsClearCollectionMetadata, NftsClearCollectionMetadataArgs>;
+
+export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<ActionType.NftsClearCollectionMetadata, NftsClearCollectionMetadataArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1182,15 +1160,14 @@ export function nftsClearMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsClearItemMetadataArgsSchema.parse(args);
+  NftsClearItemMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'clearMetadata', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'clearMetadata', args, info, options);
 }
 
-export type NftsClearItemMetadataAction = CTAtomicActionGeneric<
-  ActionType.NftsClearItemMetadata,
-  NftsClearItemMetadataArgs
->;
+export type NftsClearItemMetadataTx = TxGeneric<ActionType.NftsClearItemMetadata, NftsClearItemMetadataArgs>;
+
+export type NftsClearItemMetadataAction = CTAtomicActionGeneric<ActionType.NftsClearItemMetadata, NftsClearItemMetadataArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1215,15 +1192,14 @@ export function nftsCreate(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsCreateCollectionArgsSchema.parse(args);
+  NftsCreateCollectionArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'create', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'create', args, info, options);
 }
 
-export type NftsCreateCollectionAction = CTAtomicActionGeneric<
-  ActionType.NftsCreateCollection,
-  NftsCreateCollectionArgs
->;
+export type NftsCreateCollectionTx = TxGeneric<ActionType.NftsCreateCollection, NftsCreateCollectionArgs>;
+
+export type NftsCreateCollectionAction = CTAtomicActionGeneric<ActionType.NftsCreateCollection, NftsCreateCollectionArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1265,15 +1241,14 @@ export function nftsDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsDestroyCollectionArgsSchema.parse(args);
+  NftsDestroyCollectionArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'destroy', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'destroy', args, info, options);
 }
 
-export type NftsDestroyCollectionAction = CTAtomicActionGeneric<
-  ActionType.NftsDestroyCollection,
-  NftsDestroyCollectionArgs
->;
+export type NftsDestroyCollectionTx = TxGeneric<ActionType.NftsDestroyCollection, NftsDestroyCollectionArgs>;
+
+export type NftsDestroyCollectionAction = CTAtomicActionGeneric<ActionType.NftsDestroyCollection, NftsDestroyCollectionArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1315,15 +1290,14 @@ export function nftsLockItemTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsLockItemTransferArgsSchema.parse(args);
+  NftsLockItemTransferArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'lockItemTransfer', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'lockItemTransfer', args, info, options);
 }
 
-export type NftsLockItemTransferAction = CTAtomicActionGeneric<
-  ActionType.NftsLockItemTransfer,
-  NftsLockItemTransferArgs
->;
+export type NftsLockItemTransferTx = TxGeneric<ActionType.NftsLockItemTransfer, NftsLockItemTransferArgs>;
+
+export type NftsLockItemTransferAction = CTAtomicActionGeneric<ActionType.NftsLockItemTransfer, NftsLockItemTransferArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1360,15 +1334,14 @@ export function nftsMint(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsMintItemArgsSchema.parse(args);
+  NftsMintItemArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'mint', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'mint', args, info, options);
 }
 
-export type NftsMintItemAction = CTAtomicActionGeneric<
-  ActionType.NftsMintItem,
-  NftsMintItemArgs
->;
+export type NftsMintItemTx = TxGeneric<ActionType.NftsMintItem, NftsMintItemArgs>;
+
+export type NftsMintItemAction = CTAtomicActionGeneric<ActionType.NftsMintItem, NftsMintItemArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1403,15 +1376,14 @@ export function nftsSetAcceptOwnership(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsAcceptCollectionOwnershipArgsSchema.parse(args);
+  NftsAcceptCollectionOwnershipArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'setAcceptOwnership', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'setAcceptOwnership', args, info, options);
 }
 
-export type NftsAcceptCollectionOwnershipAction = CTAtomicActionGeneric<
-  ActionType.NftsAcceptCollectionOwnership,
-  NftsAcceptCollectionOwnershipArgs
->;
+export type NftsAcceptCollectionOwnershipTx = TxGeneric<ActionType.NftsAcceptCollectionOwnership, NftsAcceptCollectionOwnershipArgs>;
+
+export type NftsAcceptCollectionOwnershipAction = CTAtomicActionGeneric<ActionType.NftsAcceptCollectionOwnership, NftsAcceptCollectionOwnershipArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1453,15 +1425,14 @@ export function nftsSetCollectionMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsSetCollectionMetadataArgsSchema.parse(args);
+  NftsSetCollectionMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'setCollectionMetadata', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'setCollectionMetadata', args, info, options);
 }
 
-export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<
-  ActionType.NftsSetCollectionMetadata,
-  NftsSetCollectionMetadataArgs
->;
+export type NftsSetCollectionMetadataTx = TxGeneric<ActionType.NftsSetCollectionMetadata, NftsSetCollectionMetadataArgs>;
+
+export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<ActionType.NftsSetCollectionMetadata, NftsSetCollectionMetadataArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1510,15 +1481,14 @@ export function nftsSetMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsSetItemMetadataArgsSchema.parse(args);
+  NftsSetItemMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'setMetadata', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'setMetadata', args, info, options);
 }
 
-export type NftsSetItemMetadataAction = CTAtomicActionGeneric<
-  ActionType.NftsSetItemMetadata,
-  NftsSetItemMetadataArgs
->;
+export type NftsSetItemMetadataTx = TxGeneric<ActionType.NftsSetItemMetadata, NftsSetItemMetadataArgs>;
+
+export type NftsSetItemMetadataAction = CTAtomicActionGeneric<ActionType.NftsSetItemMetadata, NftsSetItemMetadataArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1567,15 +1537,14 @@ export function nftsTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsTransferItemArgsSchema.parse(args);
+  NftsTransferItemArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'transfer', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'transfer', args, info, options);
 }
 
-export type NftsTransferItemAction = CTAtomicActionGeneric<
-  ActionType.NftsTransferItem,
-  NftsTransferItemArgs
->;
+export type NftsTransferItemTx = TxGeneric<ActionType.NftsTransferItem, NftsTransferItemArgs>;
+
+export type NftsTransferItemAction = CTAtomicActionGeneric<ActionType.NftsTransferItem, NftsTransferItemArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1614,15 +1583,14 @@ export function nftsTransferOwnership(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsTransferCollectionOwnershipArgsSchema.parse(args);
+  NftsTransferCollectionOwnershipArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'transferOwnership', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'transferOwnership', args, info, options);
 }
 
-export type NftsTransferCollectionOwnershipAction = CTAtomicActionGeneric<
-  ActionType.NftsTransferCollectionOwnership,
-  NftsTransferCollectionOwnershipArgs
->;
+export type NftsTransferCollectionOwnershipTx = TxGeneric<ActionType.NftsTransferCollectionOwnership, NftsTransferCollectionOwnershipArgs>;
+
+export type NftsTransferCollectionOwnershipAction = CTAtomicActionGeneric<ActionType.NftsTransferCollectionOwnership, NftsTransferCollectionOwnershipArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1664,15 +1632,14 @@ export function nftsUnlockItemTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  const validArgs = NftsUnlockItemTransferArgsSchema.parse(args);
+  NftsUnlockItemTransferArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'unlockItemTransfer', validArgs, info, options);
+  return constructUnsignedTransaction('nfts', 'unlockItemTransfer', args, info, options);
 }
 
-export type NftsUnlockItemTransferAction = CTAtomicActionGeneric<
-  ActionType.NftsUnlockItemTransfer,
-  NftsUnlockItemTransferArgs
->;
+export type NftsUnlockItemTransferTx = TxGeneric<ActionType.NftsUnlockItemTransfer, NftsUnlockItemTransferArgs>;
+
+export type NftsUnlockItemTransferAction = CTAtomicActionGeneric<ActionType.NftsUnlockItemTransfer, NftsUnlockItemTransferArgs>;
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1717,6 +1684,46 @@ export type CTAtomicAction =
 ;
 
 /**
+ * Represents a single transaction
+ */
+export type TxAction =
+  | BalancesTransferAllowDeathTx
+  | BalancesTransferKeepAliveTx
+  | BalancesTransferAllTx
+  | AssetsCreateTx
+  | AssetsStartDestroyTx
+  | AssetsDestroyAccountsTx
+  | AssetsDestroyApprovalsTx
+  | AssetsFinishDestroyTx
+  | AssetsMintTx
+  | AssetsBurnTx
+  | AssetsTransferTx
+  | AssetsTransferKeepAliveTx
+  | AssetsForceTransferTx
+  | AssetsFreezeAccountTx
+  | AssetsThawAccountTx
+  | AssetsFreezeAssetTx
+  | AssetsThawAssetTx
+  | AssetsTransferOwnershipTx
+  | AssetsSetMetadataTx
+  | AssetsSetMinBalanceTx
+  | NftsCreateCollectionTx
+  | NftsDestroyCollectionTx
+  | NftsMintItemTx
+  | NftsBurnItemTx
+  | NftsTransferItemTx
+  | NftsLockItemTransferTx
+  | NftsUnlockItemTransferTx
+  | NftsTransferCollectionOwnershipTx
+  | NftsSetItemMetadataTx
+  | NftsClearItemMetadataTx
+  | NftsSetCollectionMetadataTx
+  | NftsClearCollectionMetadataTx
+  | NftsAcceptCollectionOwnershipTx
+  | AppTransactionsSubmitClearingTransactionTx
+;
+
+/**
  * Represents a transaction args
  */
 export type TransactionArgs =
@@ -1757,160 +1764,160 @@ export type TransactionArgs =
 ;
 
 /**
- * Builds an unsigned transaction based on the provided `ActionType`.
+ * Builds an unsigned transaction based on the provided transaction action.
  *
- * @param actionType - transaction `ActionType`
- * @param args - The arguments for the extrinsic function.
+ * @param tx - Transaction action.
  * @param info - Base transaction information.
  * @param options - Additional options with metadata.
  * @returns An unsigned transaction.
  *
  * @throws If the transaction is unsupported.
  */
-export function buildUnsignedTxFromActionType(
-  actionType: ActionType,
-  args: TransactionArgs,
+export function buildUnsignedTransaction(
+  tx: TxAction,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
+  const { actionType, arguments: args } = tx;
+
   let unsigned: UnsignedTransaction;
 
   // Handle different action types
   switch (actionType) {
     case ActionType.BalancesTransferAllowDeath: {
-      unsigned = balancesTransferAllowDeath(args as BalancesTransferAllowDeathArgs, info, options);
+      unsigned = balancesTransferAllowDeath(args, info, options);
       break;
     }
     case ActionType.BalancesTransferKeepAlive: {
-      unsigned = balancesTransferKeepAlive(args as BalancesTransferKeepAliveArgs, info, options);
+      unsigned = balancesTransferKeepAlive(args, info, options);
       break;
     }
     case ActionType.BalancesTransferAll: {
-      unsigned = balancesTransferAll(args as BalancesTransferAllArgs, info, options);
+      unsigned = balancesTransferAll(args, info, options);
       break;
     }
     case ActionType.AssetsCreate: {
-      unsigned = assetsCreate(args as AssetsCreateArgs, info, options);
+      unsigned = assetsCreate(args, info, options);
       break;
     }
     case ActionType.AssetsStartDestroy: {
-      unsigned = assetsStartDestroy(args as AssetsStartDestroyArgs, info, options);
+      unsigned = assetsStartDestroy(args, info, options);
       break;
     }
     case ActionType.AssetsDestroyAccounts: {
-      unsigned = assetsDestroyAccounts(args as AssetsDestroyAccountsArgs, info, options);
+      unsigned = assetsDestroyAccounts(args, info, options);
       break;
     }
     case ActionType.AssetsDestroyApprovals: {
-      unsigned = assetsDestroyApprovals(args as AssetsDestroyApprovalsArgs, info, options);
+      unsigned = assetsDestroyApprovals(args, info, options);
       break;
     }
     case ActionType.AssetsFinishDestroy: {
-      unsigned = assetsFinishDestroy(args as AssetsFinishDestroyArgs, info, options);
+      unsigned = assetsFinishDestroy(args, info, options);
       break;
     }
     case ActionType.AssetsMint: {
-      unsigned = assetsMint(args as AssetsMintArgs, info, options);
+      unsigned = assetsMint(args, info, options);
       break;
     }
     case ActionType.AssetsBurn: {
-      unsigned = assetsBurn(args as AssetsBurnArgs, info, options);
+      unsigned = assetsBurn(args, info, options);
       break;
     }
     case ActionType.AssetsTransfer: {
-      unsigned = assetsTransfer(args as AssetsTransferArgs, info, options);
+      unsigned = assetsTransfer(args, info, options);
       break;
     }
     case ActionType.AssetsTransferKeepAlive: {
-      unsigned = assetsTransferKeepAlive(args as AssetsTransferKeepAliveArgs, info, options);
+      unsigned = assetsTransferKeepAlive(args, info, options);
       break;
     }
     case ActionType.AssetsForceTransfer: {
-      unsigned = assetsForceTransfer(args as AssetsForceTransferArgs, info, options);
+      unsigned = assetsForceTransfer(args, info, options);
       break;
     }
     case ActionType.AssetsFreezeAccount: {
-      unsigned = assetsFreeze(args as AssetsFreezeAccountArgs, info, options);
+      unsigned = assetsFreeze(args, info, options);
       break;
     }
     case ActionType.AssetsThawAccount: {
-      unsigned = assetsThaw(args as AssetsThawAccountArgs, info, options);
+      unsigned = assetsThaw(args, info, options);
       break;
     }
     case ActionType.AssetsFreezeAsset: {
-      unsigned = assetsFreezeAsset(args as AssetsFreezeAssetArgs, info, options);
+      unsigned = assetsFreezeAsset(args, info, options);
       break;
     }
     case ActionType.AssetsThawAsset: {
-      unsigned = assetsThawAsset(args as AssetsThawAssetArgs, info, options);
+      unsigned = assetsThawAsset(args, info, options);
       break;
     }
     case ActionType.AssetsTransferOwnership: {
-      unsigned = assetsTransferOwnership(args as AssetsTransferOwnershipArgs, info, options);
+      unsigned = assetsTransferOwnership(args, info, options);
       break;
     }
     case ActionType.AssetsSetMetadata: {
-      unsigned = assetsSetMetadata(args as AssetsSetMetadataArgs, info, options);
+      unsigned = assetsSetMetadata(args, info, options);
       break;
     }
     case ActionType.AssetsSetMinBalance: {
-      unsigned = assetsSetMinBalance(args as AssetsSetMinBalanceArgs, info, options);
+      unsigned = assetsSetMinBalance(args, info, options);
       break;
     }
     case ActionType.NftsCreateCollection: {
-      unsigned = nftsCreate(args as NftsCreateCollectionArgs, info, options);
+      unsigned = nftsCreate(args, info, options);
       break;
     }
     case ActionType.NftsDestroyCollection: {
-      unsigned = nftsDestroy(args as NftsDestroyCollectionArgs, info, options);
+      unsigned = nftsDestroy(args, info, options);
       break;
     }
     case ActionType.NftsMintItem: {
-      unsigned = nftsMint(args as NftsMintItemArgs, info, options);
+      unsigned = nftsMint(args, info, options);
       break;
     }
     case ActionType.NftsBurnItem: {
-      unsigned = nftsBurn(args as NftsBurnItemArgs, info, options);
+      unsigned = nftsBurn(args, info, options);
       break;
     }
     case ActionType.NftsTransferItem: {
-      unsigned = nftsTransfer(args as NftsTransferItemArgs, info, options);
+      unsigned = nftsTransfer(args, info, options);
       break;
     }
     case ActionType.NftsLockItemTransfer: {
-      unsigned = nftsLockItemTransfer(args as NftsLockItemTransferArgs, info, options);
+      unsigned = nftsLockItemTransfer(args, info, options);
       break;
     }
     case ActionType.NftsUnlockItemTransfer: {
-      unsigned = nftsUnlockItemTransfer(args as NftsUnlockItemTransferArgs, info, options);
+      unsigned = nftsUnlockItemTransfer(args, info, options);
       break;
     }
     case ActionType.NftsTransferCollectionOwnership: {
-      unsigned = nftsTransferOwnership(args as NftsTransferCollectionOwnershipArgs, info, options);
+      unsigned = nftsTransferOwnership(args, info, options);
       break;
     }
     case ActionType.NftsSetItemMetadata: {
-      unsigned = nftsSetMetadata(args as NftsSetItemMetadataArgs, info, options);
+      unsigned = nftsSetMetadata(args, info, options);
       break;
     }
     case ActionType.NftsClearItemMetadata: {
-      unsigned = nftsClearMetadata(args as NftsClearItemMetadataArgs, info, options);
+      unsigned = nftsClearMetadata(args, info, options);
       break;
     }
     case ActionType.NftsSetCollectionMetadata: {
-      unsigned = nftsSetCollectionMetadata(args as NftsSetCollectionMetadataArgs, info, options);
+      unsigned = nftsSetCollectionMetadata(args, info, options);
       break;
     }
     case ActionType.NftsClearCollectionMetadata: {
-      unsigned = nftsClearCollectionMetadata(args as NftsClearCollectionMetadataArgs, info, options);
+      unsigned = nftsClearCollectionMetadata(args, info, options);
       break;
     }
     case ActionType.NftsAcceptCollectionOwnership: {
-      unsigned = nftsSetAcceptOwnership(args as NftsAcceptCollectionOwnershipArgs, info, options);
+      unsigned = nftsSetAcceptOwnership(args, info, options);
       break;
     }
     case ActionType.AppTransactionsSubmitClearingTransaction: {
-      unsigned = appTransactionsSubmitClearingTransaction(args as AppTransactionsSubmitClearingTransactionArgs, info, options);
+      unsigned = appTransactionsSubmitClearingTransaction(args, info, options);
       break;
     }
 
