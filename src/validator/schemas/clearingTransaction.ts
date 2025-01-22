@@ -1,16 +1,15 @@
 import { z } from 'zod';
 
+import { BlockchainGenericIdSchema, BlockchainGenericAddressIdSchema, BlockchainGenericAccountSchema, BlockchainAddressNameSchema } from './common';
 import { ArgsSchema, ActionTypeSchema, SignatorySchema } from './transaction';
 
-export const AppAgentIdSchema = z.number().min(0);
-
 export const CTActionOriginSchema = z.union([
-  z.object({ AppAgentId: z.any() }),
-  z.object({ AppAgentAddress: z.string() }),
-  z.object({ TransactionalAddressId: z.any() }),
-  z.object({ TransactionalAddress: z.any() }),
-  z.object({ NamedAddress: z.any() }),
-  z.object({ NamedAddressName: z.any() }),
+  z.object({ AppAgentId: BlockchainGenericIdSchema }),
+  z.object({ AppAgentAddress: BlockchainGenericAccountSchema }),
+  z.object({ TransactionalAddressId: BlockchainGenericAddressIdSchema }),
+  z.object({ TransactionalAddress: BlockchainGenericAccountSchema }),
+  z.object({ NamedAddress: BlockchainGenericAccountSchema }),
+  z.object({ NamedAddressName: BlockchainAddressNameSchema }),
 ]);
 
 export const CTActionCallSchema = z.union([
@@ -42,6 +41,6 @@ export const CTAtomicSchema = z.object({
 
 export const ClearingTransactionPayloadSchema = z.object({
   signatory: SignatorySchema,
-  appAgentId: AppAgentIdSchema,
+  appAgentId: BlockchainGenericIdSchema,
   atomics: z.array(CTAtomicSchema),
 });

@@ -29,6 +29,12 @@ export type BlockchainGenericAccount = string;
 export type BlockchainGenericId = UINT32;
 
 /**
+ * Unique address id on blockchain (TransactionalAddressId)
+ * Typically, it is a numeric value.
+ */
+export type BlockchainGenericAddressId = UINT128;
+
+/**
  * The balance, represented as a numeric value.
  */
 export type BlockchainGenericBalance = UINT128;
@@ -40,6 +46,16 @@ export type BlockchainGenericBalance = UINT128;
  * @maxLength 256
  */
 export type BlockchainGenericText = string;
+
+/**
+ * String of unicode chars exactly 10 chars long.
+ * Only a subset of chars can be used: https://github.com/traittech/trait-keyless/blob/main/keyless-ts/src/keyless.ts#L39
+ * @isString
+ * @minLength 10
+ * @maxLength 10
+ * @pattern ^[0-9a-zA-Z\-#]+$
+ */
+export type BlockchainAddressName = string;
 
 /**
  * Boolean type for blockchain (bool)

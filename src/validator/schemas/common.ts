@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { isValidSS58 } from '../checks';
-import { u32_MIN, u32_MAX, u128_MIN, u128_MAX, ss58_LENGTH, text_MAX_LENGTH } from '../consts';
+import { u32_MIN, u32_MAX, u128_MIN, u128_MAX, ss58_LENGTH, text_MAX_LENGTH, addressName_REGEX } from '../consts';
 
 /**
  * Number could be presented with number or string types
@@ -47,7 +47,14 @@ export const BlockchainGenericTextSchema = z
   .string()
   .max(text_MAX_LENGTH, { message: `String must be fewer or equal ${text_MAX_LENGTH} characters long` });
 
+export const BlockchainAddressNameSchema = z
+  .string()
+  .length(10, { message: `String must be exactly ${10} characters long` })
+  .regex(addressName_REGEX);
+
 export const BlockchainGenericIdSchema = u32Schema;
+
+export const BlockchainGenericAddressIdSchema = u128Schema;
 
 export const BlockchainGenericBalanceSchema = u128Schema;
 

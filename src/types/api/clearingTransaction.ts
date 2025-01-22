@@ -1,5 +1,5 @@
 import type { ActionType } from './actions';
-import type { BlockchainGenericId, BlockchainGenericAccount } from './common';
+import type { BlockchainGenericId, BlockchainGenericAddressId, BlockchainGenericAccount, BlockchainAddressName } from './common';
 import type { CTAtomicAction, TransactionArgs } from '../../txwrapper';
 
 /**
@@ -16,7 +16,7 @@ export type CTActionOrigin =
     }
   | {
       /** The ID of the transactional address. */
-      TransactionalAddressId: BlockchainGenericId
+      TransactionalAddressId: BlockchainGenericAddressId
     }
   | {
       /** The transactional address. */
@@ -28,7 +28,7 @@ export type CTActionOrigin =
     }
   | {
       /** The name of the named address. */
-      NamedAddressName: any
+      NamedAddressName: BlockchainAddressName
     };
 
 /**
@@ -100,7 +100,7 @@ export interface ClearingTransactionPayload {
   /**
    * The ID of the application agent initiating the transaction.
    */
-  appAgentId: number;
+  appAgentId: BlockchainGenericId;
 
   /**
    * A list of atomic operations included in the transaction.

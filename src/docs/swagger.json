@@ -1650,6 +1650,17 @@
 				],
 				"type": "string"
 			},
+			"BlockchainGenericAddressId": {
+				"$ref": "#/components/schemas/UINT128",
+				"description": "Unique address id on blockchain (TransactionalAddressId)\nTypically, it is a numeric value."
+			},
+			"BlockchainAddressName": {
+				"type": "string",
+				"description": "String of unicode chars exactly 10 chars long.\nOnly a subset of chars can be used: https://github.com/traittech/trait-keyless/blob/main/keyless-ts/src/keyless.ts#L39",
+				"minLength": 10,
+				"maxLength": 10,
+				"pattern": "^[0-9a-zA-Z\\-#]+$"
+			},
 			"CTActionOrigin": {
 				"anyOf": [
 					{
@@ -1679,7 +1690,7 @@
 					{
 						"properties": {
 							"TransactionalAddressId": {
-								"$ref": "#/components/schemas/BlockchainGenericId",
+								"$ref": "#/components/schemas/BlockchainGenericAddressId",
 								"description": "The ID of the transactional address."
 							}
 						},
@@ -1715,6 +1726,7 @@
 					{
 						"properties": {
 							"NamedAddressName": {
+								"$ref": "#/components/schemas/BlockchainAddressName",
 								"description": "The name of the named address."
 							}
 						},
@@ -2949,8 +2961,7 @@
 						"description": "The signatory responsible for the transaction."
 					},
 					"appAgentId": {
-						"type": "number",
-						"format": "double",
+						"$ref": "#/components/schemas/BlockchainGenericId",
 						"description": "The ID of the application agent initiating the transaction."
 					},
 					"atomics": {

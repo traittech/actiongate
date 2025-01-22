@@ -27,3 +27,5 @@ export const ss58_LENGTH = 49;
  * Text max length is defined by `StringLimit` in blockchain
  */
 export const text_MAX_LENGTH = 256;
+
+export const addressName_REGEX = /^[0-9a-zA-Z\-#]+$/g;
