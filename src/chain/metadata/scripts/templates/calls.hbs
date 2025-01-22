@@ -13,8 +13,9 @@ import type {
   BlockchainGenericBoolean,
   BlockchainGenericId,
   BlockchainGenericText,
-  TxGeneric,
-  CTAtomicActionGeneric,
+  ITxAction,
+  ICTAtomicAction,
+  CTActionOrigin,
   CTAtomicActions,
   NftWitness,
 } from '../../types/api';
@@ -90,9 +91,26 @@ export function {{{functionName}}}(
   return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', args, info, options);
 }
 
-export type {{{actionName}}}Tx = TxGeneric<ActionType.{{{actionName}}}, {{{actionName}}}Args>;
+/**
+{{#if documentation.short}}
+ * {{{documentation.short}}}{{#if documentation.full}} {{{documentation.full}}}{{/if}}
+{{/if}}
+ */
+export interface {{{actionName}}}Tx extends ITxAction {
+  actionType: ActionType.{{{actionName}}};
+  arguments: {{{actionName}}}Args;
+};
 
-export type {{{actionName}}}Action = CTAtomicActionGeneric<ActionType.{{{actionName}}}, {{{actionName}}}Args>;
+/**
+{{#if documentation.short}}
+ * {{{documentation.short}}}{{#if documentation.full}} {{{documentation.full}}}{{/if}}
+{{/if}}
+ */
+export interface {{{actionName}}}Action extends ICTAtomicAction {
+  actionType: ActionType.{{{actionName}}};
+  arguments: {{{actionName}}}Args;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 

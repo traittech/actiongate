@@ -61,16 +61,16 @@ export type CTAction = Array<CTActionOrigin | CTActionCall>;
  */
 export type CTAtomicActions = CTAction[][];
 
-export interface CTAtomicActionGeneric<CTActionType extends ActionType, CTActionArgs extends TransactionArgs> {
+export interface ICTAtomicAction {
   /**
    * The type of transaction to be performed
    */
-  actionType: CTActionType;
+  actionType: ActionType;
 
   /**
    * The arguments for the transaction.
    */
-  arguments: CTActionArgs;
+  arguments: TransactionArgs;
 
   /**
    * The origin responsible for the transaction.

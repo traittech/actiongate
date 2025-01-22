@@ -1,16 +1,16 @@
 import type { ActionType } from './actions';
 import type { TxAction, TransactionArgs } from '../../txwrapper';
 
-export interface TxGeneric<TxType extends ActionType, TxArgs extends TransactionArgs> {
+export interface ITxAction {
   /**
    * The type of transaction to be performed
    */
-  actionType: TxType;
+  actionType: ActionType;
 
   /**
    * The arguments for the transaction.
    */
-  arguments: TxArgs;
+  arguments: TransactionArgs;
 }
 
 /**

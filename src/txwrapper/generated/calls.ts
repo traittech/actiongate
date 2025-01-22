@@ -13,8 +13,9 @@ import type {
   BlockchainGenericBoolean,
   BlockchainGenericId,
   BlockchainGenericText,
-  TxGeneric,
-  CTAtomicActionGeneric,
+  ITxAction,
+  ICTAtomicAction,
+  CTActionOrigin,
   CTAtomicActions,
   NftWitness,
 } from '../../types/api';
@@ -73,9 +74,22 @@ export function appTransactionsSubmitClearingTransaction(
   return constructUnsignedTransaction('appTransactions', 'submitClearingTransaction', args, info, options);
 }
 
-export type AppTransactionsSubmitClearingTransactionTx = TxGeneric<ActionType.AppTransactionsSubmitClearingTransaction, AppTransactionsSubmitClearingTransactionArgs>;
+/**
+ * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
+ */
+export interface AppTransactionsSubmitClearingTransactionTx extends ITxAction {
+  actionType: ActionType.AppTransactionsSubmitClearingTransaction;
+  arguments: AppTransactionsSubmitClearingTransactionArgs;
+};
 
-export type AppTransactionsSubmitClearingTransactionAction = CTAtomicActionGeneric<ActionType.AppTransactionsSubmitClearingTransaction, AppTransactionsSubmitClearingTransactionArgs>;
+/**
+ * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
+ */
+export interface AppTransactionsSubmitClearingTransactionAction extends ICTAtomicAction {
+  actionType: ActionType.AppTransactionsSubmitClearingTransaction;
+  arguments: AppTransactionsSubmitClearingTransactionArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -129,9 +143,22 @@ export function assetsBurn(
   return constructUnsignedTransaction('assets', 'burn', args, info, options);
 }
 
-export type AssetsBurnTx = TxGeneric<ActionType.AssetsBurn, AssetsBurnArgs>;
+/**
+ * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
+ */
+export interface AssetsBurnTx extends ITxAction {
+  actionType: ActionType.AssetsBurn;
+  arguments: AssetsBurnArgs;
+};
 
-export type AssetsBurnAction = CTAtomicActionGeneric<ActionType.AssetsBurn, AssetsBurnArgs>;
+/**
+ * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
+ */
+export interface AssetsBurnAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsBurn;
+  arguments: AssetsBurnArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -165,9 +192,20 @@ export function assetsCreate(
   return constructUnsignedTransaction('assets', 'create', args, info, options);
 }
 
-export type AssetsCreateTx = TxGeneric<ActionType.AssetsCreate, AssetsCreateArgs>;
+/**
+ */
+export interface AssetsCreateTx extends ITxAction {
+  actionType: ActionType.AssetsCreate;
+  arguments: AssetsCreateArgs;
+};
 
-export type AssetsCreateAction = CTAtomicActionGeneric<ActionType.AssetsCreate, AssetsCreateArgs>;
+/**
+ */
+export interface AssetsCreateAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsCreate;
+  arguments: AssetsCreateArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -207,9 +245,22 @@ export function assetsDestroyAccounts(
   return constructUnsignedTransaction('assets', 'destroyAccounts', args, info, options);
 }
 
-export type AssetsDestroyAccountsTx = TxGeneric<ActionType.AssetsDestroyAccounts, AssetsDestroyAccountsArgs>;
+/**
+ * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
+ */
+export interface AssetsDestroyAccountsTx extends ITxAction {
+  actionType: ActionType.AssetsDestroyAccounts;
+  arguments: AssetsDestroyAccountsArgs;
+};
 
-export type AssetsDestroyAccountsAction = CTAtomicActionGeneric<ActionType.AssetsDestroyAccounts, AssetsDestroyAccountsArgs>;
+/**
+ * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
+ */
+export interface AssetsDestroyAccountsAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsDestroyAccounts;
+  arguments: AssetsDestroyAccountsArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -249,9 +300,22 @@ export function assetsDestroyApprovals(
   return constructUnsignedTransaction('assets', 'destroyApprovals', args, info, options);
 }
 
-export type AssetsDestroyApprovalsTx = TxGeneric<ActionType.AssetsDestroyApprovals, AssetsDestroyApprovalsArgs>;
+/**
+ * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
+ */
+export interface AssetsDestroyApprovalsTx extends ITxAction {
+  actionType: ActionType.AssetsDestroyApprovals;
+  arguments: AssetsDestroyApprovalsArgs;
+};
 
-export type AssetsDestroyApprovalsAction = CTAtomicActionGeneric<ActionType.AssetsDestroyApprovals, AssetsDestroyApprovalsArgs>;
+/**
+ * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
+ */
+export interface AssetsDestroyApprovalsAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsDestroyApprovals;
+  arguments: AssetsDestroyApprovalsArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -291,9 +355,22 @@ export function assetsFinishDestroy(
   return constructUnsignedTransaction('assets', 'finishDestroy', args, info, options);
 }
 
-export type AssetsFinishDestroyTx = TxGeneric<ActionType.AssetsFinishDestroy, AssetsFinishDestroyArgs>;
+/**
+ * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
+ */
+export interface AssetsFinishDestroyTx extends ITxAction {
+  actionType: ActionType.AssetsFinishDestroy;
+  arguments: AssetsFinishDestroyArgs;
+};
 
-export type AssetsFinishDestroyAction = CTAtomicActionGeneric<ActionType.AssetsFinishDestroy, AssetsFinishDestroyArgs>;
+/**
+ * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
+ */
+export interface AssetsFinishDestroyAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsFinishDestroy;
+  arguments: AssetsFinishDestroyArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -354,9 +431,22 @@ export function assetsForceTransfer(
   return constructUnsignedTransaction('assets', 'forceTransfer', args, info, options);
 }
 
-export type AssetsForceTransferTx = TxGeneric<ActionType.AssetsForceTransfer, AssetsForceTransferArgs>;
+/**
+ * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ */
+export interface AssetsForceTransferTx extends ITxAction {
+  actionType: ActionType.AssetsForceTransfer;
+  arguments: AssetsForceTransferArgs;
+};
 
-export type AssetsForceTransferAction = CTAtomicActionGeneric<ActionType.AssetsForceTransfer, AssetsForceTransferArgs>;
+/**
+ * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ */
+export interface AssetsForceTransferAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsForceTransfer;
+  arguments: AssetsForceTransferArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -403,9 +493,22 @@ export function assetsFreeze(
   return constructUnsignedTransaction('assets', 'freeze', args, info, options);
 }
 
-export type AssetsFreezeAccountTx = TxGeneric<ActionType.AssetsFreezeAccount, AssetsFreezeAccountArgs>;
+/**
+ * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ */
+export interface AssetsFreezeAccountTx extends ITxAction {
+  actionType: ActionType.AssetsFreezeAccount;
+  arguments: AssetsFreezeAccountArgs;
+};
 
-export type AssetsFreezeAccountAction = CTAtomicActionGeneric<ActionType.AssetsFreezeAccount, AssetsFreezeAccountArgs>;
+/**
+ * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ */
+export interface AssetsFreezeAccountAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsFreezeAccount;
+  arguments: AssetsFreezeAccountArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -445,9 +548,22 @@ export function assetsFreezeAsset(
   return constructUnsignedTransaction('assets', 'freezeAsset', args, info, options);
 }
 
-export type AssetsFreezeAssetTx = TxGeneric<ActionType.AssetsFreezeAsset, AssetsFreezeAssetArgs>;
+/**
+ * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ */
+export interface AssetsFreezeAssetTx extends ITxAction {
+  actionType: ActionType.AssetsFreezeAsset;
+  arguments: AssetsFreezeAssetArgs;
+};
 
-export type AssetsFreezeAssetAction = CTAtomicActionGeneric<ActionType.AssetsFreezeAsset, AssetsFreezeAssetArgs>;
+/**
+ * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ */
+export interface AssetsFreezeAssetAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsFreezeAsset;
+  arguments: AssetsFreezeAssetArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -501,9 +617,22 @@ export function assetsMint(
   return constructUnsignedTransaction('assets', 'mint', args, info, options);
 }
 
-export type AssetsMintTx = TxGeneric<ActionType.AssetsMint, AssetsMintArgs>;
+/**
+ * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
+ */
+export interface AssetsMintTx extends ITxAction {
+  actionType: ActionType.AssetsMint;
+  arguments: AssetsMintArgs;
+};
 
-export type AssetsMintAction = CTAtomicActionGeneric<ActionType.AssetsMint, AssetsMintArgs>;
+/**
+ * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
+ */
+export interface AssetsMintAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsMint;
+  arguments: AssetsMintArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -550,9 +679,22 @@ export function assetsSetMetadata(
   return constructUnsignedTransaction('assets', 'setMetadata', args, info, options);
 }
 
-export type AssetsSetMetadataTx = TxGeneric<ActionType.AssetsSetMetadata, AssetsSetMetadataArgs>;
+/**
+ * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
+ */
+export interface AssetsSetMetadataTx extends ITxAction {
+  actionType: ActionType.AssetsSetMetadata;
+  arguments: AssetsSetMetadataArgs;
+};
 
-export type AssetsSetMetadataAction = CTAtomicActionGeneric<ActionType.AssetsSetMetadata, AssetsSetMetadataArgs>;
+/**
+ * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
+ */
+export interface AssetsSetMetadataAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsSetMetadata;
+  arguments: AssetsSetMetadataArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -599,9 +741,22 @@ export function assetsSetMinBalance(
   return constructUnsignedTransaction('assets', 'setMinBalance', args, info, options);
 }
 
-export type AssetsSetMinBalanceTx = TxGeneric<ActionType.AssetsSetMinBalance, AssetsSetMinBalanceArgs>;
+/**
+ * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
+ */
+export interface AssetsSetMinBalanceTx extends ITxAction {
+  actionType: ActionType.AssetsSetMinBalance;
+  arguments: AssetsSetMinBalanceArgs;
+};
 
-export type AssetsSetMinBalanceAction = CTAtomicActionGeneric<ActionType.AssetsSetMinBalance, AssetsSetMinBalanceArgs>;
+/**
+ * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
+ */
+export interface AssetsSetMinBalanceAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsSetMinBalance;
+  arguments: AssetsSetMinBalanceArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -641,9 +796,22 @@ export function assetsStartDestroy(
   return constructUnsignedTransaction('assets', 'startDestroy', args, info, options);
 }
 
-export type AssetsStartDestroyTx = TxGeneric<ActionType.AssetsStartDestroy, AssetsStartDestroyArgs>;
+/**
+ * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
+ */
+export interface AssetsStartDestroyTx extends ITxAction {
+  actionType: ActionType.AssetsStartDestroy;
+  arguments: AssetsStartDestroyArgs;
+};
 
-export type AssetsStartDestroyAction = CTAtomicActionGeneric<ActionType.AssetsStartDestroy, AssetsStartDestroyArgs>;
+/**
+ * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
+ */
+export interface AssetsStartDestroyAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsStartDestroy;
+  arguments: AssetsStartDestroyArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -690,9 +858,22 @@ export function assetsThaw(
   return constructUnsignedTransaction('assets', 'thaw', args, info, options);
 }
 
-export type AssetsThawAccountTx = TxGeneric<ActionType.AssetsThawAccount, AssetsThawAccountArgs>;
+/**
+ * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ */
+export interface AssetsThawAccountTx extends ITxAction {
+  actionType: ActionType.AssetsThawAccount;
+  arguments: AssetsThawAccountArgs;
+};
 
-export type AssetsThawAccountAction = CTAtomicActionGeneric<ActionType.AssetsThawAccount, AssetsThawAccountArgs>;
+/**
+ * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ */
+export interface AssetsThawAccountAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsThawAccount;
+  arguments: AssetsThawAccountArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -732,9 +913,22 @@ export function assetsThawAsset(
   return constructUnsignedTransaction('assets', 'thawAsset', args, info, options);
 }
 
-export type AssetsThawAssetTx = TxGeneric<ActionType.AssetsThawAsset, AssetsThawAssetArgs>;
+/**
+ * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ */
+export interface AssetsThawAssetTx extends ITxAction {
+  actionType: ActionType.AssetsThawAsset;
+  arguments: AssetsThawAssetArgs;
+};
 
-export type AssetsThawAssetAction = CTAtomicActionGeneric<ActionType.AssetsThawAsset, AssetsThawAssetArgs>;
+/**
+ * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ */
+export interface AssetsThawAssetAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsThawAsset;
+  arguments: AssetsThawAssetArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -788,9 +982,22 @@ export function assetsTransfer(
   return constructUnsignedTransaction('assets', 'transfer', args, info, options);
 }
 
-export type AssetsTransferTx = TxGeneric<ActionType.AssetsTransfer, AssetsTransferArgs>;
+/**
+ * Move some assets from the sender account to another. Origin must be Signed.
+ */
+export interface AssetsTransferTx extends ITxAction {
+  actionType: ActionType.AssetsTransfer;
+  arguments: AssetsTransferArgs;
+};
 
-export type AssetsTransferAction = CTAtomicActionGeneric<ActionType.AssetsTransfer, AssetsTransferArgs>;
+/**
+ * Move some assets from the sender account to another. Origin must be Signed.
+ */
+export interface AssetsTransferAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsTransfer;
+  arguments: AssetsTransferArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -844,9 +1051,22 @@ export function assetsTransferKeepAlive(
   return constructUnsignedTransaction('assets', 'transferKeepAlive', args, info, options);
 }
 
-export type AssetsTransferKeepAliveTx = TxGeneric<ActionType.AssetsTransferKeepAlive, AssetsTransferKeepAliveArgs>;
+/**
+ * Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.
+ */
+export interface AssetsTransferKeepAliveTx extends ITxAction {
+  actionType: ActionType.AssetsTransferKeepAlive;
+  arguments: AssetsTransferKeepAliveArgs;
+};
 
-export type AssetsTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.AssetsTransferKeepAlive, AssetsTransferKeepAliveArgs>;
+/**
+ * Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.
+ */
+export interface AssetsTransferKeepAliveAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsTransferKeepAlive;
+  arguments: AssetsTransferKeepAliveArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -893,9 +1113,22 @@ export function assetsTransferOwnership(
   return constructUnsignedTransaction('assets', 'transferOwnership', args, info, options);
 }
 
-export type AssetsTransferOwnershipTx = TxGeneric<ActionType.AssetsTransferOwnership, AssetsTransferOwnershipArgs>;
+/**
+ * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
+ */
+export interface AssetsTransferOwnershipTx extends ITxAction {
+  actionType: ActionType.AssetsTransferOwnership;
+  arguments: AssetsTransferOwnershipArgs;
+};
 
-export type AssetsTransferOwnershipAction = CTAtomicActionGeneric<ActionType.AssetsTransferOwnership, AssetsTransferOwnershipArgs>;
+/**
+ * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
+ */
+export interface AssetsTransferOwnershipAction extends ICTAtomicAction {
+  actionType: ActionType.AssetsTransferOwnership;
+  arguments: AssetsTransferOwnershipArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -939,9 +1172,22 @@ export function balancesTransferAll(
   return constructUnsignedTransaction('balances', 'transferAll', args, info, options);
 }
 
-export type BalancesTransferAllTx = TxGeneric<ActionType.BalancesTransferAll, BalancesTransferAllArgs>;
+/**
+ * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
+ */
+export interface BalancesTransferAllTx extends ITxAction {
+  actionType: ActionType.BalancesTransferAll;
+  arguments: BalancesTransferAllArgs;
+};
 
-export type BalancesTransferAllAction = CTAtomicActionGeneric<ActionType.BalancesTransferAll, BalancesTransferAllArgs>;
+/**
+ * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
+ */
+export interface BalancesTransferAllAction extends ICTAtomicAction {
+  actionType: ActionType.BalancesTransferAll;
+  arguments: BalancesTransferAllArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -982,9 +1228,22 @@ export function balancesTransferAllowDeath(
   return constructUnsignedTransaction('balances', 'transferAllowDeath', args, info, options);
 }
 
-export type BalancesTransferAllowDeathTx = TxGeneric<ActionType.BalancesTransferAllowDeath, BalancesTransferAllowDeathArgs>;
+/**
+ * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
+ */
+export interface BalancesTransferAllowDeathTx extends ITxAction {
+  actionType: ActionType.BalancesTransferAllowDeath;
+  arguments: BalancesTransferAllowDeathArgs;
+};
 
-export type BalancesTransferAllowDeathAction = CTAtomicActionGeneric<ActionType.BalancesTransferAllowDeath, BalancesTransferAllowDeathArgs>;
+/**
+ * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
+ */
+export interface BalancesTransferAllowDeathAction extends ICTAtomicAction {
+  actionType: ActionType.BalancesTransferAllowDeath;
+  arguments: BalancesTransferAllowDeathArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1025,9 +1284,22 @@ export function balancesTransferKeepAlive(
   return constructUnsignedTransaction('balances', 'transferKeepAlive', args, info, options);
 }
 
-export type BalancesTransferKeepAliveTx = TxGeneric<ActionType.BalancesTransferKeepAlive, BalancesTransferKeepAliveArgs>;
+/**
+ * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
+ */
+export interface BalancesTransferKeepAliveTx extends ITxAction {
+  actionType: ActionType.BalancesTransferKeepAlive;
+  arguments: BalancesTransferKeepAliveArgs;
+};
 
-export type BalancesTransferKeepAliveAction = CTAtomicActionGeneric<ActionType.BalancesTransferKeepAlive, BalancesTransferKeepAliveArgs>;
+/**
+ * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
+ */
+export interface BalancesTransferKeepAliveAction extends ICTAtomicAction {
+  actionType: ActionType.BalancesTransferKeepAlive;
+  arguments: BalancesTransferKeepAliveArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1074,9 +1346,22 @@ export function nftsBurn(
   return constructUnsignedTransaction('nfts', 'burn', args, info, options);
 }
 
-export type NftsBurnItemTx = TxGeneric<ActionType.NftsBurnItem, NftsBurnItemArgs>;
+/**
+ * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
+ */
+export interface NftsBurnItemTx extends ITxAction {
+  actionType: ActionType.NftsBurnItem;
+  arguments: NftsBurnItemArgs;
+};
 
-export type NftsBurnItemAction = CTAtomicActionGeneric<ActionType.NftsBurnItem, NftsBurnItemArgs>;
+/**
+ * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
+ */
+export interface NftsBurnItemAction extends ICTAtomicAction {
+  actionType: ActionType.NftsBurnItem;
+  arguments: NftsBurnItemArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1116,9 +1401,22 @@ export function nftsClearCollectionMetadata(
   return constructUnsignedTransaction('nfts', 'clearCollectionMetadata', args, info, options);
 }
 
-export type NftsClearCollectionMetadataTx = TxGeneric<ActionType.NftsClearCollectionMetadata, NftsClearCollectionMetadataArgs>;
+/**
+ * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ */
+export interface NftsClearCollectionMetadataTx extends ITxAction {
+  actionType: ActionType.NftsClearCollectionMetadata;
+  arguments: NftsClearCollectionMetadataArgs;
+};
 
-export type NftsClearCollectionMetadataAction = CTAtomicActionGeneric<ActionType.NftsClearCollectionMetadata, NftsClearCollectionMetadataArgs>;
+/**
+ * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ */
+export interface NftsClearCollectionMetadataAction extends ICTAtomicAction {
+  actionType: ActionType.NftsClearCollectionMetadata;
+  arguments: NftsClearCollectionMetadataArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1165,9 +1463,22 @@ export function nftsClearMetadata(
   return constructUnsignedTransaction('nfts', 'clearMetadata', args, info, options);
 }
 
-export type NftsClearItemMetadataTx = TxGeneric<ActionType.NftsClearItemMetadata, NftsClearItemMetadataArgs>;
+/**
+ * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ */
+export interface NftsClearItemMetadataTx extends ITxAction {
+  actionType: ActionType.NftsClearItemMetadata;
+  arguments: NftsClearItemMetadataArgs;
+};
 
-export type NftsClearItemMetadataAction = CTAtomicActionGeneric<ActionType.NftsClearItemMetadata, NftsClearItemMetadataArgs>;
+/**
+ * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ */
+export interface NftsClearItemMetadataAction extends ICTAtomicAction {
+  actionType: ActionType.NftsClearItemMetadata;
+  arguments: NftsClearItemMetadataArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1197,9 +1508,20 @@ export function nftsCreate(
   return constructUnsignedTransaction('nfts', 'create', args, info, options);
 }
 
-export type NftsCreateCollectionTx = TxGeneric<ActionType.NftsCreateCollection, NftsCreateCollectionArgs>;
+/**
+ */
+export interface NftsCreateCollectionTx extends ITxAction {
+  actionType: ActionType.NftsCreateCollection;
+  arguments: NftsCreateCollectionArgs;
+};
 
-export type NftsCreateCollectionAction = CTAtomicActionGeneric<ActionType.NftsCreateCollection, NftsCreateCollectionArgs>;
+/**
+ */
+export interface NftsCreateCollectionAction extends ICTAtomicAction {
+  actionType: ActionType.NftsCreateCollection;
+  arguments: NftsCreateCollectionArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1246,9 +1568,22 @@ export function nftsDestroy(
   return constructUnsignedTransaction('nfts', 'destroy', args, info, options);
 }
 
-export type NftsDestroyCollectionTx = TxGeneric<ActionType.NftsDestroyCollection, NftsDestroyCollectionArgs>;
+/**
+ * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
+ */
+export interface NftsDestroyCollectionTx extends ITxAction {
+  actionType: ActionType.NftsDestroyCollection;
+  arguments: NftsDestroyCollectionArgs;
+};
 
-export type NftsDestroyCollectionAction = CTAtomicActionGeneric<ActionType.NftsDestroyCollection, NftsDestroyCollectionArgs>;
+/**
+ * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
+ */
+export interface NftsDestroyCollectionAction extends ICTAtomicAction {
+  actionType: ActionType.NftsDestroyCollection;
+  arguments: NftsDestroyCollectionArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1295,9 +1630,22 @@ export function nftsLockItemTransfer(
   return constructUnsignedTransaction('nfts', 'lockItemTransfer', args, info, options);
 }
 
-export type NftsLockItemTransferTx = TxGeneric<ActionType.NftsLockItemTransfer, NftsLockItemTransferArgs>;
+/**
+ * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ */
+export interface NftsLockItemTransferTx extends ITxAction {
+  actionType: ActionType.NftsLockItemTransfer;
+  arguments: NftsLockItemTransferArgs;
+};
 
-export type NftsLockItemTransferAction = CTAtomicActionGeneric<ActionType.NftsLockItemTransfer, NftsLockItemTransferArgs>;
+/**
+ * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ */
+export interface NftsLockItemTransferAction extends ICTAtomicAction {
+  actionType: ActionType.NftsLockItemTransfer;
+  arguments: NftsLockItemTransferArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1339,9 +1687,20 @@ export function nftsMint(
   return constructUnsignedTransaction('nfts', 'mint', args, info, options);
 }
 
-export type NftsMintItemTx = TxGeneric<ActionType.NftsMintItem, NftsMintItemArgs>;
+/**
+ */
+export interface NftsMintItemTx extends ITxAction {
+  actionType: ActionType.NftsMintItem;
+  arguments: NftsMintItemArgs;
+};
 
-export type NftsMintItemAction = CTAtomicActionGeneric<ActionType.NftsMintItem, NftsMintItemArgs>;
+/**
+ */
+export interface NftsMintItemAction extends ICTAtomicAction {
+  actionType: ActionType.NftsMintItem;
+  arguments: NftsMintItemArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1381,9 +1740,22 @@ export function nftsSetAcceptOwnership(
   return constructUnsignedTransaction('nfts', 'setAcceptOwnership', args, info, options);
 }
 
-export type NftsAcceptCollectionOwnershipTx = TxGeneric<ActionType.NftsAcceptCollectionOwnership, NftsAcceptCollectionOwnershipArgs>;
+/**
+ * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
+ */
+export interface NftsAcceptCollectionOwnershipTx extends ITxAction {
+  actionType: ActionType.NftsAcceptCollectionOwnership;
+  arguments: NftsAcceptCollectionOwnershipArgs;
+};
 
-export type NftsAcceptCollectionOwnershipAction = CTAtomicActionGeneric<ActionType.NftsAcceptCollectionOwnership, NftsAcceptCollectionOwnershipArgs>;
+/**
+ * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
+ */
+export interface NftsAcceptCollectionOwnershipAction extends ICTAtomicAction {
+  actionType: ActionType.NftsAcceptCollectionOwnership;
+  arguments: NftsAcceptCollectionOwnershipArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1430,9 +1802,22 @@ export function nftsSetCollectionMetadata(
   return constructUnsignedTransaction('nfts', 'setCollectionMetadata', args, info, options);
 }
 
-export type NftsSetCollectionMetadataTx = TxGeneric<ActionType.NftsSetCollectionMetadata, NftsSetCollectionMetadataArgs>;
+/**
+ * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ */
+export interface NftsSetCollectionMetadataTx extends ITxAction {
+  actionType: ActionType.NftsSetCollectionMetadata;
+  arguments: NftsSetCollectionMetadataArgs;
+};
 
-export type NftsSetCollectionMetadataAction = CTAtomicActionGeneric<ActionType.NftsSetCollectionMetadata, NftsSetCollectionMetadataArgs>;
+/**
+ * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ */
+export interface NftsSetCollectionMetadataAction extends ICTAtomicAction {
+  actionType: ActionType.NftsSetCollectionMetadata;
+  arguments: NftsSetCollectionMetadataArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1486,9 +1871,22 @@ export function nftsSetMetadata(
   return constructUnsignedTransaction('nfts', 'setMetadata', args, info, options);
 }
 
-export type NftsSetItemMetadataTx = TxGeneric<ActionType.NftsSetItemMetadata, NftsSetItemMetadataArgs>;
+/**
+ * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ */
+export interface NftsSetItemMetadataTx extends ITxAction {
+  actionType: ActionType.NftsSetItemMetadata;
+  arguments: NftsSetItemMetadataArgs;
+};
 
-export type NftsSetItemMetadataAction = CTAtomicActionGeneric<ActionType.NftsSetItemMetadata, NftsSetItemMetadataArgs>;
+/**
+ * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ */
+export interface NftsSetItemMetadataAction extends ICTAtomicAction {
+  actionType: ActionType.NftsSetItemMetadata;
+  arguments: NftsSetItemMetadataArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1542,9 +1940,22 @@ export function nftsTransfer(
   return constructUnsignedTransaction('nfts', 'transfer', args, info, options);
 }
 
-export type NftsTransferItemTx = TxGeneric<ActionType.NftsTransferItem, NftsTransferItemArgs>;
+/**
+ * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
+ */
+export interface NftsTransferItemTx extends ITxAction {
+  actionType: ActionType.NftsTransferItem;
+  arguments: NftsTransferItemArgs;
+};
 
-export type NftsTransferItemAction = CTAtomicActionGeneric<ActionType.NftsTransferItem, NftsTransferItemArgs>;
+/**
+ * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
+ */
+export interface NftsTransferItemAction extends ICTAtomicAction {
+  actionType: ActionType.NftsTransferItem;
+  arguments: NftsTransferItemArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1588,9 +1999,22 @@ export function nftsTransferOwnership(
   return constructUnsignedTransaction('nfts', 'transferOwnership', args, info, options);
 }
 
-export type NftsTransferCollectionOwnershipTx = TxGeneric<ActionType.NftsTransferCollectionOwnership, NftsTransferCollectionOwnershipArgs>;
+/**
+ * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
+ */
+export interface NftsTransferCollectionOwnershipTx extends ITxAction {
+  actionType: ActionType.NftsTransferCollectionOwnership;
+  arguments: NftsTransferCollectionOwnershipArgs;
+};
 
-export type NftsTransferCollectionOwnershipAction = CTAtomicActionGeneric<ActionType.NftsTransferCollectionOwnership, NftsTransferCollectionOwnershipArgs>;
+/**
+ * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
+ */
+export interface NftsTransferCollectionOwnershipAction extends ICTAtomicAction {
+  actionType: ActionType.NftsTransferCollectionOwnership;
+  arguments: NftsTransferCollectionOwnershipArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
@@ -1637,9 +2061,22 @@ export function nftsUnlockItemTransfer(
   return constructUnsignedTransaction('nfts', 'unlockItemTransfer', args, info, options);
 }
 
-export type NftsUnlockItemTransferTx = TxGeneric<ActionType.NftsUnlockItemTransfer, NftsUnlockItemTransferArgs>;
+/**
+ * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ */
+export interface NftsUnlockItemTransferTx extends ITxAction {
+  actionType: ActionType.NftsUnlockItemTransfer;
+  arguments: NftsUnlockItemTransferArgs;
+};
 
-export type NftsUnlockItemTransferAction = CTAtomicActionGeneric<ActionType.NftsUnlockItemTransfer, NftsUnlockItemTransferArgs>;
+/**
+ * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ */
+export interface NftsUnlockItemTransferAction extends ICTAtomicAction {
+  actionType: ActionType.NftsUnlockItemTransfer;
+  arguments: NftsUnlockItemTransferArgs;
+  origin: CTActionOrigin;
+};
 
 /*---------------------------------------------------------------------------------- */
 
