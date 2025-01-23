@@ -2,14 +2,20 @@ import { construct } from '@substrate/txwrapper-polkadot';
 import { decodeAddress } from '@traittech/trait-keyless';
 
 import { TransactionService } from '../../adapter/datagate';
+import { buildUnsignedTransaction } from '../../txwrapper';
+import { TransactionType } from '../../types/api/actions';
 import { loadConfig } from '../config';
 import logger from '../logger';
 import { signWith } from '../signer';
 import { generateTxMetadata, buildCTAction } from '../tx-helper';
-import { buildUnsignedTransaction } from '../../txwrapper';
-import { TransactionType } from '../../types/api/actions';
 
-import type { CTAction, CTActionOrigin, CTAtomicActions, ClearingTransactionPayload, BlockchainGenericId } from '../../types/api';
+import type {
+  CTAction,
+  CTActionOrigin,
+  CTAtomicActions,
+  ClearingTransactionPayload,
+  BlockchainGenericId,
+} from '../../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
 
 const config = loadConfig();
@@ -33,7 +39,9 @@ function validateActionOrigin(actionOrigin: CTActionOrigin, appAgentId: Blockcha
   }
 
   if (actionAppAgentId !== appAgentId) {
-    throw new Error(`Atomic action 'appAgentId' does not match tx payload 'appAgentId'. Action Origin: ${actionOrigin}; Payload: ${appAgentId}`);
+    throw new Error(
+      `Atomic action 'appAgentId' does not match tx payload 'appAgentId'. Action Origin: ${actionOrigin}; Payload: ${appAgentId}`
+    );
   }
 }
 
@@ -80,7 +88,7 @@ export async function createClearingTransactionAndBroadcast(
         arguments: {
           appAgentId: payload.appAgentId,
           atomics: unsignedAtomics,
-        }
+        },
       },
       baseTxInfo,
       options

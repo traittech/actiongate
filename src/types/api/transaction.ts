@@ -54,7 +54,6 @@ export interface TransactionSuccessResponse extends BaseTransactionResponse {
   tx_hash: string;
 }
 
-
 /**
  * Response from a transaction request.
  */

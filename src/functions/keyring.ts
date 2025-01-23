@@ -1,8 +1,9 @@
 import { Keyring } from '@polkadot/api';
-import type { KeyringPair } from '@polkadot/keyring/types';
 
 import { loadConfig } from './config';
 import logger from './logger';
+
+import type { KeyringPair } from '@polkadot/keyring/types';
 
 const config = loadConfig();
 const keyring = new Keyring({ type: 'sr25519' });
@@ -16,6 +17,3 @@ export function getKeyringPairByPrivateKey(privateKey: string): KeyringPair {
 
   return callerKeyPair;
 }
-
-
-

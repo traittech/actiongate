@@ -48,23 +48,23 @@ export const Actions = [
   TransactionType.BalancesTransferAllowDeath,
   TransactionType.BalancesTransferKeepAlive,
   // Assets Pallet
+  TransactionType.AssetsBurn,
   TransactionType.AssetsCreate,
-  TransactionType.AssetsStartDestroy,
   TransactionType.AssetsDestroyAccounts,
   TransactionType.AssetsDestroyApprovals,
   TransactionType.AssetsFinishDestroy,
-  TransactionType.AssetsMint,
-  TransactionType.AssetsBurn,
-  TransactionType.AssetsTransfer,
-  TransactionType.AssetsTransferKeepAlive,
   TransactionType.AssetsForceTransfer,
   TransactionType.AssetsFreezeAccount,
-  TransactionType.AssetsThawAccount,
   TransactionType.AssetsFreezeAsset,
-  TransactionType.AssetsThawAsset,
-  TransactionType.AssetsTransferOwnership,
-  TransactionType.AssetsSetMinBalance,
+  TransactionType.AssetsMint,
   TransactionType.AssetsSetMetadata,
+  TransactionType.AssetsSetMinBalance,
+  TransactionType.AssetsStartDestroy,
+  TransactionType.AssetsThawAccount,
+  TransactionType.AssetsThawAsset,
+  TransactionType.AssetsTransfer,
+  TransactionType.AssetsTransferKeepAlive,
+  TransactionType.AssetsTransferOwnership,
   // Nfts Pallet
   TransactionType.NftsAcceptCollectionOwnership,
   TransactionType.NftsBurnItem,
@@ -78,7 +78,7 @@ export const Actions = [
   TransactionType.NftsSetItemMetadata,
   TransactionType.NftsTransferCollectionOwnership,
   TransactionType.NftsTransferItem,
-  TransactionType.NftsUnlockItemTransfer
+  TransactionType.NftsUnlockItemTransfer,
 ] as const;
 
 export const AllowedActions = [...Actions];

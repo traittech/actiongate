@@ -1,21 +1,19 @@
-import {
-  Body,
-  Controller,
-  Post,
-  Route,
-  Response,
-  Tags,
-} from "tsoa";
+import { Body, Controller, Post, Route, Response, Tags } from 'tsoa';
 
-import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
 import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
+import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
 import { loadConfig, getPrivateKeyById } from '../functions/config';
-import logger from '../functions/logger';
 import { getKeyringPairByPrivateKey } from '../functions/keyring';
+import logger from '../functions/logger';
 import { TransactionPayloadSchema, ClearingTransactionPayloadSchema } from '../validator/schemas';
 
-import type { TransactionPayload, TransactionResponse, TransactionErrorResponse, TransactionSuccessResponse } from '../types/api/transaction';
 import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
+import type {
+  TransactionPayload,
+  TransactionResponse,
+  TransactionErrorResponse,
+  TransactionSuccessResponse,
+} from '../types/api/transaction';
 
 /**
  * Controller to handle transaction submission.
@@ -74,22 +72,22 @@ export class SubmitTransactionsController extends Controller {
   @Tags('Transactions')
   @Response<TransactionSuccessResponse>(200, 'Success', {
     status: 'TransactionSubmitted',
-    tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7'
+    tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7',
   })
   @Response<TransactionErrorResponse>(400, 'Bad Request', {
     status: 'failed',
     error_code: 400,
-    error_description: 'Missing required fields in payload'
+    error_description: 'Missing required fields in payload',
   })
   @Response<TransactionErrorResponse>(404, 'Not Found', {
     status: 'failed',
     error_code: 404,
-    error_description: 'Signatory not found'
+    error_description: 'Signatory not found',
   })
   @Response<TransactionErrorResponse>(500, 'Internal Server Error', {
     status: 'failed',
     error_code: 500,
-    error_description: 'Error creating and broadcasting transaction'
+    error_description: 'Error creating and broadcasting transaction',
   })
   public async submitTransaction(@Body() payload: TransactionPayload): Promise<TransactionResponse> {
     try {
@@ -119,7 +117,7 @@ export class SubmitTransactionsController extends Controller {
       const signedTx = await createSignedTransactionAndBroadcast(callerKeyPair, payload);
 
       return this.onSuccess(signedTx);
-    } catch(error) {
+    } catch (error) {
       return this.onError(500, 'Error creating and broadcasting transaction', error);
     }
   }
@@ -134,27 +132,27 @@ export class SubmitTransactionsController extends Controller {
   @Tags('Transactions')
   @Response<TransactionSuccessResponse>(200, 'Success', {
     status: 'TransactionSubmitted',
-    tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7'
+    tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7',
   })
   @Response<TransactionErrorResponse>(400, 'Bad Request', {
     status: 'failed',
     error_code: 400,
-    error_description: 'Missing required fields in payload'
+    error_description: 'Missing required fields in payload',
   })
   @Response<TransactionErrorResponse>(404, 'Not Found', {
     status: 'failed',
     error_code: 404,
-    error_description: 'Signatory not found'
+    error_description: 'Signatory not found',
   })
   @Response<TransactionErrorResponse>(500, 'Internal Server Error', {
     status: 'failed',
     error_code: 500,
-    error_description: 'Error creating and broadcasting clearing transaction'
+    error_description: 'Error creating and broadcasting clearing transaction',
   })
   public async submitClearingTransaction(@Body() payload: ClearingTransactionPayload): Promise<TransactionResponse> {
     try {
       logger.info('>> submitClearingTransaction endpoint');
-  
+
       // Validate required fields (basic validation)
       try {
         ClearingTransactionPayloadSchema.parse(payload);
@@ -177,7 +175,7 @@ export class SubmitTransactionsController extends Controller {
       logger.info('Creating and broadcasting signed clearing transaction...');
 
       const signedTx = await createClearingTransactionAndBroadcast(callerKeyPair, payload);
-  
+
       return this.onSuccess(signedTx);
     } catch (error) {
       return this.onError(500, 'Error creating and broadcasting clearing transaction', error);

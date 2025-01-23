@@ -10,7 +10,7 @@ export type UINT32 = number;
 
 /**
  * Numeric value, presented as plain number or string
- * 
+ *
  * @minimum 0
  * @maximum 340282366920938463463374607431768211455
  */

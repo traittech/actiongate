@@ -77,11 +77,7 @@ function getFunctionDescription(docs: Vec<Text>) {
   };
 }
 
-function generator(
-  meta: string,
-  extraTypes = {},
-  customLookupDefinitions = {}
-) {
+function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) {
   const { metadata, registry } = initMeta(meta as any, extraTypes);
 
   const allTypes = {
@@ -103,7 +99,7 @@ function generator(
 
   const { lookup, pallets } = metadata.asLatest;
 
-  const ctAtomicActions: Array<{ function: string; actionName: string; }> = [];
+  const ctAtomicActions: Array<{ function: string; actionName: string }> = [];
 
   const modules = pallets
     .reduce<any[]>((acc, pallet) => {

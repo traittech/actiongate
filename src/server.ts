@@ -2,23 +2,24 @@ import fs from 'fs';
 import http from 'http';
 import https from 'https';
 
+import { app } from './app';
 import { loadConfig } from './functions/config';
 import logger from './functions/logger';
-
-import { app } from './app';
 
 import type { Config } from './types/config';
 import type { Express } from 'express';
 
 function createServer(app: Express, config: Config) {
   const isSSL = config.api_ssl_enabled;
-  const server = isSSL ? https.createServer(
-    {
-      key: fs.readFileSync(config.api_ssl.sslKeyPath),
-      cert: fs.readFileSync(config.api_ssl.sslCertPath),
-    },
-    app
-  ): http.createServer(app);
+  const server = isSSL
+    ? https.createServer(
+        {
+          key: fs.readFileSync(config.api_ssl.sslKeyPath),
+          cert: fs.readFileSync(config.api_ssl.sslCertPath),
+        },
+        app
+      )
+    : http.createServer(app);
   const protocol = isSSL ? 'https' : 'http';
 
   return { server, protocol };

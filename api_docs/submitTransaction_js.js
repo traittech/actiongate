@@ -11,10 +11,10 @@ const transactionPayload = {
     actionType: 'assets.transfer',
     arguments: {
       id: 200,
-      target: "ttrENnXUfsdTDFwweKjK1dSvCXcAtVVQ9xgARy8iBisAFfc5e",
-      amount: '200'
-    }
-  }
+      target: 'ttrENnXUfsdTDFwweKjK1dSvCXcAtVVQ9xgARy8iBisAFfc5e',
+      amount: '200',
+    },
+  },
 };
 
 const transactionRequest = {

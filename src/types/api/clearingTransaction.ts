@@ -1,5 +1,10 @@
 import type { ActionType } from './actions';
-import type { BlockchainGenericId, BlockchainGenericAddressId, BlockchainGenericAccount, BlockchainAddressName } from './common';
+import type {
+  BlockchainGenericId,
+  BlockchainGenericAddressId,
+  BlockchainGenericAccount,
+  BlockchainAddressName,
+} from './common';
 import type { CTAtomicAction, ActionArgs } from '../../txwrapper';
 
 /**
@@ -8,27 +13,27 @@ import type { CTAtomicAction, ActionArgs } from '../../txwrapper';
 export type CTActionOrigin =
   | {
       /** The ID of the application agent. */
-      AppAgentId: BlockchainGenericId
+      AppAgentId: BlockchainGenericId;
     }
   | {
       /** The address of the application agent. */
-      AppAgentAddress: BlockchainGenericAccount
+      AppAgentAddress: BlockchainGenericAccount;
     }
   | {
       /** The ID of the transactional address. */
-      TransactionalAddressId: BlockchainGenericAddressId
+      TransactionalAddressId: BlockchainGenericAddressId;
     }
   | {
       /** The transactional address. */
-      TransactionalAddress: BlockchainGenericAccount
+      TransactionalAddress: BlockchainGenericAccount;
     }
   | {
       /** The named address. */
-      NamedAddress: BlockchainGenericAccount
+      NamedAddress: BlockchainGenericAccount;
     }
   | {
       /** The name of the named address. */
-      NamedAddressName: BlockchainAddressName
+      NamedAddressName: BlockchainAddressName;
     };
 
 /**
@@ -76,7 +81,7 @@ export interface ICTAtomicAction {
    * The origin responsible for the transaction.
    */
   origin: CTActionOrigin;
-};
+}
 
 /**
  * Represents an atomic operation.

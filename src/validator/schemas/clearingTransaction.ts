@@ -1,7 +1,14 @@
 import { z } from 'zod';
 
-import { BlockchainGenericIdSchema, BlockchainGenericAddressIdSchema, BlockchainGenericAccountSchema, BlockchainAddressNameSchema } from './common';
-import { ArgsSchema, ActionTypeSchema, SignatorySchema } from './transaction';
+import { Actions } from '../../types/api/actions';
+
+import {
+  BlockchainGenericIdSchema,
+  BlockchainGenericAddressIdSchema,
+  BlockchainGenericAccountSchema,
+  BlockchainAddressNameSchema,
+} from './common';
+import { SignatorySchema } from './transaction';
 
 export const CTActionOriginSchema = z.union([
   z.object({ AppAgentId: BlockchainGenericIdSchema }),
@@ -22,15 +29,16 @@ export const CTActionCallSchema = z.union([
   z.string(),
 ]);
 
-export const CTActionSchema = z.tuple([
-  CTActionOriginSchema,
-  CTActionCallSchema,
-]);
+export const CTActionSchema = z.tuple([CTActionOriginSchema, CTActionCallSchema]);
+
+export const ActionTypeSchema = z.enum(Actions);
+
+export const ActionArgsSchema = z.object({}).passthrough(); // matches any args objects
 
 export const CTAtomicActionSchema = z.object({
   actionType: ActionTypeSchema,
+  arguments: ActionArgsSchema,
   origin: CTActionOriginSchema,
-  arguments: ArgsSchema,
 });
 
 export const CTAtomicActionsSchema = z.array(z.array(CTActionSchema));
