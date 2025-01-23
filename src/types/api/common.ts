@@ -66,9 +66,3 @@ export type BlockchainAddressName = string;
  * @example true
  */
 export type BlockchainGenericBoolean = boolean;
-
-export type NftWitness = {
-  itemMetadatas: UINT32;
-  itemConfigs: UINT32;
-  attributes: UINT32;
-};

@@ -17,9 +17,13 @@ import type {
   ICTAtomicAction,
   CTActionOrigin,
   CTAtomicActions,
-  NftWitness,
-  AdminType,
 } from '../../types/api';
+
+import type {
+  AdminType,
+  NamedAddressInput,
+  NftWitness
+} from '../../types/api/trait';
 
 import { TransactionType } from '../../types/api/actions';
 
@@ -37,6 +41,556 @@ export function constructUnsignedTransaction(
 
   return defineMethod(txInfo, options);
 }
+
+/**
+ *
+ * `adminType`
+ *
+ * `admin`
+ */
+export interface AdminsAddAdminArgs extends Args {
+  adminType: AdminType;
+  admin: BlockchainGenericAccount;
+};
+
+const AdminsAddAdminArgsSchema = z.object({
+  adminType: schema.AdminTypeSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name adminsAddPalletAdmin
+ * @param args - The arguments of the transaction. {@link AdminsAddAdminArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function adminsAddPalletAdmin(
+  args: AdminsAddAdminArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AdminsAddAdminArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('admins', 'addPalletAdmin', args, info, options);
+}
+
+/**
+ */
+export interface AdminsAddAdminTx extends ITxAction {
+  actionType: TransactionType.AdminsAddAdmin;
+  arguments: AdminsAddAdminArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ *
+ * `adminType`
+ *
+ * `admin`
+ */
+export interface AdminsRemoveAdminArgs extends Args {
+  adminType: AdminType;
+  admin: BlockchainGenericAccount;
+};
+
+const AdminsRemoveAdminArgsSchema = z.object({
+  adminType: schema.AdminTypeSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name adminsRemovePalletAdmin
+ * @param args - The arguments of the transaction. {@link AdminsRemoveAdminArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function adminsRemovePalletAdmin(
+  args: AdminsRemoveAdminArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AdminsRemoveAdminArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('admins', 'removePalletAdmin', args, info, options);
+}
+
+/**
+ */
+export interface AdminsRemoveAdminTx extends ITxAction {
+  actionType: TransactionType.AdminsRemoveAdmin;
+  arguments: AdminsRemoveAdminArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Adds an admin to the App Agent.
+ *
+ * `appAgentId` - The ID of the App Agent.
+ *
+ * `admin` - The account ID of the admin to be added.
+ */
+export interface AppAgentsAddAdminArgs extends Args {
+  /**
+   *  The ID of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The account ID of the admin to be added.
+   */
+  admin: BlockchainGenericAccount;
+};
+
+const AppAgentsAddAdminArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appAgentsAddAdmin
+ * @summary Adds an admin to the App Agent.
+ * @description This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsAddAdminArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsAddAdmin(
+  args: AppAgentsAddAdminArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsAddAdminArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'addAdmin', args, info, options);
+}
+
+/**
+ * Adds an admin to the App Agent. This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount. # Parameters
+ */
+export interface AppAgentsAddAdminTx extends ITxAction {
+  actionType: TransactionType.AppAgentsAddAdmin;
+  arguments: AppAgentsAddAdminArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Adds an admin to the list of permitted administrators for a named address under a
+ *
+ * `appAgentId` - The identifier of the App Agent.
+ *
+ * `admin` - The account ID of the admin being added.
+ *
+ * `namedAddress` - The named address to which the admin is being added.
+ */
+export interface AppAgentsAddAdminToNamedAddressArgs extends Args {
+  /**
+   *  The identifier of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The account ID of the admin being added.
+   */
+  admin: BlockchainGenericAccount;
+  /**
+   *  The named address to which the admin is being added.
+   */
+  namedAddress: BlockchainGenericAccount;
+};
+
+const AppAgentsAddAdminToNamedAddressArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+  namedAddress: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appAgentsAddAdminToNamedAddressDispatch
+ * @summary Adds an admin to the list of permitted administrators for a named address under a
+ * @description specific App Agent. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsAddAdminToNamedAddressArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsAddAdminToNamedAddressDispatch(
+  args: AppAgentsAddAdminToNamedAddressArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsAddAdminToNamedAddressArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'addAdminToNamedAddressDispatch', args, info, options);
+}
+
+/**
+ * Adds an admin to the list of permitted administrators for a named address under a specific App Agent. # Parameters
+ */
+export interface AppAgentsAddAdminToNamedAddressTx extends ITxAction {
+  actionType: TransactionType.AppAgentsAddAdminToNamedAddress;
+  arguments: AppAgentsAddAdminToNamedAddressArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Pallet function to add an AppAgent' admin to the list of addresses allowed to spend
+ *
+ * `appAgentId` - The identifier of the App Agent.
+ *
+ * `admin` - The admin address to be added to the list.
+ *
+ * `coldWallet`
+ */
+export interface AppAgentsAllowAdminColdWalletArgs extends Args {
+  /**
+   *  The identifier of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The admin address to be added to the list.
+   */
+  admin: BlockchainGenericAccount;
+  coldWallet: BlockchainGenericAccount;
+};
+
+const AppAgentsAllowAdminColdWalletArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+  coldWallet: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appAgentsAllowAdminColdWalletDispatch
+ * @summary Pallet function to add an AppAgent' admin to the list of addresses allowed to spend
+ * @description from a cold wallet associated with a specific App Agent. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsAllowAdminColdWalletArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsAllowAdminColdWalletDispatch(
+  args: AppAgentsAllowAdminColdWalletArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsAllowAdminColdWalletArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'allowAdminColdWalletDispatch', args, info, options);
+}
+
+/**
+ * Pallet function to add an AppAgent' admin to the list of addresses allowed to spend from a cold wallet associated with a specific App Agent. # Parameters
+ */
+export interface AppAgentsAllowAdminColdWalletTx extends ITxAction {
+  actionType: TransactionType.AppAgentsAllowAdminColdWallet;
+  arguments: AppAgentsAllowAdminColdWalletArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Change the hot wallet associated with an App Agent.
+ *
+ * `appAgentId` - The identifier of the App Agent whose hot wallet is being changed.
+ *
+ * `newHotWallet` - The new hot wallet to be set for the specified App Agent.
+ */
+export interface AppAgentsChangeHotWalletArgs extends Args {
+  /**
+   *  The identifier of the App Agent whose hot wallet is being changed.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The new hot wallet to be set for the specified App Agent.
+   */
+  newHotWallet: NamedAddressInput;
+};
+
+const AppAgentsChangeHotWalletArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  newHotWallet: schema.NamedAddressInputSchema,
+});
+
+/**
+ * @name appAgentsChangeHotWallet
+ * @summary Change the hot wallet associated with an App Agent.
+ * @description # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsChangeHotWalletArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsChangeHotWallet(
+  args: AppAgentsChangeHotWalletArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsChangeHotWalletArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'changeHotWallet', args, info, options);
+}
+
+/**
+ * Change the hot wallet associated with an App Agent. # Parameters
+ */
+export interface AppAgentsChangeHotWalletTx extends ITxAction {
+  actionType: TransactionType.AppAgentsChangeHotWallet;
+  arguments: AppAgentsChangeHotWalletArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Cancels a change of owner for an App Agent.
+ *
+ * `appAgentId` - The ID of the App Agent.
+ */
+export interface AppAgentsChangeOwnerCancelArgs extends Args {
+  /**
+   *  The ID of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsChangeOwnerCancelArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsChangeOwnerCancel
+ * @summary Cancels a change of owner for an App Agent.
+ * @description This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsChangeOwnerCancelArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsChangeOwnerCancel(
+  args: AppAgentsChangeOwnerCancelArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsChangeOwnerCancelArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'changeOwnerCancel', args, info, options);
+}
+
+/**
+ * Cancels a change of owner for an App Agent. This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent. # Parameters
+ */
+export interface AppAgentsChangeOwnerCancelTx extends ITxAction {
+  actionType: TransactionType.AppAgentsChangeOwnerCancel;
+  arguments: AppAgentsChangeOwnerCancelArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Completes a change of owner for an App Agent.
+ *
+ * `appAgentId` - The ID of the App Agent.
+ */
+export interface AppAgentsChangeOwnerCompleteArgs extends Args {
+  /**
+   *  The ID of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsChangeOwnerCompleteArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsChangeOwnerComplete
+ * @summary Completes a change of owner for an App Agent.
+ * @description This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsChangeOwnerCompleteArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsChangeOwnerComplete(
+  args: AppAgentsChangeOwnerCompleteArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsChangeOwnerCompleteArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'changeOwnerComplete', args, info, options);
+}
+
+/**
+ * Completes a change of owner for an App Agent. This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent. # Parameters
+ */
+export interface AppAgentsChangeOwnerCompleteTx extends ITxAction {
+  actionType: TransactionType.AppAgentsChangeOwnerComplete;
+  arguments: AppAgentsChangeOwnerCompleteArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Initializes the process to change the ownership of an App Agent.
+ *
+ * `appAgentId` - The ID of the App Agent.
+ *
+ * `proposedOwner` - The account ID of the proposed owner.
+ */
+export interface AppAgentsChangeOwnerInitArgs extends Args {
+  /**
+   *  The ID of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The account ID of the proposed owner.
+   */
+  proposedOwner: BlockchainGenericAccount;
+};
+
+const AppAgentsChangeOwnerInitArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  proposedOwner: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appAgentsChangeOwnerInit
+ * @summary Initializes the process to change the ownership of an App Agent.
+ * @description This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsChangeOwnerInitArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsChangeOwnerInit(
+  args: AppAgentsChangeOwnerInitArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsChangeOwnerInitArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'changeOwnerInit', args, info, options);
+}
+
+/**
+ * Initializes the process to change the ownership of an App Agent. This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address. # Parameters
+ */
+export interface AppAgentsChangeOwnerInitTx extends ITxAction {
+  actionType: TransactionType.AppAgentsChangeOwnerInit;
+  arguments: AppAgentsChangeOwnerInitArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Clears the dispatch filter for the specified `admin` account.
+ *
+ * `appAgentId` - The ID of the App Agent.
+ *
+ * `admin` - The account ID of the admin.
+ */
+export interface AppAgentsClearAdminDispatchFilterArgs extends Args {
+  /**
+   *  The ID of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The account ID of the admin.
+   */
+  admin: BlockchainGenericAccount;
+};
+
+const AppAgentsClearAdminDispatchFilterArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appAgentsClearAdminDispatchFilter
+ * @summary Clears the dispatch filter for the specified `admin` account.
+ * @description The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsClearAdminDispatchFilterArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsClearAdminDispatchFilter(
+  args: AppAgentsClearAdminDispatchFilterArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsClearAdminDispatchFilterArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'clearAdminDispatchFilter', args, info, options);
+}
+
+/**
+ * Clears the dispatch filter for the specified `admin` account. The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions. # Parameters
+ */
+export interface AppAgentsClearAdminDispatchFilterTx extends ITxAction {
+  actionType: TransactionType.AppAgentsClearAdminDispatchFilter;
+  arguments: AppAgentsClearAdminDispatchFilterArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Clear the metadata for an asset class.
+ *
+ * `appAgentId`
+ */
+export interface AppAgentsClearAppAgentMetadataArgs extends Args {
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsClearAppAgentMetadataArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsClearAppAgentMetadata
+ * @summary Clear the metadata for an asset class.
+ * @description Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`. Any deposit is freed for the asset class owner.
+ * @param args - The arguments of the transaction. {@link AppAgentsClearAppAgentMetadataArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsClearAppAgentMetadata(
+  args: AppAgentsClearAppAgentMetadataArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsClearAppAgentMetadataArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'clearAppAgentMetadata', args, info, options);
+}
+
+/**
+ * Clear the metadata for an asset class. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`. Any deposit is freed for the asset class owner.
+ */
+export interface AppAgentsClearAppAgentMetadataTx extends ITxAction {
+  actionType: TransactionType.AppAgentsClearAppAgentMetadata;
+  arguments: AppAgentsClearAppAgentMetadataArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
 
 /**
  * Arguments required to Submit a Clearing transaction.
@@ -2076,6 +2630,17 @@ export interface NftsUnlockItemTransferAction extends ICTAtomicAction {
  * Represents a single transaction
  */
 export type TxAction =
+  | AdminsAddAdminTx
+  | AdminsRemoveAdminTx
+  | AppAgentsAddAdminTx
+  | AppAgentsAddAdminToNamedAddressTx
+  | AppAgentsAllowAdminColdWalletTx
+  | AppAgentsChangeHotWalletTx
+  | AppAgentsChangeOwnerCancelTx
+  | AppAgentsChangeOwnerCompleteTx
+  | AppAgentsChangeOwnerInitTx
+  | AppAgentsClearAdminDispatchFilterTx
+  | AppAgentsClearAppAgentMetadataTx
   | AppTransactionsSubmitClearingTransactionTx
   | AssetsBurnTx
   | AssetsCreateTx
@@ -2116,6 +2681,17 @@ export type TxAction =
  * Represents a transaction args
  */
 export type TransactionArgs =
+  | AdminsAddAdminArgs
+  | AdminsRemoveAdminArgs
+  | AppAgentsAddAdminArgs
+  | AppAgentsAddAdminToNamedAddressArgs
+  | AppAgentsAllowAdminColdWalletArgs
+  | AppAgentsChangeHotWalletArgs
+  | AppAgentsChangeOwnerCancelArgs
+  | AppAgentsChangeOwnerCompleteArgs
+  | AppAgentsChangeOwnerInitArgs
+  | AppAgentsClearAdminDispatchFilterArgs
+  | AppAgentsClearAppAgentMetadataArgs
   | AppTransactionsSubmitClearingTransactionArgs
   | AssetsBurnArgs
   | AssetsCreateArgs
@@ -2251,6 +2827,50 @@ export function buildUnsignedTransaction(
 
   // Handle different action types
   switch (actionType) {
+    case TransactionType.AdminsAddAdmin: {
+      unsigned = adminsAddPalletAdmin(args, info, options);
+      break;
+    }
+    case TransactionType.AdminsRemoveAdmin: {
+      unsigned = adminsRemovePalletAdmin(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsAddAdmin: {
+      unsigned = appAgentsAddAdmin(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsAddAdminToNamedAddress: {
+      unsigned = appAgentsAddAdminToNamedAddressDispatch(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsAllowAdminColdWallet: {
+      unsigned = appAgentsAllowAdminColdWalletDispatch(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsChangeHotWallet: {
+      unsigned = appAgentsChangeHotWallet(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsChangeOwnerCancel: {
+      unsigned = appAgentsChangeOwnerCancel(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsChangeOwnerComplete: {
+      unsigned = appAgentsChangeOwnerComplete(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsChangeOwnerInit: {
+      unsigned = appAgentsChangeOwnerInit(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsClearAdminDispatchFilter: {
+      unsigned = appAgentsClearAdminDispatchFilter(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsClearAppAgentMetadata: {
+      unsigned = appAgentsClearAppAgentMetadata(args, info, options);
+      break;
+    }
     case TransactionType.AppTransactionsSubmitClearingTransaction: {
       unsigned = appTransactionsSubmitClearingTransaction(args, info, options);
       break;

@@ -3,6 +3,20 @@
  * Transaction value must match blockchain module & method!
  */
 export enum TransactionType {
+  // Admins Pallet
+  AdminsAddAdmin = 'admins.addPalletAdmin',
+  AdminsRemoveAdmin = 'admins.removePalletAdmin',
+  // AppAgents Pallet
+  AppAgentsAddAdmin = 'appAgents.addAdmin',
+  AppAgentsAddAdminToNamedAddress = 'appAgents.addAdminToNamedAddressDispatch',
+  AppAgentsAllowAdminColdWallet = 'appAgents.allowAdminColdWalletDispatch',
+  AppAgentsChangeHotWallet = 'appAgents.changeHotWallet',
+  AppAgentsChangeOwnerCancel = 'appAgents.changeOwnerCancel',
+  AppAgentsChangeOwnerComplete = 'appAgents.changeOwnerComplete',
+  AppAgentsChangeOwnerInit = 'appAgents.changeOwnerInit',
+  AppAgentsClearAdminDispatchFilter = 'appAgents.clearAdminDispatchFilter',
+  AppAgentsClearAppAgentMetadata = 'appAgents.clearAppAgentMetadata',
+  // AppTransactions Pallet
   AppTransactionsSubmitClearingTransaction = 'appTransactions.submitClearingTransaction',
   // Assets Pallet
   AssetsCreate = 'assets.create',

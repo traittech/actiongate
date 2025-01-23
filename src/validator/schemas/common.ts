@@ -26,17 +26,17 @@ const isNumberishInRange = (min: bigint, max: bigint) =>
 /**
  * `u32` number validation schema
  */
-const u32Schema = isNumberishInRange(u32_MIN, u32_MAX);
+export const u32Schema = isNumberishInRange(u32_MIN, u32_MAX);
 
 /**
  * `u128` number validation schema
  */
-const u128Schema = isNumberishInRange(u128_MIN, u128_MAX);
+export const u128Schema = isNumberishInRange(u128_MIN, u128_MAX);
 
 /**
  * `bool` boolean validation schema
  */
-const booleanSchema = z.boolean();
+export const booleanSchema = z.boolean();
 
 export const BlockchainGenericAccountSchema = z
   .string()
@@ -59,9 +59,3 @@ export const BlockchainGenericAddressIdSchema = u128Schema;
 export const BlockchainGenericBalanceSchema = u128Schema;
 
 export const BlockchainGenericBooleanSchema = booleanSchema;
-
-export const NftWitnessSchema = z.object({
-  itemMetadatas: u32Schema,
-  itemConfigs: u32Schema,
-  attributes: u32Schema,
-});

@@ -7,6 +7,7 @@ BlockchainOverridesMap.set('bool', 'BlockchainGenericBoolean');
 BlockchainOverridesMap.set('AccountId32', 'BlockchainGenericAccount');
 BlockchainOverridesMap.set('MultiAddress', 'BlockchainGenericAccount');
 
+BlockchainOverridesMap.set('PalletAppAgentsInputNamedAddressInput', 'NamedAddressInput');
 BlockchainOverridesMap.set('PalletNftsDestroyWitness', 'NftWitness');
 BlockchainOverridesMap.set('Vec<Vec<(TraitPrimitivesAppTransactionsCtActionOrigin,Call)>>', 'CTAtomicActions');
 
