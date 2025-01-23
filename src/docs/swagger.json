@@ -66,7 +66,10 @@
 			},
 			"BlockchainGenericAccount": {
 				"type": "string",
-				"description": "The account address on the blockchain.\nTypically, it is a string of alphanumeric characters, encoded in SS58 format."
+				"example": "ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s",
+				"description": "The account address on the blockchain.\nTypically, it is a string of alphanumeric characters, encoded in SS58 format.",
+				"minLength": 49,
+				"maxLength": 49
 			},
 			"UINT128": {
 				"anyOf": [
@@ -78,7 +81,9 @@
 						"type": "string"
 					}
 				],
-				"description": "Numeric value, presented as plain number or string\n\n`min`: 0  \n`max`: 340282366920938463463374607431768211455"
+				"description": "Numeric value, presented as plain number or string",
+				"minimum": 0,
+				"maximum": 3.402823669209385e+38
 			},
 			"BlockchainGenericBalance": {
 				"$ref": "#/components/schemas/UINT128",

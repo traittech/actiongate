@@ -11,14 +11,18 @@ export type UINT32 = number;
 /**
  * Numeric value, presented as plain number or string
  * 
- * `min`: 0  
- * `max`: 340282366920938463463374607431768211455
+ * @minimum 0
+ * @maximum 340282366920938463463374607431768211455
  */
 export type UINT128 = number | string;
 
 /**
  * The account address on the blockchain.
  * Typically, it is a string of alphanumeric characters, encoded in SS58 format.
+ * @isString
+ * @minLength 49
+ * @maxLength 49
+ * @example "ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s"
  */
 export type BlockchainGenericAccount = string;
 
@@ -59,6 +63,7 @@ export type BlockchainAddressName = string;
 
 /**
  * Boolean type for blockchain (bool)
+ * @example true
  */
 export type BlockchainGenericBoolean = boolean;
 

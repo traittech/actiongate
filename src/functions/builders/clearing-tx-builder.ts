@@ -1,4 +1,5 @@
 import { construct } from '@substrate/txwrapper-polkadot';
+import { decodeAddress } from '@traittech/trait-keyless';
 
 import { TransactionService } from '../../adapter/datagate';
 import { loadConfig } from '../config';
@@ -8,11 +9,33 @@ import { generateTxMetadata, buildCTAction } from '../tx-helper';
 import { buildUnsignedTransaction } from '../../txwrapper';
 import { ActionType } from '../../types/api/actions';
 
-import type { CTAction, CTAtomicActions, ClearingTransactionPayload } from '../../types/api';
+import type { CTAction, CTActionOrigin, CTAtomicActions, ClearingTransactionPayload, BlockchainGenericId } from '../../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
 
 const config = loadConfig();
 const txService = new TransactionService(config.datagate_api.uri);
+
+function validateActionOrigin(actionOrigin: CTActionOrigin, appAgentId: BlockchainGenericId): void {
+  // nothing to do
+  if ('TransactionalAddressId ' in actionOrigin) return;
+  if ('NamedAddressName' in actionOrigin) return;
+
+  let actionAppAgentId: number | null = null;
+
+  if ('AppAgentId' in actionOrigin) {
+    actionAppAgentId = actionOrigin.AppAgentId;
+  } else if ('AppAgentAddress' in actionOrigin) {
+    actionAppAgentId = decodeAddress(actionOrigin.AppAgentAddress).appAgentId;
+  } else if ('TransactionalAddress' in actionOrigin) {
+    actionAppAgentId = decodeAddress(actionOrigin.TransactionalAddress).appAgentId;
+  } else if ('NamedAddress' in actionOrigin) {
+    actionAppAgentId = decodeAddress(actionOrigin.NamedAddress).appAgentId;
+  }
+
+  if (actionAppAgentId !== appAgentId) {
+    throw new Error(`Atomic action 'appAgentId' does not match tx payload 'appAgentId'. Action Origin: ${actionOrigin}; Payload: ${appAgentId}`);
+  }
+}
 
 /**
  * Creates a clearing transaction and broadcasts it.
@@ -40,6 +63,8 @@ export async function createClearingTransactionAndBroadcast(
       const unsignedActions: CTAction[] = [];
 
       for (const action of atomic.actions) {
+        validateActionOrigin(action.origin, payload.appAgentId);
+
         const actionTxType: CTAction = buildCTAction(action, baseTxInfo, options);
         unsignedActions.push(actionTxType);
       }
@@ -93,6 +118,6 @@ export async function createClearingTransactionAndBroadcast(
     return expectedTxHash;
   } catch (error: any) {
     logger.error('Error creating and broadcasting clearing transaction:', error);
-    throw new Error(error);
+    throw error;
   }
 }
