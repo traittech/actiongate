@@ -1,6 +1,8 @@
 // Auto-generated, do not edit
 /* eslint-disable */
 
+{{{ importsAll }}}
+
 import { z } from 'zod';
 
 import { defineMethod } from '@substrate/txwrapper-core';
@@ -18,9 +20,10 @@ import type {
   CTActionOrigin,
   CTAtomicActions,
   NftWitness,
+  AdminType,
 } from '../../types/api';
 
-import { ActionType } from '../../types/api/actions';
+import { TransactionType } from '../../types/api/actions';
 
 import * as schema from '../../validator/schemas';
 
@@ -97,26 +100,47 @@ export function {{{functionName}}}(
 {{/if}}
  */
 export interface {{{actionName}}}Tx extends ITxAction {
-  actionType: ActionType.{{{actionName}}};
+  actionType: TransactionType.{{{actionName}}};
   arguments: {{{actionName}}}Args;
 };
 
+{{#if isAllowedAction}}
 /**
 {{#if documentation.short}}
  * {{{documentation.short}}}{{#if documentation.full}} {{{documentation.full}}}{{/if}}
 {{/if}}
  */
 export interface {{{actionName}}}Action extends ICTAtomicAction {
-  actionType: ActionType.{{{actionName}}};
+  actionType: TransactionType.{{{actionName}}};
   arguments: {{{actionName}}}Args;
   origin: CTActionOrigin;
 };
+{{/if}}
 
 /*---------------------------------------------------------------------------------- */
 
 {{/each}}
 {{/each}}
 
+/**
+ * Represents a single transaction
+ */
+export type TxAction =
+{{#each modules}}
+{{#each items}}
+  | {{{this.actionName}}}Tx
+{{/each}}
+{{/each}};
+
+/**
+ * Represents a transaction args
+ */
+export type TransactionArgs =
+{{#each modules}}
+{{#each items}}
+  | {{{this.actionName}}}Args
+{{/each}}
+{{/each}};
 
 /**
  * Represents a single action within an atomic operation.
@@ -127,17 +151,9 @@ export type CTAtomicAction =
 {{/each}};
 
 /**
- * Represents a single transaction
+ * Represents a CT action args.
  */
-export type TxAction =
-{{#each ctAtomicActions}}
-  | {{{this.actionName}}}Tx
-{{/each}};
-
-/**
- * Represents a transaction args
- */
-export type TransactionArgs =
+export type ActionArgs =
 {{#each ctAtomicActions}}
   | {{{this.actionName}}}Args
 {{/each}};
@@ -163,11 +179,13 @@ export function buildUnsignedTransaction(
 
   // Handle different action types
   switch (actionType) {
-  {{#each ctAtomicActions}}
-    case ActionType.{{{this.actionName}}}: {
-      unsigned = {{{this.function}}}(args, info, options);
+  {{#each modules}}
+  {{#each items}}
+    case TransactionType.{{{this.actionName}}}: {
+      unsigned = {{{this.functionName}}}(args, info, options);
       break;
     }
+  {{/each}}
   {{/each}}
 
     default: {

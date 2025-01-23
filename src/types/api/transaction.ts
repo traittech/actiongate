@@ -1,11 +1,11 @@
-import type { ActionType } from './actions';
+import type { TransactionType } from './actions';
 import type { TxAction, TransactionArgs } from '../../txwrapper';
 
 export interface ITxAction {
   /**
    * The type of transaction to be performed
    */
-  actionType: ActionType;
+  actionType: TransactionType;
 
   /**
    * The arguments for the transaction.

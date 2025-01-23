@@ -5,7 +5,7 @@ import Keyring from '@polkadot/keyring';
 
 import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import logger from '../functions/logger';
-import { ActionType } from '../types/api/actions';
+import { TransactionType } from '../types/api/actions';
 import { u32_MIN, u32_MAX, u128_MAX, ss58_LENGTH, text_MAX_LENGTH } from '../validator/consts';
 
 import type { CTAtomicAction } from '../txwrapper';
@@ -75,7 +75,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.BalancesTransferKeepAlive,
+                actionType: TransactionType.BalancesTransferKeepAlive,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   dest: aliceAddress,
@@ -99,7 +99,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.BalancesTransferAllowDeath,
+                actionType: TransactionType.BalancesTransferAllowDeath,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   dest: aliceAddress,
@@ -125,7 +125,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.NftsCreateCollection,
+                actionType: TransactionType.NftsCreateCollection,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   metadata:
@@ -151,7 +151,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.NftsMintItem,
+                actionType: TransactionType.NftsMintItem,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   collection: 1,
@@ -178,7 +178,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.AssetsCreate,
+                actionType: TransactionType.AssetsCreate,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   minBalance: 1,
@@ -201,7 +201,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.AssetsTransfer,
+                actionType: TransactionType.AssetsTransfer,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   id: 1,
@@ -228,7 +228,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: 'unknown_action' as ActionType,
+                actionType: 'unknown_action' as TransactionType,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   dest: aliceAddress,
@@ -255,7 +255,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.NftsLockItemTransfer,
+                actionType: TransactionType.NftsLockItemTransfer,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   collection: Number(u32_MIN - BigInt(1)), // error: fewer than min
@@ -287,7 +287,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.BalancesTransferKeepAlive,
+                actionType: TransactionType.BalancesTransferKeepAlive,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   dest: '1231231', // invalid length
@@ -319,7 +319,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.BalancesTransferAll,
+                actionType: TransactionType.BalancesTransferAll,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   dest: aliceAddress.slice(0, -1).concat('z'), // invalid encoded ss58
@@ -349,7 +349,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ActionType.AssetsSetMetadata,
+                actionType: TransactionType.AssetsSetMetadata,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   id: 1,

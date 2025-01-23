@@ -1,6 +1,6 @@
 import type { ActionType } from './actions';
 import type { BlockchainGenericId, BlockchainGenericAddressId, BlockchainGenericAccount, BlockchainAddressName } from './common';
-import type { CTAtomicAction, TransactionArgs } from '../../txwrapper';
+import type { CTAtomicAction, ActionArgs } from '../../txwrapper';
 
 /**
  * The origin type for each Action in CT
@@ -70,7 +70,7 @@ export interface ICTAtomicAction {
   /**
    * The arguments for the transaction.
    */
-  arguments: TransactionArgs;
+  arguments: ActionArgs;
 
   /**
    * The origin responsible for the transaction.

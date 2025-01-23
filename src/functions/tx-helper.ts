@@ -7,10 +7,10 @@ import { TxMetadata } from '../types/tx';
 import { loadConfig } from './config';
 import logger from './logger';
 
-import type { CTAtomicAction, TxAction } from '../txwrapper';
+import type { CTAtomicAction } from '../txwrapper';
 import type { CTAction } from '../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
-import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
+import type { BaseTxInfo, OptionsWithMeta } from '@substrate/txwrapper-core';
 
 const config = loadConfig();
 const txService = new TransactionService(config.datagate_api.uri);

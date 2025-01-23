@@ -18,9 +18,10 @@ import type {
   CTActionOrigin,
   CTAtomicActions,
   NftWitness,
+  AdminType,
 } from '../../types/api';
 
-import { ActionType } from '../../types/api/actions';
+import { TransactionType } from '../../types/api/actions';
 
 import * as schema from '../../validator/schemas';
 
@@ -78,17 +79,8 @@ export function appTransactionsSubmitClearingTransaction(
  * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
  */
 export interface AppTransactionsSubmitClearingTransactionTx extends ITxAction {
-  actionType: ActionType.AppTransactionsSubmitClearingTransaction;
+  actionType: TransactionType.AppTransactionsSubmitClearingTransaction;
   arguments: AppTransactionsSubmitClearingTransactionArgs;
-};
-
-/**
- * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
- */
-export interface AppTransactionsSubmitClearingTransactionAction extends ICTAtomicAction {
-  actionType: ActionType.AppTransactionsSubmitClearingTransaction;
-  arguments: AppTransactionsSubmitClearingTransactionArgs;
-  origin: CTActionOrigin;
 };
 
 /*---------------------------------------------------------------------------------- */
@@ -147,7 +139,7 @@ export function assetsBurn(
  * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
  */
 export interface AssetsBurnTx extends ITxAction {
-  actionType: ActionType.AssetsBurn;
+  actionType: TransactionType.AssetsBurn;
   arguments: AssetsBurnArgs;
 };
 
@@ -155,7 +147,7 @@ export interface AssetsBurnTx extends ITxAction {
  * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
  */
 export interface AssetsBurnAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsBurn;
+  actionType: TransactionType.AssetsBurn;
   arguments: AssetsBurnArgs;
   origin: CTActionOrigin;
 };
@@ -195,14 +187,14 @@ export function assetsCreate(
 /**
  */
 export interface AssetsCreateTx extends ITxAction {
-  actionType: ActionType.AssetsCreate;
+  actionType: TransactionType.AssetsCreate;
   arguments: AssetsCreateArgs;
 };
 
 /**
  */
 export interface AssetsCreateAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsCreate;
+  actionType: TransactionType.AssetsCreate;
   arguments: AssetsCreateArgs;
   origin: CTActionOrigin;
 };
@@ -249,7 +241,7 @@ export function assetsDestroyAccounts(
  * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
  */
 export interface AssetsDestroyAccountsTx extends ITxAction {
-  actionType: ActionType.AssetsDestroyAccounts;
+  actionType: TransactionType.AssetsDestroyAccounts;
   arguments: AssetsDestroyAccountsArgs;
 };
 
@@ -257,7 +249,7 @@ export interface AssetsDestroyAccountsTx extends ITxAction {
  * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
  */
 export interface AssetsDestroyAccountsAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsDestroyAccounts;
+  actionType: TransactionType.AssetsDestroyAccounts;
   arguments: AssetsDestroyAccountsArgs;
   origin: CTActionOrigin;
 };
@@ -304,7 +296,7 @@ export function assetsDestroyApprovals(
  * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
  */
 export interface AssetsDestroyApprovalsTx extends ITxAction {
-  actionType: ActionType.AssetsDestroyApprovals;
+  actionType: TransactionType.AssetsDestroyApprovals;
   arguments: AssetsDestroyApprovalsArgs;
 };
 
@@ -312,7 +304,7 @@ export interface AssetsDestroyApprovalsTx extends ITxAction {
  * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
  */
 export interface AssetsDestroyApprovalsAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsDestroyApprovals;
+  actionType: TransactionType.AssetsDestroyApprovals;
   arguments: AssetsDestroyApprovalsArgs;
   origin: CTActionOrigin;
 };
@@ -359,7 +351,7 @@ export function assetsFinishDestroy(
  * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
  */
 export interface AssetsFinishDestroyTx extends ITxAction {
-  actionType: ActionType.AssetsFinishDestroy;
+  actionType: TransactionType.AssetsFinishDestroy;
   arguments: AssetsFinishDestroyArgs;
 };
 
@@ -367,7 +359,7 @@ export interface AssetsFinishDestroyTx extends ITxAction {
  * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
  */
 export interface AssetsFinishDestroyAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsFinishDestroy;
+  actionType: TransactionType.AssetsFinishDestroy;
   arguments: AssetsFinishDestroyArgs;
   origin: CTActionOrigin;
 };
@@ -435,7 +427,7 @@ export function assetsForceTransfer(
  * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsForceTransferTx extends ITxAction {
-  actionType: ActionType.AssetsForceTransfer;
+  actionType: TransactionType.AssetsForceTransfer;
   arguments: AssetsForceTransferArgs;
 };
 
@@ -443,7 +435,7 @@ export interface AssetsForceTransferTx extends ITxAction {
  * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsForceTransferAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsForceTransfer;
+  actionType: TransactionType.AssetsForceTransfer;
   arguments: AssetsForceTransferArgs;
   origin: CTActionOrigin;
 };
@@ -497,7 +489,7 @@ export function assetsFreeze(
  * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  */
 export interface AssetsFreezeAccountTx extends ITxAction {
-  actionType: ActionType.AssetsFreezeAccount;
+  actionType: TransactionType.AssetsFreezeAccount;
   arguments: AssetsFreezeAccountArgs;
 };
 
@@ -505,7 +497,7 @@ export interface AssetsFreezeAccountTx extends ITxAction {
  * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  */
 export interface AssetsFreezeAccountAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsFreezeAccount;
+  actionType: TransactionType.AssetsFreezeAccount;
   arguments: AssetsFreezeAccountArgs;
   origin: CTActionOrigin;
 };
@@ -552,7 +544,7 @@ export function assetsFreezeAsset(
  * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  */
 export interface AssetsFreezeAssetTx extends ITxAction {
-  actionType: ActionType.AssetsFreezeAsset;
+  actionType: TransactionType.AssetsFreezeAsset;
   arguments: AssetsFreezeAssetArgs;
 };
 
@@ -560,7 +552,7 @@ export interface AssetsFreezeAssetTx extends ITxAction {
  * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  */
 export interface AssetsFreezeAssetAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsFreezeAsset;
+  actionType: TransactionType.AssetsFreezeAsset;
   arguments: AssetsFreezeAssetArgs;
   origin: CTActionOrigin;
 };
@@ -621,7 +613,7 @@ export function assetsMint(
  * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
  */
 export interface AssetsMintTx extends ITxAction {
-  actionType: ActionType.AssetsMint;
+  actionType: TransactionType.AssetsMint;
   arguments: AssetsMintArgs;
 };
 
@@ -629,7 +621,7 @@ export interface AssetsMintTx extends ITxAction {
  * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
  */
 export interface AssetsMintAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsMint;
+  actionType: TransactionType.AssetsMint;
   arguments: AssetsMintArgs;
   origin: CTActionOrigin;
 };
@@ -683,7 +675,7 @@ export function assetsSetMetadata(
  * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
  */
 export interface AssetsSetMetadataTx extends ITxAction {
-  actionType: ActionType.AssetsSetMetadata;
+  actionType: TransactionType.AssetsSetMetadata;
   arguments: AssetsSetMetadataArgs;
 };
 
@@ -691,7 +683,7 @@ export interface AssetsSetMetadataTx extends ITxAction {
  * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
  */
 export interface AssetsSetMetadataAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsSetMetadata;
+  actionType: TransactionType.AssetsSetMetadata;
   arguments: AssetsSetMetadataArgs;
   origin: CTActionOrigin;
 };
@@ -745,7 +737,7 @@ export function assetsSetMinBalance(
  * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
  */
 export interface AssetsSetMinBalanceTx extends ITxAction {
-  actionType: ActionType.AssetsSetMinBalance;
+  actionType: TransactionType.AssetsSetMinBalance;
   arguments: AssetsSetMinBalanceArgs;
 };
 
@@ -753,7 +745,7 @@ export interface AssetsSetMinBalanceTx extends ITxAction {
  * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
  */
 export interface AssetsSetMinBalanceAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsSetMinBalance;
+  actionType: TransactionType.AssetsSetMinBalance;
   arguments: AssetsSetMinBalanceArgs;
   origin: CTActionOrigin;
 };
@@ -800,7 +792,7 @@ export function assetsStartDestroy(
  * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
  */
 export interface AssetsStartDestroyTx extends ITxAction {
-  actionType: ActionType.AssetsStartDestroy;
+  actionType: TransactionType.AssetsStartDestroy;
   arguments: AssetsStartDestroyArgs;
 };
 
@@ -808,7 +800,7 @@ export interface AssetsStartDestroyTx extends ITxAction {
  * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
  */
 export interface AssetsStartDestroyAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsStartDestroy;
+  actionType: TransactionType.AssetsStartDestroy;
   arguments: AssetsStartDestroyArgs;
   origin: CTActionOrigin;
 };
@@ -862,7 +854,7 @@ export function assetsThaw(
  * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsThawAccountTx extends ITxAction {
-  actionType: ActionType.AssetsThawAccount;
+  actionType: TransactionType.AssetsThawAccount;
   arguments: AssetsThawAccountArgs;
 };
 
@@ -870,7 +862,7 @@ export interface AssetsThawAccountTx extends ITxAction {
  * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsThawAccountAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsThawAccount;
+  actionType: TransactionType.AssetsThawAccount;
   arguments: AssetsThawAccountArgs;
   origin: CTActionOrigin;
 };
@@ -917,7 +909,7 @@ export function assetsThawAsset(
  * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsThawAssetTx extends ITxAction {
-  actionType: ActionType.AssetsThawAsset;
+  actionType: TransactionType.AssetsThawAsset;
   arguments: AssetsThawAssetArgs;
 };
 
@@ -925,7 +917,7 @@ export interface AssetsThawAssetTx extends ITxAction {
  * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsThawAssetAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsThawAsset;
+  actionType: TransactionType.AssetsThawAsset;
   arguments: AssetsThawAssetArgs;
   origin: CTActionOrigin;
 };
@@ -986,7 +978,7 @@ export function assetsTransfer(
  * Move some assets from the sender account to another. Origin must be Signed.
  */
 export interface AssetsTransferTx extends ITxAction {
-  actionType: ActionType.AssetsTransfer;
+  actionType: TransactionType.AssetsTransfer;
   arguments: AssetsTransferArgs;
 };
 
@@ -994,7 +986,7 @@ export interface AssetsTransferTx extends ITxAction {
  * Move some assets from the sender account to another. Origin must be Signed.
  */
 export interface AssetsTransferAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsTransfer;
+  actionType: TransactionType.AssetsTransfer;
   arguments: AssetsTransferArgs;
   origin: CTActionOrigin;
 };
@@ -1055,7 +1047,7 @@ export function assetsTransferKeepAlive(
  * Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.
  */
 export interface AssetsTransferKeepAliveTx extends ITxAction {
-  actionType: ActionType.AssetsTransferKeepAlive;
+  actionType: TransactionType.AssetsTransferKeepAlive;
   arguments: AssetsTransferKeepAliveArgs;
 };
 
@@ -1063,7 +1055,7 @@ export interface AssetsTransferKeepAliveTx extends ITxAction {
  * Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.
  */
 export interface AssetsTransferKeepAliveAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsTransferKeepAlive;
+  actionType: TransactionType.AssetsTransferKeepAlive;
   arguments: AssetsTransferKeepAliveArgs;
   origin: CTActionOrigin;
 };
@@ -1117,7 +1109,7 @@ export function assetsTransferOwnership(
  * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
  */
 export interface AssetsTransferOwnershipTx extends ITxAction {
-  actionType: ActionType.AssetsTransferOwnership;
+  actionType: TransactionType.AssetsTransferOwnership;
   arguments: AssetsTransferOwnershipArgs;
 };
 
@@ -1125,7 +1117,7 @@ export interface AssetsTransferOwnershipTx extends ITxAction {
  * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
  */
 export interface AssetsTransferOwnershipAction extends ICTAtomicAction {
-  actionType: ActionType.AssetsTransferOwnership;
+  actionType: TransactionType.AssetsTransferOwnership;
   arguments: AssetsTransferOwnershipArgs;
   origin: CTActionOrigin;
 };
@@ -1176,7 +1168,7 @@ export function balancesTransferAll(
  * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
  */
 export interface BalancesTransferAllTx extends ITxAction {
-  actionType: ActionType.BalancesTransferAll;
+  actionType: TransactionType.BalancesTransferAll;
   arguments: BalancesTransferAllArgs;
 };
 
@@ -1184,7 +1176,7 @@ export interface BalancesTransferAllTx extends ITxAction {
  * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
  */
 export interface BalancesTransferAllAction extends ICTAtomicAction {
-  actionType: ActionType.BalancesTransferAll;
+  actionType: TransactionType.BalancesTransferAll;
   arguments: BalancesTransferAllArgs;
   origin: CTActionOrigin;
 };
@@ -1232,7 +1224,7 @@ export function balancesTransferAllowDeath(
  * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
  */
 export interface BalancesTransferAllowDeathTx extends ITxAction {
-  actionType: ActionType.BalancesTransferAllowDeath;
+  actionType: TransactionType.BalancesTransferAllowDeath;
   arguments: BalancesTransferAllowDeathArgs;
 };
 
@@ -1240,7 +1232,7 @@ export interface BalancesTransferAllowDeathTx extends ITxAction {
  * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
  */
 export interface BalancesTransferAllowDeathAction extends ICTAtomicAction {
-  actionType: ActionType.BalancesTransferAllowDeath;
+  actionType: TransactionType.BalancesTransferAllowDeath;
   arguments: BalancesTransferAllowDeathArgs;
   origin: CTActionOrigin;
 };
@@ -1288,7 +1280,7 @@ export function balancesTransferKeepAlive(
  * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
  */
 export interface BalancesTransferKeepAliveTx extends ITxAction {
-  actionType: ActionType.BalancesTransferKeepAlive;
+  actionType: TransactionType.BalancesTransferKeepAlive;
   arguments: BalancesTransferKeepAliveArgs;
 };
 
@@ -1296,7 +1288,7 @@ export interface BalancesTransferKeepAliveTx extends ITxAction {
  * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
  */
 export interface BalancesTransferKeepAliveAction extends ICTAtomicAction {
-  actionType: ActionType.BalancesTransferKeepAlive;
+  actionType: TransactionType.BalancesTransferKeepAlive;
   arguments: BalancesTransferKeepAliveArgs;
   origin: CTActionOrigin;
 };
@@ -1350,7 +1342,7 @@ export function nftsBurn(
  * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
  */
 export interface NftsBurnItemTx extends ITxAction {
-  actionType: ActionType.NftsBurnItem;
+  actionType: TransactionType.NftsBurnItem;
   arguments: NftsBurnItemArgs;
 };
 
@@ -1358,7 +1350,7 @@ export interface NftsBurnItemTx extends ITxAction {
  * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
  */
 export interface NftsBurnItemAction extends ICTAtomicAction {
-  actionType: ActionType.NftsBurnItem;
+  actionType: TransactionType.NftsBurnItem;
   arguments: NftsBurnItemArgs;
   origin: CTActionOrigin;
 };
@@ -1405,7 +1397,7 @@ export function nftsClearCollectionMetadata(
  * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  */
 export interface NftsClearCollectionMetadataTx extends ITxAction {
-  actionType: ActionType.NftsClearCollectionMetadata;
+  actionType: TransactionType.NftsClearCollectionMetadata;
   arguments: NftsClearCollectionMetadataArgs;
 };
 
@@ -1413,7 +1405,7 @@ export interface NftsClearCollectionMetadataTx extends ITxAction {
  * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  */
 export interface NftsClearCollectionMetadataAction extends ICTAtomicAction {
-  actionType: ActionType.NftsClearCollectionMetadata;
+  actionType: TransactionType.NftsClearCollectionMetadata;
   arguments: NftsClearCollectionMetadataArgs;
   origin: CTActionOrigin;
 };
@@ -1467,7 +1459,7 @@ export function nftsClearMetadata(
  * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  */
 export interface NftsClearItemMetadataTx extends ITxAction {
-  actionType: ActionType.NftsClearItemMetadata;
+  actionType: TransactionType.NftsClearItemMetadata;
   arguments: NftsClearItemMetadataArgs;
 };
 
@@ -1475,7 +1467,7 @@ export interface NftsClearItemMetadataTx extends ITxAction {
  * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  */
 export interface NftsClearItemMetadataAction extends ICTAtomicAction {
-  actionType: ActionType.NftsClearItemMetadata;
+  actionType: TransactionType.NftsClearItemMetadata;
   arguments: NftsClearItemMetadataArgs;
   origin: CTActionOrigin;
 };
@@ -1511,14 +1503,14 @@ export function nftsCreate(
 /**
  */
 export interface NftsCreateCollectionTx extends ITxAction {
-  actionType: ActionType.NftsCreateCollection;
+  actionType: TransactionType.NftsCreateCollection;
   arguments: NftsCreateCollectionArgs;
 };
 
 /**
  */
 export interface NftsCreateCollectionAction extends ICTAtomicAction {
-  actionType: ActionType.NftsCreateCollection;
+  actionType: TransactionType.NftsCreateCollection;
   arguments: NftsCreateCollectionArgs;
   origin: CTActionOrigin;
 };
@@ -1572,7 +1564,7 @@ export function nftsDestroy(
  * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
  */
 export interface NftsDestroyCollectionTx extends ITxAction {
-  actionType: ActionType.NftsDestroyCollection;
+  actionType: TransactionType.NftsDestroyCollection;
   arguments: NftsDestroyCollectionArgs;
 };
 
@@ -1580,7 +1572,7 @@ export interface NftsDestroyCollectionTx extends ITxAction {
  * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
  */
 export interface NftsDestroyCollectionAction extends ICTAtomicAction {
-  actionType: ActionType.NftsDestroyCollection;
+  actionType: TransactionType.NftsDestroyCollection;
   arguments: NftsDestroyCollectionArgs;
   origin: CTActionOrigin;
 };
@@ -1634,7 +1626,7 @@ export function nftsLockItemTransfer(
  * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
  */
 export interface NftsLockItemTransferTx extends ITxAction {
-  actionType: ActionType.NftsLockItemTransfer;
+  actionType: TransactionType.NftsLockItemTransfer;
   arguments: NftsLockItemTransferArgs;
 };
 
@@ -1642,7 +1634,7 @@ export interface NftsLockItemTransferTx extends ITxAction {
  * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
  */
 export interface NftsLockItemTransferAction extends ICTAtomicAction {
-  actionType: ActionType.NftsLockItemTransfer;
+  actionType: TransactionType.NftsLockItemTransfer;
   arguments: NftsLockItemTransferArgs;
   origin: CTActionOrigin;
 };
@@ -1690,14 +1682,14 @@ export function nftsMint(
 /**
  */
 export interface NftsMintItemTx extends ITxAction {
-  actionType: ActionType.NftsMintItem;
+  actionType: TransactionType.NftsMintItem;
   arguments: NftsMintItemArgs;
 };
 
 /**
  */
 export interface NftsMintItemAction extends ICTAtomicAction {
-  actionType: ActionType.NftsMintItem;
+  actionType: TransactionType.NftsMintItem;
   arguments: NftsMintItemArgs;
   origin: CTActionOrigin;
 };
@@ -1744,7 +1736,7 @@ export function nftsSetAcceptOwnership(
  * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
  */
 export interface NftsAcceptCollectionOwnershipTx extends ITxAction {
-  actionType: ActionType.NftsAcceptCollectionOwnership;
+  actionType: TransactionType.NftsAcceptCollectionOwnership;
   arguments: NftsAcceptCollectionOwnershipArgs;
 };
 
@@ -1752,7 +1744,7 @@ export interface NftsAcceptCollectionOwnershipTx extends ITxAction {
  * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
  */
 export interface NftsAcceptCollectionOwnershipAction extends ICTAtomicAction {
-  actionType: ActionType.NftsAcceptCollectionOwnership;
+  actionType: TransactionType.NftsAcceptCollectionOwnership;
   arguments: NftsAcceptCollectionOwnershipArgs;
   origin: CTActionOrigin;
 };
@@ -1806,7 +1798,7 @@ export function nftsSetCollectionMetadata(
  * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  */
 export interface NftsSetCollectionMetadataTx extends ITxAction {
-  actionType: ActionType.NftsSetCollectionMetadata;
+  actionType: TransactionType.NftsSetCollectionMetadata;
   arguments: NftsSetCollectionMetadataArgs;
 };
 
@@ -1814,7 +1806,7 @@ export interface NftsSetCollectionMetadataTx extends ITxAction {
  * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  */
 export interface NftsSetCollectionMetadataAction extends ICTAtomicAction {
-  actionType: ActionType.NftsSetCollectionMetadata;
+  actionType: TransactionType.NftsSetCollectionMetadata;
   arguments: NftsSetCollectionMetadataArgs;
   origin: CTActionOrigin;
 };
@@ -1875,7 +1867,7 @@ export function nftsSetMetadata(
  * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  */
 export interface NftsSetItemMetadataTx extends ITxAction {
-  actionType: ActionType.NftsSetItemMetadata;
+  actionType: TransactionType.NftsSetItemMetadata;
   arguments: NftsSetItemMetadataArgs;
 };
 
@@ -1883,7 +1875,7 @@ export interface NftsSetItemMetadataTx extends ITxAction {
  * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  */
 export interface NftsSetItemMetadataAction extends ICTAtomicAction {
-  actionType: ActionType.NftsSetItemMetadata;
+  actionType: TransactionType.NftsSetItemMetadata;
   arguments: NftsSetItemMetadataArgs;
   origin: CTActionOrigin;
 };
@@ -1944,7 +1936,7 @@ export function nftsTransfer(
  * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
  */
 export interface NftsTransferItemTx extends ITxAction {
-  actionType: ActionType.NftsTransferItem;
+  actionType: TransactionType.NftsTransferItem;
   arguments: NftsTransferItemArgs;
 };
 
@@ -1952,7 +1944,7 @@ export interface NftsTransferItemTx extends ITxAction {
  * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
  */
 export interface NftsTransferItemAction extends ICTAtomicAction {
-  actionType: ActionType.NftsTransferItem;
+  actionType: TransactionType.NftsTransferItem;
   arguments: NftsTransferItemArgs;
   origin: CTActionOrigin;
 };
@@ -2003,7 +1995,7 @@ export function nftsTransferOwnership(
  * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
  */
 export interface NftsTransferCollectionOwnershipTx extends ITxAction {
-  actionType: ActionType.NftsTransferCollectionOwnership;
+  actionType: TransactionType.NftsTransferCollectionOwnership;
   arguments: NftsTransferCollectionOwnershipArgs;
 };
 
@@ -2011,7 +2003,7 @@ export interface NftsTransferCollectionOwnershipTx extends ITxAction {
  * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
  */
 export interface NftsTransferCollectionOwnershipAction extends ICTAtomicAction {
-  actionType: ActionType.NftsTransferCollectionOwnership;
+  actionType: TransactionType.NftsTransferCollectionOwnership;
   arguments: NftsTransferCollectionOwnershipArgs;
   origin: CTActionOrigin;
 };
@@ -2065,7 +2057,7 @@ export function nftsUnlockItemTransfer(
  * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
  */
 export interface NftsUnlockItemTransferTx extends ITxAction {
-  actionType: ActionType.NftsUnlockItemTransfer;
+  actionType: TransactionType.NftsUnlockItemTransfer;
   arguments: NftsUnlockItemTransferArgs;
 };
 
@@ -2073,12 +2065,92 @@ export interface NftsUnlockItemTransferTx extends ITxAction {
  * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
  */
 export interface NftsUnlockItemTransferAction extends ICTAtomicAction {
-  actionType: ActionType.NftsUnlockItemTransfer;
+  actionType: TransactionType.NftsUnlockItemTransfer;
   arguments: NftsUnlockItemTransferArgs;
   origin: CTActionOrigin;
 };
 
 /*---------------------------------------------------------------------------------- */
+
+/**
+ * Represents a single transaction
+ */
+export type TxAction =
+  | AppTransactionsSubmitClearingTransactionTx
+  | AssetsBurnTx
+  | AssetsCreateTx
+  | AssetsDestroyAccountsTx
+  | AssetsDestroyApprovalsTx
+  | AssetsFinishDestroyTx
+  | AssetsForceTransferTx
+  | AssetsFreezeAccountTx
+  | AssetsFreezeAssetTx
+  | AssetsMintTx
+  | AssetsSetMetadataTx
+  | AssetsSetMinBalanceTx
+  | AssetsStartDestroyTx
+  | AssetsThawAccountTx
+  | AssetsThawAssetTx
+  | AssetsTransferTx
+  | AssetsTransferKeepAliveTx
+  | AssetsTransferOwnershipTx
+  | BalancesTransferAllTx
+  | BalancesTransferAllowDeathTx
+  | BalancesTransferKeepAliveTx
+  | NftsBurnItemTx
+  | NftsClearCollectionMetadataTx
+  | NftsClearItemMetadataTx
+  | NftsCreateCollectionTx
+  | NftsDestroyCollectionTx
+  | NftsLockItemTransferTx
+  | NftsMintItemTx
+  | NftsAcceptCollectionOwnershipTx
+  | NftsSetCollectionMetadataTx
+  | NftsSetItemMetadataTx
+  | NftsTransferItemTx
+  | NftsTransferCollectionOwnershipTx
+  | NftsUnlockItemTransferTx
+;
+
+/**
+ * Represents a transaction args
+ */
+export type TransactionArgs =
+  | AppTransactionsSubmitClearingTransactionArgs
+  | AssetsBurnArgs
+  | AssetsCreateArgs
+  | AssetsDestroyAccountsArgs
+  | AssetsDestroyApprovalsArgs
+  | AssetsFinishDestroyArgs
+  | AssetsForceTransferArgs
+  | AssetsFreezeAccountArgs
+  | AssetsFreezeAssetArgs
+  | AssetsMintArgs
+  | AssetsSetMetadataArgs
+  | AssetsSetMinBalanceArgs
+  | AssetsStartDestroyArgs
+  | AssetsThawAccountArgs
+  | AssetsThawAssetArgs
+  | AssetsTransferArgs
+  | AssetsTransferKeepAliveArgs
+  | AssetsTransferOwnershipArgs
+  | BalancesTransferAllArgs
+  | BalancesTransferAllowDeathArgs
+  | BalancesTransferKeepAliveArgs
+  | NftsBurnItemArgs
+  | NftsClearCollectionMetadataArgs
+  | NftsClearItemMetadataArgs
+  | NftsCreateCollectionArgs
+  | NftsDestroyCollectionArgs
+  | NftsLockItemTransferArgs
+  | NftsMintItemArgs
+  | NftsAcceptCollectionOwnershipArgs
+  | NftsSetCollectionMetadataArgs
+  | NftsSetItemMetadataArgs
+  | NftsTransferItemArgs
+  | NftsTransferCollectionOwnershipArgs
+  | NftsUnlockItemTransferArgs
+;
 
 /**
  * Represents a single action within an atomic operation.
@@ -2117,53 +2189,12 @@ export type CTAtomicAction =
   | NftsSetCollectionMetadataAction
   | NftsClearCollectionMetadataAction
   | NftsAcceptCollectionOwnershipAction
-  | AppTransactionsSubmitClearingTransactionAction
 ;
 
 /**
- * Represents a single transaction
+ * Represents a CT action args.
  */
-export type TxAction =
-  | BalancesTransferAllowDeathTx
-  | BalancesTransferKeepAliveTx
-  | BalancesTransferAllTx
-  | AssetsCreateTx
-  | AssetsStartDestroyTx
-  | AssetsDestroyAccountsTx
-  | AssetsDestroyApprovalsTx
-  | AssetsFinishDestroyTx
-  | AssetsMintTx
-  | AssetsBurnTx
-  | AssetsTransferTx
-  | AssetsTransferKeepAliveTx
-  | AssetsForceTransferTx
-  | AssetsFreezeAccountTx
-  | AssetsThawAccountTx
-  | AssetsFreezeAssetTx
-  | AssetsThawAssetTx
-  | AssetsTransferOwnershipTx
-  | AssetsSetMetadataTx
-  | AssetsSetMinBalanceTx
-  | NftsCreateCollectionTx
-  | NftsDestroyCollectionTx
-  | NftsMintItemTx
-  | NftsBurnItemTx
-  | NftsTransferItemTx
-  | NftsLockItemTransferTx
-  | NftsUnlockItemTransferTx
-  | NftsTransferCollectionOwnershipTx
-  | NftsSetItemMetadataTx
-  | NftsClearItemMetadataTx
-  | NftsSetCollectionMetadataTx
-  | NftsClearCollectionMetadataTx
-  | NftsAcceptCollectionOwnershipTx
-  | AppTransactionsSubmitClearingTransactionTx
-;
-
-/**
- * Represents a transaction args
- */
-export type TransactionArgs =
+export type ActionArgs =
   | BalancesTransferAllowDeathArgs
   | BalancesTransferKeepAliveArgs
   | BalancesTransferAllArgs
@@ -2197,7 +2228,6 @@ export type TransactionArgs =
   | NftsSetCollectionMetadataArgs
   | NftsClearCollectionMetadataArgs
   | NftsAcceptCollectionOwnershipArgs
-  | AppTransactionsSubmitClearingTransactionArgs
 ;
 
 /**
@@ -2221,140 +2251,140 @@ export function buildUnsignedTransaction(
 
   // Handle different action types
   switch (actionType) {
-    case ActionType.BalancesTransferAllowDeath: {
-      unsigned = balancesTransferAllowDeath(args, info, options);
+    case TransactionType.AppTransactionsSubmitClearingTransaction: {
+      unsigned = appTransactionsSubmitClearingTransaction(args, info, options);
       break;
     }
-    case ActionType.BalancesTransferKeepAlive: {
-      unsigned = balancesTransferKeepAlive(args, info, options);
-      break;
-    }
-    case ActionType.BalancesTransferAll: {
-      unsigned = balancesTransferAll(args, info, options);
-      break;
-    }
-    case ActionType.AssetsCreate: {
-      unsigned = assetsCreate(args, info, options);
-      break;
-    }
-    case ActionType.AssetsStartDestroy: {
-      unsigned = assetsStartDestroy(args, info, options);
-      break;
-    }
-    case ActionType.AssetsDestroyAccounts: {
-      unsigned = assetsDestroyAccounts(args, info, options);
-      break;
-    }
-    case ActionType.AssetsDestroyApprovals: {
-      unsigned = assetsDestroyApprovals(args, info, options);
-      break;
-    }
-    case ActionType.AssetsFinishDestroy: {
-      unsigned = assetsFinishDestroy(args, info, options);
-      break;
-    }
-    case ActionType.AssetsMint: {
-      unsigned = assetsMint(args, info, options);
-      break;
-    }
-    case ActionType.AssetsBurn: {
+    case TransactionType.AssetsBurn: {
       unsigned = assetsBurn(args, info, options);
       break;
     }
-    case ActionType.AssetsTransfer: {
-      unsigned = assetsTransfer(args, info, options);
+    case TransactionType.AssetsCreate: {
+      unsigned = assetsCreate(args, info, options);
       break;
     }
-    case ActionType.AssetsTransferKeepAlive: {
-      unsigned = assetsTransferKeepAlive(args, info, options);
+    case TransactionType.AssetsDestroyAccounts: {
+      unsigned = assetsDestroyAccounts(args, info, options);
       break;
     }
-    case ActionType.AssetsForceTransfer: {
+    case TransactionType.AssetsDestroyApprovals: {
+      unsigned = assetsDestroyApprovals(args, info, options);
+      break;
+    }
+    case TransactionType.AssetsFinishDestroy: {
+      unsigned = assetsFinishDestroy(args, info, options);
+      break;
+    }
+    case TransactionType.AssetsForceTransfer: {
       unsigned = assetsForceTransfer(args, info, options);
       break;
     }
-    case ActionType.AssetsFreezeAccount: {
+    case TransactionType.AssetsFreezeAccount: {
       unsigned = assetsFreeze(args, info, options);
       break;
     }
-    case ActionType.AssetsThawAccount: {
-      unsigned = assetsThaw(args, info, options);
-      break;
-    }
-    case ActionType.AssetsFreezeAsset: {
+    case TransactionType.AssetsFreezeAsset: {
       unsigned = assetsFreezeAsset(args, info, options);
       break;
     }
-    case ActionType.AssetsThawAsset: {
-      unsigned = assetsThawAsset(args, info, options);
+    case TransactionType.AssetsMint: {
+      unsigned = assetsMint(args, info, options);
       break;
     }
-    case ActionType.AssetsTransferOwnership: {
-      unsigned = assetsTransferOwnership(args, info, options);
-      break;
-    }
-    case ActionType.AssetsSetMetadata: {
+    case TransactionType.AssetsSetMetadata: {
       unsigned = assetsSetMetadata(args, info, options);
       break;
     }
-    case ActionType.AssetsSetMinBalance: {
+    case TransactionType.AssetsSetMinBalance: {
       unsigned = assetsSetMinBalance(args, info, options);
       break;
     }
-    case ActionType.NftsCreateCollection: {
-      unsigned = nftsCreate(args, info, options);
+    case TransactionType.AssetsStartDestroy: {
+      unsigned = assetsStartDestroy(args, info, options);
       break;
     }
-    case ActionType.NftsDestroyCollection: {
-      unsigned = nftsDestroy(args, info, options);
+    case TransactionType.AssetsThawAccount: {
+      unsigned = assetsThaw(args, info, options);
       break;
     }
-    case ActionType.NftsMintItem: {
-      unsigned = nftsMint(args, info, options);
+    case TransactionType.AssetsThawAsset: {
+      unsigned = assetsThawAsset(args, info, options);
       break;
     }
-    case ActionType.NftsBurnItem: {
+    case TransactionType.AssetsTransfer: {
+      unsigned = assetsTransfer(args, info, options);
+      break;
+    }
+    case TransactionType.AssetsTransferKeepAlive: {
+      unsigned = assetsTransferKeepAlive(args, info, options);
+      break;
+    }
+    case TransactionType.AssetsTransferOwnership: {
+      unsigned = assetsTransferOwnership(args, info, options);
+      break;
+    }
+    case TransactionType.BalancesTransferAll: {
+      unsigned = balancesTransferAll(args, info, options);
+      break;
+    }
+    case TransactionType.BalancesTransferAllowDeath: {
+      unsigned = balancesTransferAllowDeath(args, info, options);
+      break;
+    }
+    case TransactionType.BalancesTransferKeepAlive: {
+      unsigned = balancesTransferKeepAlive(args, info, options);
+      break;
+    }
+    case TransactionType.NftsBurnItem: {
       unsigned = nftsBurn(args, info, options);
       break;
     }
-    case ActionType.NftsTransferItem: {
-      unsigned = nftsTransfer(args, info, options);
-      break;
-    }
-    case ActionType.NftsLockItemTransfer: {
-      unsigned = nftsLockItemTransfer(args, info, options);
-      break;
-    }
-    case ActionType.NftsUnlockItemTransfer: {
-      unsigned = nftsUnlockItemTransfer(args, info, options);
-      break;
-    }
-    case ActionType.NftsTransferCollectionOwnership: {
-      unsigned = nftsTransferOwnership(args, info, options);
-      break;
-    }
-    case ActionType.NftsSetItemMetadata: {
-      unsigned = nftsSetMetadata(args, info, options);
-      break;
-    }
-    case ActionType.NftsClearItemMetadata: {
-      unsigned = nftsClearMetadata(args, info, options);
-      break;
-    }
-    case ActionType.NftsSetCollectionMetadata: {
-      unsigned = nftsSetCollectionMetadata(args, info, options);
-      break;
-    }
-    case ActionType.NftsClearCollectionMetadata: {
+    case TransactionType.NftsClearCollectionMetadata: {
       unsigned = nftsClearCollectionMetadata(args, info, options);
       break;
     }
-    case ActionType.NftsAcceptCollectionOwnership: {
+    case TransactionType.NftsClearItemMetadata: {
+      unsigned = nftsClearMetadata(args, info, options);
+      break;
+    }
+    case TransactionType.NftsCreateCollection: {
+      unsigned = nftsCreate(args, info, options);
+      break;
+    }
+    case TransactionType.NftsDestroyCollection: {
+      unsigned = nftsDestroy(args, info, options);
+      break;
+    }
+    case TransactionType.NftsLockItemTransfer: {
+      unsigned = nftsLockItemTransfer(args, info, options);
+      break;
+    }
+    case TransactionType.NftsMintItem: {
+      unsigned = nftsMint(args, info, options);
+      break;
+    }
+    case TransactionType.NftsAcceptCollectionOwnership: {
       unsigned = nftsSetAcceptOwnership(args, info, options);
       break;
     }
-    case ActionType.AppTransactionsSubmitClearingTransaction: {
-      unsigned = appTransactionsSubmitClearingTransaction(args, info, options);
+    case TransactionType.NftsSetCollectionMetadata: {
+      unsigned = nftsSetCollectionMetadata(args, info, options);
+      break;
+    }
+    case TransactionType.NftsSetItemMetadata: {
+      unsigned = nftsSetMetadata(args, info, options);
+      break;
+    }
+    case TransactionType.NftsTransferItem: {
+      unsigned = nftsTransfer(args, info, options);
+      break;
+    }
+    case TransactionType.NftsTransferCollectionOwnership: {
+      unsigned = nftsTransferOwnership(args, info, options);
+      break;
+    }
+    case TransactionType.NftsUnlockItemTransfer: {
+      unsigned = nftsUnlockItemTransfer(args, info, options);
       break;
     }
 

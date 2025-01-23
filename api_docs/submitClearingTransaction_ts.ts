@@ -1,4 +1,4 @@
-import { ActionType } from '../src/types/api/actions';
+import { TransactionType } from '../src/types/api/actions';
 
 import type { CTAtomicAction, NftsMintItemArgs, NftsSetItemMetadataArgs } from '../src/txwrapper';
 import type {
@@ -40,7 +40,7 @@ const actionOneArgs: NftsMintItemArgs = {
   mintTo: 'ttrQFvYHrkh9LtUJSBdr9qNk63Rv8pKWDXtUtqhCA3wTBY8EM',
 };
 const actionOne: CTAtomicAction = {
-  actionType: ActionType.NftsMintItem,
+  actionType: TransactionType.NftsMintItem,
   origin: actionOneOrigin,
   arguments: actionOneArgs,
 };
@@ -55,7 +55,7 @@ const actionTwoArgs: NftsSetItemMetadataArgs = {
   data: 'https://trait-wallet-demo-account.trait.tech/game-a/nft-collection-a-a/nft-token-a-a-c/nft-token-a-a-c.json',
 };
 const actionTwo: CTAtomicAction = {
-  actionType: ActionType.NftsSetItemMetadata,
+  actionType: TransactionType.NftsSetItemMetadata,
   origin: actionTwoOrigin,
   arguments: actionTwoArgs,
 };

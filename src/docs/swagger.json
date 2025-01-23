@@ -58,11 +58,22 @@
 				],
 				"description": "Response from a transaction request."
 			},
-			"ActionType.BalancesTransferAllowDeath": {
+			"TransactionType.AppTransactionsSubmitClearingTransaction": {
 				"enum": [
-					"balances.transferAllowDeath"
+					"appTransactions.submitClearingTransaction"
 				],
 				"type": "string"
+			},
+			"UINT32": {
+				"type": "integer",
+				"format": "int32",
+				"description": "Numeric value, presented as plain number",
+				"minimum": 0,
+				"maximum": 4294967295
+			},
+			"BlockchainGenericId": {
+				"$ref": "#/components/schemas/UINT32",
+				"description": "A unique identifier (Asset, Collection, Agent).\nTypically, it is a numeric value."
 			},
 			"BlockchainGenericAccount": {
 				"type": "string",
@@ -84,725 +95,6 @@
 				"description": "Numeric value, presented as plain number or string",
 				"minimum": 0,
 				"maximum": 3.402823669209385e+38
-			},
-			"BlockchainGenericBalance": {
-				"$ref": "#/components/schemas/UINT128",
-				"description": "The balance, represented as a numeric value."
-			},
-			"AnyJson": {
-				"anyOf": [
-					{
-						"type": "string"
-					},
-					{
-						"type": "number",
-						"format": "double"
-					},
-					{
-						"type": "boolean"
-					},
-					{
-						"items": {
-							"$ref": "#/components/schemas/AnyJson"
-						},
-						"type": "array"
-					},
-					{
-						"properties": {},
-						"additionalProperties": {
-							"$ref": "#/components/schemas/AnyJson"
-						},
-						"type": "object"
-					}
-				],
-				"nullable": true
-			},
-			"Record_string.AnyJson_": {
-				"properties": {},
-				"additionalProperties": {
-					"$ref": "#/components/schemas/AnyJson"
-				},
-				"type": "object",
-				"description": "Construct a type with a set of properties K of type T"
-			},
-			"BalancesTransferAllowDeathArgs": {
-				"description": "Arguments required to Transfer some liquid free balance to another account.\n\n`dest`\n\n`value`",
-				"properties": {
-					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount"
-					},
-					"value": {
-						"$ref": "#/components/schemas/BlockchainGenericBalance"
-					}
-				},
-				"required": [
-					"dest",
-					"value"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType": {
-				"description": "Represents the type of action to be performed\n[Note] Action value must match blockchain method!",
-				"enum": [
-					"appTransactions.submitClearingTransaction",
-					"balances.transferAllowDeath",
-					"balances.transferKeepAlive",
-					"balances.transferAll",
-					"nfts.create",
-					"nfts.destroy",
-					"nfts.transferOwnership",
-					"nfts.setAcceptOwnership",
-					"nfts.setCollectionMetadata",
-					"nfts.clearCollectionMetadata",
-					"nfts.mint",
-					"nfts.burn",
-					"nfts.transfer",
-					"nfts.lockItemTransfer",
-					"nfts.unlockItemTransfer",
-					"nfts.setMetadata",
-					"nfts.clearMetadata",
-					"assets.create",
-					"assets.startDestroy",
-					"assets.destroyAccounts",
-					"assets.destroyApprovals",
-					"assets.finishDestroy",
-					"assets.mint",
-					"assets.burn",
-					"assets.transfer",
-					"assets.transferKeepAlive",
-					"assets.forceTransfer",
-					"assets.freeze",
-					"assets.thaw",
-					"assets.freezeAsset",
-					"assets.thawAsset",
-					"assets.transferOwnership",
-					"assets.setMinBalance",
-					"assets.setMetadata"
-				],
-				"type": "string"
-			},
-			"BalancesTransferKeepAliveArgs": {
-				"description": "Arguments required to Same as the [`transfer_allow_death`] call, but with a check that the transfer will not\n\n`dest`\n\n`value`",
-				"properties": {
-					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount"
-					},
-					"value": {
-						"$ref": "#/components/schemas/BlockchainGenericBalance"
-					}
-				},
-				"required": [
-					"dest",
-					"value"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"BlockchainGenericBoolean": {
-				"type": "boolean",
-				"description": "Boolean type for blockchain (bool)"
-			},
-			"BalancesTransferAllArgs": {
-				"description": "Arguments required to Transfer the entire transferable balance from the caller account.\n\n`dest` - The recipient of the transfer.\n\n`keepAlive`",
-				"properties": {
-					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The recipient of the transfer."
-					},
-					"keepAlive": {
-						"$ref": "#/components/schemas/BlockchainGenericBoolean"
-					}
-				},
-				"required": [
-					"dest",
-					"keepAlive"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsCreateArgs": {
-				"description": "\n`minBalance`",
-				"properties": {
-					"minBalance": {
-						"$ref": "#/components/schemas/BlockchainGenericBalance"
-					}
-				},
-				"required": [
-					"minBalance"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"UINT32": {
-				"type": "integer",
-				"format": "int32",
-				"description": "Numeric value, presented as plain number",
-				"minimum": 0,
-				"maximum": 4294967295
-			},
-			"BlockchainGenericId": {
-				"$ref": "#/components/schemas/UINT32",
-				"description": "A unique identifier (Asset, Collection, Agent).\nTypically, it is a numeric value."
-			},
-			"AssetsStartDestroyArgs": {
-				"description": "Arguments required to Start the process of destroying a fungible asset class.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
-					}
-				},
-				"required": [
-					"id"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsDestroyAccountsArgs": {
-				"description": "Arguments required to Destroy all accounts associated with a given asset.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
-					}
-				},
-				"required": [
-					"id"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsDestroyApprovalsArgs": {
-				"description": "Arguments required to Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
-					}
-				},
-				"required": [
-					"id"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsFinishDestroyArgs": {
-				"description": "Arguments required to Complete destroying asset and unreserve currency.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
-					}
-				},
-				"required": [
-					"id"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsMintArgs": {
-				"description": "Arguments required to Mint assets of a particular class.\n\n`id` - The identifier of the asset to have some amount minted.\n\n`beneficiary` - The account to be credited with the minted assets.\n\n`amount` - The amount of the asset to be minted.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to have some amount minted."
-					},
-					"beneficiary": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The account to be credited with the minted assets."
-					},
-					"amount": {
-						"$ref": "#/components/schemas/BlockchainGenericBalance",
-						"description": "The amount of the asset to be minted."
-					}
-				},
-				"required": [
-					"id",
-					"beneficiary",
-					"amount"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsBurnArgs": {
-				"description": "Arguments required to Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.\n\n`id` - The identifier of the asset to have some amount burned.\n\n`who` - The account to be debited from.\n\n`amount` - The maximum amount by which `who`'s balance should be reduced.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to have some amount burned."
-					},
-					"who": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The account to be debited from."
-					},
-					"amount": {
-						"$ref": "#/components/schemas/BlockchainGenericBalance",
-						"description": "The maximum amount by which `who`'s balance should be reduced."
-					}
-				},
-				"required": [
-					"id",
-					"who",
-					"amount"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsTransferArgs": {
-				"description": "Arguments required to Move some assets from the sender account to another.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to have some amount transferred."
-					},
-					"target": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The account to be credited."
-					},
-					"amount": {
-						"$ref": "#/components/schemas/BlockchainGenericBalance",
-						"description": "The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero."
-					}
-				},
-				"required": [
-					"id",
-					"target",
-					"amount"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsTransferKeepAliveArgs": {
-				"description": "Arguments required to Move some assets from the sender account to another, keeping the sender account alive.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to have some amount transferred."
-					},
-					"target": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The account to be credited."
-					},
-					"amount": {
-						"$ref": "#/components/schemas/BlockchainGenericBalance",
-						"description": "The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero."
-					}
-				},
-				"required": [
-					"id",
-					"target",
-					"amount"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsForceTransferArgs": {
-				"description": "Arguments required to Move some assets from one account to another.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`source` - The account to be debited.\n\n`dest` - The account to be credited.\n\n`amount` - The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to have some amount transferred."
-					},
-					"source": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The account to be debited."
-					},
-					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The account to be credited."
-					},
-					"amount": {
-						"$ref": "#/components/schemas/BlockchainGenericBalance",
-						"description": "The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero."
-					}
-				},
-				"required": [
-					"id",
-					"source",
-					"dest",
-					"amount"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsFreezeAccountArgs": {
-				"description": "Arguments required to Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`\n\n`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be frozen.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to be frozen."
-					},
-					"who": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The account to be frozen."
-					}
-				},
-				"required": [
-					"id",
-					"who"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsThawAccountArgs": {
-				"description": "Arguments required to Allow unprivileged transfers to and from an account again.\n\n`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be unfrozen.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to be frozen."
-					},
-					"who": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The account to be unfrozen."
-					}
-				},
-				"required": [
-					"id",
-					"who"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsFreezeAssetArgs": {
-				"description": "Arguments required to Disallow further unprivileged transfers for the asset class.\n\n`id` - The identifier of the asset to be frozen.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to be frozen."
-					}
-				},
-				"required": [
-					"id"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsThawAssetArgs": {
-				"description": "Arguments required to Allow unprivileged transfers for the asset again.\n\n`id` - The identifier of the asset to be thawed.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to be thawed."
-					}
-				},
-				"required": [
-					"id"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsTransferOwnershipArgs": {
-				"description": "Arguments required to Change the Owner of an asset.\n\n`id` - The identifier of the asset.\n\n`owner` - The new Owner of this asset.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset."
-					},
-					"owner": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The new Owner of this asset."
-					}
-				},
-				"required": [
-					"id",
-					"owner"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"BlockchainGenericText": {
-				"type": "string",
-				"description": "Text or metadata represented by string.\nCharacters limit is defined in `StringLimit` const on blockchain.",
-				"maxLength": 256
-			},
-			"AssetsSetMetadataArgs": {
-				"description": "Arguments required to Set the raw metadata for an asset.\n\n`id` - The identifier of the asset to update.\n\n`data` - The data of metadata. Limited in length by `StringLimit`.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset to update."
-					},
-					"data": {
-						"$ref": "#/components/schemas/BlockchainGenericText",
-						"description": "The data of metadata. Limited in length by `StringLimit`."
-					}
-				},
-				"required": [
-					"id",
-					"data"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AssetsSetMinBalanceArgs": {
-				"description": "Arguments required to Sets the minimum balance of an asset.\n\n`id` - The identifier of the asset.\n\n`minBalance` - The new value of `min_balance`.",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the asset."
-					},
-					"minBalance": {
-						"$ref": "#/components/schemas/BlockchainGenericBalance",
-						"description": "The new value of `min_balance`."
-					}
-				},
-				"required": [
-					"id",
-					"minBalance"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsCreateCollectionArgs": {
-				"properties": {},
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftWitness": {
-				"properties": {
-					"attributes": {
-						"$ref": "#/components/schemas/UINT32"
-					},
-					"itemConfigs": {
-						"$ref": "#/components/schemas/UINT32"
-					},
-					"itemMetadatas": {
-						"$ref": "#/components/schemas/UINT32"
-					}
-				},
-				"required": [
-					"attributes",
-					"itemConfigs",
-					"itemMetadatas"
-				],
-				"type": "object"
-			},
-			"NftsDestroyCollectionArgs": {
-				"description": "Arguments required to Destroy a collection of fungible items.\n\n`collection` - The identifier of the collection to be destroyed.\n\n`witness` - Information on the items minted in the collection. This must be correct.",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the collection to be destroyed."
-					},
-					"witness": {
-						"$ref": "#/components/schemas/NftWitness",
-						"description": "Information on the items minted in the collection. This must be correct."
-					}
-				},
-				"required": [
-					"collection",
-					"witness"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsMintItemArgs": {
-				"description": "\n`collection`\n\n`item`\n\n`mintTo`",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId"
-					},
-					"item": {
-						"$ref": "#/components/schemas/BlockchainGenericId"
-					},
-					"mintTo": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount"
-					}
-				},
-				"required": [
-					"collection",
-					"item",
-					"mintTo"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsBurnItemArgs": {
-				"description": "Arguments required to Destroy a single item.\n\n`collection` - The collection of the item to be burned.\n\n`item` - The item to be burned.",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The collection of the item to be burned."
-					},
-					"item": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The item to be burned."
-					}
-				},
-				"required": [
-					"collection",
-					"item"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsTransferItemArgs": {
-				"description": "Arguments required to Move an item from the sender account to another.\n\n`collection` - The collection of the item to be transferred.\n\n`item` - The item to be transferred.\n\n`dest` - The account to receive ownership of the item.",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The collection of the item to be transferred."
-					},
-					"item": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The item to be transferred."
-					},
-					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount",
-						"description": "The account to receive ownership of the item."
-					}
-				},
-				"required": [
-					"collection",
-					"item",
-					"dest"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsLockItemTransferArgs": {
-				"description": "Arguments required to Disallow further unprivileged transfer of an item.\n\n`collection` - The collection of the item to be changed.\n\n`item` - The item to become non-transferable.",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The collection of the item to be changed."
-					},
-					"item": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The item to become non-transferable."
-					}
-				},
-				"required": [
-					"collection",
-					"item"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsUnlockItemTransferArgs": {
-				"description": "Arguments required to Re-allow unprivileged transfer of an item.\n\n`collection` - The collection of the item to be changed.\n\n`item` - The item to become transferable.",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The collection of the item to be changed."
-					},
-					"item": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The item to become transferable."
-					}
-				},
-				"required": [
-					"collection",
-					"item"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsTransferCollectionOwnershipArgs": {
-				"description": "Arguments required to Change the Owner of a collection.\n\n`collection` - The collection whose owner should be changed.\n\n`newOwner`",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The collection whose owner should be changed."
-					},
-					"newOwner": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount"
-					}
-				},
-				"required": [
-					"collection",
-					"newOwner"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsSetItemMetadataArgs": {
-				"description": "Arguments required to Set the metadata for an item.\n\n`collection` - The identifier of the collection whose item's metadata to set.\n\n`item` - The identifier of the item whose metadata to set.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the collection whose item's metadata to set."
-					},
-					"item": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the item whose metadata to set."
-					},
-					"data": {
-						"$ref": "#/components/schemas/BlockchainGenericText",
-						"description": "The general information of this item. Limited in length by `StringLimit`."
-					}
-				},
-				"required": [
-					"collection",
-					"item",
-					"data"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsClearItemMetadataArgs": {
-				"description": "Arguments required to Clear the metadata for an item.\n\n`collection` - The identifier of the collection whose item's metadata to clear.\n\n`item` - The identifier of the item whose metadata to clear.",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the collection whose item's metadata to clear."
-					},
-					"item": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the item whose metadata to clear."
-					}
-				},
-				"required": [
-					"collection",
-					"item"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsSetCollectionMetadataArgs": {
-				"description": "Arguments required to Set the metadata for a collection.\n\n`collection` - The identifier of the item whose metadata to update.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the item whose metadata to update."
-					},
-					"data": {
-						"$ref": "#/components/schemas/BlockchainGenericText",
-						"description": "The general information of this item. Limited in length by `StringLimit`."
-					}
-				},
-				"required": [
-					"collection",
-					"data"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsClearCollectionMetadataArgs": {
-				"description": "Arguments required to Clear the metadata for a collection.\n\n`collection` - The identifier of the collection whose metadata to clear.",
-				"properties": {
-					"collection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the collection whose metadata to clear."
-					}
-				},
-				"required": [
-					"collection"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"NftsAcceptCollectionOwnershipArgs": {
-				"description": "Arguments required to Set (or reset) the acceptance of ownership for a particular account.\n\n`maybeCollection` - The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.",
-				"properties": {
-					"maybeCollection": {
-						"$ref": "#/components/schemas/BlockchainGenericId",
-						"description": "The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal."
-					}
-				},
-				"type": "object",
-				"additionalProperties": false
 			},
 			"BlockchainGenericAddressId": {
 				"$ref": "#/components/schemas/UINT128",
@@ -935,6 +227,42 @@
 				"type": "array",
 				"description": "A nested array of actions (Vec<Vec<Action>> in rust)."
 			},
+			"AnyJson": {
+				"anyOf": [
+					{
+						"type": "string"
+					},
+					{
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"type": "boolean"
+					},
+					{
+						"items": {
+							"$ref": "#/components/schemas/AnyJson"
+						},
+						"type": "array"
+					},
+					{
+						"properties": {},
+						"additionalProperties": {
+							"$ref": "#/components/schemas/AnyJson"
+						},
+						"type": "object"
+					}
+				],
+				"nullable": true
+			},
+			"Record_string.AnyJson_": {
+				"properties": {},
+				"additionalProperties": {
+					"$ref": "#/components/schemas/AnyJson"
+				},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
 			"AppTransactionsSubmitClearingTransactionArgs": {
 				"description": "Arguments required to Submit a Clearing transaction.\n\n`appAgentId`\n\n`atomics`",
 				"properties": {
@@ -952,7 +280,1857 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"TransactionType": {
+				"description": "Represents the type of transaction to be performed.\nTransaction value must match blockchain module & method!",
+				"enum": [
+					"appTransactions.submitClearingTransaction",
+					"assets.create",
+					"assets.startDestroy",
+					"assets.destroyAccounts",
+					"assets.destroyApprovals",
+					"assets.finishDestroy",
+					"assets.mint",
+					"assets.burn",
+					"assets.transfer",
+					"assets.transferKeepAlive",
+					"assets.forceTransfer",
+					"assets.freeze",
+					"assets.thaw",
+					"assets.freezeAsset",
+					"assets.thawAsset",
+					"assets.transferOwnership",
+					"assets.setMinBalance",
+					"assets.setMetadata",
+					"balances.transferAllowDeath",
+					"balances.transferKeepAlive",
+					"balances.transferAll",
+					"nfts.create",
+					"nfts.destroy",
+					"nfts.transferOwnership",
+					"nfts.setAcceptOwnership",
+					"nfts.setCollectionMetadata",
+					"nfts.clearCollectionMetadata",
+					"nfts.mint",
+					"nfts.burn",
+					"nfts.transfer",
+					"nfts.lockItemTransfer",
+					"nfts.unlockItemTransfer",
+					"nfts.setMetadata",
+					"nfts.clearMetadata"
+				],
+				"type": "string"
+			},
+			"BlockchainGenericBalance": {
+				"$ref": "#/components/schemas/UINT128",
+				"description": "The balance, represented as a numeric value."
+			},
+			"AssetsBurnArgs": {
+				"description": "Arguments required to Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.\n\n`id` - The identifier of the asset to have some amount burned.\n\n`who` - The account to be debited from.\n\n`amount` - The maximum amount by which `who`'s balance should be reduced.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount burned."
+					},
+					"who": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be debited from."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The maximum amount by which `who`'s balance should be reduced."
+					}
+				},
+				"required": [
+					"id",
+					"who",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsCreateArgs": {
+				"description": "\n`minBalance`",
+				"properties": {
+					"minBalance": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"minBalance"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsDestroyAccountsArgs": {
+				"description": "Arguments required to Destroy all accounts associated with a given asset.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsDestroyApprovalsArgs": {
+				"description": "Arguments required to Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsFinishDestroyArgs": {
+				"description": "Arguments required to Complete destroying asset and unreserve currency.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsForceTransferArgs": {
+				"description": "Arguments required to Move some assets from one account to another.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`source` - The account to be debited.\n\n`dest` - The account to be credited.\n\n`amount` - The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount transferred."
+					},
+					"source": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be debited."
+					},
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero."
+					}
+				},
+				"required": [
+					"id",
+					"source",
+					"dest",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsFreezeAccountArgs": {
+				"description": "Arguments required to Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`\n\n`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be frozen.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be frozen."
+					},
+					"who": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be frozen."
+					}
+				},
+				"required": [
+					"id",
+					"who"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsFreezeAssetArgs": {
+				"description": "Arguments required to Disallow further unprivileged transfers for the asset class.\n\n`id` - The identifier of the asset to be frozen.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be frozen."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsMintArgs": {
+				"description": "Arguments required to Mint assets of a particular class.\n\n`id` - The identifier of the asset to have some amount minted.\n\n`beneficiary` - The account to be credited with the minted assets.\n\n`amount` - The amount of the asset to be minted.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount minted."
+					},
+					"beneficiary": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited with the minted assets."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount of the asset to be minted."
+					}
+				},
+				"required": [
+					"id",
+					"beneficiary",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainGenericText": {
+				"type": "string",
+				"description": "Text or metadata represented by string.\nCharacters limit is defined in `StringLimit` const on blockchain.",
+				"maxLength": 256
+			},
+			"AssetsSetMetadataArgs": {
+				"description": "Arguments required to Set the raw metadata for an asset.\n\n`id` - The identifier of the asset to update.\n\n`data` - The data of metadata. Limited in length by `StringLimit`.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to update."
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The data of metadata. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"id",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsSetMinBalanceArgs": {
+				"description": "Arguments required to Sets the minimum balance of an asset.\n\n`id` - The identifier of the asset.\n\n`minBalance` - The new value of `min_balance`.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset."
+					},
+					"minBalance": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The new value of `min_balance`."
+					}
+				},
+				"required": [
+					"id",
+					"minBalance"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsStartDestroyArgs": {
+				"description": "Arguments required to Start the process of destroying a fungible asset class.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsThawAccountArgs": {
+				"description": "Arguments required to Allow unprivileged transfers to and from an account again.\n\n`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be unfrozen.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be frozen."
+					},
+					"who": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be unfrozen."
+					}
+				},
+				"required": [
+					"id",
+					"who"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsThawAssetArgs": {
+				"description": "Arguments required to Allow unprivileged transfers for the asset again.\n\n`id` - The identifier of the asset to be thawed.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be thawed."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferArgs": {
+				"description": "Arguments required to Move some assets from the sender account to another.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount transferred."
+					},
+					"target": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero."
+					}
+				},
+				"required": [
+					"id",
+					"target",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferKeepAliveArgs": {
+				"description": "Arguments required to Move some assets from the sender account to another, keeping the sender account alive.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount transferred."
+					},
+					"target": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero."
+					}
+				},
+				"required": [
+					"id",
+					"target",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferOwnershipArgs": {
+				"description": "Arguments required to Change the Owner of an asset.\n\n`id` - The identifier of the asset.\n\n`owner` - The new Owner of this asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset."
+					},
+					"owner": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The new Owner of this asset."
+					}
+				},
+				"required": [
+					"id",
+					"owner"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainGenericBoolean": {
+				"type": "boolean",
+				"example": true,
+				"description": "Boolean type for blockchain (bool)"
+			},
+			"BalancesTransferAllArgs": {
+				"description": "Arguments required to Transfer the entire transferable balance from the caller account.\n\n`dest` - The recipient of the transfer.\n\n`keepAlive`",
+				"properties": {
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The recipient of the transfer."
+					},
+					"keepAlive": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					}
+				},
+				"required": [
+					"dest",
+					"keepAlive"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BalancesTransferAllowDeathArgs": {
+				"description": "Arguments required to Transfer some liquid free balance to another account.\n\n`dest`\n\n`value`",
+				"properties": {
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					},
+					"value": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"dest",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BalancesTransferKeepAliveArgs": {
+				"description": "Arguments required to Same as the [`transfer_allow_death`] call, but with a check that the transfer will not\n\n`dest`\n\n`value`",
+				"properties": {
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					},
+					"value": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"dest",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsBurnItemArgs": {
+				"description": "Arguments required to Destroy a single item.\n\n`collection` - The collection of the item to be burned.\n\n`item` - The item to be burned.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be burned."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to be burned."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsClearCollectionMetadataArgs": {
+				"description": "Arguments required to Clear the metadata for a collection.\n\n`collection` - The identifier of the collection whose metadata to clear.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose metadata to clear."
+					}
+				},
+				"required": [
+					"collection"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsClearItemMetadataArgs": {
+				"description": "Arguments required to Clear the metadata for an item.\n\n`collection` - The identifier of the collection whose item's metadata to clear.\n\n`item` - The identifier of the item whose metadata to clear.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose item's metadata to clear."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the item whose metadata to clear."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsCreateCollectionArgs": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftWitness": {
+				"properties": {
+					"attributes": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"itemConfigs": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"itemMetadatas": {
+						"$ref": "#/components/schemas/UINT32"
+					}
+				},
+				"required": [
+					"attributes",
+					"itemConfigs",
+					"itemMetadatas"
+				],
+				"type": "object"
+			},
+			"NftsDestroyCollectionArgs": {
+				"description": "Arguments required to Destroy a collection of fungible items.\n\n`collection` - The identifier of the collection to be destroyed.\n\n`witness` - Information on the items minted in the collection. This must be correct.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection to be destroyed."
+					},
+					"witness": {
+						"$ref": "#/components/schemas/NftWitness",
+						"description": "Information on the items minted in the collection. This must be correct."
+					}
+				},
+				"required": [
+					"collection",
+					"witness"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsLockItemTransferArgs": {
+				"description": "Arguments required to Disallow further unprivileged transfer of an item.\n\n`collection` - The collection of the item to be changed.\n\n`item` - The item to become non-transferable.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be changed."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to become non-transferable."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsMintItemArgs": {
+				"description": "\n`collection`\n\n`item`\n\n`mintTo`",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"mintTo": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"collection",
+					"item",
+					"mintTo"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsAcceptCollectionOwnershipArgs": {
+				"description": "Arguments required to Set (or reset) the acceptance of ownership for a particular account.\n\n`maybeCollection` - The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.",
+				"properties": {
+					"maybeCollection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal."
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsSetCollectionMetadataArgs": {
+				"description": "Arguments required to Set the metadata for a collection.\n\n`collection` - The identifier of the item whose metadata to update.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the item whose metadata to update."
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The general information of this item. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"collection",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsSetItemMetadataArgs": {
+				"description": "Arguments required to Set the metadata for an item.\n\n`collection` - The identifier of the collection whose item's metadata to set.\n\n`item` - The identifier of the item whose metadata to set.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose item's metadata to set."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the item whose metadata to set."
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The general information of this item. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"collection",
+					"item",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsTransferItemArgs": {
+				"description": "Arguments required to Move an item from the sender account to another.\n\n`collection` - The collection of the item to be transferred.\n\n`item` - The item to be transferred.\n\n`dest` - The account to receive ownership of the item.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be transferred."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to be transferred."
+					},
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to receive ownership of the item."
+					}
+				},
+				"required": [
+					"collection",
+					"item",
+					"dest"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsTransferCollectionOwnershipArgs": {
+				"description": "Arguments required to Change the Owner of a collection.\n\n`collection` - The collection whose owner should be changed.\n\n`newOwner`",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection whose owner should be changed."
+					},
+					"newOwner": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"collection",
+					"newOwner"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsUnlockItemTransferArgs": {
+				"description": "Arguments required to Re-allow unprivileged transfer of an item.\n\n`collection` - The collection of the item to be changed.\n\n`item` - The item to become transferable.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be changed."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to become transferable."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"TransactionArgs": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsBurnArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsCreateArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyAccountsArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyApprovalsArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFinishDestroyArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsForceTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAccountArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAssetArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsMintArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMinBalanceArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsStartDestroyArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAccountArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAssetArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferOwnershipArgs"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllArgs"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllowDeathArgs"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsBurnItemArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearCollectionMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearItemMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsCreateCollectionArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsDestroyCollectionArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsLockItemTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsMintItemArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetCollectionMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetItemMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferItemArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsUnlockItemTransferArgs"
+					}
+				],
+				"description": "Represents a transaction args"
+			},
+			"AppTransactionsSubmitClearingTransactionTx": {
+				"description": "Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppTransactionsSubmitClearingTransaction",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsBurn": {
+				"enum": [
+					"assets.burn"
+				],
+				"type": "string"
+			},
+			"AssetsBurnTx": {
+				"description": "Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsBurn",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsBurnArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsCreate": {
+				"enum": [
+					"assets.create"
+				],
+				"type": "string"
+			},
+			"AssetsCreateTx": {
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsCreate",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsCreateArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsDestroyAccounts": {
+				"enum": [
+					"assets.destroyAccounts"
+				],
+				"type": "string"
+			},
+			"AssetsDestroyAccountsTx": {
+				"description": "Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsDestroyAccounts",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsDestroyAccountsArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsDestroyApprovals": {
+				"enum": [
+					"assets.destroyApprovals"
+				],
+				"type": "string"
+			},
+			"AssetsDestroyApprovalsTx": {
+				"description": "Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsDestroyApprovals",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsDestroyApprovalsArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsFinishDestroy": {
+				"enum": [
+					"assets.finishDestroy"
+				],
+				"type": "string"
+			},
+			"AssetsFinishDestroyTx": {
+				"description": "Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsFinishDestroy",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsFinishDestroyArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsForceTransfer": {
+				"enum": [
+					"assets.forceTransfer"
+				],
+				"type": "string"
+			},
+			"AssetsForceTransferTx": {
+				"description": "Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsForceTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsForceTransferArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsFreezeAccount": {
+				"enum": [
+					"assets.freeze"
+				],
+				"type": "string"
+			},
+			"AssetsFreezeAccountTx": {
+				"description": "Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAccount",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsFreezeAccountArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsFreezeAsset": {
+				"enum": [
+					"assets.freezeAsset"
+				],
+				"type": "string"
+			},
+			"AssetsFreezeAssetTx": {
+				"description": "Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAsset",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsFreezeAssetArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsMint": {
+				"enum": [
+					"assets.mint"
+				],
+				"type": "string"
+			},
+			"AssetsMintTx": {
+				"description": "Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsMint",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsMintArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsSetMetadata": {
+				"enum": [
+					"assets.setMetadata"
+				],
+				"type": "string"
+			},
+			"AssetsSetMetadataTx": {
+				"description": "Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsSetMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsSetMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsSetMinBalance": {
+				"enum": [
+					"assets.setMinBalance"
+				],
+				"type": "string"
+			},
+			"AssetsSetMinBalanceTx": {
+				"description": "Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsSetMinBalance",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsSetMinBalanceArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsStartDestroy": {
+				"enum": [
+					"assets.startDestroy"
+				],
+				"type": "string"
+			},
+			"AssetsStartDestroyTx": {
+				"description": "Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsStartDestroy",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsStartDestroyArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsThawAccount": {
+				"enum": [
+					"assets.thaw"
+				],
+				"type": "string"
+			},
+			"AssetsThawAccountTx": {
+				"description": "Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsThawAccount",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsThawAccountArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsThawAsset": {
+				"enum": [
+					"assets.thawAsset"
+				],
+				"type": "string"
+			},
+			"AssetsThawAssetTx": {
+				"description": "Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsThawAsset",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsThawAssetArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsTransfer": {
+				"enum": [
+					"assets.transfer"
+				],
+				"type": "string"
+			},
+			"AssetsTransferTx": {
+				"description": "Move some assets from the sender account to another. Origin must be Signed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsTransferKeepAlive": {
+				"enum": [
+					"assets.transferKeepAlive"
+				],
+				"type": "string"
+			},
+			"AssetsTransferKeepAliveTx": {
+				"description": "Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsTransferKeepAlive",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AssetsTransferOwnership": {
+				"enum": [
+					"assets.transferOwnership"
+				],
+				"type": "string"
+			},
+			"AssetsTransferOwnershipTx": {
+				"description": "Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AssetsTransferOwnership",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferOwnershipArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.BalancesTransferAll": {
+				"enum": [
+					"balances.transferAll"
+				],
+				"type": "string"
+			},
+			"BalancesTransferAllTx": {
+				"description": "Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.BalancesTransferAll",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferAllArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.BalancesTransferAllowDeath": {
+				"enum": [
+					"balances.transferAllowDeath"
+				],
+				"type": "string"
+			},
+			"BalancesTransferAllowDeathTx": {
+				"description": "Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.BalancesTransferAllowDeath",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferAllowDeathArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.BalancesTransferKeepAlive": {
+				"enum": [
+					"balances.transferKeepAlive"
+				],
+				"type": "string"
+			},
+			"BalancesTransferKeepAliveTx": {
+				"description": "Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.BalancesTransferKeepAlive",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsBurnItem": {
+				"enum": [
+					"nfts.burn"
+				],
+				"type": "string"
+			},
+			"NftsBurnItemTx": {
+				"description": "Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsBurnItem",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsBurnItemArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsClearCollectionMetadata": {
+				"enum": [
+					"nfts.clearCollectionMetadata"
+				],
+				"type": "string"
+			},
+			"NftsClearCollectionMetadataTx": {
+				"description": "Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsClearCollectionMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsClearCollectionMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsClearItemMetadata": {
+				"enum": [
+					"nfts.clearMetadata"
+				],
+				"type": "string"
+			},
+			"NftsClearItemMetadataTx": {
+				"description": "Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsClearItemMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsClearItemMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsCreateCollection": {
+				"enum": [
+					"nfts.create"
+				],
+				"type": "string"
+			},
+			"NftsCreateCollectionTx": {
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsCreateCollection",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsCreateCollectionArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsDestroyCollection": {
+				"enum": [
+					"nfts.destroy"
+				],
+				"type": "string"
+			},
+			"NftsDestroyCollectionTx": {
+				"description": "Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsDestroyCollection",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsDestroyCollectionArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsLockItemTransfer": {
+				"enum": [
+					"nfts.lockItemTransfer"
+				],
+				"type": "string"
+			},
+			"NftsLockItemTransferTx": {
+				"description": "Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsLockItemTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsLockItemTransferArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsMintItem": {
+				"enum": [
+					"nfts.mint"
+				],
+				"type": "string"
+			},
+			"NftsMintItemTx": {
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsMintItem",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsMintItemArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsAcceptCollectionOwnership": {
+				"enum": [
+					"nfts.setAcceptOwnership"
+				],
+				"type": "string"
+			},
+			"NftsAcceptCollectionOwnershipTx": {
+				"description": "Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsAcceptCollectionOwnership",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsSetCollectionMetadata": {
+				"enum": [
+					"nfts.setCollectionMetadata"
+				],
+				"type": "string"
+			},
+			"NftsSetCollectionMetadataTx": {
+				"description": "Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsSetCollectionMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsSetCollectionMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsSetItemMetadata": {
+				"enum": [
+					"nfts.setMetadata"
+				],
+				"type": "string"
+			},
+			"NftsSetItemMetadataTx": {
+				"description": "Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsSetItemMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsSetItemMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsTransferItem": {
+				"enum": [
+					"nfts.transfer"
+				],
+				"type": "string"
+			},
+			"NftsTransferItemTx": {
+				"description": "Move an item from the sender account to another. Origin must be Signed and the signing account must be either:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsTransferItem",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsTransferItemArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsTransferCollectionOwnership": {
+				"enum": [
+					"nfts.transferOwnership"
+				],
+				"type": "string"
+			},
+			"NftsTransferCollectionOwnershipTx": {
+				"description": "Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsTransferCollectionOwnership",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.NftsUnlockItemTransfer": {
+				"enum": [
+					"nfts.unlockItemTransfer"
+				],
+				"type": "string"
+			},
+			"NftsUnlockItemTransferTx": {
+				"description": "Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.NftsUnlockItemTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsUnlockItemTransferArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TxAction": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsBurnTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsCreateTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyAccountsTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyApprovalsTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFinishDestroyTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsForceTransferTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAccountTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAssetTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsMintTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMinBalanceTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsStartDestroyTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAccountTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAssetTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferOwnershipTx"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllTx"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllowDeathTx"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsBurnItemTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearCollectionMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearItemMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsCreateCollectionTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsDestroyCollectionTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsLockItemTransferTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsMintItemTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetCollectionMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetItemMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferItemTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsUnlockItemTransferTx"
+					}
+				],
+				"description": "Represents a single transaction"
+			},
+			"TransactionPayload": {
+				"description": "Payload for a transaction.",
+				"properties": {
+					"signatory": {
+						"type": "string",
+						"description": "The signatory responsible for the transaction."
+					},
+					"tx": {
+						"$ref": "#/components/schemas/TxAction",
+						"description": "Transaction data"
+					}
+				},
+				"required": [
+					"signatory",
+					"tx"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ActionType": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsCreate"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsStartDestroy"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsDestroyAccounts"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsDestroyApprovals"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsFinishDestroy"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsMint"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsBurn"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsTransferKeepAlive"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsForceTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAccount"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsThawAccount"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAsset"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsThawAsset"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsTransferOwnership"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsSetMinBalance"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.AssetsSetMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.BalancesTransferAllowDeath"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.BalancesTransferKeepAlive"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.BalancesTransferAll"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsCreateCollection"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsDestroyCollection"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsTransferCollectionOwnership"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsAcceptCollectionOwnership"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsSetCollectionMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsClearCollectionMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsMintItem"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsBurnItem"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsTransferItem"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsLockItemTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsUnlockItemTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsSetItemMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionType.NftsClearItemMetadata"
+					}
+				]
+			},
+			"ActionArgs": {
 				"anyOf": [
 					{
 						"$ref": "#/components/schemas/BalancesTransferAllowDeathArgs"
@@ -1052,985 +2230,15 @@
 					},
 					{
 						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipArgs"
-					},
-					{
-						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionArgs"
 					}
 				],
-				"description": "Represents a transaction args"
-			},
-			"BalancesTransferAllowDeathTx": {
-				"description": "Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.BalancesTransferAllowDeath",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/BalancesTransferAllowDeathArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.BalancesTransferKeepAlive": {
-				"enum": [
-					"balances.transferKeepAlive"
-				],
-				"type": "string"
-			},
-			"BalancesTransferKeepAliveTx": {
-				"description": "Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.BalancesTransferKeepAlive",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/BalancesTransferKeepAliveArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.BalancesTransferAll": {
-				"enum": [
-					"balances.transferAll"
-				],
-				"type": "string"
-			},
-			"BalancesTransferAllTx": {
-				"description": "Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.BalancesTransferAll",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/BalancesTransferAllArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsCreate": {
-				"enum": [
-					"assets.create"
-				],
-				"type": "string"
-			},
-			"AssetsCreateTx": {
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsCreate",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsCreateArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsStartDestroy": {
-				"enum": [
-					"assets.startDestroy"
-				],
-				"type": "string"
-			},
-			"AssetsStartDestroyTx": {
-				"description": "Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsStartDestroy",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsStartDestroyArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsDestroyAccounts": {
-				"enum": [
-					"assets.destroyAccounts"
-				],
-				"type": "string"
-			},
-			"AssetsDestroyAccountsTx": {
-				"description": "Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsDestroyAccounts",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsDestroyAccountsArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsDestroyApprovals": {
-				"enum": [
-					"assets.destroyApprovals"
-				],
-				"type": "string"
-			},
-			"AssetsDestroyApprovalsTx": {
-				"description": "Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsDestroyApprovals",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsDestroyApprovalsArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsFinishDestroy": {
-				"enum": [
-					"assets.finishDestroy"
-				],
-				"type": "string"
-			},
-			"AssetsFinishDestroyTx": {
-				"description": "Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsFinishDestroy",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsFinishDestroyArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsMint": {
-				"enum": [
-					"assets.mint"
-				],
-				"type": "string"
-			},
-			"AssetsMintTx": {
-				"description": "Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsMint",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsMintArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsBurn": {
-				"enum": [
-					"assets.burn"
-				],
-				"type": "string"
-			},
-			"AssetsBurnTx": {
-				"description": "Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsBurn",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsBurnArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsTransfer": {
-				"enum": [
-					"assets.transfer"
-				],
-				"type": "string"
-			},
-			"AssetsTransferTx": {
-				"description": "Move some assets from the sender account to another. Origin must be Signed.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsTransfer",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsTransferArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsTransferKeepAlive": {
-				"enum": [
-					"assets.transferKeepAlive"
-				],
-				"type": "string"
-			},
-			"AssetsTransferKeepAliveTx": {
-				"description": "Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsTransferKeepAlive",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsTransferKeepAliveArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsForceTransfer": {
-				"enum": [
-					"assets.forceTransfer"
-				],
-				"type": "string"
-			},
-			"AssetsForceTransferTx": {
-				"description": "Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsForceTransfer",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsForceTransferArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsFreezeAccount": {
-				"enum": [
-					"assets.freeze"
-				],
-				"type": "string"
-			},
-			"AssetsFreezeAccountTx": {
-				"description": "Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsFreezeAccount",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsFreezeAccountArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsThawAccount": {
-				"enum": [
-					"assets.thaw"
-				],
-				"type": "string"
-			},
-			"AssetsThawAccountTx": {
-				"description": "Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsThawAccount",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsThawAccountArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsFreezeAsset": {
-				"enum": [
-					"assets.freezeAsset"
-				],
-				"type": "string"
-			},
-			"AssetsFreezeAssetTx": {
-				"description": "Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsFreezeAsset",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsFreezeAssetArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsThawAsset": {
-				"enum": [
-					"assets.thawAsset"
-				],
-				"type": "string"
-			},
-			"AssetsThawAssetTx": {
-				"description": "Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsThawAsset",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsThawAssetArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsTransferOwnership": {
-				"enum": [
-					"assets.transferOwnership"
-				],
-				"type": "string"
-			},
-			"AssetsTransferOwnershipTx": {
-				"description": "Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsTransferOwnership",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsTransferOwnershipArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsSetMetadata": {
-				"enum": [
-					"assets.setMetadata"
-				],
-				"type": "string"
-			},
-			"AssetsSetMetadataTx": {
-				"description": "Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsSetMetadata",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsSetMetadataArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AssetsSetMinBalance": {
-				"enum": [
-					"assets.setMinBalance"
-				],
-				"type": "string"
-			},
-			"AssetsSetMinBalanceTx": {
-				"description": "Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsSetMinBalance",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AssetsSetMinBalanceArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsCreateCollection": {
-				"enum": [
-					"nfts.create"
-				],
-				"type": "string"
-			},
-			"NftsCreateCollectionTx": {
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsCreateCollection",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsCreateCollectionArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsDestroyCollection": {
-				"enum": [
-					"nfts.destroy"
-				],
-				"type": "string"
-			},
-			"NftsDestroyCollectionTx": {
-				"description": "Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsDestroyCollection",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsDestroyCollectionArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsMintItem": {
-				"enum": [
-					"nfts.mint"
-				],
-				"type": "string"
-			},
-			"NftsMintItemTx": {
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsMintItem",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsMintItemArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsBurnItem": {
-				"enum": [
-					"nfts.burn"
-				],
-				"type": "string"
-			},
-			"NftsBurnItemTx": {
-				"description": "Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsBurnItem",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsBurnItemArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsTransferItem": {
-				"enum": [
-					"nfts.transfer"
-				],
-				"type": "string"
-			},
-			"NftsTransferItemTx": {
-				"description": "Move an item from the sender account to another. Origin must be Signed and the signing account must be either:",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsTransferItem",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsTransferItemArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsLockItemTransfer": {
-				"enum": [
-					"nfts.lockItemTransfer"
-				],
-				"type": "string"
-			},
-			"NftsLockItemTransferTx": {
-				"description": "Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsLockItemTransfer",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsLockItemTransferArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsUnlockItemTransfer": {
-				"enum": [
-					"nfts.unlockItemTransfer"
-				],
-				"type": "string"
-			},
-			"NftsUnlockItemTransferTx": {
-				"description": "Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsUnlockItemTransfer",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsUnlockItemTransferArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsTransferCollectionOwnership": {
-				"enum": [
-					"nfts.transferOwnership"
-				],
-				"type": "string"
-			},
-			"NftsTransferCollectionOwnershipTx": {
-				"description": "Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsTransferCollectionOwnership",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsSetItemMetadata": {
-				"enum": [
-					"nfts.setMetadata"
-				],
-				"type": "string"
-			},
-			"NftsSetItemMetadataTx": {
-				"description": "Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsSetItemMetadata",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsSetItemMetadataArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsClearItemMetadata": {
-				"enum": [
-					"nfts.clearMetadata"
-				],
-				"type": "string"
-			},
-			"NftsClearItemMetadataTx": {
-				"description": "Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsClearItemMetadata",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsClearItemMetadataArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsSetCollectionMetadata": {
-				"enum": [
-					"nfts.setCollectionMetadata"
-				],
-				"type": "string"
-			},
-			"NftsSetCollectionMetadataTx": {
-				"description": "Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsSetCollectionMetadata",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsSetCollectionMetadataArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsClearCollectionMetadata": {
-				"enum": [
-					"nfts.clearCollectionMetadata"
-				],
-				"type": "string"
-			},
-			"NftsClearCollectionMetadataTx": {
-				"description": "Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsClearCollectionMetadata",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsClearCollectionMetadataArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.NftsAcceptCollectionOwnership": {
-				"enum": [
-					"nfts.setAcceptOwnership"
-				],
-				"type": "string"
-			},
-			"NftsAcceptCollectionOwnershipTx": {
-				"description": "Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsAcceptCollectionOwnership",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"ActionType.AppTransactionsSubmitClearingTransaction": {
-				"enum": [
-					"appTransactions.submitClearingTransaction"
-				],
-				"type": "string"
-			},
-			"AppTransactionsSubmitClearingTransactionTx": {
-				"description": "Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AppTransactionsSubmitClearingTransaction",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionArgs",
-						"description": "The arguments for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"TxAction": {
-				"anyOf": [
-					{
-						"$ref": "#/components/schemas/BalancesTransferAllowDeathTx"
-					},
-					{
-						"$ref": "#/components/schemas/BalancesTransferKeepAliveTx"
-					},
-					{
-						"$ref": "#/components/schemas/BalancesTransferAllTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsCreateTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsStartDestroyTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsDestroyAccountsTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsDestroyApprovalsTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsFinishDestroyTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsMintTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsBurnTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsTransferTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsTransferKeepAliveTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsForceTransferTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsFreezeAccountTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsThawAccountTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsFreezeAssetTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsThawAssetTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsTransferOwnershipTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsSetMetadataTx"
-					},
-					{
-						"$ref": "#/components/schemas/AssetsSetMinBalanceTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsCreateCollectionTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsDestroyCollectionTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsMintItemTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsBurnItemTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsTransferItemTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsLockItemTransferTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsUnlockItemTransferTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsSetItemMetadataTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsClearItemMetadataTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsSetCollectionMetadataTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsClearCollectionMetadataTx"
-					},
-					{
-						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipTx"
-					},
-					{
-						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionTx"
-					}
-				],
-				"description": "Represents a single transaction"
-			},
-			"TransactionPayload": {
-				"description": "Payload for a transaction.",
-				"properties": {
-					"signatory": {
-						"type": "string",
-						"description": "The signatory responsible for the transaction."
-					},
-					"tx": {
-						"$ref": "#/components/schemas/TxAction",
-						"description": "Transaction data"
-					}
-				},
-				"required": [
-					"signatory",
-					"tx"
-				],
-				"type": "object",
-				"additionalProperties": false
+				"description": "Represents a CT action args."
 			},
 			"BalancesTransferAllowDeathAction": {
 				"description": "Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.BalancesTransferAllowDeath",
+						"$ref": "#/components/schemas/TransactionType.BalancesTransferAllowDeath",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2054,7 +2262,7 @@
 				"description": "Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.BalancesTransferKeepAlive",
+						"$ref": "#/components/schemas/TransactionType.BalancesTransferKeepAlive",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2078,7 +2286,7 @@
 				"description": "Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.BalancesTransferAll",
+						"$ref": "#/components/schemas/TransactionType.BalancesTransferAll",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2101,7 +2309,7 @@
 			"AssetsCreateAction": {
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsCreate",
+						"$ref": "#/components/schemas/TransactionType.AssetsCreate",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2125,7 +2333,7 @@
 				"description": "Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsStartDestroy",
+						"$ref": "#/components/schemas/TransactionType.AssetsStartDestroy",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2149,7 +2357,7 @@
 				"description": "Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsDestroyAccounts",
+						"$ref": "#/components/schemas/TransactionType.AssetsDestroyAccounts",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2173,7 +2381,7 @@
 				"description": "Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsDestroyApprovals",
+						"$ref": "#/components/schemas/TransactionType.AssetsDestroyApprovals",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2197,7 +2405,7 @@
 				"description": "Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsFinishDestroy",
+						"$ref": "#/components/schemas/TransactionType.AssetsFinishDestroy",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2221,7 +2429,7 @@
 				"description": "Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsMint",
+						"$ref": "#/components/schemas/TransactionType.AssetsMint",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2245,7 +2453,7 @@
 				"description": "Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsBurn",
+						"$ref": "#/components/schemas/TransactionType.AssetsBurn",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2269,7 +2477,7 @@
 				"description": "Move some assets from the sender account to another. Origin must be Signed.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsTransfer",
+						"$ref": "#/components/schemas/TransactionType.AssetsTransfer",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2293,7 +2501,7 @@
 				"description": "Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsTransferKeepAlive",
+						"$ref": "#/components/schemas/TransactionType.AssetsTransferKeepAlive",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2317,7 +2525,7 @@
 				"description": "Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsForceTransfer",
+						"$ref": "#/components/schemas/TransactionType.AssetsForceTransfer",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2341,7 +2549,7 @@
 				"description": "Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsFreezeAccount",
+						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAccount",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2365,7 +2573,7 @@
 				"description": "Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsThawAccount",
+						"$ref": "#/components/schemas/TransactionType.AssetsThawAccount",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2389,7 +2597,7 @@
 				"description": "Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsFreezeAsset",
+						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAsset",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2413,7 +2621,7 @@
 				"description": "Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsThawAsset",
+						"$ref": "#/components/schemas/TransactionType.AssetsThawAsset",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2437,7 +2645,7 @@
 				"description": "Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsTransferOwnership",
+						"$ref": "#/components/schemas/TransactionType.AssetsTransferOwnership",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2461,7 +2669,7 @@
 				"description": "Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsSetMetadata",
+						"$ref": "#/components/schemas/TransactionType.AssetsSetMetadata",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2485,7 +2693,7 @@
 				"description": "Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AssetsSetMinBalance",
+						"$ref": "#/components/schemas/TransactionType.AssetsSetMinBalance",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2508,7 +2716,7 @@
 			"NftsCreateCollectionAction": {
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsCreateCollection",
+						"$ref": "#/components/schemas/TransactionType.NftsCreateCollection",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2532,7 +2740,7 @@
 				"description": "Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsDestroyCollection",
+						"$ref": "#/components/schemas/TransactionType.NftsDestroyCollection",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2555,7 +2763,7 @@
 			"NftsMintItemAction": {
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsMintItem",
+						"$ref": "#/components/schemas/TransactionType.NftsMintItem",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2579,7 +2787,7 @@
 				"description": "Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsBurnItem",
+						"$ref": "#/components/schemas/TransactionType.NftsBurnItem",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2603,7 +2811,7 @@
 				"description": "Move an item from the sender account to another. Origin must be Signed and the signing account must be either:",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsTransferItem",
+						"$ref": "#/components/schemas/TransactionType.NftsTransferItem",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2627,7 +2835,7 @@
 				"description": "Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsLockItemTransfer",
+						"$ref": "#/components/schemas/TransactionType.NftsLockItemTransfer",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2651,7 +2859,7 @@
 				"description": "Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsUnlockItemTransfer",
+						"$ref": "#/components/schemas/TransactionType.NftsUnlockItemTransfer",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2675,7 +2883,7 @@
 				"description": "Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsTransferCollectionOwnership",
+						"$ref": "#/components/schemas/TransactionType.NftsTransferCollectionOwnership",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2699,7 +2907,7 @@
 				"description": "Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsSetItemMetadata",
+						"$ref": "#/components/schemas/TransactionType.NftsSetItemMetadata",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2723,7 +2931,7 @@
 				"description": "Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsClearItemMetadata",
+						"$ref": "#/components/schemas/TransactionType.NftsClearItemMetadata",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2747,7 +2955,7 @@
 				"description": "Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsSetCollectionMetadata",
+						"$ref": "#/components/schemas/TransactionType.NftsSetCollectionMetadata",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2771,7 +2979,7 @@
 				"description": "Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsClearCollectionMetadata",
+						"$ref": "#/components/schemas/TransactionType.NftsClearCollectionMetadata",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
@@ -2795,35 +3003,11 @@
 				"description": "Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.",
 				"properties": {
 					"actionType": {
-						"$ref": "#/components/schemas/ActionType.NftsAcceptCollectionOwnership",
+						"$ref": "#/components/schemas/TransactionType.NftsAcceptCollectionOwnership",
 						"description": "The type of transaction to be performed"
 					},
 					"arguments": {
 						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipArgs",
-						"description": "The arguments for the transaction."
-					},
-					"origin": {
-						"$ref": "#/components/schemas/CTActionOrigin",
-						"description": "The origin responsible for the transaction."
-					}
-				},
-				"required": [
-					"actionType",
-					"arguments",
-					"origin"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"AppTransactionsSubmitClearingTransactionAction": {
-				"description": "Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).",
-				"properties": {
-					"actionType": {
-						"$ref": "#/components/schemas/ActionType.AppTransactionsSubmitClearingTransaction",
-						"description": "The type of transaction to be performed"
-					},
-					"arguments": {
-						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionArgs",
 						"description": "The arguments for the transaction."
 					},
 					"origin": {
@@ -2939,9 +3123,6 @@
 					},
 					{
 						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipAction"
-					},
-					{
-						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionAction"
 					}
 				],
 				"description": "Represents a single action within an atomic operation."

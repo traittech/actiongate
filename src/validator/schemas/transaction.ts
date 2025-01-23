@@ -1,15 +1,17 @@
 import { z } from 'zod';
 
-import { ActionType } from '../../types/api/actions';
+import { AllowedActions, TransactionType } from '../../types/api/actions';
 
 export const SignatorySchema = z.string();
 
 export const ArgsSchema = z.object({}).passthrough(); // matches any args objects
 
-export const ActionTypeSchema = z.nativeEnum(ActionType);
+export const TransactionTypeSchema = z.nativeEnum(TransactionType);
+
+export const ActionTypeSchema = z.enum(AllowedActions);
 
 export const TxActionSchema = z.object({
-  actionType: ActionTypeSchema,
+  actionType: TransactionTypeSchema,
   arguments: ArgsSchema,
 });
 

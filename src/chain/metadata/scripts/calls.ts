@@ -7,7 +7,7 @@ import lookupDefinitions from '@polkadot/types-augment/lookup/definitions';
 import { stringCamelCase, stringPascalCase } from '@polkadot/util';
 import Handlebars from 'handlebars';
 
-import { ActionType } from '../../../types/api/actions';
+import { TransactionType, AllowedActions } from '../../../types/api/actions';
 import metadataJson from '../generated/latest.json';
 import { BlockchainOverridesMap } from '../overrides';
 
@@ -79,7 +79,6 @@ function getFunctionDescription(docs: Vec<Text>) {
 
 function generator(
   meta: string,
-  allowedFunctions: [string, ActionType][],
   extraTypes = {},
   customLookupDefinitions = {}
 ) {
@@ -124,17 +123,20 @@ function generator(
 
           let actionName = stringPascalCase(functionName);
 
-          const allowedTuple = allowedFunctions.find(([key, val]) => val === actionValue);
+          const txTuple = Object.entries(TransactionType).find(([key, val]) => val === actionValue);
+          const isAllowedAction = !!AllowedActions.find((action) => action === actionValue);
 
-          if (!allowedTuple) {
-            return acc;
+          if (txTuple) {
+            actionName = txTuple[0];
+
+            if (isAllowedAction) {
+              ctAtomicActions.push({
+                function: functionName,
+                actionName,
+              });
+            }
           } else {
-            actionName = allowedTuple[0];
-
-            ctAtomicActions.push({
-              function: functionName,
-              actionName,
-            });
+            return acc;
           }
 
           const typesInfo = fields.map(({ name, type, typeName }, index) => {
@@ -182,6 +184,7 @@ function generator(
             palletName,
             methodName: method,
             actionName,
+            isAllowedAction,
             params,
             // for ordering
             name: method,
@@ -220,7 +223,7 @@ function generator(
 
   const dest = path.join(process.cwd(), './src/txwrapper/generated/calls.ts');
 
-  const templateGenerator = () => generator(metadataHex, Object.entries(ActionType));
+  const templateGenerator = () => generator(metadataHex);
 
   writeFile(dest, templateGenerator);
 })();

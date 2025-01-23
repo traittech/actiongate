@@ -7,7 +7,7 @@ import logger from '../logger';
 import { signWith } from '../signer';
 import { generateTxMetadata, buildCTAction } from '../tx-helper';
 import { buildUnsignedTransaction } from '../../txwrapper';
-import { ActionType } from '../../types/api/actions';
+import { TransactionType } from '../../types/api/actions';
 
 import type { CTAction, CTActionOrigin, CTAtomicActions, ClearingTransactionPayload, BlockchainGenericId } from '../../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
@@ -76,7 +76,7 @@ export async function createClearingTransactionAndBroadcast(
     logger.debug('Building unsigned clearing transaction...');
     const unsigned = buildUnsignedTransaction(
       {
-        actionType: ActionType.AppTransactionsSubmitClearingTransaction,
+        actionType: TransactionType.AppTransactionsSubmitClearingTransaction,
         arguments: {
           appAgentId: payload.appAgentId,
           atomics: unsignedAtomics,
