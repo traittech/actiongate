@@ -10,6 +10,8 @@ BlockchainOverridesMap.set('MultiAddress', 'BlockchainGenericAccount');
 
 BlockchainOverridesMap.set('PalletAppAgentsInputNamedAddressInput', 'NamedAddressInput');
 BlockchainOverridesMap.set('PalletNftsDestroyWitness', 'NftWitness');
-BlockchainOverridesMap.set('Vec<Vec<(TraitPrimitivesAppTransactionsCtActionOrigin,Call)>>', 'CTAtomicActions');
 
 BlockchainOverridesMap.set('TraitPrimitivesPalletAdminsPalletAdminType', 'AdminType');
+BlockchainOverridesMap.set('TraitPrimitivesAppSubscriptionsAppSubscriptionTierDetails', 'AppSubscriptionTierDetails');
+BlockchainOverridesMap.set('TraitPrimitivesAppSubscriptionsAppPayOnDemandMode', 'PayOnDemandMode');
+BlockchainOverridesMap.set('Vec<Vec<(TraitPrimitivesAppTransactionsCtActionOrigin,Call)>>', 'CTAtomicActions');

@@ -22,8 +22,10 @@ import type {
 
 import type {
   AdminType,
+  AppSubscriptionTierDetails,
+  PayOnDemandMode,
   NamedAddressInput,
-  NftWitness
+  NftWitness,
 } from '../../types/api/trait';
 
 import { TransactionType } from '../../types/api/actions';
@@ -1314,6 +1316,362 @@ export function appAgentsUnpauseAppAgent(
 export interface AppAgentsUnpauseAppAgentTx extends ITxAction {
   actionType: TransactionType.AppAgentsUnpauseAppAgent;
   arguments: AppAgentsUnpauseAppAgentArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Sets the action points balance for a specified account.
+ *
+ * `address` - The account for which the action points balance will be set.
+ *
+ * `balance` - The balance of action points to be set for the specified account.
+ */
+export interface AppResourcesSetActionPointsBalanceArgs extends Args {
+  /**
+   *  The account for which the action points balance will be set.
+   */
+  address: BlockchainGenericAccount;
+  /**
+   *  The balance of action points to be set for the specified account.
+   */
+  balance: BlockchainGenericBalance;
+};
+
+const AppResourcesSetActionPointsBalanceArgsSchema = z.object({
+  address: schema.BlockchainGenericAccountSchema,
+  balance: schema.BlockchainGenericBalanceSchema,
+});
+
+/**
+ * @name appResourcesSetActionPointsBalance
+ * @summary Sets the action points balance for a specified account.
+ * @description This function allows setting the action points balance for a specified account. Parameters:
+ * @param args - The arguments of the transaction. {@link AppResourcesSetActionPointsBalanceArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appResourcesSetActionPointsBalance(
+  args: AppResourcesSetActionPointsBalanceArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppResourcesSetActionPointsBalanceArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appResources', 'setActionPointsBalance', args, info, options);
+}
+
+/**
+ * Sets the action points balance for a specified account. This function allows setting the action points balance for a specified account. Parameters:
+ */
+export interface AppResourcesSetActionPointsBalanceTx extends ITxAction {
+  actionType: TransactionType.AppResourcesSetActionPointsBalance;
+  arguments: AppResourcesSetActionPointsBalanceArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Sets the clearing points balance for a specified account.
+ *
+ * `address` - The account for which the clearing points balance will be set.
+ *
+ * `balance` - The balance of clearing points to be set for the specified account.
+ */
+export interface AppResourcesSetClearingPointsBalanceArgs extends Args {
+  /**
+   *  The account for which the clearing points balance will be set.
+   */
+  address: BlockchainGenericAccount;
+  /**
+   *  The balance of clearing points to be set for the specified account.
+   */
+  balance: BlockchainGenericBalance;
+};
+
+const AppResourcesSetClearingPointsBalanceArgsSchema = z.object({
+  address: schema.BlockchainGenericAccountSchema,
+  balance: schema.BlockchainGenericBalanceSchema,
+});
+
+/**
+ * @name appResourcesSetClearingPointsBalance
+ * @summary Sets the clearing points balance for a specified account.
+ * @description This function allows setting the clearing points balance for a specified account. Parameters:
+ * @param args - The arguments of the transaction. {@link AppResourcesSetClearingPointsBalanceArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appResourcesSetClearingPointsBalance(
+  args: AppResourcesSetClearingPointsBalanceArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppResourcesSetClearingPointsBalanceArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appResources', 'setClearingPointsBalance', args, info, options);
+}
+
+/**
+ * Sets the clearing points balance for a specified account. This function allows setting the clearing points balance for a specified account. Parameters:
+ */
+export interface AppResourcesSetClearingPointsBalanceTx extends ITxAction {
+  actionType: TransactionType.AppResourcesSetClearingPointsBalance;
+  arguments: AppResourcesSetClearingPointsBalanceArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Creates a new subscription tier with the provided details.
+ *
+ * `details` - The details of the subscription tier to be created.
+ */
+export interface AppSubscriptionsCreateAppSubscriptionTierArgs extends Args {
+  /**
+   *  The details of the subscription tier to be created.
+   */
+  details: AppSubscriptionTierDetails;
+};
+
+const AppSubscriptionsCreateAppSubscriptionTierArgsSchema = z.object({
+  details: schema.AppSubscriptionTierDetailsSchema,
+});
+
+/**
+ * @name appSubscriptionsCreateAppSubscriptionTier
+ * @summary Creates a new subscription tier with the provided details.
+ * @description This function is used to create a new subscription tier with the specified details. It generates a unique identifier for the tier, inserts the tier into storage, updates the next tier ID, and emits an event to indicate the creation of the subscription tier. Parameters:
+ * @param args - The arguments of the transaction. {@link AppSubscriptionsCreateAppSubscriptionTierArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appSubscriptionsCreateAppSubscriptionTier(
+  args: AppSubscriptionsCreateAppSubscriptionTierArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppSubscriptionsCreateAppSubscriptionTierArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appSubscriptions', 'createAppSubscriptionTier', args, info, options);
+}
+
+/**
+ * Creates a new subscription tier with the provided details. This function is used to create a new subscription tier with the specified details. It generates a unique identifier for the tier, inserts the tier into storage, updates the next tier ID, and emits an event to indicate the creation of the subscription tier. Parameters:
+ */
+export interface AppSubscriptionsCreateAppSubscriptionTierTx extends ITxAction {
+  actionType: TransactionType.AppSubscriptionsCreateAppSubscriptionTier;
+  arguments: AppSubscriptionsCreateAppSubscriptionTierArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Updates the details or status of an existing subscription tier.
+ *
+ * `tierToObsolete`
+ *
+ * `successorTier`
+ */
+export interface AppSubscriptionsObsoleteAppSubscriptionTierArgs extends Args {
+  tierToObsolete: BlockchainGenericId;
+  successorTier: BlockchainGenericId;
+};
+
+const AppSubscriptionsObsoleteAppSubscriptionTierArgsSchema = z.object({
+  tierToObsolete: schema.BlockchainGenericIdSchema,
+  successorTier: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appSubscriptionsObsoleteAppSubscriptionTier
+ * @summary Updates the details or status of an existing subscription tier.
+ * @description This function is used to patch the details or status of an existing subscription tier identified by its ID. It retrieves the tier from storage, updates its details or status based on the provided patch, and stores the updated tier back into storage. After patching, it emits an event to indicate the changes made to the subscription tier. Parameters:
+ * @param args - The arguments of the transaction. {@link AppSubscriptionsObsoleteAppSubscriptionTierArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appSubscriptionsObsoleteAppSubscriptionTier(
+  args: AppSubscriptionsObsoleteAppSubscriptionTierArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppSubscriptionsObsoleteAppSubscriptionTierArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appSubscriptions', 'obsoleteAppSubscriptionTier', args, info, options);
+}
+
+/**
+ * Updates the details or status of an existing subscription tier. This function is used to patch the details or status of an existing subscription tier identified by its ID. It retrieves the tier from storage, updates its details or status based on the provided patch, and stores the updated tier back into storage. After patching, it emits an event to indicate the changes made to the subscription tier. Parameters:
+ */
+export interface AppSubscriptionsObsoleteAppSubscriptionTierTx extends ITxAction {
+  actionType: TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier;
+  arguments: AppSubscriptionsObsoleteAppSubscriptionTierArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Sets the pay-on-demand mode for an app agent's subscription.
+ *
+ * `appAgentId` - The identifier of the subscriber (app agent).
+ *
+ * `payOnDemandMode` - The pay-on-demand mode to be set for the subscription.
+ */
+export interface AppSubscriptionsSetAppPayOnDemandModeArgs extends Args {
+  /**
+   *  The identifier of the subscriber (app agent).
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The pay-on-demand mode to be set for the subscription.
+   */
+  payOnDemandMode: PayOnDemandMode;
+};
+
+const AppSubscriptionsSetAppPayOnDemandModeArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  payOnDemandMode: schema.PayOnDemandModeSchema,
+});
+
+/**
+ * @name appSubscriptionsSetAppPayOnDemandMode
+ * @summary Sets the pay-on-demand mode for an app agent's subscription.
+ * @description This function allows setting the pay-on-demand mode for an app agent's subscription. Parameters:
+ * @param args - The arguments of the transaction. {@link AppSubscriptionsSetAppPayOnDemandModeArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appSubscriptionsSetAppPayOnDemandMode(
+  args: AppSubscriptionsSetAppPayOnDemandModeArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppSubscriptionsSetAppPayOnDemandModeArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appSubscriptions', 'setAppPayOnDemandMode', args, info, options);
+}
+
+/**
+ * Sets the pay-on-demand mode for an app agent's subscription. This function allows setting the pay-on-demand mode for an app agent's subscription. Parameters:
+ */
+export interface AppSubscriptionsSetAppPayOnDemandModeTx extends ITxAction {
+  actionType: TransactionType.AppSubscriptionsSetAppPayOnDemandMode;
+  arguments: AppSubscriptionsSetAppPayOnDemandModeArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Changes the subscription tier of an app agent.
+ *
+ * `appAgentId` - The identifier of the app agent whose subscription tier is to be changed.
+ *
+ * `subscriptionTierId` - The identifier of the new subscription tier to be assigned to the app agent.
+ */
+export interface AppSubscriptionsSetAppSubscriptionTierArgs extends Args {
+  /**
+   *  The identifier of the app agent whose subscription tier is to be changed.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The identifier of the new subscription tier to be assigned to the app agent.
+   */
+  subscriptionTierId: BlockchainGenericId;
+};
+
+const AppSubscriptionsSetAppSubscriptionTierArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  subscriptionTierId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appSubscriptionsSetAppSubscriptionTier
+ * @summary Changes the subscription tier of an app agent.
+ * @description This function allows changing the subscription tier of an app agent identified by its subscriber ID. It calculates the difference in price between the current and new tiers and adjusts the subscription limits accordingly. If the new tier is more expensive, it charges the delta payment and updates the action points and clearing points balances for the current billing period. After the adjustment, it updates the subscription tier information for the app agent and emits an event indicating the change in subscription tier. Parameters:
+ * @param args - The arguments of the transaction. {@link AppSubscriptionsSetAppSubscriptionTierArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appSubscriptionsSetAppSubscriptionTier(
+  args: AppSubscriptionsSetAppSubscriptionTierArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppSubscriptionsSetAppSubscriptionTierArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appSubscriptions', 'setAppSubscriptionTier', args, info, options);
+}
+
+/**
+ * Changes the subscription tier of an app agent. This function allows changing the subscription tier of an app agent identified by its subscriber ID. It calculates the difference in price between the current and new tiers and adjusts the subscription limits accordingly. If the new tier is more expensive, it charges the delta payment and updates the action points and clearing points balances for the current billing period. After the adjustment, it updates the subscription tier information for the app agent and emits an event indicating the change in subscription tier. Parameters:
+ */
+export interface AppSubscriptionsSetAppSubscriptionTierTx extends ITxAction {
+  actionType: TransactionType.AppSubscriptionsSetAppSubscriptionTier;
+  arguments: AppSubscriptionsSetAppSubscriptionTierArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Submit a Clearing transaction with root permissions.
+ *
+ * `appAgentId`
+ *
+ * `extraFeePayer`
+ *
+ * `atomics`
+ */
+export interface AppTransactionsForceSubmitClearingTransactionArgs extends Args {
+  appAgentId: BlockchainGenericId;
+  extraFeePayer: BlockchainGenericAccount;
+  atomics: CTAtomicActions;
+};
+
+const AppTransactionsForceSubmitClearingTransactionArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  extraFeePayer: schema.BlockchainGenericAccountSchema,
+  atomics: schema.CTAtomicActionsSchema,
+});
+
+/**
+ * @name appTransactionsForceSubmitClearingTransaction
+ * @summary Submit a Clearing transaction with root permissions.
+ * @description CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from `extra_fee_payer`.
+ * @param args - The arguments of the transaction. {@link AppTransactionsForceSubmitClearingTransactionArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appTransactionsForceSubmitClearingTransaction(
+  args: AppTransactionsForceSubmitClearingTransactionArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppTransactionsForceSubmitClearingTransactionArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appTransactions', 'forceSubmitClearingTransaction', args, info, options);
+}
+
+/**
+ * Submit a Clearing transaction with root permissions. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from `extra_fee_payer`.
+ */
+export interface AppTransactionsForceSubmitClearingTransactionTx extends ITxAction {
+  actionType: TransactionType.AppTransactionsForceSubmitClearingTransaction;
+  arguments: AppTransactionsForceSubmitClearingTransactionArgs;
 };
 
 /*---------------------------------------------------------------------------------- */
@@ -3382,6 +3740,13 @@ export type TxAction =
   | AppAgentsSetAdminDispatchFilterTx
   | AppAgentsSetAppAgentMetadataTx
   | AppAgentsUnpauseAppAgentTx
+  | AppResourcesSetActionPointsBalanceTx
+  | AppResourcesSetClearingPointsBalanceTx
+  | AppSubscriptionsCreateAppSubscriptionTierTx
+  | AppSubscriptionsObsoleteAppSubscriptionTierTx
+  | AppSubscriptionsSetAppPayOnDemandModeTx
+  | AppSubscriptionsSetAppSubscriptionTierTx
+  | AppTransactionsForceSubmitClearingTransactionTx
   | AppTransactionsSubmitClearingTransactionTx
   | AssetsBurnTx
   | AssetsCreateTx
@@ -3448,6 +3813,13 @@ export type TransactionArgs =
   | AppAgentsSetAdminDispatchFilterArgs
   | AppAgentsSetAppAgentMetadataArgs
   | AppAgentsUnpauseAppAgentArgs
+  | AppResourcesSetActionPointsBalanceArgs
+  | AppResourcesSetClearingPointsBalanceArgs
+  | AppSubscriptionsCreateAppSubscriptionTierArgs
+  | AppSubscriptionsObsoleteAppSubscriptionTierArgs
+  | AppSubscriptionsSetAppPayOnDemandModeArgs
+  | AppSubscriptionsSetAppSubscriptionTierArgs
+  | AppTransactionsForceSubmitClearingTransactionArgs
   | AppTransactionsSubmitClearingTransactionArgs
   | AssetsBurnArgs
   | AssetsCreateArgs
@@ -3685,6 +4057,34 @@ export function buildUnsignedTransaction(
     }
     case TransactionType.AppAgentsUnpauseAppAgent: {
       unsigned = appAgentsUnpauseAppAgent(args, info, options);
+      break;
+    }
+    case TransactionType.AppResourcesSetActionPointsBalance: {
+      unsigned = appResourcesSetActionPointsBalance(args, info, options);
+      break;
+    }
+    case TransactionType.AppResourcesSetClearingPointsBalance: {
+      unsigned = appResourcesSetClearingPointsBalance(args, info, options);
+      break;
+    }
+    case TransactionType.AppSubscriptionsCreateAppSubscriptionTier: {
+      unsigned = appSubscriptionsCreateAppSubscriptionTier(args, info, options);
+      break;
+    }
+    case TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier: {
+      unsigned = appSubscriptionsObsoleteAppSubscriptionTier(args, info, options);
+      break;
+    }
+    case TransactionType.AppSubscriptionsSetAppPayOnDemandMode: {
+      unsigned = appSubscriptionsSetAppPayOnDemandMode(args, info, options);
+      break;
+    }
+    case TransactionType.AppSubscriptionsSetAppSubscriptionTier: {
+      unsigned = appSubscriptionsSetAppSubscriptionTier(args, info, options);
+      break;
+    }
+    case TransactionType.AppTransactionsForceSubmitClearingTransaction: {
+      unsigned = appTransactionsForceSubmitClearingTransaction(args, info, options);
       break;
     }
     case TransactionType.AppTransactionsSubmitClearingTransaction: {

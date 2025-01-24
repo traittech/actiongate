@@ -34,8 +34,17 @@ export enum TransactionType {
   AppAgentsSetAdminDispatchFilter = 'appAgents.setAdminDispatchFilter',
   AppAgentsSetAppAgentMetadata = 'appAgents.setAppAgentMetadata',
   AppAgentsUnpauseAppAgent = 'appAgents.unpauseAppAgent',
+  // AppResources Pallet
+  AppResourcesSetActionPointsBalance = 'appResources.setActionPointsBalance',
+  AppResourcesSetClearingPointsBalance = 'appResources.setClearingPointsBalance',
+  // AppSubscriptions Pallet
+  AppSubscriptionsCreateAppSubscriptionTier = 'appSubscriptions.createAppSubscriptionTier',
+  AppSubscriptionsObsoleteAppSubscriptionTier = 'appSubscriptions.obsoleteAppSubscriptionTier',
+  AppSubscriptionsSetAppPayOnDemandMode = 'appSubscriptions.setAppPayOnDemandMode',
+  AppSubscriptionsSetAppSubscriptionTier = 'appSubscriptions.setAppSubscriptionTier',
   // AppTransactions Pallet
   AppTransactionsSubmitClearingTransaction = 'appTransactions.submitClearingTransaction',
+  AppTransactionsForceSubmitClearingTransaction = 'appTransactions.forceSubmitClearingTransaction',
   // Assets Pallet
   AssetsCreate = 'assets.create',
   AssetsStartDestroy = 'assets.startDestroy',
