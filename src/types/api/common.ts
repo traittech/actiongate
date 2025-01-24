@@ -10,6 +10,14 @@ export type UINT32 = number;
 
 /**
  * Numeric value, presented as plain number or string
+ * @isLong
+ * @minimum 0
+ * @maximum 18446744073709551615
+ */
+export type UINT64 = number | string;
+
+/**
+ * Numeric value, presented as plain number or string
  *
  * @minimum 0
  * @maximum 340282366920938463463374607431768211455

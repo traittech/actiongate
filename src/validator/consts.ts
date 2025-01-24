@@ -9,6 +9,16 @@ export const u32_MIN = BigInt(0);
 export const u32_MAX = BigInt('4294967295');
 
 /**
+ * The smallest value that can be represented by `u64` integer type.
+ */
+export const u64_MIN = BigInt(0);
+
+/**
+ * The largest value that can be represented by `u64` integer type (2^64 − 1).
+ */
+export const u64_MAX = BigInt('18446744073709551615');
+
+/**
  * The smallest value that can be represented by `u128` integer type.
  */
 export const u128_MIN = BigInt(0);

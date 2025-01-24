@@ -13,6 +13,7 @@ import type {
   BlockchainGenericBoolean,
   BlockchainGenericId,
   BlockchainGenericText,
+  UINT64,
   ITxAction,
   ICTAtomicAction,
   CTActionOrigin,
@@ -588,6 +589,731 @@ export function appAgentsClearAppAgentMetadata(
 export interface AppAgentsClearAppAgentMetadataTx extends ITxAction {
   actionType: TransactionType.AppAgentsClearAppAgentMetadata;
   arguments: AppAgentsClearAppAgentMetadataArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend
+ *
+ * `appAgentId` - The identifier of the App Agent.
+ *
+ * `admin` - The admin address to be removed from the list.
+ *
+ * `coldWallet`
+ */
+export interface AppAgentsDisableAdminColdWalletDispatchArgs extends Args {
+  /**
+   *  The identifier of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The admin address to be removed from the list.
+   */
+  admin: BlockchainGenericAccount;
+  coldWallet: BlockchainGenericAccount;
+};
+
+const AppAgentsDisableAdminColdWalletDispatchArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+  coldWallet: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appAgentsDisableAdminColdWalletDispatch
+ * @summary Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend
+ * @description from a cold wallet associated with a specific App Agent. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsDisableAdminColdWalletDispatchArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsDisableAdminColdWalletDispatch(
+  args: AppAgentsDisableAdminColdWalletDispatchArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsDisableAdminColdWalletDispatchArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'disableAdminColdWalletDispatch', args, info, options);
+}
+
+/**
+ * Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend from a cold wallet associated with a specific App Agent. # Parameters
+ */
+export interface AppAgentsDisableAdminColdWalletDispatchTx extends ITxAction {
+  actionType: TransactionType.AppAgentsDisableAdminColdWalletDispatch;
+  arguments: AppAgentsDisableAdminColdWalletDispatchArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Disables the hot wallet for a specified App Agent.
+ *
+ * `appAgentId` - Identifier of the App Agent for which the hot wallet needs to be disabled.
+ */
+export interface AppAgentsDisableHotWalletArgs extends Args {
+  /**
+   *  Identifier of the App Agent for which the hot wallet needs to be disabled.
+   */
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsDisableHotWalletArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsDisableHotWallet
+ * @summary Disables the hot wallet for a specified App Agent.
+ * @description This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsDisableHotWalletArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsDisableHotWallet(
+  args: AppAgentsDisableHotWalletArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsDisableHotWalletArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'disableHotWallet', args, info, options);
+}
+
+/**
+ * Disables the hot wallet for a specified App Agent. This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it. # Parameters
+ */
+export interface AppAgentsDisableHotWalletTx extends ITxAction {
+  actionType: TransactionType.AppAgentsDisableHotWallet;
+  arguments: AppAgentsDisableHotWalletArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Enables the hot wallet for a specified App Agent.
+ *
+ * `appAgentId` - Identifier of the App Agent for which the hot wallet needs to be enabled.
+ */
+export interface AppAgentsEnableHotWalletArgs extends Args {
+  /**
+   *  Identifier of the App Agent for which the hot wallet needs to be enabled.
+   */
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsEnableHotWalletArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsEnableHotWallet
+ * @summary Enables the hot wallet for a specified App Agent.
+ * @description This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsEnableHotWalletArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsEnableHotWallet(
+  args: AppAgentsEnableHotWalletArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsEnableHotWalletArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'enableHotWallet', args, info, options);
+}
+
+/**
+ * Enables the hot wallet for a specified App Agent. This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it. # Parameters
+ */
+export interface AppAgentsEnableHotWalletTx extends ITxAction {
+  actionType: TransactionType.AppAgentsEnableHotWallet;
+  arguments: AppAgentsEnableHotWalletArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Same as `create_app_agent` but can only be called by ForceOrigin
+ *
+ * `appAgentOwner`
+ *
+ * `appAgentBalancePayer`
+ */
+export interface AppAgentsForceCreateAppAgentArgs extends Args {
+  appAgentOwner: BlockchainGenericAccount;
+  appAgentBalancePayer: BlockchainGenericAccount;
+};
+
+const AppAgentsForceCreateAppAgentArgsSchema = z.object({
+  appAgentOwner: schema.BlockchainGenericAccountSchema,
+  appAgentBalancePayer: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appAgentsForceCreateAppAgent
+ * @summary Same as `create_app_agent` but can only be called by ForceOrigin
+ * @param args - The arguments of the transaction. {@link AppAgentsForceCreateAppAgentArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsForceCreateAppAgent(
+  args: AppAgentsForceCreateAppAgentArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsForceCreateAppAgentArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'forceCreateAppAgent', args, info, options);
+}
+
+/**
+ * Same as `create_app_agent` but can only be called by ForceOrigin
+ */
+export interface AppAgentsForceCreateAppAgentTx extends ITxAction {
+  actionType: TransactionType.AppAgentsForceCreateAppAgent;
+  arguments: AppAgentsForceCreateAppAgentArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Force initiates the destroy of an AppAgent.
+ *
+ * `appAgentId`
+ */
+export interface AppAgentsForceInitiateAppAgentDestroyArgs extends Args {
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsForceInitiateAppAgentDestroyArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsForceInitiateAppAgentDestroy
+ * @summary Force initiates the destroy of an AppAgent.
+ * @param args - The arguments of the transaction. {@link AppAgentsForceInitiateAppAgentDestroyArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsForceInitiateAppAgentDestroy(
+  args: AppAgentsForceInitiateAppAgentDestroyArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsForceInitiateAppAgentDestroyArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'forceInitiateAppAgentDestroy', args, info, options);
+}
+
+/**
+ * Force initiates the destroy of an AppAgent.
+ */
+export interface AppAgentsForceInitiateAppAgentDestroyTx extends ITxAction {
+  actionType: TransactionType.AppAgentsForceInitiateAppAgentDestroy;
+  arguments: AppAgentsForceInitiateAppAgentDestroyArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Force initiates the suspension of an AppAgent.
+ *
+ * `appAgentId`
+ */
+export interface AppAgentsForceInitiateAppAgentSuspensionArgs extends Args {
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsForceInitiateAppAgentSuspensionArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsForceInitiateAppAgentSuspension
+ * @summary Force initiates the suspension of an AppAgent.
+ * @param args - The arguments of the transaction. {@link AppAgentsForceInitiateAppAgentSuspensionArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsForceInitiateAppAgentSuspension(
+  args: AppAgentsForceInitiateAppAgentSuspensionArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsForceInitiateAppAgentSuspensionArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'forceInitiateAppAgentSuspension', args, info, options);
+}
+
+/**
+ * Force initiates the suspension of an AppAgent.
+ */
+export interface AppAgentsForceInitiateAppAgentSuspensionTx extends ITxAction {
+  actionType: TransactionType.AppAgentsForceInitiateAppAgentSuspension;
+  arguments: AppAgentsForceInitiateAppAgentSuspensionArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Force initiates the un-suspension of an AppAgent.
+ *
+ * `appAgentId`
+ */
+export interface AppAgentsForceInitiateAppAgentUnsuspensionArgs extends Args {
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsForceInitiateAppAgentUnsuspensionArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsForceInitiateAppAgentUnsuspension
+ * @summary Force initiates the un-suspension of an AppAgent.
+ * @param args - The arguments of the transaction. {@link AppAgentsForceInitiateAppAgentUnsuspensionArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsForceInitiateAppAgentUnsuspension(
+  args: AppAgentsForceInitiateAppAgentUnsuspensionArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsForceInitiateAppAgentUnsuspensionArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'forceInitiateAppAgentUnsuspension', args, info, options);
+}
+
+/**
+ * Force initiates the un-suspension of an AppAgent.
+ */
+export interface AppAgentsForceInitiateAppAgentUnsuspensionTx extends ITxAction {
+  actionType: TransactionType.AppAgentsForceInitiateAppAgentUnsuspension;
+  arguments: AppAgentsForceInitiateAppAgentUnsuspensionArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Initiate destroy of an App Agent.
+ *
+ * `appAgentId` - The identifier of the App Agent to be deleted.
+ */
+export interface AppAgentsInitiateDestroyAppAgentArgs extends Args {
+  /**
+   *  The identifier of the App Agent to be deleted.
+   */
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsInitiateDestroyAppAgentArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsInitiateDestroyAppAgent
+ * @summary Initiate destroy of an App Agent.
+ * @description This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to "destroy initiated" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsInitiateDestroyAppAgentArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsInitiateDestroyAppAgent(
+  args: AppAgentsInitiateDestroyAppAgentArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsInitiateDestroyAppAgentArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'initiateDestroyAppAgent', args, info, options);
+}
+
+/**
+ * Initiate destroy of an App Agent. This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to "destroy initiated" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent. # Parameters
+ */
+export interface AppAgentsInitiateDestroyAppAgentTx extends ITxAction {
+  actionType: TransactionType.AppAgentsInitiateDestroyAppAgent;
+  arguments: AppAgentsInitiateDestroyAppAgentArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Pauses the specified App Agent.
+ *
+ * `appAgentId` - The ID of the App Agent to be paused.
+ */
+export interface AppAgentsPauseAppAgentArgs extends Args {
+  /**
+   *  The ID of the App Agent to be paused.
+   */
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsPauseAppAgentArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsPauseAppAgent
+ * @summary Pauses the specified App Agent.
+ * @description This function verifies that the caller has the necessary permissions to pause the app agent.
+ * @param args - The arguments of the transaction. {@link AppAgentsPauseAppAgentArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsPauseAppAgent(
+  args: AppAgentsPauseAppAgentArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsPauseAppAgentArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'pauseAppAgent', args, info, options);
+}
+
+/**
+ * Pauses the specified App Agent. This function verifies that the caller has the necessary permissions to pause the app agent.
+ */
+export interface AppAgentsPauseAppAgentTx extends ITxAction {
+  actionType: TransactionType.AppAgentsPauseAppAgent;
+  arguments: AppAgentsPauseAppAgentArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Reactivates the specified App Agent.
+ *
+ * `appAgentId` - The identifier of the App Agent to be reactivated.
+ */
+export interface AppAgentsReactivateAppAgentArgs extends Args {
+  /**
+   *  The identifier of the App Agent to be reactivated.
+   */
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsReactivateAppAgentArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsReactivateAppAgent
+ * @summary Reactivates the specified App Agent.
+ * @description This function is used to reactivate a previously deactivated App Agent. It checks if the App Agent exists and is in the DestroyInitiated state. If so, it verifies whether the deletion window has passed. If the deletion was initiated by the system, it attempts to process a subscription payment to prevent deletion and sets the App Agent to active status. If the deletion was triggered by the owner, it resets the App Agent to active without any checks. After reactivation, it emits an event to indicate the status change of the App Agent. Parameters:
+ * @param args - The arguments of the transaction. {@link AppAgentsReactivateAppAgentArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsReactivateAppAgent(
+  args: AppAgentsReactivateAppAgentArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsReactivateAppAgentArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'reactivateAppAgent', args, info, options);
+}
+
+/**
+ * Reactivates the specified App Agent. This function is used to reactivate a previously deactivated App Agent. It checks if the App Agent exists and is in the DestroyInitiated state. If so, it verifies whether the deletion window has passed. If the deletion was initiated by the system, it attempts to process a subscription payment to prevent deletion and sets the App Agent to active status. If the deletion was triggered by the owner, it resets the App Agent to active without any checks. After reactivation, it emits an event to indicate the status change of the App Agent. Parameters:
+ */
+export interface AppAgentsReactivateAppAgentTx extends ITxAction {
+  actionType: TransactionType.AppAgentsReactivateAppAgent;
+  arguments: AppAgentsReactivateAppAgentArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Removes an admin from the App Agent.
+ *
+ * `appAgentId` - The ID of the App Agent.
+ *
+ * `admin` - The account ID of the admin to be removed.
+ */
+export interface AppAgentsRemoveAdminArgs extends Args {
+  /**
+   *  The ID of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The account ID of the admin to be removed.
+   */
+  admin: BlockchainGenericAccount;
+};
+
+const AppAgentsRemoveAdminArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appAgentsRemoveAdmin
+ * @summary Removes an admin from the App Agent.
+ * @description This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsRemoveAdminArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsRemoveAdmin(
+  args: AppAgentsRemoveAdminArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsRemoveAdminArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'removeAdmin', args, info, options);
+}
+
+/**
+ * Removes an admin from the App Agent. This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount. # Parameters
+ */
+export interface AppAgentsRemoveAdminTx extends ITxAction {
+  actionType: TransactionType.AppAgentsRemoveAdmin;
+  arguments: AppAgentsRemoveAdminArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Removes an admin from the list of permitted administrators for a named address under a
+ *
+ * `appAgentId` - The identifier of the App Agent.
+ *
+ * `admin` - The account ID of the admin being removed.
+ *
+ * `namedAddress` - The named address from which the admin is being removed.
+ */
+export interface AppAgentsRemoveAdminFromNamedAddressDispatchArgs extends Args {
+  /**
+   *  The identifier of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The account ID of the admin being removed.
+   */
+  admin: BlockchainGenericAccount;
+  /**
+   *  The named address from which the admin is being removed.
+   */
+  namedAddress: BlockchainGenericAccount;
+};
+
+const AppAgentsRemoveAdminFromNamedAddressDispatchArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+  namedAddress: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appAgentsRemoveAdminFromNamedAddressDispatch
+ * @summary Removes an admin from the list of permitted administrators for a named address under a
+ * @description specific App Agent. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsRemoveAdminFromNamedAddressDispatchArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsRemoveAdminFromNamedAddressDispatch(
+  args: AppAgentsRemoveAdminFromNamedAddressDispatchArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsRemoveAdminFromNamedAddressDispatchArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'removeAdminFromNamedAddressDispatch', args, info, options);
+}
+
+/**
+ * Removes an admin from the list of permitted administrators for a named address under a specific App Agent. # Parameters
+ */
+export interface AppAgentsRemoveAdminFromNamedAddressDispatchTx extends ITxAction {
+  actionType: TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch;
+  arguments: AppAgentsRemoveAdminFromNamedAddressDispatchArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Sets the list of dispatchables callable by the specified `admin` account.
+ *
+ * `appAgentId` - The ID of the App Agent.
+ *
+ * `admin` - The account ID of the admin.
+ *
+ * `newPermissions`
+ */
+export interface AppAgentsSetAdminDispatchFilterArgs extends Args {
+  /**
+   *  The ID of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The account ID of the admin.
+   */
+  admin: BlockchainGenericAccount;
+  newPermissions: UINT64;
+};
+
+const AppAgentsSetAdminDispatchFilterArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  admin: schema.BlockchainGenericAccountSchema,
+  newPermissions: schema.UINT64Schema,
+});
+
+/**
+ * @name appAgentsSetAdminDispatchFilter
+ * @summary Sets the list of dispatchables callable by the specified `admin` account.
+ * @description The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter. # Parameters
+ * @param args - The arguments of the transaction. {@link AppAgentsSetAdminDispatchFilterArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsSetAdminDispatchFilter(
+  args: AppAgentsSetAdminDispatchFilterArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsSetAdminDispatchFilterArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'setAdminDispatchFilter', args, info, options);
+}
+
+/**
+ * Sets the list of dispatchables callable by the specified `admin` account. The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter. # Parameters
+ */
+export interface AppAgentsSetAdminDispatchFilterTx extends ITxAction {
+  actionType: TransactionType.AppAgentsSetAdminDispatchFilter;
+  arguments: AppAgentsSetAdminDispatchFilterArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Set the metadata for an asset class.
+ *
+ * `appAgentId`
+ *
+ * `data` - The general information of this asset. Limited in length by `StringLimit`.
+ */
+export interface AppAgentsSetAppAgentMetadataArgs extends Args {
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The general information of this asset. Limited in length by `StringLimit`.
+   */
+  data: BlockchainGenericText;
+};
+
+const AppAgentsSetAppAgentMetadataArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  data: schema.BlockchainGenericTextSchema,
+});
+
+/**
+ * @name appAgentsSetAppAgentMetadata
+ * @summary Set the metadata for an asset class.
+ * @description Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`.
+ * @param args - The arguments of the transaction. {@link AppAgentsSetAppAgentMetadataArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsSetAppAgentMetadata(
+  args: AppAgentsSetAppAgentMetadataArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsSetAppAgentMetadataArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'setAppAgentMetadata', args, info, options);
+}
+
+/**
+ * Set the metadata for an asset class. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`.
+ */
+export interface AppAgentsSetAppAgentMetadataTx extends ITxAction {
+  actionType: TransactionType.AppAgentsSetAppAgentMetadata;
+  arguments: AppAgentsSetAppAgentMetadataArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Resumes the specified App Agent.
+ *
+ * `appAgentId` - The ID of the App Agent to be resumed.
+ */
+export interface AppAgentsUnpauseAppAgentArgs extends Args {
+  /**
+   *  The ID of the App Agent to be resumed.
+   */
+  appAgentId: BlockchainGenericId;
+};
+
+const AppAgentsUnpauseAppAgentArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+});
+
+/**
+ * @name appAgentsUnpauseAppAgent
+ * @summary Resumes the specified App Agent.
+ * @description This function verifies that the caller has the necessary permissions to resume the app agent.
+ * @param args - The arguments of the transaction. {@link AppAgentsUnpauseAppAgentArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsUnpauseAppAgent(
+  args: AppAgentsUnpauseAppAgentArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsUnpauseAppAgentArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'unpauseAppAgent', args, info, options);
+}
+
+/**
+ * Resumes the specified App Agent. This function verifies that the caller has the necessary permissions to resume the app agent.
+ */
+export interface AppAgentsUnpauseAppAgentTx extends ITxAction {
+  actionType: TransactionType.AppAgentsUnpauseAppAgent;
+  arguments: AppAgentsUnpauseAppAgentArgs;
 };
 
 /*---------------------------------------------------------------------------------- */
@@ -2641,6 +3367,21 @@ export type TxAction =
   | AppAgentsChangeOwnerInitTx
   | AppAgentsClearAdminDispatchFilterTx
   | AppAgentsClearAppAgentMetadataTx
+  | AppAgentsDisableAdminColdWalletDispatchTx
+  | AppAgentsDisableHotWalletTx
+  | AppAgentsEnableHotWalletTx
+  | AppAgentsForceCreateAppAgentTx
+  | AppAgentsForceInitiateAppAgentDestroyTx
+  | AppAgentsForceInitiateAppAgentSuspensionTx
+  | AppAgentsForceInitiateAppAgentUnsuspensionTx
+  | AppAgentsInitiateDestroyAppAgentTx
+  | AppAgentsPauseAppAgentTx
+  | AppAgentsReactivateAppAgentTx
+  | AppAgentsRemoveAdminTx
+  | AppAgentsRemoveAdminFromNamedAddressDispatchTx
+  | AppAgentsSetAdminDispatchFilterTx
+  | AppAgentsSetAppAgentMetadataTx
+  | AppAgentsUnpauseAppAgentTx
   | AppTransactionsSubmitClearingTransactionTx
   | AssetsBurnTx
   | AssetsCreateTx
@@ -2692,6 +3433,21 @@ export type TransactionArgs =
   | AppAgentsChangeOwnerInitArgs
   | AppAgentsClearAdminDispatchFilterArgs
   | AppAgentsClearAppAgentMetadataArgs
+  | AppAgentsDisableAdminColdWalletDispatchArgs
+  | AppAgentsDisableHotWalletArgs
+  | AppAgentsEnableHotWalletArgs
+  | AppAgentsForceCreateAppAgentArgs
+  | AppAgentsForceInitiateAppAgentDestroyArgs
+  | AppAgentsForceInitiateAppAgentSuspensionArgs
+  | AppAgentsForceInitiateAppAgentUnsuspensionArgs
+  | AppAgentsInitiateDestroyAppAgentArgs
+  | AppAgentsPauseAppAgentArgs
+  | AppAgentsReactivateAppAgentArgs
+  | AppAgentsRemoveAdminArgs
+  | AppAgentsRemoveAdminFromNamedAddressDispatchArgs
+  | AppAgentsSetAdminDispatchFilterArgs
+  | AppAgentsSetAppAgentMetadataArgs
+  | AppAgentsUnpauseAppAgentArgs
   | AppTransactionsSubmitClearingTransactionArgs
   | AssetsBurnArgs
   | AssetsCreateArgs
@@ -2869,6 +3625,66 @@ export function buildUnsignedTransaction(
     }
     case TransactionType.AppAgentsClearAppAgentMetadata: {
       unsigned = appAgentsClearAppAgentMetadata(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsDisableAdminColdWalletDispatch: {
+      unsigned = appAgentsDisableAdminColdWalletDispatch(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsDisableHotWallet: {
+      unsigned = appAgentsDisableHotWallet(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsEnableHotWallet: {
+      unsigned = appAgentsEnableHotWallet(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsForceCreateAppAgent: {
+      unsigned = appAgentsForceCreateAppAgent(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsForceInitiateAppAgentDestroy: {
+      unsigned = appAgentsForceInitiateAppAgentDestroy(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsForceInitiateAppAgentSuspension: {
+      unsigned = appAgentsForceInitiateAppAgentSuspension(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsForceInitiateAppAgentUnsuspension: {
+      unsigned = appAgentsForceInitiateAppAgentUnsuspension(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsInitiateDestroyAppAgent: {
+      unsigned = appAgentsInitiateDestroyAppAgent(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsPauseAppAgent: {
+      unsigned = appAgentsPauseAppAgent(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsReactivateAppAgent: {
+      unsigned = appAgentsReactivateAppAgent(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsRemoveAdmin: {
+      unsigned = appAgentsRemoveAdmin(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch: {
+      unsigned = appAgentsRemoveAdminFromNamedAddressDispatch(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsSetAdminDispatchFilter: {
+      unsigned = appAgentsSetAdminDispatchFilter(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsSetAppAgentMetadata: {
+      unsigned = appAgentsSetAppAgentMetadata(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsUnpauseAppAgent: {
+      unsigned = appAgentsUnpauseAppAgent(args, info, options);
       break;
     }
     case TransactionType.AppTransactionsSubmitClearingTransaction: {

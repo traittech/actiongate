@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { isValidSS58 } from '../checks';
-import { u32_MIN, u32_MAX, u128_MIN, u128_MAX, ss58_LENGTH, text_MAX_LENGTH, addressName_REGEX } from '../consts';
+import { u32_MIN, u32_MAX, u64_MIN, u64_MAX, u128_MIN, u128_MAX, ss58_LENGTH, text_MAX_LENGTH, addressName_REGEX } from '../consts';
 
 /**
  * Number could be presented with number or string types
@@ -26,12 +26,17 @@ const isNumberishInRange = (min: bigint, max: bigint) =>
 /**
  * `u32` number validation schema
  */
-export const u32Schema = isNumberishInRange(u32_MIN, u32_MAX);
+export const UINT32Schema = isNumberishInRange(u32_MIN, u32_MAX);
+
+/**
+ * `u32` number validation schema
+ */
+export const UINT64Schema = isNumberishInRange(u64_MIN, u64_MAX);
 
 /**
  * `u128` number validation schema
  */
-export const u128Schema = isNumberishInRange(u128_MIN, u128_MAX);
+export const UINT128Schema = isNumberishInRange(u128_MIN, u128_MAX);
 
 /**
  * `bool` boolean validation schema
@@ -52,7 +57,7 @@ export const BlockchainAddressNameSchema = z
   .length(10, { message: `String must be exactly ${10} characters long` })
   .regex(addressName_REGEX);
 
-export const BlockchainGenericIdSchema = u32Schema;
+export const BlockchainGenericIdSchema = UINT32Schema;
 
 export const BlockchainGenericAddressIdSchema = u128Schema;
 

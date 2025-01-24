@@ -16,6 +16,24 @@ export enum TransactionType {
   AppAgentsChangeOwnerInit = 'appAgents.changeOwnerInit',
   AppAgentsClearAdminDispatchFilter = 'appAgents.clearAdminDispatchFilter',
   AppAgentsClearAppAgentMetadata = 'appAgents.clearAppAgentMetadata',
+  // AppAgentsCompleteDestroyAppAgent = 'appAgents.completeDestroyAppAgent', // complex types
+  AppAgentsCreateAppAgent = 'createAppAgent',
+  AppAgentsDisableAdminColdWalletDispatch = 'appAgents.disableAdminColdWalletDispatch',
+  AppAgentsDisableHotWallet = 'appAgents.disableHotWallet',
+  AppAgentsEnableHotWallet = 'appAgents.enableHotWallet',
+  AppAgentsForceCreateAppAgent = 'appAgents.forceCreateAppAgent',
+  AppAgentsForceInitiateAppAgentDestroy = 'appAgents.forceInitiateAppAgentDestroy',
+  AppAgentsForceInitiateAppAgentSuspension = 'appAgents.forceInitiateAppAgentSuspension',
+  AppAgentsForceInitiateAppAgentUnsuspension = 'appAgents.forceInitiateAppAgentUnsuspension',
+  AppAgentsInitiateDestroyAppAgent = 'appAgents.initiateDestroyAppAgent',
+  AppAgentsPauseAppAgent = 'appAgents.pauseAppAgent',
+  // AppAgentsProcessDestroy = 'appAgents.processDestroy', // complex types
+  AppAgentsReactivateAppAgent = 'appAgents.reactivateAppAgent',
+  AppAgentsRemoveAdmin = 'appAgents.removeAdmin',
+  AppAgentsRemoveAdminFromNamedAddressDispatch = 'appAgents.removeAdminFromNamedAddressDispatch',
+  AppAgentsSetAdminDispatchFilter = 'appAgents.setAdminDispatchFilter',
+  AppAgentsSetAppAgentMetadata = 'appAgents.setAppAgentMetadata',
+  AppAgentsUnpauseAppAgent = 'appAgents.unpauseAppAgent',
   // AppTransactions Pallet
   AppTransactionsSubmitClearingTransaction = 'appTransactions.submitClearingTransaction',
   // Assets Pallet

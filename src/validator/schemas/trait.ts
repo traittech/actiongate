@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { AdminType } from '../../types/api/trait';
-import { u32Schema, BlockchainGenericAccountSchema, BlockchainAddressNameSchema } from './common';
+import { UINT32Schema, BlockchainGenericAccountSchema, BlockchainAddressNameSchema } from './common';
 
 export const AdminTypeSchema = z.nativeEnum(AdminType);
 
@@ -11,7 +11,7 @@ export const NamedAddressInputSchema = z.union([
 ]);
 
 export const NftWitnessSchema = z.object({
-  itemMetadatas: u32Schema,
-  itemConfigs: u32Schema,
-  attributes: u32Schema,
+  itemMetadatas: UINT32Schema,
+  itemConfigs: UINT32Schema,
+  attributes: UINT32Schema,
 });
