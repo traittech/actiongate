@@ -7,9 +7,9 @@ import lookupDefinitions from '@polkadot/types-augment/lookup/definitions';
 import { stringCamelCase, stringPascalCase } from '@polkadot/util';
 import Handlebars from 'handlebars';
 
-import { ActionType } from '../../../types/api/actions';
-import { BlockchainOverridesMap } from '../../../types/api/overrides';
+import { TransactionType, AllowedActions } from '../../../types/api/actions';
 import metadataJson from '../generated/latest.json';
+import { BlockchainOverridesMap } from '../overrides';
 
 import type { Vec, Text } from '@polkadot/types';
 
@@ -67,8 +67,8 @@ function getFunctionDescription(docs: Vec<Text>) {
     }
   }
 
-  const full = description.join(' ');
-  const short = description[0] ? description[0].charAt(0).toLowerCase() + description[0].slice(1) : '';
+  const short = description[0] ?? '';
+  const full = short ? description.slice(1).join(' ') : '';
 
   return {
     full,
@@ -77,12 +77,7 @@ function getFunctionDescription(docs: Vec<Text>) {
   };
 }
 
-function generator(
-  meta: string,
-  allowedFunctions: [string, ActionType][],
-  extraTypes = {},
-  customLookupDefinitions = {}
-) {
+function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) {
   const { metadata, registry } = initMeta(meta as any, extraTypes);
 
   const allTypes = {
@@ -104,7 +99,7 @@ function generator(
 
   const { lookup, pallets } = metadata.asLatest;
 
-  const ctAtomicActions: string[] = [];
+  const ctAtomicActions: Array<{ function: string; actionName: string }> = [];
 
   const modules = pallets
     .reduce<any[]>((acc, pallet) => {
@@ -118,17 +113,27 @@ function generator(
 
       const items = palletCalls
         .reduce<any[]>((acc, { docs, fields, name: methodName }) => {
-          const functionName = `${palletName}${stringPascalCase(methodName)}`;
+          const method = stringCamelCase(methodName);
+          const functionName = `${palletName}${stringPascalCase(method)}`;
+          const actionValue = `${palletName}.${method}`;
 
-          const actionName = allowedFunctions.find(([key, val]) => val === functionName)?.[0];
+          let actionName = stringPascalCase(functionName);
 
-          if (!actionName) return acc;
+          const txTuple = Object.entries(TransactionType).find(([key, val]) => val === actionValue);
+          const isAllowedAction = !!AllowedActions.find((action) => action === actionValue);
 
-          const name = stringCamelCase(methodName);
-          const argsTypeName = `${stringPascalCase(functionName)}Args`;
-          const actionTypeName = `${stringPascalCase(functionName)}Action`;
+          if (txTuple) {
+            actionName = txTuple[0];
 
-          ctAtomicActions.push(actionTypeName);
+            if (isAllowedAction) {
+              ctAtomicActions.push({
+                function: functionName,
+                actionName,
+              });
+            }
+          } else {
+            return acc;
+          }
 
           const typesInfo = fields.map(({ name, type, typeName }, index) => {
             const typeDef = registry.lookup.getTypeDef(type);
@@ -142,13 +147,22 @@ function generator(
           const documentation = getFunctionDescription(docs);
 
           const params = typesInfo.map(([name, , typeStr]) => {
-            const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
+            let isOptional = false;
+            let type = typeStr;
 
-            let type = similarTypes.join(' | ');
+            const regex = /^(.*?)?<(.*?)>$/g;
+            const matches = regex.exec(typeStr);
+
+            if (matches && ['Compact', 'Option'].includes(matches[1])) {
+              isOptional = matches[1] === 'Option';
+              type = matches[2] ?? type;
+            }
 
             if (BlockchainOverridesMap.has(type)) {
               type = BlockchainOverridesMap.get(type) as string;
             } else {
+              const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
+              type = similarTypes.join(' | ');
               setImports(allDefs, imports, [typeStr, ...similarTypes]);
             }
 
@@ -156,6 +170,7 @@ function generator(
               name,
               type,
               description: documentation.args[name] ?? '',
+              isOptional,
             };
           });
 
@@ -163,13 +178,12 @@ function generator(
             documentation,
             functionName,
             palletName,
-            methodName,
-            argsTypeName,
+            methodName: method,
             actionName,
-            actionTypeName,
+            isAllowedAction,
             params,
             // for ordering
-            name,
+            name: method,
           });
 
           return acc;
@@ -201,13 +215,11 @@ function generator(
 }
 
 (async function main() {
-  console.log(Object.entries(ActionType));
-
   const metadataHex = metadataJson.latest as any;
 
-  const dest = path.join(process.cwd(), './src/txwrapper/calls.ts');
+  const dest = path.join(process.cwd(), './src/txwrapper/generated/calls.ts');
 
-  const templateGenerator = () => generator(metadataHex, Object.entries(ActionType));
+  const templateGenerator = () => generator(metadataHex);
 
   writeFile(dest, templateGenerator);
 })();

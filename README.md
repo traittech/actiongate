@@ -84,7 +84,7 @@ URL: /submit/transaction
 Method: POST
 Middleware: checkApiKey, enforceHttps (in production)
 Description: Submits a transaction.
-Controller: transactionController.submitTransaction
+Controller: SubmitTransactionsController.submitTransaction
 ```
 
 ### Submit Clearing Transaction
@@ -94,12 +94,13 @@ URL: /submit/clearing_transaction
 Method: POST
 Middleware: checkApiKey, enforceHttps (in production)
 Description: Submits a clearing transaction using typed actions.
-Controller: clearingtransactionController.submitClearingTransaction
+Controller: SubmitTransactionsController.submitClearingTransaction
 ```
 
 ## Running the Application
 
 ```bash
+yarn build
 yarn start
 ```
 

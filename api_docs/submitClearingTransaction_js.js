@@ -21,12 +21,12 @@ const clearingTransactionHeaders = new Headers({
 // - "origin": { "AppAgentAddress": "ttrQFvYHrGzMthGLMaqY5BT84sK7R6bKyAjih9rmNEXm5TqLd" }
 const clearingTransactionPayload = {
   signatory: 'ADMIN_1',
-  app_agent_id: 1,
+  appAgentId: 1,
   atomics: [
     {
       actions: [
         {
-          actionType: 'nftsMintItem',
+          actionType: 'nfts.mint',
           origin: {
             AppAgentId: 1000,
           },
@@ -37,7 +37,7 @@ const clearingTransactionPayload = {
           },
         },
         {
-          actionType: 'nftsSetItemMetadata',
+          actionType: 'nfts.setMetadata',
           origin: {
             AppAgentAddress: 'ttrQFvYHrGzMthGLMaqY5BT84sK7R6bKyAjih9rmNEXm5TqLd',
           },

@@ -1,14 +1,12 @@
-import {
+import { TransactionType } from '../src/types/api/actions';
+
+import type { CTAtomicAction, NftsMintItemArgs, NftsSetItemMetadataArgs } from '../src/txwrapper';
+import type {
   ClearingTransactionPayload,
   ClearingTransactionResponse,
-  CTActionOrigin,
-  BalancesTransferKeepAliveArguments,
-  CTAction,
   CTAtomic,
-  ActionType,
-  NftsMintItemArguments,
-  NftsSetItemMetadataArguments,
-} from '../src/types/api/clearingTransaction';
+  CTActionOrigin,
+} from '../src/types/api';
 
 // API endpoint
 const CLEARING_TRANSACTION_ENDPOINT = 'localhost:8080/submit/clearing_transaction';
@@ -36,13 +34,13 @@ const clearingTransactionHeaders = new Headers({
 const actionOneOrigin: CTActionOrigin = {
   AppAgentId: 1000,
 };
-const actionOneArgs: NftsMintItemArguments = {
+const actionOneArgs: NftsMintItemArgs = {
   collection: 1000,
   item: 1,
   mintTo: 'ttrQFvYHrkh9LtUJSBdr9qNk63Rv8pKWDXtUtqhCA3wTBY8EM',
 };
-const actionOne: CTAction = {
-  actionType: ActionType.NftsMintItem,
+const actionOne: CTAtomicAction = {
+  actionType: TransactionType.NftsMintItem,
   origin: actionOneOrigin,
   arguments: actionOneArgs,
 };
@@ -51,13 +49,13 @@ const actionOne: CTAction = {
 const actionTwoOrigin: CTActionOrigin = {
   AppAgentAddress: 'ttrQFvYHrGzMthGLMaqY5BT84sK7R6bKyAjih9rmNEXm5TqLd',
 };
-const actionTwoArgs: NftsSetItemMetadataArguments = {
+const actionTwoArgs: NftsSetItemMetadataArgs = {
   collection: 1000,
   item: 1,
   data: 'https://trait-wallet-demo-account.trait.tech/game-a/nft-collection-a-a/nft-token-a-a-c/nft-token-a-a-c.json',
 };
-const actionTwo: CTAction = {
-  actionType: ActionType.NftsSetItemMetadata,
+const actionTwo: CTAtomicAction = {
+  actionType: TransactionType.NftsSetItemMetadata,
   origin: actionTwoOrigin,
   arguments: actionTwoArgs,
 };
@@ -70,7 +68,7 @@ const atomic: CTAtomic = {
 // Define the clearing transaction payload
 const clearingTransactionPayload: ClearingTransactionPayload = {
   signatory: 'ADMIN_1',
-  app_agent_id: 1000,
+  appAgentId: 1000,
   atomics: [atomic],
 };
 

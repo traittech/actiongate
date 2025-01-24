@@ -1,80 +1,205 @@
 // Auto-generated, do not edit
 /* eslint-disable */
 
+{{{ importsAll }}}
+
+import { z } from 'zod';
+
 import { defineMethod } from '@substrate/txwrapper-core';
 
-import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
+import type { Args, BaseTxInfo, OptionsWithMeta, TxInfo, TxMethod, UnsignedTransaction } from '@substrate/txwrapper-core';
 
-import type { ActionType } from '../types/api/actions';
 import type {
-  BlockchainGenericAddress,
+  BlockchainGenericAccount,
   BlockchainGenericBalance,
+  BlockchainGenericBoolean,
   BlockchainGenericId,
-  CTAtomicActionGeneric,
-  NftWitness,
-} from '../types/api/common';
+  BlockchainGenericText,
+  UINT64,
+  ITxAction,
+  ICTAtomicAction,
+  CTActionOrigin,
+  CTAtomicActions,
+} from '../../types/api';
 
-/**
- * Represents a single action within an atomic operation.
- */
-export type CTAtomicAction =
-{{#each ctAtomicActions}}
-  | {{{this}}}
-{{/each}};
+import type {
+  AdminType,
+  AppSubscriptionTierDetails,
+  AppDepositPermissions,
+  AppPayOnDemandMode,
+  NamedAddressInput,
+  NftWitness,
+} from '../../types/api/trait';
+
+import { TransactionType } from '../../types/api/actions';
+
+import * as schema from '../../validator/schemas';
+
+export function constructUnsignedTransaction(
+  pallet: string,
+  name: string,
+  args: Args,
+  baseTxInfo: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  const txMethod: TxMethod = { args, name, pallet };
+  const txInfo: TxInfo = { method: txMethod, ...baseTxInfo };
+
+  return defineMethod(txInfo, options);
+}
 
 {{#each modules}}
 
 {{#each items}}
 
-{{#if documentation.short}}
 /**
- * Arguments required to {{documentation.short}}
- */
+{{#if documentation.short}}
+ * Arguments required to {{{documentation.short}}}
 {{/if}}
-export type {{{argsTypeName}}} = {
+{{#each params}}
+ *
+ * `{{{this.name}}}`{{#if this.description}} -{{{this.description}}}{{/if}}
+{{/each}}
+ */
+export interface {{{actionName}}}Args extends Args {
   {{#each params}}
   {{#if this.description}}
   /**
    * {{{this.description}}}
    */
   {{/if}}
-  {{{this.name}}}: {{{this.type}}};
+  {{{this.name}}}{{#if this.isOptional}}?{{/if}}: {{{this.type}}};
   {{/each}}
 };
 
+const {{{actionName}}}ArgsSchema = z.object({
+  {{#each params}}
+  {{{this.name}}}: {{#if this.isOptional}}z.optional({{/if}}schema.{{{this.type}}}Schema{{#if this.isOptional}}){{/if}},
+  {{/each}}
+});
+
 /**
-{{#if documentation.full}}
- * {{documentation.full}}
+ * @name {{{functionName}}}
+{{#if documentation.short}}
+ * @summary {{{documentation.short}}}
 {{/if}}
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+{{#if documentation.full}}
+ * @description {{{documentation.full}}}
+{{/if}}
+ * @param args - The arguments of the transaction. {@link {{{actionName}}}Args}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function {{{functionName}}}(
-  args: {{{argsTypeName}}},
+  args: {{{actionName}}}Args,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
-  return defineMethod(
-    {
-      method: {
-        args,
-        name: '{{{methodName}}}',
-        pallet: '{{{palletName}}}',
-      },
-      ...info,
-    },
-    options
-  );
+  // throws error if validation is failed
+  {{{actionName}}}ArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', args, info, options);
 }
 
-export type {{{actionTypeName}}} = CTAtomicActionGeneric<
-  ActionType.{{{actionName}}},
-  {{{argsTypeName}}}
->;
+/**
+{{#if documentation.short}}
+ * {{{documentation.short}}}{{#if documentation.full}} {{{documentation.full}}}{{/if}}
+{{/if}}
+ */
+export interface {{{actionName}}}Tx extends ITxAction {
+  actionType: TransactionType.{{{actionName}}};
+  arguments: {{{actionName}}}Args;
+};
+
+{{#if isAllowedAction}}
+/**
+{{#if documentation.short}}
+ * {{{documentation.short}}}{{#if documentation.full}} {{{documentation.full}}}{{/if}}
+{{/if}}
+ */
+export interface {{{actionName}}}Action extends ICTAtomicAction {
+  actionType: TransactionType.{{{actionName}}};
+  arguments: {{{actionName}}}Args;
+  origin: CTActionOrigin;
+};
+{{/if}}
 
 /*---------------------------------------------------------------------------------- */
 
 {{/each}}
 {{/each}}
+
+/**
+ * Represents a single transaction
+ */
+export type TxAction =
+{{#each modules}}
+{{#each items}}
+  | {{{this.actionName}}}Tx
+{{/each}}
+{{/each}};
+
+/**
+ * Represents a transaction args
+ */
+export type TransactionArgs =
+{{#each modules}}
+{{#each items}}
+  | {{{this.actionName}}}Args
+{{/each}}
+{{/each}};
+
+/**
+ * Represents a single action within an atomic operation.
+ */
+export type CTAtomicAction =
+{{#each ctAtomicActions}}
+  | {{{this.actionName}}}Action
+{{/each}};
+
+/**
+ * Represents a CT action args.
+ */
+export type ActionArgs =
+{{#each ctAtomicActions}}
+  | {{{this.actionName}}}Args
+{{/each}};
+
+/**
+ * Builds an unsigned transaction based on the provided transaction action.
+ *
+ * @param tx - Transaction action.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ *
+ * @throws If the transaction is unsupported.
+ */
+export function buildUnsignedTransaction(
+  tx: TxAction,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  const { actionType, arguments: args } = tx;
+
+  let unsigned: UnsignedTransaction;
+
+  // Handle different action types
+  switch (actionType) {
+  {{#each modules}}
+  {{#each items}}
+    case TransactionType.{{{this.actionName}}}: {
+      unsigned = {{{this.functionName}}}(args, info, options);
+      break;
+    }
+  {{/each}}
+  {{/each}}
+
+    default: {
+      throw new Error(`Unsupported transaction type: ${actionType}`);
+    }
+  }
+
+  return unsigned;
+}

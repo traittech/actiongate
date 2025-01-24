@@ -3,12 +3,14 @@ import * as path from 'path';
 
 import Keyring from '@polkadot/keyring';
 
-import { createClearingTransactionAndBroadcast } from '../functions/clearing-tx-builder';
+import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import logger from '../functions/logger';
-import { ActionType } from '../types/api/actions';
+import { TransactionType } from '../types/api/actions';
+import { u32_MIN, u32_MAX, u128_MAX, ss58_LENGTH, text_MAX_LENGTH } from '../validator/consts';
 
-import type { CTAtomicAction } from '../txwrapper/calls';
+import type { CTAtomicAction } from '../txwrapper';
 import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
+import type { ZodIssue } from 'zod';
 
 // Mock config
 jest.mock('../functions/config', () => ({
@@ -62,19 +64,18 @@ describe('Clearing Transaction Builder', () => {
   const aliceAddress = 'ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s';
 
   const keyring = new Keyring({ ss58Format: 5335, type: 'ed25519' });
-  keyring.addFromMnemonic(aliceMnemonic);
-  const aliceKeyringPair = keyring.getPairs()[0];
+  const aliceKeyringPair = keyring.addFromMnemonic(aliceMnemonic);
 
   describe('Balances Pallet', () => {
     it('should build balances_transferKeepAlive transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
               {
-                actionType: ActionType.BalancesTransferKeepAlive,
+                actionType: TransactionType.BalancesTransferKeepAlive,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   dest: aliceAddress,
@@ -93,12 +94,12 @@ describe('Clearing Transaction Builder', () => {
     it('should build balances_transfer transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
               {
-                actionType: ActionType.BalancesTransferAllowDeath,
+                actionType: TransactionType.BalancesTransferAllowDeath,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   dest: aliceAddress,
@@ -119,12 +120,12 @@ describe('Clearing Transaction Builder', () => {
     it('should build nft_mintCollection transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
               {
-                actionType: ActionType.NftsCreateCollection,
+                actionType: TransactionType.NftsCreateCollection,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   metadata:
@@ -145,12 +146,12 @@ describe('Clearing Transaction Builder', () => {
     it('should build nft_mintItem transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
               {
-                actionType: ActionType.NftsMintItem,
+                actionType: TransactionType.NftsMintItem,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   collection: 1,
@@ -172,12 +173,12 @@ describe('Clearing Transaction Builder', () => {
     it('should build assets_create transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
               {
-                actionType: ActionType.AssetsCreate,
+                actionType: TransactionType.AssetsCreate,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   minBalance: 1,
@@ -195,12 +196,12 @@ describe('Clearing Transaction Builder', () => {
     it('should build assets_transfer transaction', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
               {
-                actionType: ActionType.AssetsTransfer,
+                actionType: TransactionType.AssetsTransfer,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   id: 1,
@@ -222,12 +223,12 @@ describe('Clearing Transaction Builder', () => {
     it('should throw error for unsupported action type', async () => {
       const payload: ClearingTransactionPayload = {
         signatory: 'ADMIN_1',
-        app_agent_id: 1,
+        appAgentId: 1,
         atomics: [
           {
             actions: [
               {
-                actionType: 'unknown_action' as ActionType,
+                actionType: 'unknown_action' as TransactionType,
                 origin: { AppAgentAddress: aliceAddress },
                 arguments: {
                   dest: aliceAddress,
@@ -240,8 +241,134 @@ describe('Clearing Transaction Builder', () => {
       };
 
       await expect(createClearingTransactionAndBroadcast(aliceKeyringPair, payload)).rejects.toThrow(
-        'Unsupported action type: unknown_action'
+        'Unsupported transaction type: unknown_action'
       );
+    });
+  });
+
+  describe('Clearing transaction action args validation errors', () => {
+    it('Action args: Numbers with overflow (u32)', async () => {
+      const payload: ClearingTransactionPayload = {
+        signatory: 'ADMIN_1',
+        appAgentId: 1,
+        atomics: [
+          {
+            actions: [
+              {
+                actionType: TransactionType.NftsLockItemTransfer,
+                origin: { AppAgentAddress: aliceAddress },
+                arguments: {
+                  collection: Number(u32_MIN - BigInt(1)), // error: fewer than min
+                  item: Number(u32_MAX + BigInt(1)), // error: greater than max
+                },
+              } as CTAtomicAction,
+            ],
+          },
+        ],
+      };
+
+      try {
+        await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      } catch (error) {
+        const errors = JSON.parse((error as any).message) as ZodIssue[];
+        const collectionError = errors.find((e) => e.path[0] === 'collection');
+        const itemError = errors.find((e) => e.path[0] === 'item');
+
+        expect(collectionError?.message).toEqual(`Value must be greater or equal to ${u32_MIN.toString()}`);
+        expect(itemError?.message).toEqual(`Value must be fewer or equal to ${u32_MAX.toString()}`);
+      }
+    });
+
+    it('Action args: Invalid address length & Number with overflow (u128)', async () => {
+      const payload: ClearingTransactionPayload = {
+        signatory: 'ADMIN_1',
+        appAgentId: 1,
+        atomics: [
+          {
+            actions: [
+              {
+                actionType: TransactionType.BalancesTransferKeepAlive,
+                origin: { AppAgentAddress: aliceAddress },
+                arguments: {
+                  dest: '1231231', // invalid length
+                  value: (u128_MAX + BigInt(1)).toString(), // error: greater than max
+                },
+              } as CTAtomicAction,
+            ],
+          },
+        ],
+      };
+
+      try {
+        await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      } catch (error) {
+        const errors = JSON.parse((error as any).message) as ZodIssue[];
+        const destErrors = errors.filter((e) => e.path[0] === 'dest');
+        const valueErrors = errors.filter((e) => e.path[0] === 'value');
+
+        expect(destErrors[0]?.message).toEqual(`String must be exactly ${ss58_LENGTH} characters long`);
+        expect(valueErrors[0]?.message).toEqual(`Value must be fewer or equal to ${u128_MAX.toString()}`);
+      }
+    });
+
+    it('Action args: Invalid ss58 address', async () => {
+      const payload: ClearingTransactionPayload = {
+        signatory: 'ADMIN_1',
+        appAgentId: 1,
+        atomics: [
+          {
+            actions: [
+              {
+                actionType: TransactionType.BalancesTransferAll,
+                origin: { AppAgentAddress: aliceAddress },
+                arguments: {
+                  dest: aliceAddress.slice(0, -1).concat('z'), // invalid encoded ss58
+                  keepAlive: true,
+                },
+              } as CTAtomicAction,
+            ],
+          },
+        ],
+      };
+
+      try {
+        await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      } catch (error) {
+        const errors = JSON.parse((error as any).message) as ZodIssue[];
+        const destErrors = errors.filter((e) => e.path[0] === 'dest');
+
+        expect(destErrors[0]?.message).toEqual(`String is not valid SS58 encoded address`);
+      }
+    });
+
+    it('Action args: Invalid metadata text length', async () => {
+      const payload: ClearingTransactionPayload = {
+        signatory: 'ADMIN_1',
+        appAgentId: 1,
+        atomics: [
+          {
+            actions: [
+              {
+                actionType: TransactionType.AssetsSetMetadata,
+                origin: { AppAgentAddress: aliceAddress },
+                arguments: {
+                  id: 1,
+                  data: 's'.repeat(257), // text overflow
+                },
+              } as CTAtomicAction,
+            ],
+          },
+        ],
+      };
+
+      try {
+        await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      } catch (error) {
+        const errors = JSON.parse((error as any).message) as ZodIssue[];
+        const dataErrors = errors.filter((e) => e.path[0] === 'data');
+
+        expect(dataErrors[0]?.message).toEqual(`String must be fewer or equal ${text_MAX_LENGTH} characters long`);
+      }
     });
   });
 });

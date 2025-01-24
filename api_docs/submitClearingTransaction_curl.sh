@@ -23,12 +23,12 @@ REQUEST_HEADERS=(
 # - "origin": { "AppAgentAddress": "ttrQFvYHrGzMthGLMaqY5BT84sK7R6bKyAjih9rmNEXm5TqLd" }
 CLEARING_TRANSACTION_REQUEST='{
   "signatory": "ADMIN_1",
-  "app_agent_id": 1000,
+  "appAgentId": 1000,
   "atomics": [
     {
       "actions": [
         {
-          "actionType": "nftsMintItem",
+          "actionType": "nfts.mint",
           "origin": {
             "AppAgentId": 1000
           },
@@ -39,7 +39,7 @@ CLEARING_TRANSACTION_REQUEST='{
           }
         },
         {
-          "actionType": "nftsSetItemMetadata",
+          "actionType": "nfts.setMetadata",
           "origin": {
             "AppAgentAddress": "ttrQFvYHrGzMthGLMaqY5BT84sK7R6bKyAjih9rmNEXm5TqLd"
           },

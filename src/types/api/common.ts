@@ -1,59 +1,76 @@
-import type { ActionType } from './actions';
+// Common blockchain types
 
 /**
- * The origin type for each Action in CT
+ * Numeric value, presented as plain number
+ * @isInt
+ * @minimum 0
+ * @maximum 4294967295
  */
-export type CTActionOrigin =
-  | { AppAgentId: any }
-  | { AppAgentAddress: string }
-  | { TransactionalAddressId: any }
-  | { TransactionalAddress: any }
-  | { NamedAddress: any }
-  | { NamedAddressName: any };
+export type UINT32 = number;
 
 /**
- * Represents an action in a clearing transaction.
+ * Numeric value, presented as plain number or string
+ * @isLong
+ * @minimum 0
+ * @maximum 18446744073709551615
  */
-export type CTAction = [
-  // The origin of the action
-  CTActionOrigin,
-  /**
-   * The call to be made by the action
-   * To take advantage of txwrapper methods, this could be UnsignedTransaction.method.
-   */
-  { callIndex?: string; args?: string } | string,
-];
-
-export type CTAtomicActionGeneric<ActionTypeName extends ActionType, ActionArgs> = {
-  /**
-   * The type of action to be performed
-   */
-  actionType: ActionTypeName;
-
-  /**
-   * The origin responsible for the transaction.
-   */
-  origin: CTActionOrigin;
-
-  /**
-   * The arguments for the action.
-   */
-  arguments: ActionArgs;
-};
+export type UINT64 = number | string;
 
 /**
- * Common blockchain types
+ * Numeric value, presented as plain number or string
+ *
+ * @minimum 0
+ * @maximum 340282366920938463463374607431768211455
  */
+export type UINT128 = number | string;
 
-export type BlockchainGenericAddress = string;
+/**
+ * The account address on the blockchain.
+ * Typically, it is a string of alphanumeric characters, encoded in SS58 format.
+ * @isString
+ * @minLength 49
+ * @maxLength 49
+ * @example "ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s"
+ */
+export type BlockchainGenericAccount = string;
 
-// Asset Id, Collection Id, Agent Id
-export type BlockchainGenericId = number;
+/**
+ * A unique identifier (Asset, Collection, Agent).
+ * Typically, it is a numeric value.
+ */
+export type BlockchainGenericId = UINT32;
 
-export type BlockchainGenericBalance = number;
+/**
+ * Unique address id on blockchain (TransactionalAddressId)
+ * Typically, it is a numeric value.
+ */
+export type BlockchainGenericAddressId = UINT128;
 
-export type NftWitness = {
-  itemMetadatas: number;
-  itemConfigs: number;
-  attributes: number;
-};
+/**
+ * The balance, represented as a numeric value.
+ */
+export type BlockchainGenericBalance = UINT128;
+
+/**
+ * Text or metadata represented by string.
+ * Characters limit is defined in `StringLimit` const on blockchain.
+ * @isString
+ * @maxLength 256
+ */
+export type BlockchainGenericText = string;
+
+/**
+ * String of unicode chars exactly 10 chars long.
+ * Only a subset of chars can be used: https://github.com/traittech/trait-keyless/blob/main/keyless-ts/src/keyless.ts#L39
+ * @isString
+ * @minLength 10
+ * @maxLength 10
+ * @pattern ^[0-9a-zA-Z\-#]+$
+ */
+export type BlockchainAddressName = string;
+
+/**
+ * Boolean type for blockchain (bool)
+ * @example true
+ */
+export type BlockchainGenericBoolean = boolean;

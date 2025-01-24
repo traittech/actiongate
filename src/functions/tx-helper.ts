@@ -1,92 +1,32 @@
-import {
-  deriveAddress,
-  getRegistry,
-  methods,
-  PolkadotSS58Format,
-  BaseTxInfo,
-  UnsignedTransaction,
-  OptionsWithMeta,
-} from '@substrate/txwrapper-polkadot';
+import { deriveAddress, getRegistry, PolkadotSS58Format } from '@substrate/txwrapper-polkadot';
 
 import { TransactionService } from '../adapter/datagate';
-import { clearingTransaction } from '../txwrapper/appTransactions/clearingTransaction';
+import { buildUnsignedTransaction } from '../txwrapper';
 import { TxMetadata } from '../types/tx';
 
 import { loadConfig } from './config';
 import logger from './logger';
 
+import type { CTAtomicAction } from '../txwrapper';
+import type { CTAction } from '../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
+import type { BaseTxInfo, OptionsWithMeta } from '@substrate/txwrapper-core';
 
 const config = loadConfig();
 const txService = new TransactionService(config.datagate_api.uri);
 
 /**
- * Builds an unsigned transaction based on the provided module and function names and parameters.
- *
- * @param moduleName - The name of the module.
- * @param functionName - The name of the function within the module.
- * @param params - The parameters for the extrinsic function.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
- *
- * @throws If the transaction is unsupported.
+ * Builds clearing transaction action from atomic action.
+ * @param action - Atomic action.
+ * @param baseTxInfo - Base transaction information.
+ * @param options - Additional options including the registry and metadata RPC.
+ * @returns An action in clearing transaction.
  */
-export function buildUnsignedTransaction(
-  moduleName: string,
-  functionName: string,
-  params: any[],
-  info: BaseTxInfo,
-  options: OptionsWithMeta
-): UnsignedTransaction {
-  logger.info(`Building unsigned transaction for module: ${moduleName}, function: ${functionName}`);
-  if (moduleName === 'balances' && functionName === 'transferKeepAlive') {
-    return methods.balances.transferKeepAlive(
-      {
-        value: params[1],
-        dest: { id: params[0] },
-      },
-      info,
-      options
-    );
-  }
+export function buildCTAction(action: CTAtomicAction, baseTxInfo: BaseTxInfo, options: OptionsWithMeta): CTAction {
+  const unsigned = buildUnsignedTransaction(action, baseTxInfo, options);
+  const ctAction: CTAction = [action.origin, unsigned.method];
 
-  if (moduleName === 'balances' && functionName === 'transferAllowDeath') {
-    return methods.balances.transferAllowDeath(
-      {
-        value: params[1],
-        dest: { id: params[0] },
-      },
-      info,
-      options
-    );
-  }
-
-  if (moduleName === 'assets' && functionName === 'transfer') {
-    return methods.assets.transfer(
-      {
-        amount: params[2],
-        id: params[1],
-        target: params[0],
-      },
-      info,
-      options
-    );
-  }
-
-  if (moduleName === 'appTransactions' && functionName === 'submitClearingTransaction') {
-    return clearingTransaction(
-      {
-        appAgentId: params[0],
-        atomics: params[1],
-      },
-      info,
-      options
-    );
-  }
-
-  logger.error(`Unsupported transaction: module ${moduleName}, function ${functionName}`);
-  throw new Error('Unsupported Transaction!');
+  return ctAction;
 }
 
 /**

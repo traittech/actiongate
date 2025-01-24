@@ -1,4 +1,87 @@
-import type { CTAtomicAction } from '../../txwrapper/calls';
+import type { ActionType } from './actions';
+import type {
+  BlockchainGenericId,
+  BlockchainGenericAddressId,
+  BlockchainGenericAccount,
+  BlockchainAddressName,
+} from './common';
+import type { CTAtomicAction, ActionArgs } from '../../txwrapper';
+
+/**
+ * The origin type for each Action in CT
+ */
+export type CTActionOrigin =
+  | {
+      /** The ID of the application agent. */
+      AppAgentId: BlockchainGenericId;
+    }
+  | {
+      /** The address of the application agent. */
+      AppAgentAddress: BlockchainGenericAccount;
+    }
+  | {
+      /** The ID of the transactional address. */
+      TransactionalAddressId: BlockchainGenericAddressId;
+    }
+  | {
+      /** The transactional address. */
+      TransactionalAddress: BlockchainGenericAccount;
+    }
+  | {
+      /** The named address. */
+      NamedAddress: BlockchainGenericAccount;
+    }
+  | {
+      /** The name of the named address. */
+      NamedAddressName: BlockchainAddressName;
+    };
+
+/**
+ * Action call presented as object, or string encoded method (with arguments) in hex.
+ */
+export type CTActionCall = { callIndex?: string; args?: string } | string;
+
+/**
+ * Represents an action in a clearing transaction.
+ * [WARNING]: this is not a correct type, because `openapi v3` doesn't support `tuple` type.
+ * The correct tuple type is [CTActionOrigin, CTActionCall], commented below
+ */
+export type CTAction = Array<CTActionOrigin | CTActionCall>;
+
+// /**
+//  * Represents an action in a clearing transaction.
+//  */
+// export type CTAction = [
+//   // The origin of the action
+//   CTActionOrigin,
+//   /**
+//    * The call to be made by the action
+//    * To take advantage of txwrapper methods, this could be UnsignedTransaction.method.
+//    */
+//   CTActionCall,
+// ];
+
+/**
+ * A nested array of actions (Vec<Vec<Action>> in rust).
+ */
+export type CTAtomicActions = CTAction[][];
+
+export interface ICTAtomicAction {
+  /**
+   * The type of transaction to be performed
+   */
+  actionType: ActionType;
+
+  /**
+   * The arguments for the transaction.
+   */
+  arguments: ActionArgs;
+
+  /**
+   * The origin responsible for the transaction.
+   */
+  origin: CTActionOrigin;
+}
 
 /**
  * Represents an atomic operation.
@@ -22,7 +105,7 @@ export interface ClearingTransactionPayload {
   /**
    * The ID of the application agent initiating the transaction.
    */
-  app_agent_id: number;
+  appAgentId: BlockchainGenericId;
 
   /**
    * A list of atomic operations included in the transaction.
