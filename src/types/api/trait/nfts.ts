@@ -1,6 +1,4 @@
-import type {
-  UINT32
-} from '../common';
+import type { UINT32 } from '../common';
 
 export type NftWitness = {
   itemMetadatas: UINT32;

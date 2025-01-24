@@ -1,7 +1,4 @@
-import type {
-  BlockchainGenericBalance,
-  UINT32
-} from '../common';
+import type { BlockchainGenericBalance, UINT32 } from '../common';
 
 export type PayOnDemand = {
   extraCtPrice: BlockchainGenericBalance;
@@ -12,7 +9,7 @@ export enum AppPayOnDemandMode {
   AppAgent = 'AppAgent',
   Admin = 'Admin',
   Disabled = 'Disabled',
-};
+}
 
 export type AppSubscriptionTierDetails = {
   includedCtNumber: UINT32;

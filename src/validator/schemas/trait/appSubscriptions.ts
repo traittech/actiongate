@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 import { AppPayOnDemandMode } from '../../../types/api/trait';
-
 import { BlockchainGenericBalanceSchema, UINT32Schema } from '../common';
 
 export const PayOnDemandSchema = z.object({

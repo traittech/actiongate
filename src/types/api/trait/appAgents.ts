@@ -1,8 +1,3 @@
-import type {
-  BlockchainAddressName,
-  BlockchainGenericAccount,
-} from '../common';
+import type { BlockchainAddressName, BlockchainGenericAccount } from '../common';
 
-export type NamedAddressInput = 
-  | { Address: BlockchainGenericAccount }
-  | { Name: BlockchainAddressName };
+export type NamedAddressInput = { Address: BlockchainGenericAccount } | { Name: BlockchainAddressName };

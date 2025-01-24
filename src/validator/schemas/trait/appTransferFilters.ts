@@ -1,10 +1,6 @@
 import { z } from 'zod';
 
-import {
-  BlockchainGenericIdSchema,
-  BlockchainGenericBalanceSchema,
-  BlockchainGenericBooleanSchema,
-} from '../common';
+import { BlockchainGenericIdSchema, BlockchainGenericBalanceSchema, BlockchainGenericBooleanSchema } from '../common';
 
 export const FungibleTokenDetailsSchema = z.object({
   id: BlockchainGenericIdSchema,
@@ -45,13 +41,13 @@ const NftsDepositAllowNftCollectionsSchema = z.object({
 const NftsDepositDisallowNftCollectionsSchema = z.object({
   DisallowedNftCollections: z.object({
     disallowedCollections: z.array(BlockchainGenericIdSchema),
-  })
+  }),
 });
 
 export const NftsDepositPermissionTypeSchema = z.union([
   NftsDepositAllowAllSchema,
   NftsDepositAllowNftCollectionsSchema,
-  NftsDepositDisallowNftCollectionsSchema
+  NftsDepositDisallowNftCollectionsSchema,
 ]);
 
 export const NativeDepositPermissionsDetailsSchema = z.object({

@@ -1,7 +1,17 @@
 import { z } from 'zod';
 
 import { isValidSS58 } from '../checks';
-import { u32_MIN, u32_MAX, u64_MIN, u64_MAX, u128_MIN, u128_MAX, ss58_LENGTH, text_MAX_LENGTH, addressName_REGEX } from '../consts';
+import {
+  u32_MIN,
+  u32_MAX,
+  u64_MIN,
+  u64_MAX,
+  u128_MIN,
+  u128_MAX,
+  ss58_LENGTH,
+  text_MAX_LENGTH,
+  addressName_REGEX,
+} from '../consts';
 
 /**
  * Number could be presented with number or string types
@@ -59,8 +69,8 @@ export const BlockchainAddressNameSchema = z
 
 export const BlockchainGenericIdSchema = UINT32Schema;
 
-export const BlockchainGenericAddressIdSchema = u128Schema;
+export const BlockchainGenericAddressIdSchema = UINT128Schema;
 
-export const BlockchainGenericBalanceSchema = u128Schema;
+export const BlockchainGenericBalanceSchema = UINT128Schema;
 
 export const BlockchainGenericBooleanSchema = booleanSchema;

@@ -58,11 +58,181 @@
 				],
 				"description": "Response from a transaction request."
 			},
-			"TransactionType.AppTransactionsSubmitClearingTransaction": {
+			"TransactionType.AdminsAddAdmin": {
 				"enum": [
-					"appTransactions.submitClearingTransaction"
+					"admins.addPalletAdmin"
 				],
 				"type": "string"
+			},
+			"AdminType": {
+				"enum": [
+					"AppAgentForce",
+					"AppAgentGarbageCollector",
+					"AppSubscriptions",
+					"AppTransactions",
+					"PriceIndex",
+					"UserFreeTransactions",
+					"UserVerification",
+					"Assets",
+					"Nfts"
+				],
+				"type": "string"
+			},
+			"BlockchainGenericAccount": {
+				"type": "string",
+				"example": "ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s",
+				"description": "The account address on the blockchain.\nTypically, it is a string of alphanumeric characters, encoded in SS58 format.",
+				"minLength": 49,
+				"maxLength": 49
+			},
+			"AnyJson": {
+				"anyOf": [
+					{
+						"type": "string"
+					},
+					{
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"type": "boolean"
+					},
+					{
+						"items": {
+							"$ref": "#/components/schemas/AnyJson"
+						},
+						"type": "array"
+					},
+					{
+						"properties": {},
+						"additionalProperties": {
+							"$ref": "#/components/schemas/AnyJson"
+						},
+						"type": "object"
+					}
+				],
+				"nullable": true
+			},
+			"Record_string.AnyJson_": {
+				"properties": {},
+				"additionalProperties": {
+					"$ref": "#/components/schemas/AnyJson"
+				},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"AdminsAddAdminArgs": {
+				"description": "\n`adminType`\n\n`admin`",
+				"properties": {
+					"adminType": {
+						"$ref": "#/components/schemas/AdminType"
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"adminType",
+					"admin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType": {
+				"description": "Represents the type of transaction to be performed.\nTransaction value must match blockchain module & method!",
+				"enum": [
+					"admins.addPalletAdmin",
+					"admins.removePalletAdmin",
+					"appAgents.addAdmin",
+					"appAgents.addAdminToNamedAddressDispatch",
+					"appAgents.allowAdminColdWalletDispatch",
+					"appAgents.changeHotWallet",
+					"appAgents.changeOwnerCancel",
+					"appAgents.changeOwnerComplete",
+					"appAgents.changeOwnerInit",
+					"appAgents.clearAdminDispatchFilter",
+					"appAgents.clearAppAgentMetadata",
+					"createAppAgent",
+					"appAgents.disableAdminColdWalletDispatch",
+					"appAgents.disableHotWallet",
+					"appAgents.enableHotWallet",
+					"appAgents.forceCreateAppAgent",
+					"appAgents.forceInitiateAppAgentDestroy",
+					"appAgents.forceInitiateAppAgentSuspension",
+					"appAgents.forceInitiateAppAgentUnsuspension",
+					"appAgents.initiateDestroyAppAgent",
+					"appAgents.pauseAppAgent",
+					"appAgents.reactivateAppAgent",
+					"appAgents.removeAdmin",
+					"appAgents.removeAdminFromNamedAddressDispatch",
+					"appAgents.setAdminDispatchFilter",
+					"appAgents.setAppAgentMetadata",
+					"appAgents.unpauseAppAgent",
+					"appResources.setActionPointsBalance",
+					"appResources.setClearingPointsBalance",
+					"appSubscriptions.createAppSubscriptionTier",
+					"appSubscriptions.obsoleteAppSubscriptionTier",
+					"appSubscriptions.setAppPayOnDemandMode",
+					"appSubscriptions.setAppSubscriptionTier",
+					"appTransactions.submitClearingTransaction",
+					"appTransactions.forceSubmitClearingTransaction",
+					"appTransferChannels.establishTransferChannel",
+					"appTransferChannels.removeTransferChannel",
+					"appTransferFilters.blockAddressDeposits",
+					"appTransferFilters.setAppDepositPermissions",
+					"appTransferFilters.unblockAddressDeposits",
+					"assets.create",
+					"assets.startDestroy",
+					"assets.destroyAccounts",
+					"assets.destroyApprovals",
+					"assets.finishDestroy",
+					"assets.mint",
+					"assets.burn",
+					"assets.transfer",
+					"assets.transferKeepAlive",
+					"assets.forceTransfer",
+					"assets.freeze",
+					"assets.thaw",
+					"assets.freezeAsset",
+					"assets.thawAsset",
+					"assets.transferOwnership",
+					"assets.setMinBalance",
+					"assets.setMetadata",
+					"balances.transferAllowDeath",
+					"balances.transferKeepAlive",
+					"balances.transferAll",
+					"nfts.create",
+					"nfts.destroy",
+					"nfts.transferOwnership",
+					"nfts.setAcceptOwnership",
+					"nfts.setCollectionMetadata",
+					"nfts.clearCollectionMetadata",
+					"nfts.mint",
+					"nfts.burn",
+					"nfts.transfer",
+					"nfts.lockItemTransfer",
+					"nfts.unlockItemTransfer",
+					"nfts.setMetadata",
+					"nfts.clearMetadata"
+				],
+				"type": "string"
+			},
+			"AdminsRemoveAdminArgs": {
+				"description": "\n`adminType`\n\n`admin`",
+				"properties": {
+					"adminType": {
+						"$ref": "#/components/schemas/AdminType"
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"adminType",
+					"admin"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
 			"UINT32": {
 				"type": "integer",
@@ -75,12 +245,468 @@
 				"$ref": "#/components/schemas/UINT32",
 				"description": "A unique identifier (Asset, Collection, Agent).\nTypically, it is a numeric value."
 			},
-			"BlockchainGenericAccount": {
+			"AppAgentsAddAdminArgs": {
+				"description": "Arguments required to Adds an admin to the App Agent.\n\n`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin to be added.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin to be added."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsAddAdminToNamedAddressArgs": {
+				"description": "Arguments required to Adds an admin to the list of permitted administrators for a named address under a\n\n`appAgentId` - The identifier of the App Agent.\n\n`admin` - The account ID of the admin being added.\n\n`namedAddress` - The named address to which the admin is being added.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin being added."
+					},
+					"namedAddress": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The named address to which the admin is being added."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"namedAddress"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsAllowAdminColdWalletArgs": {
+				"description": "Arguments required to Pallet function to add an AppAgent' admin to the list of addresses allowed to spend\n\n`appAgentId` - The identifier of the App Agent.\n\n`admin` - The admin address to be added to the list.\n\n`coldWallet`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The admin address to be added to the list."
+					},
+					"coldWallet": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"coldWallet"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainAddressName": {
 				"type": "string",
-				"example": "ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s",
-				"description": "The account address on the blockchain.\nTypically, it is a string of alphanumeric characters, encoded in SS58 format.",
-				"minLength": 49,
-				"maxLength": 49
+				"description": "String of unicode chars exactly 10 chars long.\nOnly a subset of chars can be used: https://github.com/traittech/trait-keyless/blob/main/keyless-ts/src/keyless.ts#L39",
+				"minLength": 10,
+				"maxLength": 10,
+				"pattern": "^[0-9a-zA-Z\\-#]+$"
+			},
+			"NamedAddressInput": {
+				"anyOf": [
+					{
+						"properties": {
+							"Address": {
+								"$ref": "#/components/schemas/BlockchainGenericAccount"
+							}
+						},
+						"required": [
+							"Address"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"Name": {
+								"$ref": "#/components/schemas/BlockchainAddressName"
+							}
+						},
+						"required": [
+							"Name"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"AppAgentsChangeHotWalletArgs": {
+				"description": "Arguments required to Change the hot wallet associated with an App Agent.\n\n`appAgentId` - The identifier of the App Agent whose hot wallet is being changed.\n\n`newHotWallet` - The new hot wallet to be set for the specified App Agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent whose hot wallet is being changed."
+					},
+					"newHotWallet": {
+						"$ref": "#/components/schemas/NamedAddressInput",
+						"description": "The new hot wallet to be set for the specified App Agent."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"newHotWallet"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeOwnerCancelArgs": {
+				"description": "Arguments required to Cancels a change of owner for an App Agent.\n\n`appAgentId` - The ID of the App Agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeOwnerCompleteArgs": {
+				"description": "Arguments required to Completes a change of owner for an App Agent.\n\n`appAgentId` - The ID of the App Agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeOwnerInitArgs": {
+				"description": "Arguments required to Initializes the process to change the ownership of an App Agent.\n\n`appAgentId` - The ID of the App Agent.\n\n`proposedOwner` - The account ID of the proposed owner.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"proposedOwner": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the proposed owner."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"proposedOwner"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsClearAdminDispatchFilterArgs": {
+				"description": "Arguments required to Clears the dispatch filter for the specified `admin` account.\n\n`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsClearAppAgentMetadataArgs": {
+				"description": "Arguments required to Clear the metadata for an asset class.\n\n`appAgentId`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsDisableAdminColdWalletDispatchArgs": {
+				"description": "Arguments required to Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend\n\n`appAgentId` - The identifier of the App Agent.\n\n`admin` - The admin address to be removed from the list.\n\n`coldWallet`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The admin address to be removed from the list."
+					},
+					"coldWallet": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"coldWallet"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsDisableHotWalletArgs": {
+				"description": "Arguments required to Disables the hot wallet for a specified App Agent.\n\n`appAgentId` - Identifier of the App Agent for which the hot wallet needs to be disabled.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "Identifier of the App Agent for which the hot wallet needs to be disabled."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsEnableHotWalletArgs": {
+				"description": "Arguments required to Enables the hot wallet for a specified App Agent.\n\n`appAgentId` - Identifier of the App Agent for which the hot wallet needs to be enabled.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "Identifier of the App Agent for which the hot wallet needs to be enabled."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsForceCreateAppAgentArgs": {
+				"description": "Arguments required to Same as `create_app_agent` but can only be called by ForceOrigin\n\n`appAgentOwner`\n\n`appAgentBalancePayer`",
+				"properties": {
+					"appAgentOwner": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					},
+					"appAgentBalancePayer": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"appAgentOwner",
+					"appAgentBalancePayer"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsForceInitiateAppAgentDestroyArgs": {
+				"description": "Arguments required to Force initiates the destroy of an AppAgent.\n\n`appAgentId`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsForceInitiateAppAgentSuspensionArgs": {
+				"description": "Arguments required to Force initiates the suspension of an AppAgent.\n\n`appAgentId`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsForceInitiateAppAgentUnsuspensionArgs": {
+				"description": "Arguments required to Force initiates the un-suspension of an AppAgent.\n\n`appAgentId`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsInitiateDestroyAppAgentArgs": {
+				"description": "Arguments required to Initiate destroy of an App Agent.\n\n`appAgentId` - The identifier of the App Agent to be deleted.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent to be deleted."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsPauseAppAgentArgs": {
+				"description": "Arguments required to Pauses the specified App Agent.\n\n`appAgentId` - The ID of the App Agent to be paused.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent to be paused."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsReactivateAppAgentArgs": {
+				"description": "Arguments required to Reactivates the specified App Agent.\n\n`appAgentId` - The identifier of the App Agent to be reactivated.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent to be reactivated."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsRemoveAdminArgs": {
+				"description": "Arguments required to Removes an admin from the App Agent.\n\n`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin to be removed.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin to be removed."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsRemoveAdminFromNamedAddressDispatchArgs": {
+				"description": "Arguments required to Removes an admin from the list of permitted administrators for a named address under a\n\n`appAgentId` - The identifier of the App Agent.\n\n`admin` - The account ID of the admin being removed.\n\n`namedAddress` - The named address from which the admin is being removed.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin being removed."
+					},
+					"namedAddress": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The named address from which the admin is being removed."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"namedAddress"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UINT64": {
+				"anyOf": [
+					{
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"type": "string"
+					}
+				],
+				"description": "Numeric value, presented as plain number or string",
+				"minimum": 0,
+				"maximum": 18446744073709552000
+			},
+			"AppAgentsSetAdminDispatchFilterArgs": {
+				"description": "Arguments required to Sets the list of dispatchables callable by the specified `admin` account.\n\n`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin.\n\n`newPermissions`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin."
+					},
+					"newPermissions": {
+						"$ref": "#/components/schemas/UINT64"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"newPermissions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainGenericText": {
+				"type": "string",
+				"description": "Text or metadata represented by string.\nCharacters limit is defined in `StringLimit` const on blockchain.",
+				"maxLength": 256
+			},
+			"AppAgentsSetAppAgentMetadataArgs": {
+				"description": "Arguments required to Set the metadata for an asset class.\n\n`appAgentId`\n\n`data` - The general information of this asset. Limited in length by `StringLimit`.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The general information of this asset. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsUnpauseAppAgentArgs": {
+				"description": "Arguments required to Resumes the specified App Agent.\n\n`appAgentId` - The ID of the App Agent to be resumed.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent to be resumed."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
 			"UINT128": {
 				"anyOf": [
@@ -96,16 +722,174 @@
 				"minimum": 0,
 				"maximum": 3.402823669209385e+38
 			},
+			"BlockchainGenericBalance": {
+				"$ref": "#/components/schemas/UINT128",
+				"description": "The balance, represented as a numeric value."
+			},
+			"AppResourcesSetActionPointsBalanceArgs": {
+				"description": "Arguments required to Sets the action points balance for a specified account.\n\n`address` - The account for which the action points balance will be set.\n\n`balance` - The balance of action points to be set for the specified account.",
+				"properties": {
+					"address": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account for which the action points balance will be set."
+					},
+					"balance": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The balance of action points to be set for the specified account."
+					}
+				},
+				"required": [
+					"address",
+					"balance"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppResourcesSetClearingPointsBalanceArgs": {
+				"description": "Arguments required to Sets the clearing points balance for a specified account.\n\n`address` - The account for which the clearing points balance will be set.\n\n`balance` - The balance of clearing points to be set for the specified account.",
+				"properties": {
+					"address": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account for which the clearing points balance will be set."
+					},
+					"balance": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The balance of clearing points to be set for the specified account."
+					}
+				},
+				"required": [
+					"address",
+					"balance"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PayOnDemand": {
+				"properties": {
+					"extraCtActionPrice": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"extraCtPrice": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"extraCtActionPrice",
+					"extraCtPrice"
+				],
+				"type": "object"
+			},
+			"AppSubscriptionTierDetails": {
+				"properties": {
+					"billingPeriodLength": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"payOnDemand": {
+						"$ref": "#/components/schemas/PayOnDemand"
+					},
+					"price": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"includedAnonymousTransfers": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"includedCtActionsNumber": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"includedCtNumber": {
+						"$ref": "#/components/schemas/UINT32"
+					}
+				},
+				"required": [
+					"billingPeriodLength",
+					"payOnDemand",
+					"price",
+					"includedAnonymousTransfers",
+					"includedCtActionsNumber",
+					"includedCtNumber"
+				],
+				"type": "object"
+			},
+			"AppSubscriptionsCreateAppSubscriptionTierArgs": {
+				"description": "Arguments required to Creates a new subscription tier with the provided details.\n\n`details` - The details of the subscription tier to be created.",
+				"properties": {
+					"details": {
+						"$ref": "#/components/schemas/AppSubscriptionTierDetails",
+						"description": "The details of the subscription tier to be created."
+					}
+				},
+				"required": [
+					"details"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppSubscriptionsObsoleteAppSubscriptionTierArgs": {
+				"description": "Arguments required to Updates the details or status of an existing subscription tier.\n\n`tierToObsolete`\n\n`successorTier`",
+				"properties": {
+					"tierToObsolete": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"successorTier": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"tierToObsolete",
+					"successorTier"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppPayOnDemandMode": {
+				"enum": [
+					"AppAgent",
+					"Admin",
+					"Disabled"
+				],
+				"type": "string"
+			},
+			"AppSubscriptionsSetAppPayOnDemandModeArgs": {
+				"description": "Arguments required to Sets the pay-on-demand mode for an app agent's subscription.\n\n`appAgentId` - The identifier of the subscriber (app agent).\n\n`payOnDemandMode` - The pay-on-demand mode to be set for the subscription.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the subscriber (app agent)."
+					},
+					"payOnDemandMode": {
+						"$ref": "#/components/schemas/AppPayOnDemandMode",
+						"description": "The pay-on-demand mode to be set for the subscription."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"payOnDemandMode"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppSubscriptionsSetAppSubscriptionTierArgs": {
+				"description": "Arguments required to Changes the subscription tier of an app agent.\n\n`appAgentId` - The identifier of the app agent whose subscription tier is to be changed.\n\n`subscriptionTierId` - The identifier of the new subscription tier to be assigned to the app agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the app agent whose subscription tier is to be changed."
+					},
+					"subscriptionTierId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the new subscription tier to be assigned to the app agent."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"subscriptionTierId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"BlockchainGenericAddressId": {
 				"$ref": "#/components/schemas/UINT128",
 				"description": "Unique address id on blockchain (TransactionalAddressId)\nTypically, it is a numeric value."
-			},
-			"BlockchainAddressName": {
-				"type": "string",
-				"description": "String of unicode chars exactly 10 chars long.\nOnly a subset of chars can be used: https://github.com/traittech/trait-keyless/blob/main/keyless-ts/src/keyless.ts#L39",
-				"minLength": 10,
-				"maxLength": 10,
-				"pattern": "^[0-9a-zA-Z\\-#]+$"
 			},
 			"CTActionOrigin": {
 				"anyOf": [
@@ -227,41 +1011,26 @@
 				"type": "array",
 				"description": "A nested array of actions (Vec<Vec<Action>> in rust)."
 			},
-			"AnyJson": {
-				"anyOf": [
-					{
-						"type": "string"
+			"AppTransactionsForceSubmitClearingTransactionArgs": {
+				"description": "Arguments required to Submit a Clearing transaction with root permissions.\n\n`appAgentId`\n\n`extraFeePayer`\n\n`atomics`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
 					},
-					{
-						"type": "number",
-						"format": "double"
+					"extraFeePayer": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
 					},
-					{
-						"type": "boolean"
-					},
-					{
-						"items": {
-							"$ref": "#/components/schemas/AnyJson"
-						},
-						"type": "array"
-					},
-					{
-						"properties": {},
-						"additionalProperties": {
-							"$ref": "#/components/schemas/AnyJson"
-						},
-						"type": "object"
+					"atomics": {
+						"$ref": "#/components/schemas/CTAtomicActions"
 					}
-				],
-				"nullable": true
-			},
-			"Record_string.AnyJson_": {
-				"properties": {},
-				"additionalProperties": {
-					"$ref": "#/components/schemas/AnyJson"
 				},
+				"required": [
+					"appAgentId",
+					"extraFeePayer",
+					"atomics"
+				],
 				"type": "object",
-				"description": "Construct a type with a set of properties K of type T"
+				"additionalProperties": false
 			},
 			"AppTransactionsSubmitClearingTransactionArgs": {
 				"description": "Arguments required to Submit a Clearing transaction.\n\n`appAgentId`\n\n`atomics`",
@@ -280,49 +1049,290 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"TransactionType": {
-				"description": "Represents the type of transaction to be performed.\nTransaction value must match blockchain module & method!",
-				"enum": [
-					"appTransactions.submitClearingTransaction",
-					"assets.create",
-					"assets.startDestroy",
-					"assets.destroyAccounts",
-					"assets.destroyApprovals",
-					"assets.finishDestroy",
-					"assets.mint",
-					"assets.burn",
-					"assets.transfer",
-					"assets.transferKeepAlive",
-					"assets.forceTransfer",
-					"assets.freeze",
-					"assets.thaw",
-					"assets.freezeAsset",
-					"assets.thawAsset",
-					"assets.transferOwnership",
-					"assets.setMinBalance",
-					"assets.setMetadata",
-					"balances.transferAllowDeath",
-					"balances.transferKeepAlive",
-					"balances.transferAll",
-					"nfts.create",
-					"nfts.destroy",
-					"nfts.transferOwnership",
-					"nfts.setAcceptOwnership",
-					"nfts.setCollectionMetadata",
-					"nfts.clearCollectionMetadata",
-					"nfts.mint",
-					"nfts.burn",
-					"nfts.transfer",
-					"nfts.lockItemTransfer",
-					"nfts.unlockItemTransfer",
-					"nfts.setMetadata",
-					"nfts.clearMetadata"
+			"AppTransferChannelsEstablishTransferChannelArgs": {
+				"description": "Arguments required to Establishes a new transfer channel between two accounts.\n\n`senderAccount` - The account ID of the sender address for the new transfer channel.\n\n`transfersLimitResetPeriod` - The number of blocks after which the transfer limit resets\n\n`transfersLimitPerPeriod` - The number of transfers allowed per period",
+				"properties": {
+					"senderAccount": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the sender address for the new transfer channel."
+					},
+					"transfersLimitResetPeriod": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The number of blocks after which the transfer limit resets"
+					},
+					"transfersLimitPerPeriod": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The number of transfers allowed per period"
+					}
+				},
+				"required": [
+					"senderAccount",
+					"transfersLimitResetPeriod",
+					"transfersLimitPerPeriod"
 				],
-				"type": "string"
+				"type": "object",
+				"additionalProperties": false
 			},
-			"BlockchainGenericBalance": {
-				"$ref": "#/components/schemas/UINT128",
-				"description": "The balance, represented as a numeric value."
+			"AppTransferChannelsRemoveTransferChannelArgs": {
+				"description": "Arguments required to Removes a transfer channel between two accounts.\n\n`senderAccount` - The account ID of the sender address for the transfer channel to be removed.",
+				"properties": {
+					"senderAccount": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the sender address for the transfer channel to be removed."
+					}
+				},
+				"required": [
+					"senderAccount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferFiltersBlockAddressDepositsArgs": {
+				"description": "Arguments required to Blocks deposits to a keyless address controlled by a specific app agent.\n\n`appAgentId`\n\n`keylessAddress`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"keylessAddress": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"keylessAddress"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainGenericBoolean": {
+				"type": "boolean",
+				"example": true,
+				"description": "Boolean type for blockchain (bool)"
+			},
+			"NativeDepositPermissionsDetails": {
+				"properties": {
+					"maxDeposit": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"minDeposit": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"allowed": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					}
+				},
+				"required": [
+					"allowed"
+				],
+				"type": "object"
+			},
+			"FungibleDepositAllowAll": {
+				"type": "string",
+				"enum": [
+					"AllowAll"
+				],
+				"nullable": false
+			},
+			"FungibleTokenDetails": {
+				"properties": {
+					"maxDeposit": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"minDeposit": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object"
+			},
+			"FungibleDepositAllowFungible": {
+				"properties": {
+					"AllowedFungibleTokens": {
+						"properties": {
+							"allowedTokens": {
+								"items": {
+									"$ref": "#/components/schemas/FungibleTokenDetails"
+								},
+								"type": "array"
+							},
+							"allowOwnTokens": {
+								"$ref": "#/components/schemas/BlockchainGenericBoolean"
+							}
+						},
+						"required": [
+							"allowedTokens",
+							"allowOwnTokens"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"AllowedFungibleTokens"
+				],
+				"type": "object"
+			},
+			"FungibleDepositDisallowFungible": {
+				"properties": {
+					"DisallowedFungibleTokens": {
+						"properties": {
+							"disallowedTokens": {
+								"items": {
+									"$ref": "#/components/schemas/BlockchainGenericId"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"disallowedTokens"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"DisallowedFungibleTokens"
+				],
+				"type": "object"
+			},
+			"FungibleDepositPermissionsType": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/FungibleDepositAllowAll"
+					},
+					{
+						"$ref": "#/components/schemas/FungibleDepositAllowFungible"
+					},
+					{
+						"$ref": "#/components/schemas/FungibleDepositDisallowFungible"
+					}
+				]
+			},
+			"NftsDepositAllowAll": {
+				"type": "string",
+				"enum": [
+					"AllowAll"
+				],
+				"nullable": false
+			},
+			"NftsDepositAllowNftCollections": {
+				"properties": {
+					"AllowedNftCollections": {
+						"properties": {
+							"allowedCollections": {
+								"items": {
+									"$ref": "#/components/schemas/BlockchainGenericId"
+								},
+								"type": "array"
+							},
+							"allowOwnCollections": {
+								"$ref": "#/components/schemas/BlockchainGenericBoolean"
+							}
+						},
+						"required": [
+							"allowedCollections",
+							"allowOwnCollections"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"AllowedNftCollections"
+				],
+				"type": "object"
+			},
+			"NftsDepositDisallowNftCollections": {
+				"properties": {
+					"DisallowedNftCollections": {
+						"properties": {
+							"disallowedCollections": {
+								"items": {
+									"$ref": "#/components/schemas/BlockchainGenericId"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"disallowedCollections"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"DisallowedNftCollections"
+				],
+				"type": "object"
+			},
+			"NftsDepositPermissionType": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/NftsDepositAllowAll"
+					},
+					{
+						"$ref": "#/components/schemas/NftsDepositAllowNftCollections"
+					},
+					{
+						"$ref": "#/components/schemas/NftsDepositDisallowNftCollections"
+					}
+				]
+			},
+			"AppDepositPermissions": {
+				"properties": {
+					"nftCollections": {
+						"$ref": "#/components/schemas/NftsDepositPermissionType"
+					},
+					"fungibles": {
+						"$ref": "#/components/schemas/FungibleDepositPermissionsType"
+					},
+					"native": {
+						"$ref": "#/components/schemas/NativeDepositPermissionsDetails"
+					}
+				},
+				"required": [
+					"nftCollections",
+					"fungibles",
+					"native"
+				],
+				"type": "object"
+			},
+			"AppTransferFiltersSetAppDepositPermissionsArgs": {
+				"description": "Arguments required to Sets the transdepositfer permissions for the specified app_agent_id under the authority\n\n`appAgentId` - The identifier of the application agent for which the deposit permissions are being set.\n\n`permissions` - The deposit permissions to be set for the application agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the application agent for which the deposit permissions are being set."
+					},
+					"permissions": {
+						"$ref": "#/components/schemas/AppDepositPermissions",
+						"description": "The deposit permissions to be set for the application agent."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"permissions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferFiltersUnblockAddressDepositsArgs": {
+				"description": "Arguments required to Unblocks deposits to a keyless address controlled by a specific app agent.\n\n`appAgentId`\n\n`keylessAddress`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"keylessAddress": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"keylessAddress"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
 			"AssetsBurnArgs": {
 				"description": "Arguments required to Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.\n\n`id` - The identifier of the asset to have some amount burned.\n\n`who` - The account to be debited from.\n\n`amount` - The maximum amount by which `who`'s balance should be reduced.",
@@ -489,11 +1499,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"BlockchainGenericText": {
-				"type": "string",
-				"description": "Text or metadata represented by string.\nCharacters limit is defined in `StringLimit` const on blockchain.",
-				"maxLength": 256
-			},
 			"AssetsSetMetadataArgs": {
 				"description": "Arguments required to Set the raw metadata for an asset.\n\n`id` - The identifier of the asset to update.\n\n`data` - The data of metadata. Limited in length by `StringLimit`.",
 				"properties": {
@@ -645,11 +1650,6 @@
 				],
 				"type": "object",
 				"additionalProperties": false
-			},
-			"BlockchainGenericBoolean": {
-				"type": "boolean",
-				"example": true,
-				"description": "Boolean type for blockchain (bool)"
 			},
 			"BalancesTransferAllArgs": {
 				"description": "Arguments required to Transfer the entire transferable balance from the caller account.\n\n`dest` - The recipient of the transfer.\n\n`keepAlive`",
@@ -956,7 +1956,121 @@
 			"TransactionArgs": {
 				"anyOf": [
 					{
+						"$ref": "#/components/schemas/AdminsAddAdminArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AdminsRemoveAdminArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAddAdminArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAddAdminToNamedAddressArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAllowAdminColdWalletArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeHotWalletArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCancelArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCompleteArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerInitArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsClearAdminDispatchFilterArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsClearAppAgentMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsDisableHotWalletArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsEnableHotWalletArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsForceCreateAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsForceInitiateAppAgentDestroyArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsForceInitiateAppAgentSuspensionArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsForceInitiateAppAgentUnsuspensionArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsInitiateDestroyAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsPauseAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsReactivateAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminFromNamedAddressDispatchArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsSetAdminDispatchFilterArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsSetAppAgentMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsUnpauseAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppResourcesSetActionPointsBalanceArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppResourcesSetClearingPointsBalanceArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsCreateAppSubscriptionTierArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsObsoleteAppSubscriptionTierArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppPayOnDemandModeArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppSubscriptionTierArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransactionsForceSubmitClearingTransactionArgs"
+					},
+					{
 						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferChannelsEstablishTransferChannelArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferChannelsRemoveTransferChannelArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersBlockAddressDepositsArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersSetAppDepositPermissionsArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersUnblockAddressDepositsArgs"
 					},
 					{
 						"$ref": "#/components/schemas/AssetsBurnArgs"
@@ -1060,6 +2174,829 @@
 				],
 				"description": "Represents a transaction args"
 			},
+			"AdminsAddAdminTx": {
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AdminsAddAdmin",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AdminsAddAdminArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AdminsRemoveAdmin": {
+				"enum": [
+					"admins.removePalletAdmin"
+				],
+				"type": "string"
+			},
+			"AdminsRemoveAdminTx": {
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AdminsRemoveAdmin",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AdminsRemoveAdminArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsAddAdmin": {
+				"enum": [
+					"appAgents.addAdmin"
+				],
+				"type": "string"
+			},
+			"AppAgentsAddAdminTx": {
+				"description": "Adds an admin to the App Agent. This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsAddAdmin",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsAddAdminArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsAddAdminToNamedAddress": {
+				"enum": [
+					"appAgents.addAdminToNamedAddressDispatch"
+				],
+				"type": "string"
+			},
+			"AppAgentsAddAdminToNamedAddressTx": {
+				"description": "Adds an admin to the list of permitted administrators for a named address under a specific App Agent. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsAddAdminToNamedAddress",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsAddAdminToNamedAddressArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsAllowAdminColdWallet": {
+				"enum": [
+					"appAgents.allowAdminColdWalletDispatch"
+				],
+				"type": "string"
+			},
+			"AppAgentsAllowAdminColdWalletTx": {
+				"description": "Pallet function to add an AppAgent' admin to the list of addresses allowed to spend from a cold wallet associated with a specific App Agent. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsAllowAdminColdWallet",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsAllowAdminColdWalletArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsChangeHotWallet": {
+				"enum": [
+					"appAgents.changeHotWallet"
+				],
+				"type": "string"
+			},
+			"AppAgentsChangeHotWalletTx": {
+				"description": "Change the hot wallet associated with an App Agent. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsChangeHotWallet",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsChangeHotWalletArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsChangeOwnerCancel": {
+				"enum": [
+					"appAgents.changeOwnerCancel"
+				],
+				"type": "string"
+			},
+			"AppAgentsChangeOwnerCancelTx": {
+				"description": "Cancels a change of owner for an App Agent. This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsChangeOwnerCancel",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCancelArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsChangeOwnerComplete": {
+				"enum": [
+					"appAgents.changeOwnerComplete"
+				],
+				"type": "string"
+			},
+			"AppAgentsChangeOwnerCompleteTx": {
+				"description": "Completes a change of owner for an App Agent. This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsChangeOwnerComplete",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCompleteArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsChangeOwnerInit": {
+				"enum": [
+					"appAgents.changeOwnerInit"
+				],
+				"type": "string"
+			},
+			"AppAgentsChangeOwnerInitTx": {
+				"description": "Initializes the process to change the ownership of an App Agent. This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsChangeOwnerInit",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerInitArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsClearAdminDispatchFilter": {
+				"enum": [
+					"appAgents.clearAdminDispatchFilter"
+				],
+				"type": "string"
+			},
+			"AppAgentsClearAdminDispatchFilterTx": {
+				"description": "Clears the dispatch filter for the specified `admin` account. The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsClearAdminDispatchFilter",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsClearAdminDispatchFilterArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsClearAppAgentMetadata": {
+				"enum": [
+					"appAgents.clearAppAgentMetadata"
+				],
+				"type": "string"
+			},
+			"AppAgentsClearAppAgentMetadataTx": {
+				"description": "Clear the metadata for an asset class. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`. Any deposit is freed for the asset class owner.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsClearAppAgentMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsClearAppAgentMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsDisableAdminColdWalletDispatch": {
+				"enum": [
+					"appAgents.disableAdminColdWalletDispatch"
+				],
+				"type": "string"
+			},
+			"AppAgentsDisableAdminColdWalletDispatchTx": {
+				"description": "Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend from a cold wallet associated with a specific App Agent. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsDisableAdminColdWalletDispatch",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsDisableHotWallet": {
+				"enum": [
+					"appAgents.disableHotWallet"
+				],
+				"type": "string"
+			},
+			"AppAgentsDisableHotWalletTx": {
+				"description": "Disables the hot wallet for a specified App Agent. This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsDisableHotWallet",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsDisableHotWalletArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsEnableHotWallet": {
+				"enum": [
+					"appAgents.enableHotWallet"
+				],
+				"type": "string"
+			},
+			"AppAgentsEnableHotWalletTx": {
+				"description": "Enables the hot wallet for a specified App Agent. This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsEnableHotWallet",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsEnableHotWalletArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsForceCreateAppAgent": {
+				"enum": [
+					"appAgents.forceCreateAppAgent"
+				],
+				"type": "string"
+			},
+			"AppAgentsForceCreateAppAgentTx": {
+				"description": "Same as `create_app_agent` but can only be called by ForceOrigin",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsForceCreateAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsForceCreateAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsForceInitiateAppAgentDestroy": {
+				"enum": [
+					"appAgents.forceInitiateAppAgentDestroy"
+				],
+				"type": "string"
+			},
+			"AppAgentsForceInitiateAppAgentDestroyTx": {
+				"description": "Force initiates the destroy of an AppAgent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsForceInitiateAppAgentDestroy",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsForceInitiateAppAgentDestroyArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsForceInitiateAppAgentSuspension": {
+				"enum": [
+					"appAgents.forceInitiateAppAgentSuspension"
+				],
+				"type": "string"
+			},
+			"AppAgentsForceInitiateAppAgentSuspensionTx": {
+				"description": "Force initiates the suspension of an AppAgent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsForceInitiateAppAgentSuspension",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsForceInitiateAppAgentSuspensionArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsForceInitiateAppAgentUnsuspension": {
+				"enum": [
+					"appAgents.forceInitiateAppAgentUnsuspension"
+				],
+				"type": "string"
+			},
+			"AppAgentsForceInitiateAppAgentUnsuspensionTx": {
+				"description": "Force initiates the un-suspension of an AppAgent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsForceInitiateAppAgentUnsuspension",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsForceInitiateAppAgentUnsuspensionArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsInitiateDestroyAppAgent": {
+				"enum": [
+					"appAgents.initiateDestroyAppAgent"
+				],
+				"type": "string"
+			},
+			"AppAgentsInitiateDestroyAppAgentTx": {
+				"description": "Initiate destroy of an App Agent. This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to \"destroy initiated\" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsInitiateDestroyAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsInitiateDestroyAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsPauseAppAgent": {
+				"enum": [
+					"appAgents.pauseAppAgent"
+				],
+				"type": "string"
+			},
+			"AppAgentsPauseAppAgentTx": {
+				"description": "Pauses the specified App Agent. This function verifies that the caller has the necessary permissions to pause the app agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsPauseAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsPauseAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsReactivateAppAgent": {
+				"enum": [
+					"appAgents.reactivateAppAgent"
+				],
+				"type": "string"
+			},
+			"AppAgentsReactivateAppAgentTx": {
+				"description": "Reactivates the specified App Agent. This function is used to reactivate a previously deactivated App Agent. It checks if the App Agent exists and is in the DestroyInitiated state. If so, it verifies whether the deletion window has passed. If the deletion was initiated by the system, it attempts to process a subscription payment to prevent deletion and sets the App Agent to active status. If the deletion was triggered by the owner, it resets the App Agent to active without any checks. After reactivation, it emits an event to indicate the status change of the App Agent. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsReactivateAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsReactivateAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsRemoveAdmin": {
+				"enum": [
+					"appAgents.removeAdmin"
+				],
+				"type": "string"
+			},
+			"AppAgentsRemoveAdminTx": {
+				"description": "Removes an admin from the App Agent. This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsRemoveAdmin",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch": {
+				"enum": [
+					"appAgents.removeAdminFromNamedAddressDispatch"
+				],
+				"type": "string"
+			},
+			"AppAgentsRemoveAdminFromNamedAddressDispatchTx": {
+				"description": "Removes an admin from the list of permitted administrators for a named address under a specific App Agent. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminFromNamedAddressDispatchArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsSetAdminDispatchFilter": {
+				"enum": [
+					"appAgents.setAdminDispatchFilter"
+				],
+				"type": "string"
+			},
+			"AppAgentsSetAdminDispatchFilterTx": {
+				"description": "Sets the list of dispatchables callable by the specified `admin` account. The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsSetAdminDispatchFilter",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsSetAdminDispatchFilterArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsSetAppAgentMetadata": {
+				"enum": [
+					"appAgents.setAppAgentMetadata"
+				],
+				"type": "string"
+			},
+			"AppAgentsSetAppAgentMetadataTx": {
+				"description": "Set the metadata for an asset class. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsSetAppAgentMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsSetAppAgentMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsUnpauseAppAgent": {
+				"enum": [
+					"appAgents.unpauseAppAgent"
+				],
+				"type": "string"
+			},
+			"AppAgentsUnpauseAppAgentTx": {
+				"description": "Resumes the specified App Agent. This function verifies that the caller has the necessary permissions to resume the app agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsUnpauseAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsUnpauseAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppResourcesSetActionPointsBalance": {
+				"enum": [
+					"appResources.setActionPointsBalance"
+				],
+				"type": "string"
+			},
+			"AppResourcesSetActionPointsBalanceTx": {
+				"description": "Sets the action points balance for a specified account. This function allows setting the action points balance for a specified account. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppResourcesSetActionPointsBalance",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppResourcesSetActionPointsBalanceArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppResourcesSetClearingPointsBalance": {
+				"enum": [
+					"appResources.setClearingPointsBalance"
+				],
+				"type": "string"
+			},
+			"AppResourcesSetClearingPointsBalanceTx": {
+				"description": "Sets the clearing points balance for a specified account. This function allows setting the clearing points balance for a specified account. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppResourcesSetClearingPointsBalance",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppResourcesSetClearingPointsBalanceArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppSubscriptionsCreateAppSubscriptionTier": {
+				"enum": [
+					"appSubscriptions.createAppSubscriptionTier"
+				],
+				"type": "string"
+			},
+			"AppSubscriptionsCreateAppSubscriptionTierTx": {
+				"description": "Creates a new subscription tier with the provided details. This function is used to create a new subscription tier with the specified details. It generates a unique identifier for the tier, inserts the tier into storage, updates the next tier ID, and emits an event to indicate the creation of the subscription tier. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppSubscriptionsCreateAppSubscriptionTier",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppSubscriptionsCreateAppSubscriptionTierArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier": {
+				"enum": [
+					"appSubscriptions.obsoleteAppSubscriptionTier"
+				],
+				"type": "string"
+			},
+			"AppSubscriptionsObsoleteAppSubscriptionTierTx": {
+				"description": "Updates the details or status of an existing subscription tier. This function is used to patch the details or status of an existing subscription tier identified by its ID. It retrieves the tier from storage, updates its details or status based on the provided patch, and stores the updated tier back into storage. After patching, it emits an event to indicate the changes made to the subscription tier. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppSubscriptionsObsoleteAppSubscriptionTierArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppSubscriptionsSetAppPayOnDemandMode": {
+				"enum": [
+					"appSubscriptions.setAppPayOnDemandMode"
+				],
+				"type": "string"
+			},
+			"AppSubscriptionsSetAppPayOnDemandModeTx": {
+				"description": "Sets the pay-on-demand mode for an app agent's subscription. This function allows setting the pay-on-demand mode for an app agent's subscription. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppSubscriptionsSetAppPayOnDemandMode",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppPayOnDemandModeArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppSubscriptionsSetAppSubscriptionTier": {
+				"enum": [
+					"appSubscriptions.setAppSubscriptionTier"
+				],
+				"type": "string"
+			},
+			"AppSubscriptionsSetAppSubscriptionTierTx": {
+				"description": "Changes the subscription tier of an app agent. This function allows changing the subscription tier of an app agent identified by its subscriber ID. It calculates the difference in price between the current and new tiers and adjusts the subscription limits accordingly. If the new tier is more expensive, it charges the delta payment and updates the action points and clearing points balances for the current billing period. After the adjustment, it updates the subscription tier information for the app agent and emits an event indicating the change in subscription tier. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppSubscriptionsSetAppSubscriptionTier",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppSubscriptionTierArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppTransactionsForceSubmitClearingTransaction": {
+				"enum": [
+					"appTransactions.forceSubmitClearingTransaction"
+				],
+				"type": "string"
+			},
+			"AppTransactionsForceSubmitClearingTransactionTx": {
+				"description": "Submit a Clearing transaction with root permissions. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from `extra_fee_payer`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppTransactionsForceSubmitClearingTransaction",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransactionsForceSubmitClearingTransactionArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppTransactionsSubmitClearingTransaction": {
+				"enum": [
+					"appTransactions.submitClearingTransaction"
+				],
+				"type": "string"
+			},
 			"AppTransactionsSubmitClearingTransactionTx": {
 				"description": "Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).",
 				"properties": {
@@ -1069,6 +3006,131 @@
 					},
 					"arguments": {
 						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppTransferChannelsEstablishTransferChannel": {
+				"enum": [
+					"appTransferChannels.establishTransferChannel"
+				],
+				"type": "string"
+			},
+			"AppTransferChannelsEstablishTransferChannelTx": {
+				"description": "Establishes a new transfer channel between two accounts. This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppTransferChannelsEstablishTransferChannel",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferChannelsEstablishTransferChannelArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppTransferChannelsRemoveTransferChannel": {
+				"enum": [
+					"appTransferChannels.removeTransferChannel"
+				],
+				"type": "string"
+			},
+			"AppTransferChannelsRemoveTransferChannelTx": {
+				"description": "Removes a transfer channel between two accounts. This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppTransferChannelsRemoveTransferChannel",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferChannelsRemoveTransferChannelArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppTransferFiltersBlockAddressDeposits": {
+				"enum": [
+					"appTransferFilters.blockAddressDeposits"
+				],
+				"type": "string"
+			},
+			"AppTransferFiltersBlockAddressDepositsTx": {
+				"description": "Blocks deposits to a keyless address controlled by a specific app agent. # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppTransferFiltersBlockAddressDeposits",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferFiltersBlockAddressDepositsArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppTransferFiltersSetAppDepositPermissions": {
+				"enum": [
+					"appTransferFilters.setAppDepositPermissions"
+				],
+				"type": "string"
+			},
+			"AppTransferFiltersSetAppDepositPermissionsTx": {
+				"description": "Sets the transdepositfer permissions for the specified app_agent_id under the authority of the caller's origin. This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent. # Parameters",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppTransferFiltersSetAppDepositPermissions",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferFiltersSetAppDepositPermissionsArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppTransferFiltersUnblockAddressDeposits": {
+				"enum": [
+					"appTransferFilters.unblockAddressDeposits"
+				],
+				"type": "string"
+			},
+			"AppTransferFiltersUnblockAddressDepositsTx": {
+				"description": "Unblocks deposits to a keyless address controlled by a specific app agent. # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppTransferFiltersUnblockAddressDeposits",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferFiltersUnblockAddressDepositsArgs",
 						"description": "The arguments for the transaction."
 					}
 				},
@@ -1904,7 +3966,121 @@
 			"TxAction": {
 				"anyOf": [
 					{
+						"$ref": "#/components/schemas/AdminsAddAdminTx"
+					},
+					{
+						"$ref": "#/components/schemas/AdminsRemoveAdminTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAddAdminTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAddAdminToNamedAddressTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAllowAdminColdWalletTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeHotWalletTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCancelTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCompleteTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerInitTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsClearAdminDispatchFilterTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsClearAppAgentMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsDisableHotWalletTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsEnableHotWalletTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsForceCreateAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsForceInitiateAppAgentDestroyTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsForceInitiateAppAgentSuspensionTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsForceInitiateAppAgentUnsuspensionTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsInitiateDestroyAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsPauseAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsReactivateAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminFromNamedAddressDispatchTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsSetAdminDispatchFilterTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsSetAppAgentMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsUnpauseAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppResourcesSetActionPointsBalanceTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppResourcesSetClearingPointsBalanceTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsCreateAppSubscriptionTierTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsObsoleteAppSubscriptionTierTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppPayOnDemandModeTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppSubscriptionTierTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransactionsForceSubmitClearingTransactionTx"
+					},
+					{
 						"$ref": "#/components/schemas/AppTransactionsSubmitClearingTransactionTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferChannelsEstablishTransferChannelTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferChannelsRemoveTransferChannelTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersBlockAddressDepositsTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersSetAppDepositPermissionsTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersUnblockAddressDepositsTx"
 					},
 					{
 						"$ref": "#/components/schemas/AssetsBurnTx"

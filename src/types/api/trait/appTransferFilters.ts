@@ -1,8 +1,4 @@
-import type {
-  BlockchainGenericBalance,
-  BlockchainGenericBoolean,
-  BlockchainGenericId,
-} from '../common';
+import type { BlockchainGenericBalance, BlockchainGenericBoolean, BlockchainGenericId } from '../common';
 
 export type FungibleTokenDetails = {
   id: BlockchainGenericId;
@@ -42,7 +38,7 @@ type NftsDepositAllowNftCollections = {
 type NftsDepositDisallowNftCollections = {
   DisallowedNftCollections: {
     disallowedCollections: BlockchainGenericId[];
-  }
+  };
 };
 
 export type NftsDepositPermissionType =
