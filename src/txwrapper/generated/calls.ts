@@ -23,7 +23,8 @@ import type {
 import type {
   AdminType,
   AppSubscriptionTierDetails,
-  PayOnDemandMode,
+  AppDepositPermissions,
+  AppPayOnDemandMode,
   NamedAddressInput,
   NftWitness,
 } from '../../types/api/trait';
@@ -1534,12 +1535,12 @@ export interface AppSubscriptionsSetAppPayOnDemandModeArgs extends Args {
   /**
    *  The pay-on-demand mode to be set for the subscription.
    */
-  payOnDemandMode: PayOnDemandMode;
+  payOnDemandMode: AppPayOnDemandMode;
 };
 
 const AppSubscriptionsSetAppPayOnDemandModeArgsSchema = z.object({
   appAgentId: schema.BlockchainGenericIdSchema,
-  payOnDemandMode: schema.PayOnDemandModeSchema,
+  payOnDemandMode: schema.AppPayOnDemandModeSchema,
 });
 
 /**
@@ -1719,6 +1720,259 @@ export function appTransactionsSubmitClearingTransaction(
 export interface AppTransactionsSubmitClearingTransactionTx extends ITxAction {
   actionType: TransactionType.AppTransactionsSubmitClearingTransaction;
   arguments: AppTransactionsSubmitClearingTransactionArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Establishes a new transfer channel between two accounts.
+ *
+ * `senderAccount` - The account ID of the sender address for the new transfer channel.
+ *
+ * `transfersLimitResetPeriod` - The number of blocks after which the transfer limit resets
+ *
+ * `transfersLimitPerPeriod` - The number of transfers allowed per period
+ */
+export interface AppTransferChannelsEstablishTransferChannelArgs extends Args {
+  /**
+   *  The account ID of the sender address for the new transfer channel.
+   */
+  senderAccount: BlockchainGenericAccount;
+  /**
+   *  The number of blocks after which the transfer limit resets
+   */
+  transfersLimitResetPeriod: BlockchainGenericId;
+  /**
+   *  The number of transfers allowed per period
+   */
+  transfersLimitPerPeriod: BlockchainGenericBalance;
+};
+
+const AppTransferChannelsEstablishTransferChannelArgsSchema = z.object({
+  senderAccount: schema.BlockchainGenericAccountSchema,
+  transfersLimitResetPeriod: schema.BlockchainGenericIdSchema,
+  transfersLimitPerPeriod: schema.BlockchainGenericBalanceSchema,
+});
+
+/**
+ * @name appTransferChannelsEstablishTransferChannel
+ * @summary Establishes a new transfer channel between two accounts.
+ * @description This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters
+ * @param args - The arguments of the transaction. {@link AppTransferChannelsEstablishTransferChannelArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appTransferChannelsEstablishTransferChannel(
+  args: AppTransferChannelsEstablishTransferChannelArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppTransferChannelsEstablishTransferChannelArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appTransferChannels', 'establishTransferChannel', args, info, options);
+}
+
+/**
+ * Establishes a new transfer channel between two accounts. This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters
+ */
+export interface AppTransferChannelsEstablishTransferChannelTx extends ITxAction {
+  actionType: TransactionType.AppTransferChannelsEstablishTransferChannel;
+  arguments: AppTransferChannelsEstablishTransferChannelArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Removes a transfer channel between two accounts.
+ *
+ * `senderAccount` - The account ID of the sender address for the transfer channel to be removed.
+ */
+export interface AppTransferChannelsRemoveTransferChannelArgs extends Args {
+  /**
+   *  The account ID of the sender address for the transfer channel to be removed.
+   */
+  senderAccount: BlockchainGenericAccount;
+};
+
+const AppTransferChannelsRemoveTransferChannelArgsSchema = z.object({
+  senderAccount: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appTransferChannelsRemoveTransferChannel
+ * @summary Removes a transfer channel between two accounts.
+ * @description This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters
+ * @param args - The arguments of the transaction. {@link AppTransferChannelsRemoveTransferChannelArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appTransferChannelsRemoveTransferChannel(
+  args: AppTransferChannelsRemoveTransferChannelArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppTransferChannelsRemoveTransferChannelArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appTransferChannels', 'removeTransferChannel', args, info, options);
+}
+
+/**
+ * Removes a transfer channel between two accounts. This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters
+ */
+export interface AppTransferChannelsRemoveTransferChannelTx extends ITxAction {
+  actionType: TransactionType.AppTransferChannelsRemoveTransferChannel;
+  arguments: AppTransferChannelsRemoveTransferChannelArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Blocks deposits to a keyless address controlled by a specific app agent.
+ *
+ * `appAgentId`
+ *
+ * `keylessAddress`
+ */
+export interface AppTransferFiltersBlockAddressDepositsArgs extends Args {
+  appAgentId: BlockchainGenericId;
+  keylessAddress: BlockchainGenericAccount;
+};
+
+const AppTransferFiltersBlockAddressDepositsArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  keylessAddress: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appTransferFiltersBlockAddressDeposits
+ * @summary Blocks deposits to a keyless address controlled by a specific app agent.
+ * @description # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).
+ * @param args - The arguments of the transaction. {@link AppTransferFiltersBlockAddressDepositsArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appTransferFiltersBlockAddressDeposits(
+  args: AppTransferFiltersBlockAddressDepositsArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppTransferFiltersBlockAddressDepositsArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appTransferFilters', 'blockAddressDeposits', args, info, options);
+}
+
+/**
+ * Blocks deposits to a keyless address controlled by a specific app agent. # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).
+ */
+export interface AppTransferFiltersBlockAddressDepositsTx extends ITxAction {
+  actionType: TransactionType.AppTransferFiltersBlockAddressDeposits;
+  arguments: AppTransferFiltersBlockAddressDepositsArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Sets the transdepositfer permissions for the specified app_agent_id under the authority
+ *
+ * `appAgentId` - The identifier of the application agent for which the deposit permissions are being set.
+ *
+ * `permissions` - The deposit permissions to be set for the application agent.
+ */
+export interface AppTransferFiltersSetAppDepositPermissionsArgs extends Args {
+  /**
+   *  The identifier of the application agent for which the deposit permissions are being set.
+   */
+  appAgentId: BlockchainGenericId;
+  /**
+   *  The deposit permissions to be set for the application agent.
+   */
+  permissions: AppDepositPermissions;
+};
+
+const AppTransferFiltersSetAppDepositPermissionsArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  permissions: schema.AppDepositPermissionsSchema,
+});
+
+/**
+ * @name appTransferFiltersSetAppDepositPermissions
+ * @summary Sets the transdepositfer permissions for the specified app_agent_id under the authority
+ * @description of the caller's origin. This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent. # Parameters
+ * @param args - The arguments of the transaction. {@link AppTransferFiltersSetAppDepositPermissionsArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appTransferFiltersSetAppDepositPermissions(
+  args: AppTransferFiltersSetAppDepositPermissionsArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppTransferFiltersSetAppDepositPermissionsArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appTransferFilters', 'setAppDepositPermissions', args, info, options);
+}
+
+/**
+ * Sets the transdepositfer permissions for the specified app_agent_id under the authority of the caller's origin. This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent. # Parameters
+ */
+export interface AppTransferFiltersSetAppDepositPermissionsTx extends ITxAction {
+  actionType: TransactionType.AppTransferFiltersSetAppDepositPermissions;
+  arguments: AppTransferFiltersSetAppDepositPermissionsArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Unblocks deposits to a keyless address controlled by a specific app agent.
+ *
+ * `appAgentId`
+ *
+ * `keylessAddress`
+ */
+export interface AppTransferFiltersUnblockAddressDepositsArgs extends Args {
+  appAgentId: BlockchainGenericId;
+  keylessAddress: BlockchainGenericAccount;
+};
+
+const AppTransferFiltersUnblockAddressDepositsArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  keylessAddress: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name appTransferFiltersUnblockAddressDeposits
+ * @summary Unblocks deposits to a keyless address controlled by a specific app agent.
+ * @description # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).
+ * @param args - The arguments of the transaction. {@link AppTransferFiltersUnblockAddressDepositsArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appTransferFiltersUnblockAddressDeposits(
+  args: AppTransferFiltersUnblockAddressDepositsArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppTransferFiltersUnblockAddressDepositsArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appTransferFilters', 'unblockAddressDeposits', args, info, options);
+}
+
+/**
+ * Unblocks deposits to a keyless address controlled by a specific app agent. # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).
+ */
+export interface AppTransferFiltersUnblockAddressDepositsTx extends ITxAction {
+  actionType: TransactionType.AppTransferFiltersUnblockAddressDeposits;
+  arguments: AppTransferFiltersUnblockAddressDepositsArgs;
 };
 
 /*---------------------------------------------------------------------------------- */
@@ -3748,6 +4002,11 @@ export type TxAction =
   | AppSubscriptionsSetAppSubscriptionTierTx
   | AppTransactionsForceSubmitClearingTransactionTx
   | AppTransactionsSubmitClearingTransactionTx
+  | AppTransferChannelsEstablishTransferChannelTx
+  | AppTransferChannelsRemoveTransferChannelTx
+  | AppTransferFiltersBlockAddressDepositsTx
+  | AppTransferFiltersSetAppDepositPermissionsTx
+  | AppTransferFiltersUnblockAddressDepositsTx
   | AssetsBurnTx
   | AssetsCreateTx
   | AssetsDestroyAccountsTx
@@ -3821,6 +4080,11 @@ export type TransactionArgs =
   | AppSubscriptionsSetAppSubscriptionTierArgs
   | AppTransactionsForceSubmitClearingTransactionArgs
   | AppTransactionsSubmitClearingTransactionArgs
+  | AppTransferChannelsEstablishTransferChannelArgs
+  | AppTransferChannelsRemoveTransferChannelArgs
+  | AppTransferFiltersBlockAddressDepositsArgs
+  | AppTransferFiltersSetAppDepositPermissionsArgs
+  | AppTransferFiltersUnblockAddressDepositsArgs
   | AssetsBurnArgs
   | AssetsCreateArgs
   | AssetsDestroyAccountsArgs
@@ -4089,6 +4353,26 @@ export function buildUnsignedTransaction(
     }
     case TransactionType.AppTransactionsSubmitClearingTransaction: {
       unsigned = appTransactionsSubmitClearingTransaction(args, info, options);
+      break;
+    }
+    case TransactionType.AppTransferChannelsEstablishTransferChannel: {
+      unsigned = appTransferChannelsEstablishTransferChannel(args, info, options);
+      break;
+    }
+    case TransactionType.AppTransferChannelsRemoveTransferChannel: {
+      unsigned = appTransferChannelsRemoveTransferChannel(args, info, options);
+      break;
+    }
+    case TransactionType.AppTransferFiltersBlockAddressDeposits: {
+      unsigned = appTransferFiltersBlockAddressDeposits(args, info, options);
+      break;
+    }
+    case TransactionType.AppTransferFiltersSetAppDepositPermissions: {
+      unsigned = appTransferFiltersSetAppDepositPermissions(args, info, options);
+      break;
+    }
+    case TransactionType.AppTransferFiltersUnblockAddressDeposits: {
+      unsigned = appTransferFiltersUnblockAddressDeposits(args, info, options);
       break;
     }
     case TransactionType.AssetsBurn: {

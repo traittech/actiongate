@@ -13,5 +13,6 @@ BlockchainOverridesMap.set('PalletNftsDestroyWitness', 'NftWitness');
 
 BlockchainOverridesMap.set('TraitPrimitivesPalletAdminsPalletAdminType', 'AdminType');
 BlockchainOverridesMap.set('TraitPrimitivesAppSubscriptionsAppSubscriptionTierDetails', 'AppSubscriptionTierDetails');
-BlockchainOverridesMap.set('TraitPrimitivesAppSubscriptionsAppPayOnDemandMode', 'PayOnDemandMode');
+BlockchainOverridesMap.set('TraitPrimitivesAppSubscriptionsAppPayOnDemandMode', 'AppPayOnDemandMode');
+BlockchainOverridesMap.set('TraitPrimitivesAppTransferFiltersAppDepositPermissions', 'AppDepositPermissions');
 BlockchainOverridesMap.set('Vec<Vec<(TraitPrimitivesAppTransactionsCtActionOrigin,Call)>>', 'CTAtomicActions');

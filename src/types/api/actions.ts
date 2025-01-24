@@ -45,6 +45,13 @@ export enum TransactionType {
   // AppTransactions Pallet
   AppTransactionsSubmitClearingTransaction = 'appTransactions.submitClearingTransaction',
   AppTransactionsForceSubmitClearingTransaction = 'appTransactions.forceSubmitClearingTransaction',
+  // AppTransferChannels Pallet
+  AppTransferChannelsEstablishTransferChannel = 'appTransferChannels.establishTransferChannel',
+  AppTransferChannelsRemoveTransferChannel = 'appTransferChannels.removeTransferChannel',
+  // AppTransferFilters Pallet
+  AppTransferFiltersBlockAddressDeposits = 'appTransferFilters.blockAddressDeposits',
+  AppTransferFiltersSetAppDepositPermissions = 'appTransferFilters.setAppDepositPermissions',
+  AppTransferFiltersUnblockAddressDeposits = 'appTransferFilters.unblockAddressDeposits',
   // Assets Pallet
   AssetsCreate = 'assets.create',
   AssetsStartDestroy = 'assets.startDestroy',
