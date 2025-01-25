@@ -550,11 +550,16 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BlockchainGenericAccountId": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"ref":"BlockchainGenericAccount","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsBurnArgs": {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
-            "who": {"ref":"BlockchainGenericAccount","required":true},
+            "who": {"ref":"BlockchainGenericAccountId","required":true},
             "amount": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
@@ -596,8 +601,8 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
-            "source": {"ref":"BlockchainGenericAccount","required":true},
-            "dest": {"ref":"BlockchainGenericAccount","required":true},
+            "source": {"ref":"BlockchainGenericAccountId","required":true},
+            "dest": {"ref":"BlockchainGenericAccountId","required":true},
             "amount": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
@@ -607,7 +612,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
-            "who": {"ref":"BlockchainGenericAccount","required":true},
+            "who": {"ref":"BlockchainGenericAccountId","required":true},
         },
         "additionalProperties": false,
     },
@@ -624,7 +629,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
-            "beneficiary": {"ref":"BlockchainGenericAccount","required":true},
+            "beneficiary": {"ref":"BlockchainGenericAccountId","required":true},
             "amount": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
@@ -660,7 +665,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
-            "who": {"ref":"BlockchainGenericAccount","required":true},
+            "who": {"ref":"BlockchainGenericAccountId","required":true},
         },
         "additionalProperties": false,
     },
@@ -677,7 +682,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
-            "target": {"ref":"BlockchainGenericAccount","required":true},
+            "target": {"ref":"BlockchainGenericAccountId","required":true},
             "amount": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
@@ -687,7 +692,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
-            "target": {"ref":"BlockchainGenericAccount","required":true},
+            "target": {"ref":"BlockchainGenericAccountId","required":true},
             "amount": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
@@ -697,7 +702,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
-            "owner": {"ref":"BlockchainGenericAccount","required":true},
+            "owner": {"ref":"BlockchainGenericAccountId","required":true},
         },
         "additionalProperties": false,
     },
@@ -705,7 +710,7 @@ const models: TsoaRoute.Models = {
     "BalancesTransferAllArgs": {
         "dataType": "refObject",
         "properties": {
-            "dest": {"ref":"BlockchainGenericAccount","required":true},
+            "dest": {"ref":"BlockchainGenericAccountId","required":true},
             "keepAlive": {"ref":"BlockchainGenericBoolean","required":true},
         },
         "additionalProperties": false,
@@ -714,7 +719,7 @@ const models: TsoaRoute.Models = {
     "BalancesTransferAllowDeathArgs": {
         "dataType": "refObject",
         "properties": {
-            "dest": {"ref":"BlockchainGenericAccount","required":true},
+            "dest": {"ref":"BlockchainGenericAccountId","required":true},
             "value": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
@@ -723,7 +728,7 @@ const models: TsoaRoute.Models = {
     "BalancesTransferKeepAliveArgs": {
         "dataType": "refObject",
         "properties": {
-            "dest": {"ref":"BlockchainGenericAccount","required":true},
+            "dest": {"ref":"BlockchainGenericAccountId","required":true},
             "value": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
@@ -790,7 +795,7 @@ const models: TsoaRoute.Models = {
         "properties": {
             "collection": {"ref":"BlockchainGenericId","required":true},
             "item": {"ref":"BlockchainGenericId","required":true},
-            "mintTo": {"ref":"BlockchainGenericAccount","required":true},
+            "mintTo": {"ref":"BlockchainGenericAccountId","required":true},
         },
         "additionalProperties": false,
     },
@@ -827,7 +832,7 @@ const models: TsoaRoute.Models = {
         "properties": {
             "collection": {"ref":"BlockchainGenericId","required":true},
             "item": {"ref":"BlockchainGenericId","required":true},
-            "dest": {"ref":"BlockchainGenericAccount","required":true},
+            "dest": {"ref":"BlockchainGenericAccountId","required":true},
         },
         "additionalProperties": false,
     },
@@ -836,7 +841,7 @@ const models: TsoaRoute.Models = {
         "dataType": "refObject",
         "properties": {
             "collection": {"ref":"BlockchainGenericId","required":true},
-            "newOwner": {"ref":"BlockchainGenericAccount","required":true},
+            "newOwner": {"ref":"BlockchainGenericAccountId","required":true},
         },
         "additionalProperties": false,
     },

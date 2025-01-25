@@ -1,7 +1,7 @@
 // Common blockchain types
 
 /**
- * Numeric value, presented as plain number
+ * A numeric `integer` value represented with `number` type
  * @isInt
  * @minimum 0
  * @maximum 4294967295
@@ -9,7 +9,7 @@
 export type UINT32 = number;
 
 /**
- * Numeric value, presented as plain number or string
+ * A numeric `integer` value represented with `number` or `string` type
  * @isLong
  * @minimum 0
  * @maximum 18446744073709551615
@@ -17,7 +17,7 @@ export type UINT32 = number;
 export type UINT64 = number | string;
 
 /**
- * Numeric value, presented as plain number or string
+ * A numeric `integer` value represented with `number` or `string` type
  *
  * @minimum 0
  * @maximum 340282366920938463463374607431768211455
@@ -35,7 +35,14 @@ export type UINT128 = number | string;
 export type BlockchainGenericAccount = string;
 
 /**
- * A unique identifier (Asset, Collection, Agent).
+ * The structure represents the blockchain account address defined by the `id` key.
+ */
+export type BlockchainGenericAccountId = {
+  id: BlockchainGenericAccount
+};
+
+/**
+ * A unique identifier (AssetId, CollectionId, AppAgentId).
  * Typically, it is a numeric value.
  */
 export type BlockchainGenericId = UINT32;

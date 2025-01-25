@@ -9,6 +9,7 @@ import type { Args, BaseTxInfo, OptionsWithMeta, TxInfo, TxMethod, UnsignedTrans
 
 import type {
   BlockchainGenericAccount,
+  BlockchainGenericAccountId,
   BlockchainGenericBalance,
   BlockchainGenericBoolean,
   BlockchainGenericId,
@@ -1994,7 +1995,7 @@ export interface AssetsBurnArgs extends Args {
   /**
    *  The account to be debited from.
    */
-  who: BlockchainGenericAccount;
+  who: BlockchainGenericAccountId;
   /**
    *  The maximum amount by which `who`'s balance should be reduced.
    */
@@ -2003,7 +2004,7 @@ export interface AssetsBurnArgs extends Args {
 
 const AssetsBurnArgsSchema = z.object({
   id: schema.BlockchainGenericIdSchema,
-  who: schema.BlockchainGenericAccountSchema,
+  who: schema.BlockchainGenericAccountIdSchema,
   amount: schema.BlockchainGenericBalanceSchema,
 });
 
@@ -2277,11 +2278,11 @@ export interface AssetsForceTransferArgs extends Args {
   /**
    *  The account to be debited.
    */
-  source: BlockchainGenericAccount;
+  source: BlockchainGenericAccountId;
   /**
    *  The account to be credited.
    */
-  dest: BlockchainGenericAccount;
+  dest: BlockchainGenericAccountId;
   /**
    *  The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.
    */
@@ -2290,8 +2291,8 @@ export interface AssetsForceTransferArgs extends Args {
 
 const AssetsForceTransferArgsSchema = z.object({
   id: schema.BlockchainGenericIdSchema,
-  source: schema.BlockchainGenericAccountSchema,
-  dest: schema.BlockchainGenericAccountSchema,
+  source: schema.BlockchainGenericAccountIdSchema,
+  dest: schema.BlockchainGenericAccountIdSchema,
   amount: schema.BlockchainGenericBalanceSchema,
 });
 
@@ -2349,12 +2350,12 @@ export interface AssetsFreezeAccountArgs extends Args {
   /**
    *  The account to be frozen.
    */
-  who: BlockchainGenericAccount;
+  who: BlockchainGenericAccountId;
 };
 
 const AssetsFreezeAccountArgsSchema = z.object({
   id: schema.BlockchainGenericIdSchema,
-  who: schema.BlockchainGenericAccountSchema,
+  who: schema.BlockchainGenericAccountIdSchema,
 });
 
 /**
@@ -2468,7 +2469,7 @@ export interface AssetsMintArgs extends Args {
   /**
    *  The account to be credited with the minted assets.
    */
-  beneficiary: BlockchainGenericAccount;
+  beneficiary: BlockchainGenericAccountId;
   /**
    *  The amount of the asset to be minted.
    */
@@ -2477,7 +2478,7 @@ export interface AssetsMintArgs extends Args {
 
 const AssetsMintArgsSchema = z.object({
   id: schema.BlockchainGenericIdSchema,
-  beneficiary: schema.BlockchainGenericAccountSchema,
+  beneficiary: schema.BlockchainGenericAccountIdSchema,
   amount: schema.BlockchainGenericBalanceSchema,
 });
 
@@ -2714,12 +2715,12 @@ export interface AssetsThawAccountArgs extends Args {
   /**
    *  The account to be unfrozen.
    */
-  who: BlockchainGenericAccount;
+  who: BlockchainGenericAccountId;
 };
 
 const AssetsThawAccountArgsSchema = z.object({
   id: schema.BlockchainGenericIdSchema,
-  who: schema.BlockchainGenericAccountSchema,
+  who: schema.BlockchainGenericAccountIdSchema,
 });
 
 /**
@@ -2833,7 +2834,7 @@ export interface AssetsTransferArgs extends Args {
   /**
    *  The account to be credited.
    */
-  target: BlockchainGenericAccount;
+  target: BlockchainGenericAccountId;
   /**
    *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
    */
@@ -2842,7 +2843,7 @@ export interface AssetsTransferArgs extends Args {
 
 const AssetsTransferArgsSchema = z.object({
   id: schema.BlockchainGenericIdSchema,
-  target: schema.BlockchainGenericAccountSchema,
+  target: schema.BlockchainGenericAccountIdSchema,
   amount: schema.BlockchainGenericBalanceSchema,
 });
 
@@ -2902,7 +2903,7 @@ export interface AssetsTransferKeepAliveArgs extends Args {
   /**
    *  The account to be credited.
    */
-  target: BlockchainGenericAccount;
+  target: BlockchainGenericAccountId;
   /**
    *  The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
    */
@@ -2911,7 +2912,7 @@ export interface AssetsTransferKeepAliveArgs extends Args {
 
 const AssetsTransferKeepAliveArgsSchema = z.object({
   id: schema.BlockchainGenericIdSchema,
-  target: schema.BlockchainGenericAccountSchema,
+  target: schema.BlockchainGenericAccountIdSchema,
   amount: schema.BlockchainGenericBalanceSchema,
 });
 
@@ -2969,12 +2970,12 @@ export interface AssetsTransferOwnershipArgs extends Args {
   /**
    *  The new Owner of this asset.
    */
-  owner: BlockchainGenericAccount;
+  owner: BlockchainGenericAccountId;
 };
 
 const AssetsTransferOwnershipArgsSchema = z.object({
   id: schema.BlockchainGenericIdSchema,
-  owner: schema.BlockchainGenericAccountSchema,
+  owner: schema.BlockchainGenericAccountIdSchema,
 });
 
 /**
@@ -3027,12 +3028,12 @@ export interface BalancesTransferAllArgs extends Args {
   /**
    *  The recipient of the transfer.
    */
-  dest: BlockchainGenericAccount;
+  dest: BlockchainGenericAccountId;
   keepAlive: BlockchainGenericBoolean;
 };
 
 const BalancesTransferAllArgsSchema = z.object({
-  dest: schema.BlockchainGenericAccountSchema,
+  dest: schema.BlockchainGenericAccountIdSchema,
   keepAlive: schema.BlockchainGenericBooleanSchema,
 });
 
@@ -3083,12 +3084,12 @@ export interface BalancesTransferAllAction extends ICTAtomicAction {
  * `value`
  */
 export interface BalancesTransferAllowDeathArgs extends Args {
-  dest: BlockchainGenericAccount;
+  dest: BlockchainGenericAccountId;
   value: BlockchainGenericBalance;
 };
 
 const BalancesTransferAllowDeathArgsSchema = z.object({
-  dest: schema.BlockchainGenericAccountSchema,
+  dest: schema.BlockchainGenericAccountIdSchema,
   value: schema.BlockchainGenericBalanceSchema,
 });
 
@@ -3139,12 +3140,12 @@ export interface BalancesTransferAllowDeathAction extends ICTAtomicAction {
  * `value`
  */
 export interface BalancesTransferKeepAliveArgs extends Args {
-  dest: BlockchainGenericAccount;
+  dest: BlockchainGenericAccountId;
   value: BlockchainGenericBalance;
 };
 
 const BalancesTransferKeepAliveArgsSchema = z.object({
-  dest: schema.BlockchainGenericAccountSchema,
+  dest: schema.BlockchainGenericAccountIdSchema,
   value: schema.BlockchainGenericBalanceSchema,
 });
 
@@ -3544,13 +3545,13 @@ export interface NftsLockItemTransferAction extends ICTAtomicAction {
 export interface NftsMintItemArgs extends Args {
   collection: BlockchainGenericId;
   item: BlockchainGenericId;
-  mintTo: BlockchainGenericAccount;
+  mintTo: BlockchainGenericAccountId;
 };
 
 const NftsMintItemArgsSchema = z.object({
   collection: schema.BlockchainGenericIdSchema,
   item: schema.BlockchainGenericIdSchema,
-  mintTo: schema.BlockchainGenericAccountSchema,
+  mintTo: schema.BlockchainGenericAccountIdSchema,
 });
 
 /**
@@ -3795,13 +3796,13 @@ export interface NftsTransferItemArgs extends Args {
   /**
    *  The account to receive ownership of the item.
    */
-  dest: BlockchainGenericAccount;
+  dest: BlockchainGenericAccountId;
 };
 
 const NftsTransferItemArgsSchema = z.object({
   collection: schema.BlockchainGenericIdSchema,
   item: schema.BlockchainGenericIdSchema,
-  dest: schema.BlockchainGenericAccountSchema,
+  dest: schema.BlockchainGenericAccountIdSchema,
 });
 
 /**
@@ -3855,12 +3856,12 @@ export interface NftsTransferCollectionOwnershipArgs extends Args {
    *  The collection whose owner should be changed.
    */
   collection: BlockchainGenericId;
-  newOwner: BlockchainGenericAccount;
+  newOwner: BlockchainGenericAccountId;
 };
 
 const NftsTransferCollectionOwnershipArgsSchema = z.object({
   collection: schema.BlockchainGenericIdSchema,
-  newOwner: schema.BlockchainGenericAccountSchema,
+  newOwner: schema.BlockchainGenericAccountIdSchema,
 });
 
 /**

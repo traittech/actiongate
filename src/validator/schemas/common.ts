@@ -39,7 +39,7 @@ const isNumberishInRange = (min: bigint, max: bigint) =>
 export const UINT32Schema = isNumberishInRange(u32_MIN, u32_MAX);
 
 /**
- * `u32` number validation schema
+ * `u64` number validation schema
  */
 export const UINT64Schema = isNumberishInRange(u64_MIN, u64_MAX);
 
@@ -57,6 +57,10 @@ export const BlockchainGenericAccountSchema = z
   .string()
   .length(ss58_LENGTH, { message: `String must be exactly ${ss58_LENGTH} characters long` })
   .refine((v) => isValidSS58(v), { message: 'String is not valid SS58 encoded address' });
+
+export const BlockchainGenericAccountIdSchema = z.object({
+  id: BlockchainGenericAccountSchema,
+});
 
 export const BlockchainGenericTextSchema = z
   .string()
