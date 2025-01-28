@@ -152,6 +152,7 @@
 					"appAgents.changeOwnerInit",
 					"appAgents.clearAdminDispatchFilter",
 					"appAgents.clearAppAgentMetadata",
+					"appAgents.completeDestroyAppAgent",
 					"createAppAgent",
 					"appAgents.disableAdminColdWalletDispatch",
 					"appAgents.disableHotWallet",
@@ -438,6 +439,167 @@
 				},
 				"required": [
 					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainGenericBoolean": {
+				"type": "boolean",
+				"example": true,
+				"description": "Boolean type for blockchain (bool)"
+			},
+			"OwnFungibleDestroyDetail": {
+				"properties": {
+					"finishDestroy": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					},
+					"approvals": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"accounts": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"finishDestroy",
+					"approvals",
+					"accounts",
+					"id"
+				],
+				"type": "object"
+			},
+			"OwnNonFungibleDestroyDetail": {
+				"properties": {
+					"finishDestroy": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					},
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/BlockchainGenericId"
+						},
+						"type": "array"
+					},
+					"collectionId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"finishDestroy",
+					"items",
+					"collectionId"
+				],
+				"type": "object"
+			},
+			"FungibleDestroyDetail": {
+				"properties": {
+					"approvals": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"accounts": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"approvals",
+					"accounts",
+					"id"
+				],
+				"type": "object"
+			},
+			"NonFungibleDestroyDetail": {
+				"items": {
+					"$ref": "#/components/schemas/UINT32"
+				},
+				"type": "array",
+				"description": "Tuple `[UINT32, UINT32]`\n\n[WARNING]: `openapi v3` doesn't support `tuple` type."
+			},
+			"PoolAddressDestroyInfo": {
+				"properties": {
+					"nonFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/NonFungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"fungibles": {
+						"items": {
+							"$ref": "#/components/schemas/FungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"address": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"nonFungibles",
+					"fungibles",
+					"address"
+				],
+				"type": "object"
+			},
+			"AppAgentDestroyInfo": {
+				"properties": {
+					"appAgentNonFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/NonFungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"appAgentFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/FungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"controlledAddressesInfos": {
+						"items": {
+							"$ref": "#/components/schemas/PoolAddressDestroyInfo"
+						},
+						"type": "array"
+					},
+					"ownNonFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/OwnNonFungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"ownFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/OwnFungibleDestroyDetail"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"appAgentNonFungibles",
+					"appAgentFungibles",
+					"controlledAddressesInfos",
+					"ownNonFungibles",
+					"ownFungibles"
+				],
+				"type": "object"
+			},
+			"AppAgentsCompleteDestroyAppAgentArgs": {
+				"description": "Arguments required to Completes the destruction process of the App Agent.\n\n`appAgentId` - The identifier of the App Agent to be destroyed.\n\n`destroyInfos`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent to be destroyed."
+					},
+					"destroyInfos": {
+						"$ref": "#/components/schemas/AppAgentDestroyInfo"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"destroyInfos"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -999,7 +1161,7 @@
 					]
 				},
 				"type": "array",
-				"description": "Represents an action in a clearing transaction.\n[WARNING]: this is not a correct type, because `openapi v3` doesn't support `tuple` type.\nThe correct tuple type is [CTActionOrigin, CTActionCall], commented below"
+				"description": "Represents an action in a clearing transaction.\n\nTuple `[CTActionOrigin, CTActionCall]`\n\n[WARNING]: `openapi v3` doesn't support `tuple` type."
 			},
 			"CTAtomicActions": {
 				"items": {
@@ -1103,11 +1265,6 @@
 				],
 				"type": "object",
 				"additionalProperties": false
-			},
-			"BlockchainGenericBoolean": {
-				"type": "boolean",
-				"example": true,
-				"description": "Boolean type for blockchain (bool)"
 			},
 			"NativeDepositPermissionsDetails": {
 				"properties": {
@@ -2001,6 +2158,9 @@
 						"$ref": "#/components/schemas/AppAgentsClearAppAgentMetadataArgs"
 					},
 					{
+						"$ref": "#/components/schemas/AppAgentsCompleteDestroyAppAgentArgs"
+					},
+					{
 						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchArgs"
 					},
 					{
@@ -2443,6 +2603,31 @@
 					},
 					"arguments": {
 						"$ref": "#/components/schemas/AppAgentsClearAppAgentMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsCompleteDestroyAppAgent": {
+				"enum": [
+					"appAgents.completeDestroyAppAgent"
+				],
+				"type": "string"
+			},
+			"AppAgentsCompleteDestroyAppAgentTx": {
+				"description": "Completes the destruction process of the App Agent. This function is used to complete the destruction process of the specified App Agent. It marks the App Agent as Destroyed and removes its metadata storage. After completion, it emits an event to indicate the status change of the App Agent. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsCompleteDestroyAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsCompleteDestroyAppAgentArgs",
 						"description": "The arguments for the transaction."
 					}
 				},
@@ -4009,6 +4194,9 @@
 					},
 					{
 						"$ref": "#/components/schemas/AppAgentsClearAppAgentMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsCompleteDestroyAppAgentTx"
 					},
 					{
 						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchTx"

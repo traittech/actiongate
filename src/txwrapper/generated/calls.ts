@@ -23,6 +23,7 @@ import type {
 
 import type {
   AdminType,
+  AppAgentDestroyInfo,
   AppSubscriptionTierDetails,
   AppDepositPermissions,
   AppPayOnDemandMode,
@@ -593,6 +594,56 @@ export function appAgentsClearAppAgentMetadata(
 export interface AppAgentsClearAppAgentMetadataTx extends ITxAction {
   actionType: TransactionType.AppAgentsClearAppAgentMetadata;
   arguments: AppAgentsClearAppAgentMetadataArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Completes the destruction process of the App Agent.
+ *
+ * `appAgentId` - The identifier of the App Agent to be destroyed.
+ *
+ * `destroyInfos`
+ */
+export interface AppAgentsCompleteDestroyAppAgentArgs extends Args {
+  /**
+   *  The identifier of the App Agent to be destroyed.
+   */
+  appAgentId: BlockchainGenericId;
+  destroyInfos: AppAgentDestroyInfo;
+};
+
+const AppAgentsCompleteDestroyAppAgentArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  destroyInfos: schema.AppAgentDestroyInfoSchema,
+});
+
+/**
+ * @name appAgentsCompleteDestroyAppAgent
+ * @summary Completes the destruction process of the App Agent.
+ * @description This function is used to complete the destruction process of the specified App Agent. It marks the App Agent as Destroyed and removes its metadata storage. After completion, it emits an event to indicate the status change of the App Agent. Parameters:
+ * @param args - The arguments of the transaction. {@link AppAgentsCompleteDestroyAppAgentArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsCompleteDestroyAppAgent(
+  args: AppAgentsCompleteDestroyAppAgentArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsCompleteDestroyAppAgentArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'completeDestroyAppAgent', args, info, options);
+}
+
+/**
+ * Completes the destruction process of the App Agent. This function is used to complete the destruction process of the specified App Agent. It marks the App Agent as Destroyed and removes its metadata storage. After completion, it emits an event to indicate the status change of the App Agent. Parameters:
+ */
+export interface AppAgentsCompleteDestroyAppAgentTx extends ITxAction {
+  actionType: TransactionType.AppAgentsCompleteDestroyAppAgent;
+  arguments: AppAgentsCompleteDestroyAppAgentArgs;
 };
 
 /*---------------------------------------------------------------------------------- */
@@ -3980,6 +4031,7 @@ export type TxAction =
   | AppAgentsChangeOwnerInitTx
   | AppAgentsClearAdminDispatchFilterTx
   | AppAgentsClearAppAgentMetadataTx
+  | AppAgentsCompleteDestroyAppAgentTx
   | AppAgentsDisableAdminColdWalletDispatchTx
   | AppAgentsDisableHotWalletTx
   | AppAgentsEnableHotWalletTx
@@ -4058,6 +4110,7 @@ export type TransactionArgs =
   | AppAgentsChangeOwnerInitArgs
   | AppAgentsClearAdminDispatchFilterArgs
   | AppAgentsClearAppAgentMetadataArgs
+  | AppAgentsCompleteDestroyAppAgentArgs
   | AppAgentsDisableAdminColdWalletDispatchArgs
   | AppAgentsDisableHotWalletArgs
   | AppAgentsEnableHotWalletArgs
@@ -4262,6 +4315,10 @@ export function buildUnsignedTransaction(
     }
     case TransactionType.AppAgentsClearAppAgentMetadata: {
       unsigned = appAgentsClearAppAgentMetadata(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsCompleteDestroyAppAgent: {
+      unsigned = appAgentsCompleteDestroyAppAgent(args, info, options);
       break;
     }
     case TransactionType.AppAgentsDisableAdminColdWalletDispatch: {

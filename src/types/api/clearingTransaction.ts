@@ -43,8 +43,10 @@ export type CTActionCall = { callIndex?: string; args?: string } | string;
 
 /**
  * Represents an action in a clearing transaction.
- * [WARNING]: this is not a correct type, because `openapi v3` doesn't support `tuple` type.
- * The correct tuple type is [CTActionOrigin, CTActionCall], commented below
+ * 
+ * Tuple `[CTActionOrigin, CTActionCall]`
+ * 
+ * [WARNING]: `openapi v3` doesn't support `tuple` type.
  */
 export type CTAction = Array<CTActionOrigin | CTActionCall>;
 
