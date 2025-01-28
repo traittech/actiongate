@@ -1062,6 +1062,56 @@ export interface AppAgentsPauseAppAgentTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
+ * Arguments required to Processes the destruction of assets owned by the App Agent.
+ *
+ * `appAgentId` - The identifier of the App Agent.
+ *
+ * `destroyInfo`
+ */
+export interface AppAgentsProcessDestroyArgs extends Args {
+  /**
+   *  The identifier of the App Agent.
+   */
+  appAgentId: BlockchainGenericId;
+  destroyInfo: AppAgentDestroyInfo;
+};
+
+const AppAgentsProcessDestroyArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  destroyInfo: schema.AppAgentDestroyInfoSchema,
+});
+
+/**
+ * @name appAgentsProcessDestroy
+ * @summary Processes the destruction of assets owned by the App Agent.
+ * @description This function is used to process the destruction of assets owned by the specified app agent. This extrinsic can be called multiple times to destroy all entities related to the app agent. On the first call the status of app agent changes to DestroyInProcess - after that app agent can not be reactivated. It emits `AppAgentDestroyProcessed` after the destruction process is completed. Parameters:
+ * @param args - The arguments of the transaction. {@link AppAgentsProcessDestroyArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsProcessDestroy(
+  args: AppAgentsProcessDestroyArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsProcessDestroyArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'processDestroy', args, info, options);
+}
+
+/**
+ * Processes the destruction of assets owned by the App Agent. This function is used to process the destruction of assets owned by the specified app agent. This extrinsic can be called multiple times to destroy all entities related to the app agent. On the first call the status of app agent changes to DestroyInProcess - after that app agent can not be reactivated. It emits `AppAgentDestroyProcessed` after the destruction process is completed. Parameters:
+ */
+export interface AppAgentsProcessDestroyTx extends ITxAction {
+  actionType: TransactionType.AppAgentsProcessDestroy;
+  arguments: AppAgentsProcessDestroyArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
  * Arguments required to Reactivates the specified App Agent.
  *
  * `appAgentId` - The identifier of the App Agent to be reactivated.
@@ -4041,6 +4091,7 @@ export type TxAction =
   | AppAgentsForceInitiateAppAgentUnsuspensionTx
   | AppAgentsInitiateDestroyAppAgentTx
   | AppAgentsPauseAppAgentTx
+  | AppAgentsProcessDestroyTx
   | AppAgentsReactivateAppAgentTx
   | AppAgentsRemoveAdminTx
   | AppAgentsRemoveAdminFromNamedAddressDispatchTx
@@ -4120,6 +4171,7 @@ export type TransactionArgs =
   | AppAgentsForceInitiateAppAgentUnsuspensionArgs
   | AppAgentsInitiateDestroyAppAgentArgs
   | AppAgentsPauseAppAgentArgs
+  | AppAgentsProcessDestroyArgs
   | AppAgentsReactivateAppAgentArgs
   | AppAgentsRemoveAdminArgs
   | AppAgentsRemoveAdminFromNamedAddressDispatchArgs
@@ -4355,6 +4407,10 @@ export function buildUnsignedTransaction(
     }
     case TransactionType.AppAgentsPauseAppAgent: {
       unsigned = appAgentsPauseAppAgent(args, info, options);
+      break;
+    }
+    case TransactionType.AppAgentsProcessDestroy: {
+      unsigned = appAgentsProcessDestroy(args, info, options);
       break;
     }
     case TransactionType.AppAgentsReactivateAppAgent: {

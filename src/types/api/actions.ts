@@ -27,7 +27,7 @@ export enum TransactionType {
   AppAgentsForceInitiateAppAgentUnsuspension = 'appAgents.forceInitiateAppAgentUnsuspension',
   AppAgentsInitiateDestroyAppAgent = 'appAgents.initiateDestroyAppAgent',
   AppAgentsPauseAppAgent = 'appAgents.pauseAppAgent',
-  // AppAgentsProcessDestroy = 'appAgents.processDestroy', // complex types
+  AppAgentsProcessDestroy = 'appAgents.processDestroy',
   AppAgentsReactivateAppAgent = 'appAgents.reactivateAppAgent',
   AppAgentsRemoveAdmin = 'appAgents.removeAdmin',
   AppAgentsRemoveAdminFromNamedAddressDispatch = 'appAgents.removeAdminFromNamedAddressDispatch',

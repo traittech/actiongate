@@ -163,6 +163,7 @@
 					"appAgents.forceInitiateAppAgentUnsuspension",
 					"appAgents.initiateDestroyAppAgent",
 					"appAgents.pauseAppAgent",
+					"appAgents.processDestroy",
 					"appAgents.reactivateAppAgent",
 					"appAgents.removeAdmin",
 					"appAgents.removeAdminFromNamedAddressDispatch",
@@ -735,6 +736,24 @@
 				},
 				"required": [
 					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsProcessDestroyArgs": {
+				"description": "Arguments required to Processes the destruction of assets owned by the App Agent.\n\n`appAgentId` - The identifier of the App Agent.\n\n`destroyInfo`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"destroyInfo": {
+						"$ref": "#/components/schemas/AppAgentDestroyInfo"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"destroyInfo"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -2188,6 +2207,9 @@
 						"$ref": "#/components/schemas/AppAgentsPauseAppAgentArgs"
 					},
 					{
+						"$ref": "#/components/schemas/AppAgentsProcessDestroyArgs"
+					},
+					{
 						"$ref": "#/components/schemas/AppAgentsReactivateAppAgentArgs"
 					},
 					{
@@ -2853,6 +2875,31 @@
 					},
 					"arguments": {
 						"$ref": "#/components/schemas/AppAgentsPauseAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsProcessDestroy": {
+				"enum": [
+					"appAgents.processDestroy"
+				],
+				"type": "string"
+			},
+			"AppAgentsProcessDestroyTx": {
+				"description": "Processes the destruction of assets owned by the App Agent. This function is used to process the destruction of assets owned by the specified app agent. This extrinsic can be called multiple times to destroy all entities related to the app agent. On the first call the status of app agent changes to DestroyInProcess - after that app agent can not be reactivated. It emits `AppAgentDestroyProcessed` after the destruction process is completed. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsProcessDestroy",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsProcessDestroyArgs",
 						"description": "The arguments for the transaction."
 					}
 				},
@@ -4224,6 +4271,9 @@
 					},
 					{
 						"$ref": "#/components/schemas/AppAgentsPauseAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsProcessDestroyTx"
 					},
 					{
 						"$ref": "#/components/schemas/AppAgentsReactivateAppAgentTx"
