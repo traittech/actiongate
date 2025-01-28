@@ -51,10 +51,10 @@ export function constructUnsignedTransaction(
 }
 
 /**
- *
  * `adminType`
  *
  * `admin`
+ *
  */
 export interface AdminsAddAdminArgs extends Args {
   adminType: AdminType;
@@ -94,10 +94,10 @@ export interface AdminsAddAdminTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- *
  * `adminType`
  *
  * `admin`
+ *
  */
 export interface AdminsRemoveAdminArgs extends Args {
   adminType: AdminType;
@@ -137,11 +137,10 @@ export interface AdminsRemoveAdminTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Adds an admin to the App Agent.
- *
  * `appAgentId` - The ID of the App Agent.
  *
  * `admin` - The account ID of the admin to be added.
+ *
  */
 export interface AppAgentsAddAdminArgs extends Args {
   /**
@@ -162,7 +161,7 @@ const AppAgentsAddAdminArgsSchema = z.object({
 /**
  * @name appAgentsAddAdmin
  * @summary Adds an admin to the App Agent.
- * @description This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount. # Parameters
+ * @description This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount.
  * @param args - The arguments of the transaction. {@link AppAgentsAddAdminArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -180,7 +179,7 @@ export function appAgentsAddAdmin(
 }
 
 /**
- * Adds an admin to the App Agent. This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount. # Parameters
+ * Adds an admin to the App Agent.This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount.
  */
 export interface AppAgentsAddAdminTx extends ITxAction {
   actionType: TransactionType.AppAgentsAddAdmin;
@@ -190,13 +189,12 @@ export interface AppAgentsAddAdminTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Adds an admin to the list of permitted administrators for a named address under a
- *
  * `appAgentId` - The identifier of the App Agent.
  *
  * `admin` - The account ID of the admin being added.
  *
  * `namedAddress` - The named address to which the admin is being added.
+ *
  */
 export interface AppAgentsAddAdminToNamedAddressArgs extends Args {
   /**
@@ -221,8 +219,7 @@ const AppAgentsAddAdminToNamedAddressArgsSchema = z.object({
 
 /**
  * @name appAgentsAddAdminToNamedAddressDispatch
- * @summary Adds an admin to the list of permitted administrators for a named address under a
- * @description specific App Agent. # Parameters
+ * @description Adds an admin to the list of permitted administrators for a named address under a specific App Agent.
  * @param args - The arguments of the transaction. {@link AppAgentsAddAdminToNamedAddressArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -240,7 +237,7 @@ export function appAgentsAddAdminToNamedAddressDispatch(
 }
 
 /**
- * Adds an admin to the list of permitted administrators for a named address under a specific App Agent. # Parameters
+ * Adds an admin to the list of permitted administrators for a named address under a specific App Agent.
  */
 export interface AppAgentsAddAdminToNamedAddressTx extends ITxAction {
   actionType: TransactionType.AppAgentsAddAdminToNamedAddress;
@@ -250,13 +247,12 @@ export interface AppAgentsAddAdminToNamedAddressTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Pallet function to add an AppAgent' admin to the list of addresses allowed to spend
- *
  * `appAgentId` - The identifier of the App Agent.
  *
  * `admin` - The admin address to be added to the list.
  *
  * `coldWallet`
+ *
  */
 export interface AppAgentsAllowAdminColdWalletArgs extends Args {
   /**
@@ -278,8 +274,7 @@ const AppAgentsAllowAdminColdWalletArgsSchema = z.object({
 
 /**
  * @name appAgentsAllowAdminColdWalletDispatch
- * @summary Pallet function to add an AppAgent' admin to the list of addresses allowed to spend
- * @description from a cold wallet associated with a specific App Agent. # Parameters
+ * @description Pallet function to add an AppAgent' admin to the list of addresses allowed to spend from a cold wallet associated with a specific App Agent.
  * @param args - The arguments of the transaction. {@link AppAgentsAllowAdminColdWalletArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -297,7 +292,7 @@ export function appAgentsAllowAdminColdWalletDispatch(
 }
 
 /**
- * Pallet function to add an AppAgent' admin to the list of addresses allowed to spend from a cold wallet associated with a specific App Agent. # Parameters
+ * Pallet function to add an AppAgent' admin to the list of addresses allowed to spend from a cold wallet associated with a specific App Agent.
  */
 export interface AppAgentsAllowAdminColdWalletTx extends ITxAction {
   actionType: TransactionType.AppAgentsAllowAdminColdWallet;
@@ -307,11 +302,10 @@ export interface AppAgentsAllowAdminColdWalletTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Change the hot wallet associated with an App Agent.
- *
  * `appAgentId` - The identifier of the App Agent whose hot wallet is being changed.
  *
  * `newHotWallet` - The new hot wallet to be set for the specified App Agent.
+ *
  */
 export interface AppAgentsChangeHotWalletArgs extends Args {
   /**
@@ -331,8 +325,7 @@ const AppAgentsChangeHotWalletArgsSchema = z.object({
 
 /**
  * @name appAgentsChangeHotWallet
- * @summary Change the hot wallet associated with an App Agent.
- * @description # Parameters
+ * @description Change the hot wallet associated with an App Agent.
  * @param args - The arguments of the transaction. {@link AppAgentsChangeHotWalletArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -350,7 +343,7 @@ export function appAgentsChangeHotWallet(
 }
 
 /**
- * Change the hot wallet associated with an App Agent. # Parameters
+ * Change the hot wallet associated with an App Agent.
  */
 export interface AppAgentsChangeHotWalletTx extends ITxAction {
   actionType: TransactionType.AppAgentsChangeHotWallet;
@@ -360,9 +353,8 @@ export interface AppAgentsChangeHotWalletTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Cancels a change of owner for an App Agent.
- *
  * `appAgentId` - The ID of the App Agent.
+ *
  */
 export interface AppAgentsChangeOwnerCancelArgs extends Args {
   /**
@@ -378,7 +370,7 @@ const AppAgentsChangeOwnerCancelArgsSchema = z.object({
 /**
  * @name appAgentsChangeOwnerCancel
  * @summary Cancels a change of owner for an App Agent.
- * @description This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent. # Parameters
+ * @description This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent.
  * @param args - The arguments of the transaction. {@link AppAgentsChangeOwnerCancelArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -396,7 +388,7 @@ export function appAgentsChangeOwnerCancel(
 }
 
 /**
- * Cancels a change of owner for an App Agent. This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent. # Parameters
+ * Cancels a change of owner for an App Agent.This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent.
  */
 export interface AppAgentsChangeOwnerCancelTx extends ITxAction {
   actionType: TransactionType.AppAgentsChangeOwnerCancel;
@@ -406,9 +398,8 @@ export interface AppAgentsChangeOwnerCancelTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Completes a change of owner for an App Agent.
- *
  * `appAgentId` - The ID of the App Agent.
+ *
  */
 export interface AppAgentsChangeOwnerCompleteArgs extends Args {
   /**
@@ -424,7 +415,7 @@ const AppAgentsChangeOwnerCompleteArgsSchema = z.object({
 /**
  * @name appAgentsChangeOwnerComplete
  * @summary Completes a change of owner for an App Agent.
- * @description This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent. # Parameters
+ * @description This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent.
  * @param args - The arguments of the transaction. {@link AppAgentsChangeOwnerCompleteArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -442,7 +433,7 @@ export function appAgentsChangeOwnerComplete(
 }
 
 /**
- * Completes a change of owner for an App Agent. This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent. # Parameters
+ * Completes a change of owner for an App Agent.This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent.
  */
 export interface AppAgentsChangeOwnerCompleteTx extends ITxAction {
   actionType: TransactionType.AppAgentsChangeOwnerComplete;
@@ -452,11 +443,10 @@ export interface AppAgentsChangeOwnerCompleteTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Initializes the process to change the ownership of an App Agent.
- *
  * `appAgentId` - The ID of the App Agent.
  *
  * `proposedOwner` - The account ID of the proposed owner.
+ *
  */
 export interface AppAgentsChangeOwnerInitArgs extends Args {
   /**
@@ -477,7 +467,7 @@ const AppAgentsChangeOwnerInitArgsSchema = z.object({
 /**
  * @name appAgentsChangeOwnerInit
  * @summary Initializes the process to change the ownership of an App Agent.
- * @description This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address. # Parameters
+ * @description This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address.
  * @param args - The arguments of the transaction. {@link AppAgentsChangeOwnerInitArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -495,7 +485,7 @@ export function appAgentsChangeOwnerInit(
 }
 
 /**
- * Initializes the process to change the ownership of an App Agent. This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address. # Parameters
+ * Initializes the process to change the ownership of an App Agent.This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address.
  */
 export interface AppAgentsChangeOwnerInitTx extends ITxAction {
   actionType: TransactionType.AppAgentsChangeOwnerInit;
@@ -505,11 +495,10 @@ export interface AppAgentsChangeOwnerInitTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Clears the dispatch filter for the specified `admin` account.
- *
  * `appAgentId` - The ID of the App Agent.
  *
  * `admin` - The account ID of the admin.
+ *
  */
 export interface AppAgentsClearAdminDispatchFilterArgs extends Args {
   /**
@@ -530,7 +519,7 @@ const AppAgentsClearAdminDispatchFilterArgsSchema = z.object({
 /**
  * @name appAgentsClearAdminDispatchFilter
  * @summary Clears the dispatch filter for the specified `admin` account.
- * @description The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions. # Parameters
+ * @description The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions.
  * @param args - The arguments of the transaction. {@link AppAgentsClearAdminDispatchFilterArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -548,7 +537,7 @@ export function appAgentsClearAdminDispatchFilter(
 }
 
 /**
- * Clears the dispatch filter for the specified `admin` account. The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions. # Parameters
+ * Clears the dispatch filter for the specified `admin` account.The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions.
  */
 export interface AppAgentsClearAdminDispatchFilterTx extends ITxAction {
   actionType: TransactionType.AppAgentsClearAdminDispatchFilter;
@@ -558,9 +547,8 @@ export interface AppAgentsClearAdminDispatchFilterTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Clear the metadata for an asset class.
- *
  * `appAgentId`
+ *
  */
 export interface AppAgentsClearAppAgentMetadataArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -591,7 +579,7 @@ export function appAgentsClearAppAgentMetadata(
 }
 
 /**
- * Clear the metadata for an asset class. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`. Any deposit is freed for the asset class owner.
+ * Clear the metadata for an asset class.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`. Any deposit is freed for the asset class owner.
  */
 export interface AppAgentsClearAppAgentMetadataTx extends ITxAction {
   actionType: TransactionType.AppAgentsClearAppAgentMetadata;
@@ -601,11 +589,10 @@ export interface AppAgentsClearAppAgentMetadataTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Completes the destruction process of the App Agent.
- *
  * `appAgentId` - The identifier of the App Agent to be destroyed.
  *
  * `destroyInfos`
+ *
  */
 export interface AppAgentsCompleteDestroyAppAgentArgs extends Args {
   /**
@@ -641,7 +628,7 @@ export function appAgentsCompleteDestroyAppAgent(
 }
 
 /**
- * Completes the destruction process of the App Agent. This function is used to complete the destruction process of the specified App Agent. It marks the App Agent as Destroyed and removes its metadata storage. After completion, it emits an event to indicate the status change of the App Agent. Parameters:
+ * Completes the destruction process of the App Agent.This function is used to complete the destruction process of the specified App Agent. It marks the App Agent as Destroyed and removes its metadata storage. After completion, it emits an event to indicate the status change of the App Agent. Parameters:
  */
 export interface AppAgentsCompleteDestroyAppAgentTx extends ITxAction {
   actionType: TransactionType.AppAgentsCompleteDestroyAppAgent;
@@ -651,13 +638,12 @@ export interface AppAgentsCompleteDestroyAppAgentTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend
- *
  * `appAgentId` - The identifier of the App Agent.
  *
  * `admin` - The admin address to be removed from the list.
  *
  * `coldWallet`
+ *
  */
 export interface AppAgentsDisableAdminColdWalletDispatchArgs extends Args {
   /**
@@ -679,8 +665,7 @@ const AppAgentsDisableAdminColdWalletDispatchArgsSchema = z.object({
 
 /**
  * @name appAgentsDisableAdminColdWalletDispatch
- * @summary Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend
- * @description from a cold wallet associated with a specific App Agent. # Parameters
+ * @description Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend from a cold wallet associated with a specific App Agent.
  * @param args - The arguments of the transaction. {@link AppAgentsDisableAdminColdWalletDispatchArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -698,7 +683,7 @@ export function appAgentsDisableAdminColdWalletDispatch(
 }
 
 /**
- * Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend from a cold wallet associated with a specific App Agent. # Parameters
+ * Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend from a cold wallet associated with a specific App Agent.
  */
 export interface AppAgentsDisableAdminColdWalletDispatchTx extends ITxAction {
   actionType: TransactionType.AppAgentsDisableAdminColdWalletDispatch;
@@ -708,9 +693,8 @@ export interface AppAgentsDisableAdminColdWalletDispatchTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Disables the hot wallet for a specified App Agent.
- *
  * `appAgentId` - Identifier of the App Agent for which the hot wallet needs to be disabled.
+ *
  */
 export interface AppAgentsDisableHotWalletArgs extends Args {
   /**
@@ -726,7 +710,7 @@ const AppAgentsDisableHotWalletArgsSchema = z.object({
 /**
  * @name appAgentsDisableHotWallet
  * @summary Disables the hot wallet for a specified App Agent.
- * @description This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it. # Parameters
+ * @description This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it.
  * @param args - The arguments of the transaction. {@link AppAgentsDisableHotWalletArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -744,7 +728,7 @@ export function appAgentsDisableHotWallet(
 }
 
 /**
- * Disables the hot wallet for a specified App Agent. This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it. # Parameters
+ * Disables the hot wallet for a specified App Agent.This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it.
  */
 export interface AppAgentsDisableHotWalletTx extends ITxAction {
   actionType: TransactionType.AppAgentsDisableHotWallet;
@@ -754,9 +738,8 @@ export interface AppAgentsDisableHotWalletTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Enables the hot wallet for a specified App Agent.
- *
  * `appAgentId` - Identifier of the App Agent for which the hot wallet needs to be enabled.
+ *
  */
 export interface AppAgentsEnableHotWalletArgs extends Args {
   /**
@@ -772,7 +755,7 @@ const AppAgentsEnableHotWalletArgsSchema = z.object({
 /**
  * @name appAgentsEnableHotWallet
  * @summary Enables the hot wallet for a specified App Agent.
- * @description This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it. # Parameters
+ * @description This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it.
  * @param args - The arguments of the transaction. {@link AppAgentsEnableHotWalletArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -790,7 +773,7 @@ export function appAgentsEnableHotWallet(
 }
 
 /**
- * Enables the hot wallet for a specified App Agent. This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it. # Parameters
+ * Enables the hot wallet for a specified App Agent.This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it.
  */
 export interface AppAgentsEnableHotWalletTx extends ITxAction {
   actionType: TransactionType.AppAgentsEnableHotWallet;
@@ -800,11 +783,10 @@ export interface AppAgentsEnableHotWalletTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Same as `create_app_agent` but can only be called by ForceOrigin
- *
  * `appAgentOwner`
  *
  * `appAgentBalancePayer`
+ *
  */
 export interface AppAgentsForceCreateAppAgentArgs extends Args {
   appAgentOwner: BlockchainGenericAccount;
@@ -818,7 +800,7 @@ const AppAgentsForceCreateAppAgentArgsSchema = z.object({
 
 /**
  * @name appAgentsForceCreateAppAgent
- * @summary Same as `create_app_agent` but can only be called by ForceOrigin
+ * @description Same as `create_app_agent` but can only be called by ForceOrigin
  * @param args - The arguments of the transaction. {@link AppAgentsForceCreateAppAgentArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -846,9 +828,8 @@ export interface AppAgentsForceCreateAppAgentTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Force initiates the destroy of an AppAgent.
- *
  * `appAgentId`
+ *
  */
 export interface AppAgentsForceInitiateAppAgentDestroyArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -860,7 +841,7 @@ const AppAgentsForceInitiateAppAgentDestroyArgsSchema = z.object({
 
 /**
  * @name appAgentsForceInitiateAppAgentDestroy
- * @summary Force initiates the destroy of an AppAgent.
+ * @description Force initiates the destroy of an AppAgent.
  * @param args - The arguments of the transaction. {@link AppAgentsForceInitiateAppAgentDestroyArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -888,9 +869,8 @@ export interface AppAgentsForceInitiateAppAgentDestroyTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Force initiates the suspension of an AppAgent.
- *
  * `appAgentId`
+ *
  */
 export interface AppAgentsForceInitiateAppAgentSuspensionArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -902,7 +882,7 @@ const AppAgentsForceInitiateAppAgentSuspensionArgsSchema = z.object({
 
 /**
  * @name appAgentsForceInitiateAppAgentSuspension
- * @summary Force initiates the suspension of an AppAgent.
+ * @description Force initiates the suspension of an AppAgent.
  * @param args - The arguments of the transaction. {@link AppAgentsForceInitiateAppAgentSuspensionArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -930,9 +910,8 @@ export interface AppAgentsForceInitiateAppAgentSuspensionTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Force initiates the un-suspension of an AppAgent.
- *
  * `appAgentId`
+ *
  */
 export interface AppAgentsForceInitiateAppAgentUnsuspensionArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -944,7 +923,7 @@ const AppAgentsForceInitiateAppAgentUnsuspensionArgsSchema = z.object({
 
 /**
  * @name appAgentsForceInitiateAppAgentUnsuspension
- * @summary Force initiates the un-suspension of an AppAgent.
+ * @description Force initiates the un-suspension of an AppAgent.
  * @param args - The arguments of the transaction. {@link AppAgentsForceInitiateAppAgentUnsuspensionArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -972,9 +951,8 @@ export interface AppAgentsForceInitiateAppAgentUnsuspensionTx extends ITxAction 
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Initiate destroy of an App Agent.
- *
  * `appAgentId` - The identifier of the App Agent to be deleted.
+ *
  */
 export interface AppAgentsInitiateDestroyAppAgentArgs extends Args {
   /**
@@ -990,7 +968,7 @@ const AppAgentsInitiateDestroyAppAgentArgsSchema = z.object({
 /**
  * @name appAgentsInitiateDestroyAppAgent
  * @summary Initiate destroy of an App Agent.
- * @description This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to "destroy initiated" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent. # Parameters
+ * @description This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to "destroy initiated" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent.
  * @param args - The arguments of the transaction. {@link AppAgentsInitiateDestroyAppAgentArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1008,7 +986,7 @@ export function appAgentsInitiateDestroyAppAgent(
 }
 
 /**
- * Initiate destroy of an App Agent. This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to "destroy initiated" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent. # Parameters
+ * Initiate destroy of an App Agent.This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to "destroy initiated" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent.
  */
 export interface AppAgentsInitiateDestroyAppAgentTx extends ITxAction {
   actionType: TransactionType.AppAgentsInitiateDestroyAppAgent;
@@ -1018,9 +996,8 @@ export interface AppAgentsInitiateDestroyAppAgentTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Pauses the specified App Agent.
- *
  * `appAgentId` - The ID of the App Agent to be paused.
+ *
  */
 export interface AppAgentsPauseAppAgentArgs extends Args {
   /**
@@ -1054,7 +1031,7 @@ export function appAgentsPauseAppAgent(
 }
 
 /**
- * Pauses the specified App Agent. This function verifies that the caller has the necessary permissions to pause the app agent.
+ * Pauses the specified App Agent.This function verifies that the caller has the necessary permissions to pause the app agent.
  */
 export interface AppAgentsPauseAppAgentTx extends ITxAction {
   actionType: TransactionType.AppAgentsPauseAppAgent;
@@ -1064,11 +1041,10 @@ export interface AppAgentsPauseAppAgentTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Processes the destruction of assets owned by the App Agent.
- *
  * `appAgentId` - The identifier of the App Agent.
  *
  * `destroyInfo`
+ *
  */
 export interface AppAgentsProcessDestroyArgs extends Args {
   /**
@@ -1104,7 +1080,7 @@ export function appAgentsProcessDestroy(
 }
 
 /**
- * Processes the destruction of assets owned by the App Agent. This function is used to process the destruction of assets owned by the specified app agent. This extrinsic can be called multiple times to destroy all entities related to the app agent. On the first call the status of app agent changes to DestroyInProcess - after that app agent can not be reactivated. It emits `AppAgentDestroyProcessed` after the destruction process is completed. Parameters:
+ * Processes the destruction of assets owned by the App Agent.This function is used to process the destruction of assets owned by the specified app agent. This extrinsic can be called multiple times to destroy all entities related to the app agent. On the first call the status of app agent changes to DestroyInProcess - after that app agent can not be reactivated. It emits `AppAgentDestroyProcessed` after the destruction process is completed. Parameters:
  */
 export interface AppAgentsProcessDestroyTx extends ITxAction {
   actionType: TransactionType.AppAgentsProcessDestroy;
@@ -1114,9 +1090,8 @@ export interface AppAgentsProcessDestroyTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Reactivates the specified App Agent.
- *
  * `appAgentId` - The identifier of the App Agent to be reactivated.
+ *
  */
 export interface AppAgentsReactivateAppAgentArgs extends Args {
   /**
@@ -1150,7 +1125,7 @@ export function appAgentsReactivateAppAgent(
 }
 
 /**
- * Reactivates the specified App Agent. This function is used to reactivate a previously deactivated App Agent. It checks if the App Agent exists and is in the DestroyInitiated state. If so, it verifies whether the deletion window has passed. If the deletion was initiated by the system, it attempts to process a subscription payment to prevent deletion and sets the App Agent to active status. If the deletion was triggered by the owner, it resets the App Agent to active without any checks. After reactivation, it emits an event to indicate the status change of the App Agent. Parameters:
+ * Reactivates the specified App Agent.This function is used to reactivate a previously deactivated App Agent. It checks if the App Agent exists and is in the DestroyInitiated state. If so, it verifies whether the deletion window has passed. If the deletion was initiated by the system, it attempts to process a subscription payment to prevent deletion and sets the App Agent to active status. If the deletion was triggered by the owner, it resets the App Agent to active without any checks. After reactivation, it emits an event to indicate the status change of the App Agent. Parameters:
  */
 export interface AppAgentsReactivateAppAgentTx extends ITxAction {
   actionType: TransactionType.AppAgentsReactivateAppAgent;
@@ -1160,11 +1135,10 @@ export interface AppAgentsReactivateAppAgentTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Removes an admin from the App Agent.
- *
  * `appAgentId` - The ID of the App Agent.
  *
  * `admin` - The account ID of the admin to be removed.
+ *
  */
 export interface AppAgentsRemoveAdminArgs extends Args {
   /**
@@ -1185,7 +1159,7 @@ const AppAgentsRemoveAdminArgsSchema = z.object({
 /**
  * @name appAgentsRemoveAdmin
  * @summary Removes an admin from the App Agent.
- * @description This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount. # Parameters
+ * @description This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount.
  * @param args - The arguments of the transaction. {@link AppAgentsRemoveAdminArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1203,7 +1177,7 @@ export function appAgentsRemoveAdmin(
 }
 
 /**
- * Removes an admin from the App Agent. This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount. # Parameters
+ * Removes an admin from the App Agent.This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount.
  */
 export interface AppAgentsRemoveAdminTx extends ITxAction {
   actionType: TransactionType.AppAgentsRemoveAdmin;
@@ -1213,13 +1187,12 @@ export interface AppAgentsRemoveAdminTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Removes an admin from the list of permitted administrators for a named address under a
- *
  * `appAgentId` - The identifier of the App Agent.
  *
  * `admin` - The account ID of the admin being removed.
  *
  * `namedAddress` - The named address from which the admin is being removed.
+ *
  */
 export interface AppAgentsRemoveAdminFromNamedAddressDispatchArgs extends Args {
   /**
@@ -1244,8 +1217,7 @@ const AppAgentsRemoveAdminFromNamedAddressDispatchArgsSchema = z.object({
 
 /**
  * @name appAgentsRemoveAdminFromNamedAddressDispatch
- * @summary Removes an admin from the list of permitted administrators for a named address under a
- * @description specific App Agent. # Parameters
+ * @description Removes an admin from the list of permitted administrators for a named address under a specific App Agent.
  * @param args - The arguments of the transaction. {@link AppAgentsRemoveAdminFromNamedAddressDispatchArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1263,7 +1235,7 @@ export function appAgentsRemoveAdminFromNamedAddressDispatch(
 }
 
 /**
- * Removes an admin from the list of permitted administrators for a named address under a specific App Agent. # Parameters
+ * Removes an admin from the list of permitted administrators for a named address under a specific App Agent.
  */
 export interface AppAgentsRemoveAdminFromNamedAddressDispatchTx extends ITxAction {
   actionType: TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch;
@@ -1273,13 +1245,12 @@ export interface AppAgentsRemoveAdminFromNamedAddressDispatchTx extends ITxActio
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Sets the list of dispatchables callable by the specified `admin` account.
- *
  * `appAgentId` - The ID of the App Agent.
  *
  * `admin` - The account ID of the admin.
  *
  * `newPermissions`
+ *
  */
 export interface AppAgentsSetAdminDispatchFilterArgs extends Args {
   /**
@@ -1302,7 +1273,7 @@ const AppAgentsSetAdminDispatchFilterArgsSchema = z.object({
 /**
  * @name appAgentsSetAdminDispatchFilter
  * @summary Sets the list of dispatchables callable by the specified `admin` account.
- * @description The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter. # Parameters
+ * @description The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter.
  * @param args - The arguments of the transaction. {@link AppAgentsSetAdminDispatchFilterArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1320,7 +1291,7 @@ export function appAgentsSetAdminDispatchFilter(
 }
 
 /**
- * Sets the list of dispatchables callable by the specified `admin` account. The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter. # Parameters
+ * Sets the list of dispatchables callable by the specified `admin` account.The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter.
  */
 export interface AppAgentsSetAdminDispatchFilterTx extends ITxAction {
   actionType: TransactionType.AppAgentsSetAdminDispatchFilter;
@@ -1330,11 +1301,10 @@ export interface AppAgentsSetAdminDispatchFilterTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Set the metadata for an asset class.
- *
  * `appAgentId`
  *
  * `data` - The general information of this asset. Limited in length by `StringLimit`.
+ *
  */
 export interface AppAgentsSetAppAgentMetadataArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -1370,7 +1340,7 @@ export function appAgentsSetAppAgentMetadata(
 }
 
 /**
- * Set the metadata for an asset class. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`.
+ * Set the metadata for an asset class.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`.
  */
 export interface AppAgentsSetAppAgentMetadataTx extends ITxAction {
   actionType: TransactionType.AppAgentsSetAppAgentMetadata;
@@ -1380,9 +1350,8 @@ export interface AppAgentsSetAppAgentMetadataTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Resumes the specified App Agent.
- *
  * `appAgentId` - The ID of the App Agent to be resumed.
+ *
  */
 export interface AppAgentsUnpauseAppAgentArgs extends Args {
   /**
@@ -1416,7 +1385,7 @@ export function appAgentsUnpauseAppAgent(
 }
 
 /**
- * Resumes the specified App Agent. This function verifies that the caller has the necessary permissions to resume the app agent.
+ * Resumes the specified App Agent.This function verifies that the caller has the necessary permissions to resume the app agent.
  */
 export interface AppAgentsUnpauseAppAgentTx extends ITxAction {
   actionType: TransactionType.AppAgentsUnpauseAppAgent;
@@ -1426,11 +1395,10 @@ export interface AppAgentsUnpauseAppAgentTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Sets the action points balance for a specified account.
- *
  * `address` - The account for which the action points balance will be set.
  *
  * `balance` - The balance of action points to be set for the specified account.
+ *
  */
 export interface AppResourcesSetActionPointsBalanceArgs extends Args {
   /**
@@ -1469,7 +1437,7 @@ export function appResourcesSetActionPointsBalance(
 }
 
 /**
- * Sets the action points balance for a specified account. This function allows setting the action points balance for a specified account. Parameters:
+ * Sets the action points balance for a specified account.This function allows setting the action points balance for a specified account. Parameters:
  */
 export interface AppResourcesSetActionPointsBalanceTx extends ITxAction {
   actionType: TransactionType.AppResourcesSetActionPointsBalance;
@@ -1479,11 +1447,10 @@ export interface AppResourcesSetActionPointsBalanceTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Sets the clearing points balance for a specified account.
- *
  * `address` - The account for which the clearing points balance will be set.
  *
  * `balance` - The balance of clearing points to be set for the specified account.
+ *
  */
 export interface AppResourcesSetClearingPointsBalanceArgs extends Args {
   /**
@@ -1522,7 +1489,7 @@ export function appResourcesSetClearingPointsBalance(
 }
 
 /**
- * Sets the clearing points balance for a specified account. This function allows setting the clearing points balance for a specified account. Parameters:
+ * Sets the clearing points balance for a specified account.This function allows setting the clearing points balance for a specified account. Parameters:
  */
 export interface AppResourcesSetClearingPointsBalanceTx extends ITxAction {
   actionType: TransactionType.AppResourcesSetClearingPointsBalance;
@@ -1532,9 +1499,8 @@ export interface AppResourcesSetClearingPointsBalanceTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Creates a new subscription tier with the provided details.
- *
  * `details` - The details of the subscription tier to be created.
+ *
  */
 export interface AppSubscriptionsCreateAppSubscriptionTierArgs extends Args {
   /**
@@ -1568,7 +1534,7 @@ export function appSubscriptionsCreateAppSubscriptionTier(
 }
 
 /**
- * Creates a new subscription tier with the provided details. This function is used to create a new subscription tier with the specified details. It generates a unique identifier for the tier, inserts the tier into storage, updates the next tier ID, and emits an event to indicate the creation of the subscription tier. Parameters:
+ * Creates a new subscription tier with the provided details.This function is used to create a new subscription tier with the specified details. It generates a unique identifier for the tier, inserts the tier into storage, updates the next tier ID, and emits an event to indicate the creation of the subscription tier. Parameters:
  */
 export interface AppSubscriptionsCreateAppSubscriptionTierTx extends ITxAction {
   actionType: TransactionType.AppSubscriptionsCreateAppSubscriptionTier;
@@ -1578,11 +1544,10 @@ export interface AppSubscriptionsCreateAppSubscriptionTierTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Updates the details or status of an existing subscription tier.
- *
  * `tierToObsolete`
  *
  * `successorTier`
+ *
  */
 export interface AppSubscriptionsObsoleteAppSubscriptionTierArgs extends Args {
   tierToObsolete: BlockchainGenericId;
@@ -1615,7 +1580,7 @@ export function appSubscriptionsObsoleteAppSubscriptionTier(
 }
 
 /**
- * Updates the details or status of an existing subscription tier. This function is used to patch the details or status of an existing subscription tier identified by its ID. It retrieves the tier from storage, updates its details or status based on the provided patch, and stores the updated tier back into storage. After patching, it emits an event to indicate the changes made to the subscription tier. Parameters:
+ * Updates the details or status of an existing subscription tier.This function is used to patch the details or status of an existing subscription tier identified by its ID. It retrieves the tier from storage, updates its details or status based on the provided patch, and stores the updated tier back into storage. After patching, it emits an event to indicate the changes made to the subscription tier. Parameters:
  */
 export interface AppSubscriptionsObsoleteAppSubscriptionTierTx extends ITxAction {
   actionType: TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier;
@@ -1625,11 +1590,10 @@ export interface AppSubscriptionsObsoleteAppSubscriptionTierTx extends ITxAction
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Sets the pay-on-demand mode for an app agent's subscription.
- *
  * `appAgentId` - The identifier of the subscriber (app agent).
  *
  * `payOnDemandMode` - The pay-on-demand mode to be set for the subscription.
+ *
  */
 export interface AppSubscriptionsSetAppPayOnDemandModeArgs extends Args {
   /**
@@ -1668,7 +1632,7 @@ export function appSubscriptionsSetAppPayOnDemandMode(
 }
 
 /**
- * Sets the pay-on-demand mode for an app agent's subscription. This function allows setting the pay-on-demand mode for an app agent's subscription. Parameters:
+ * Sets the pay-on-demand mode for an app agent's subscription.This function allows setting the pay-on-demand mode for an app agent's subscription. Parameters:
  */
 export interface AppSubscriptionsSetAppPayOnDemandModeTx extends ITxAction {
   actionType: TransactionType.AppSubscriptionsSetAppPayOnDemandMode;
@@ -1678,11 +1642,10 @@ export interface AppSubscriptionsSetAppPayOnDemandModeTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Changes the subscription tier of an app agent.
- *
  * `appAgentId` - The identifier of the app agent whose subscription tier is to be changed.
  *
  * `subscriptionTierId` - The identifier of the new subscription tier to be assigned to the app agent.
+ *
  */
 export interface AppSubscriptionsSetAppSubscriptionTierArgs extends Args {
   /**
@@ -1721,7 +1684,7 @@ export function appSubscriptionsSetAppSubscriptionTier(
 }
 
 /**
- * Changes the subscription tier of an app agent. This function allows changing the subscription tier of an app agent identified by its subscriber ID. It calculates the difference in price between the current and new tiers and adjusts the subscription limits accordingly. If the new tier is more expensive, it charges the delta payment and updates the action points and clearing points balances for the current billing period. After the adjustment, it updates the subscription tier information for the app agent and emits an event indicating the change in subscription tier. Parameters:
+ * Changes the subscription tier of an app agent.This function allows changing the subscription tier of an app agent identified by its subscriber ID. It calculates the difference in price between the current and new tiers and adjusts the subscription limits accordingly. If the new tier is more expensive, it charges the delta payment and updates the action points and clearing points balances for the current billing period. After the adjustment, it updates the subscription tier information for the app agent and emits an event indicating the change in subscription tier. Parameters:
  */
 export interface AppSubscriptionsSetAppSubscriptionTierTx extends ITxAction {
   actionType: TransactionType.AppSubscriptionsSetAppSubscriptionTier;
@@ -1731,13 +1694,12 @@ export interface AppSubscriptionsSetAppSubscriptionTierTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Submit a Clearing transaction with root permissions.
- *
  * `appAgentId`
  *
  * `extraFeePayer`
  *
  * `atomics`
+ *
  */
 export interface AppTransactionsForceSubmitClearingTransactionArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -1772,7 +1734,7 @@ export function appTransactionsForceSubmitClearingTransaction(
 }
 
 /**
- * Submit a Clearing transaction with root permissions. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from `extra_fee_payer`.
+ * Submit a Clearing transaction with root permissions.CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from `extra_fee_payer`.
  */
 export interface AppTransactionsForceSubmitClearingTransactionTx extends ITxAction {
   actionType: TransactionType.AppTransactionsForceSubmitClearingTransaction;
@@ -1782,11 +1744,10 @@ export interface AppTransactionsForceSubmitClearingTransactionTx extends ITxActi
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Submit a Clearing transaction.
- *
  * `appAgentId`
  *
  * `atomics`
+ *
  */
 export interface AppTransactionsSubmitClearingTransactionArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -1819,7 +1780,7 @@ export function appTransactionsSubmitClearingTransaction(
 }
 
 /**
- * Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
+ * Submit a Clearing transaction.CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).
  */
 export interface AppTransactionsSubmitClearingTransactionTx extends ITxAction {
   actionType: TransactionType.AppTransactionsSubmitClearingTransaction;
@@ -1829,13 +1790,12 @@ export interface AppTransactionsSubmitClearingTransactionTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Establishes a new transfer channel between two accounts.
- *
  * `senderAccount` - The account ID of the sender address for the new transfer channel.
  *
  * `transfersLimitResetPeriod` - The number of blocks after which the transfer limit resets
  *
  * `transfersLimitPerPeriod` - The number of transfers allowed per period
+ *
  */
 export interface AppTransferChannelsEstablishTransferChannelArgs extends Args {
   /**
@@ -1861,7 +1821,7 @@ const AppTransferChannelsEstablishTransferChannelArgsSchema = z.object({
 /**
  * @name appTransferChannelsEstablishTransferChannel
  * @summary Establishes a new transfer channel between two accounts.
- * @description This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters
+ * @description This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction.
  * @param args - The arguments of the transaction. {@link AppTransferChannelsEstablishTransferChannelArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1879,7 +1839,7 @@ export function appTransferChannelsEstablishTransferChannel(
 }
 
 /**
- * Establishes a new transfer channel between two accounts. This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters
+ * Establishes a new transfer channel between two accounts.This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction.
  */
 export interface AppTransferChannelsEstablishTransferChannelTx extends ITxAction {
   actionType: TransactionType.AppTransferChannelsEstablishTransferChannel;
@@ -1889,9 +1849,8 @@ export interface AppTransferChannelsEstablishTransferChannelTx extends ITxAction
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Removes a transfer channel between two accounts.
- *
  * `senderAccount` - The account ID of the sender address for the transfer channel to be removed.
+ *
  */
 export interface AppTransferChannelsRemoveTransferChannelArgs extends Args {
   /**
@@ -1907,7 +1866,7 @@ const AppTransferChannelsRemoveTransferChannelArgsSchema = z.object({
 /**
  * @name appTransferChannelsRemoveTransferChannel
  * @summary Removes a transfer channel between two accounts.
- * @description This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters
+ * @description This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction.
  * @param args - The arguments of the transaction. {@link AppTransferChannelsRemoveTransferChannelArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1925,7 +1884,7 @@ export function appTransferChannelsRemoveTransferChannel(
 }
 
 /**
- * Removes a transfer channel between two accounts. This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters
+ * Removes a transfer channel between two accounts.This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction.
  */
 export interface AppTransferChannelsRemoveTransferChannelTx extends ITxAction {
   actionType: TransactionType.AppTransferChannelsRemoveTransferChannel;
@@ -1935,11 +1894,10 @@ export interface AppTransferChannelsRemoveTransferChannelTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Blocks deposits to a keyless address controlled by a specific app agent.
- *
  * `appAgentId`
  *
  * `keylessAddress`
+ *
  */
 export interface AppTransferFiltersBlockAddressDepositsArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -1954,7 +1912,7 @@ const AppTransferFiltersBlockAddressDepositsArgsSchema = z.object({
 /**
  * @name appTransferFiltersBlockAddressDeposits
  * @summary Blocks deposits to a keyless address controlled by a specific app agent.
- * @description # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).
+ * @description * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. * `DispatchResult` - Indicates whether the transaction was successful or failed. Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).
  * @param args - The arguments of the transaction. {@link AppTransferFiltersBlockAddressDepositsArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -1972,7 +1930,7 @@ export function appTransferFiltersBlockAddressDeposits(
 }
 
 /**
- * Blocks deposits to a keyless address controlled by a specific app agent. # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).
+ * Blocks deposits to a keyless address controlled by a specific app agent.* `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. * `DispatchResult` - Indicates whether the transaction was successful or failed. Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).
  */
 export interface AppTransferFiltersBlockAddressDepositsTx extends ITxAction {
   actionType: TransactionType.AppTransferFiltersBlockAddressDeposits;
@@ -1982,11 +1940,10 @@ export interface AppTransferFiltersBlockAddressDepositsTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Sets the transdepositfer permissions for the specified app_agent_id under the authority
- *
  * `appAgentId` - The identifier of the application agent for which the deposit permissions are being set.
  *
  * `permissions` - The deposit permissions to be set for the application agent.
+ *
  */
 export interface AppTransferFiltersSetAppDepositPermissionsArgs extends Args {
   /**
@@ -2006,8 +1963,8 @@ const AppTransferFiltersSetAppDepositPermissionsArgsSchema = z.object({
 
 /**
  * @name appTransferFiltersSetAppDepositPermissions
- * @summary Sets the transdepositfer permissions for the specified app_agent_id under the authority
- * @description of the caller's origin. This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent. # Parameters
+ * @summary Sets the transdepositfer permissions for the specified app_agent_id under the authority of the caller's origin.
+ * @description This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent.
  * @param args - The arguments of the transaction. {@link AppTransferFiltersSetAppDepositPermissionsArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -2025,7 +1982,7 @@ export function appTransferFiltersSetAppDepositPermissions(
 }
 
 /**
- * Sets the transdepositfer permissions for the specified app_agent_id under the authority of the caller's origin. This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent. # Parameters
+ * Sets the transdepositfer permissions for the specified app_agent_id under the authority of the caller's origin.This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent.
  */
 export interface AppTransferFiltersSetAppDepositPermissionsTx extends ITxAction {
   actionType: TransactionType.AppTransferFiltersSetAppDepositPermissions;
@@ -2035,11 +1992,10 @@ export interface AppTransferFiltersSetAppDepositPermissionsTx extends ITxAction 
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Unblocks deposits to a keyless address controlled by a specific app agent.
- *
  * `appAgentId`
  *
  * `keylessAddress`
+ *
  */
 export interface AppTransferFiltersUnblockAddressDepositsArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -2054,7 +2010,7 @@ const AppTransferFiltersUnblockAddressDepositsArgsSchema = z.object({
 /**
  * @name appTransferFiltersUnblockAddressDeposits
  * @summary Unblocks deposits to a keyless address controlled by a specific app agent.
- * @description # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).
+ * @description * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. * `DispatchResult` - Indicates whether the transaction was successful or failed. Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).
  * @param args - The arguments of the transaction. {@link AppTransferFiltersUnblockAddressDepositsArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -2072,7 +2028,7 @@ export function appTransferFiltersUnblockAddressDeposits(
 }
 
 /**
- * Unblocks deposits to a keyless address controlled by a specific app agent. # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).
+ * Unblocks deposits to a keyless address controlled by a specific app agent.* `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. * `DispatchResult` - Indicates whether the transaction was successful or failed. Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).
  */
 export interface AppTransferFiltersUnblockAddressDepositsTx extends ITxAction {
   actionType: TransactionType.AppTransferFiltersUnblockAddressDeposits;
@@ -2082,13 +2038,12 @@ export interface AppTransferFiltersUnblockAddressDepositsTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.
- *
  * `id` - The identifier of the asset to have some amount burned.
  *
  * `who` - The account to be debited from.
  *
  * `amount` - The maximum amount by which `who`'s balance should be reduced.
+ *
  */
 export interface AssetsBurnArgs extends Args {
   /**
@@ -2132,7 +2087,7 @@ export function assetsBurn(
 }
 
 /**
- * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
+ * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
  */
 export interface AssetsBurnTx extends ITxAction {
   actionType: TransactionType.AssetsBurn;
@@ -2140,7 +2095,7 @@ export interface AssetsBurnTx extends ITxAction {
 };
 
 /**
- * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
+ * Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.
  */
 export interface AssetsBurnAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsBurn;
@@ -2151,8 +2106,8 @@ export interface AssetsBurnAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- *
  * `minBalance`
+ *
  */
 export interface AssetsCreateArgs extends Args {
   minBalance: BlockchainGenericBalance;
@@ -2198,9 +2153,8 @@ export interface AssetsCreateAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Destroy all accounts associated with a given asset.
- *
  * `id` - The identifier of the asset to be destroyed. This must identify an existing asset.
+ *
  */
 export interface AssetsDestroyAccountsArgs extends Args {
   /**
@@ -2234,7 +2188,7 @@ export function assetsDestroyAccounts(
 }
 
 /**
- * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
+ * Destroy all accounts associated with a given asset.`destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
  */
 export interface AssetsDestroyAccountsTx extends ITxAction {
   actionType: TransactionType.AssetsDestroyAccounts;
@@ -2242,7 +2196,7 @@ export interface AssetsDestroyAccountsTx extends ITxAction {
 };
 
 /**
- * Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
+ * Destroy all accounts associated with a given asset.`destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.
  */
 export interface AssetsDestroyAccountsAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsDestroyAccounts;
@@ -2253,9 +2207,8 @@ export interface AssetsDestroyAccountsAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).
- *
  * `id` - The identifier of the asset to be destroyed. This must identify an existing asset.
+ *
  */
 export interface AssetsDestroyApprovalsArgs extends Args {
   /**
@@ -2289,7 +2242,7 @@ export function assetsDestroyApprovals(
 }
 
 /**
- * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
+ * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).`destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
  */
 export interface AssetsDestroyApprovalsTx extends ITxAction {
   actionType: TransactionType.AssetsDestroyApprovals;
@@ -2297,7 +2250,7 @@ export interface AssetsDestroyApprovalsTx extends ITxAction {
 };
 
 /**
- * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
+ * Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).`destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.
  */
 export interface AssetsDestroyApprovalsAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsDestroyApprovals;
@@ -2308,9 +2261,8 @@ export interface AssetsDestroyApprovalsAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Complete destroying asset and unreserve currency.
- *
  * `id` - The identifier of the asset to be destroyed. This must identify an existing asset.
+ *
  */
 export interface AssetsFinishDestroyArgs extends Args {
   /**
@@ -2344,7 +2296,7 @@ export function assetsFinishDestroy(
 }
 
 /**
- * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
+ * Complete destroying asset and unreserve currency.`finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
  */
 export interface AssetsFinishDestroyTx extends ITxAction {
   actionType: TransactionType.AssetsFinishDestroy;
@@ -2352,7 +2304,7 @@ export interface AssetsFinishDestroyTx extends ITxAction {
 };
 
 /**
- * Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
+ * Complete destroying asset and unreserve currency.`finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.
  */
 export interface AssetsFinishDestroyAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsFinishDestroy;
@@ -2363,8 +2315,6 @@ export interface AssetsFinishDestroyAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Move some assets from one account to another.
- *
  * `id` - The identifier of the asset to have some amount transferred.
  *
  * `source` - The account to be debited.
@@ -2372,6 +2322,7 @@ export interface AssetsFinishDestroyAction extends ICTAtomicAction {
  * `dest` - The account to be credited.
  *
  * `amount` - The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.
+ *
  */
 export interface AssetsForceTransferArgs extends Args {
   /**
@@ -2420,7 +2371,7 @@ export function assetsForceTransfer(
 }
 
 /**
- * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ * Move some assets from one account to another.Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsForceTransferTx extends ITxAction {
   actionType: TransactionType.AssetsForceTransfer;
@@ -2428,7 +2379,7 @@ export interface AssetsForceTransferTx extends ITxAction {
 };
 
 /**
- * Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ * Move some assets from one account to another.Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsForceTransferAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsForceTransfer;
@@ -2439,11 +2390,10 @@ export interface AssetsForceTransferAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`
- *
  * `id` - The identifier of the asset to be frozen.
  *
  * `who` - The account to be frozen.
+ *
  */
 export interface AssetsFreezeAccountArgs extends Args {
   /**
@@ -2463,8 +2413,8 @@ const AssetsFreezeAccountArgsSchema = z.object({
 
 /**
  * @name assetsFreeze
- * @summary Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`
- * @description must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ * @summary Disallow further unprivileged transfers of an asset `id` from an account `who`.
+ * @description `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  * @param args - The arguments of the transaction. {@link AssetsFreezeAccountArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -2482,7 +2432,7 @@ export function assetsFreeze(
 }
 
 /**
- * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ * Disallow further unprivileged transfers of an asset `id` from an account `who`.`who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  */
 export interface AssetsFreezeAccountTx extends ITxAction {
   actionType: TransactionType.AssetsFreezeAccount;
@@ -2490,7 +2440,7 @@ export interface AssetsFreezeAccountTx extends ITxAction {
 };
 
 /**
- * Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ * Disallow further unprivileged transfers of an asset `id` from an account `who`.`who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.
  */
 export interface AssetsFreezeAccountAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsFreezeAccount;
@@ -2501,9 +2451,8 @@ export interface AssetsFreezeAccountAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Disallow further unprivileged transfers for the asset class.
- *
  * `id` - The identifier of the asset to be frozen.
+ *
  */
 export interface AssetsFreezeAssetArgs extends Args {
   /**
@@ -2537,7 +2486,7 @@ export function assetsFreezeAsset(
 }
 
 /**
- * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ * Disallow further unprivileged transfers for the asset class.Origin must be Signed and the sender should be the Freezer of the asset `id`.
  */
 export interface AssetsFreezeAssetTx extends ITxAction {
   actionType: TransactionType.AssetsFreezeAsset;
@@ -2545,7 +2494,7 @@ export interface AssetsFreezeAssetTx extends ITxAction {
 };
 
 /**
- * Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.
+ * Disallow further unprivileged transfers for the asset class.Origin must be Signed and the sender should be the Freezer of the asset `id`.
  */
 export interface AssetsFreezeAssetAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsFreezeAsset;
@@ -2556,13 +2505,12 @@ export interface AssetsFreezeAssetAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Mint assets of a particular class.
- *
  * `id` - The identifier of the asset to have some amount minted.
  *
  * `beneficiary` - The account to be credited with the minted assets.
  *
  * `amount` - The amount of the asset to be minted.
+ *
  */
 export interface AssetsMintArgs extends Args {
   /**
@@ -2606,7 +2554,7 @@ export function assetsMint(
 }
 
 /**
- * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
+ * Mint assets of a particular class.The origin must be Signed and the sender must be the Issuer of the asset `id`.
  */
 export interface AssetsMintTx extends ITxAction {
   actionType: TransactionType.AssetsMint;
@@ -2614,7 +2562,7 @@ export interface AssetsMintTx extends ITxAction {
 };
 
 /**
- * Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.
+ * Mint assets of a particular class.The origin must be Signed and the sender must be the Issuer of the asset `id`.
  */
 export interface AssetsMintAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsMint;
@@ -2625,11 +2573,10 @@ export interface AssetsMintAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Set the raw metadata for an asset.
- *
  * `id` - The identifier of the asset to update.
  *
  * `data` - The data of metadata. Limited in length by `StringLimit`.
+ *
  */
 export interface AssetsSetMetadataArgs extends Args {
   /**
@@ -2668,7 +2615,7 @@ export function assetsSetMetadata(
 }
 
 /**
- * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
+ * Set the raw metadata for an asset.Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
  */
 export interface AssetsSetMetadataTx extends ITxAction {
   actionType: TransactionType.AssetsSetMetadata;
@@ -2676,7 +2623,7 @@ export interface AssetsSetMetadataTx extends ITxAction {
 };
 
 /**
- * Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
+ * Set the raw metadata for an asset.Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.
  */
 export interface AssetsSetMetadataAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsSetMetadata;
@@ -2687,11 +2634,10 @@ export interface AssetsSetMetadataAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Sets the minimum balance of an asset.
- *
  * `id` - The identifier of the asset.
  *
  * `minBalance` - The new value of `min_balance`.
+ *
  */
 export interface AssetsSetMinBalanceArgs extends Args {
   /**
@@ -2730,7 +2676,7 @@ export function assetsSetMinBalance(
 }
 
 /**
- * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
+ * Sets the minimum balance of an asset.Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
  */
 export interface AssetsSetMinBalanceTx extends ITxAction {
   actionType: TransactionType.AssetsSetMinBalance;
@@ -2738,7 +2684,7 @@ export interface AssetsSetMinBalanceTx extends ITxAction {
 };
 
 /**
- * Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
+ * Sets the minimum balance of an asset.Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.
  */
 export interface AssetsSetMinBalanceAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsSetMinBalance;
@@ -2749,9 +2695,8 @@ export interface AssetsSetMinBalanceAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Start the process of destroying a fungible asset class.
- *
  * `id` - The identifier of the asset to be destroyed. This must identify an existing asset.
+ *
  */
 export interface AssetsStartDestroyArgs extends Args {
   /**
@@ -2785,7 +2730,7 @@ export function assetsStartDestroy(
 }
 
 /**
- * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
+ * Start the process of destroying a fungible asset class.`start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
  */
 export interface AssetsStartDestroyTx extends ITxAction {
   actionType: TransactionType.AssetsStartDestroy;
@@ -2793,7 +2738,7 @@ export interface AssetsStartDestroyTx extends ITxAction {
 };
 
 /**
- * Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
+ * Start the process of destroying a fungible asset class.`start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.
  */
 export interface AssetsStartDestroyAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsStartDestroy;
@@ -2804,11 +2749,10 @@ export interface AssetsStartDestroyAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Allow unprivileged transfers to and from an account again.
- *
  * `id` - The identifier of the asset to be frozen.
  *
  * `who` - The account to be unfrozen.
+ *
  */
 export interface AssetsThawAccountArgs extends Args {
   /**
@@ -2847,7 +2791,7 @@ export function assetsThaw(
 }
 
 /**
- * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ * Allow unprivileged transfers to and from an account again.Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsThawAccountTx extends ITxAction {
   actionType: TransactionType.AssetsThawAccount;
@@ -2855,7 +2799,7 @@ export interface AssetsThawAccountTx extends ITxAction {
 };
 
 /**
- * Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ * Allow unprivileged transfers to and from an account again.Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsThawAccountAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsThawAccount;
@@ -2866,9 +2810,8 @@ export interface AssetsThawAccountAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Allow unprivileged transfers for the asset again.
- *
  * `id` - The identifier of the asset to be thawed.
+ *
  */
 export interface AssetsThawAssetArgs extends Args {
   /**
@@ -2902,7 +2845,7 @@ export function assetsThawAsset(
 }
 
 /**
- * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ * Allow unprivileged transfers for the asset again.Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsThawAssetTx extends ITxAction {
   actionType: TransactionType.AssetsThawAsset;
@@ -2910,7 +2853,7 @@ export interface AssetsThawAssetTx extends ITxAction {
 };
 
 /**
- * Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.
+ * Allow unprivileged transfers for the asset again.Origin must be Signed and the sender should be the Admin of the asset `id`.
  */
 export interface AssetsThawAssetAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsThawAsset;
@@ -2921,13 +2864,12 @@ export interface AssetsThawAssetAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Move some assets from the sender account to another.
- *
  * `id` - The identifier of the asset to have some amount transferred.
  *
  * `target` - The account to be credited.
  *
  * `amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
+ *
  */
 export interface AssetsTransferArgs extends Args {
   /**
@@ -2971,7 +2913,7 @@ export function assetsTransfer(
 }
 
 /**
- * Move some assets from the sender account to another. Origin must be Signed.
+ * Move some assets from the sender account to another.Origin must be Signed.
  */
 export interface AssetsTransferTx extends ITxAction {
   actionType: TransactionType.AssetsTransfer;
@@ -2979,7 +2921,7 @@ export interface AssetsTransferTx extends ITxAction {
 };
 
 /**
- * Move some assets from the sender account to another. Origin must be Signed.
+ * Move some assets from the sender account to another.Origin must be Signed.
  */
 export interface AssetsTransferAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsTransfer;
@@ -2990,13 +2932,12 @@ export interface AssetsTransferAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Move some assets from the sender account to another, keeping the sender account alive.
- *
  * `id` - The identifier of the asset to have some amount transferred.
  *
  * `target` - The account to be credited.
  *
  * `amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.
+ *
  */
 export interface AssetsTransferKeepAliveArgs extends Args {
   /**
@@ -3040,7 +2981,7 @@ export function assetsTransferKeepAlive(
 }
 
 /**
- * Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.
+ * Move some assets from the sender account to another, keeping the sender account alive.Origin must be Signed.
  */
 export interface AssetsTransferKeepAliveTx extends ITxAction {
   actionType: TransactionType.AssetsTransferKeepAlive;
@@ -3048,7 +2989,7 @@ export interface AssetsTransferKeepAliveTx extends ITxAction {
 };
 
 /**
- * Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.
+ * Move some assets from the sender account to another, keeping the sender account alive.Origin must be Signed.
  */
 export interface AssetsTransferKeepAliveAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsTransferKeepAlive;
@@ -3059,11 +3000,10 @@ export interface AssetsTransferKeepAliveAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Change the Owner of an asset.
- *
  * `id` - The identifier of the asset.
  *
  * `owner` - The new Owner of this asset.
+ *
  */
 export interface AssetsTransferOwnershipArgs extends Args {
   /**
@@ -3102,7 +3042,7 @@ export function assetsTransferOwnership(
 }
 
 /**
- * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
+ * Change the Owner of an asset.Origin must be Signed and the sender should be the Owner of the asset `id`.
  */
 export interface AssetsTransferOwnershipTx extends ITxAction {
   actionType: TransactionType.AssetsTransferOwnership;
@@ -3110,7 +3050,7 @@ export interface AssetsTransferOwnershipTx extends ITxAction {
 };
 
 /**
- * Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.
+ * Change the Owner of an asset.Origin must be Signed and the sender should be the Owner of the asset `id`.
  */
 export interface AssetsTransferOwnershipAction extends ICTAtomicAction {
   actionType: TransactionType.AssetsTransferOwnership;
@@ -3121,11 +3061,10 @@ export interface AssetsTransferOwnershipAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Transfer the entire transferable balance from the caller account.
- *
  * `dest` - The recipient of the transfer.
  *
  * `keepAlive`
+ *
  */
 export interface BalancesTransferAllArgs extends Args {
   /**
@@ -3161,7 +3100,7 @@ export function balancesTransferAll(
 }
 
 /**
- * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
+ * Transfer the entire transferable balance from the caller account.NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
  */
 export interface BalancesTransferAllTx extends ITxAction {
   actionType: TransactionType.BalancesTransferAll;
@@ -3169,7 +3108,7 @@ export interface BalancesTransferAllTx extends ITxAction {
 };
 
 /**
- * Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
+ * Transfer the entire transferable balance from the caller account.NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.
  */
 export interface BalancesTransferAllAction extends ICTAtomicAction {
   actionType: TransactionType.BalancesTransferAll;
@@ -3180,11 +3119,10 @@ export interface BalancesTransferAllAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Transfer some liquid free balance to another account.
- *
  * `dest`
  *
  * `value`
+ *
  */
 export interface BalancesTransferAllowDeathArgs extends Args {
   dest: BlockchainGenericAccountId;
@@ -3217,7 +3155,7 @@ export function balancesTransferAllowDeath(
 }
 
 /**
- * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
+ * Transfer some liquid free balance to another account.`transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
  */
 export interface BalancesTransferAllowDeathTx extends ITxAction {
   actionType: TransactionType.BalancesTransferAllowDeath;
@@ -3225,7 +3163,7 @@ export interface BalancesTransferAllowDeathTx extends ITxAction {
 };
 
 /**
- * Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
+ * Transfer some liquid free balance to another account.`transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.
  */
 export interface BalancesTransferAllowDeathAction extends ICTAtomicAction {
   actionType: TransactionType.BalancesTransferAllowDeath;
@@ -3236,11 +3174,10 @@ export interface BalancesTransferAllowDeathAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Same as the [`transfer_allow_death`] call, but with a check that the transfer will not
- *
  * `dest`
  *
  * `value`
+ *
  */
 export interface BalancesTransferKeepAliveArgs extends Args {
   dest: BlockchainGenericAccountId;
@@ -3254,8 +3191,8 @@ const BalancesTransferKeepAliveArgsSchema = z.object({
 
 /**
  * @name balancesTransferKeepAlive
- * @summary Same as the [`transfer_allow_death`] call, but with a check that the transfer will not
- * @description kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
+ * @summary Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account.
+ * @description 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
  * @param args - The arguments of the transaction. {@link BalancesTransferKeepAliveArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -3273,7 +3210,7 @@ export function balancesTransferKeepAlive(
 }
 
 /**
- * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
+ * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account.99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
  */
 export interface BalancesTransferKeepAliveTx extends ITxAction {
   actionType: TransactionType.BalancesTransferKeepAlive;
@@ -3281,7 +3218,7 @@ export interface BalancesTransferKeepAliveTx extends ITxAction {
 };
 
 /**
- * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
+ * Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account.99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer
  */
 export interface BalancesTransferKeepAliveAction extends ICTAtomicAction {
   actionType: TransactionType.BalancesTransferKeepAlive;
@@ -3292,11 +3229,10 @@ export interface BalancesTransferKeepAliveAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Destroy a single item.
- *
  * `collection` - The collection of the item to be burned.
  *
  * `item` - The item to be burned.
+ *
  */
 export interface NftsBurnItemArgs extends Args {
   /**
@@ -3335,7 +3271,7 @@ export function nftsBurn(
 }
 
 /**
- * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
+ * Destroy a single item.The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
  */
 export interface NftsBurnItemTx extends ITxAction {
   actionType: TransactionType.NftsBurnItem;
@@ -3343,7 +3279,7 @@ export interface NftsBurnItemTx extends ITxAction {
 };
 
 /**
- * Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
+ * Destroy a single item.The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.
  */
 export interface NftsBurnItemAction extends ICTAtomicAction {
   actionType: TransactionType.NftsBurnItem;
@@ -3354,9 +3290,8 @@ export interface NftsBurnItemAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Clear the metadata for a collection.
- *
  * `collection` - The identifier of the collection whose metadata to clear.
+ *
  */
 export interface NftsClearCollectionMetadataArgs extends Args {
   /**
@@ -3390,7 +3325,7 @@ export function nftsClearCollectionMetadata(
 }
 
 /**
- * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ * Clear the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  */
 export interface NftsClearCollectionMetadataTx extends ITxAction {
   actionType: TransactionType.NftsClearCollectionMetadata;
@@ -3398,7 +3333,7 @@ export interface NftsClearCollectionMetadataTx extends ITxAction {
 };
 
 /**
- * Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ * Clear the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  */
 export interface NftsClearCollectionMetadataAction extends ICTAtomicAction {
   actionType: TransactionType.NftsClearCollectionMetadata;
@@ -3409,11 +3344,10 @@ export interface NftsClearCollectionMetadataAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Clear the metadata for an item.
- *
  * `collection` - The identifier of the collection whose item's metadata to clear.
  *
  * `item` - The identifier of the item whose metadata to clear.
+ *
  */
 export interface NftsClearItemMetadataArgs extends Args {
   /**
@@ -3452,7 +3386,7 @@ export function nftsClearMetadata(
 }
 
 /**
- * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ * Clear the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  */
 export interface NftsClearItemMetadataTx extends ITxAction {
   actionType: TransactionType.NftsClearItemMetadata;
@@ -3460,7 +3394,7 @@ export interface NftsClearItemMetadataTx extends ITxAction {
 };
 
 /**
- * Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
+ * Clear the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.
  */
 export interface NftsClearItemMetadataAction extends ICTAtomicAction {
   actionType: TransactionType.NftsClearItemMetadata;
@@ -3514,11 +3448,10 @@ export interface NftsCreateCollectionAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Destroy a collection of fungible items.
- *
  * `collection` - The identifier of the collection to be destroyed.
  *
  * `witness` - Information on the items minted in the collection. This must be correct.
+ *
  */
 export interface NftsDestroyCollectionArgs extends Args {
   /**
@@ -3557,7 +3490,7 @@ export function nftsDestroy(
 }
 
 /**
- * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
+ * Destroy a collection of fungible items.The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
  */
 export interface NftsDestroyCollectionTx extends ITxAction {
   actionType: TransactionType.NftsDestroyCollection;
@@ -3565,7 +3498,7 @@ export interface NftsDestroyCollectionTx extends ITxAction {
 };
 
 /**
- * Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
+ * Destroy a collection of fungible items.The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.
  */
 export interface NftsDestroyCollectionAction extends ICTAtomicAction {
   actionType: TransactionType.NftsDestroyCollection;
@@ -3576,11 +3509,10 @@ export interface NftsDestroyCollectionAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Disallow further unprivileged transfer of an item.
- *
  * `collection` - The collection of the item to be changed.
  *
  * `item` - The item to become non-transferable.
+ *
  */
 export interface NftsLockItemTransferArgs extends Args {
   /**
@@ -3619,7 +3551,7 @@ export function nftsLockItemTransfer(
 }
 
 /**
- * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ * Disallow further unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.
  */
 export interface NftsLockItemTransferTx extends ITxAction {
   actionType: TransactionType.NftsLockItemTransfer;
@@ -3627,7 +3559,7 @@ export interface NftsLockItemTransferTx extends ITxAction {
 };
 
 /**
- * Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ * Disallow further unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.
  */
 export interface NftsLockItemTransferAction extends ICTAtomicAction {
   actionType: TransactionType.NftsLockItemTransfer;
@@ -3638,12 +3570,12 @@ export interface NftsLockItemTransferAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- *
  * `collection`
  *
  * `item`
  *
  * `mintTo`
+ *
  */
 export interface NftsMintItemArgs extends Args {
   collection: BlockchainGenericId;
@@ -3693,9 +3625,8 @@ export interface NftsMintItemAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Set (or reset) the acceptance of ownership for a particular account.
- *
  * `maybeCollection` - The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.
+ *
  */
 export interface NftsAcceptCollectionOwnershipArgs extends Args {
   /**
@@ -3729,7 +3660,7 @@ export function nftsSetAcceptOwnership(
 }
 
 /**
- * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
+ * Set (or reset) the acceptance of ownership for a particular account.Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
  */
 export interface NftsAcceptCollectionOwnershipTx extends ITxAction {
   actionType: TransactionType.NftsAcceptCollectionOwnership;
@@ -3737,7 +3668,7 @@ export interface NftsAcceptCollectionOwnershipTx extends ITxAction {
 };
 
 /**
- * Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
+ * Set (or reset) the acceptance of ownership for a particular account.Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.
  */
 export interface NftsAcceptCollectionOwnershipAction extends ICTAtomicAction {
   actionType: TransactionType.NftsAcceptCollectionOwnership;
@@ -3748,11 +3679,10 @@ export interface NftsAcceptCollectionOwnershipAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Set the metadata for a collection.
- *
  * `collection` - The identifier of the item whose metadata to update.
  *
  * `data` - The general information of this item. Limited in length by `StringLimit`.
+ *
  */
 export interface NftsSetCollectionMetadataArgs extends Args {
   /**
@@ -3791,7 +3721,7 @@ export function nftsSetCollectionMetadata(
 }
 
 /**
- * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ * Set the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  */
 export interface NftsSetCollectionMetadataTx extends ITxAction {
   actionType: TransactionType.NftsSetCollectionMetadata;
@@ -3799,7 +3729,7 @@ export interface NftsSetCollectionMetadataTx extends ITxAction {
 };
 
 /**
- * Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ * Set the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  */
 export interface NftsSetCollectionMetadataAction extends ICTAtomicAction {
   actionType: TransactionType.NftsSetCollectionMetadata;
@@ -3810,13 +3740,12 @@ export interface NftsSetCollectionMetadataAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Set the metadata for an item.
- *
  * `collection` - The identifier of the collection whose item's metadata to set.
  *
  * `item` - The identifier of the item whose metadata to set.
  *
  * `data` - The general information of this item. Limited in length by `StringLimit`.
+ *
  */
 export interface NftsSetItemMetadataArgs extends Args {
   /**
@@ -3860,7 +3789,7 @@ export function nftsSetMetadata(
 }
 
 /**
- * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ * Set the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  */
 export interface NftsSetItemMetadataTx extends ITxAction {
   actionType: TransactionType.NftsSetItemMetadata;
@@ -3868,7 +3797,7 @@ export interface NftsSetItemMetadataTx extends ITxAction {
 };
 
 /**
- * Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
+ * Set the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.
  */
 export interface NftsSetItemMetadataAction extends ICTAtomicAction {
   actionType: TransactionType.NftsSetItemMetadata;
@@ -3879,13 +3808,12 @@ export interface NftsSetItemMetadataAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Move an item from the sender account to another.
- *
  * `collection` - The collection of the item to be transferred.
  *
  * `item` - The item to be transferred.
  *
  * `dest` - The account to receive ownership of the item.
+ *
  */
 export interface NftsTransferItemArgs extends Args {
   /**
@@ -3929,7 +3857,7 @@ export function nftsTransfer(
 }
 
 /**
- * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
+ * Move an item from the sender account to another.Origin must be Signed and the signing account must be either:
  */
 export interface NftsTransferItemTx extends ITxAction {
   actionType: TransactionType.NftsTransferItem;
@@ -3937,7 +3865,7 @@ export interface NftsTransferItemTx extends ITxAction {
 };
 
 /**
- * Move an item from the sender account to another. Origin must be Signed and the signing account must be either:
+ * Move an item from the sender account to another.Origin must be Signed and the signing account must be either:
  */
 export interface NftsTransferItemAction extends ICTAtomicAction {
   actionType: TransactionType.NftsTransferItem;
@@ -3948,11 +3876,10 @@ export interface NftsTransferItemAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Change the Owner of a collection.
- *
  * `collection` - The collection whose owner should be changed.
  *
  * `newOwner`
+ *
  */
 export interface NftsTransferCollectionOwnershipArgs extends Args {
   /**
@@ -3988,7 +3915,7 @@ export function nftsTransferOwnership(
 }
 
 /**
- * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
+ * Change the Owner of a collection.Origin must be Signed and the sender should be the Owner of the `collection`.
  */
 export interface NftsTransferCollectionOwnershipTx extends ITxAction {
   actionType: TransactionType.NftsTransferCollectionOwnership;
@@ -3996,7 +3923,7 @@ export interface NftsTransferCollectionOwnershipTx extends ITxAction {
 };
 
 /**
- * Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.
+ * Change the Owner of a collection.Origin must be Signed and the sender should be the Owner of the `collection`.
  */
 export interface NftsTransferCollectionOwnershipAction extends ICTAtomicAction {
   actionType: TransactionType.NftsTransferCollectionOwnership;
@@ -4007,11 +3934,10 @@ export interface NftsTransferCollectionOwnershipAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Re-allow unprivileged transfer of an item.
- *
  * `collection` - The collection of the item to be changed.
  *
  * `item` - The item to become transferable.
+ *
  */
 export interface NftsUnlockItemTransferArgs extends Args {
   /**
@@ -4050,7 +3976,7 @@ export function nftsUnlockItemTransfer(
 }
 
 /**
- * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ * Re-allow unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.
  */
 export interface NftsUnlockItemTransferTx extends ITxAction {
   actionType: TransactionType.NftsUnlockItemTransfer;
@@ -4058,7 +3984,7 @@ export interface NftsUnlockItemTransferTx extends ITxAction {
 };
 
 /**
- * Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.
+ * Re-allow unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.
  */
 export interface NftsUnlockItemTransferAction extends ICTAtomicAction {
   actionType: TransactionType.NftsUnlockItemTransfer;
@@ -4069,11 +3995,10 @@ export interface NftsUnlockItemTransferAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Blacklist an address by an app agent.
- *
  * `appAgentId`
  *
  * `addresses`
+ *
  */
 export interface UserFreeTransactionsAppAgentBlacklistAddressArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -4106,7 +4031,7 @@ export function userFreeTransactionsAppAgentBlacklistAddress(
 }
 
 /**
- * Blacklist an address by an app agent. Only callable by an admin of the app agent.
+ * Blacklist an address by an app agent.Only callable by an admin of the app agent.
  */
 export interface UserFreeTransactionsAppAgentBlacklistAddressTx extends ITxAction {
   actionType: TransactionType.UserFreeTransactionsAppAgentBlacklistAddress;
@@ -4116,11 +4041,10 @@ export interface UserFreeTransactionsAppAgentBlacklistAddressTx extends ITxActio
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Unblacklist an address by an app agent.
- *
  * `appAgentId`
  *
  * `addresses`
+ *
  */
 export interface UserFreeTransactionsAppAgentUnblacklistAddressArgs extends Args {
   appAgentId: BlockchainGenericId;
@@ -4153,7 +4077,7 @@ export function userFreeTransactionsAppAgentUnblacklistAddress(
 }
 
 /**
- * Unblacklist an address by an app agent. Only callable by an admin of the app agent.
+ * Unblacklist an address by an app agent.Only callable by an admin of the app agent.
  */
 export interface UserFreeTransactionsAppAgentUnblacklistAddressTx extends ITxAction {
   actionType: TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress;
@@ -4163,9 +4087,8 @@ export interface UserFreeTransactionsAppAgentUnblacklistAddressTx extends ITxAct
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Blacklist an address.
- *
  * `addresses`
+ *
  */
 export interface UserFreeTransactionsBlacklistAddressArgs extends Args {
   addresses: BlockchainGenericAccountList;
@@ -4196,7 +4119,7 @@ export function userFreeTransactionsBlacklistAddress(
 }
 
 /**
- * Blacklist an address. Only callable by the ForceOrigin.
+ * Blacklist an address.Only callable by the ForceOrigin.
  */
 export interface UserFreeTransactionsBlacklistAddressTx extends ITxAction {
   actionType: TransactionType.UserFreeTransactionsBlacklistAddress;
@@ -4206,7 +4129,6 @@ export interface UserFreeTransactionsBlacklistAddressTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Clear free transfer infos of appagents.
  */
 export interface UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs extends Args {
 };
@@ -4235,7 +4157,7 @@ export function userFreeTransactionsClearAppAgentsFreeTransferInfos(
 }
 
 /**
- * Clear free transfer infos of appagents. Only callable by the ForceOrigin.
+ * Clear free transfer infos of appagents.Only callable by the ForceOrigin.
  */
 export interface UserFreeTransactionsClearAppAgentsFreeTransferInfosTx extends ITxAction {
   actionType: TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos;
@@ -4245,7 +4167,6 @@ export interface UserFreeTransactionsClearAppAgentsFreeTransferInfosTx extends I
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Clear last transfers of fingible tokens.
  */
 export interface UserFreeTransactionsClearAssetLastTransferBlocksArgs extends Args {
 };
@@ -4274,7 +4195,7 @@ export function userFreeTransactionsClearAssetLastTransferBlocks(
 }
 
 /**
- * Clear last transfers of fingible tokens. Only callable by the ForceOrigin.
+ * Clear last transfers of fingible tokens.Only callable by the ForceOrigin.
  */
 export interface UserFreeTransactionsClearAssetLastTransferBlocksTx extends ITxAction {
   actionType: TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks;
@@ -4284,7 +4205,6 @@ export interface UserFreeTransactionsClearAssetLastTransferBlocksTx extends ITxA
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Clear last transfers of NFTs.
  */
 export interface UserFreeTransactionsClearNftLastTransferBlocksArgs extends Args {
 };
@@ -4313,7 +4233,7 @@ export function userFreeTransactionsClearNftLastTransferBlocks(
 }
 
 /**
- * Clear last transfers of NFTs. Only callable by the ForceOrigin.
+ * Clear last transfers of NFTs.Only callable by the ForceOrigin.
  */
 export interface UserFreeTransactionsClearNftLastTransferBlocksTx extends ITxAction {
   actionType: TransactionType.UserFreeTransactionsClearNftLastTransferBlocks;
@@ -4323,7 +4243,6 @@ export interface UserFreeTransactionsClearNftLastTransferBlocksTx extends ITxAct
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Clear free transfer infos of users.
  */
 export interface UserFreeTransactionsClearUserFreeTransferInfosArgs extends Args {
 };
@@ -4352,7 +4271,7 @@ export function userFreeTransactionsClearUserFreeTransferInfos(
 }
 
 /**
- * Clear free transfer infos of users. Only callable by the ForceOrigin.
+ * Clear free transfer infos of users.Only callable by the ForceOrigin.
  */
 export interface UserFreeTransactionsClearUserFreeTransferInfosTx extends ITxAction {
   actionType: TransactionType.UserFreeTransactionsClearUserFreeTransferInfos;
@@ -4362,9 +4281,8 @@ export interface UserFreeTransactionsClearUserFreeTransferInfosTx extends ITxAct
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Enable or disable free transfers.
- *
  * `enabled`
+ *
  */
 export interface UserFreeTransactionsSetFreeTransfersEnabledArgs extends Args {
   enabled: BlockchainGenericBoolean;
@@ -4395,7 +4313,7 @@ export function userFreeTransactionsSetFreeTransfersEnabled(
 }
 
 /**
- * Enable or disable free transfers. Only callable by the ForceOrigin.
+ * Enable or disable free transfers.Only callable by the ForceOrigin.
  */
 export interface UserFreeTransactionsSetFreeTransfersEnabledTx extends ITxAction {
   actionType: TransactionType.UserFreeTransactionsSetFreeTransfersEnabled;
@@ -4405,9 +4323,8 @@ export interface UserFreeTransactionsSetFreeTransfersEnabledTx extends ITxAction
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Unblacklist an address.
- *
  * `addresses`
+ *
  */
 export interface UserFreeTransactionsUnblacklistAddressArgs extends Args {
   addresses: BlockchainGenericAccountList;
@@ -4438,7 +4355,7 @@ export function userFreeTransactionsUnblacklistAddress(
 }
 
 /**
- * Unblacklist an address. Only callable by the ForceOrigin.
+ * Unblacklist an address.Only callable by the ForceOrigin.
  */
 export interface UserFreeTransactionsUnblacklistAddressTx extends ITxAction {
   actionType: TransactionType.UserFreeTransactionsUnblacklistAddress;
@@ -4448,11 +4365,10 @@ export interface UserFreeTransactionsUnblacklistAddressTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Submits a transfer_all call using the given parameter
- *
  * `dest`
  *
  * `keepAlive`
+ *
  */
 export interface UserTransactionsSubmitTransferAllBalancesArgs extends Args {
   dest: BlockchainGenericAccount;
@@ -4466,8 +4382,7 @@ const UserTransactionsSubmitTransferAllBalancesArgsSchema = z.object({
 
 /**
  * @name userTransactionsSubmitTransferAllBalances
- * @summary Submits a transfer_all call using the given parameter
- * @description Works similar to `submit_transfer_balances`
+ * @description Submits a transfer_all call using the given parameter Works similar to `submit_transfer_balances`
  * @param args - The arguments of the transaction. {@link UserTransactionsSubmitTransferAllBalancesArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -4495,13 +4410,12 @@ export interface UserTransactionsSubmitTransferAllBalancesTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Submits a transfer of assets using the provided runtime call.
- *
  * `id`
  *
  * `target`
  *
  * `amount`
+ *
  */
 export interface UserTransactionsSubmitTransferAssetsArgs extends Args {
   id: BlockchainGenericId;
@@ -4518,7 +4432,7 @@ const UserTransactionsSubmitTransferAssetsArgsSchema = z.object({
 /**
  * @name userTransactionsSubmitTransferAssets
  * @summary Submits a transfer of assets using the provided runtime call.
- * @description This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified assets. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `id`: The asset ID to be transferred. * `target`: The target account ID. * `amount`: The amount of assets to transfer. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:
+ * @description This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified assets. 3. Processes the call. * `origin`: The runtime origin. * `id`: The asset ID to be transferred. * `target`: The target account ID. * `amount`: The amount of assets to transfer. Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. Returns an error if:
  * @param args - The arguments of the transaction. {@link UserTransactionsSubmitTransferAssetsArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -4536,7 +4450,7 @@ export function userTransactionsSubmitTransferAssets(
 }
 
 /**
- * Submits a transfer of assets using the provided runtime call. This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified assets. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `id`: The asset ID to be transferred. * `target`: The target account ID. * `amount`: The amount of assets to transfer. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:
+ * Submits a transfer of assets using the provided runtime call.This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified assets. 3. Processes the call. * `origin`: The runtime origin. * `id`: The asset ID to be transferred. * `target`: The target account ID. * `amount`: The amount of assets to transfer. Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. Returns an error if:
  */
 export interface UserTransactionsSubmitTransferAssetsTx extends ITxAction {
   actionType: TransactionType.UserTransactionsSubmitTransferAssets;
@@ -4546,11 +4460,10 @@ export interface UserTransactionsSubmitTransferAssetsTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Submits a transfer using the provided runtime call.
- *
  * `dest`
  *
  * `value`
+ *
  */
 export interface UserTransactionsSubmitTransferBalancesArgs extends Args {
   dest: BlockchainGenericAccount;
@@ -4565,7 +4478,7 @@ const UserTransactionsSubmitTransferBalancesArgsSchema = z.object({
 /**
  * @name userTransactionsSubmitTransferBalances
  * @summary Submits a transfer using the provided runtime call.
- * @description # Steps 1. Verifies the origin and retrieves the caller's account ID. 2. Checks if the call is allowed by the specified filters. 3. If the call is for a target recipient:
+ * @description 1. Verifies the origin and retrieves the caller's account ID. 2. Checks if the call is allowed by the specified filters. 3. If the call is for a target recipient:
  * @param args - The arguments of the transaction. {@link UserTransactionsSubmitTransferBalancesArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -4583,7 +4496,7 @@ export function userTransactionsSubmitTransferBalances(
 }
 
 /**
- * Submits a transfer using the provided runtime call. # Steps 1. Verifies the origin and retrieves the caller's account ID. 2. Checks if the call is allowed by the specified filters. 3. If the call is for a target recipient:
+ * Submits a transfer using the provided runtime call.1. Verifies the origin and retrieves the caller's account ID. 2. Checks if the call is allowed by the specified filters. 3. If the call is for a target recipient:
  */
 export interface UserTransactionsSubmitTransferBalancesTx extends ITxAction {
   actionType: TransactionType.UserTransactionsSubmitTransferBalances;
@@ -4593,13 +4506,12 @@ export interface UserTransactionsSubmitTransferBalancesTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- * Arguments required to Submits a transfer of NFTs using the provided runtime call.
- *
  * `collection`
  *
  * `item`
  *
  * `dest`
+ *
  */
 export interface UserTransactionsSubmitTransferNftsArgs extends Args {
   collection: BlockchainGenericId;
@@ -4616,7 +4528,7 @@ const UserTransactionsSubmitTransferNftsArgsSchema = z.object({
 /**
  * @name userTransactionsSubmitTransferNfts
  * @summary Submits a transfer of NFTs using the provided runtime call.
- * @description This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified NFT. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `collection`: The collection ID of the NFT. * `item`: The item ID of the NFT. * `dest`: The destination account ID. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:
+ * @description This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified NFT. 3. Processes the call. * `origin`: The runtime origin. * `collection`: The collection ID of the NFT. * `item`: The item ID of the NFT. * `dest`: The destination account ID. Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. Returns an error if:
  * @param args - The arguments of the transaction. {@link UserTransactionsSubmitTransferNftsArgs}
  * @param info - Base transaction information. {@link BaseTxInfo}
  * @param options - Additional options with metadata. {@link OptionsWithMeta}
@@ -4634,7 +4546,7 @@ export function userTransactionsSubmitTransferNfts(
 }
 
 /**
- * Submits a transfer of NFTs using the provided runtime call. This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified NFT. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `collection`: The collection ID of the NFT. * `item`: The item ID of the NFT. * `dest`: The destination account ID. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:
+ * Submits a transfer of NFTs using the provided runtime call.This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified NFT. 3. Processes the call. * `origin`: The runtime origin. * `collection`: The collection ID of the NFT. * `item`: The item ID of the NFT. * `dest`: The destination account ID. Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. Returns an error if:
  */
 export interface UserTransactionsSubmitTransferNftsTx extends ITxAction {
   actionType: TransactionType.UserTransactionsSubmitTransferNfts;
@@ -4644,10 +4556,10 @@ export interface UserTransactionsSubmitTransferNftsTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
- *
  * `user`
  *
  * `level`
+ *
  */
 export interface UserVerificationSetUserLevelArgs extends Args {
   user: BlockchainGenericAccount;
@@ -4969,367 +4881,277 @@ export function buildUnsignedTransaction(
 ): UnsignedTransaction {
   const { actionType, arguments: args } = tx;
 
-  let unsigned: UnsignedTransaction;
-
-  // Handle different action types
-  switch (actionType) {
-    case TransactionType.AdminsAddAdmin: {
-      unsigned = adminsAddPalletAdmin(args, info, options);
-      break;
-    }
-    case TransactionType.AdminsRemoveAdmin: {
-      unsigned = adminsRemovePalletAdmin(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsAddAdmin: {
-      unsigned = appAgentsAddAdmin(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsAddAdminToNamedAddress: {
-      unsigned = appAgentsAddAdminToNamedAddressDispatch(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsAllowAdminColdWallet: {
-      unsigned = appAgentsAllowAdminColdWalletDispatch(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsChangeHotWallet: {
-      unsigned = appAgentsChangeHotWallet(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsChangeOwnerCancel: {
-      unsigned = appAgentsChangeOwnerCancel(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsChangeOwnerComplete: {
-      unsigned = appAgentsChangeOwnerComplete(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsChangeOwnerInit: {
-      unsigned = appAgentsChangeOwnerInit(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsClearAdminDispatchFilter: {
-      unsigned = appAgentsClearAdminDispatchFilter(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsClearAppAgentMetadata: {
-      unsigned = appAgentsClearAppAgentMetadata(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsCompleteDestroyAppAgent: {
-      unsigned = appAgentsCompleteDestroyAppAgent(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsDisableAdminColdWalletDispatch: {
-      unsigned = appAgentsDisableAdminColdWalletDispatch(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsDisableHotWallet: {
-      unsigned = appAgentsDisableHotWallet(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsEnableHotWallet: {
-      unsigned = appAgentsEnableHotWallet(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsForceCreateAppAgent: {
-      unsigned = appAgentsForceCreateAppAgent(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsForceInitiateAppAgentDestroy: {
-      unsigned = appAgentsForceInitiateAppAgentDestroy(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsForceInitiateAppAgentSuspension: {
-      unsigned = appAgentsForceInitiateAppAgentSuspension(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsForceInitiateAppAgentUnsuspension: {
-      unsigned = appAgentsForceInitiateAppAgentUnsuspension(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsInitiateDestroyAppAgent: {
-      unsigned = appAgentsInitiateDestroyAppAgent(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsPauseAppAgent: {
-      unsigned = appAgentsPauseAppAgent(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsProcessDestroy: {
-      unsigned = appAgentsProcessDestroy(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsReactivateAppAgent: {
-      unsigned = appAgentsReactivateAppAgent(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsRemoveAdmin: {
-      unsigned = appAgentsRemoveAdmin(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch: {
-      unsigned = appAgentsRemoveAdminFromNamedAddressDispatch(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsSetAdminDispatchFilter: {
-      unsigned = appAgentsSetAdminDispatchFilter(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsSetAppAgentMetadata: {
-      unsigned = appAgentsSetAppAgentMetadata(args, info, options);
-      break;
-    }
-    case TransactionType.AppAgentsUnpauseAppAgent: {
-      unsigned = appAgentsUnpauseAppAgent(args, info, options);
-      break;
-    }
-    case TransactionType.AppResourcesSetActionPointsBalance: {
-      unsigned = appResourcesSetActionPointsBalance(args, info, options);
-      break;
-    }
-    case TransactionType.AppResourcesSetClearingPointsBalance: {
-      unsigned = appResourcesSetClearingPointsBalance(args, info, options);
-      break;
-    }
-    case TransactionType.AppSubscriptionsCreateAppSubscriptionTier: {
-      unsigned = appSubscriptionsCreateAppSubscriptionTier(args, info, options);
-      break;
-    }
-    case TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier: {
-      unsigned = appSubscriptionsObsoleteAppSubscriptionTier(args, info, options);
-      break;
-    }
-    case TransactionType.AppSubscriptionsSetAppPayOnDemandMode: {
-      unsigned = appSubscriptionsSetAppPayOnDemandMode(args, info, options);
-      break;
-    }
-    case TransactionType.AppSubscriptionsSetAppSubscriptionTier: {
-      unsigned = appSubscriptionsSetAppSubscriptionTier(args, info, options);
-      break;
-    }
-    case TransactionType.AppTransactionsForceSubmitClearingTransaction: {
-      unsigned = appTransactionsForceSubmitClearingTransaction(args, info, options);
-      break;
-    }
-    case TransactionType.AppTransactionsSubmitClearingTransaction: {
-      unsigned = appTransactionsSubmitClearingTransaction(args, info, options);
-      break;
-    }
-    case TransactionType.AppTransferChannelsEstablishTransferChannel: {
-      unsigned = appTransferChannelsEstablishTransferChannel(args, info, options);
-      break;
-    }
-    case TransactionType.AppTransferChannelsRemoveTransferChannel: {
-      unsigned = appTransferChannelsRemoveTransferChannel(args, info, options);
-      break;
-    }
-    case TransactionType.AppTransferFiltersBlockAddressDeposits: {
-      unsigned = appTransferFiltersBlockAddressDeposits(args, info, options);
-      break;
-    }
-    case TransactionType.AppTransferFiltersSetAppDepositPermissions: {
-      unsigned = appTransferFiltersSetAppDepositPermissions(args, info, options);
-      break;
-    }
-    case TransactionType.AppTransferFiltersUnblockAddressDeposits: {
-      unsigned = appTransferFiltersUnblockAddressDeposits(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsBurn: {
-      unsigned = assetsBurn(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsCreate: {
-      unsigned = assetsCreate(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsDestroyAccounts: {
-      unsigned = assetsDestroyAccounts(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsDestroyApprovals: {
-      unsigned = assetsDestroyApprovals(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsFinishDestroy: {
-      unsigned = assetsFinishDestroy(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsForceTransfer: {
-      unsigned = assetsForceTransfer(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsFreezeAccount: {
-      unsigned = assetsFreeze(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsFreezeAsset: {
-      unsigned = assetsFreezeAsset(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsMint: {
-      unsigned = assetsMint(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsSetMetadata: {
-      unsigned = assetsSetMetadata(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsSetMinBalance: {
-      unsigned = assetsSetMinBalance(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsStartDestroy: {
-      unsigned = assetsStartDestroy(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsThawAccount: {
-      unsigned = assetsThaw(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsThawAsset: {
-      unsigned = assetsThawAsset(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsTransfer: {
-      unsigned = assetsTransfer(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsTransferKeepAlive: {
-      unsigned = assetsTransferKeepAlive(args, info, options);
-      break;
-    }
-    case TransactionType.AssetsTransferOwnership: {
-      unsigned = assetsTransferOwnership(args, info, options);
-      break;
-    }
-    case TransactionType.BalancesTransferAll: {
-      unsigned = balancesTransferAll(args, info, options);
-      break;
-    }
-    case TransactionType.BalancesTransferAllowDeath: {
-      unsigned = balancesTransferAllowDeath(args, info, options);
-      break;
-    }
-    case TransactionType.BalancesTransferKeepAlive: {
-      unsigned = balancesTransferKeepAlive(args, info, options);
-      break;
-    }
-    case TransactionType.NftsBurnItem: {
-      unsigned = nftsBurn(args, info, options);
-      break;
-    }
-    case TransactionType.NftsClearCollectionMetadata: {
-      unsigned = nftsClearCollectionMetadata(args, info, options);
-      break;
-    }
-    case TransactionType.NftsClearItemMetadata: {
-      unsigned = nftsClearMetadata(args, info, options);
-      break;
-    }
-    case TransactionType.NftsCreateCollection: {
-      unsigned = nftsCreate(args, info, options);
-      break;
-    }
-    case TransactionType.NftsDestroyCollection: {
-      unsigned = nftsDestroy(args, info, options);
-      break;
-    }
-    case TransactionType.NftsLockItemTransfer: {
-      unsigned = nftsLockItemTransfer(args, info, options);
-      break;
-    }
-    case TransactionType.NftsMintItem: {
-      unsigned = nftsMint(args, info, options);
-      break;
-    }
-    case TransactionType.NftsAcceptCollectionOwnership: {
-      unsigned = nftsSetAcceptOwnership(args, info, options);
-      break;
-    }
-    case TransactionType.NftsSetCollectionMetadata: {
-      unsigned = nftsSetCollectionMetadata(args, info, options);
-      break;
-    }
-    case TransactionType.NftsSetItemMetadata: {
-      unsigned = nftsSetMetadata(args, info, options);
-      break;
-    }
-    case TransactionType.NftsTransferItem: {
-      unsigned = nftsTransfer(args, info, options);
-      break;
-    }
-    case TransactionType.NftsTransferCollectionOwnership: {
-      unsigned = nftsTransferOwnership(args, info, options);
-      break;
-    }
-    case TransactionType.NftsUnlockItemTransfer: {
-      unsigned = nftsUnlockItemTransfer(args, info, options);
-      break;
-    }
-    case TransactionType.UserFreeTransactionsAppAgentBlacklistAddress: {
-      unsigned = userFreeTransactionsAppAgentBlacklistAddress(args, info, options);
-      break;
-    }
-    case TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress: {
-      unsigned = userFreeTransactionsAppAgentUnblacklistAddress(args, info, options);
-      break;
-    }
-    case TransactionType.UserFreeTransactionsBlacklistAddress: {
-      unsigned = userFreeTransactionsBlacklistAddress(args, info, options);
-      break;
-    }
-    case TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos: {
-      unsigned = userFreeTransactionsClearAppAgentsFreeTransferInfos(args, info, options);
-      break;
-    }
-    case TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks: {
-      unsigned = userFreeTransactionsClearAssetLastTransferBlocks(args, info, options);
-      break;
-    }
-    case TransactionType.UserFreeTransactionsClearNftLastTransferBlocks: {
-      unsigned = userFreeTransactionsClearNftLastTransferBlocks(args, info, options);
-      break;
-    }
-    case TransactionType.UserFreeTransactionsClearUserFreeTransferInfos: {
-      unsigned = userFreeTransactionsClearUserFreeTransferInfos(args, info, options);
-      break;
-    }
-    case TransactionType.UserFreeTransactionsSetFreeTransfersEnabled: {
-      unsigned = userFreeTransactionsSetFreeTransfersEnabled(args, info, options);
-      break;
-    }
-    case TransactionType.UserFreeTransactionsUnblacklistAddress: {
-      unsigned = userFreeTransactionsUnblacklistAddress(args, info, options);
-      break;
-    }
-    case TransactionType.UserTransactionsSubmitTransferAllBalances: {
-      unsigned = userTransactionsSubmitTransferAllBalances(args, info, options);
-      break;
-    }
-    case TransactionType.UserTransactionsSubmitTransferAssets: {
-      unsigned = userTransactionsSubmitTransferAssets(args, info, options);
-      break;
-    }
-    case TransactionType.UserTransactionsSubmitTransferBalances: {
-      unsigned = userTransactionsSubmitTransferBalances(args, info, options);
-      break;
-    }
-    case TransactionType.UserTransactionsSubmitTransferNfts: {
-      unsigned = userTransactionsSubmitTransferNfts(args, info, options);
-      break;
-    }
-    case TransactionType.UserVerificationSetUserLevel: {
-      unsigned = userVerificationSetUserLevel(args, info, options);
-      break;
-    }
-
-    default: {
-      throw new Error(`Unsupported transaction type: ${actionType}`);
-    }
-  }
+  const unsigned: UnsignedTransaction = (() => {
+    switch (actionType) {
+      case TransactionType.AdminsAddAdmin: {
+        return adminsAddPalletAdmin(args, info, options);
+      }
+      case TransactionType.AdminsRemoveAdmin: {
+        return adminsRemovePalletAdmin(args, info, options);
+      }
+      case TransactionType.AppAgentsAddAdmin: {
+        return appAgentsAddAdmin(args, info, options);
+      }
+      case TransactionType.AppAgentsAddAdminToNamedAddress: {
+        return appAgentsAddAdminToNamedAddressDispatch(args, info, options);
+      }
+      case TransactionType.AppAgentsAllowAdminColdWallet: {
+        return appAgentsAllowAdminColdWalletDispatch(args, info, options);
+      }
+      case TransactionType.AppAgentsChangeHotWallet: {
+        return appAgentsChangeHotWallet(args, info, options);
+      }
+      case TransactionType.AppAgentsChangeOwnerCancel: {
+        return appAgentsChangeOwnerCancel(args, info, options);
+      }
+      case TransactionType.AppAgentsChangeOwnerComplete: {
+        return appAgentsChangeOwnerComplete(args, info, options);
+      }
+      case TransactionType.AppAgentsChangeOwnerInit: {
+        return appAgentsChangeOwnerInit(args, info, options);
+      }
+      case TransactionType.AppAgentsClearAdminDispatchFilter: {
+        return appAgentsClearAdminDispatchFilter(args, info, options);
+      }
+      case TransactionType.AppAgentsClearAppAgentMetadata: {
+        return appAgentsClearAppAgentMetadata(args, info, options);
+      }
+      case TransactionType.AppAgentsCompleteDestroyAppAgent: {
+        return appAgentsCompleteDestroyAppAgent(args, info, options);
+      }
+      case TransactionType.AppAgentsDisableAdminColdWalletDispatch: {
+        return appAgentsDisableAdminColdWalletDispatch(args, info, options);
+      }
+      case TransactionType.AppAgentsDisableHotWallet: {
+        return appAgentsDisableHotWallet(args, info, options);
+      }
+      case TransactionType.AppAgentsEnableHotWallet: {
+        return appAgentsEnableHotWallet(args, info, options);
+      }
+      case TransactionType.AppAgentsForceCreateAppAgent: {
+        return appAgentsForceCreateAppAgent(args, info, options);
+      }
+      case TransactionType.AppAgentsForceInitiateAppAgentDestroy: {
+        return appAgentsForceInitiateAppAgentDestroy(args, info, options);
+      }
+      case TransactionType.AppAgentsForceInitiateAppAgentSuspension: {
+        return appAgentsForceInitiateAppAgentSuspension(args, info, options);
+      }
+      case TransactionType.AppAgentsForceInitiateAppAgentUnsuspension: {
+        return appAgentsForceInitiateAppAgentUnsuspension(args, info, options);
+      }
+      case TransactionType.AppAgentsInitiateDestroyAppAgent: {
+        return appAgentsInitiateDestroyAppAgent(args, info, options);
+      }
+      case TransactionType.AppAgentsPauseAppAgent: {
+        return appAgentsPauseAppAgent(args, info, options);
+      }
+      case TransactionType.AppAgentsProcessDestroy: {
+        return appAgentsProcessDestroy(args, info, options);
+      }
+      case TransactionType.AppAgentsReactivateAppAgent: {
+        return appAgentsReactivateAppAgent(args, info, options);
+      }
+      case TransactionType.AppAgentsRemoveAdmin: {
+        return appAgentsRemoveAdmin(args, info, options);
+      }
+      case TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch: {
+        return appAgentsRemoveAdminFromNamedAddressDispatch(args, info, options);
+      }
+      case TransactionType.AppAgentsSetAdminDispatchFilter: {
+        return appAgentsSetAdminDispatchFilter(args, info, options);
+      }
+      case TransactionType.AppAgentsSetAppAgentMetadata: {
+        return appAgentsSetAppAgentMetadata(args, info, options);
+      }
+      case TransactionType.AppAgentsUnpauseAppAgent: {
+        return appAgentsUnpauseAppAgent(args, info, options);
+      }
+      case TransactionType.AppResourcesSetActionPointsBalance: {
+        return appResourcesSetActionPointsBalance(args, info, options);
+      }
+      case TransactionType.AppResourcesSetClearingPointsBalance: {
+        return appResourcesSetClearingPointsBalance(args, info, options);
+      }
+      case TransactionType.AppSubscriptionsCreateAppSubscriptionTier: {
+        return appSubscriptionsCreateAppSubscriptionTier(args, info, options);
+      }
+      case TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier: {
+        return appSubscriptionsObsoleteAppSubscriptionTier(args, info, options);
+      }
+      case TransactionType.AppSubscriptionsSetAppPayOnDemandMode: {
+        return appSubscriptionsSetAppPayOnDemandMode(args, info, options);
+      }
+      case TransactionType.AppSubscriptionsSetAppSubscriptionTier: {
+        return appSubscriptionsSetAppSubscriptionTier(args, info, options);
+      }
+      case TransactionType.AppTransactionsForceSubmitClearingTransaction: {
+        return appTransactionsForceSubmitClearingTransaction(args, info, options);
+      }
+      case TransactionType.AppTransactionsSubmitClearingTransaction: {
+        return appTransactionsSubmitClearingTransaction(args, info, options);
+      }
+      case TransactionType.AppTransferChannelsEstablishTransferChannel: {
+        return appTransferChannelsEstablishTransferChannel(args, info, options);
+      }
+      case TransactionType.AppTransferChannelsRemoveTransferChannel: {
+        return appTransferChannelsRemoveTransferChannel(args, info, options);
+      }
+      case TransactionType.AppTransferFiltersBlockAddressDeposits: {
+        return appTransferFiltersBlockAddressDeposits(args, info, options);
+      }
+      case TransactionType.AppTransferFiltersSetAppDepositPermissions: {
+        return appTransferFiltersSetAppDepositPermissions(args, info, options);
+      }
+      case TransactionType.AppTransferFiltersUnblockAddressDeposits: {
+        return appTransferFiltersUnblockAddressDeposits(args, info, options);
+      }
+      case TransactionType.AssetsBurn: {
+        return assetsBurn(args, info, options);
+      }
+      case TransactionType.AssetsCreate: {
+        return assetsCreate(args, info, options);
+      }
+      case TransactionType.AssetsDestroyAccounts: {
+        return assetsDestroyAccounts(args, info, options);
+      }
+      case TransactionType.AssetsDestroyApprovals: {
+        return assetsDestroyApprovals(args, info, options);
+      }
+      case TransactionType.AssetsFinishDestroy: {
+        return assetsFinishDestroy(args, info, options);
+      }
+      case TransactionType.AssetsForceTransfer: {
+        return assetsForceTransfer(args, info, options);
+      }
+      case TransactionType.AssetsFreezeAccount: {
+        return assetsFreeze(args, info, options);
+      }
+      case TransactionType.AssetsFreezeAsset: {
+        return assetsFreezeAsset(args, info, options);
+      }
+      case TransactionType.AssetsMint: {
+        return assetsMint(args, info, options);
+      }
+      case TransactionType.AssetsSetMetadata: {
+        return assetsSetMetadata(args, info, options);
+      }
+      case TransactionType.AssetsSetMinBalance: {
+        return assetsSetMinBalance(args, info, options);
+      }
+      case TransactionType.AssetsStartDestroy: {
+        return assetsStartDestroy(args, info, options);
+      }
+      case TransactionType.AssetsThawAccount: {
+        return assetsThaw(args, info, options);
+      }
+      case TransactionType.AssetsThawAsset: {
+        return assetsThawAsset(args, info, options);
+      }
+      case TransactionType.AssetsTransfer: {
+        return assetsTransfer(args, info, options);
+      }
+      case TransactionType.AssetsTransferKeepAlive: {
+        return assetsTransferKeepAlive(args, info, options);
+      }
+      case TransactionType.AssetsTransferOwnership: {
+        return assetsTransferOwnership(args, info, options);
+      }
+      case TransactionType.BalancesTransferAll: {
+        return balancesTransferAll(args, info, options);
+      }
+      case TransactionType.BalancesTransferAllowDeath: {
+        return balancesTransferAllowDeath(args, info, options);
+      }
+      case TransactionType.BalancesTransferKeepAlive: {
+        return balancesTransferKeepAlive(args, info, options);
+      }
+      case TransactionType.NftsBurnItem: {
+        return nftsBurn(args, info, options);
+      }
+      case TransactionType.NftsClearCollectionMetadata: {
+        return nftsClearCollectionMetadata(args, info, options);
+      }
+      case TransactionType.NftsClearItemMetadata: {
+        return nftsClearMetadata(args, info, options);
+      }
+      case TransactionType.NftsCreateCollection: {
+        return nftsCreate(args, info, options);
+      }
+      case TransactionType.NftsDestroyCollection: {
+        return nftsDestroy(args, info, options);
+      }
+      case TransactionType.NftsLockItemTransfer: {
+        return nftsLockItemTransfer(args, info, options);
+      }
+      case TransactionType.NftsMintItem: {
+        return nftsMint(args, info, options);
+      }
+      case TransactionType.NftsAcceptCollectionOwnership: {
+        return nftsSetAcceptOwnership(args, info, options);
+      }
+      case TransactionType.NftsSetCollectionMetadata: {
+        return nftsSetCollectionMetadata(args, info, options);
+      }
+      case TransactionType.NftsSetItemMetadata: {
+        return nftsSetMetadata(args, info, options);
+      }
+      case TransactionType.NftsTransferItem: {
+        return nftsTransfer(args, info, options);
+      }
+      case TransactionType.NftsTransferCollectionOwnership: {
+        return nftsTransferOwnership(args, info, options);
+      }
+      case TransactionType.NftsUnlockItemTransfer: {
+        return nftsUnlockItemTransfer(args, info, options);
+      }
+      case TransactionType.UserFreeTransactionsAppAgentBlacklistAddress: {
+        return userFreeTransactionsAppAgentBlacklistAddress(args, info, options);
+      }
+      case TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress: {
+        return userFreeTransactionsAppAgentUnblacklistAddress(args, info, options);
+      }
+      case TransactionType.UserFreeTransactionsBlacklistAddress: {
+        return userFreeTransactionsBlacklistAddress(args, info, options);
+      }
+      case TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos: {
+        return userFreeTransactionsClearAppAgentsFreeTransferInfos(args, info, options);
+      }
+      case TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks: {
+        return userFreeTransactionsClearAssetLastTransferBlocks(args, info, options);
+      }
+      case TransactionType.UserFreeTransactionsClearNftLastTransferBlocks: {
+        return userFreeTransactionsClearNftLastTransferBlocks(args, info, options);
+      }
+      case TransactionType.UserFreeTransactionsClearUserFreeTransferInfos: {
+        return userFreeTransactionsClearUserFreeTransferInfos(args, info, options);
+      }
+      case TransactionType.UserFreeTransactionsSetFreeTransfersEnabled: {
+        return userFreeTransactionsSetFreeTransfersEnabled(args, info, options);
+      }
+      case TransactionType.UserFreeTransactionsUnblacklistAddress: {
+        return userFreeTransactionsUnblacklistAddress(args, info, options);
+      }
+      case TransactionType.UserTransactionsSubmitTransferAllBalances: {
+        return userTransactionsSubmitTransferAllBalances(args, info, options);
+      }
+      case TransactionType.UserTransactionsSubmitTransferAssets: {
+        return userTransactionsSubmitTransferAssets(args, info, options);
+      }
+      case TransactionType.UserTransactionsSubmitTransferBalances: {
+        return userTransactionsSubmitTransferBalances(args, info, options);
+      }
+      case TransactionType.UserTransactionsSubmitTransferNfts: {
+        return userTransactionsSubmitTransferNfts(args, info, options);
+      }
+      case TransactionType.UserVerificationSetUserLevel: {
+        return userVerificationSetUserLevel(args, info, options);
+      }
+      default: {
+        throw new Error(`Unsupported transaction type: ${actionType}`);
+      }
+    }
+  })();
 
   return unsigned;
 }

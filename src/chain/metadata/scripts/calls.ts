@@ -33,7 +33,7 @@ function mapName(_name: any) {
 }
 
 function getFunctionDescription(docs: Vec<Text>) {
-  const description: string[] = [];
+  const desc: string[] = [];
   const args: Record<string, string> = {};
 
   const parts = docs.toArray();
@@ -62,17 +62,23 @@ function getFunctionDescription(docs: Vec<Text>) {
       currentArgDesc.push(argDescription);
     } else if (currentArgName) {
       currentArgDesc.push(text);
-    } else if (!headerPartsCollected && text) {
-      description.push(text);
+    } else if (!headerPartsCollected && text && !text.startsWith('#')) {
+      desc.push(text);
     }
   }
 
-  const short = description[0] ?? '';
-  const full = short ? description.slice(1).join(' ') : '';
+  const fullDescription = desc.join(' ');
+  const dotIndex = fullDescription.indexOf('.');
+
+  const short = dotIndex !== -1 ? fullDescription.substring(0, dotIndex + 1) : '';
+  const full = fullDescription !== short ? fullDescription.replace(short, '').trim() : '';
+
+  const summary = full ? short : '';
+  const description = summary ? full : fullDescription;
 
   return {
-    full,
-    short,
+    summary,
+    description,
     args,
   };
 }

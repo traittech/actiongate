@@ -122,7 +122,7 @@
 				"description": "Construct a type with a set of properties K of type T"
 			},
 			"AdminsAddAdminArgs": {
-				"description": "\n`adminType`\n\n`admin`",
+				"description": "`adminType`\n\n`admin`",
 				"properties": {
 					"adminType": {
 						"$ref": "#/components/schemas/AdminType"
@@ -234,7 +234,7 @@
 				"type": "string"
 			},
 			"AdminsRemoveAdminArgs": {
-				"description": "\n`adminType`\n\n`admin`",
+				"description": "`adminType`\n\n`admin`",
 				"properties": {
 					"adminType": {
 						"$ref": "#/components/schemas/AdminType"
@@ -262,7 +262,7 @@
 				"description": "A unique identifier (AssetId, CollectionId, AppAgentId).\nTypically, it is a numeric value."
 			},
 			"AppAgentsAddAdminArgs": {
-				"description": "Arguments required to Adds an admin to the App Agent.\n\n`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin to be added.",
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin to be added.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -281,7 +281,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsAddAdminToNamedAddressArgs": {
-				"description": "Arguments required to Adds an admin to the list of permitted administrators for a named address under a\n\n`appAgentId` - The identifier of the App Agent.\n\n`admin` - The account ID of the admin being added.\n\n`namedAddress` - The named address to which the admin is being added.",
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`admin` - The account ID of the admin being added.\n\n`namedAddress` - The named address to which the admin is being added.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -305,7 +305,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsAllowAdminColdWalletArgs": {
-				"description": "Arguments required to Pallet function to add an AppAgent' admin to the list of addresses allowed to spend\n\n`appAgentId` - The identifier of the App Agent.\n\n`admin` - The admin address to be added to the list.\n\n`coldWallet`",
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`admin` - The admin address to be added to the list.\n\n`coldWallet`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -361,7 +361,7 @@
 				]
 			},
 			"AppAgentsChangeHotWalletArgs": {
-				"description": "Arguments required to Change the hot wallet associated with an App Agent.\n\n`appAgentId` - The identifier of the App Agent whose hot wallet is being changed.\n\n`newHotWallet` - The new hot wallet to be set for the specified App Agent.",
+				"description": "`appAgentId` - The identifier of the App Agent whose hot wallet is being changed.\n\n`newHotWallet` - The new hot wallet to be set for the specified App Agent.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -380,7 +380,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsChangeOwnerCancelArgs": {
-				"description": "Arguments required to Cancels a change of owner for an App Agent.\n\n`appAgentId` - The ID of the App Agent.",
+				"description": "`appAgentId` - The ID of the App Agent.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -394,7 +394,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsChangeOwnerCompleteArgs": {
-				"description": "Arguments required to Completes a change of owner for an App Agent.\n\n`appAgentId` - The ID of the App Agent.",
+				"description": "`appAgentId` - The ID of the App Agent.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -408,7 +408,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsChangeOwnerInitArgs": {
-				"description": "Arguments required to Initializes the process to change the ownership of an App Agent.\n\n`appAgentId` - The ID of the App Agent.\n\n`proposedOwner` - The account ID of the proposed owner.",
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`proposedOwner` - The account ID of the proposed owner.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -427,7 +427,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsClearAdminDispatchFilterArgs": {
-				"description": "Arguments required to Clears the dispatch filter for the specified `admin` account.\n\n`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin.",
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -446,7 +446,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsClearAppAgentMetadataArgs": {
-				"description": "Arguments required to Clear the metadata for an asset class.\n\n`appAgentId`",
+				"description": "`appAgentId`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -602,7 +602,7 @@
 				"type": "object"
 			},
 			"AppAgentsCompleteDestroyAppAgentArgs": {
-				"description": "Arguments required to Completes the destruction process of the App Agent.\n\n`appAgentId` - The identifier of the App Agent to be destroyed.\n\n`destroyInfos`",
+				"description": "`appAgentId` - The identifier of the App Agent to be destroyed.\n\n`destroyInfos`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -620,7 +620,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsDisableAdminColdWalletDispatchArgs": {
-				"description": "Arguments required to Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend\n\n`appAgentId` - The identifier of the App Agent.\n\n`admin` - The admin address to be removed from the list.\n\n`coldWallet`",
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`admin` - The admin address to be removed from the list.\n\n`coldWallet`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -643,7 +643,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsDisableHotWalletArgs": {
-				"description": "Arguments required to Disables the hot wallet for a specified App Agent.\n\n`appAgentId` - Identifier of the App Agent for which the hot wallet needs to be disabled.",
+				"description": "`appAgentId` - Identifier of the App Agent for which the hot wallet needs to be disabled.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -657,7 +657,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsEnableHotWalletArgs": {
-				"description": "Arguments required to Enables the hot wallet for a specified App Agent.\n\n`appAgentId` - Identifier of the App Agent for which the hot wallet needs to be enabled.",
+				"description": "`appAgentId` - Identifier of the App Agent for which the hot wallet needs to be enabled.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -671,7 +671,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsForceCreateAppAgentArgs": {
-				"description": "Arguments required to Same as `create_app_agent` but can only be called by ForceOrigin\n\n`appAgentOwner`\n\n`appAgentBalancePayer`",
+				"description": "`appAgentOwner`\n\n`appAgentBalancePayer`",
 				"properties": {
 					"appAgentOwner": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount"
@@ -688,7 +688,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsForceInitiateAppAgentDestroyArgs": {
-				"description": "Arguments required to Force initiates the destroy of an AppAgent.\n\n`appAgentId`",
+				"description": "`appAgentId`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -701,7 +701,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsForceInitiateAppAgentSuspensionArgs": {
-				"description": "Arguments required to Force initiates the suspension of an AppAgent.\n\n`appAgentId`",
+				"description": "`appAgentId`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -714,7 +714,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsForceInitiateAppAgentUnsuspensionArgs": {
-				"description": "Arguments required to Force initiates the un-suspension of an AppAgent.\n\n`appAgentId`",
+				"description": "`appAgentId`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -727,7 +727,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsInitiateDestroyAppAgentArgs": {
-				"description": "Arguments required to Initiate destroy of an App Agent.\n\n`appAgentId` - The identifier of the App Agent to be deleted.",
+				"description": "`appAgentId` - The identifier of the App Agent to be deleted.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -741,7 +741,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsPauseAppAgentArgs": {
-				"description": "Arguments required to Pauses the specified App Agent.\n\n`appAgentId` - The ID of the App Agent to be paused.",
+				"description": "`appAgentId` - The ID of the App Agent to be paused.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -755,7 +755,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsProcessDestroyArgs": {
-				"description": "Arguments required to Processes the destruction of assets owned by the App Agent.\n\n`appAgentId` - The identifier of the App Agent.\n\n`destroyInfo`",
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`destroyInfo`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -773,7 +773,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsReactivateAppAgentArgs": {
-				"description": "Arguments required to Reactivates the specified App Agent.\n\n`appAgentId` - The identifier of the App Agent to be reactivated.",
+				"description": "`appAgentId` - The identifier of the App Agent to be reactivated.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -787,7 +787,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsRemoveAdminArgs": {
-				"description": "Arguments required to Removes an admin from the App Agent.\n\n`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin to be removed.",
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin to be removed.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -806,7 +806,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsRemoveAdminFromNamedAddressDispatchArgs": {
-				"description": "Arguments required to Removes an admin from the list of permitted administrators for a named address under a\n\n`appAgentId` - The identifier of the App Agent.\n\n`admin` - The account ID of the admin being removed.\n\n`namedAddress` - The named address from which the admin is being removed.",
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`admin` - The account ID of the admin being removed.\n\n`namedAddress` - The named address from which the admin is being removed.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -844,7 +844,7 @@
 				"maximum": 18446744073709552000
 			},
 			"AppAgentsSetAdminDispatchFilterArgs": {
-				"description": "Arguments required to Sets the list of dispatchables callable by the specified `admin` account.\n\n`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin.\n\n`newPermissions`",
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin.\n\n`newPermissions`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -872,7 +872,7 @@
 				"maxLength": 256
 			},
 			"AppAgentsSetAppAgentMetadataArgs": {
-				"description": "Arguments required to Set the metadata for an asset class.\n\n`appAgentId`\n\n`data` - The general information of this asset. Limited in length by `StringLimit`.",
+				"description": "`appAgentId`\n\n`data` - The general information of this asset. Limited in length by `StringLimit`.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -890,7 +890,7 @@
 				"additionalProperties": false
 			},
 			"AppAgentsUnpauseAppAgentArgs": {
-				"description": "Arguments required to Resumes the specified App Agent.\n\n`appAgentId` - The ID of the App Agent to be resumed.",
+				"description": "`appAgentId` - The ID of the App Agent to be resumed.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -922,7 +922,7 @@
 				"description": "The balance, represented as a numeric value."
 			},
 			"AppResourcesSetActionPointsBalanceArgs": {
-				"description": "Arguments required to Sets the action points balance for a specified account.\n\n`address` - The account for which the action points balance will be set.\n\n`balance` - The balance of action points to be set for the specified account.",
+				"description": "`address` - The account for which the action points balance will be set.\n\n`balance` - The balance of action points to be set for the specified account.",
 				"properties": {
 					"address": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount",
@@ -941,7 +941,7 @@
 				"additionalProperties": false
 			},
 			"AppResourcesSetClearingPointsBalanceArgs": {
-				"description": "Arguments required to Sets the clearing points balance for a specified account.\n\n`address` - The account for which the clearing points balance will be set.\n\n`balance` - The balance of clearing points to be set for the specified account.",
+				"description": "`address` - The account for which the clearing points balance will be set.\n\n`balance` - The balance of clearing points to be set for the specified account.",
 				"properties": {
 					"address": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount",
@@ -1006,7 +1006,7 @@
 				"type": "object"
 			},
 			"AppSubscriptionsCreateAppSubscriptionTierArgs": {
-				"description": "Arguments required to Creates a new subscription tier with the provided details.\n\n`details` - The details of the subscription tier to be created.",
+				"description": "`details` - The details of the subscription tier to be created.",
 				"properties": {
 					"details": {
 						"$ref": "#/components/schemas/AppSubscriptionTierDetails",
@@ -1020,7 +1020,7 @@
 				"additionalProperties": false
 			},
 			"AppSubscriptionsObsoleteAppSubscriptionTierArgs": {
-				"description": "Arguments required to Updates the details or status of an existing subscription tier.\n\n`tierToObsolete`\n\n`successorTier`",
+				"description": "`tierToObsolete`\n\n`successorTier`",
 				"properties": {
 					"tierToObsolete": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -1045,7 +1045,7 @@
 				"type": "string"
 			},
 			"AppSubscriptionsSetAppPayOnDemandModeArgs": {
-				"description": "Arguments required to Sets the pay-on-demand mode for an app agent's subscription.\n\n`appAgentId` - The identifier of the subscriber (app agent).\n\n`payOnDemandMode` - The pay-on-demand mode to be set for the subscription.",
+				"description": "`appAgentId` - The identifier of the subscriber (app agent).\n\n`payOnDemandMode` - The pay-on-demand mode to be set for the subscription.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1064,7 +1064,7 @@
 				"additionalProperties": false
 			},
 			"AppSubscriptionsSetAppSubscriptionTierArgs": {
-				"description": "Arguments required to Changes the subscription tier of an app agent.\n\n`appAgentId` - The identifier of the app agent whose subscription tier is to be changed.\n\n`subscriptionTierId` - The identifier of the new subscription tier to be assigned to the app agent.",
+				"description": "`appAgentId` - The identifier of the app agent whose subscription tier is to be changed.\n\n`subscriptionTierId` - The identifier of the new subscription tier to be assigned to the app agent.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1207,7 +1207,7 @@
 				"description": "A nested array of actions (Vec<Vec<Action>> in rust)."
 			},
 			"AppTransactionsForceSubmitClearingTransactionArgs": {
-				"description": "Arguments required to Submit a Clearing transaction with root permissions.\n\n`appAgentId`\n\n`extraFeePayer`\n\n`atomics`",
+				"description": "`appAgentId`\n\n`extraFeePayer`\n\n`atomics`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -1228,7 +1228,7 @@
 				"additionalProperties": false
 			},
 			"AppTransactionsSubmitClearingTransactionArgs": {
-				"description": "Arguments required to Submit a Clearing transaction.\n\n`appAgentId`\n\n`atomics`",
+				"description": "`appAgentId`\n\n`atomics`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -1245,7 +1245,7 @@
 				"additionalProperties": false
 			},
 			"AppTransferChannelsEstablishTransferChannelArgs": {
-				"description": "Arguments required to Establishes a new transfer channel between two accounts.\n\n`senderAccount` - The account ID of the sender address for the new transfer channel.\n\n`transfersLimitResetPeriod` - The number of blocks after which the transfer limit resets\n\n`transfersLimitPerPeriod` - The number of transfers allowed per period",
+				"description": "`senderAccount` - The account ID of the sender address for the new transfer channel.\n\n`transfersLimitResetPeriod` - The number of blocks after which the transfer limit resets\n\n`transfersLimitPerPeriod` - The number of transfers allowed per period",
 				"properties": {
 					"senderAccount": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount",
@@ -1269,7 +1269,7 @@
 				"additionalProperties": false
 			},
 			"AppTransferChannelsRemoveTransferChannelArgs": {
-				"description": "Arguments required to Removes a transfer channel between two accounts.\n\n`senderAccount` - The account ID of the sender address for the transfer channel to be removed.",
+				"description": "`senderAccount` - The account ID of the sender address for the transfer channel to be removed.",
 				"properties": {
 					"senderAccount": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount",
@@ -1283,7 +1283,7 @@
 				"additionalProperties": false
 			},
 			"AppTransferFiltersBlockAddressDepositsArgs": {
-				"description": "Arguments required to Blocks deposits to a keyless address controlled by a specific app agent.\n\n`appAgentId`\n\n`keylessAddress`",
+				"description": "`appAgentId`\n\n`keylessAddress`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -1489,7 +1489,7 @@
 				"type": "object"
 			},
 			"AppTransferFiltersSetAppDepositPermissionsArgs": {
-				"description": "Arguments required to Sets the transdepositfer permissions for the specified app_agent_id under the authority\n\n`appAgentId` - The identifier of the application agent for which the deposit permissions are being set.\n\n`permissions` - The deposit permissions to be set for the application agent.",
+				"description": "`appAgentId` - The identifier of the application agent for which the deposit permissions are being set.\n\n`permissions` - The deposit permissions to be set for the application agent.",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1508,7 +1508,7 @@
 				"additionalProperties": false
 			},
 			"AppTransferFiltersUnblockAddressDepositsArgs": {
-				"description": "Arguments required to Unblocks deposits to a keyless address controlled by a specific app agent.\n\n`appAgentId`\n\n`keylessAddress`",
+				"description": "`appAgentId`\n\n`keylessAddress`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -1537,7 +1537,7 @@
 				"description": "The structure represents the blockchain account address defined by the `id` key."
 			},
 			"AssetsBurnArgs": {
-				"description": "Arguments required to Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.\n\n`id` - The identifier of the asset to have some amount burned.\n\n`who` - The account to be debited from.\n\n`amount` - The maximum amount by which `who`'s balance should be reduced.",
+				"description": "`id` - The identifier of the asset to have some amount burned.\n\n`who` - The account to be debited from.\n\n`amount` - The maximum amount by which `who`'s balance should be reduced.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1561,7 +1561,7 @@
 				"additionalProperties": false
 			},
 			"AssetsCreateArgs": {
-				"description": "\n`minBalance`",
+				"description": "`minBalance`",
 				"properties": {
 					"minBalance": {
 						"$ref": "#/components/schemas/BlockchainGenericBalance"
@@ -1574,7 +1574,7 @@
 				"additionalProperties": false
 			},
 			"AssetsDestroyAccountsArgs": {
-				"description": "Arguments required to Destroy all accounts associated with a given asset.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"description": "`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1588,7 +1588,7 @@
 				"additionalProperties": false
 			},
 			"AssetsDestroyApprovalsArgs": {
-				"description": "Arguments required to Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"description": "`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1602,7 +1602,7 @@
 				"additionalProperties": false
 			},
 			"AssetsFinishDestroyArgs": {
-				"description": "Arguments required to Complete destroying asset and unreserve currency.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"description": "`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1616,7 +1616,7 @@
 				"additionalProperties": false
 			},
 			"AssetsForceTransferArgs": {
-				"description": "Arguments required to Move some assets from one account to another.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`source` - The account to be debited.\n\n`dest` - The account to be credited.\n\n`amount` - The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.",
+				"description": "`id` - The identifier of the asset to have some amount transferred.\n\n`source` - The account to be debited.\n\n`dest` - The account to be credited.\n\n`amount` - The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1645,7 +1645,7 @@
 				"additionalProperties": false
 			},
 			"AssetsFreezeAccountArgs": {
-				"description": "Arguments required to Disallow further unprivileged transfers of an asset `id` from an account `who`. `who`\n\n`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be frozen.",
+				"description": "`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be frozen.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1664,7 +1664,7 @@
 				"additionalProperties": false
 			},
 			"AssetsFreezeAssetArgs": {
-				"description": "Arguments required to Disallow further unprivileged transfers for the asset class.\n\n`id` - The identifier of the asset to be frozen.",
+				"description": "`id` - The identifier of the asset to be frozen.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1678,7 +1678,7 @@
 				"additionalProperties": false
 			},
 			"AssetsMintArgs": {
-				"description": "Arguments required to Mint assets of a particular class.\n\n`id` - The identifier of the asset to have some amount minted.\n\n`beneficiary` - The account to be credited with the minted assets.\n\n`amount` - The amount of the asset to be minted.",
+				"description": "`id` - The identifier of the asset to have some amount minted.\n\n`beneficiary` - The account to be credited with the minted assets.\n\n`amount` - The amount of the asset to be minted.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1702,7 +1702,7 @@
 				"additionalProperties": false
 			},
 			"AssetsSetMetadataArgs": {
-				"description": "Arguments required to Set the raw metadata for an asset.\n\n`id` - The identifier of the asset to update.\n\n`data` - The data of metadata. Limited in length by `StringLimit`.",
+				"description": "`id` - The identifier of the asset to update.\n\n`data` - The data of metadata. Limited in length by `StringLimit`.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1721,7 +1721,7 @@
 				"additionalProperties": false
 			},
 			"AssetsSetMinBalanceArgs": {
-				"description": "Arguments required to Sets the minimum balance of an asset.\n\n`id` - The identifier of the asset.\n\n`minBalance` - The new value of `min_balance`.",
+				"description": "`id` - The identifier of the asset.\n\n`minBalance` - The new value of `min_balance`.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1740,7 +1740,7 @@
 				"additionalProperties": false
 			},
 			"AssetsStartDestroyArgs": {
-				"description": "Arguments required to Start the process of destroying a fungible asset class.\n\n`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"description": "`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1754,7 +1754,7 @@
 				"additionalProperties": false
 			},
 			"AssetsThawAccountArgs": {
-				"description": "Arguments required to Allow unprivileged transfers to and from an account again.\n\n`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be unfrozen.",
+				"description": "`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be unfrozen.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1773,7 +1773,7 @@
 				"additionalProperties": false
 			},
 			"AssetsThawAssetArgs": {
-				"description": "Arguments required to Allow unprivileged transfers for the asset again.\n\n`id` - The identifier of the asset to be thawed.",
+				"description": "`id` - The identifier of the asset to be thawed.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1787,7 +1787,7 @@
 				"additionalProperties": false
 			},
 			"AssetsTransferArgs": {
-				"description": "Arguments required to Move some assets from the sender account to another.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
+				"description": "`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1811,7 +1811,7 @@
 				"additionalProperties": false
 			},
 			"AssetsTransferKeepAliveArgs": {
-				"description": "Arguments required to Move some assets from the sender account to another, keeping the sender account alive.\n\n`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
+				"description": "`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1835,7 +1835,7 @@
 				"additionalProperties": false
 			},
 			"AssetsTransferOwnershipArgs": {
-				"description": "Arguments required to Change the Owner of an asset.\n\n`id` - The identifier of the asset.\n\n`owner` - The new Owner of this asset.",
+				"description": "`id` - The identifier of the asset.\n\n`owner` - The new Owner of this asset.",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1854,7 +1854,7 @@
 				"additionalProperties": false
 			},
 			"BalancesTransferAllArgs": {
-				"description": "Arguments required to Transfer the entire transferable balance from the caller account.\n\n`dest` - The recipient of the transfer.\n\n`keepAlive`",
+				"description": "`dest` - The recipient of the transfer.\n\n`keepAlive`",
 				"properties": {
 					"dest": {
 						"$ref": "#/components/schemas/BlockchainGenericAccountId",
@@ -1872,7 +1872,7 @@
 				"additionalProperties": false
 			},
 			"BalancesTransferAllowDeathArgs": {
-				"description": "Arguments required to Transfer some liquid free balance to another account.\n\n`dest`\n\n`value`",
+				"description": "`dest`\n\n`value`",
 				"properties": {
 					"dest": {
 						"$ref": "#/components/schemas/BlockchainGenericAccountId"
@@ -1889,7 +1889,7 @@
 				"additionalProperties": false
 			},
 			"BalancesTransferKeepAliveArgs": {
-				"description": "Arguments required to Same as the [`transfer_allow_death`] call, but with a check that the transfer will not\n\n`dest`\n\n`value`",
+				"description": "`dest`\n\n`value`",
 				"properties": {
 					"dest": {
 						"$ref": "#/components/schemas/BlockchainGenericAccountId"
@@ -1906,7 +1906,7 @@
 				"additionalProperties": false
 			},
 			"NftsBurnItemArgs": {
-				"description": "Arguments required to Destroy a single item.\n\n`collection` - The collection of the item to be burned.\n\n`item` - The item to be burned.",
+				"description": "`collection` - The collection of the item to be burned.\n\n`item` - The item to be burned.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1925,7 +1925,7 @@
 				"additionalProperties": false
 			},
 			"NftsClearCollectionMetadataArgs": {
-				"description": "Arguments required to Clear the metadata for a collection.\n\n`collection` - The identifier of the collection whose metadata to clear.",
+				"description": "`collection` - The identifier of the collection whose metadata to clear.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1939,7 +1939,7 @@
 				"additionalProperties": false
 			},
 			"NftsClearItemMetadataArgs": {
-				"description": "Arguments required to Clear the metadata for an item.\n\n`collection` - The identifier of the collection whose item's metadata to clear.\n\n`item` - The identifier of the item whose metadata to clear.",
+				"description": "`collection` - The identifier of the collection whose item's metadata to clear.\n\n`item` - The identifier of the item whose metadata to clear.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -1982,7 +1982,7 @@
 				"type": "object"
 			},
 			"NftsDestroyCollectionArgs": {
-				"description": "Arguments required to Destroy a collection of fungible items.\n\n`collection` - The identifier of the collection to be destroyed.\n\n`witness` - Information on the items minted in the collection. This must be correct.",
+				"description": "`collection` - The identifier of the collection to be destroyed.\n\n`witness` - Information on the items minted in the collection. This must be correct.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -2001,7 +2001,7 @@
 				"additionalProperties": false
 			},
 			"NftsLockItemTransferArgs": {
-				"description": "Arguments required to Disallow further unprivileged transfer of an item.\n\n`collection` - The collection of the item to be changed.\n\n`item` - The item to become non-transferable.",
+				"description": "`collection` - The collection of the item to be changed.\n\n`item` - The item to become non-transferable.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -2020,7 +2020,7 @@
 				"additionalProperties": false
 			},
 			"NftsMintItemArgs": {
-				"description": "\n`collection`\n\n`item`\n\n`mintTo`",
+				"description": "`collection`\n\n`item`\n\n`mintTo`",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -2041,7 +2041,7 @@
 				"additionalProperties": false
 			},
 			"NftsAcceptCollectionOwnershipArgs": {
-				"description": "Arguments required to Set (or reset) the acceptance of ownership for a particular account.\n\n`maybeCollection` - The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.",
+				"description": "`maybeCollection` - The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.",
 				"properties": {
 					"maybeCollection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -2052,7 +2052,7 @@
 				"additionalProperties": false
 			},
 			"NftsSetCollectionMetadataArgs": {
-				"description": "Arguments required to Set the metadata for a collection.\n\n`collection` - The identifier of the item whose metadata to update.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
+				"description": "`collection` - The identifier of the item whose metadata to update.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -2071,7 +2071,7 @@
 				"additionalProperties": false
 			},
 			"NftsSetItemMetadataArgs": {
-				"description": "Arguments required to Set the metadata for an item.\n\n`collection` - The identifier of the collection whose item's metadata to set.\n\n`item` - The identifier of the item whose metadata to set.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
+				"description": "`collection` - The identifier of the collection whose item's metadata to set.\n\n`item` - The identifier of the item whose metadata to set.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -2095,7 +2095,7 @@
 				"additionalProperties": false
 			},
 			"NftsTransferItemArgs": {
-				"description": "Arguments required to Move an item from the sender account to another.\n\n`collection` - The collection of the item to be transferred.\n\n`item` - The item to be transferred.\n\n`dest` - The account to receive ownership of the item.",
+				"description": "`collection` - The collection of the item to be transferred.\n\n`item` - The item to be transferred.\n\n`dest` - The account to receive ownership of the item.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -2119,7 +2119,7 @@
 				"additionalProperties": false
 			},
 			"NftsTransferCollectionOwnershipArgs": {
-				"description": "Arguments required to Change the Owner of a collection.\n\n`collection` - The collection whose owner should be changed.\n\n`newOwner`",
+				"description": "`collection` - The collection whose owner should be changed.\n\n`newOwner`",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -2137,7 +2137,7 @@
 				"additionalProperties": false
 			},
 			"NftsUnlockItemTransferArgs": {
-				"description": "Arguments required to Re-allow unprivileged transfer of an item.\n\n`collection` - The collection of the item to be changed.\n\n`item` - The item to become transferable.",
+				"description": "`collection` - The collection of the item to be changed.\n\n`item` - The item to become transferable.",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId",
@@ -2162,7 +2162,7 @@
 				"type": "array"
 			},
 			"UserFreeTransactionsAppAgentBlacklistAddressArgs": {
-				"description": "Arguments required to Blacklist an address by an app agent.\n\n`appAgentId`\n\n`addresses`",
+				"description": "`appAgentId`\n\n`addresses`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -2179,7 +2179,7 @@
 				"additionalProperties": false
 			},
 			"UserFreeTransactionsAppAgentUnblacklistAddressArgs": {
-				"description": "Arguments required to Unblacklist an address by an app agent.\n\n`appAgentId`\n\n`addresses`",
+				"description": "`appAgentId`\n\n`addresses`",
 				"properties": {
 					"appAgentId": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -2196,7 +2196,7 @@
 				"additionalProperties": false
 			},
 			"UserFreeTransactionsBlacklistAddressArgs": {
-				"description": "Arguments required to Blacklist an address.\n\n`addresses`",
+				"description": "`addresses`",
 				"properties": {
 					"addresses": {
 						"$ref": "#/components/schemas/BlockchainGenericAccountList"
@@ -2209,31 +2209,27 @@
 				"additionalProperties": false
 			},
 			"UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs": {
-				"description": "Arguments required to Clear free transfer infos of appagents.",
 				"properties": {},
 				"type": "object",
 				"additionalProperties": false
 			},
 			"UserFreeTransactionsClearAssetLastTransferBlocksArgs": {
-				"description": "Arguments required to Clear last transfers of fingible tokens.",
 				"properties": {},
 				"type": "object",
 				"additionalProperties": false
 			},
 			"UserFreeTransactionsClearNftLastTransferBlocksArgs": {
-				"description": "Arguments required to Clear last transfers of NFTs.",
 				"properties": {},
 				"type": "object",
 				"additionalProperties": false
 			},
 			"UserFreeTransactionsClearUserFreeTransferInfosArgs": {
-				"description": "Arguments required to Clear free transfer infos of users.",
 				"properties": {},
 				"type": "object",
 				"additionalProperties": false
 			},
 			"UserFreeTransactionsSetFreeTransfersEnabledArgs": {
-				"description": "Arguments required to Enable or disable free transfers.\n\n`enabled`",
+				"description": "`enabled`",
 				"properties": {
 					"enabled": {
 						"$ref": "#/components/schemas/BlockchainGenericBoolean"
@@ -2246,7 +2242,7 @@
 				"additionalProperties": false
 			},
 			"UserFreeTransactionsUnblacklistAddressArgs": {
-				"description": "Arguments required to Unblacklist an address.\n\n`addresses`",
+				"description": "`addresses`",
 				"properties": {
 					"addresses": {
 						"$ref": "#/components/schemas/BlockchainGenericAccountList"
@@ -2259,7 +2255,7 @@
 				"additionalProperties": false
 			},
 			"UserTransactionsSubmitTransferAllBalancesArgs": {
-				"description": "Arguments required to Submits a transfer_all call using the given parameter\n\n`dest`\n\n`keepAlive`",
+				"description": "`dest`\n\n`keepAlive`",
 				"properties": {
 					"dest": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount"
@@ -2276,7 +2272,7 @@
 				"additionalProperties": false
 			},
 			"UserTransactionsSubmitTransferAssetsArgs": {
-				"description": "Arguments required to Submits a transfer of assets using the provided runtime call.\n\n`id`\n\n`target`\n\n`amount`",
+				"description": "`id`\n\n`target`\n\n`amount`",
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -2297,7 +2293,7 @@
 				"additionalProperties": false
 			},
 			"UserTransactionsSubmitTransferBalancesArgs": {
-				"description": "Arguments required to Submits a transfer using the provided runtime call.\n\n`dest`\n\n`value`",
+				"description": "`dest`\n\n`value`",
 				"properties": {
 					"dest": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount"
@@ -2314,7 +2310,7 @@
 				"additionalProperties": false
 			},
 			"UserTransactionsSubmitTransferNftsArgs": {
-				"description": "Arguments required to Submits a transfer of NFTs using the provided runtime call.\n\n`collection`\n\n`item`\n\n`dest`",
+				"description": "`collection`\n\n`item`\n\n`dest`",
 				"properties": {
 					"collection": {
 						"$ref": "#/components/schemas/BlockchainGenericId"
@@ -2345,7 +2341,7 @@
 				"type": "string"
 			},
 			"UserVerificationSetUserLevelArgs": {
-				"description": "\n`user`\n\n`level`",
+				"description": "`user`\n\n`level`",
 				"properties": {
 					"user": {
 						"$ref": "#/components/schemas/BlockchainGenericAccount"
@@ -2679,7 +2675,7 @@
 				"type": "string"
 			},
 			"AppAgentsAddAdminTx": {
-				"description": "Adds an admin to the App Agent. This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount. # Parameters",
+				"description": "Adds an admin to the App Agent.This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsAddAdmin",
@@ -2704,7 +2700,7 @@
 				"type": "string"
 			},
 			"AppAgentsAddAdminToNamedAddressTx": {
-				"description": "Adds an admin to the list of permitted administrators for a named address under a specific App Agent. # Parameters",
+				"description": "Adds an admin to the list of permitted administrators for a named address under a specific App Agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsAddAdminToNamedAddress",
@@ -2729,7 +2725,7 @@
 				"type": "string"
 			},
 			"AppAgentsAllowAdminColdWalletTx": {
-				"description": "Pallet function to add an AppAgent' admin to the list of addresses allowed to spend from a cold wallet associated with a specific App Agent. # Parameters",
+				"description": "Pallet function to add an AppAgent' admin to the list of addresses allowed to spend from a cold wallet associated with a specific App Agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsAllowAdminColdWallet",
@@ -2754,7 +2750,7 @@
 				"type": "string"
 			},
 			"AppAgentsChangeHotWalletTx": {
-				"description": "Change the hot wallet associated with an App Agent. # Parameters",
+				"description": "Change the hot wallet associated with an App Agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsChangeHotWallet",
@@ -2779,7 +2775,7 @@
 				"type": "string"
 			},
 			"AppAgentsChangeOwnerCancelTx": {
-				"description": "Cancels a change of owner for an App Agent. This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent. # Parameters",
+				"description": "Cancels a change of owner for an App Agent.This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsChangeOwnerCancel",
@@ -2804,7 +2800,7 @@
 				"type": "string"
 			},
 			"AppAgentsChangeOwnerCompleteTx": {
-				"description": "Completes a change of owner for an App Agent. This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent. # Parameters",
+				"description": "Completes a change of owner for an App Agent.This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsChangeOwnerComplete",
@@ -2829,7 +2825,7 @@
 				"type": "string"
 			},
 			"AppAgentsChangeOwnerInitTx": {
-				"description": "Initializes the process to change the ownership of an App Agent. This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address. # Parameters",
+				"description": "Initializes the process to change the ownership of an App Agent.This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsChangeOwnerInit",
@@ -2854,7 +2850,7 @@
 				"type": "string"
 			},
 			"AppAgentsClearAdminDispatchFilterTx": {
-				"description": "Clears the dispatch filter for the specified `admin` account. The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions. # Parameters",
+				"description": "Clears the dispatch filter for the specified `admin` account.The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsClearAdminDispatchFilter",
@@ -2879,7 +2875,7 @@
 				"type": "string"
 			},
 			"AppAgentsClearAppAgentMetadataTx": {
-				"description": "Clear the metadata for an asset class. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`. Any deposit is freed for the asset class owner.",
+				"description": "Clear the metadata for an asset class.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`. Any deposit is freed for the asset class owner.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsClearAppAgentMetadata",
@@ -2904,7 +2900,7 @@
 				"type": "string"
 			},
 			"AppAgentsCompleteDestroyAppAgentTx": {
-				"description": "Completes the destruction process of the App Agent. This function is used to complete the destruction process of the specified App Agent. It marks the App Agent as Destroyed and removes its metadata storage. After completion, it emits an event to indicate the status change of the App Agent. Parameters:",
+				"description": "Completes the destruction process of the App Agent.This function is used to complete the destruction process of the specified App Agent. It marks the App Agent as Destroyed and removes its metadata storage. After completion, it emits an event to indicate the status change of the App Agent. Parameters:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsCompleteDestroyAppAgent",
@@ -2929,7 +2925,7 @@
 				"type": "string"
 			},
 			"AppAgentsDisableAdminColdWalletDispatchTx": {
-				"description": "Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend from a cold wallet associated with a specific App Agent. # Parameters",
+				"description": "Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend from a cold wallet associated with a specific App Agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsDisableAdminColdWalletDispatch",
@@ -2954,7 +2950,7 @@
 				"type": "string"
 			},
 			"AppAgentsDisableHotWalletTx": {
-				"description": "Disables the hot wallet for a specified App Agent. This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it. # Parameters",
+				"description": "Disables the hot wallet for a specified App Agent.This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsDisableHotWallet",
@@ -2979,7 +2975,7 @@
 				"type": "string"
 			},
 			"AppAgentsEnableHotWalletTx": {
-				"description": "Enables the hot wallet for a specified App Agent. This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it. # Parameters",
+				"description": "Enables the hot wallet for a specified App Agent.This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsEnableHotWallet",
@@ -3104,7 +3100,7 @@
 				"type": "string"
 			},
 			"AppAgentsInitiateDestroyAppAgentTx": {
-				"description": "Initiate destroy of an App Agent. This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to \"destroy initiated\" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent. # Parameters",
+				"description": "Initiate destroy of an App Agent.This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to \"destroy initiated\" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsInitiateDestroyAppAgent",
@@ -3129,7 +3125,7 @@
 				"type": "string"
 			},
 			"AppAgentsPauseAppAgentTx": {
-				"description": "Pauses the specified App Agent. This function verifies that the caller has the necessary permissions to pause the app agent.",
+				"description": "Pauses the specified App Agent.This function verifies that the caller has the necessary permissions to pause the app agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsPauseAppAgent",
@@ -3154,7 +3150,7 @@
 				"type": "string"
 			},
 			"AppAgentsProcessDestroyTx": {
-				"description": "Processes the destruction of assets owned by the App Agent. This function is used to process the destruction of assets owned by the specified app agent. This extrinsic can be called multiple times to destroy all entities related to the app agent. On the first call the status of app agent changes to DestroyInProcess - after that app agent can not be reactivated. It emits `AppAgentDestroyProcessed` after the destruction process is completed. Parameters:",
+				"description": "Processes the destruction of assets owned by the App Agent.This function is used to process the destruction of assets owned by the specified app agent. This extrinsic can be called multiple times to destroy all entities related to the app agent. On the first call the status of app agent changes to DestroyInProcess - after that app agent can not be reactivated. It emits `AppAgentDestroyProcessed` after the destruction process is completed. Parameters:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsProcessDestroy",
@@ -3179,7 +3175,7 @@
 				"type": "string"
 			},
 			"AppAgentsReactivateAppAgentTx": {
-				"description": "Reactivates the specified App Agent. This function is used to reactivate a previously deactivated App Agent. It checks if the App Agent exists and is in the DestroyInitiated state. If so, it verifies whether the deletion window has passed. If the deletion was initiated by the system, it attempts to process a subscription payment to prevent deletion and sets the App Agent to active status. If the deletion was triggered by the owner, it resets the App Agent to active without any checks. After reactivation, it emits an event to indicate the status change of the App Agent. Parameters:",
+				"description": "Reactivates the specified App Agent.This function is used to reactivate a previously deactivated App Agent. It checks if the App Agent exists and is in the DestroyInitiated state. If so, it verifies whether the deletion window has passed. If the deletion was initiated by the system, it attempts to process a subscription payment to prevent deletion and sets the App Agent to active status. If the deletion was triggered by the owner, it resets the App Agent to active without any checks. After reactivation, it emits an event to indicate the status change of the App Agent. Parameters:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsReactivateAppAgent",
@@ -3204,7 +3200,7 @@
 				"type": "string"
 			},
 			"AppAgentsRemoveAdminTx": {
-				"description": "Removes an admin from the App Agent. This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount. # Parameters",
+				"description": "Removes an admin from the App Agent.This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsRemoveAdmin",
@@ -3229,7 +3225,7 @@
 				"type": "string"
 			},
 			"AppAgentsRemoveAdminFromNamedAddressDispatchTx": {
-				"description": "Removes an admin from the list of permitted administrators for a named address under a specific App Agent. # Parameters",
+				"description": "Removes an admin from the list of permitted administrators for a named address under a specific App Agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch",
@@ -3254,7 +3250,7 @@
 				"type": "string"
 			},
 			"AppAgentsSetAdminDispatchFilterTx": {
-				"description": "Sets the list of dispatchables callable by the specified `admin` account. The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter. # Parameters",
+				"description": "Sets the list of dispatchables callable by the specified `admin` account.The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsSetAdminDispatchFilter",
@@ -3279,7 +3275,7 @@
 				"type": "string"
 			},
 			"AppAgentsSetAppAgentMetadataTx": {
-				"description": "Set the metadata for an asset class. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`.",
+				"description": "Set the metadata for an asset class.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsSetAppAgentMetadata",
@@ -3304,7 +3300,7 @@
 				"type": "string"
 			},
 			"AppAgentsUnpauseAppAgentTx": {
-				"description": "Resumes the specified App Agent. This function verifies that the caller has the necessary permissions to resume the app agent.",
+				"description": "Resumes the specified App Agent.This function verifies that the caller has the necessary permissions to resume the app agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppAgentsUnpauseAppAgent",
@@ -3329,7 +3325,7 @@
 				"type": "string"
 			},
 			"AppResourcesSetActionPointsBalanceTx": {
-				"description": "Sets the action points balance for a specified account. This function allows setting the action points balance for a specified account. Parameters:",
+				"description": "Sets the action points balance for a specified account.This function allows setting the action points balance for a specified account. Parameters:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppResourcesSetActionPointsBalance",
@@ -3354,7 +3350,7 @@
 				"type": "string"
 			},
 			"AppResourcesSetClearingPointsBalanceTx": {
-				"description": "Sets the clearing points balance for a specified account. This function allows setting the clearing points balance for a specified account. Parameters:",
+				"description": "Sets the clearing points balance for a specified account.This function allows setting the clearing points balance for a specified account. Parameters:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppResourcesSetClearingPointsBalance",
@@ -3379,7 +3375,7 @@
 				"type": "string"
 			},
 			"AppSubscriptionsCreateAppSubscriptionTierTx": {
-				"description": "Creates a new subscription tier with the provided details. This function is used to create a new subscription tier with the specified details. It generates a unique identifier for the tier, inserts the tier into storage, updates the next tier ID, and emits an event to indicate the creation of the subscription tier. Parameters:",
+				"description": "Creates a new subscription tier with the provided details.This function is used to create a new subscription tier with the specified details. It generates a unique identifier for the tier, inserts the tier into storage, updates the next tier ID, and emits an event to indicate the creation of the subscription tier. Parameters:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppSubscriptionsCreateAppSubscriptionTier",
@@ -3404,7 +3400,7 @@
 				"type": "string"
 			},
 			"AppSubscriptionsObsoleteAppSubscriptionTierTx": {
-				"description": "Updates the details or status of an existing subscription tier. This function is used to patch the details or status of an existing subscription tier identified by its ID. It retrieves the tier from storage, updates its details or status based on the provided patch, and stores the updated tier back into storage. After patching, it emits an event to indicate the changes made to the subscription tier. Parameters:",
+				"description": "Updates the details or status of an existing subscription tier.This function is used to patch the details or status of an existing subscription tier identified by its ID. It retrieves the tier from storage, updates its details or status based on the provided patch, and stores the updated tier back into storage. After patching, it emits an event to indicate the changes made to the subscription tier. Parameters:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier",
@@ -3429,7 +3425,7 @@
 				"type": "string"
 			},
 			"AppSubscriptionsSetAppPayOnDemandModeTx": {
-				"description": "Sets the pay-on-demand mode for an app agent's subscription. This function allows setting the pay-on-demand mode for an app agent's subscription. Parameters:",
+				"description": "Sets the pay-on-demand mode for an app agent's subscription.This function allows setting the pay-on-demand mode for an app agent's subscription. Parameters:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppSubscriptionsSetAppPayOnDemandMode",
@@ -3454,7 +3450,7 @@
 				"type": "string"
 			},
 			"AppSubscriptionsSetAppSubscriptionTierTx": {
-				"description": "Changes the subscription tier of an app agent. This function allows changing the subscription tier of an app agent identified by its subscriber ID. It calculates the difference in price between the current and new tiers and adjusts the subscription limits accordingly. If the new tier is more expensive, it charges the delta payment and updates the action points and clearing points balances for the current billing period. After the adjustment, it updates the subscription tier information for the app agent and emits an event indicating the change in subscription tier. Parameters:",
+				"description": "Changes the subscription tier of an app agent.This function allows changing the subscription tier of an app agent identified by its subscriber ID. It calculates the difference in price between the current and new tiers and adjusts the subscription limits accordingly. If the new tier is more expensive, it charges the delta payment and updates the action points and clearing points balances for the current billing period. After the adjustment, it updates the subscription tier information for the app agent and emits an event indicating the change in subscription tier. Parameters:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppSubscriptionsSetAppSubscriptionTier",
@@ -3479,7 +3475,7 @@
 				"type": "string"
 			},
 			"AppTransactionsForceSubmitClearingTransactionTx": {
-				"description": "Submit a Clearing transaction with root permissions. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from `extra_fee_payer`.",
+				"description": "Submit a Clearing transaction with root permissions.CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from `extra_fee_payer`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppTransactionsForceSubmitClearingTransaction",
@@ -3504,7 +3500,7 @@
 				"type": "string"
 			},
 			"AppTransactionsSubmitClearingTransactionTx": {
-				"description": "Submit a Clearing transaction. CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).",
+				"description": "Submit a Clearing transaction.CT consists of a number of Atomics. Each Atomic consists of a number of Actions. Atomics are executed atomically - if an action within an atomic fails, then the entire atomic is no-op. Atomics within a CT are processed independently of each other. In case of errors, method takes additional fee from admin that submitted СT (origin).",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppTransactionsSubmitClearingTransaction",
@@ -3529,7 +3525,7 @@
 				"type": "string"
 			},
 			"AppTransferChannelsEstablishTransferChannelTx": {
-				"description": "Establishes a new transfer channel between two accounts. This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters",
+				"description": "Establishes a new transfer channel between two accounts.This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppTransferChannelsEstablishTransferChannel",
@@ -3554,7 +3550,7 @@
 				"type": "string"
 			},
 			"AppTransferChannelsRemoveTransferChannelTx": {
-				"description": "Removes a transfer channel between two accounts. This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. # Cost of the call This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction. # Parameters",
+				"description": "Removes a transfer channel between two accounts.This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppTransferChannelsRemoveTransferChannel",
@@ -3579,7 +3575,7 @@
 				"type": "string"
 			},
 			"AppTransferFiltersBlockAddressDepositsTx": {
-				"description": "Blocks deposits to a keyless address controlled by a specific app agent. # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).",
+				"description": "Blocks deposits to a keyless address controlled by a specific app agent.* `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. * `DispatchResult` - Indicates whether the transaction was successful or failed. Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppTransferFiltersBlockAddressDeposits",
@@ -3604,7 +3600,7 @@
 				"type": "string"
 			},
 			"AppTransferFiltersSetAppDepositPermissionsTx": {
-				"description": "Sets the transdepositfer permissions for the specified app_agent_id under the authority of the caller's origin. This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent. # Parameters",
+				"description": "Sets the transdepositfer permissions for the specified app_agent_id under the authority of the caller's origin.This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppTransferFiltersSetAppDepositPermissions",
@@ -3629,7 +3625,7 @@
 				"type": "string"
 			},
 			"AppTransferFiltersUnblockAddressDepositsTx": {
-				"description": "Unblocks deposits to a keyless address controlled by a specific app agent. # Arguments * `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. # Returns * `DispatchResult` - Indicates whether the transaction was successful or failed. # Errors Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).",
+				"description": "Unblocks deposits to a keyless address controlled by a specific app agent.* `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. * `DispatchResult` - Indicates whether the transaction was successful or failed. Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AppTransferFiltersUnblockAddressDeposits",
@@ -3654,7 +3650,7 @@
 				"type": "string"
 			},
 			"AssetsBurnTx": {
-				"description": "Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.",
+				"description": "Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsBurn",
@@ -3703,7 +3699,7 @@
 				"type": "string"
 			},
 			"AssetsDestroyAccountsTx": {
-				"description": "Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.",
+				"description": "Destroy all accounts associated with a given asset.`destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsDestroyAccounts",
@@ -3728,7 +3724,7 @@
 				"type": "string"
 			},
 			"AssetsDestroyApprovalsTx": {
-				"description": "Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.",
+				"description": "Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).`destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsDestroyApprovals",
@@ -3753,7 +3749,7 @@
 				"type": "string"
 			},
 			"AssetsFinishDestroyTx": {
-				"description": "Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.",
+				"description": "Complete destroying asset and unreserve currency.`finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsFinishDestroy",
@@ -3778,7 +3774,7 @@
 				"type": "string"
 			},
 			"AssetsForceTransferTx": {
-				"description": "Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"description": "Move some assets from one account to another.Origin must be Signed and the sender should be the Admin of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsForceTransfer",
@@ -3803,7 +3799,7 @@
 				"type": "string"
 			},
 			"AssetsFreezeAccountTx": {
-				"description": "Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
+				"description": "Disallow further unprivileged transfers of an asset `id` from an account `who`.`who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAccount",
@@ -3828,7 +3824,7 @@
 				"type": "string"
 			},
 			"AssetsFreezeAssetTx": {
-				"description": "Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
+				"description": "Disallow further unprivileged transfers for the asset class.Origin must be Signed and the sender should be the Freezer of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAsset",
@@ -3853,7 +3849,7 @@
 				"type": "string"
 			},
 			"AssetsMintTx": {
-				"description": "Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.",
+				"description": "Mint assets of a particular class.The origin must be Signed and the sender must be the Issuer of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsMint",
@@ -3878,7 +3874,7 @@
 				"type": "string"
 			},
 			"AssetsSetMetadataTx": {
-				"description": "Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.",
+				"description": "Set the raw metadata for an asset.Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsSetMetadata",
@@ -3903,7 +3899,7 @@
 				"type": "string"
 			},
 			"AssetsSetMinBalanceTx": {
-				"description": "Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.",
+				"description": "Sets the minimum balance of an asset.Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsSetMinBalance",
@@ -3928,7 +3924,7 @@
 				"type": "string"
 			},
 			"AssetsStartDestroyTx": {
-				"description": "Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.",
+				"description": "Start the process of destroying a fungible asset class.`start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsStartDestroy",
@@ -3953,7 +3949,7 @@
 				"type": "string"
 			},
 			"AssetsThawAccountTx": {
-				"description": "Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"description": "Allow unprivileged transfers to and from an account again.Origin must be Signed and the sender should be the Admin of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsThawAccount",
@@ -3978,7 +3974,7 @@
 				"type": "string"
 			},
 			"AssetsThawAssetTx": {
-				"description": "Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"description": "Allow unprivileged transfers for the asset again.Origin must be Signed and the sender should be the Admin of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsThawAsset",
@@ -4003,7 +3999,7 @@
 				"type": "string"
 			},
 			"AssetsTransferTx": {
-				"description": "Move some assets from the sender account to another. Origin must be Signed.",
+				"description": "Move some assets from the sender account to another.Origin must be Signed.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsTransfer",
@@ -4028,7 +4024,7 @@
 				"type": "string"
 			},
 			"AssetsTransferKeepAliveTx": {
-				"description": "Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.",
+				"description": "Move some assets from the sender account to another, keeping the sender account alive.Origin must be Signed.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsTransferKeepAlive",
@@ -4053,7 +4049,7 @@
 				"type": "string"
 			},
 			"AssetsTransferOwnershipTx": {
-				"description": "Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.",
+				"description": "Change the Owner of an asset.Origin must be Signed and the sender should be the Owner of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsTransferOwnership",
@@ -4078,7 +4074,7 @@
 				"type": "string"
 			},
 			"BalancesTransferAllTx": {
-				"description": "Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.",
+				"description": "Transfer the entire transferable balance from the caller account.NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.BalancesTransferAll",
@@ -4103,7 +4099,7 @@
 				"type": "string"
 			},
 			"BalancesTransferAllowDeathTx": {
-				"description": "Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.",
+				"description": "Transfer some liquid free balance to another account.`transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.BalancesTransferAllowDeath",
@@ -4128,7 +4124,7 @@
 				"type": "string"
 			},
 			"BalancesTransferKeepAliveTx": {
-				"description": "Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer",
+				"description": "Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account.99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.BalancesTransferKeepAlive",
@@ -4153,7 +4149,7 @@
 				"type": "string"
 			},
 			"NftsBurnItemTx": {
-				"description": "Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.",
+				"description": "Destroy a single item.The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsBurnItem",
@@ -4178,7 +4174,7 @@
 				"type": "string"
 			},
 			"NftsClearCollectionMetadataTx": {
-				"description": "Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
+				"description": "Clear the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsClearCollectionMetadata",
@@ -4203,7 +4199,7 @@
 				"type": "string"
 			},
 			"NftsClearItemMetadataTx": {
-				"description": "Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
+				"description": "Clear the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsClearItemMetadata",
@@ -4252,7 +4248,7 @@
 				"type": "string"
 			},
 			"NftsDestroyCollectionTx": {
-				"description": "Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.",
+				"description": "Destroy a collection of fungible items.The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsDestroyCollection",
@@ -4277,7 +4273,7 @@
 				"type": "string"
 			},
 			"NftsLockItemTransferTx": {
-				"description": "Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
+				"description": "Disallow further unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsLockItemTransfer",
@@ -4326,7 +4322,7 @@
 				"type": "string"
 			},
 			"NftsAcceptCollectionOwnershipTx": {
-				"description": "Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.",
+				"description": "Set (or reset) the acceptance of ownership for a particular account.Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsAcceptCollectionOwnership",
@@ -4351,7 +4347,7 @@
 				"type": "string"
 			},
 			"NftsSetCollectionMetadataTx": {
-				"description": "Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
+				"description": "Set the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsSetCollectionMetadata",
@@ -4376,7 +4372,7 @@
 				"type": "string"
 			},
 			"NftsSetItemMetadataTx": {
-				"description": "Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
+				"description": "Set the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsSetItemMetadata",
@@ -4401,7 +4397,7 @@
 				"type": "string"
 			},
 			"NftsTransferItemTx": {
-				"description": "Move an item from the sender account to another. Origin must be Signed and the signing account must be either:",
+				"description": "Move an item from the sender account to another.Origin must be Signed and the signing account must be either:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsTransferItem",
@@ -4426,7 +4422,7 @@
 				"type": "string"
 			},
 			"NftsTransferCollectionOwnershipTx": {
-				"description": "Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.",
+				"description": "Change the Owner of a collection.Origin must be Signed and the sender should be the Owner of the `collection`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsTransferCollectionOwnership",
@@ -4451,7 +4447,7 @@
 				"type": "string"
 			},
 			"NftsUnlockItemTransferTx": {
-				"description": "Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
+				"description": "Re-allow unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsUnlockItemTransfer",
@@ -4476,7 +4472,7 @@
 				"type": "string"
 			},
 			"UserFreeTransactionsAppAgentBlacklistAddressTx": {
-				"description": "Blacklist an address by an app agent. Only callable by an admin of the app agent.",
+				"description": "Blacklist an address by an app agent.Only callable by an admin of the app agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsAppAgentBlacklistAddress",
@@ -4501,7 +4497,7 @@
 				"type": "string"
 			},
 			"UserFreeTransactionsAppAgentUnblacklistAddressTx": {
-				"description": "Unblacklist an address by an app agent. Only callable by an admin of the app agent.",
+				"description": "Unblacklist an address by an app agent.Only callable by an admin of the app agent.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress",
@@ -4526,7 +4522,7 @@
 				"type": "string"
 			},
 			"UserFreeTransactionsBlacklistAddressTx": {
-				"description": "Blacklist an address. Only callable by the ForceOrigin.",
+				"description": "Blacklist an address.Only callable by the ForceOrigin.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsBlacklistAddress",
@@ -4551,7 +4547,7 @@
 				"type": "string"
 			},
 			"UserFreeTransactionsClearAppAgentsFreeTransferInfosTx": {
-				"description": "Clear free transfer infos of appagents. Only callable by the ForceOrigin.",
+				"description": "Clear free transfer infos of appagents.Only callable by the ForceOrigin.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos",
@@ -4576,7 +4572,7 @@
 				"type": "string"
 			},
 			"UserFreeTransactionsClearAssetLastTransferBlocksTx": {
-				"description": "Clear last transfers of fingible tokens. Only callable by the ForceOrigin.",
+				"description": "Clear last transfers of fingible tokens.Only callable by the ForceOrigin.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks",
@@ -4601,7 +4597,7 @@
 				"type": "string"
 			},
 			"UserFreeTransactionsClearNftLastTransferBlocksTx": {
-				"description": "Clear last transfers of NFTs. Only callable by the ForceOrigin.",
+				"description": "Clear last transfers of NFTs.Only callable by the ForceOrigin.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsClearNftLastTransferBlocks",
@@ -4626,7 +4622,7 @@
 				"type": "string"
 			},
 			"UserFreeTransactionsClearUserFreeTransferInfosTx": {
-				"description": "Clear free transfer infos of users. Only callable by the ForceOrigin.",
+				"description": "Clear free transfer infos of users.Only callable by the ForceOrigin.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsClearUserFreeTransferInfos",
@@ -4651,7 +4647,7 @@
 				"type": "string"
 			},
 			"UserFreeTransactionsSetFreeTransfersEnabledTx": {
-				"description": "Enable or disable free transfers. Only callable by the ForceOrigin.",
+				"description": "Enable or disable free transfers.Only callable by the ForceOrigin.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsSetFreeTransfersEnabled",
@@ -4676,7 +4672,7 @@
 				"type": "string"
 			},
 			"UserFreeTransactionsUnblacklistAddressTx": {
-				"description": "Unblacklist an address. Only callable by the ForceOrigin.",
+				"description": "Unblacklist an address.Only callable by the ForceOrigin.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsUnblacklistAddress",
@@ -4726,7 +4722,7 @@
 				"type": "string"
 			},
 			"UserTransactionsSubmitTransferAssetsTx": {
-				"description": "Submits a transfer of assets using the provided runtime call. This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified assets. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `id`: The asset ID to be transferred. * `target`: The target account ID. * `amount`: The amount of assets to transfer. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:",
+				"description": "Submits a transfer of assets using the provided runtime call.This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified assets. 3. Processes the call. * `origin`: The runtime origin. * `id`: The asset ID to be transferred. * `target`: The target account ID. * `amount`: The amount of assets to transfer. Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. Returns an error if:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserTransactionsSubmitTransferAssets",
@@ -4751,7 +4747,7 @@
 				"type": "string"
 			},
 			"UserTransactionsSubmitTransferBalancesTx": {
-				"description": "Submits a transfer using the provided runtime call. # Steps 1. Verifies the origin and retrieves the caller's account ID. 2. Checks if the call is allowed by the specified filters. 3. If the call is for a target recipient:",
+				"description": "Submits a transfer using the provided runtime call.1. Verifies the origin and retrieves the caller's account ID. 2. Checks if the call is allowed by the specified filters. 3. If the call is for a target recipient:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserTransactionsSubmitTransferBalances",
@@ -4776,7 +4772,7 @@
 				"type": "string"
 			},
 			"UserTransactionsSubmitTransferNftsTx": {
-				"description": "Submits a transfer of NFTs using the provided runtime call. This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified NFT. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `collection`: The collection ID of the NFT. * `item`: The item ID of the NFT. * `dest`: The destination account ID. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:",
+				"description": "Submits a transfer of NFTs using the provided runtime call.This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified NFT. 3. Processes the call. * `origin`: The runtime origin. * `collection`: The collection ID of the NFT. * `item`: The item ID of the NFT. * `dest`: The destination account ID. Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. Returns an error if:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.UserTransactionsSubmitTransferNfts",
@@ -5314,7 +5310,7 @@
 				"description": "Represents a CT action args."
 			},
 			"BalancesTransferAllowDeathAction": {
-				"description": "Transfer some liquid free balance to another account. `transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.",
+				"description": "Transfer some liquid free balance to another account.`transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.BalancesTransferAllowDeath",
@@ -5338,7 +5334,7 @@
 				"additionalProperties": false
 			},
 			"BalancesTransferKeepAliveAction": {
-				"description": "Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account. 99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer",
+				"description": "Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account.99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.BalancesTransferKeepAlive",
@@ -5362,7 +5358,7 @@
 				"additionalProperties": false
 			},
 			"BalancesTransferAllAction": {
-				"description": "Transfer the entire transferable balance from the caller account. NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.",
+				"description": "Transfer the entire transferable balance from the caller account.NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.BalancesTransferAll",
@@ -5409,7 +5405,7 @@
 				"additionalProperties": false
 			},
 			"AssetsStartDestroyAction": {
-				"description": "Start the process of destroying a fungible asset class. `start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.",
+				"description": "Start the process of destroying a fungible asset class.`start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsStartDestroy",
@@ -5433,7 +5429,7 @@
 				"additionalProperties": false
 			},
 			"AssetsDestroyAccountsAction": {
-				"description": "Destroy all accounts associated with a given asset. `destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.",
+				"description": "Destroy all accounts associated with a given asset.`destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsDestroyAccounts",
@@ -5457,7 +5453,7 @@
 				"additionalProperties": false
 			},
 			"AssetsDestroyApprovalsAction": {
-				"description": "Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit). `destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.",
+				"description": "Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).`destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsDestroyApprovals",
@@ -5481,7 +5477,7 @@
 				"additionalProperties": false
 			},
 			"AssetsFinishDestroyAction": {
-				"description": "Complete destroying asset and unreserve currency. `finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.",
+				"description": "Complete destroying asset and unreserve currency.`finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsFinishDestroy",
@@ -5505,7 +5501,7 @@
 				"additionalProperties": false
 			},
 			"AssetsMintAction": {
-				"description": "Mint assets of a particular class. The origin must be Signed and the sender must be the Issuer of the asset `id`.",
+				"description": "Mint assets of a particular class.The origin must be Signed and the sender must be the Issuer of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsMint",
@@ -5529,7 +5525,7 @@
 				"additionalProperties": false
 			},
 			"AssetsBurnAction": {
-				"description": "Reduce the balance of `who` by as much as possible up to `amount` assets of `id`. Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.",
+				"description": "Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsBurn",
@@ -5553,7 +5549,7 @@
 				"additionalProperties": false
 			},
 			"AssetsTransferAction": {
-				"description": "Move some assets from the sender account to another. Origin must be Signed.",
+				"description": "Move some assets from the sender account to another.Origin must be Signed.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsTransfer",
@@ -5577,7 +5573,7 @@
 				"additionalProperties": false
 			},
 			"AssetsTransferKeepAliveAction": {
-				"description": "Move some assets from the sender account to another, keeping the sender account alive. Origin must be Signed.",
+				"description": "Move some assets from the sender account to another, keeping the sender account alive.Origin must be Signed.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsTransferKeepAlive",
@@ -5601,7 +5597,7 @@
 				"additionalProperties": false
 			},
 			"AssetsForceTransferAction": {
-				"description": "Move some assets from one account to another. Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"description": "Move some assets from one account to another.Origin must be Signed and the sender should be the Admin of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsForceTransfer",
@@ -5625,7 +5621,7 @@
 				"additionalProperties": false
 			},
 			"AssetsFreezeAccountAction": {
-				"description": "Disallow further unprivileged transfers of an asset `id` from an account `who`. `who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
+				"description": "Disallow further unprivileged transfers of an asset `id` from an account `who`.`who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAccount",
@@ -5649,7 +5645,7 @@
 				"additionalProperties": false
 			},
 			"AssetsThawAccountAction": {
-				"description": "Allow unprivileged transfers to and from an account again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"description": "Allow unprivileged transfers to and from an account again.Origin must be Signed and the sender should be the Admin of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsThawAccount",
@@ -5673,7 +5669,7 @@
 				"additionalProperties": false
 			},
 			"AssetsFreezeAssetAction": {
-				"description": "Disallow further unprivileged transfers for the asset class. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
+				"description": "Disallow further unprivileged transfers for the asset class.Origin must be Signed and the sender should be the Freezer of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsFreezeAsset",
@@ -5697,7 +5693,7 @@
 				"additionalProperties": false
 			},
 			"AssetsThawAssetAction": {
-				"description": "Allow unprivileged transfers for the asset again. Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"description": "Allow unprivileged transfers for the asset again.Origin must be Signed and the sender should be the Admin of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsThawAsset",
@@ -5721,7 +5717,7 @@
 				"additionalProperties": false
 			},
 			"AssetsTransferOwnershipAction": {
-				"description": "Change the Owner of an asset. Origin must be Signed and the sender should be the Owner of the asset `id`.",
+				"description": "Change the Owner of an asset.Origin must be Signed and the sender should be the Owner of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsTransferOwnership",
@@ -5745,7 +5741,7 @@
 				"additionalProperties": false
 			},
 			"AssetsSetMetadataAction": {
-				"description": "Set the raw metadata for an asset. Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.",
+				"description": "Set the raw metadata for an asset.Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsSetMetadata",
@@ -5769,7 +5765,7 @@
 				"additionalProperties": false
 			},
 			"AssetsSetMinBalanceAction": {
-				"description": "Sets the minimum balance of an asset. Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.",
+				"description": "Sets the minimum balance of an asset.Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.AssetsSetMinBalance",
@@ -5816,7 +5812,7 @@
 				"additionalProperties": false
 			},
 			"NftsDestroyCollectionAction": {
-				"description": "Destroy a collection of fungible items. The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.",
+				"description": "Destroy a collection of fungible items.The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsDestroyCollection",
@@ -5863,7 +5859,7 @@
 				"additionalProperties": false
 			},
 			"NftsBurnItemAction": {
-				"description": "Destroy a single item. The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.",
+				"description": "Destroy a single item.The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsBurnItem",
@@ -5887,7 +5883,7 @@
 				"additionalProperties": false
 			},
 			"NftsTransferItemAction": {
-				"description": "Move an item from the sender account to another. Origin must be Signed and the signing account must be either:",
+				"description": "Move an item from the sender account to another.Origin must be Signed and the signing account must be either:",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsTransferItem",
@@ -5911,7 +5907,7 @@
 				"additionalProperties": false
 			},
 			"NftsLockItemTransferAction": {
-				"description": "Disallow further unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
+				"description": "Disallow further unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsLockItemTransfer",
@@ -5935,7 +5931,7 @@
 				"additionalProperties": false
 			},
 			"NftsUnlockItemTransferAction": {
-				"description": "Re-allow unprivileged transfer of an item. Origin must be Signed and the sender should be the Freezer of the `collection`.",
+				"description": "Re-allow unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsUnlockItemTransfer",
@@ -5959,7 +5955,7 @@
 				"additionalProperties": false
 			},
 			"NftsTransferCollectionOwnershipAction": {
-				"description": "Change the Owner of a collection. Origin must be Signed and the sender should be the Owner of the `collection`.",
+				"description": "Change the Owner of a collection.Origin must be Signed and the sender should be the Owner of the `collection`.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsTransferCollectionOwnership",
@@ -5983,7 +5979,7 @@
 				"additionalProperties": false
 			},
 			"NftsSetItemMetadataAction": {
-				"description": "Set the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
+				"description": "Set the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsSetItemMetadata",
@@ -6007,7 +6003,7 @@
 				"additionalProperties": false
 			},
 			"NftsClearItemMetadataAction": {
-				"description": "Clear the metadata for an item. Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
+				"description": "Clear the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsClearItemMetadata",
@@ -6031,7 +6027,7 @@
 				"additionalProperties": false
 			},
 			"NftsSetCollectionMetadataAction": {
-				"description": "Set the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
+				"description": "Set the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsSetCollectionMetadata",
@@ -6055,7 +6051,7 @@
 				"additionalProperties": false
 			},
 			"NftsClearCollectionMetadataAction": {
-				"description": "Clear the metadata for a collection. Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
+				"description": "Clear the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsClearCollectionMetadata",
@@ -6079,7 +6075,7 @@
 				"additionalProperties": false
 			},
 			"NftsAcceptCollectionOwnershipAction": {
-				"description": "Set (or reset) the acceptance of ownership for a particular account. Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.",
+				"description": "Set (or reset) the acceptance of ownership for a particular account.Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.",
 				"properties": {
 					"actionType": {
 						"$ref": "#/components/schemas/TransactionType.NftsAcceptCollectionOwnership",

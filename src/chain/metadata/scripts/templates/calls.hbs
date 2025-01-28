@@ -57,12 +57,9 @@ export function constructUnsignedTransaction(
 {{#each items}}
 
 /**
-{{#if documentation.short}}
- * Arguments required to {{{documentation.short}}}
-{{/if}}
 {{#each params}}
- *
  * `{{{this.name}}}`{{#if this.description}} -{{{this.description}}}{{/if}}
+ *
 {{/each}}
  */
 export interface {{{actionName}}}Args extends Args {
@@ -84,11 +81,11 @@ const {{{actionName}}}ArgsSchema = z.object({
 
 /**
  * @name {{{functionName}}}
-{{#if documentation.short}}
- * @summary {{{documentation.short}}}
+{{#if documentation.summary}}
+ * @summary {{{documentation.summary}}}
 {{/if}}
-{{#if documentation.full}}
- * @description {{{documentation.full}}}
+{{#if documentation.description}}
+ * @description {{{documentation.description}}}
 {{/if}}
  * @param args - The arguments of the transaction. {@link {{{actionName}}}Args}
  * @param info - Base transaction information. {@link BaseTxInfo}
@@ -107,8 +104,8 @@ export function {{{functionName}}}(
 }
 
 /**
-{{#if documentation.short}}
- * {{{documentation.short}}}{{#if documentation.full}} {{{documentation.full}}}{{/if}}
+{{#if documentation.description}}
+ * {{#if documentation.summary}}{{{documentation.summary}}}{{/if}}{{{documentation.description}}}
 {{/if}}
  */
 export interface {{{actionName}}}Tx extends ITxAction {
@@ -118,8 +115,8 @@ export interface {{{actionName}}}Tx extends ITxAction {
 
 {{#if isAllowedAction}}
 /**
-{{#if documentation.short}}
- * {{{documentation.short}}}{{#if documentation.full}} {{{documentation.full}}}{{/if}}
+{{#if documentation.description}}
+ * {{#if documentation.summary}}{{{documentation.summary}}}{{/if}}{{{documentation.description}}}
 {{/if}}
  */
 export interface {{{actionName}}}Action extends ICTAtomicAction {
@@ -187,23 +184,20 @@ export function buildUnsignedTransaction(
 ): UnsignedTransaction {
   const { actionType, arguments: args } = tx;
 
-  let unsigned: UnsignedTransaction;
-
-  // Handle different action types
-  switch (actionType) {
-  {{#each modules}}
-  {{#each items}}
-    case TransactionType.{{{this.actionName}}}: {
-      unsigned = {{{this.functionName}}}(args, info, options);
-      break;
+  const unsigned: UnsignedTransaction = (() => {
+    switch (actionType) {
+    {{#each modules}}
+    {{#each items}}
+      case TransactionType.{{{this.actionName}}}: {
+        return {{{this.functionName}}}(args, info, options);
+      }
+    {{/each}}
+    {{/each}}
+      default: {
+        throw new Error(`Unsupported transaction type: ${actionType}`);
+      }
     }
-  {{/each}}
-  {{/each}}
-
-    default: {
-      throw new Error(`Unsupported transaction type: ${actionType}`);
-    }
-  }
+  })();
 
   return unsigned;
 }
