@@ -215,7 +215,16 @@
 					"nfts.lockItemTransfer",
 					"nfts.unlockItemTransfer",
 					"nfts.setMetadata",
-					"nfts.clearMetadata"
+					"nfts.clearMetadata",
+					"userFreeTransactions.appAgentBlacklistAddress",
+					"userFreeTransactions.appAgentUnblacklistAddress",
+					"userFreeTransactions.blacklistAddress",
+					"userFreeTransactions.clearAppAgentsFreeTransferInfos",
+					"userFreeTransactions.clearAssetLastTransferBlocks",
+					"userFreeTransactions.clearNftLastTransferBlocks",
+					"userFreeTransactions.clearUserFreeTransferInfos",
+					"userFreeTransactions.setFreeTransfersEnabled",
+					"userFreeTransactions.unblacklistAddress"
 				],
 				"type": "string"
 			},
@@ -2141,6 +2150,109 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"BlockchainGenericAccountList": {
+				"items": {
+					"$ref": "#/components/schemas/BlockchainGenericAccount"
+				},
+				"type": "array"
+			},
+			"UserFreeTransactionsAppAgentBlacklistAddressArgs": {
+				"description": "Arguments required to Blacklist an address by an app agent.\n\n`appAgentId`\n\n`addresses`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"addresses": {
+						"$ref": "#/components/schemas/BlockchainGenericAccountList"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"addresses"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserFreeTransactionsAppAgentUnblacklistAddressArgs": {
+				"description": "Arguments required to Unblacklist an address by an app agent.\n\n`appAgentId`\n\n`addresses`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"addresses": {
+						"$ref": "#/components/schemas/BlockchainGenericAccountList"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"addresses"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserFreeTransactionsBlacklistAddressArgs": {
+				"description": "Arguments required to Blacklist an address.\n\n`addresses`",
+				"properties": {
+					"addresses": {
+						"$ref": "#/components/schemas/BlockchainGenericAccountList"
+					}
+				},
+				"required": [
+					"addresses"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs": {
+				"description": "Arguments required to Clear free transfer infos of appagents.",
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserFreeTransactionsClearAssetLastTransferBlocksArgs": {
+				"description": "Arguments required to Clear last transfers of fingible tokens.",
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserFreeTransactionsClearNftLastTransferBlocksArgs": {
+				"description": "Arguments required to Clear last transfers of NFTs.",
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserFreeTransactionsClearUserFreeTransferInfosArgs": {
+				"description": "Arguments required to Clear free transfer infos of users.",
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserFreeTransactionsSetFreeTransfersEnabledArgs": {
+				"description": "Arguments required to Enable or disable free transfers.\n\n`enabled`",
+				"properties": {
+					"enabled": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					}
+				},
+				"required": [
+					"enabled"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserFreeTransactionsUnblacklistAddressArgs": {
+				"description": "Arguments required to Unblacklist an address.\n\n`addresses`",
+				"properties": {
+					"addresses": {
+						"$ref": "#/components/schemas/BlockchainGenericAccountList"
+					}
+				},
+				"required": [
+					"addresses"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"TransactionArgs": {
 				"anyOf": [
 					{
@@ -2364,6 +2476,33 @@
 					},
 					{
 						"$ref": "#/components/schemas/NftsUnlockItemTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsAppAgentBlacklistAddressArgs"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsAppAgentUnblacklistAddressArgs"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsBlacklistAddressArgs"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsClearAssetLastTransferBlocksArgs"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsClearNftLastTransferBlocksArgs"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsClearUserFreeTransferInfosArgs"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsSetFreeTransfersEnabledArgs"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsUnblacklistAddressArgs"
 					}
 				],
 				"description": "Represents a transaction args"
@@ -4207,6 +4346,231 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"TransactionType.UserFreeTransactionsAppAgentBlacklistAddress": {
+				"enum": [
+					"userFreeTransactions.appAgentBlacklistAddress"
+				],
+				"type": "string"
+			},
+			"UserFreeTransactionsAppAgentBlacklistAddressTx": {
+				"description": "Blacklist an address by an app agent. Only callable by an admin of the app agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsAppAgentBlacklistAddress",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/UserFreeTransactionsAppAgentBlacklistAddressArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress": {
+				"enum": [
+					"userFreeTransactions.appAgentUnblacklistAddress"
+				],
+				"type": "string"
+			},
+			"UserFreeTransactionsAppAgentUnblacklistAddressTx": {
+				"description": "Unblacklist an address by an app agent. Only callable by an admin of the app agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/UserFreeTransactionsAppAgentUnblacklistAddressArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.UserFreeTransactionsBlacklistAddress": {
+				"enum": [
+					"userFreeTransactions.blacklistAddress"
+				],
+				"type": "string"
+			},
+			"UserFreeTransactionsBlacklistAddressTx": {
+				"description": "Blacklist an address. Only callable by the ForceOrigin.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsBlacklistAddress",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/UserFreeTransactionsBlacklistAddressArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos": {
+				"enum": [
+					"userFreeTransactions.clearAppAgentsFreeTransferInfos"
+				],
+				"type": "string"
+			},
+			"UserFreeTransactionsClearAppAgentsFreeTransferInfosTx": {
+				"description": "Clear free transfer infos of appagents. Only callable by the ForceOrigin.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks": {
+				"enum": [
+					"userFreeTransactions.clearAssetLastTransferBlocks"
+				],
+				"type": "string"
+			},
+			"UserFreeTransactionsClearAssetLastTransferBlocksTx": {
+				"description": "Clear last transfers of fingible tokens. Only callable by the ForceOrigin.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/UserFreeTransactionsClearAssetLastTransferBlocksArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.UserFreeTransactionsClearNftLastTransferBlocks": {
+				"enum": [
+					"userFreeTransactions.clearNftLastTransferBlocks"
+				],
+				"type": "string"
+			},
+			"UserFreeTransactionsClearNftLastTransferBlocksTx": {
+				"description": "Clear last transfers of NFTs. Only callable by the ForceOrigin.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsClearNftLastTransferBlocks",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/UserFreeTransactionsClearNftLastTransferBlocksArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.UserFreeTransactionsClearUserFreeTransferInfos": {
+				"enum": [
+					"userFreeTransactions.clearUserFreeTransferInfos"
+				],
+				"type": "string"
+			},
+			"UserFreeTransactionsClearUserFreeTransferInfosTx": {
+				"description": "Clear free transfer infos of users. Only callable by the ForceOrigin.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsClearUserFreeTransferInfos",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/UserFreeTransactionsClearUserFreeTransferInfosArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.UserFreeTransactionsSetFreeTransfersEnabled": {
+				"enum": [
+					"userFreeTransactions.setFreeTransfersEnabled"
+				],
+				"type": "string"
+			},
+			"UserFreeTransactionsSetFreeTransfersEnabledTx": {
+				"description": "Enable or disable free transfers. Only callable by the ForceOrigin.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsSetFreeTransfersEnabled",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/UserFreeTransactionsSetFreeTransfersEnabledArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.UserFreeTransactionsUnblacklistAddress": {
+				"enum": [
+					"userFreeTransactions.unblacklistAddress"
+				],
+				"type": "string"
+			},
+			"UserFreeTransactionsUnblacklistAddressTx": {
+				"description": "Unblacklist an address. Only callable by the ForceOrigin.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.UserFreeTransactionsUnblacklistAddress",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/UserFreeTransactionsUnblacklistAddressArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"TxAction": {
 				"anyOf": [
 					{
@@ -4430,6 +4794,33 @@
 					},
 					{
 						"$ref": "#/components/schemas/NftsUnlockItemTransferTx"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsAppAgentBlacklistAddressTx"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsAppAgentUnblacklistAddressTx"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsBlacklistAddressTx"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsClearAppAgentsFreeTransferInfosTx"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsClearAssetLastTransferBlocksTx"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsClearNftLastTransferBlocksTx"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsClearUserFreeTransferInfosTx"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsSetFreeTransfersEnabledTx"
+					},
+					{
+						"$ref": "#/components/schemas/UserFreeTransactionsUnblacklistAddressTx"
 					}
 				],
 				"description": "Represents a single transaction"

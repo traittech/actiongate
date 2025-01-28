@@ -7,6 +7,7 @@ BlockchainOverridesMap.set('Bytes', 'BlockchainGenericText');
 BlockchainOverridesMap.set('bool', 'BlockchainGenericBoolean');
 BlockchainOverridesMap.set('AccountId32', 'BlockchainGenericAccount');
 BlockchainOverridesMap.set('MultiAddress', 'BlockchainGenericAccountId');
+BlockchainOverridesMap.set('Vec<AccountId32>', 'BlockchainGenericAccountList');
 
 BlockchainOverridesMap.set('TraitPrimitivesPalletAdminsPalletAdminType', 'AdminType');
 BlockchainOverridesMap.set('PalletAppAgentsInputNamedAddressInput', 'NamedAddressInput');

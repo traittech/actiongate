@@ -9,6 +9,7 @@ import type { Args, BaseTxInfo, OptionsWithMeta, TxInfo, TxMethod, UnsignedTrans
 
 import type {
   BlockchainGenericAccount,
+  BlockchainGenericAccountList,
   BlockchainGenericAccountId,
   BlockchainGenericBalance,
   BlockchainGenericBoolean,
@@ -4067,6 +4068,385 @@ export interface NftsUnlockItemTransferAction extends ICTAtomicAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
+ * Arguments required to Blacklist an address by an app agent.
+ *
+ * `appAgentId`
+ *
+ * `addresses`
+ */
+export interface UserFreeTransactionsAppAgentBlacklistAddressArgs extends Args {
+  appAgentId: BlockchainGenericId;
+  addresses: BlockchainGenericAccountList;
+};
+
+const UserFreeTransactionsAppAgentBlacklistAddressArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  addresses: schema.BlockchainGenericAccountListSchema,
+});
+
+/**
+ * @name userFreeTransactionsAppAgentBlacklistAddress
+ * @summary Blacklist an address by an app agent.
+ * @description Only callable by an admin of the app agent.
+ * @param args - The arguments of the transaction. {@link UserFreeTransactionsAppAgentBlacklistAddressArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userFreeTransactionsAppAgentBlacklistAddress(
+  args: UserFreeTransactionsAppAgentBlacklistAddressArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserFreeTransactionsAppAgentBlacklistAddressArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userFreeTransactions', 'appAgentBlacklistAddress', args, info, options);
+}
+
+/**
+ * Blacklist an address by an app agent. Only callable by an admin of the app agent.
+ */
+export interface UserFreeTransactionsAppAgentBlacklistAddressTx extends ITxAction {
+  actionType: TransactionType.UserFreeTransactionsAppAgentBlacklistAddress;
+  arguments: UserFreeTransactionsAppAgentBlacklistAddressArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Unblacklist an address by an app agent.
+ *
+ * `appAgentId`
+ *
+ * `addresses`
+ */
+export interface UserFreeTransactionsAppAgentUnblacklistAddressArgs extends Args {
+  appAgentId: BlockchainGenericId;
+  addresses: BlockchainGenericAccountList;
+};
+
+const UserFreeTransactionsAppAgentUnblacklistAddressArgsSchema = z.object({
+  appAgentId: schema.BlockchainGenericIdSchema,
+  addresses: schema.BlockchainGenericAccountListSchema,
+});
+
+/**
+ * @name userFreeTransactionsAppAgentUnblacklistAddress
+ * @summary Unblacklist an address by an app agent.
+ * @description Only callable by an admin of the app agent.
+ * @param args - The arguments of the transaction. {@link UserFreeTransactionsAppAgentUnblacklistAddressArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userFreeTransactionsAppAgentUnblacklistAddress(
+  args: UserFreeTransactionsAppAgentUnblacklistAddressArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserFreeTransactionsAppAgentUnblacklistAddressArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userFreeTransactions', 'appAgentUnblacklistAddress', args, info, options);
+}
+
+/**
+ * Unblacklist an address by an app agent. Only callable by an admin of the app agent.
+ */
+export interface UserFreeTransactionsAppAgentUnblacklistAddressTx extends ITxAction {
+  actionType: TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress;
+  arguments: UserFreeTransactionsAppAgentUnblacklistAddressArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Blacklist an address.
+ *
+ * `addresses`
+ */
+export interface UserFreeTransactionsBlacklistAddressArgs extends Args {
+  addresses: BlockchainGenericAccountList;
+};
+
+const UserFreeTransactionsBlacklistAddressArgsSchema = z.object({
+  addresses: schema.BlockchainGenericAccountListSchema,
+});
+
+/**
+ * @name userFreeTransactionsBlacklistAddress
+ * @summary Blacklist an address.
+ * @description Only callable by the ForceOrigin.
+ * @param args - The arguments of the transaction. {@link UserFreeTransactionsBlacklistAddressArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userFreeTransactionsBlacklistAddress(
+  args: UserFreeTransactionsBlacklistAddressArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserFreeTransactionsBlacklistAddressArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userFreeTransactions', 'blacklistAddress', args, info, options);
+}
+
+/**
+ * Blacklist an address. Only callable by the ForceOrigin.
+ */
+export interface UserFreeTransactionsBlacklistAddressTx extends ITxAction {
+  actionType: TransactionType.UserFreeTransactionsBlacklistAddress;
+  arguments: UserFreeTransactionsBlacklistAddressArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Clear free transfer infos of appagents.
+ */
+export interface UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs extends Args {
+};
+
+const UserFreeTransactionsClearAppAgentsFreeTransferInfosArgsSchema = z.object({
+});
+
+/**
+ * @name userFreeTransactionsClearAppAgentsFreeTransferInfos
+ * @summary Clear free transfer infos of appagents.
+ * @description Only callable by the ForceOrigin.
+ * @param args - The arguments of the transaction. {@link UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userFreeTransactionsClearAppAgentsFreeTransferInfos(
+  args: UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserFreeTransactionsClearAppAgentsFreeTransferInfosArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userFreeTransactions', 'clearAppAgentsFreeTransferInfos', args, info, options);
+}
+
+/**
+ * Clear free transfer infos of appagents. Only callable by the ForceOrigin.
+ */
+export interface UserFreeTransactionsClearAppAgentsFreeTransferInfosTx extends ITxAction {
+  actionType: TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos;
+  arguments: UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Clear last transfers of fingible tokens.
+ */
+export interface UserFreeTransactionsClearAssetLastTransferBlocksArgs extends Args {
+};
+
+const UserFreeTransactionsClearAssetLastTransferBlocksArgsSchema = z.object({
+});
+
+/**
+ * @name userFreeTransactionsClearAssetLastTransferBlocks
+ * @summary Clear last transfers of fingible tokens.
+ * @description Only callable by the ForceOrigin.
+ * @param args - The arguments of the transaction. {@link UserFreeTransactionsClearAssetLastTransferBlocksArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userFreeTransactionsClearAssetLastTransferBlocks(
+  args: UserFreeTransactionsClearAssetLastTransferBlocksArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserFreeTransactionsClearAssetLastTransferBlocksArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userFreeTransactions', 'clearAssetLastTransferBlocks', args, info, options);
+}
+
+/**
+ * Clear last transfers of fingible tokens. Only callable by the ForceOrigin.
+ */
+export interface UserFreeTransactionsClearAssetLastTransferBlocksTx extends ITxAction {
+  actionType: TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks;
+  arguments: UserFreeTransactionsClearAssetLastTransferBlocksArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Clear last transfers of NFTs.
+ */
+export interface UserFreeTransactionsClearNftLastTransferBlocksArgs extends Args {
+};
+
+const UserFreeTransactionsClearNftLastTransferBlocksArgsSchema = z.object({
+});
+
+/**
+ * @name userFreeTransactionsClearNftLastTransferBlocks
+ * @summary Clear last transfers of NFTs.
+ * @description Only callable by the ForceOrigin.
+ * @param args - The arguments of the transaction. {@link UserFreeTransactionsClearNftLastTransferBlocksArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userFreeTransactionsClearNftLastTransferBlocks(
+  args: UserFreeTransactionsClearNftLastTransferBlocksArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserFreeTransactionsClearNftLastTransferBlocksArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userFreeTransactions', 'clearNftLastTransferBlocks', args, info, options);
+}
+
+/**
+ * Clear last transfers of NFTs. Only callable by the ForceOrigin.
+ */
+export interface UserFreeTransactionsClearNftLastTransferBlocksTx extends ITxAction {
+  actionType: TransactionType.UserFreeTransactionsClearNftLastTransferBlocks;
+  arguments: UserFreeTransactionsClearNftLastTransferBlocksArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Clear free transfer infos of users.
+ */
+export interface UserFreeTransactionsClearUserFreeTransferInfosArgs extends Args {
+};
+
+const UserFreeTransactionsClearUserFreeTransferInfosArgsSchema = z.object({
+});
+
+/**
+ * @name userFreeTransactionsClearUserFreeTransferInfos
+ * @summary Clear free transfer infos of users.
+ * @description Only callable by the ForceOrigin.
+ * @param args - The arguments of the transaction. {@link UserFreeTransactionsClearUserFreeTransferInfosArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userFreeTransactionsClearUserFreeTransferInfos(
+  args: UserFreeTransactionsClearUserFreeTransferInfosArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserFreeTransactionsClearUserFreeTransferInfosArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userFreeTransactions', 'clearUserFreeTransferInfos', args, info, options);
+}
+
+/**
+ * Clear free transfer infos of users. Only callable by the ForceOrigin.
+ */
+export interface UserFreeTransactionsClearUserFreeTransferInfosTx extends ITxAction {
+  actionType: TransactionType.UserFreeTransactionsClearUserFreeTransferInfos;
+  arguments: UserFreeTransactionsClearUserFreeTransferInfosArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Enable or disable free transfers.
+ *
+ * `enabled`
+ */
+export interface UserFreeTransactionsSetFreeTransfersEnabledArgs extends Args {
+  enabled: BlockchainGenericBoolean;
+};
+
+const UserFreeTransactionsSetFreeTransfersEnabledArgsSchema = z.object({
+  enabled: schema.BlockchainGenericBooleanSchema,
+});
+
+/**
+ * @name userFreeTransactionsSetFreeTransfersEnabled
+ * @summary Enable or disable free transfers.
+ * @description Only callable by the ForceOrigin.
+ * @param args - The arguments of the transaction. {@link UserFreeTransactionsSetFreeTransfersEnabledArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userFreeTransactionsSetFreeTransfersEnabled(
+  args: UserFreeTransactionsSetFreeTransfersEnabledArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserFreeTransactionsSetFreeTransfersEnabledArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userFreeTransactions', 'setFreeTransfersEnabled', args, info, options);
+}
+
+/**
+ * Enable or disable free transfers. Only callable by the ForceOrigin.
+ */
+export interface UserFreeTransactionsSetFreeTransfersEnabledTx extends ITxAction {
+  actionType: TransactionType.UserFreeTransactionsSetFreeTransfersEnabled;
+  arguments: UserFreeTransactionsSetFreeTransfersEnabledArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Unblacklist an address.
+ *
+ * `addresses`
+ */
+export interface UserFreeTransactionsUnblacklistAddressArgs extends Args {
+  addresses: BlockchainGenericAccountList;
+};
+
+const UserFreeTransactionsUnblacklistAddressArgsSchema = z.object({
+  addresses: schema.BlockchainGenericAccountListSchema,
+});
+
+/**
+ * @name userFreeTransactionsUnblacklistAddress
+ * @summary Unblacklist an address.
+ * @description Only callable by the ForceOrigin.
+ * @param args - The arguments of the transaction. {@link UserFreeTransactionsUnblacklistAddressArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userFreeTransactionsUnblacklistAddress(
+  args: UserFreeTransactionsUnblacklistAddressArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserFreeTransactionsUnblacklistAddressArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userFreeTransactions', 'unblacklistAddress', args, info, options);
+}
+
+/**
+ * Unblacklist an address. Only callable by the ForceOrigin.
+ */
+export interface UserFreeTransactionsUnblacklistAddressTx extends ITxAction {
+  actionType: TransactionType.UserFreeTransactionsUnblacklistAddress;
+  arguments: UserFreeTransactionsUnblacklistAddressArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
  * Represents a single transaction
  */
 export type TxAction =
@@ -4144,6 +4524,15 @@ export type TxAction =
   | NftsTransferItemTx
   | NftsTransferCollectionOwnershipTx
   | NftsUnlockItemTransferTx
+  | UserFreeTransactionsAppAgentBlacklistAddressTx
+  | UserFreeTransactionsAppAgentUnblacklistAddressTx
+  | UserFreeTransactionsBlacklistAddressTx
+  | UserFreeTransactionsClearAppAgentsFreeTransferInfosTx
+  | UserFreeTransactionsClearAssetLastTransferBlocksTx
+  | UserFreeTransactionsClearNftLastTransferBlocksTx
+  | UserFreeTransactionsClearUserFreeTransferInfosTx
+  | UserFreeTransactionsSetFreeTransfersEnabledTx
+  | UserFreeTransactionsUnblacklistAddressTx
 ;
 
 /**
@@ -4224,6 +4613,15 @@ export type TransactionArgs =
   | NftsTransferItemArgs
   | NftsTransferCollectionOwnershipArgs
   | NftsUnlockItemTransferArgs
+  | UserFreeTransactionsAppAgentBlacklistAddressArgs
+  | UserFreeTransactionsAppAgentUnblacklistAddressArgs
+  | UserFreeTransactionsBlacklistAddressArgs
+  | UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs
+  | UserFreeTransactionsClearAssetLastTransferBlocksArgs
+  | UserFreeTransactionsClearNftLastTransferBlocksArgs
+  | UserFreeTransactionsClearUserFreeTransferInfosArgs
+  | UserFreeTransactionsSetFreeTransfersEnabledArgs
+  | UserFreeTransactionsUnblacklistAddressArgs
 ;
 
 /**
@@ -4619,6 +5017,42 @@ export function buildUnsignedTransaction(
     }
     case TransactionType.NftsUnlockItemTransfer: {
       unsigned = nftsUnlockItemTransfer(args, info, options);
+      break;
+    }
+    case TransactionType.UserFreeTransactionsAppAgentBlacklistAddress: {
+      unsigned = userFreeTransactionsAppAgentBlacklistAddress(args, info, options);
+      break;
+    }
+    case TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress: {
+      unsigned = userFreeTransactionsAppAgentUnblacklistAddress(args, info, options);
+      break;
+    }
+    case TransactionType.UserFreeTransactionsBlacklistAddress: {
+      unsigned = userFreeTransactionsBlacklistAddress(args, info, options);
+      break;
+    }
+    case TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos: {
+      unsigned = userFreeTransactionsClearAppAgentsFreeTransferInfos(args, info, options);
+      break;
+    }
+    case TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks: {
+      unsigned = userFreeTransactionsClearAssetLastTransferBlocks(args, info, options);
+      break;
+    }
+    case TransactionType.UserFreeTransactionsClearNftLastTransferBlocks: {
+      unsigned = userFreeTransactionsClearNftLastTransferBlocks(args, info, options);
+      break;
+    }
+    case TransactionType.UserFreeTransactionsClearUserFreeTransferInfos: {
+      unsigned = userFreeTransactionsClearUserFreeTransferInfos(args, info, options);
+      break;
+    }
+    case TransactionType.UserFreeTransactionsSetFreeTransfersEnabled: {
+      unsigned = userFreeTransactionsSetFreeTransfersEnabled(args, info, options);
+      break;
+    }
+    case TransactionType.UserFreeTransactionsUnblacklistAddress: {
+      unsigned = userFreeTransactionsUnblacklistAddress(args, info, options);
       break;
     }
 

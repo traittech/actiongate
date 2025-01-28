@@ -34,6 +34,8 @@ export type UINT128 = number | string;
  */
 export type BlockchainGenericAccount = string;
 
+export type BlockchainGenericAccountList = BlockchainGenericAccount[];
+
 /**
  * The structure represents the blockchain account address defined by the `id` key.
  */

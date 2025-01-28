@@ -88,6 +88,16 @@ export enum TransactionType {
   NftsUnlockItemTransfer = 'nfts.unlockItemTransfer',
   NftsSetItemMetadata = 'nfts.setMetadata',
   NftsClearItemMetadata = 'nfts.clearMetadata',
+  // UserFreeTransactions Pallet
+  UserFreeTransactionsAppAgentBlacklistAddress = 'userFreeTransactions.appAgentBlacklistAddress',
+  UserFreeTransactionsAppAgentUnblacklistAddress = 'userFreeTransactions.appAgentUnblacklistAddress',
+  UserFreeTransactionsBlacklistAddress = 'userFreeTransactions.blacklistAddress',
+  UserFreeTransactionsClearAppAgentsFreeTransferInfos = 'userFreeTransactions.clearAppAgentsFreeTransferInfos',
+  UserFreeTransactionsClearAssetLastTransferBlocks = 'userFreeTransactions.clearAssetLastTransferBlocks',
+  UserFreeTransactionsClearNftLastTransferBlocks = 'userFreeTransactions.clearNftLastTransferBlocks',
+  UserFreeTransactionsClearUserFreeTransferInfos = 'userFreeTransactions.clearUserFreeTransferInfos',
+  UserFreeTransactionsSetFreeTransfersEnabled = 'userFreeTransactions.setFreeTransfersEnabled',
+  UserFreeTransactionsUnblacklistAddress = 'userFreeTransactions.unblacklistAddress',
 }
 
 export const Actions = [

@@ -58,6 +58,8 @@ export const BlockchainGenericAccountSchema = z
   .length(ss58_LENGTH, { message: `String must be exactly ${ss58_LENGTH} characters long` })
   .refine((v) => isValidSS58(v), { message: 'String is not valid SS58 encoded address' });
 
+export const BlockchainGenericAccountListSchema = z.array(BlockchainGenericAccountSchema);
+
 export const BlockchainGenericAccountIdSchema = z.object({
   id: BlockchainGenericAccountSchema,
 });
