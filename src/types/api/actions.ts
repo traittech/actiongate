@@ -98,6 +98,13 @@ export enum TransactionType {
   UserFreeTransactionsClearUserFreeTransferInfos = 'userFreeTransactions.clearUserFreeTransferInfos',
   UserFreeTransactionsSetFreeTransfersEnabled = 'userFreeTransactions.setFreeTransfersEnabled',
   UserFreeTransactionsUnblacklistAddress = 'userFreeTransactions.unblacklistAddress',
+  // UserTransactions Pallet
+  UserTransactionsSubmitTransferAllBalances = 'userTransactions.submitTransferAllBalances',
+  UserTransactionsSubmitTransferAssets = 'userTransactions.submitTransferAssets',
+  UserTransactionsSubmitTransferBalances = 'userTransactions.submitTransferBalances',
+  UserTransactionsSubmitTransferNfts = 'userTransactions.submitTransferNfts',
+  // UserVerification Pallet
+  UserVerificationSetUserLevel = 'userVerification.setUserLevel'
 }
 
 export const Actions = [

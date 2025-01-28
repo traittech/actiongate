@@ -9,11 +9,16 @@ BlockchainOverridesMap.set('AccountId32', 'BlockchainGenericAccount');
 BlockchainOverridesMap.set('MultiAddress', 'BlockchainGenericAccountId');
 BlockchainOverridesMap.set('Vec<AccountId32>', 'BlockchainGenericAccountList');
 
-BlockchainOverridesMap.set('TraitPrimitivesPalletAdminsPalletAdminType', 'AdminType');
 BlockchainOverridesMap.set('PalletAppAgentsInputNamedAddressInput', 'NamedAddressInput');
+BlockchainOverridesMap.set('PalletNftsDestroyWitness', 'NftWitness');
+
+BlockchainOverridesMap.set('TraitPrimitivesPalletAdminsPalletAdminType', 'AdminType');
 BlockchainOverridesMap.set('TraitPrimitivesAppAgentsDestroyAppAgentDestroyInfo', 'AppAgentDestroyInfo');
 BlockchainOverridesMap.set('TraitPrimitivesAppSubscriptionsAppSubscriptionTierDetails', 'AppSubscriptionTierDetails');
 BlockchainOverridesMap.set('TraitPrimitivesAppSubscriptionsAppPayOnDemandMode', 'AppPayOnDemandMode');
 BlockchainOverridesMap.set('TraitPrimitivesAppTransferFiltersAppDepositPermissions', 'AppDepositPermissions');
+BlockchainOverridesMap.set('TraitPrimitivesUserVerificationUserLevel', 'UserLevel');
 BlockchainOverridesMap.set('Vec<Vec<(TraitPrimitivesAppTransactionsCtActionOrigin,Call)>>', 'CTAtomicActions');
-BlockchainOverridesMap.set('PalletNftsDestroyWitness', 'NftWitness');
+
+
+

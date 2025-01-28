@@ -72,7 +72,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "TransactionType": {
         "dataType": "refEnum",
-        "enums": ["admins.addPalletAdmin","admins.removePalletAdmin","appAgents.addAdmin","appAgents.addAdminToNamedAddressDispatch","appAgents.allowAdminColdWalletDispatch","appAgents.changeHotWallet","appAgents.changeOwnerCancel","appAgents.changeOwnerComplete","appAgents.changeOwnerInit","appAgents.clearAdminDispatchFilter","appAgents.clearAppAgentMetadata","appAgents.completeDestroyAppAgent","createAppAgent","appAgents.disableAdminColdWalletDispatch","appAgents.disableHotWallet","appAgents.enableHotWallet","appAgents.forceCreateAppAgent","appAgents.forceInitiateAppAgentDestroy","appAgents.forceInitiateAppAgentSuspension","appAgents.forceInitiateAppAgentUnsuspension","appAgents.initiateDestroyAppAgent","appAgents.pauseAppAgent","appAgents.processDestroy","appAgents.reactivateAppAgent","appAgents.removeAdmin","appAgents.removeAdminFromNamedAddressDispatch","appAgents.setAdminDispatchFilter","appAgents.setAppAgentMetadata","appAgents.unpauseAppAgent","appResources.setActionPointsBalance","appResources.setClearingPointsBalance","appSubscriptions.createAppSubscriptionTier","appSubscriptions.obsoleteAppSubscriptionTier","appSubscriptions.setAppPayOnDemandMode","appSubscriptions.setAppSubscriptionTier","appTransactions.submitClearingTransaction","appTransactions.forceSubmitClearingTransaction","appTransferChannels.establishTransferChannel","appTransferChannels.removeTransferChannel","appTransferFilters.blockAddressDeposits","appTransferFilters.setAppDepositPermissions","appTransferFilters.unblockAddressDeposits","assets.create","assets.startDestroy","assets.destroyAccounts","assets.destroyApprovals","assets.finishDestroy","assets.mint","assets.burn","assets.transfer","assets.transferKeepAlive","assets.forceTransfer","assets.freeze","assets.thaw","assets.freezeAsset","assets.thawAsset","assets.transferOwnership","assets.setMinBalance","assets.setMetadata","balances.transferAllowDeath","balances.transferKeepAlive","balances.transferAll","nfts.create","nfts.destroy","nfts.transferOwnership","nfts.setAcceptOwnership","nfts.setCollectionMetadata","nfts.clearCollectionMetadata","nfts.mint","nfts.burn","nfts.transfer","nfts.lockItemTransfer","nfts.unlockItemTransfer","nfts.setMetadata","nfts.clearMetadata","userFreeTransactions.appAgentBlacklistAddress","userFreeTransactions.appAgentUnblacklistAddress","userFreeTransactions.blacklistAddress","userFreeTransactions.clearAppAgentsFreeTransferInfos","userFreeTransactions.clearAssetLastTransferBlocks","userFreeTransactions.clearNftLastTransferBlocks","userFreeTransactions.clearUserFreeTransferInfos","userFreeTransactions.setFreeTransfersEnabled","userFreeTransactions.unblacklistAddress"],
+        "enums": ["admins.addPalletAdmin","admins.removePalletAdmin","appAgents.addAdmin","appAgents.addAdminToNamedAddressDispatch","appAgents.allowAdminColdWalletDispatch","appAgents.changeHotWallet","appAgents.changeOwnerCancel","appAgents.changeOwnerComplete","appAgents.changeOwnerInit","appAgents.clearAdminDispatchFilter","appAgents.clearAppAgentMetadata","appAgents.completeDestroyAppAgent","createAppAgent","appAgents.disableAdminColdWalletDispatch","appAgents.disableHotWallet","appAgents.enableHotWallet","appAgents.forceCreateAppAgent","appAgents.forceInitiateAppAgentDestroy","appAgents.forceInitiateAppAgentSuspension","appAgents.forceInitiateAppAgentUnsuspension","appAgents.initiateDestroyAppAgent","appAgents.pauseAppAgent","appAgents.processDestroy","appAgents.reactivateAppAgent","appAgents.removeAdmin","appAgents.removeAdminFromNamedAddressDispatch","appAgents.setAdminDispatchFilter","appAgents.setAppAgentMetadata","appAgents.unpauseAppAgent","appResources.setActionPointsBalance","appResources.setClearingPointsBalance","appSubscriptions.createAppSubscriptionTier","appSubscriptions.obsoleteAppSubscriptionTier","appSubscriptions.setAppPayOnDemandMode","appSubscriptions.setAppSubscriptionTier","appTransactions.submitClearingTransaction","appTransactions.forceSubmitClearingTransaction","appTransferChannels.establishTransferChannel","appTransferChannels.removeTransferChannel","appTransferFilters.blockAddressDeposits","appTransferFilters.setAppDepositPermissions","appTransferFilters.unblockAddressDeposits","assets.create","assets.startDestroy","assets.destroyAccounts","assets.destroyApprovals","assets.finishDestroy","assets.mint","assets.burn","assets.transfer","assets.transferKeepAlive","assets.forceTransfer","assets.freeze","assets.thaw","assets.freezeAsset","assets.thawAsset","assets.transferOwnership","assets.setMinBalance","assets.setMetadata","balances.transferAllowDeath","balances.transferKeepAlive","balances.transferAll","nfts.create","nfts.destroy","nfts.transferOwnership","nfts.setAcceptOwnership","nfts.setCollectionMetadata","nfts.clearCollectionMetadata","nfts.mint","nfts.burn","nfts.transfer","nfts.lockItemTransfer","nfts.unlockItemTransfer","nfts.setMetadata","nfts.clearMetadata","userFreeTransactions.appAgentBlacklistAddress","userFreeTransactions.appAgentUnblacklistAddress","userFreeTransactions.blacklistAddress","userFreeTransactions.clearAppAgentsFreeTransferInfos","userFreeTransactions.clearAssetLastTransferBlocks","userFreeTransactions.clearNftLastTransferBlocks","userFreeTransactions.clearUserFreeTransferInfos","userFreeTransactions.setFreeTransfersEnabled","userFreeTransactions.unblacklistAddress","userTransactions.submitTransferAllBalances","userTransactions.submitTransferAssets","userTransactions.submitTransferBalances","userTransactions.submitTransferNfts","userVerification.setUserLevel"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AdminsRemoveAdminArgs": {
@@ -978,9 +978,61 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserTransactionsSubmitTransferAllBalancesArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "dest": {"ref":"BlockchainGenericAccount","required":true},
+            "keepAlive": {"ref":"BlockchainGenericBoolean","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserTransactionsSubmitTransferAssetsArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"ref":"BlockchainGenericId","required":true},
+            "target": {"ref":"BlockchainGenericAccount","required":true},
+            "amount": {"ref":"BlockchainGenericBalance","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserTransactionsSubmitTransferBalancesArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "dest": {"ref":"BlockchainGenericAccount","required":true},
+            "value": {"ref":"BlockchainGenericBalance","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserTransactionsSubmitTransferNftsArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "collection": {"ref":"BlockchainGenericId","required":true},
+            "item": {"ref":"BlockchainGenericId","required":true},
+            "dest": {"ref":"BlockchainGenericAccount","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserLevel": {
+        "dataType": "refEnum",
+        "enums": ["Anonymous","Registered","Level1","Level2","Level3"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserVerificationSetUserLevelArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "user": {"ref":"BlockchainGenericAccount","required":true},
+            "level": {"ref":"UserLevel","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "TransactionArgs": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"ref":"AdminsAddAdminArgs"},{"ref":"AdminsRemoveAdminArgs"},{"ref":"AppAgentsAddAdminArgs"},{"ref":"AppAgentsAddAdminToNamedAddressArgs"},{"ref":"AppAgentsAllowAdminColdWalletArgs"},{"ref":"AppAgentsChangeHotWalletArgs"},{"ref":"AppAgentsChangeOwnerCancelArgs"},{"ref":"AppAgentsChangeOwnerCompleteArgs"},{"ref":"AppAgentsChangeOwnerInitArgs"},{"ref":"AppAgentsClearAdminDispatchFilterArgs"},{"ref":"AppAgentsClearAppAgentMetadataArgs"},{"ref":"AppAgentsCompleteDestroyAppAgentArgs"},{"ref":"AppAgentsDisableAdminColdWalletDispatchArgs"},{"ref":"AppAgentsDisableHotWalletArgs"},{"ref":"AppAgentsEnableHotWalletArgs"},{"ref":"AppAgentsForceCreateAppAgentArgs"},{"ref":"AppAgentsForceInitiateAppAgentDestroyArgs"},{"ref":"AppAgentsForceInitiateAppAgentSuspensionArgs"},{"ref":"AppAgentsForceInitiateAppAgentUnsuspensionArgs"},{"ref":"AppAgentsInitiateDestroyAppAgentArgs"},{"ref":"AppAgentsPauseAppAgentArgs"},{"ref":"AppAgentsProcessDestroyArgs"},{"ref":"AppAgentsReactivateAppAgentArgs"},{"ref":"AppAgentsRemoveAdminArgs"},{"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchArgs"},{"ref":"AppAgentsSetAdminDispatchFilterArgs"},{"ref":"AppAgentsSetAppAgentMetadataArgs"},{"ref":"AppAgentsUnpauseAppAgentArgs"},{"ref":"AppResourcesSetActionPointsBalanceArgs"},{"ref":"AppResourcesSetClearingPointsBalanceArgs"},{"ref":"AppSubscriptionsCreateAppSubscriptionTierArgs"},{"ref":"AppSubscriptionsObsoleteAppSubscriptionTierArgs"},{"ref":"AppSubscriptionsSetAppPayOnDemandModeArgs"},{"ref":"AppSubscriptionsSetAppSubscriptionTierArgs"},{"ref":"AppTransactionsForceSubmitClearingTransactionArgs"},{"ref":"AppTransactionsSubmitClearingTransactionArgs"},{"ref":"AppTransferChannelsEstablishTransferChannelArgs"},{"ref":"AppTransferChannelsRemoveTransferChannelArgs"},{"ref":"AppTransferFiltersBlockAddressDepositsArgs"},{"ref":"AppTransferFiltersSetAppDepositPermissionsArgs"},{"ref":"AppTransferFiltersUnblockAddressDepositsArgs"},{"ref":"AssetsBurnArgs"},{"ref":"AssetsCreateArgs"},{"ref":"AssetsDestroyAccountsArgs"},{"ref":"AssetsDestroyApprovalsArgs"},{"ref":"AssetsFinishDestroyArgs"},{"ref":"AssetsForceTransferArgs"},{"ref":"AssetsFreezeAccountArgs"},{"ref":"AssetsFreezeAssetArgs"},{"ref":"AssetsMintArgs"},{"ref":"AssetsSetMetadataArgs"},{"ref":"AssetsSetMinBalanceArgs"},{"ref":"AssetsStartDestroyArgs"},{"ref":"AssetsThawAccountArgs"},{"ref":"AssetsThawAssetArgs"},{"ref":"AssetsTransferArgs"},{"ref":"AssetsTransferKeepAliveArgs"},{"ref":"AssetsTransferOwnershipArgs"},{"ref":"BalancesTransferAllArgs"},{"ref":"BalancesTransferAllowDeathArgs"},{"ref":"BalancesTransferKeepAliveArgs"},{"ref":"NftsBurnItemArgs"},{"ref":"NftsClearCollectionMetadataArgs"},{"ref":"NftsClearItemMetadataArgs"},{"ref":"NftsCreateCollectionArgs"},{"ref":"NftsDestroyCollectionArgs"},{"ref":"NftsLockItemTransferArgs"},{"ref":"NftsMintItemArgs"},{"ref":"NftsAcceptCollectionOwnershipArgs"},{"ref":"NftsSetCollectionMetadataArgs"},{"ref":"NftsSetItemMetadataArgs"},{"ref":"NftsTransferItemArgs"},{"ref":"NftsTransferCollectionOwnershipArgs"},{"ref":"NftsUnlockItemTransferArgs"},{"ref":"UserFreeTransactionsAppAgentBlacklistAddressArgs"},{"ref":"UserFreeTransactionsAppAgentUnblacklistAddressArgs"},{"ref":"UserFreeTransactionsBlacklistAddressArgs"},{"ref":"UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs"},{"ref":"UserFreeTransactionsClearAssetLastTransferBlocksArgs"},{"ref":"UserFreeTransactionsClearNftLastTransferBlocksArgs"},{"ref":"UserFreeTransactionsClearUserFreeTransferInfosArgs"},{"ref":"UserFreeTransactionsSetFreeTransfersEnabledArgs"},{"ref":"UserFreeTransactionsUnblacklistAddressArgs"}],"validators":{}},
+        "type": {"dataType":"union","subSchemas":[{"ref":"AdminsAddAdminArgs"},{"ref":"AdminsRemoveAdminArgs"},{"ref":"AppAgentsAddAdminArgs"},{"ref":"AppAgentsAddAdminToNamedAddressArgs"},{"ref":"AppAgentsAllowAdminColdWalletArgs"},{"ref":"AppAgentsChangeHotWalletArgs"},{"ref":"AppAgentsChangeOwnerCancelArgs"},{"ref":"AppAgentsChangeOwnerCompleteArgs"},{"ref":"AppAgentsChangeOwnerInitArgs"},{"ref":"AppAgentsClearAdminDispatchFilterArgs"},{"ref":"AppAgentsClearAppAgentMetadataArgs"},{"ref":"AppAgentsCompleteDestroyAppAgentArgs"},{"ref":"AppAgentsDisableAdminColdWalletDispatchArgs"},{"ref":"AppAgentsDisableHotWalletArgs"},{"ref":"AppAgentsEnableHotWalletArgs"},{"ref":"AppAgentsForceCreateAppAgentArgs"},{"ref":"AppAgentsForceInitiateAppAgentDestroyArgs"},{"ref":"AppAgentsForceInitiateAppAgentSuspensionArgs"},{"ref":"AppAgentsForceInitiateAppAgentUnsuspensionArgs"},{"ref":"AppAgentsInitiateDestroyAppAgentArgs"},{"ref":"AppAgentsPauseAppAgentArgs"},{"ref":"AppAgentsProcessDestroyArgs"},{"ref":"AppAgentsReactivateAppAgentArgs"},{"ref":"AppAgentsRemoveAdminArgs"},{"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchArgs"},{"ref":"AppAgentsSetAdminDispatchFilterArgs"},{"ref":"AppAgentsSetAppAgentMetadataArgs"},{"ref":"AppAgentsUnpauseAppAgentArgs"},{"ref":"AppResourcesSetActionPointsBalanceArgs"},{"ref":"AppResourcesSetClearingPointsBalanceArgs"},{"ref":"AppSubscriptionsCreateAppSubscriptionTierArgs"},{"ref":"AppSubscriptionsObsoleteAppSubscriptionTierArgs"},{"ref":"AppSubscriptionsSetAppPayOnDemandModeArgs"},{"ref":"AppSubscriptionsSetAppSubscriptionTierArgs"},{"ref":"AppTransactionsForceSubmitClearingTransactionArgs"},{"ref":"AppTransactionsSubmitClearingTransactionArgs"},{"ref":"AppTransferChannelsEstablishTransferChannelArgs"},{"ref":"AppTransferChannelsRemoveTransferChannelArgs"},{"ref":"AppTransferFiltersBlockAddressDepositsArgs"},{"ref":"AppTransferFiltersSetAppDepositPermissionsArgs"},{"ref":"AppTransferFiltersUnblockAddressDepositsArgs"},{"ref":"AssetsBurnArgs"},{"ref":"AssetsCreateArgs"},{"ref":"AssetsDestroyAccountsArgs"},{"ref":"AssetsDestroyApprovalsArgs"},{"ref":"AssetsFinishDestroyArgs"},{"ref":"AssetsForceTransferArgs"},{"ref":"AssetsFreezeAccountArgs"},{"ref":"AssetsFreezeAssetArgs"},{"ref":"AssetsMintArgs"},{"ref":"AssetsSetMetadataArgs"},{"ref":"AssetsSetMinBalanceArgs"},{"ref":"AssetsStartDestroyArgs"},{"ref":"AssetsThawAccountArgs"},{"ref":"AssetsThawAssetArgs"},{"ref":"AssetsTransferArgs"},{"ref":"AssetsTransferKeepAliveArgs"},{"ref":"AssetsTransferOwnershipArgs"},{"ref":"BalancesTransferAllArgs"},{"ref":"BalancesTransferAllowDeathArgs"},{"ref":"BalancesTransferKeepAliveArgs"},{"ref":"NftsBurnItemArgs"},{"ref":"NftsClearCollectionMetadataArgs"},{"ref":"NftsClearItemMetadataArgs"},{"ref":"NftsCreateCollectionArgs"},{"ref":"NftsDestroyCollectionArgs"},{"ref":"NftsLockItemTransferArgs"},{"ref":"NftsMintItemArgs"},{"ref":"NftsAcceptCollectionOwnershipArgs"},{"ref":"NftsSetCollectionMetadataArgs"},{"ref":"NftsSetItemMetadataArgs"},{"ref":"NftsTransferItemArgs"},{"ref":"NftsTransferCollectionOwnershipArgs"},{"ref":"NftsUnlockItemTransferArgs"},{"ref":"UserFreeTransactionsAppAgentBlacklistAddressArgs"},{"ref":"UserFreeTransactionsAppAgentUnblacklistAddressArgs"},{"ref":"UserFreeTransactionsBlacklistAddressArgs"},{"ref":"UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs"},{"ref":"UserFreeTransactionsClearAssetLastTransferBlocksArgs"},{"ref":"UserFreeTransactionsClearNftLastTransferBlocksArgs"},{"ref":"UserFreeTransactionsClearUserFreeTransferInfosArgs"},{"ref":"UserFreeTransactionsSetFreeTransfersEnabledArgs"},{"ref":"UserFreeTransactionsUnblacklistAddressArgs"},{"ref":"UserTransactionsSubmitTransferAllBalancesArgs"},{"ref":"UserTransactionsSubmitTransferAssetsArgs"},{"ref":"UserTransactionsSubmitTransferBalancesArgs"},{"ref":"UserTransactionsSubmitTransferNftsArgs"},{"ref":"UserVerificationSetUserLevelArgs"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AdminsAddAdminTx": {
@@ -2140,9 +2192,79 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TransactionType.UserTransactionsSubmitTransferAllBalances": {
+        "dataType": "refEnum",
+        "enums": ["userTransactions.submitTransferAllBalances"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserTransactionsSubmitTransferAllBalancesTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"TransactionType.UserTransactionsSubmitTransferAllBalances","required":true},
+            "arguments": {"ref":"UserTransactionsSubmitTransferAllBalancesArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TransactionType.UserTransactionsSubmitTransferAssets": {
+        "dataType": "refEnum",
+        "enums": ["userTransactions.submitTransferAssets"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserTransactionsSubmitTransferAssetsTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"TransactionType.UserTransactionsSubmitTransferAssets","required":true},
+            "arguments": {"ref":"UserTransactionsSubmitTransferAssetsArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TransactionType.UserTransactionsSubmitTransferBalances": {
+        "dataType": "refEnum",
+        "enums": ["userTransactions.submitTransferBalances"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserTransactionsSubmitTransferBalancesTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"TransactionType.UserTransactionsSubmitTransferBalances","required":true},
+            "arguments": {"ref":"UserTransactionsSubmitTransferBalancesArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TransactionType.UserTransactionsSubmitTransferNfts": {
+        "dataType": "refEnum",
+        "enums": ["userTransactions.submitTransferNfts"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserTransactionsSubmitTransferNftsTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"TransactionType.UserTransactionsSubmitTransferNfts","required":true},
+            "arguments": {"ref":"UserTransactionsSubmitTransferNftsArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TransactionType.UserVerificationSetUserLevel": {
+        "dataType": "refEnum",
+        "enums": ["userVerification.setUserLevel"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UserVerificationSetUserLevelTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"TransactionType.UserVerificationSetUserLevel","required":true},
+            "arguments": {"ref":"UserVerificationSetUserLevelArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "TxAction": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"ref":"AdminsAddAdminTx"},{"ref":"AdminsRemoveAdminTx"},{"ref":"AppAgentsAddAdminTx"},{"ref":"AppAgentsAddAdminToNamedAddressTx"},{"ref":"AppAgentsAllowAdminColdWalletTx"},{"ref":"AppAgentsChangeHotWalletTx"},{"ref":"AppAgentsChangeOwnerCancelTx"},{"ref":"AppAgentsChangeOwnerCompleteTx"},{"ref":"AppAgentsChangeOwnerInitTx"},{"ref":"AppAgentsClearAdminDispatchFilterTx"},{"ref":"AppAgentsClearAppAgentMetadataTx"},{"ref":"AppAgentsCompleteDestroyAppAgentTx"},{"ref":"AppAgentsDisableAdminColdWalletDispatchTx"},{"ref":"AppAgentsDisableHotWalletTx"},{"ref":"AppAgentsEnableHotWalletTx"},{"ref":"AppAgentsForceCreateAppAgentTx"},{"ref":"AppAgentsForceInitiateAppAgentDestroyTx"},{"ref":"AppAgentsForceInitiateAppAgentSuspensionTx"},{"ref":"AppAgentsForceInitiateAppAgentUnsuspensionTx"},{"ref":"AppAgentsInitiateDestroyAppAgentTx"},{"ref":"AppAgentsPauseAppAgentTx"},{"ref":"AppAgentsProcessDestroyTx"},{"ref":"AppAgentsReactivateAppAgentTx"},{"ref":"AppAgentsRemoveAdminTx"},{"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchTx"},{"ref":"AppAgentsSetAdminDispatchFilterTx"},{"ref":"AppAgentsSetAppAgentMetadataTx"},{"ref":"AppAgentsUnpauseAppAgentTx"},{"ref":"AppResourcesSetActionPointsBalanceTx"},{"ref":"AppResourcesSetClearingPointsBalanceTx"},{"ref":"AppSubscriptionsCreateAppSubscriptionTierTx"},{"ref":"AppSubscriptionsObsoleteAppSubscriptionTierTx"},{"ref":"AppSubscriptionsSetAppPayOnDemandModeTx"},{"ref":"AppSubscriptionsSetAppSubscriptionTierTx"},{"ref":"AppTransactionsForceSubmitClearingTransactionTx"},{"ref":"AppTransactionsSubmitClearingTransactionTx"},{"ref":"AppTransferChannelsEstablishTransferChannelTx"},{"ref":"AppTransferChannelsRemoveTransferChannelTx"},{"ref":"AppTransferFiltersBlockAddressDepositsTx"},{"ref":"AppTransferFiltersSetAppDepositPermissionsTx"},{"ref":"AppTransferFiltersUnblockAddressDepositsTx"},{"ref":"AssetsBurnTx"},{"ref":"AssetsCreateTx"},{"ref":"AssetsDestroyAccountsTx"},{"ref":"AssetsDestroyApprovalsTx"},{"ref":"AssetsFinishDestroyTx"},{"ref":"AssetsForceTransferTx"},{"ref":"AssetsFreezeAccountTx"},{"ref":"AssetsFreezeAssetTx"},{"ref":"AssetsMintTx"},{"ref":"AssetsSetMetadataTx"},{"ref":"AssetsSetMinBalanceTx"},{"ref":"AssetsStartDestroyTx"},{"ref":"AssetsThawAccountTx"},{"ref":"AssetsThawAssetTx"},{"ref":"AssetsTransferTx"},{"ref":"AssetsTransferKeepAliveTx"},{"ref":"AssetsTransferOwnershipTx"},{"ref":"BalancesTransferAllTx"},{"ref":"BalancesTransferAllowDeathTx"},{"ref":"BalancesTransferKeepAliveTx"},{"ref":"NftsBurnItemTx"},{"ref":"NftsClearCollectionMetadataTx"},{"ref":"NftsClearItemMetadataTx"},{"ref":"NftsCreateCollectionTx"},{"ref":"NftsDestroyCollectionTx"},{"ref":"NftsLockItemTransferTx"},{"ref":"NftsMintItemTx"},{"ref":"NftsAcceptCollectionOwnershipTx"},{"ref":"NftsSetCollectionMetadataTx"},{"ref":"NftsSetItemMetadataTx"},{"ref":"NftsTransferItemTx"},{"ref":"NftsTransferCollectionOwnershipTx"},{"ref":"NftsUnlockItemTransferTx"},{"ref":"UserFreeTransactionsAppAgentBlacklistAddressTx"},{"ref":"UserFreeTransactionsAppAgentUnblacklistAddressTx"},{"ref":"UserFreeTransactionsBlacklistAddressTx"},{"ref":"UserFreeTransactionsClearAppAgentsFreeTransferInfosTx"},{"ref":"UserFreeTransactionsClearAssetLastTransferBlocksTx"},{"ref":"UserFreeTransactionsClearNftLastTransferBlocksTx"},{"ref":"UserFreeTransactionsClearUserFreeTransferInfosTx"},{"ref":"UserFreeTransactionsSetFreeTransfersEnabledTx"},{"ref":"UserFreeTransactionsUnblacklistAddressTx"}],"validators":{}},
+        "type": {"dataType":"union","subSchemas":[{"ref":"AdminsAddAdminTx"},{"ref":"AdminsRemoveAdminTx"},{"ref":"AppAgentsAddAdminTx"},{"ref":"AppAgentsAddAdminToNamedAddressTx"},{"ref":"AppAgentsAllowAdminColdWalletTx"},{"ref":"AppAgentsChangeHotWalletTx"},{"ref":"AppAgentsChangeOwnerCancelTx"},{"ref":"AppAgentsChangeOwnerCompleteTx"},{"ref":"AppAgentsChangeOwnerInitTx"},{"ref":"AppAgentsClearAdminDispatchFilterTx"},{"ref":"AppAgentsClearAppAgentMetadataTx"},{"ref":"AppAgentsCompleteDestroyAppAgentTx"},{"ref":"AppAgentsDisableAdminColdWalletDispatchTx"},{"ref":"AppAgentsDisableHotWalletTx"},{"ref":"AppAgentsEnableHotWalletTx"},{"ref":"AppAgentsForceCreateAppAgentTx"},{"ref":"AppAgentsForceInitiateAppAgentDestroyTx"},{"ref":"AppAgentsForceInitiateAppAgentSuspensionTx"},{"ref":"AppAgentsForceInitiateAppAgentUnsuspensionTx"},{"ref":"AppAgentsInitiateDestroyAppAgentTx"},{"ref":"AppAgentsPauseAppAgentTx"},{"ref":"AppAgentsProcessDestroyTx"},{"ref":"AppAgentsReactivateAppAgentTx"},{"ref":"AppAgentsRemoveAdminTx"},{"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchTx"},{"ref":"AppAgentsSetAdminDispatchFilterTx"},{"ref":"AppAgentsSetAppAgentMetadataTx"},{"ref":"AppAgentsUnpauseAppAgentTx"},{"ref":"AppResourcesSetActionPointsBalanceTx"},{"ref":"AppResourcesSetClearingPointsBalanceTx"},{"ref":"AppSubscriptionsCreateAppSubscriptionTierTx"},{"ref":"AppSubscriptionsObsoleteAppSubscriptionTierTx"},{"ref":"AppSubscriptionsSetAppPayOnDemandModeTx"},{"ref":"AppSubscriptionsSetAppSubscriptionTierTx"},{"ref":"AppTransactionsForceSubmitClearingTransactionTx"},{"ref":"AppTransactionsSubmitClearingTransactionTx"},{"ref":"AppTransferChannelsEstablishTransferChannelTx"},{"ref":"AppTransferChannelsRemoveTransferChannelTx"},{"ref":"AppTransferFiltersBlockAddressDepositsTx"},{"ref":"AppTransferFiltersSetAppDepositPermissionsTx"},{"ref":"AppTransferFiltersUnblockAddressDepositsTx"},{"ref":"AssetsBurnTx"},{"ref":"AssetsCreateTx"},{"ref":"AssetsDestroyAccountsTx"},{"ref":"AssetsDestroyApprovalsTx"},{"ref":"AssetsFinishDestroyTx"},{"ref":"AssetsForceTransferTx"},{"ref":"AssetsFreezeAccountTx"},{"ref":"AssetsFreezeAssetTx"},{"ref":"AssetsMintTx"},{"ref":"AssetsSetMetadataTx"},{"ref":"AssetsSetMinBalanceTx"},{"ref":"AssetsStartDestroyTx"},{"ref":"AssetsThawAccountTx"},{"ref":"AssetsThawAssetTx"},{"ref":"AssetsTransferTx"},{"ref":"AssetsTransferKeepAliveTx"},{"ref":"AssetsTransferOwnershipTx"},{"ref":"BalancesTransferAllTx"},{"ref":"BalancesTransferAllowDeathTx"},{"ref":"BalancesTransferKeepAliveTx"},{"ref":"NftsBurnItemTx"},{"ref":"NftsClearCollectionMetadataTx"},{"ref":"NftsClearItemMetadataTx"},{"ref":"NftsCreateCollectionTx"},{"ref":"NftsDestroyCollectionTx"},{"ref":"NftsLockItemTransferTx"},{"ref":"NftsMintItemTx"},{"ref":"NftsAcceptCollectionOwnershipTx"},{"ref":"NftsSetCollectionMetadataTx"},{"ref":"NftsSetItemMetadataTx"},{"ref":"NftsTransferItemTx"},{"ref":"NftsTransferCollectionOwnershipTx"},{"ref":"NftsUnlockItemTransferTx"},{"ref":"UserFreeTransactionsAppAgentBlacklistAddressTx"},{"ref":"UserFreeTransactionsAppAgentUnblacklistAddressTx"},{"ref":"UserFreeTransactionsBlacklistAddressTx"},{"ref":"UserFreeTransactionsClearAppAgentsFreeTransferInfosTx"},{"ref":"UserFreeTransactionsClearAssetLastTransferBlocksTx"},{"ref":"UserFreeTransactionsClearNftLastTransferBlocksTx"},{"ref":"UserFreeTransactionsClearUserFreeTransferInfosTx"},{"ref":"UserFreeTransactionsSetFreeTransfersEnabledTx"},{"ref":"UserFreeTransactionsUnblacklistAddressTx"},{"ref":"UserTransactionsSubmitTransferAllBalancesTx"},{"ref":"UserTransactionsSubmitTransferAssetsTx"},{"ref":"UserTransactionsSubmitTransferBalancesTx"},{"ref":"UserTransactionsSubmitTransferNftsTx"},{"ref":"UserVerificationSetUserLevelTx"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "TransactionPayload": {

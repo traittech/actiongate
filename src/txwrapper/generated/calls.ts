@@ -30,6 +30,7 @@ import type {
   AppPayOnDemandMode,
   NamedAddressInput,
   NftWitness,
+  UserLevel,
 } from '../../types/api/trait';
 
 import { TransactionType } from '../../types/api/actions';
@@ -4447,6 +4448,245 @@ export interface UserFreeTransactionsUnblacklistAddressTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
+ * Arguments required to Submits a transfer_all call using the given parameter
+ *
+ * `dest`
+ *
+ * `keepAlive`
+ */
+export interface UserTransactionsSubmitTransferAllBalancesArgs extends Args {
+  dest: BlockchainGenericAccount;
+  keepAlive: BlockchainGenericBoolean;
+};
+
+const UserTransactionsSubmitTransferAllBalancesArgsSchema = z.object({
+  dest: schema.BlockchainGenericAccountSchema,
+  keepAlive: schema.BlockchainGenericBooleanSchema,
+});
+
+/**
+ * @name userTransactionsSubmitTransferAllBalances
+ * @summary Submits a transfer_all call using the given parameter
+ * @description Works similar to `submit_transfer_balances`
+ * @param args - The arguments of the transaction. {@link UserTransactionsSubmitTransferAllBalancesArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userTransactionsSubmitTransferAllBalances(
+  args: UserTransactionsSubmitTransferAllBalancesArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserTransactionsSubmitTransferAllBalancesArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userTransactions', 'submitTransferAllBalances', args, info, options);
+}
+
+/**
+ * Submits a transfer_all call using the given parameter Works similar to `submit_transfer_balances`
+ */
+export interface UserTransactionsSubmitTransferAllBalancesTx extends ITxAction {
+  actionType: TransactionType.UserTransactionsSubmitTransferAllBalances;
+  arguments: UserTransactionsSubmitTransferAllBalancesArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Submits a transfer of assets using the provided runtime call.
+ *
+ * `id`
+ *
+ * `target`
+ *
+ * `amount`
+ */
+export interface UserTransactionsSubmitTransferAssetsArgs extends Args {
+  id: BlockchainGenericId;
+  target: BlockchainGenericAccount;
+  amount: BlockchainGenericBalance;
+};
+
+const UserTransactionsSubmitTransferAssetsArgsSchema = z.object({
+  id: schema.BlockchainGenericIdSchema,
+  target: schema.BlockchainGenericAccountSchema,
+  amount: schema.BlockchainGenericBalanceSchema,
+});
+
+/**
+ * @name userTransactionsSubmitTransferAssets
+ * @summary Submits a transfer of assets using the provided runtime call.
+ * @description This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified assets. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `id`: The asset ID to be transferred. * `target`: The target account ID. * `amount`: The amount of assets to transfer. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:
+ * @param args - The arguments of the transaction. {@link UserTransactionsSubmitTransferAssetsArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userTransactionsSubmitTransferAssets(
+  args: UserTransactionsSubmitTransferAssetsArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserTransactionsSubmitTransferAssetsArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userTransactions', 'submitTransferAssets', args, info, options);
+}
+
+/**
+ * Submits a transfer of assets using the provided runtime call. This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified assets. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `id`: The asset ID to be transferred. * `target`: The target account ID. * `amount`: The amount of assets to transfer. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:
+ */
+export interface UserTransactionsSubmitTransferAssetsTx extends ITxAction {
+  actionType: TransactionType.UserTransactionsSubmitTransferAssets;
+  arguments: UserTransactionsSubmitTransferAssetsArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Submits a transfer using the provided runtime call.
+ *
+ * `dest`
+ *
+ * `value`
+ */
+export interface UserTransactionsSubmitTransferBalancesArgs extends Args {
+  dest: BlockchainGenericAccount;
+  value: BlockchainGenericBalance;
+};
+
+const UserTransactionsSubmitTransferBalancesArgsSchema = z.object({
+  dest: schema.BlockchainGenericAccountSchema,
+  value: schema.BlockchainGenericBalanceSchema,
+});
+
+/**
+ * @name userTransactionsSubmitTransferBalances
+ * @summary Submits a transfer using the provided runtime call.
+ * @description # Steps 1. Verifies the origin and retrieves the caller's account ID. 2. Checks if the call is allowed by the specified filters. 3. If the call is for a target recipient:
+ * @param args - The arguments of the transaction. {@link UserTransactionsSubmitTransferBalancesArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userTransactionsSubmitTransferBalances(
+  args: UserTransactionsSubmitTransferBalancesArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserTransactionsSubmitTransferBalancesArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userTransactions', 'submitTransferBalances', args, info, options);
+}
+
+/**
+ * Submits a transfer using the provided runtime call. # Steps 1. Verifies the origin and retrieves the caller's account ID. 2. Checks if the call is allowed by the specified filters. 3. If the call is for a target recipient:
+ */
+export interface UserTransactionsSubmitTransferBalancesTx extends ITxAction {
+  actionType: TransactionType.UserTransactionsSubmitTransferBalances;
+  arguments: UserTransactionsSubmitTransferBalancesArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ * Arguments required to Submits a transfer of NFTs using the provided runtime call.
+ *
+ * `collection`
+ *
+ * `item`
+ *
+ * `dest`
+ */
+export interface UserTransactionsSubmitTransferNftsArgs extends Args {
+  collection: BlockchainGenericId;
+  item: BlockchainGenericId;
+  dest: BlockchainGenericAccount;
+};
+
+const UserTransactionsSubmitTransferNftsArgsSchema = z.object({
+  collection: schema.BlockchainGenericIdSchema,
+  item: schema.BlockchainGenericIdSchema,
+  dest: schema.BlockchainGenericAccountSchema,
+});
+
+/**
+ * @name userTransactionsSubmitTransferNfts
+ * @summary Submits a transfer of NFTs using the provided runtime call.
+ * @description This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified NFT. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `collection`: The collection ID of the NFT. * `item`: The item ID of the NFT. * `dest`: The destination account ID. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:
+ * @param args - The arguments of the transaction. {@link UserTransactionsSubmitTransferNftsArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userTransactionsSubmitTransferNfts(
+  args: UserTransactionsSubmitTransferNftsArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserTransactionsSubmitTransferNftsArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userTransactions', 'submitTransferNfts', args, info, options);
+}
+
+/**
+ * Submits a transfer of NFTs using the provided runtime call. This function performs the following steps: 1. Verifies the origin and retrieves the caller's account ID. 2. Builds a runtime call for transferring the specified NFT. 3. Processes the call. # Arguments * `origin`: The runtime origin. * `collection`: The collection ID of the NFT. * `item`: The item ID of the NFT. * `dest`: The destination account ID. # Returns Returns a `DispatchResultWithPostInfo` indicating whether the transfer was successful. # Errors Returns an error if:
+ */
+export interface UserTransactionsSubmitTransferNftsTx extends ITxAction {
+  actionType: TransactionType.UserTransactionsSubmitTransferNfts;
+  arguments: UserTransactionsSubmitTransferNftsArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
+ *
+ * `user`
+ *
+ * `level`
+ */
+export interface UserVerificationSetUserLevelArgs extends Args {
+  user: BlockchainGenericAccount;
+  level: UserLevel;
+};
+
+const UserVerificationSetUserLevelArgsSchema = z.object({
+  user: schema.BlockchainGenericAccountSchema,
+  level: schema.UserLevelSchema,
+});
+
+/**
+ * @name userVerificationSetUserLevel
+ * @param args - The arguments of the transaction. {@link UserVerificationSetUserLevelArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function userVerificationSetUserLevel(
+  args: UserVerificationSetUserLevelArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  UserVerificationSetUserLevelArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('userVerification', 'setUserLevel', args, info, options);
+}
+
+/**
+ */
+export interface UserVerificationSetUserLevelTx extends ITxAction {
+  actionType: TransactionType.UserVerificationSetUserLevel;
+  arguments: UserVerificationSetUserLevelArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
  * Represents a single transaction
  */
 export type TxAction =
@@ -4533,6 +4773,11 @@ export type TxAction =
   | UserFreeTransactionsClearUserFreeTransferInfosTx
   | UserFreeTransactionsSetFreeTransfersEnabledTx
   | UserFreeTransactionsUnblacklistAddressTx
+  | UserTransactionsSubmitTransferAllBalancesTx
+  | UserTransactionsSubmitTransferAssetsTx
+  | UserTransactionsSubmitTransferBalancesTx
+  | UserTransactionsSubmitTransferNftsTx
+  | UserVerificationSetUserLevelTx
 ;
 
 /**
@@ -4622,6 +4867,11 @@ export type TransactionArgs =
   | UserFreeTransactionsClearUserFreeTransferInfosArgs
   | UserFreeTransactionsSetFreeTransfersEnabledArgs
   | UserFreeTransactionsUnblacklistAddressArgs
+  | UserTransactionsSubmitTransferAllBalancesArgs
+  | UserTransactionsSubmitTransferAssetsArgs
+  | UserTransactionsSubmitTransferBalancesArgs
+  | UserTransactionsSubmitTransferNftsArgs
+  | UserVerificationSetUserLevelArgs
 ;
 
 /**
@@ -5053,6 +5303,26 @@ export function buildUnsignedTransaction(
     }
     case TransactionType.UserFreeTransactionsUnblacklistAddress: {
       unsigned = userFreeTransactionsUnblacklistAddress(args, info, options);
+      break;
+    }
+    case TransactionType.UserTransactionsSubmitTransferAllBalances: {
+      unsigned = userTransactionsSubmitTransferAllBalances(args, info, options);
+      break;
+    }
+    case TransactionType.UserTransactionsSubmitTransferAssets: {
+      unsigned = userTransactionsSubmitTransferAssets(args, info, options);
+      break;
+    }
+    case TransactionType.UserTransactionsSubmitTransferBalances: {
+      unsigned = userTransactionsSubmitTransferBalances(args, info, options);
+      break;
+    }
+    case TransactionType.UserTransactionsSubmitTransferNfts: {
+      unsigned = userTransactionsSubmitTransferNfts(args, info, options);
+      break;
+    }
+    case TransactionType.UserVerificationSetUserLevel: {
+      unsigned = userVerificationSetUserLevel(args, info, options);
       break;
     }
 
