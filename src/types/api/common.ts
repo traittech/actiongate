@@ -14,15 +14,18 @@ export type UINT32 = number;
  * @minimum 0
  * @maximum 18446744073709551615
  */
-export type UINT64 = number | string;
+export type UINT64 = number;
 
 /**
- * A numeric `integer` value represented with `number` or `string` type
- *
- * @minimum 0
- * @maximum 340282366920938463463374607431768211455
+ * A numeric `integer` value represented with `string` type
+ * 
+ * minimum: `0`
+ * 
+ * maximum: `340282366920938463463374607431768211455`
+ * @isString
+ * @pattern ^\d{1,39}$
  */
-export type UINT128 = number | string;
+export type UINT128 = string;
 
 /**
  * The account address on the blockchain.

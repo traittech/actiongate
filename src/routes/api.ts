@@ -342,7 +342,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UINT64": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"long"},{"dataType":"string"}],"validators":{"minimum":{"value":0},"maximum":{"value":18446744073709552000}}},
+        "type": {"dataType":"long","validators":{"minimum":{"value":0},"maximum":{"value":18446744073709552000}}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AppAgentsSetAdminDispatchFilterArgs": {
@@ -379,7 +379,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UINT128": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"double"},{"dataType":"string"}],"validators":{"minimum":{"value":0},"maximum":{"value":3.402823669209385e+38}}},
+        "type": {"dataType":"string","validators":{"pattern":{"value":"^\\d{1,39}$"}}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BlockchainGenericBalance": {

@@ -833,15 +833,8 @@
 				"additionalProperties": false
 			},
 			"UINT64": {
-				"anyOf": [
-					{
-						"type": "integer",
-						"format": "int64"
-					},
-					{
-						"type": "string"
-					}
-				],
+				"type": "integer",
+				"format": "int64",
 				"description": "A numeric `integer` value represented with `number` or `string` type",
 				"minimum": 0,
 				"maximum": 18446744073709552000
@@ -907,18 +900,9 @@
 				"additionalProperties": false
 			},
 			"UINT128": {
-				"anyOf": [
-					{
-						"type": "number",
-						"format": "double"
-					},
-					{
-						"type": "string"
-					}
-				],
-				"description": "A numeric `integer` value represented with `number` or `string` type",
-				"minimum": 0,
-				"maximum": 3.402823669209385e+38
+				"type": "string",
+				"description": "A numeric `integer` value represented with `string` type\n`minimum`: `0`\n`maximum`: `340282366920938463463374607431768211455`",
+				"pattern": "^\\d{1,39}$"
 			},
 			"BlockchainGenericBalance": {
 				"$ref": "#/components/schemas/UINT128",
