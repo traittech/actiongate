@@ -60,25 +60,30 @@ jest.mock('../adapter/datagate', () => ({
 
 // Tests
 describe('Clearing Transaction Builder', () => {
-  const aliceMnemonic = 'bottom drive obey lake curtain smoke basket hold race lonely fit walk//Alice';
-  const aliceAddress = 'ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s';
+  // appAgentOwnerAddress = 'ttqRZiq3D4jbPMCDzsWV5PmdXCH3rEtChCkfgfA6CXYQQyYKb';
+  const appAgentOwnerPhrase = 'street firm worth record skin taste legend lobster magnet stove drive side';
+  const appAgentAddress = 'ttrornXohYufjszoigJBX4VpvhGQv5VkTPDEzbu6sUiTR6R4y';
+  const appAgentId = 1018;
 
   const keyring = new Keyring({ ss58Format: 5335, type: 'ed25519' });
-  const aliceKeyringPair = keyring.addFromMnemonic(aliceMnemonic);
+  const appAgentKeyringPair = keyring.addFromMnemonic(appAgentOwnerPhrase);
+  const signatory = 'ADMIN_1';
 
   describe('Balances Pallet', () => {
     it('should build balances_transferKeepAlive transaction', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.BalancesTransferKeepAlive,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  dest: aliceAddress,
+                  dest: {
+                    id: appAgentAddress,
+                  },
                   value: 1000,
                 },
               },
@@ -87,22 +92,24 @@ describe('Clearing Transaction Builder', () => {
         ],
       };
 
-      const result = await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      const result = await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       expect(result).toHaveLength(66);
     });
 
     it('should build balances_transfer transaction', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.BalancesTransferAllowDeath,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  dest: aliceAddress,
+                  dest: {
+                    id: appAgentAddress
+                  },
                   value: 1000,
                 },
               },
@@ -111,7 +118,7 @@ describe('Clearing Transaction Builder', () => {
         ],
       };
 
-      const result = await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      const result = await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       expect(result).toHaveLength(66);
     });
   });
@@ -119,14 +126,14 @@ describe('Clearing Transaction Builder', () => {
   describe('NFT Pallet', () => {
     it('should build nft_mintCollection transaction', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.NftsCreateCollection,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   metadata:
                     'https://trait-wallet-demo-account.trait.tech/game-a/nft-collection-a-a/nft-token-a-a-c/nft-token-a-a-c.json',
@@ -139,24 +146,26 @@ describe('Clearing Transaction Builder', () => {
         ],
       };
 
-      const result = await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      const result = await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       expect(result).toHaveLength(66);
     });
 
     it('should build nft_mintItem transaction', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.NftsMintItem,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   collection: 1,
                   item: 1,
-                  mintTo: aliceAddress,
+                  mintTo: {
+                    id: appAgentAddress,
+                  },
                 },
               },
             ],
@@ -164,7 +173,7 @@ describe('Clearing Transaction Builder', () => {
         ],
       };
 
-      const result = await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      const result = await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       expect(result).toHaveLength(66);
     });
   });
@@ -172,14 +181,14 @@ describe('Clearing Transaction Builder', () => {
   describe('Assets Pallet', () => {
     it('should build assets_create transaction', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.AssetsCreate,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   minBalance: 1,
                 },
@@ -189,23 +198,25 @@ describe('Clearing Transaction Builder', () => {
         ],
       };
 
-      const result = await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      const result = await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       expect(result).toHaveLength(66);
     });
 
     it('should build assets_transfer transaction', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.AssetsTransfer,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   id: 1,
-                  target: aliceAddress,
+                  target: {
+                    id: appAgentAddress,
+                  },
                   amount: 1000,
                 },
               },
@@ -214,7 +225,7 @@ describe('Clearing Transaction Builder', () => {
         ],
       };
 
-      const result = await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+      const result = await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       expect(result).toHaveLength(66);
     });
   });
@@ -222,16 +233,16 @@ describe('Clearing Transaction Builder', () => {
   describe('Error Handling', () => {
     it('should throw error for unsupported action type', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: 'unknown_action' as TransactionType,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  dest: aliceAddress,
+                  dest: appAgentAddress,
                   value: 1000,
                 },
               } as CTAtomicAction,
@@ -240,7 +251,7 @@ describe('Clearing Transaction Builder', () => {
         ],
       };
 
-      await expect(createClearingTransactionAndBroadcast(aliceKeyringPair, payload)).rejects.toThrow(
+      await expect(createClearingTransactionAndBroadcast(appAgentKeyringPair, payload)).rejects.toThrow(
         'Unsupported transaction type: unknown_action'
       );
     });
@@ -249,14 +260,14 @@ describe('Clearing Transaction Builder', () => {
   describe('Clearing transaction action args validation errors', () => {
     it('Action args: Numbers with overflow (u32)', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.NftsLockItemTransfer,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   collection: Number(u32_MIN - BigInt(1)), // error: fewer than min
                   item: Number(u32_MAX + BigInt(1)), // error: greater than max
@@ -268,7 +279,7 @@ describe('Clearing Transaction Builder', () => {
       };
 
       try {
-        await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+        await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       } catch (error) {
         const errors = JSON.parse((error as any).message) as ZodIssue[];
         const collectionError = errors.find((e) => e.path[0] === 'collection');
@@ -281,16 +292,18 @@ describe('Clearing Transaction Builder', () => {
 
     it('Action args: Invalid address length & Number with overflow (u128)', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.BalancesTransferKeepAlive,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  dest: '1231231', // invalid length
+                  dest: {
+                    id: '12312321', // invalid length
+                  },
                   value: (u128_MAX + BigInt(1)).toString(), // error: greater than max
                 },
               } as CTAtomicAction,
@@ -300,7 +313,7 @@ describe('Clearing Transaction Builder', () => {
       };
 
       try {
-        await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+        await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       } catch (error) {
         const errors = JSON.parse((error as any).message) as ZodIssue[];
         const destErrors = errors.filter((e) => e.path[0] === 'dest');
@@ -313,16 +326,18 @@ describe('Clearing Transaction Builder', () => {
 
     it('Action args: Invalid ss58 address', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.BalancesTransferAll,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  dest: aliceAddress.slice(0, -1).concat('z'), // invalid encoded ss58
+                  dest: {
+                    id: appAgentAddress.slice(0, -1).concat('z'), // invalid encoded ss58
+                  },
                   keepAlive: true,
                 },
               } as CTAtomicAction,
@@ -332,7 +347,7 @@ describe('Clearing Transaction Builder', () => {
       };
 
       try {
-        await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+        await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       } catch (error) {
         const errors = JSON.parse((error as any).message) as ZodIssue[];
         const destErrors = errors.filter((e) => e.path[0] === 'dest');
@@ -343,14 +358,14 @@ describe('Clearing Transaction Builder', () => {
 
     it('Action args: Invalid metadata text length', async () => {
       const payload: ClearingTransactionPayload = {
-        signatory: 'ADMIN_1',
-        appAgentId: 1,
+        signatory,
+        appAgentId,
         atomics: [
           {
             actions: [
               {
                 actionType: TransactionType.AssetsSetMetadata,
-                origin: { AppAgentAddress: aliceAddress },
+                origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   id: 1,
                   data: 's'.repeat(257), // text overflow
@@ -362,7 +377,7 @@ describe('Clearing Transaction Builder', () => {
       };
 
       try {
-        await createClearingTransactionAndBroadcast(aliceKeyringPair, payload);
+        await createClearingTransactionAndBroadcast(appAgentKeyringPair, payload);
       } catch (error) {
         const errors = JSON.parse((error as any).message) as ZodIssue[];
         const dataErrors = errors.filter((e) => e.path[0] === 'data');
