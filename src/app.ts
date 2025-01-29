@@ -1,10 +1,14 @@
-import express from 'express';
+import express, { json, urlencoded } from 'express';
 
+import errorHandler from './middleware/errorHandler';
 import { router } from './routes';
 
 export const app = express();
 
 // Middleware
-app.use(express.json());
+app.use(urlencoded({ extended: true }));
+app.use(json());
 // Router
 app.use('/', router);
+// Error handler
+app.use(errorHandler);

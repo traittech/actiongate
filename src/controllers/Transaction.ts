@@ -2,10 +2,9 @@ import { Body, Controller, Post, Route, Response, Tags } from 'tsoa';
 
 import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
-import { loadConfig, getPrivateKeyById } from '../functions/config';
+import { loadConfig, getSignatoryPrivateKey } from '../functions/config';
 import { getKeyringPairByPrivateKey } from '../functions/keyring';
 import logger from '../functions/logger';
-import { TransactionPayloadSchema, ClearingTransactionPayloadSchema } from '../validator/schemas';
 
 import type { ClearingTransactionPayload } from '../types/api/clearingTransaction';
 import type {
@@ -42,27 +41,6 @@ export class SubmitTransactionsController extends Controller {
   }
 
   /**
-   * @description Helper to return error transaction response
-   * @param code HTTP error code
-   * @param description Text description of error
-   * @param error `Error` runtime object
-   * @returns Transaction response {@link TransactionErrorResponse}
-   */
-  protected onError(code: number, description: string, error?: any): TransactionErrorResponse {
-    logger.error(description, error);
-
-    this.setStatus(code);
-
-    const response: TransactionErrorResponse = {
-      status: 'failed',
-      error_code: code,
-      error_description: description,
-    };
-
-    return response;
-  }
-
-  /**
    * @summary Submit a transaction
    * @description Submits a transaction and returns the transaction hash.
    * @param payload Payload for submitting a transaction
@@ -74,40 +52,23 @@ export class SubmitTransactionsController extends Controller {
     status: 'TransactionSubmitted',
     tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7',
   })
-  @Response<TransactionErrorResponse>(400, 'Bad Request', {
+  @Response<TransactionErrorResponse>(422, 'Unprocessable Entity', {
     status: 'failed',
-    error_code: 400,
-    error_description: 'Missing required fields in payload',
-  })
-  @Response<TransactionErrorResponse>(404, 'Not Found', {
-    status: 'failed',
-    error_code: 404,
-    error_description: 'Signatory not found',
+    error_code: 422,
+    error_description: 'Validation Error',
   })
   @Response<TransactionErrorResponse>(500, 'Internal Server Error', {
     status: 'failed',
     error_code: 500,
-    error_description: 'Error creating and broadcasting transaction',
+    error_description: 'Internal Server Error',
   })
   public async submitTransaction(@Body() payload: TransactionPayload): Promise<TransactionResponse> {
     try {
       logger.info('>> submitTransaction endpoint');
 
-      // Validate required fields (basic validation)
-      try {
-        TransactionPayloadSchema.parse(payload);
-      } catch (error) {
-        return this.onError(400, 'Missing or invalid required fields in payload', error);
-      }
-
       // Retrieve the private key for the signatory
       logger.info('Retrieving private key for the signatory...');
-
-      const privateKey = getPrivateKeyById(this.config, payload.signatory);
-
-      if (!privateKey) {
-        return this.onError(404, 'Signatory not found');
-      }
+      const privateKey = getSignatoryPrivateKey(this.config, payload.signatory);
 
       const callerKeyPair = getKeyringPairByPrivateKey(privateKey);
 
@@ -118,7 +79,8 @@ export class SubmitTransactionsController extends Controller {
 
       return this.onSuccess(signedTx);
     } catch (error) {
-      return this.onError(500, 'Error creating and broadcasting transaction', error);
+      logger.error('Error creating and broadcasting transaction:', error);
+      throw error;
     }
   }
 
@@ -134,40 +96,23 @@ export class SubmitTransactionsController extends Controller {
     status: 'TransactionSubmitted',
     tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7',
   })
-  @Response<TransactionErrorResponse>(400, 'Bad Request', {
+  @Response<TransactionErrorResponse>(422, 'Unprocessable Entity', {
     status: 'failed',
-    error_code: 400,
-    error_description: 'Missing required fields in payload',
-  })
-  @Response<TransactionErrorResponse>(404, 'Not Found', {
-    status: 'failed',
-    error_code: 404,
-    error_description: 'Signatory not found',
+    error_code: 422,
+    error_description: 'Validation Error',
   })
   @Response<TransactionErrorResponse>(500, 'Internal Server Error', {
     status: 'failed',
     error_code: 500,
-    error_description: 'Error creating and broadcasting clearing transaction',
+    error_description: 'Internal Server Error',
   })
   public async submitClearingTransaction(@Body() payload: ClearingTransactionPayload): Promise<TransactionResponse> {
     try {
       logger.info('>> submitClearingTransaction endpoint');
 
-      // Validate required fields (basic validation)
-      try {
-        ClearingTransactionPayloadSchema.parse(payload);
-      } catch (error) {
-        return this.onError(400, 'Missing or invalid required fields in payload', error);
-      }
-
       // Retrieve the private key for the signatory
-      logger.debug('Retrieving private key for the signatory...');
-
-      const privateKey = getPrivateKeyById(this.config, payload.signatory);
-
-      if (!privateKey) {
-        return this.onError(404, 'Signatory not found');
-      }
+      logger.info('Retrieving private key for the signatory...');
+      const privateKey = getSignatoryPrivateKey(this.config, payload.signatory);
 
       const callerKeyPair = getKeyringPairByPrivateKey(privateKey);
 
@@ -178,7 +123,8 @@ export class SubmitTransactionsController extends Controller {
 
       return this.onSuccess(signedTx);
     } catch (error) {
-      return this.onError(500, 'Error creating and broadcasting clearing transaction', error);
+      logger.error('Error creating and broadcasting clearing transaction:', error);
+      throw error;
     }
   }
 }

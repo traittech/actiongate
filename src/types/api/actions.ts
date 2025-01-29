@@ -104,7 +104,7 @@ export enum TransactionType {
   UserTransactionsSubmitTransferBalances = 'userTransactions.submitTransferBalances',
   UserTransactionsSubmitTransferNfts = 'userTransactions.submitTransferNfts',
   // UserVerification Pallet
-  UserVerificationSetUserLevel = 'userVerification.setUserLevel'
+  UserVerificationSetUserLevel = 'userVerification.setUserLevel',
 }
 
 export const Actions = [

@@ -38,9 +38,6 @@ function validateActionOrigin(actionOrigin: CTActionOrigin, appAgentId: Blockcha
     actionAppAgentId = decodeAddress(actionOrigin.NamedAddress).appAgentId;
   }
 
-  console.info('actionAppAgentId', actionAppAgentId);
-  console.log('actionOrigin', JSON.stringify(actionOrigin));
-
   if (actionAppAgentId !== appAgentId) {
     throw new Error(
       `Atomic action 'appAgentId' does not match tx payload 'appAgentId'. Action 'appAgentId': ${actionAppAgentId}; Payload 'appAgentId': ${appAgentId}`

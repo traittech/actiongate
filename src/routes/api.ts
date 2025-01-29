@@ -27,6 +27,7 @@ const models: TsoaRoute.Models = {
             "status": {"dataType":"string","required":true},
             "error_code": {"dataType":"double"},
             "error_description": {"dataType":"string"},
+            "error_details": {"dataType":"any"},
         },
         "additionalProperties": false,
     },

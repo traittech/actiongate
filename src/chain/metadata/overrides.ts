@@ -19,6 +19,3 @@ BlockchainOverridesMap.set('TraitPrimitivesAppSubscriptionsAppPayOnDemandMode', 
 BlockchainOverridesMap.set('TraitPrimitivesAppTransferFiltersAppDepositPermissions', 'AppDepositPermissions');
 BlockchainOverridesMap.set('TraitPrimitivesUserVerificationUserLevel', 'UserLevel');
 BlockchainOverridesMap.set('Vec<Vec<(TraitPrimitivesAppTransactionsCtActionOrigin,Call)>>', 'CTAtomicActions');
-
-
-

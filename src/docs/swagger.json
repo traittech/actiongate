@@ -39,6 +39,9 @@
 					"error_description": {
 						"type": "string",
 						"description": "A description of the error, if the transaction failed."
+					},
+					"error_details": {
+						"description": "A details of the error"
 					}
 				},
 				"required": [
@@ -81,7 +84,7 @@
 			"BlockchainGenericAccount": {
 				"type": "string",
 				"example": "ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s",
-				"description": "The account address on the blockchain.\nTypically, it is a string of alphanumeric characters, encoded in SS58 format.",
+				"description": "The account address on the blockchain.\nIt is a string of alphanumeric characters, encoded in SS58 format, using `5335` prefix.",
 				"minLength": 49,
 				"maxLength": 49
 			},
@@ -6281,8 +6284,8 @@
 							}
 						}
 					},
-					"400": {
-						"description": "Bad Request",
+					"422": {
+						"description": "Unprocessable Entity",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -6292,27 +6295,8 @@
 									"Example 1": {
 										"value": {
 											"status": "failed",
-											"error_code": 400,
-											"error_description": "Missing required fields in payload"
-										}
-									}
-								}
-							}
-						}
-					},
-					"404": {
-						"description": "Not Found",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/TransactionErrorResponse"
-								},
-								"examples": {
-									"Example 1": {
-										"value": {
-											"status": "failed",
-											"error_code": 404,
-											"error_description": "Signatory not found"
+											"error_code": 422,
+											"error_description": "Validation Error"
 										}
 									}
 								}
@@ -6331,7 +6315,7 @@
 										"value": {
 											"status": "failed",
 											"error_code": 500,
-											"error_description": "Error creating and broadcasting transaction"
+											"error_description": "Internal Server Error"
 										}
 									}
 								}
@@ -6373,8 +6357,8 @@
 							}
 						}
 					},
-					"400": {
-						"description": "Bad Request",
+					"422": {
+						"description": "Unprocessable Entity",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -6384,27 +6368,8 @@
 									"Example 1": {
 										"value": {
 											"status": "failed",
-											"error_code": 400,
-											"error_description": "Missing required fields in payload"
-										}
-									}
-								}
-							}
-						}
-					},
-					"404": {
-						"description": "Not Found",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/TransactionErrorResponse"
-								},
-								"examples": {
-									"Example 1": {
-										"value": {
-											"status": "failed",
-											"error_code": 404,
-											"error_description": "Signatory not found"
+											"error_code": 422,
+											"error_description": "Validation Error"
 										}
 									}
 								}
@@ -6423,7 +6388,7 @@
 										"value": {
 											"status": "failed",
 											"error_code": 500,
-											"error_description": "Error creating and broadcasting clearing transaction"
+											"error_description": "Internal Server Error"
 										}
 									}
 								}

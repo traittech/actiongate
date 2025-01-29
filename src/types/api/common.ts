@@ -26,7 +26,7 @@ export type UINT128 = number | string;
 
 /**
  * The account address on the blockchain.
- * Typically, it is a string of alphanumeric characters, encoded in SS58 format.
+ * It is a string of alphanumeric characters, encoded in SS58 format, using `5335` prefix.
  * @isString
  * @minLength 49
  * @maxLength 49
@@ -40,7 +40,7 @@ export type BlockchainGenericAccountList = BlockchainGenericAccount[];
  * The structure represents the blockchain account address defined by the `id` key.
  */
 export type BlockchainGenericAccountId = {
-  id: BlockchainGenericAccount
+  id: BlockchainGenericAccount;
 };
 
 /**

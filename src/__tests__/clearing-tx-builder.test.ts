@@ -108,7 +108,7 @@ describe('Clearing Transaction Builder', () => {
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   dest: {
-                    id: appAgentAddress
+                    id: appAgentAddress,
                   },
                   value: 1000,
                 },

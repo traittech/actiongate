@@ -11,10 +11,12 @@ export function loadConfig(): Config {
 }
 
 // Function to get the private_key by id
-export function getPrivateKeyById(config: Config, id: string): string {
-  const privateKey = config.admin_keys.find((key) => key.id === id);
+export function getSignatoryPrivateKey(config: Config, signatory: string): string {
+  const privateKey = config.admin_keys.find((key) => key.id === signatory);
+
   if (!privateKey) {
-    throw new Error(`Private key with id '${id}' does not exist`);
+    throw new Error(`Signatory '${signatory}' private key does not exist`);
   }
+
   return privateKey.private_key;
 }

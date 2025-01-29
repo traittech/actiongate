@@ -3,7 +3,7 @@ import type {
   BlockchainGenericAccount,
   BlockchainGenericId,
   BlockchainGenericBoolean,
-  UINT32
+  UINT32,
 } from '../common';
 
 export type NamedAddressInput = { Address: BlockchainGenericAccount } | { Name: BlockchainAddressName };
@@ -16,9 +16,9 @@ type FungibleDestroyDetail = {
 
 /**
  * Tuple `[UINT32, UINT32]`
- * 
+ *
  * [WARNING]: `openapi v3` doesn't support `tuple` type.
- */ 
+ */
 type NonFungibleDestroyDetail = UINT32[];
 
 type OwnFungibleDestroyDetail = {

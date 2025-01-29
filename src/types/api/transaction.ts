@@ -45,6 +45,11 @@ export interface TransactionErrorResponse extends BaseTransactionResponse {
    * A description of the error, if the transaction failed.
    */
   error_description?: string;
+
+  /**
+   * A details of the error
+   */
+  error_details?: any;
 }
 
 export interface TransactionSuccessResponse extends BaseTransactionResponse {

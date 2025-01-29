@@ -34,7 +34,7 @@ export async function createSignedTransactionAndBroadcast(
     const { registry, baseTxInfo, options } = await generateTxMetadata(pair);
 
     // Build the unsigned transaction
-    logger.info(`Building unsigned transaction for: ${actionType}, with args: ${args}`);
+    logger.info(`Building unsigned transaction for: ${actionType}, with args: ${JSON.stringify(args)}`);
     const unsigned = buildUnsignedTransaction(payload.tx, baseTxInfo, options);
 
     // Construct the signing payload from the unsigned transaction
@@ -69,6 +69,6 @@ export async function createSignedTransactionAndBroadcast(
     return expectedTxHash;
   } catch (error) {
     logger.error('Error creating and broadcasting signed transaction:', error);
-    throw new Error('Failed to create and broadcast signed transaction');
+    throw error;
   }
 }
