@@ -23,7 +23,7 @@ const txService = new TransactionService(config.datagate_api.uri);
 
 function validateActionOrigin(actionOrigin: CTActionOrigin, appAgentId: BlockchainGenericId): void {
   // nothing to do
-  if ('TransactionalAddressId ' in actionOrigin) return;
+  if ('TransactionalAddressId' in actionOrigin) return;
   if ('NamedAddressName' in actionOrigin) return;
 
   let actionAppAgentId: number | null = null;
