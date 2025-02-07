@@ -17,7 +17,7 @@ export enum TransactionType {
   AppAgentsClearAdminDispatchFilter = 'appAgents.clearAdminDispatchFilter',
   AppAgentsClearAppAgentMetadata = 'appAgents.clearAppAgentMetadata',
   AppAgentsCompleteDestroyAppAgent = 'appAgents.completeDestroyAppAgent',
-  AppAgentsCreateAppAgent = 'createAppAgent',
+  AppAgentsCreateAppAgent = 'appAgents.createAppAgent',
   AppAgentsDisableAdminColdWalletDispatch = 'appAgents.disableAdminColdWalletDispatch',
   AppAgentsDisableHotWallet = 'appAgents.disableHotWallet',
   AppAgentsEnableHotWallet = 'appAgents.enableHotWallet',

@@ -638,6 +638,44 @@ export interface AppAgentsCompleteDestroyAppAgentTx extends ITxAction {
 /*---------------------------------------------------------------------------------- */
 
 /**
+ */
+export interface AppAgentsCreateAppAgentArgs extends Args {
+};
+
+const AppAgentsCreateAppAgentArgsSchema = z.object({
+});
+
+/**
+ * @name appAgentsCreateAppAgent
+ * @summary Creates a new App Agent.
+ * @description This function is used to create a new App Agent with the specified owner. It generates the necessary addresses, reserves the required deposit, creates a cold address, and adds the App Agent details to storage. Additionally, it evaluates the subscription payment, and creates a transfer filter record for the App Agent. Parameters:
+ * @param args - The arguments of the transaction. {@link AppAgentsCreateAppAgentArgs}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
+ */
+export function appAgentsCreateAppAgent(
+  args: AppAgentsCreateAppAgentArgs,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  // throws error if validation is failed
+  AppAgentsCreateAppAgentArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('appAgents', 'createAppAgent', args, info, options);
+}
+
+/**
+ * Creates a new App Agent.This function is used to create a new App Agent with the specified owner. It generates the necessary addresses, reserves the required deposit, creates a cold address, and adds the App Agent details to storage. Additionally, it evaluates the subscription payment, and creates a transfer filter record for the App Agent. Parameters:
+ */
+export interface AppAgentsCreateAppAgentTx extends ITxAction {
+  actionType: TransactionType.AppAgentsCreateAppAgent;
+  arguments: AppAgentsCreateAppAgentArgs;
+};
+
+/*---------------------------------------------------------------------------------- */
+
+/**
  * `appAgentId` - The identifier of the App Agent.
  *
  * `admin` - The admin address to be removed from the list.
@@ -4614,6 +4652,7 @@ export type TxAction =
   | AppAgentsClearAdminDispatchFilterTx
   | AppAgentsClearAppAgentMetadataTx
   | AppAgentsCompleteDestroyAppAgentTx
+  | AppAgentsCreateAppAgentTx
   | AppAgentsDisableAdminColdWalletDispatchTx
   | AppAgentsDisableHotWalletTx
   | AppAgentsEnableHotWalletTx
@@ -4708,6 +4747,7 @@ export type TransactionArgs =
   | AppAgentsClearAdminDispatchFilterArgs
   | AppAgentsClearAppAgentMetadataArgs
   | AppAgentsCompleteDestroyAppAgentArgs
+  | AppAgentsCreateAppAgentArgs
   | AppAgentsDisableAdminColdWalletDispatchArgs
   | AppAgentsDisableHotWalletArgs
   | AppAgentsEnableHotWalletArgs
@@ -4918,6 +4958,9 @@ export function buildUnsignedTransaction(
       }
       case TransactionType.AppAgentsCompleteDestroyAppAgent: {
         return appAgentsCompleteDestroyAppAgent(args, info, options);
+      }
+      case TransactionType.AppAgentsCreateAppAgent: {
+        return appAgentsCreateAppAgent(args, info, options);
       }
       case TransactionType.AppAgentsDisableAdminColdWalletDispatch: {
         return appAgentsDisableAdminColdWalletDispatch(args, info, options);

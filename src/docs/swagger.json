@@ -156,7 +156,7 @@
 					"appAgents.clearAdminDispatchFilter",
 					"appAgents.clearAppAgentMetadata",
 					"appAgents.completeDestroyAppAgent",
-					"createAppAgent",
+					"appAgents.createAppAgent",
 					"appAgents.disableAdminColdWalletDispatch",
 					"appAgents.disableHotWallet",
 					"appAgents.enableHotWallet",
@@ -622,6 +622,11 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"AppAgentsCreateAppAgentArgs": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
 			"AppAgentsDisableAdminColdWalletDispatchArgs": {
 				"description": "`appAgentId` - The identifier of the App Agent.\n\n`admin` - The admin address to be removed from the list.\n\n`coldWallet`",
 				"properties": {
@@ -901,7 +906,7 @@
 			},
 			"UINT128": {
 				"type": "string",
-				"description": "A numeric `integer` value represented with `string` type\n`minimum`: `0`\n`maximum`: `340282366920938463463374607431768211455`",
+				"description": "A numeric `integer` value represented with `string` type\n\nminimum: `0`\n\nmaximum: `340282366920938463463374607431768211455`",
 				"pattern": "^\\d{1,39}$"
 			},
 			"BlockchainGenericBalance": {
@@ -2383,6 +2388,9 @@
 						"$ref": "#/components/schemas/AppAgentsCompleteDestroyAppAgentArgs"
 					},
 					{
+						"$ref": "#/components/schemas/AppAgentsCreateAppAgentArgs"
+					},
+					{
 						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchArgs"
 					},
 					{
@@ -2895,6 +2903,31 @@
 					},
 					"arguments": {
 						"$ref": "#/components/schemas/AppAgentsCompleteDestroyAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionType.AppAgentsCreateAppAgent": {
+				"enum": [
+					"appAgents.createAppAgent"
+				],
+				"type": "string"
+			},
+			"AppAgentsCreateAppAgentTx": {
+				"description": "Creates a new App Agent.This function is used to create a new App Agent with the specified owner. It generates the necessary addresses, reserves the required deposit, creates a cold address, and adds the App Agent details to storage. Additionally, it evaluates the subscription payment, and creates a transfer filter record for the App Agent. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/TransactionType.AppAgentsCreateAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsCreateAppAgentArgs",
 						"description": "The arguments for the transaction."
 					}
 				},
@@ -4838,6 +4871,9 @@
 					},
 					{
 						"$ref": "#/components/schemas/AppAgentsCompleteDestroyAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsCreateAppAgentTx"
 					},
 					{
 						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchTx"
