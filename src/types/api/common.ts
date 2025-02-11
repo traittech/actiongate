@@ -18,9 +18,9 @@ export type UINT64 = number;
 
 /**
  * A numeric `integer` value represented with `string` type
- * 
+ *
  * minimum: `0`
- * 
+ *
  * maximum: `340282366920938463463374607431768211455`
  * @isString
  * @pattern ^\d{1,39}$

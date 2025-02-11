@@ -82,7 +82,7 @@ Detailed API documentation is available in [API Documentation](api_docs/API.md)
 ```
 URL: /submit/transaction
 Method: POST
-Middleware: checkApiKey, enforceHttps (in production)
+Middleware: enforceHttps (in production)
 Description: Submits a transaction.
 Controller: SubmitTransactionsController.submitTransaction
 ```
@@ -92,7 +92,7 @@ Controller: SubmitTransactionsController.submitTransaction
 ```
 URL: /submit/clearing_transaction
 Method: POST
-Middleware: checkApiKey, enforceHttps (in production)
+Middleware: enforceHttps (in production)
 Description: Submits a clearing transaction using typed actions.
 Controller: SubmitTransactionsController.submitClearingTransaction
 ```

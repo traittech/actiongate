@@ -22,6 +22,7 @@
     }
   },
   "routes": {
+    "authenticationModule": "src/routes/auth.ts",
     "routesDir": "src/routes",
     "routesFileName": "api.ts"
   }

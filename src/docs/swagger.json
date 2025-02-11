@@ -4397,7 +4397,11 @@
 				"tags": [
 					"Transactions"
 				],
-				"security": [],
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"description": "Payload for submitting a transaction",
@@ -4470,7 +4474,11 @@
 				"tags": [
 					"Transactions"
 				],
-				"security": [],
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
 				"parameters": [],
 				"requestBody": {
 					"description": "Payload for submitting a clearing transaction",

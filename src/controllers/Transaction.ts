@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Route, Response, Tags } from 'tsoa';
+import { Body, Controller, Post, Route, Response, Security, Tags } from 'tsoa';
 
 import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import { createSignedTransactionAndBroadcast } from '../functions/builders/tx-builder';
@@ -47,7 +47,6 @@ export class SubmitTransactionsController extends Controller {
    * @returns Submitted transaction hash
    */
   @Post('/transaction')
-  @Tags('Transactions')
   @Response<TransactionSuccessResponse>(200, 'Success', {
     status: 'TransactionSubmitted',
     tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7',
@@ -62,6 +61,8 @@ export class SubmitTransactionsController extends Controller {
     error_code: 500,
     error_description: 'Internal Server Error',
   })
+  @Security('ApiKeyAuth')
+  @Tags('Transactions')
   public async submitTransaction(@Body() payload: TransactionPayload): Promise<TransactionResponse> {
     try {
       logger.info('>> submitTransaction endpoint');
@@ -91,7 +92,6 @@ export class SubmitTransactionsController extends Controller {
    * @returns Submitted transaction hash
    */
   @Post('/clearing_transaction')
-  @Tags('Transactions')
   @Response<TransactionSuccessResponse>(200, 'Success', {
     status: 'TransactionSubmitted',
     tx_hash: '0xe77b9882786d10a803919033a92a4b59dc1671edb86f81203c273a5c30b44ea7',
@@ -106,6 +106,8 @@ export class SubmitTransactionsController extends Controller {
     error_code: 500,
     error_description: 'Internal Server Error',
   })
+  @Security('ApiKeyAuth')
+  @Tags('Transactions')
   public async submitClearingTransaction(@Body() payload: ClearingTransactionPayload): Promise<TransactionResponse> {
     try {
       logger.info('>> submitClearingTransaction endpoint');
