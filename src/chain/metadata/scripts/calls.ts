@@ -105,8 +105,8 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
 
   const { lookup, pallets } = metadata.asLatest;
 
-  const ctAtomicActions: Array<{ function: string; actionName: string }> = [];
-  const txActions: Array<{ function: string; actionName: string }> = [];
+  const ctAtomicActions: Array<string> = [];
+  const txActions: Array<string> = [];
 
   const modules = pallets
     .reduce<any[]>((acc, pallet) => {
@@ -133,19 +133,13 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
           const isAllowedAction = !!AllowedActions.find((action) => action === actionValue);
 
           if (AllowedActions.find((action) => action === actionValue)) {
-            ctAtomicActions.push({
-              function: functionName,
-              actionName,
-            });
+            ctAtomicActions.push(actionName);
           }
 
           const isAllowedTx = !!AllowedTxs.find((action) => action === actionValue);
 
           if (isAllowedTx) {
-            txActions.push({
-              function: functionName,
-              actionName,
-            });
+            txActions.push(actionName);
           }
 
           const typesInfo = fields.map(({ name, type, typeName }, index) => {

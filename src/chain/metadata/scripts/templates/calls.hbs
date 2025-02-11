@@ -5,9 +5,9 @@
 
 import { z } from 'zod';
 
-import { defineMethod } from '@substrate/txwrapper-core';
+import { constructUnsignedTransaction } from '../construct';
 
-import type { Args, BaseTxInfo, OptionsWithMeta, TxInfo, TxMethod, UnsignedTransaction } from '@substrate/txwrapper-core';
+import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 import type {
   BlockchainGenericAccount,
@@ -33,19 +33,6 @@ import type {
 import { ExtrinsicType } from '../../types/api/actions';
 
 import * as schema from '../../validator/schemas';
-
-export function constructUnsignedTransaction(
-  pallet: string,
-  name: string,
-  args: Args,
-  baseTxInfo: BaseTxInfo,
-  options: OptionsWithMeta
-): UnsignedTransaction {
-  const txMethod: TxMethod = { args, name, pallet };
-  const txInfo: TxInfo = { method: txMethod, ...baseTxInfo };
-
-  return defineMethod(txInfo, options);
-}
 
 {{#each modules}}
 
@@ -133,7 +120,7 @@ export interface {{{actionName}}}Action extends ICTAtomicAction {
  */
 export type Tx =
 {{#each txActions}}
-  | {{{this.actionName}}}Tx
+  | {{{this}}}Tx
 {{/each}};
 
 /**
@@ -141,7 +128,7 @@ export type Tx =
  */
 export type TxArgs =
 {{#each txActions}}
-  | {{{this.actionName}}}Args
+  | {{{this}}}Args
 {{/each}};
 
 /**
@@ -149,7 +136,7 @@ export type TxArgs =
  */
 export type CTAtomicAction =
 {{#each ctAtomicActions}}
-  | {{{this.actionName}}}Action
+  | {{{this}}}Action
 {{/each}};
 
 /**
@@ -157,7 +144,7 @@ export type CTAtomicAction =
  */
 export type ActionArgs =
 {{#each ctAtomicActions}}
-  | {{{this.actionName}}}Args
+  | {{{this}}}Args
 {{/each}};
 
 /**

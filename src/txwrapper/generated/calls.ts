@@ -3,9 +3,9 @@
 
 import { z } from 'zod';
 
-import { defineMethod } from '@substrate/txwrapper-core';
+import { constructUnsignedTransaction } from '../construct';
 
-import type { Args, BaseTxInfo, OptionsWithMeta, TxInfo, TxMethod, UnsignedTransaction } from '@substrate/txwrapper-core';
+import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
 
 import type {
   BlockchainGenericAccount,
@@ -31,19 +31,6 @@ import type {
 import { ExtrinsicType } from '../../types/api/actions';
 
 import * as schema from '../../validator/schemas';
-
-export function constructUnsignedTransaction(
-  pallet: string,
-  name: string,
-  args: Args,
-  baseTxInfo: BaseTxInfo,
-  options: OptionsWithMeta
-): UnsignedTransaction {
-  const txMethod: TxMethod = { args, name, pallet };
-  const txInfo: TxInfo = { method: txMethod, ...baseTxInfo };
-
-  return defineMethod(txInfo, options);
-}
 
 /**
  * `appAgentId` - The ID of the App Agent.
