@@ -1,80 +1,185 @@
 // Auto-generated, do not edit
 /* eslint-disable */
 
-import { defineMethod } from '@substrate/txwrapper-core';
+{{{ importsAll }}}
 
-import type { BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
+import { z } from 'zod';
 
-import type { ActionType } from '../types/api/actions';
+import { constructUnsignedTransaction } from '../construct';
+
+import type { Args, BaseTxInfo, OptionsWithMeta, UnsignedTransaction } from '@substrate/txwrapper-core';
+
 import type {
-  BlockchainGenericAddress,
+  BlockchainGenericAccount,
   BlockchainGenericBalance,
+  BlockchainGenericBoolean,
   BlockchainGenericId,
-  CTAtomicActionGeneric,
-  NftWitness,
-} from '../types/api/common';
+  BlockchainGenericText,
+  UINT64,
+  ITx,
+  ICTAtomicAction,
+  CTActionOrigin,
+  CTAtomicActions,
+} from '../../types/api';
 
-/**
- * Represents a single action within an atomic operation.
- */
-export type CTAtomicAction =
-{{#each ctAtomicActions}}
-  | {{{this}}}
-{{/each}};
+import type {
+  AppAgentDestroyInfo,
+  AppDepositPermissions,
+  AppPayOnDemandMode,
+  NamedAddressInput,
+  NftWitness,
+} from '../../types/api/trait';
+
+import { ExtrinsicType } from '../../types/api/actions';
+
+import * as schema from '../../validator/schemas';
 
 {{#each modules}}
 
 {{#each items}}
 
-{{#if documentation.short}}
 /**
- * Arguments required to {{documentation.short}}
+{{#each params}}
+ * `{{{this.name}}}`{{#if this.description}} -{{{this.description}}}{{/if}}
+ *
+{{/each}}
  */
-{{/if}}
-export type {{{argsTypeName}}} = {
+export interface {{{actionName}}}Args extends Args {
   {{#each params}}
   {{#if this.description}}
   /**
    * {{{this.description}}}
    */
   {{/if}}
-  {{{this.name}}}: {{{this.type}}};
+  {{{this.name}}}{{#if this.isOptional}}?{{/if}}: {{{this.type}}};
   {{/each}}
 };
 
+const {{{actionName}}}ArgsSchema = z.object({
+  {{#each params}}
+  {{{this.name}}}: {{#if this.isOptional}}z.optional({{/if}}schema.{{{this.type}}}Schema{{#if this.isOptional}}){{/if}},
+  {{/each}}
+});
+
 /**
-{{#if documentation.full}}
- * {{documentation.full}}
+ * @name {{{functionName}}}
+{{#if documentation.summary}}
+ * @summary {{{documentation.summary}}}
 {{/if}}
- * @param args - The arguments of the transaction.
- * @param info - Base transaction information.
- * @param options - Additional options with metadata.
- * @returns An unsigned transaction.
+{{#if documentation.description}}
+ * @description {{{documentation.description}}}
+{{/if}}
+ * @param args - The arguments of the transaction. {@link {{{actionName}}}Args}
+ * @param info - Base transaction information. {@link BaseTxInfo}
+ * @param options - Additional options with metadata. {@link OptionsWithMeta}
+ * @returns An unsigned transaction. {@link UnsignedTransaction}
  */
 export function {{{functionName}}}(
-  args: {{{argsTypeName}}},
+  args: {{{actionName}}}Args,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
-  return defineMethod(
-    {
-      method: {
-        args,
-        name: '{{{methodName}}}',
-        pallet: '{{{palletName}}}',
-      },
-      ...info,
-    },
-    options
-  );
+  // throws error if validation is failed
+  const validArgs = {{{actionName}}}ArgsSchema.parse(args);
+
+  return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', validArgs, info, options);
 }
 
-export type {{{actionTypeName}}} = CTAtomicActionGeneric<
-  ActionType.{{{actionName}}},
-  {{{argsTypeName}}}
->;
+{{#if isAllowedTx}}
+/**
+{{#if documentation.description}}
+ * {{#if documentation.summary}}{{{documentation.summary}}}{{/if}}{{{documentation.description}}}
+{{/if}}
+ */
+export interface {{{actionName}}}Tx extends ITx {
+  actionType: ExtrinsicType.{{{actionName}}};
+  arguments: {{{actionName}}}Args;
+};
+{{/if}}
+
+{{#if isAllowedAction}}
+/**
+{{#if documentation.description}}
+ * {{#if documentation.summary}}{{{documentation.summary}}}{{/if}}{{{documentation.description}}}
+{{/if}}
+ */
+export interface {{{actionName}}}Action extends ICTAtomicAction {
+  actionType: ExtrinsicType.{{{actionName}}};
+  arguments: {{{actionName}}}Args;
+  origin: CTActionOrigin;
+};
+{{/if}}
 
 /*---------------------------------------------------------------------------------- */
 
 {{/each}}
 {{/each}}
+
+/**
+ * Represents a single transaction
+ */
+export type Tx =
+{{#each txActions}}
+  | {{{this}}}Tx
+{{/each}};
+
+/**
+ * Represents a transaction args
+ */
+export type TxArgs =
+{{#each txActions}}
+  | {{{this}}}Args
+{{/each}};
+
+/**
+ * Represents a single action within an atomic operation.
+ */
+export type CTAtomicAction =
+{{#each ctAtomicActions}}
+  | {{{this}}}Action
+{{/each}};
+
+/**
+ * Represents a CT action args.
+ */
+export type ActionArgs =
+{{#each ctAtomicActions}}
+  | {{{this}}}Args
+{{/each}};
+
+/**
+ * Builds an unsigned transaction based on the provided transaction action.
+ *
+ * @param tx - Transaction action.
+ * @param info - Base transaction information.
+ * @param options - Additional options with metadata.
+ * @returns An unsigned transaction.
+ *
+ * @throws If the transaction is unsupported.
+ */
+export function buildUnsignedTransaction(
+  tx: Tx | CTAtomicAction,
+  info: BaseTxInfo,
+  options: OptionsWithMeta
+): UnsignedTransaction {
+  const { actionType, arguments: args } = tx;
+
+  const unsigned: UnsignedTransaction = (() => {
+    switch (actionType) {
+    {{#each modules}}
+    {{#each items}}
+    {{#if isAllowed}}
+      case ExtrinsicType.{{{this.actionName}}}: {
+        return {{{this.functionName}}}(args, info, options);
+      }
+    {{/if}}
+    {{/each}}
+    {{/each}}
+      default: {
+        throw new Error(`Unsupported transaction type: ${actionType}`);
+      }
+    }
+  })();
+
+  return unsigned;
+}

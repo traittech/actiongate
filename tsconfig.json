@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "esnext",
     "module": "commonjs",
     "strict": true,
-    "esModuleInterop": true,
     "skipLibCheck": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "resolveJsonModule": true
+    "outDir": "dist",
+    "rootDir": "src",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "paths": {
     "@/*": ["src/*"]
