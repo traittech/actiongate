@@ -72,7 +72,8 @@
 				"example": "ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s",
 				"description": "The account address on the blockchain.\nIt is a string of alphanumeric characters, encoded in SS58 format, using `5335` prefix.",
 				"minLength": 49,
-				"maxLength": 49
+				"maxLength": 49,
+				"pattern": "^tt[1-9a-zA-Z]{47}$"
 			},
 			"BlockchainGenericAccountId": {
 				"properties": {

@@ -33,6 +33,7 @@ export type UINT128 = string;
  * @isString
  * @minLength 49
  * @maxLength 49
+ * @pattern ^tt[1-9a-zA-Z]{47}$
  * @example "ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s"
  */
 export type BlockchainGenericAccount = string;

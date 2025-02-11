@@ -47,7 +47,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BlockchainGenericAccount": {
         "dataType": "refAlias",
-        "type": {"dataType":"string","validators":{"minLength":{"value":49},"maxLength":{"value":49}}},
+        "type": {"dataType":"string","validators":{"minLength":{"value":49},"maxLength":{"value":49},"pattern":{"value":"^tt[1-9a-zA-Z]{47}$"}}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BlockchainGenericAccountId": {

@@ -104,7 +104,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: ExtrinsicType.BalancesTransferAllowDeath,
+                actionType: ExtrinsicType.BalancesTransfer,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   dest: {
@@ -336,7 +336,7 @@ describe('Clearing Transaction Builder', () => {
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   dest: {
-                    id: appAgentAddress.slice(0, -1).concat('z'), // invalid encoded ss58
+                    id: 'ttxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', // invalid encoded ss58
                   },
                   keepAlive: true,
                 },

@@ -1,10 +1,12 @@
-import { base58Decode, decodeAddress } from '@polkadot/util-crypto';
+import { isAddress } from '@polkadot/util-crypto';
+
+import { loadConfig } from '../functions/config';
+
+const ss58Code = loadConfig().blockchain.ss58_code;
 
 export const isValidSS58 = (address: string): boolean => {
   try {
-    base58Decode(address);
-    decodeAddress(address, false);
-    return true;
+    return isAddress(address, false, ss58Code);
   } catch {
     return false;
   }
