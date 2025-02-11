@@ -14,12 +14,10 @@ type FungibleDestroyDetail = {
   approvals: UINT32;
 };
 
-/**
- * Tuple `[UINT32, UINT32]`
- *
- * [WARNING]: `openapi v3` doesn't support `tuple` type.
- */
-type NonFungibleDestroyDetail = UINT32[];
+type NonFungibleDestroyDetail = {
+  collectionId: UINT32;
+  itemId: UINT32;
+}
 
 type OwnFungibleDestroyDetail = {
   id: BlockchainGenericId;

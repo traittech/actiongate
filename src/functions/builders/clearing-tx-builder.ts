@@ -114,7 +114,7 @@ export async function createClearingTransactionAndBroadcast(
     const broadcast = await txService.submitTransaction(tx);
 
     logger.info('Transaction broadcasted successfully');
-    logger.debug(broadcast);
+    logger.debug(`Submit response: ${JSON.stringify(broadcast)}`);
 
     return expectedTxHash;
   } catch (error: any) {

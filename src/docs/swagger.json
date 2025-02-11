@@ -648,11 +648,19 @@
 				"type": "object"
 			},
 			"NonFungibleDestroyDetail": {
-				"items": {
-					"$ref": "#/components/schemas/UINT32"
+				"properties": {
+					"itemId": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"collectionId": {
+						"$ref": "#/components/schemas/UINT32"
+					}
 				},
-				"type": "array",
-				"description": "Tuple `[UINT32, UINT32]`\n\n[WARNING]: `openapi v3` doesn't support `tuple` type."
+				"required": [
+					"itemId",
+					"collectionId"
+				],
+				"type": "object"
 			},
 			"PoolAddressDestroyInfo": {
 				"properties": {

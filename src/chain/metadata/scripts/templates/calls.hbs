@@ -93,9 +93,9 @@ export function {{{functionName}}}(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  {{{actionName}}}ArgsSchema.parse(args);
+  const validArgs = {{{actionName}}}ArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', args, info, options);
+  return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', validArgs, info, options);
 }
 
 {{#if isAllowedTx}}

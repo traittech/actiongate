@@ -43,12 +43,8 @@ export type CTActionCall = { callIndex?: string; args?: string } | string;
 
 /**
  * Represents an action in a clearing transaction.
- *
- * Tuple `[CTActionOrigin, CTActionCall]`
- *
- * [WARNING]: `openapi v3` doesn't support `tuple` type.
  */
-export type CTAction = Array<CTActionOrigin | CTActionCall>;
+export type CTAction = [CTActionOrigin, CTActionCall];
 
 /**
  * A nested array of actions (Vec<Vec<Action>> in rust).

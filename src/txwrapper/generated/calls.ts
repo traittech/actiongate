@@ -82,9 +82,9 @@ export function appAgentsAddAdmin(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsAddAdminArgsSchema.parse(args);
+  const validArgs = AppAgentsAddAdminArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'addAdmin', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'addAdmin', validArgs, info, options);
 }
 
 /**
@@ -140,9 +140,9 @@ export function appAgentsAddAdminToNamedAddressDispatch(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsAddAdminToNamedAddressArgsSchema.parse(args);
+  const validArgs = AppAgentsAddAdminToNamedAddressArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'addAdminToNamedAddressDispatch', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'addAdminToNamedAddressDispatch', validArgs, info, options);
 }
 
 /**
@@ -195,9 +195,9 @@ export function appAgentsAllowAdminColdWalletDispatch(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsAllowAdminColdWalletArgsSchema.parse(args);
+  const validArgs = AppAgentsAllowAdminColdWalletArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'allowAdminColdWalletDispatch', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'allowAdminColdWalletDispatch', validArgs, info, options);
 }
 
 /**
@@ -246,9 +246,9 @@ export function appAgentsChangeHotWallet(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsChangeHotWalletArgsSchema.parse(args);
+  const validArgs = AppAgentsChangeHotWalletArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'changeHotWallet', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'changeHotWallet', validArgs, info, options);
 }
 
 /**
@@ -291,9 +291,9 @@ export function appAgentsChangeOwnerCancel(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsChangeOwnerCancelArgsSchema.parse(args);
+  const validArgs = AppAgentsChangeOwnerCancelArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'changeOwnerCancel', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'changeOwnerCancel', validArgs, info, options);
 }
 
 /**
@@ -336,9 +336,9 @@ export function appAgentsChangeOwnerComplete(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsChangeOwnerCompleteArgsSchema.parse(args);
+  const validArgs = AppAgentsChangeOwnerCompleteArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'changeOwnerComplete', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'changeOwnerComplete', validArgs, info, options);
 }
 
 /**
@@ -388,9 +388,9 @@ export function appAgentsChangeOwnerInit(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsChangeOwnerInitArgsSchema.parse(args);
+  const validArgs = AppAgentsChangeOwnerInitArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'changeOwnerInit', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'changeOwnerInit', validArgs, info, options);
 }
 
 /**
@@ -440,9 +440,9 @@ export function appAgentsClearAdminDispatchFilter(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsClearAdminDispatchFilterArgsSchema.parse(args);
+  const validArgs = AppAgentsClearAdminDispatchFilterArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'clearAdminDispatchFilter', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'clearAdminDispatchFilter', validArgs, info, options);
 }
 
 /**
@@ -482,9 +482,9 @@ export function appAgentsClearAppAgentMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsClearAppAgentMetadataArgsSchema.parse(args);
+  const validArgs = AppAgentsClearAppAgentMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'clearAppAgentMetadata', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'clearAppAgentMetadata', validArgs, info, options);
 }
 
 /**
@@ -531,9 +531,9 @@ export function appAgentsCompleteDestroyAppAgent(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsCompleteDestroyAppAgentArgsSchema.parse(args);
+  const validArgs = AppAgentsCompleteDestroyAppAgentArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'completeDestroyAppAgent', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'completeDestroyAppAgent', validArgs, info, options);
 }
 
 /**
@@ -569,9 +569,9 @@ export function appAgentsCreateAppAgent(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsCreateAppAgentArgsSchema.parse(args);
+  const validArgs = AppAgentsCreateAppAgentArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'createAppAgent', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'createAppAgent', validArgs, info, options);
 }
 
 /**
@@ -624,9 +624,9 @@ export function appAgentsDisableAdminColdWalletDispatch(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsDisableAdminColdWalletDispatchArgsSchema.parse(args);
+  const validArgs = AppAgentsDisableAdminColdWalletDispatchArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'disableAdminColdWalletDispatch', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'disableAdminColdWalletDispatch', validArgs, info, options);
 }
 
 /**
@@ -669,9 +669,9 @@ export function appAgentsDisableHotWallet(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsDisableHotWalletArgsSchema.parse(args);
+  const validArgs = AppAgentsDisableHotWalletArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'disableHotWallet', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'disableHotWallet', validArgs, info, options);
 }
 
 /**
@@ -714,9 +714,9 @@ export function appAgentsEnableHotWallet(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsEnableHotWalletArgsSchema.parse(args);
+  const validArgs = AppAgentsEnableHotWalletArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'enableHotWallet', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'enableHotWallet', validArgs, info, options);
 }
 
 /**
@@ -759,9 +759,9 @@ export function appAgentsInitiateDestroyAppAgent(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsInitiateDestroyAppAgentArgsSchema.parse(args);
+  const validArgs = AppAgentsInitiateDestroyAppAgentArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'initiateDestroyAppAgent', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'initiateDestroyAppAgent', validArgs, info, options);
 }
 
 /**
@@ -804,9 +804,9 @@ export function appAgentsPauseAppAgent(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsPauseAppAgentArgsSchema.parse(args);
+  const validArgs = AppAgentsPauseAppAgentArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'pauseAppAgent', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'pauseAppAgent', validArgs, info, options);
 }
 
 /**
@@ -853,9 +853,9 @@ export function appAgentsProcessDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsProcessDestroyArgsSchema.parse(args);
+  const validArgs = AppAgentsProcessDestroyArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'processDestroy', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'processDestroy', validArgs, info, options);
 }
 
 /**
@@ -898,9 +898,9 @@ export function appAgentsReactivateAppAgent(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsReactivateAppAgentArgsSchema.parse(args);
+  const validArgs = AppAgentsReactivateAppAgentArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'reactivateAppAgent', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'reactivateAppAgent', validArgs, info, options);
 }
 
 /**
@@ -950,9 +950,9 @@ export function appAgentsRemoveAdmin(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsRemoveAdminArgsSchema.parse(args);
+  const validArgs = AppAgentsRemoveAdminArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'removeAdmin', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'removeAdmin', validArgs, info, options);
 }
 
 /**
@@ -1008,9 +1008,9 @@ export function appAgentsRemoveAdminFromNamedAddressDispatch(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsRemoveAdminFromNamedAddressDispatchArgsSchema.parse(args);
+  const validArgs = AppAgentsRemoveAdminFromNamedAddressDispatchArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'removeAdminFromNamedAddressDispatch', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'removeAdminFromNamedAddressDispatch', validArgs, info, options);
 }
 
 /**
@@ -1064,9 +1064,9 @@ export function appAgentsSetAdminDispatchFilter(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsSetAdminDispatchFilterArgsSchema.parse(args);
+  const validArgs = AppAgentsSetAdminDispatchFilterArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'setAdminDispatchFilter', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'setAdminDispatchFilter', validArgs, info, options);
 }
 
 /**
@@ -1113,9 +1113,9 @@ export function appAgentsSetAppAgentMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsSetAppAgentMetadataArgsSchema.parse(args);
+  const validArgs = AppAgentsSetAppAgentMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'setAppAgentMetadata', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'setAppAgentMetadata', validArgs, info, options);
 }
 
 /**
@@ -1158,9 +1158,9 @@ export function appAgentsUnpauseAppAgent(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppAgentsUnpauseAppAgentArgsSchema.parse(args);
+  const validArgs = AppAgentsUnpauseAppAgentArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appAgents', 'unpauseAppAgent', args, info, options);
+  return constructUnsignedTransaction('appAgents', 'unpauseAppAgent', validArgs, info, options);
 }
 
 /**
@@ -1210,9 +1210,9 @@ export function appSubscriptionsSetAppPayOnDemandMode(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppSubscriptionsSetAppPayOnDemandModeArgsSchema.parse(args);
+  const validArgs = AppSubscriptionsSetAppPayOnDemandModeArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appSubscriptions', 'setAppPayOnDemandMode', args, info, options);
+  return constructUnsignedTransaction('appSubscriptions', 'setAppPayOnDemandMode', validArgs, info, options);
 }
 
 /**
@@ -1262,9 +1262,9 @@ export function appSubscriptionsSetAppSubscriptionTier(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppSubscriptionsSetAppSubscriptionTierArgsSchema.parse(args);
+  const validArgs = AppSubscriptionsSetAppSubscriptionTierArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appSubscriptions', 'setAppSubscriptionTier', args, info, options);
+  return constructUnsignedTransaction('appSubscriptions', 'setAppSubscriptionTier', validArgs, info, options);
 }
 
 /**
@@ -1308,9 +1308,9 @@ export function appTransactionsSubmitClearingTransaction(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppTransactionsSubmitClearingTransactionArgsSchema.parse(args);
+  const validArgs = AppTransactionsSubmitClearingTransactionArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appTransactions', 'submitClearingTransaction', args, info, options);
+  return constructUnsignedTransaction('appTransactions', 'submitClearingTransaction', validArgs, info, options);
 }
 
 /*---------------------------------------------------------------------------------- */
@@ -1359,9 +1359,9 @@ export function appTransferChannelsEstablishTransferChannel(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppTransferChannelsEstablishTransferChannelArgsSchema.parse(args);
+  const validArgs = AppTransferChannelsEstablishTransferChannelArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appTransferChannels', 'establishTransferChannel', args, info, options);
+  return constructUnsignedTransaction('appTransferChannels', 'establishTransferChannel', validArgs, info, options);
 }
 
 /**
@@ -1405,9 +1405,9 @@ export function appTransferChannelsRemoveTransferChannel(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppTransferChannelsRemoveTransferChannelArgsSchema.parse(args);
+  const validArgs = AppTransferChannelsRemoveTransferChannelArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appTransferChannels', 'removeTransferChannel', args, info, options);
+  return constructUnsignedTransaction('appTransferChannels', 'removeTransferChannel', validArgs, info, options);
 }
 
 /**
@@ -1452,9 +1452,9 @@ export function appTransferFiltersBlockAddressDeposits(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppTransferFiltersBlockAddressDepositsArgsSchema.parse(args);
+  const validArgs = AppTransferFiltersBlockAddressDepositsArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appTransferFilters', 'blockAddressDeposits', args, info, options);
+  return constructUnsignedTransaction('appTransferFilters', 'blockAddressDeposits', validArgs, info, options);
 }
 
 /**
@@ -1504,9 +1504,9 @@ export function appTransferFiltersSetAppDepositPermissions(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppTransferFiltersSetAppDepositPermissionsArgsSchema.parse(args);
+  const validArgs = AppTransferFiltersSetAppDepositPermissionsArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appTransferFilters', 'setAppDepositPermissions', args, info, options);
+  return constructUnsignedTransaction('appTransferFilters', 'setAppDepositPermissions', validArgs, info, options);
 }
 
 /**
@@ -1550,9 +1550,9 @@ export function appTransferFiltersUnblockAddressDeposits(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AppTransferFiltersUnblockAddressDepositsArgsSchema.parse(args);
+  const validArgs = AppTransferFiltersUnblockAddressDepositsArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('appTransferFilters', 'unblockAddressDeposits', args, info, options);
+  return constructUnsignedTransaction('appTransferFilters', 'unblockAddressDeposits', validArgs, info, options);
 }
 
 /**
@@ -1609,9 +1609,9 @@ export function assetsBurn(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsBurnArgsSchema.parse(args);
+  const validArgs = AssetsBurnArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'burn', args, info, options);
+  return constructUnsignedTransaction('assets', 'burn', validArgs, info, options);
 }
 
 /**
@@ -1650,9 +1650,9 @@ export function assetsCreate(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsCreateArgsSchema.parse(args);
+  const validArgs = AssetsCreateArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'create', args, info, options);
+  return constructUnsignedTransaction('assets', 'create', validArgs, info, options);
 }
 
 /**
@@ -1695,9 +1695,9 @@ export function assetsDestroyAccounts(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsDestroyAccountsArgsSchema.parse(args);
+  const validArgs = AssetsDestroyAccountsArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'destroyAccounts', args, info, options);
+  return constructUnsignedTransaction('assets', 'destroyAccounts', validArgs, info, options);
 }
 
 /**
@@ -1741,9 +1741,9 @@ export function assetsDestroyApprovals(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsDestroyApprovalsArgsSchema.parse(args);
+  const validArgs = AssetsDestroyApprovalsArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'destroyApprovals', args, info, options);
+  return constructUnsignedTransaction('assets', 'destroyApprovals', validArgs, info, options);
 }
 
 /**
@@ -1787,9 +1787,9 @@ export function assetsFinishDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsFinishDestroyArgsSchema.parse(args);
+  const validArgs = AssetsFinishDestroyArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'finishDestroy', args, info, options);
+  return constructUnsignedTransaction('assets', 'finishDestroy', validArgs, info, options);
 }
 
 /**
@@ -1854,9 +1854,9 @@ export function assetsForceTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsForceTransferArgsSchema.parse(args);
+  const validArgs = AssetsForceTransferArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'forceTransfer', args, info, options);
+  return constructUnsignedTransaction('assets', 'forceTransfer', validArgs, info, options);
 }
 
 /**
@@ -1907,9 +1907,9 @@ export function assetsFreeze(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsFreezeAccountArgsSchema.parse(args);
+  const validArgs = AssetsFreezeAccountArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'freeze', args, info, options);
+  return constructUnsignedTransaction('assets', 'freeze', validArgs, info, options);
 }
 
 /**
@@ -1953,9 +1953,9 @@ export function assetsFreezeAsset(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsFreezeAssetArgsSchema.parse(args);
+  const validArgs = AssetsFreezeAssetArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'freezeAsset', args, info, options);
+  return constructUnsignedTransaction('assets', 'freezeAsset', validArgs, info, options);
 }
 
 /**
@@ -2013,9 +2013,9 @@ export function assetsMint(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsMintArgsSchema.parse(args);
+  const validArgs = AssetsMintArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'mint', args, info, options);
+  return constructUnsignedTransaction('assets', 'mint', validArgs, info, options);
 }
 
 /**
@@ -2066,9 +2066,9 @@ export function assetsSetMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsSetMetadataArgsSchema.parse(args);
+  const validArgs = AssetsSetMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'setMetadata', args, info, options);
+  return constructUnsignedTransaction('assets', 'setMetadata', validArgs, info, options);
 }
 
 /**
@@ -2119,9 +2119,9 @@ export function assetsSetMinBalance(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsSetMinBalanceArgsSchema.parse(args);
+  const validArgs = AssetsSetMinBalanceArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'setMinBalance', args, info, options);
+  return constructUnsignedTransaction('assets', 'setMinBalance', validArgs, info, options);
 }
 
 /**
@@ -2165,9 +2165,9 @@ export function assetsStartDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsStartDestroyArgsSchema.parse(args);
+  const validArgs = AssetsStartDestroyArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'startDestroy', args, info, options);
+  return constructUnsignedTransaction('assets', 'startDestroy', validArgs, info, options);
 }
 
 /**
@@ -2218,9 +2218,9 @@ export function assetsThaw(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsThawAccountArgsSchema.parse(args);
+  const validArgs = AssetsThawAccountArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'thaw', args, info, options);
+  return constructUnsignedTransaction('assets', 'thaw', validArgs, info, options);
 }
 
 /**
@@ -2264,9 +2264,9 @@ export function assetsThawAsset(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsThawAssetArgsSchema.parse(args);
+  const validArgs = AssetsThawAssetArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'thawAsset', args, info, options);
+  return constructUnsignedTransaction('assets', 'thawAsset', validArgs, info, options);
 }
 
 /**
@@ -2324,9 +2324,9 @@ export function assetsTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsTransferArgsSchema.parse(args);
+  const validArgs = AssetsTransferArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'transfer', args, info, options);
+  return constructUnsignedTransaction('assets', 'transfer', validArgs, info, options);
 }
 
 /**
@@ -2392,9 +2392,9 @@ export function assetsTransferKeepAlive(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsTransferKeepAliveArgsSchema.parse(args);
+  const validArgs = AssetsTransferKeepAliveArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'transferKeepAlive', args, info, options);
+  return constructUnsignedTransaction('assets', 'transferKeepAlive', validArgs, info, options);
 }
 
 /**
@@ -2453,9 +2453,9 @@ export function assetsTransferOwnership(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  AssetsTransferOwnershipArgsSchema.parse(args);
+  const validArgs = AssetsTransferOwnershipArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('assets', 'transferOwnership', args, info, options);
+  return constructUnsignedTransaction('assets', 'transferOwnership', validArgs, info, options);
 }
 
 /**
@@ -2503,9 +2503,9 @@ export function balancesTransferAll(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  BalancesTransferAllArgsSchema.parse(args);
+  const validArgs = BalancesTransferAllArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('balances', 'transferAll', args, info, options);
+  return constructUnsignedTransaction('balances', 'transferAll', validArgs, info, options);
 }
 
 /**
@@ -2558,9 +2558,9 @@ export function balancesTransferAllowDeath(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  BalancesTransferArgsSchema.parse(args);
+  const validArgs = BalancesTransferArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('balances', 'transferAllowDeath', args, info, options);
+  return constructUnsignedTransaction('balances', 'transferAllowDeath', validArgs, info, options);
 }
 
 /**
@@ -2613,9 +2613,9 @@ export function balancesTransferKeepAlive(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  BalancesTransferKeepAliveArgsSchema.parse(args);
+  const validArgs = BalancesTransferKeepAliveArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('balances', 'transferKeepAlive', args, info, options);
+  return constructUnsignedTransaction('balances', 'transferKeepAlive', validArgs, info, options);
 }
 
 /**
@@ -2674,9 +2674,9 @@ export function nftsBurn(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsBurnItemArgsSchema.parse(args);
+  const validArgs = NftsBurnItemArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'burn', args, info, options);
+  return constructUnsignedTransaction('nfts', 'burn', validArgs, info, options);
 }
 
 /**
@@ -2720,9 +2720,9 @@ export function nftsClearCollectionMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsClearCollectionMetadataArgsSchema.parse(args);
+  const validArgs = NftsClearCollectionMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'clearCollectionMetadata', args, info, options);
+  return constructUnsignedTransaction('nfts', 'clearCollectionMetadata', validArgs, info, options);
 }
 
 /**
@@ -2773,9 +2773,9 @@ export function nftsClearMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsClearItemMetadataArgsSchema.parse(args);
+  const validArgs = NftsClearItemMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'clearMetadata', args, info, options);
+  return constructUnsignedTransaction('nfts', 'clearMetadata', validArgs, info, options);
 }
 
 /**
@@ -2810,9 +2810,9 @@ export function nftsCreate(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsCreateCollectionArgsSchema.parse(args);
+  const validArgs = NftsCreateCollectionArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'create', args, info, options);
+  return constructUnsignedTransaction('nfts', 'create', validArgs, info, options);
 }
 
 /**
@@ -2862,9 +2862,9 @@ export function nftsDestroy(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsDestroyCollectionArgsSchema.parse(args);
+  const validArgs = NftsDestroyCollectionArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'destroy', args, info, options);
+  return constructUnsignedTransaction('nfts', 'destroy', validArgs, info, options);
 }
 
 /**
@@ -2915,9 +2915,9 @@ export function nftsLockItemTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsLockItemTransferArgsSchema.parse(args);
+  const validArgs = NftsLockItemTransferArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'lockItemTransfer', args, info, options);
+  return constructUnsignedTransaction('nfts', 'lockItemTransfer', validArgs, info, options);
 }
 
 /**
@@ -2964,9 +2964,9 @@ export function nftsMint(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsMintItemArgsSchema.parse(args);
+  const validArgs = NftsMintItemArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'mint', args, info, options);
+  return constructUnsignedTransaction('nfts', 'mint', validArgs, info, options);
 }
 
 /**
@@ -3009,9 +3009,9 @@ export function nftsSetAcceptOwnership(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsAcceptCollectionOwnershipArgsSchema.parse(args);
+  const validArgs = NftsAcceptCollectionOwnershipArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'setAcceptOwnership', args, info, options);
+  return constructUnsignedTransaction('nfts', 'setAcceptOwnership', validArgs, info, options);
 }
 
 /**
@@ -3062,9 +3062,9 @@ export function nftsSetCollectionMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsSetCollectionMetadataArgsSchema.parse(args);
+  const validArgs = NftsSetCollectionMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'setCollectionMetadata', args, info, options);
+  return constructUnsignedTransaction('nfts', 'setCollectionMetadata', validArgs, info, options);
 }
 
 /**
@@ -3122,9 +3122,9 @@ export function nftsSetMetadata(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsSetItemMetadataArgsSchema.parse(args);
+  const validArgs = NftsSetItemMetadataArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'setMetadata', args, info, options);
+  return constructUnsignedTransaction('nfts', 'setMetadata', validArgs, info, options);
 }
 
 /**
@@ -3182,9 +3182,9 @@ export function nftsTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsTransferItemArgsSchema.parse(args);
+  const validArgs = NftsTransferItemArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'transfer', args, info, options);
+  return constructUnsignedTransaction('nfts', 'transfer', validArgs, info, options);
 }
 
 /**
@@ -3240,9 +3240,9 @@ export function nftsTransferOwnership(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsTransferCollectionOwnershipArgsSchema.parse(args);
+  const validArgs = NftsTransferCollectionOwnershipArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'transferOwnership', args, info, options);
+  return constructUnsignedTransaction('nfts', 'transferOwnership', validArgs, info, options);
 }
 
 /**
@@ -3293,9 +3293,9 @@ export function nftsUnlockItemTransfer(
   options: OptionsWithMeta
 ): UnsignedTransaction {
   // throws error if validation is failed
-  NftsUnlockItemTransferArgsSchema.parse(args);
+  const validArgs = NftsUnlockItemTransferArgsSchema.parse(args);
 
-  return constructUnsignedTransaction('nfts', 'unlockItemTransfer', args, info, options);
+  return constructUnsignedTransaction('nfts', 'unlockItemTransfer', validArgs, info, options);
 }
 
 /**
