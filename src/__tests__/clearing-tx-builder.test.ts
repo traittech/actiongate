@@ -81,9 +81,7 @@ describe('Clearing Transaction Builder', () => {
                 actionType: ExtrinsicType.BalancesTransferKeepAlive,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  dest: {
-                    id: appAgentAddress,
-                  },
+                  dest: appAgentAddress,
                   value: '1000',
                 },
               },
@@ -107,9 +105,7 @@ describe('Clearing Transaction Builder', () => {
                 actionType: ExtrinsicType.BalancesTransfer,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  dest: {
-                    id: appAgentAddress,
-                  },
+                  dest: appAgentAddress,
                   value: '1000',
                 },
               },
@@ -163,9 +159,7 @@ describe('Clearing Transaction Builder', () => {
                 arguments: {
                   collection: 1,
                   item: 1,
-                  mintTo: {
-                    id: appAgentAddress,
-                  },
+                  mintTo: appAgentAddress,
                 },
               },
             ],
@@ -214,9 +208,7 @@ describe('Clearing Transaction Builder', () => {
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   id: 1,
-                  target: {
-                    id: appAgentAddress,
-                  },
+                  target: appAgentAddress,
                   amount: '1000',
                 },
               },
@@ -301,9 +293,7 @@ describe('Clearing Transaction Builder', () => {
                 actionType: ExtrinsicType.BalancesTransferKeepAlive,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  dest: {
-                    id: '12312321', // invalid length
-                  },
+                  dest: '12312321', // invalid length,
                   value: (u128_MAX + BigInt(1)).toString(), // error: greater than max
                 },
               } as CTAtomicAction,
@@ -325,6 +315,7 @@ describe('Clearing Transaction Builder', () => {
     });
 
     it('Action args: Invalid ss58 address', async () => {
+      const invalidAddress = 'ttxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
       const payload: ClearingTransactionPayload = {
         signatory,
         appAgentId,
@@ -335,9 +326,7 @@ describe('Clearing Transaction Builder', () => {
                 actionType: ExtrinsicType.BalancesTransferAll,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  dest: {
-                    id: 'ttxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', // invalid encoded ss58
-                  },
+                  dest: invalidAddress,
                   keepAlive: true,
                 },
               } as CTAtomicAction,

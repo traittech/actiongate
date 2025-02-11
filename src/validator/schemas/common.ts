@@ -60,10 +60,6 @@ export const BlockchainGenericAccountSchema = z
 
 export const BlockchainGenericAccountListSchema = z.array(BlockchainGenericAccountSchema);
 
-export const BlockchainGenericAccountIdSchema = z.object({
-  id: BlockchainGenericAccountSchema,
-});
-
 export const BlockchainGenericTextSchema = z
   .string()
   .max(text_MAX_LENGTH, { message: `String must be fewer or equal ${text_MAX_LENGTH} characters long` });

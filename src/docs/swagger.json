@@ -75,18 +75,6 @@
 				"maxLength": 49,
 				"pattern": "^tt[1-9a-zA-Z]{47}$"
 			},
-			"BlockchainGenericAccountId": {
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/BlockchainGenericAccount"
-					}
-				},
-				"required": [
-					"id"
-				],
-				"type": "object",
-				"description": "The structure represents the blockchain account address defined by the `id` key."
-			},
 			"UINT128": {
 				"type": "string",
 				"description": "A numeric `integer` value represented with `string` type\n\nminimum: `0`\n\nmaximum: `340282366920938463463374607431768211455`",
@@ -136,7 +124,7 @@
 				"description": "`dest`\n\n`value`",
 				"properties": {
 					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId"
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
 					},
 					"value": {
 						"$ref": "#/components/schemas/BlockchainGenericBalance"
@@ -457,7 +445,7 @@
 				"description": "`dest`\n\n`value`",
 				"properties": {
 					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId"
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
 					},
 					"value": {
 						"$ref": "#/components/schemas/BlockchainGenericBalance"
@@ -479,7 +467,7 @@
 				"description": "`dest` - The recipient of the transfer.\n\n`keepAlive`",
 				"properties": {
 					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The recipient of the transfer."
 					},
 					"keepAlive": {
@@ -512,7 +500,7 @@
 						"description": "The identifier of the asset to have some amount transferred."
 					},
 					"target": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The account to be credited."
 					},
 					"amount": {
@@ -536,7 +524,7 @@
 						"description": "The identifier of the asset to have some amount transferred."
 					},
 					"target": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The account to be credited."
 					},
 					"amount": {
@@ -564,7 +552,7 @@
 						"description": "The item to be transferred."
 					},
 					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The account to receive ownership of the item."
 					}
 				},
@@ -2763,7 +2751,7 @@
 						"description": "The identifier of the asset to have some amount minted."
 					},
 					"beneficiary": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The account to be credited with the minted assets."
 					},
 					"amount": {
@@ -2787,7 +2775,7 @@
 						"description": "The identifier of the asset to have some amount burned."
 					},
 					"who": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The account to be debited from."
 					},
 					"amount": {
@@ -2811,11 +2799,11 @@
 						"description": "The identifier of the asset to have some amount transferred."
 					},
 					"source": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The account to be debited."
 					},
 					"dest": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The account to be credited."
 					},
 					"amount": {
@@ -2840,7 +2828,7 @@
 						"description": "The identifier of the asset to be frozen."
 					},
 					"who": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The account to be frozen."
 					}
 				},
@@ -2859,7 +2847,7 @@
 						"description": "The identifier of the asset to be frozen."
 					},
 					"who": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The account to be unfrozen."
 					}
 				},
@@ -2906,7 +2894,7 @@
 						"description": "The identifier of the asset."
 					},
 					"owner": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId",
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
 						"description": "The new Owner of this asset."
 					}
 				},
@@ -3008,7 +2996,7 @@
 						"$ref": "#/components/schemas/BlockchainGenericId"
 					},
 					"mintTo": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId"
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
 					}
 				},
 				"required": [
@@ -3084,7 +3072,7 @@
 						"description": "The collection whose owner should be changed."
 					},
 					"newOwner": {
-						"$ref": "#/components/schemas/BlockchainGenericAccountId"
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
 					}
 				},
 				"required": [

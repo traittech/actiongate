@@ -41,13 +41,6 @@ export type BlockchainGenericAccount = string;
 export type BlockchainGenericAccountList = BlockchainGenericAccount[];
 
 /**
- * The structure represents the blockchain account address defined by the `id` key.
- */
-export type BlockchainGenericAccountId = {
-  id: BlockchainGenericAccount;
-};
-
-/**
  * A unique identifier (AssetId, CollectionId, AppAgentId).
  * Typically, it is a numeric value.
  */
