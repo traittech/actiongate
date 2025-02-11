@@ -2,8 +2,7 @@ import { construct } from '@substrate/txwrapper-polkadot';
 import { decodeAddress } from '@traittech/trait-keyless';
 
 import { TransactionService } from '../../adapter/datagate';
-import { buildUnsignedTransaction } from '../../txwrapper';
-import { TransactionType } from '../../types/api/actions';
+import { appTransactionsSubmitClearingTransaction } from '../../txwrapper';
 import { loadConfig } from '../config';
 import logger from '../logger';
 import { signWith } from '../signer';
@@ -82,17 +81,11 @@ export async function createClearingTransactionAndBroadcast(
 
     // Build the unsigned clearing transaction
     logger.debug('Building unsigned clearing transaction...');
-    const unsigned = buildUnsignedTransaction(
-      {
-        actionType: TransactionType.AppTransactionsSubmitClearingTransaction,
-        arguments: {
-          appAgentId: payload.appAgentId,
-          atomics: unsignedAtomics,
-        },
-      },
-      baseTxInfo,
-      options
-    );
+    const args = {
+      appAgentId: payload.appAgentId,
+      atomics: unsignedAtomics,
+    };
+    const unsigned = appTransactionsSubmitClearingTransaction(args, baseTxInfo, options);
 
     // Construct the signing payload from an unsigned transaction
     logger.debug('Constructing signing payload...');

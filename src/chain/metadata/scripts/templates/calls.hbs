@@ -11,31 +11,27 @@ import type { Args, BaseTxInfo, OptionsWithMeta, TxInfo, TxMethod, UnsignedTrans
 
 import type {
   BlockchainGenericAccount,
-  BlockchainGenericAccountList,
   BlockchainGenericAccountId,
   BlockchainGenericBalance,
   BlockchainGenericBoolean,
   BlockchainGenericId,
   BlockchainGenericText,
   UINT64,
-  ITxAction,
+  ITx,
   ICTAtomicAction,
   CTActionOrigin,
   CTAtomicActions,
 } from '../../types/api';
 
 import type {
-  AdminType,
   AppAgentDestroyInfo,
-  AppSubscriptionTierDetails,
   AppDepositPermissions,
   AppPayOnDemandMode,
   NamedAddressInput,
   NftWitness,
-  UserLevel,
 } from '../../types/api/trait';
 
-import { TransactionType } from '../../types/api/actions';
+import { ExtrinsicType } from '../../types/api/actions';
 
 import * as schema from '../../validator/schemas';
 
@@ -103,15 +99,17 @@ export function {{{functionName}}}(
   return constructUnsignedTransaction('{{{palletName}}}', '{{{methodName}}}', args, info, options);
 }
 
+{{#if isAllowedTx}}
 /**
 {{#if documentation.description}}
  * {{#if documentation.summary}}{{{documentation.summary}}}{{/if}}{{{documentation.description}}}
 {{/if}}
  */
-export interface {{{actionName}}}Tx extends ITxAction {
-  actionType: TransactionType.{{{actionName}}};
+export interface {{{actionName}}}Tx extends ITx {
+  actionType: ExtrinsicType.{{{actionName}}};
   arguments: {{{actionName}}}Args;
 };
+{{/if}}
 
 {{#if isAllowedAction}}
 /**
@@ -120,7 +118,7 @@ export interface {{{actionName}}}Tx extends ITxAction {
 {{/if}}
  */
 export interface {{{actionName}}}Action extends ICTAtomicAction {
-  actionType: TransactionType.{{{actionName}}};
+  actionType: ExtrinsicType.{{{actionName}}};
   arguments: {{{actionName}}}Args;
   origin: CTActionOrigin;
 };
@@ -134,21 +132,17 @@ export interface {{{actionName}}}Action extends ICTAtomicAction {
 /**
  * Represents a single transaction
  */
-export type TxAction =
-{{#each modules}}
-{{#each items}}
+export type Tx =
+{{#each txActions}}
   | {{{this.actionName}}}Tx
-{{/each}}
 {{/each}};
 
 /**
  * Represents a transaction args
  */
-export type TransactionArgs =
-{{#each modules}}
-{{#each items}}
+export type TxArgs =
+{{#each txActions}}
   | {{{this.actionName}}}Args
-{{/each}}
 {{/each}};
 
 /**
@@ -178,7 +172,7 @@ export type ActionArgs =
  * @throws If the transaction is unsupported.
  */
 export function buildUnsignedTransaction(
-  tx: TxAction,
+  tx: Tx | CTAtomicAction,
   info: BaseTxInfo,
   options: OptionsWithMeta
 ): UnsignedTransaction {
@@ -188,9 +182,11 @@ export function buildUnsignedTransaction(
     switch (actionType) {
     {{#each modules}}
     {{#each items}}
-      case TransactionType.{{{this.actionName}}}: {
+    {{#if isAllowed}}
+      case ExtrinsicType.{{{this.actionName}}}: {
         return {{{this.functionName}}}(args, info, options);
       }
+    {{/if}}
     {{/each}}
     {{/each}}
       default: {

@@ -2,10 +2,10 @@
  * Represents the type of transaction to be performed.
  * Transaction value must match blockchain module & method!
  */
-export enum TransactionType {
+export enum ExtrinsicType {
   // Admins Pallet
-  AdminsAddAdmin = 'admins.addPalletAdmin',
-  AdminsRemoveAdmin = 'admins.removePalletAdmin',
+  // AdminsAddAdmin = 'admins.addPalletAdmin',
+  // AdminsRemoveAdmin = 'admins.removePalletAdmin',
   // AppAgents Pallet
   AppAgentsAddAdmin = 'appAgents.addAdmin',
   AppAgentsAddAdminToNamedAddress = 'appAgents.addAdminToNamedAddressDispatch',
@@ -21,10 +21,10 @@ export enum TransactionType {
   AppAgentsDisableAdminColdWalletDispatch = 'appAgents.disableAdminColdWalletDispatch',
   AppAgentsDisableHotWallet = 'appAgents.disableHotWallet',
   AppAgentsEnableHotWallet = 'appAgents.enableHotWallet',
-  AppAgentsForceCreateAppAgent = 'appAgents.forceCreateAppAgent',
-  AppAgentsForceInitiateAppAgentDestroy = 'appAgents.forceInitiateAppAgentDestroy',
-  AppAgentsForceInitiateAppAgentSuspension = 'appAgents.forceInitiateAppAgentSuspension',
-  AppAgentsForceInitiateAppAgentUnsuspension = 'appAgents.forceInitiateAppAgentUnsuspension',
+  // AppAgentsForceCreateAppAgent = 'appAgents.forceCreateAppAgent',
+  // AppAgentsForceInitiateAppAgentDestroy = 'appAgents.forceInitiateAppAgentDestroy',
+  // AppAgentsForceInitiateAppAgentSuspension = 'appAgents.forceInitiateAppAgentSuspension',
+  // AppAgentsForceInitiateAppAgentUnsuspension = 'appAgents.forceInitiateAppAgentUnsuspension',
   AppAgentsInitiateDestroyAppAgent = 'appAgents.initiateDestroyAppAgent',
   AppAgentsPauseAppAgent = 'appAgents.pauseAppAgent',
   AppAgentsProcessDestroy = 'appAgents.processDestroy',
@@ -35,16 +35,16 @@ export enum TransactionType {
   AppAgentsSetAppAgentMetadata = 'appAgents.setAppAgentMetadata',
   AppAgentsUnpauseAppAgent = 'appAgents.unpauseAppAgent',
   // AppResources Pallet
-  AppResourcesSetActionPointsBalance = 'appResources.setActionPointsBalance',
-  AppResourcesSetClearingPointsBalance = 'appResources.setClearingPointsBalance',
+  // AppResourcesSetActionPointsBalance = 'appResources.setActionPointsBalance',
+  // AppResourcesSetClearingPointsBalance = 'appResources.setClearingPointsBalance',
   // AppSubscriptions Pallet
-  AppSubscriptionsCreateAppSubscriptionTier = 'appSubscriptions.createAppSubscriptionTier',
-  AppSubscriptionsObsoleteAppSubscriptionTier = 'appSubscriptions.obsoleteAppSubscriptionTier',
+  // AppSubscriptionsCreateAppSubscriptionTier = 'appSubscriptions.createAppSubscriptionTier',
+  // AppSubscriptionsObsoleteAppSubscriptionTier = 'appSubscriptions.obsoleteAppSubscriptionTier',
   AppSubscriptionsSetAppPayOnDemandMode = 'appSubscriptions.setAppPayOnDemandMode',
   AppSubscriptionsSetAppSubscriptionTier = 'appSubscriptions.setAppSubscriptionTier',
   // AppTransactions Pallet
   AppTransactionsSubmitClearingTransaction = 'appTransactions.submitClearingTransaction',
-  AppTransactionsForceSubmitClearingTransaction = 'appTransactions.forceSubmitClearingTransaction',
+  // AppTransactionsForceSubmitClearingTransaction = 'appTransactions.forceSubmitClearingTransaction',
   // AppTransferChannels Pallet
   AppTransferChannelsEstablishTransferChannel = 'appTransferChannels.establishTransferChannel',
   AppTransferChannelsRemoveTransferChannel = 'appTransferChannels.removeTransferChannel',
@@ -71,7 +71,7 @@ export enum TransactionType {
   AssetsSetMinBalance = 'assets.setMinBalance',
   AssetsSetMetadata = 'assets.setMetadata',
   // Balances Pallet
-  BalancesTransferAllowDeath = 'balances.transferAllowDeath',
+  BalancesTransfer = 'balances.transferAllowDeath',
   BalancesTransferKeepAlive = 'balances.transferKeepAlive',
   BalancesTransferAll = 'balances.transferAll',
   // Nfts Pallet
@@ -89,63 +89,20 @@ export enum TransactionType {
   NftsSetItemMetadata = 'nfts.setMetadata',
   NftsClearItemMetadata = 'nfts.clearMetadata',
   // UserFreeTransactions Pallet
-  UserFreeTransactionsAppAgentBlacklistAddress = 'userFreeTransactions.appAgentBlacklistAddress',
-  UserFreeTransactionsAppAgentUnblacklistAddress = 'userFreeTransactions.appAgentUnblacklistAddress',
-  UserFreeTransactionsBlacklistAddress = 'userFreeTransactions.blacklistAddress',
-  UserFreeTransactionsClearAppAgentsFreeTransferInfos = 'userFreeTransactions.clearAppAgentsFreeTransferInfos',
-  UserFreeTransactionsClearAssetLastTransferBlocks = 'userFreeTransactions.clearAssetLastTransferBlocks',
-  UserFreeTransactionsClearNftLastTransferBlocks = 'userFreeTransactions.clearNftLastTransferBlocks',
-  UserFreeTransactionsClearUserFreeTransferInfos = 'userFreeTransactions.clearUserFreeTransferInfos',
-  UserFreeTransactionsSetFreeTransfersEnabled = 'userFreeTransactions.setFreeTransfersEnabled',
-  UserFreeTransactionsUnblacklistAddress = 'userFreeTransactions.unblacklistAddress',
+  // UserFreeTransactionsAppAgentBlacklistAddress = 'userFreeTransactions.appAgentBlacklistAddress',
+  // UserFreeTransactionsAppAgentUnblacklistAddress = 'userFreeTransactions.appAgentUnblacklistAddress',
+  // UserFreeTransactionsBlacklistAddress = 'userFreeTransactions.blacklistAddress',
+  // UserFreeTransactionsClearAppAgentsFreeTransferInfos = 'userFreeTransactions.clearAppAgentsFreeTransferInfos',
+  // UserFreeTransactionsClearAssetLastTransferBlocks = 'userFreeTransactions.clearAssetLastTransferBlocks',
+  // UserFreeTransactionsClearNftLastTransferBlocks = 'userFreeTransactions.clearNftLastTransferBlocks',
+  // UserFreeTransactionsClearUserFreeTransferInfos = 'userFreeTransactions.clearUserFreeTransferInfos',
+  // UserFreeTransactionsSetFreeTransfersEnabled = 'userFreeTransactions.setFreeTransfersEnabled',
+  // UserFreeTransactionsUnblacklistAddress = 'userFreeTransactions.unblacklistAddress',
   // UserTransactions Pallet
-  UserTransactionsSubmitTransferAllBalances = 'userTransactions.submitTransferAllBalances',
-  UserTransactionsSubmitTransferAssets = 'userTransactions.submitTransferAssets',
-  UserTransactionsSubmitTransferBalances = 'userTransactions.submitTransferBalances',
-  UserTransactionsSubmitTransferNfts = 'userTransactions.submitTransferNfts',
+  // UserTransactionsSubmitTransferAllBalances = 'userTransactions.submitTransferAllBalances',
+  // UserTransactionsSubmitTransferAssets = 'userTransactions.submitTransferAssets',
+  // UserTransactionsSubmitTransferBalances = 'userTransactions.submitTransferBalances',
+  // UserTransactionsSubmitTransferNfts = 'userTransactions.submitTransferNfts',
   // UserVerification Pallet
-  UserVerificationSetUserLevel = 'userVerification.setUserLevel',
+  // UserVerificationSetUserLevel = 'userVerification.setUserLevel',
 }
-
-export const Actions = [
-  // Balances pallet
-  TransactionType.BalancesTransferAll,
-  TransactionType.BalancesTransferAllowDeath,
-  TransactionType.BalancesTransferKeepAlive,
-  // Assets Pallet
-  TransactionType.AssetsBurn,
-  TransactionType.AssetsCreate,
-  TransactionType.AssetsDestroyAccounts,
-  TransactionType.AssetsDestroyApprovals,
-  TransactionType.AssetsFinishDestroy,
-  TransactionType.AssetsForceTransfer,
-  TransactionType.AssetsFreezeAccount,
-  TransactionType.AssetsFreezeAsset,
-  TransactionType.AssetsMint,
-  TransactionType.AssetsSetMetadata,
-  TransactionType.AssetsSetMinBalance,
-  TransactionType.AssetsStartDestroy,
-  TransactionType.AssetsThawAccount,
-  TransactionType.AssetsThawAsset,
-  TransactionType.AssetsTransfer,
-  TransactionType.AssetsTransferKeepAlive,
-  TransactionType.AssetsTransferOwnership,
-  // Nfts Pallet
-  TransactionType.NftsAcceptCollectionOwnership,
-  TransactionType.NftsBurnItem,
-  TransactionType.NftsClearCollectionMetadata,
-  TransactionType.NftsClearItemMetadata,
-  TransactionType.NftsCreateCollection,
-  TransactionType.NftsDestroyCollection,
-  TransactionType.NftsLockItemTransfer,
-  TransactionType.NftsMintItem,
-  TransactionType.NftsSetCollectionMetadata,
-  TransactionType.NftsSetItemMetadata,
-  TransactionType.NftsTransferCollectionOwnership,
-  TransactionType.NftsTransferItem,
-  TransactionType.NftsUnlockItemTransfer,
-] as const;
-
-export const AllowedActions = [...Actions];
-
-export type ActionType = (typeof Actions)[number];

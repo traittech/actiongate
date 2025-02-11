@@ -37,19 +37,29 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"union","subSchemas":[{"ref":"TransactionSuccessResponse"},{"ref":"TransactionErrorResponse"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AdminsAddAdmin": {
+    "ExtrinsicType.BalancesTransfer": {
         "dataType": "refEnum",
-        "enums": ["admins.addPalletAdmin"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AdminType": {
-        "dataType": "refEnum",
-        "enums": ["AppAgentForce","AppAgentGarbageCollector","AppSubscriptions","AppTransactions","PriceIndex","UserFreeTransactions","UserVerification","Assets","Nfts"],
+        "enums": ["balances.transferAllowDeath"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "BlockchainGenericAccount": {
         "dataType": "refAlias",
         "type": {"dataType":"string","validators":{"minLength":{"value":49},"maxLength":{"value":49}}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BlockchainGenericAccountId": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"ref":"BlockchainGenericAccount","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UINT128": {
+        "dataType": "refAlias",
+        "type": {"dataType":"string","validators":{"pattern":{"value":"^\\d{1,39}$"}}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BlockchainGenericBalance": {
+        "dataType": "refAlias",
+        "type": {"ref":"UINT128","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AnyJson": {
@@ -62,25 +72,204 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"additionalProperties":{"ref":"AnyJson"},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AdminsAddAdminArgs": {
+    "BalancesTransferArgs": {
         "dataType": "refObject",
         "properties": {
-            "adminType": {"ref":"AdminType","required":true},
-            "admin": {"ref":"BlockchainGenericAccount","required":true},
+            "dest": {"ref":"BlockchainGenericAccountId","required":true},
+            "value": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType": {
+    "ExtrinsicType.AppAgentsAddAdmin": {
         "dataType": "refEnum",
-        "enums": ["admins.addPalletAdmin","admins.removePalletAdmin","appAgents.addAdmin","appAgents.addAdminToNamedAddressDispatch","appAgents.allowAdminColdWalletDispatch","appAgents.changeHotWallet","appAgents.changeOwnerCancel","appAgents.changeOwnerComplete","appAgents.changeOwnerInit","appAgents.clearAdminDispatchFilter","appAgents.clearAppAgentMetadata","appAgents.completeDestroyAppAgent","appAgents.createAppAgent","appAgents.disableAdminColdWalletDispatch","appAgents.disableHotWallet","appAgents.enableHotWallet","appAgents.forceCreateAppAgent","appAgents.forceInitiateAppAgentDestroy","appAgents.forceInitiateAppAgentSuspension","appAgents.forceInitiateAppAgentUnsuspension","appAgents.initiateDestroyAppAgent","appAgents.pauseAppAgent","appAgents.processDestroy","appAgents.reactivateAppAgent","appAgents.removeAdmin","appAgents.removeAdminFromNamedAddressDispatch","appAgents.setAdminDispatchFilter","appAgents.setAppAgentMetadata","appAgents.unpauseAppAgent","appResources.setActionPointsBalance","appResources.setClearingPointsBalance","appSubscriptions.createAppSubscriptionTier","appSubscriptions.obsoleteAppSubscriptionTier","appSubscriptions.setAppPayOnDemandMode","appSubscriptions.setAppSubscriptionTier","appTransactions.submitClearingTransaction","appTransactions.forceSubmitClearingTransaction","appTransferChannels.establishTransferChannel","appTransferChannels.removeTransferChannel","appTransferFilters.blockAddressDeposits","appTransferFilters.setAppDepositPermissions","appTransferFilters.unblockAddressDeposits","assets.create","assets.startDestroy","assets.destroyAccounts","assets.destroyApprovals","assets.finishDestroy","assets.mint","assets.burn","assets.transfer","assets.transferKeepAlive","assets.forceTransfer","assets.freeze","assets.thaw","assets.freezeAsset","assets.thawAsset","assets.transferOwnership","assets.setMinBalance","assets.setMetadata","balances.transferAllowDeath","balances.transferKeepAlive","balances.transferAll","nfts.create","nfts.destroy","nfts.transferOwnership","nfts.setAcceptOwnership","nfts.setCollectionMetadata","nfts.clearCollectionMetadata","nfts.mint","nfts.burn","nfts.transfer","nfts.lockItemTransfer","nfts.unlockItemTransfer","nfts.setMetadata","nfts.clearMetadata","userFreeTransactions.appAgentBlacklistAddress","userFreeTransactions.appAgentUnblacklistAddress","userFreeTransactions.blacklistAddress","userFreeTransactions.clearAppAgentsFreeTransferInfos","userFreeTransactions.clearAssetLastTransferBlocks","userFreeTransactions.clearNftLastTransferBlocks","userFreeTransactions.clearUserFreeTransferInfos","userFreeTransactions.setFreeTransfersEnabled","userFreeTransactions.unblacklistAddress","userTransactions.submitTransferAllBalances","userTransactions.submitTransferAssets","userTransactions.submitTransferBalances","userTransactions.submitTransferNfts","userVerification.setUserLevel"],
+        "enums": ["appAgents.addAdmin"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AdminsRemoveAdminArgs": {
+    "ExtrinsicType.AppAgentsAddAdminToNamedAddress": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.addAdminToNamedAddressDispatch"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsAllowAdminColdWallet": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.allowAdminColdWalletDispatch"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsChangeHotWallet": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.changeHotWallet"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsChangeOwnerCancel": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.changeOwnerCancel"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsChangeOwnerComplete": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.changeOwnerComplete"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsChangeOwnerInit": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.changeOwnerInit"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsClearAdminDispatchFilter": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.clearAdminDispatchFilter"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsClearAppAgentMetadata": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.clearAppAgentMetadata"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsCompleteDestroyAppAgent": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.completeDestroyAppAgent"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsCreateAppAgent": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.createAppAgent"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsDisableAdminColdWalletDispatch": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.disableAdminColdWalletDispatch"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsDisableHotWallet": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.disableHotWallet"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsEnableHotWallet": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.enableHotWallet"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsInitiateDestroyAppAgent": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.initiateDestroyAppAgent"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsPauseAppAgent": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.pauseAppAgent"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsProcessDestroy": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.processDestroy"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsReactivateAppAgent": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.reactivateAppAgent"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsRemoveAdmin": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.removeAdmin"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsRemoveAdminFromNamedAddressDispatch": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.removeAdminFromNamedAddressDispatch"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsSetAdminDispatchFilter": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.setAdminDispatchFilter"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsSetAppAgentMetadata": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.setAppAgentMetadata"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppAgentsUnpauseAppAgent": {
+        "dataType": "refEnum",
+        "enums": ["appAgents.unpauseAppAgent"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppSubscriptionsSetAppPayOnDemandMode": {
+        "dataType": "refEnum",
+        "enums": ["appSubscriptions.setAppPayOnDemandMode"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppSubscriptionsSetAppSubscriptionTier": {
+        "dataType": "refEnum",
+        "enums": ["appSubscriptions.setAppSubscriptionTier"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppTransferFiltersBlockAddressDeposits": {
+        "dataType": "refEnum",
+        "enums": ["appTransferFilters.blockAddressDeposits"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppTransferFiltersSetAppDepositPermissions": {
+        "dataType": "refEnum",
+        "enums": ["appTransferFilters.setAppDepositPermissions"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppTransferFiltersUnblockAddressDeposits": {
+        "dataType": "refEnum",
+        "enums": ["appTransferFilters.unblockAddressDeposits"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsTransfer": {
+        "dataType": "refEnum",
+        "enums": ["assets.transfer"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsTransferKeepAlive": {
+        "dataType": "refEnum",
+        "enums": ["assets.transferKeepAlive"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.BalancesTransferKeepAlive": {
+        "dataType": "refEnum",
+        "enums": ["balances.transferKeepAlive"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.BalancesTransferAll": {
+        "dataType": "refEnum",
+        "enums": ["balances.transferAll"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsTransferItem": {
+        "dataType": "refEnum",
+        "enums": ["nfts.transfer"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TxType": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"ref":"ExtrinsicType.AppAgentsAddAdmin"},{"ref":"ExtrinsicType.AppAgentsAddAdminToNamedAddress"},{"ref":"ExtrinsicType.AppAgentsAllowAdminColdWallet"},{"ref":"ExtrinsicType.AppAgentsChangeHotWallet"},{"ref":"ExtrinsicType.AppAgentsChangeOwnerCancel"},{"ref":"ExtrinsicType.AppAgentsChangeOwnerComplete"},{"ref":"ExtrinsicType.AppAgentsChangeOwnerInit"},{"ref":"ExtrinsicType.AppAgentsClearAdminDispatchFilter"},{"ref":"ExtrinsicType.AppAgentsClearAppAgentMetadata"},{"ref":"ExtrinsicType.AppAgentsCompleteDestroyAppAgent"},{"ref":"ExtrinsicType.AppAgentsCreateAppAgent"},{"ref":"ExtrinsicType.AppAgentsDisableAdminColdWalletDispatch"},{"ref":"ExtrinsicType.AppAgentsDisableHotWallet"},{"ref":"ExtrinsicType.AppAgentsEnableHotWallet"},{"ref":"ExtrinsicType.AppAgentsInitiateDestroyAppAgent"},{"ref":"ExtrinsicType.AppAgentsPauseAppAgent"},{"ref":"ExtrinsicType.AppAgentsProcessDestroy"},{"ref":"ExtrinsicType.AppAgentsReactivateAppAgent"},{"ref":"ExtrinsicType.AppAgentsRemoveAdmin"},{"ref":"ExtrinsicType.AppAgentsRemoveAdminFromNamedAddressDispatch"},{"ref":"ExtrinsicType.AppAgentsSetAdminDispatchFilter"},{"ref":"ExtrinsicType.AppAgentsSetAppAgentMetadata"},{"ref":"ExtrinsicType.AppAgentsUnpauseAppAgent"},{"ref":"ExtrinsicType.AppSubscriptionsSetAppPayOnDemandMode"},{"ref":"ExtrinsicType.AppSubscriptionsSetAppSubscriptionTier"},{"ref":"ExtrinsicType.AppTransferFiltersBlockAddressDeposits"},{"ref":"ExtrinsicType.AppTransferFiltersSetAppDepositPermissions"},{"ref":"ExtrinsicType.AppTransferFiltersUnblockAddressDeposits"},{"ref":"ExtrinsicType.AssetsTransfer"},{"ref":"ExtrinsicType.AssetsTransferKeepAlive"},{"ref":"ExtrinsicType.BalancesTransfer"},{"ref":"ExtrinsicType.BalancesTransferKeepAlive"},{"ref":"ExtrinsicType.BalancesTransferAll"},{"ref":"ExtrinsicType.NftsTransferItem"}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BalancesTransferKeepAliveArgs": {
         "dataType": "refObject",
         "properties": {
-            "adminType": {"ref":"AdminType","required":true},
-            "admin": {"ref":"BlockchainGenericAccount","required":true},
+            "dest": {"ref":"BlockchainGenericAccountId","required":true},
+            "value": {"ref":"BlockchainGenericBalance","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BlockchainGenericBoolean": {
+        "dataType": "refAlias",
+        "type": {"dataType":"boolean","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BalancesTransferAllArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "dest": {"ref":"BlockchainGenericAccountId","required":true},
+            "keepAlive": {"ref":"BlockchainGenericBoolean","required":true},
         },
         "additionalProperties": false,
     },
@@ -95,99 +284,49 @@ const models: TsoaRoute.Models = {
         "type": {"ref":"UINT32","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsAddAdminArgs": {
+    "AssetsTransferArgs": {
         "dataType": "refObject",
         "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "admin": {"ref":"BlockchainGenericAccount","required":true},
+            "id": {"ref":"BlockchainGenericId","required":true},
+            "target": {"ref":"BlockchainGenericAccountId","required":true},
+            "amount": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsAddAdminToNamedAddressArgs": {
+    "AssetsTransferKeepAliveArgs": {
         "dataType": "refObject",
         "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "admin": {"ref":"BlockchainGenericAccount","required":true},
-            "namedAddress": {"ref":"BlockchainGenericAccount","required":true},
+            "id": {"ref":"BlockchainGenericId","required":true},
+            "target": {"ref":"BlockchainGenericAccountId","required":true},
+            "amount": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsAllowAdminColdWalletArgs": {
+    "NftsTransferItemArgs": {
         "dataType": "refObject",
         "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "admin": {"ref":"BlockchainGenericAccount","required":true},
-            "coldWallet": {"ref":"BlockchainGenericAccount","required":true},
+            "collection": {"ref":"BlockchainGenericId","required":true},
+            "item": {"ref":"BlockchainGenericId","required":true},
+            "dest": {"ref":"BlockchainGenericAccountId","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BlockchainAddressName": {
-        "dataType": "refAlias",
-        "type": {"dataType":"string","validators":{"minLength":{"value":10},"maxLength":{"value":10},"pattern":{"value":"^[0-9a-zA-Z\\-#]+$"}}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NamedAddressInput": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"nestedObjectLiteral","nestedProperties":{"Address":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"Name":{"ref":"BlockchainAddressName","required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsChangeHotWalletArgs": {
+    "AppAgentsCreateAppAgentArgs": {
         "dataType": "refObject",
         "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "newHotWallet": {"ref":"NamedAddressInput","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsChangeOwnerCancelArgs": {
+    "AppAgentsInitiateDestroyAppAgentArgs": {
         "dataType": "refObject",
         "properties": {
             "appAgentId": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsChangeOwnerCompleteArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsChangeOwnerInitArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "proposedOwner": {"ref":"BlockchainGenericAccount","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsClearAdminDispatchFilterArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "admin": {"ref":"BlockchainGenericAccount","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsClearAppAgentMetadataArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BlockchainGenericBoolean": {
-        "dataType": "refAlias",
-        "type": {"dataType":"boolean","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "OwnFungibleDestroyDetail": {
@@ -220,6 +359,15 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"appAgentNonFungibles":{"dataType":"array","array":{"dataType":"refAlias","ref":"NonFungibleDestroyDetail"},"required":true},"appAgentFungibles":{"dataType":"array","array":{"dataType":"refAlias","ref":"FungibleDestroyDetail"},"required":true},"controlledAddressesInfos":{"dataType":"array","array":{"dataType":"refAlias","ref":"PoolAddressDestroyInfo"},"required":true},"ownNonFungibles":{"dataType":"array","array":{"dataType":"refAlias","ref":"OwnNonFungibleDestroyDetail"},"required":true},"ownFungibles":{"dataType":"array","array":{"dataType":"refAlias","ref":"OwnFungibleDestroyDetail"},"required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsProcessDestroyArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "destroyInfo": {"ref":"AppAgentDestroyInfo","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AppAgentsCompleteDestroyAppAgentArgs": {
         "dataType": "refObject",
         "properties": {
@@ -229,73 +377,7 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsCreateAppAgentArgs": {
-        "dataType": "refObject",
-        "properties": {
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsDisableAdminColdWalletDispatchArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "admin": {"ref":"BlockchainGenericAccount","required":true},
-            "coldWallet": {"ref":"BlockchainGenericAccount","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsDisableHotWalletArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsEnableHotWalletArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsForceCreateAppAgentArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentOwner": {"ref":"BlockchainGenericAccount","required":true},
-            "appAgentBalancePayer": {"ref":"BlockchainGenericAccount","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsForceInitiateAppAgentDestroyArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsForceInitiateAppAgentSuspensionArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsForceInitiateAppAgentUnsuspensionArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsInitiateDestroyAppAgentArgs": {
+    "AppAgentsReactivateAppAgentArgs": {
         "dataType": "refObject",
         "properties": {
             "appAgentId": {"ref":"BlockchainGenericId","required":true},
@@ -311,19 +393,101 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsProcessDestroyArgs": {
+    "AppAgentsUnpauseAppAgentArgs": {
         "dataType": "refObject",
         "properties": {
             "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "destroyInfo": {"ref":"AppAgentDestroyInfo","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsReactivateAppAgentArgs": {
+    "AppAgentsChangeOwnerInitArgs": {
         "dataType": "refObject",
         "properties": {
             "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "proposedOwner": {"ref":"BlockchainGenericAccount","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsChangeOwnerCompleteArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsChangeOwnerCancelArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BlockchainGenericText": {
+        "dataType": "refAlias",
+        "type": {"dataType":"string","validators":{"maxLength":{"value":256}}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsSetAppAgentMetadataArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "data": {"ref":"BlockchainGenericText","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsClearAppAgentMetadataArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsEnableHotWalletArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsDisableHotWalletArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BlockchainAddressName": {
+        "dataType": "refAlias",
+        "type": {"dataType":"string","validators":{"minLength":{"value":10},"maxLength":{"value":10},"pattern":{"value":"^[0-9a-zA-Z\\-#]+$"}}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NamedAddressInput": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"dataType":"nestedObjectLiteral","nestedProperties":{"Address":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"Name":{"ref":"BlockchainAddressName","required":true}}}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsChangeHotWalletArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "newHotWallet": {"ref":"NamedAddressInput","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsAddAdminArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "admin": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
     },
@@ -333,16 +497,6 @@ const models: TsoaRoute.Models = {
         "properties": {
             "appAgentId": {"ref":"BlockchainGenericId","required":true},
             "admin": {"ref":"BlockchainGenericAccount","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsRemoveAdminFromNamedAddressDispatchArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "admin": {"ref":"BlockchainGenericAccount","required":true},
-            "namedAddress": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
     },
@@ -362,79 +516,60 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BlockchainGenericText": {
-        "dataType": "refAlias",
-        "type": {"dataType":"string","validators":{"maxLength":{"value":256}}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsSetAppAgentMetadataArgs": {
+    "AppAgentsClearAdminDispatchFilterArgs": {
         "dataType": "refObject",
         "properties": {
             "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "data": {"ref":"BlockchainGenericText","required":true},
+            "admin": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsUnpauseAppAgentArgs": {
+    "AppAgentsAllowAdminColdWalletArgs": {
         "dataType": "refObject",
         "properties": {
             "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "admin": {"ref":"BlockchainGenericAccount","required":true},
+            "coldWallet": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UINT128": {
-        "dataType": "refAlias",
-        "type": {"dataType":"string","validators":{"pattern":{"value":"^\\d{1,39}$"}}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BlockchainGenericBalance": {
-        "dataType": "refAlias",
-        "type": {"ref":"UINT128","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppResourcesSetActionPointsBalanceArgs": {
+    "AppAgentsDisableAdminColdWalletDispatchArgs": {
         "dataType": "refObject",
         "properties": {
-            "address": {"ref":"BlockchainGenericAccount","required":true},
-            "balance": {"ref":"BlockchainGenericBalance","required":true},
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "admin": {"ref":"BlockchainGenericAccount","required":true},
+            "coldWallet": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppResourcesSetClearingPointsBalanceArgs": {
+    "AppAgentsAddAdminToNamedAddressArgs": {
         "dataType": "refObject",
         "properties": {
-            "address": {"ref":"BlockchainGenericAccount","required":true},
-            "balance": {"ref":"BlockchainGenericBalance","required":true},
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "admin": {"ref":"BlockchainGenericAccount","required":true},
+            "namedAddress": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "PayOnDemand": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"extraCtActionPrice":{"ref":"BlockchainGenericBalance","required":true},"extraCtPrice":{"ref":"BlockchainGenericBalance","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppSubscriptionTierDetails": {
-        "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"billingPeriodLength":{"ref":"UINT32","required":true},"payOnDemand":{"ref":"PayOnDemand","required":true},"price":{"ref":"BlockchainGenericBalance","required":true},"includedAnonymousTransfers":{"ref":"UINT32","required":true},"includedCtActionsNumber":{"ref":"UINT32","required":true},"includedCtNumber":{"ref":"UINT32","required":true}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppSubscriptionsCreateAppSubscriptionTierArgs": {
+    "AppAgentsRemoveAdminFromNamedAddressDispatchArgs": {
         "dataType": "refObject",
         "properties": {
-            "details": {"ref":"AppSubscriptionTierDetails","required":true},
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "admin": {"ref":"BlockchainGenericAccount","required":true},
+            "namedAddress": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppSubscriptionsObsoleteAppSubscriptionTierArgs": {
+    "AppSubscriptionsSetAppSubscriptionTierArgs": {
         "dataType": "refObject",
         "properties": {
-            "tierToObsolete": {"ref":"BlockchainGenericId","required":true},
-            "successorTier": {"ref":"BlockchainGenericId","required":true},
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "subscriptionTierId": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
     },
@@ -453,78 +588,16 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppSubscriptionsSetAppSubscriptionTierArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "subscriptionTierId": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BlockchainGenericAddressId": {
-        "dataType": "refAlias",
-        "type": {"ref":"UINT128","validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CTActionOrigin": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"nestedObjectLiteral","nestedProperties":{"AppAgentId":{"ref":"BlockchainGenericId","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"AppAgentAddress":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"TransactionalAddressId":{"ref":"BlockchainGenericAddressId","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"TransactionalAddress":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"NamedAddress":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"NamedAddressName":{"ref":"BlockchainAddressName","required":true}}}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CTActionCall": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"dataType":"nestedObjectLiteral","nestedProperties":{"args":{"dataType":"string"},"callIndex":{"dataType":"string"}}},{"dataType":"string"}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CTAction": {
-        "dataType": "refAlias",
-        "type": {"dataType":"array","array":{"dataType":"union","subSchemas":[{"ref":"CTActionOrigin"},{"ref":"CTActionCall"}]},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "CTAtomicActions": {
-        "dataType": "refAlias",
-        "type": {"dataType":"array","array":{"dataType":"array","array":{"dataType":"refAlias","ref":"CTAction"}},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransactionsForceSubmitClearingTransactionArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "extraFeePayer": {"ref":"BlockchainGenericAccount","required":true},
-            "atomics": {"ref":"CTAtomicActions","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransactionsSubmitClearingTransactionArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "atomics": {"ref":"CTAtomicActions","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransferChannelsEstablishTransferChannelArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "senderAccount": {"ref":"BlockchainGenericAccount","required":true},
-            "transfersLimitResetPeriod": {"ref":"BlockchainGenericId","required":true},
-            "transfersLimitPerPeriod": {"ref":"BlockchainGenericBalance","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransferChannelsRemoveTransferChannelArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "senderAccount": {"ref":"BlockchainGenericAccount","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AppTransferFiltersBlockAddressDepositsArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "appAgentId": {"ref":"BlockchainGenericId","required":true},
+            "keylessAddress": {"ref":"BlockchainGenericAccount","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppTransferFiltersUnblockAddressDepositsArgs": {
         "dataType": "refObject",
         "properties": {
             "appAgentId": {"ref":"BlockchainGenericId","required":true},
@@ -597,34 +670,503 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransferFiltersUnblockAddressDepositsArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "keylessAddress": {"ref":"BlockchainGenericAccount","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BlockchainGenericAccountId": {
+    "TxArgs": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"id":{"ref":"BlockchainGenericAccount","required":true}},"validators":{}},
+        "type": {"dataType":"union","subSchemas":[{"ref":"BalancesTransferArgs"},{"ref":"BalancesTransferKeepAliveArgs"},{"ref":"BalancesTransferAllArgs"},{"ref":"AssetsTransferArgs"},{"ref":"AssetsTransferKeepAliveArgs"},{"ref":"NftsTransferItemArgs"},{"ref":"AppAgentsCreateAppAgentArgs"},{"ref":"AppAgentsInitiateDestroyAppAgentArgs"},{"ref":"AppAgentsProcessDestroyArgs"},{"ref":"AppAgentsCompleteDestroyAppAgentArgs"},{"ref":"AppAgentsReactivateAppAgentArgs"},{"ref":"AppAgentsPauseAppAgentArgs"},{"ref":"AppAgentsUnpauseAppAgentArgs"},{"ref":"AppAgentsChangeOwnerInitArgs"},{"ref":"AppAgentsChangeOwnerCompleteArgs"},{"ref":"AppAgentsChangeOwnerCancelArgs"},{"ref":"AppAgentsSetAppAgentMetadataArgs"},{"ref":"AppAgentsClearAppAgentMetadataArgs"},{"ref":"AppAgentsEnableHotWalletArgs"},{"ref":"AppAgentsDisableHotWalletArgs"},{"ref":"AppAgentsChangeHotWalletArgs"},{"ref":"AppAgentsAddAdminArgs"},{"ref":"AppAgentsRemoveAdminArgs"},{"ref":"AppAgentsSetAdminDispatchFilterArgs"},{"ref":"AppAgentsClearAdminDispatchFilterArgs"},{"ref":"AppAgentsAllowAdminColdWalletArgs"},{"ref":"AppAgentsDisableAdminColdWalletDispatchArgs"},{"ref":"AppAgentsAddAdminToNamedAddressArgs"},{"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchArgs"},{"ref":"AppSubscriptionsSetAppSubscriptionTierArgs"},{"ref":"AppSubscriptionsSetAppPayOnDemandModeArgs"},{"ref":"AppTransferFiltersBlockAddressDepositsArgs"},{"ref":"AppTransferFiltersUnblockAddressDepositsArgs"},{"ref":"AppTransferFiltersSetAppDepositPermissionsArgs"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsBurnArgs": {
+    "BalancesTransferTx": {
         "dataType": "refObject",
         "properties": {
-            "id": {"ref":"BlockchainGenericId","required":true},
-            "who": {"ref":"BlockchainGenericAccountId","required":true},
-            "amount": {"ref":"BlockchainGenericBalance","required":true},
+            "actionType": {"ref":"ExtrinsicType.BalancesTransfer","required":true},
+            "arguments": {"ref":"BalancesTransferArgs","required":true},
         },
         "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BalancesTransferKeepAliveTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.BalancesTransferKeepAlive","required":true},
+            "arguments": {"ref":"BalancesTransferKeepAliveArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BalancesTransferAllTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.BalancesTransferAll","required":true},
+            "arguments": {"ref":"BalancesTransferAllArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsTransferTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AssetsTransfer","required":true},
+            "arguments": {"ref":"AssetsTransferArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsTransferKeepAliveTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AssetsTransferKeepAlive","required":true},
+            "arguments": {"ref":"AssetsTransferKeepAliveArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsTransferItemTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.NftsTransferItem","required":true},
+            "arguments": {"ref":"NftsTransferItemArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsCreateAppAgentTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsCreateAppAgent","required":true},
+            "arguments": {"ref":"AppAgentsCreateAppAgentArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsInitiateDestroyAppAgentTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsInitiateDestroyAppAgent","required":true},
+            "arguments": {"ref":"AppAgentsInitiateDestroyAppAgentArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsProcessDestroyTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsProcessDestroy","required":true},
+            "arguments": {"ref":"AppAgentsProcessDestroyArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsCompleteDestroyAppAgentTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsCompleteDestroyAppAgent","required":true},
+            "arguments": {"ref":"AppAgentsCompleteDestroyAppAgentArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsReactivateAppAgentTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsReactivateAppAgent","required":true},
+            "arguments": {"ref":"AppAgentsReactivateAppAgentArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsPauseAppAgentTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsPauseAppAgent","required":true},
+            "arguments": {"ref":"AppAgentsPauseAppAgentArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsUnpauseAppAgentTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsUnpauseAppAgent","required":true},
+            "arguments": {"ref":"AppAgentsUnpauseAppAgentArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsChangeOwnerInitTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsChangeOwnerInit","required":true},
+            "arguments": {"ref":"AppAgentsChangeOwnerInitArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsChangeOwnerCompleteTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsChangeOwnerComplete","required":true},
+            "arguments": {"ref":"AppAgentsChangeOwnerCompleteArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsChangeOwnerCancelTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsChangeOwnerCancel","required":true},
+            "arguments": {"ref":"AppAgentsChangeOwnerCancelArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsSetAppAgentMetadataTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsSetAppAgentMetadata","required":true},
+            "arguments": {"ref":"AppAgentsSetAppAgentMetadataArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsClearAppAgentMetadataTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsClearAppAgentMetadata","required":true},
+            "arguments": {"ref":"AppAgentsClearAppAgentMetadataArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsEnableHotWalletTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsEnableHotWallet","required":true},
+            "arguments": {"ref":"AppAgentsEnableHotWalletArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsDisableHotWalletTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsDisableHotWallet","required":true},
+            "arguments": {"ref":"AppAgentsDisableHotWalletArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsChangeHotWalletTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsChangeHotWallet","required":true},
+            "arguments": {"ref":"AppAgentsChangeHotWalletArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsAddAdminTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsAddAdmin","required":true},
+            "arguments": {"ref":"AppAgentsAddAdminArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsRemoveAdminTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsRemoveAdmin","required":true},
+            "arguments": {"ref":"AppAgentsRemoveAdminArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsSetAdminDispatchFilterTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsSetAdminDispatchFilter","required":true},
+            "arguments": {"ref":"AppAgentsSetAdminDispatchFilterArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsClearAdminDispatchFilterTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsClearAdminDispatchFilter","required":true},
+            "arguments": {"ref":"AppAgentsClearAdminDispatchFilterArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsAllowAdminColdWalletTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsAllowAdminColdWallet","required":true},
+            "arguments": {"ref":"AppAgentsAllowAdminColdWalletArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsDisableAdminColdWalletDispatchTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsDisableAdminColdWalletDispatch","required":true},
+            "arguments": {"ref":"AppAgentsDisableAdminColdWalletDispatchArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsAddAdminToNamedAddressTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsAddAdminToNamedAddress","required":true},
+            "arguments": {"ref":"AppAgentsAddAdminToNamedAddressArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppAgentsRemoveAdminFromNamedAddressDispatchTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppAgentsRemoveAdminFromNamedAddressDispatch","required":true},
+            "arguments": {"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppSubscriptionsSetAppSubscriptionTierTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppSubscriptionsSetAppSubscriptionTier","required":true},
+            "arguments": {"ref":"AppSubscriptionsSetAppSubscriptionTierArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppSubscriptionsSetAppPayOnDemandModeTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppSubscriptionsSetAppPayOnDemandMode","required":true},
+            "arguments": {"ref":"AppSubscriptionsSetAppPayOnDemandModeArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppTransferFiltersBlockAddressDepositsTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppTransferFiltersBlockAddressDeposits","required":true},
+            "arguments": {"ref":"AppTransferFiltersBlockAddressDepositsArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppTransferFiltersUnblockAddressDepositsTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppTransferFiltersUnblockAddressDeposits","required":true},
+            "arguments": {"ref":"AppTransferFiltersUnblockAddressDepositsArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppTransferFiltersSetAppDepositPermissionsTx": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppTransferFiltersSetAppDepositPermissions","required":true},
+            "arguments": {"ref":"AppTransferFiltersSetAppDepositPermissionsArgs","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Tx": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"ref":"BalancesTransferTx"},{"ref":"BalancesTransferKeepAliveTx"},{"ref":"BalancesTransferAllTx"},{"ref":"AssetsTransferTx"},{"ref":"AssetsTransferKeepAliveTx"},{"ref":"NftsTransferItemTx"},{"ref":"AppAgentsCreateAppAgentTx"},{"ref":"AppAgentsInitiateDestroyAppAgentTx"},{"ref":"AppAgentsProcessDestroyTx"},{"ref":"AppAgentsCompleteDestroyAppAgentTx"},{"ref":"AppAgentsReactivateAppAgentTx"},{"ref":"AppAgentsPauseAppAgentTx"},{"ref":"AppAgentsUnpauseAppAgentTx"},{"ref":"AppAgentsChangeOwnerInitTx"},{"ref":"AppAgentsChangeOwnerCompleteTx"},{"ref":"AppAgentsChangeOwnerCancelTx"},{"ref":"AppAgentsSetAppAgentMetadataTx"},{"ref":"AppAgentsClearAppAgentMetadataTx"},{"ref":"AppAgentsEnableHotWalletTx"},{"ref":"AppAgentsDisableHotWalletTx"},{"ref":"AppAgentsChangeHotWalletTx"},{"ref":"AppAgentsAddAdminTx"},{"ref":"AppAgentsRemoveAdminTx"},{"ref":"AppAgentsSetAdminDispatchFilterTx"},{"ref":"AppAgentsClearAdminDispatchFilterTx"},{"ref":"AppAgentsAllowAdminColdWalletTx"},{"ref":"AppAgentsDisableAdminColdWalletDispatchTx"},{"ref":"AppAgentsAddAdminToNamedAddressTx"},{"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchTx"},{"ref":"AppSubscriptionsSetAppSubscriptionTierTx"},{"ref":"AppSubscriptionsSetAppPayOnDemandModeTx"},{"ref":"AppTransferFiltersBlockAddressDepositsTx"},{"ref":"AppTransferFiltersUnblockAddressDepositsTx"},{"ref":"AppTransferFiltersSetAppDepositPermissionsTx"}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TransactionPayload": {
+        "dataType": "refObject",
+        "properties": {
+            "signatory": {"dataType":"string","required":true},
+            "tx": {"ref":"Tx","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "BlockchainGenericAddressId": {
+        "dataType": "refAlias",
+        "type": {"ref":"UINT128","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "CTActionOrigin": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"dataType":"nestedObjectLiteral","nestedProperties":{"AppAgentId":{"ref":"BlockchainGenericId","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"AppAgentAddress":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"TransactionalAddressId":{"ref":"BlockchainGenericAddressId","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"TransactionalAddress":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"NamedAddress":{"ref":"BlockchainGenericAccount","required":true}}},{"dataType":"nestedObjectLiteral","nestedProperties":{"NamedAddressName":{"ref":"BlockchainAddressName","required":true}}}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppTransferChannelsEstablishTransferChannel": {
+        "dataType": "refEnum",
+        "enums": ["appTransferChannels.establishTransferChannel"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AppTransferChannelsRemoveTransferChannel": {
+        "dataType": "refEnum",
+        "enums": ["appTransferChannels.removeTransferChannel"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsCreate": {
+        "dataType": "refEnum",
+        "enums": ["assets.create"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsStartDestroy": {
+        "dataType": "refEnum",
+        "enums": ["assets.startDestroy"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsDestroyAccounts": {
+        "dataType": "refEnum",
+        "enums": ["assets.destroyAccounts"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsDestroyApprovals": {
+        "dataType": "refEnum",
+        "enums": ["assets.destroyApprovals"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsFinishDestroy": {
+        "dataType": "refEnum",
+        "enums": ["assets.finishDestroy"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsMint": {
+        "dataType": "refEnum",
+        "enums": ["assets.mint"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsBurn": {
+        "dataType": "refEnum",
+        "enums": ["assets.burn"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsForceTransfer": {
+        "dataType": "refEnum",
+        "enums": ["assets.forceTransfer"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsFreezeAccount": {
+        "dataType": "refEnum",
+        "enums": ["assets.freeze"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsThawAccount": {
+        "dataType": "refEnum",
+        "enums": ["assets.thaw"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsFreezeAsset": {
+        "dataType": "refEnum",
+        "enums": ["assets.freezeAsset"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsThawAsset": {
+        "dataType": "refEnum",
+        "enums": ["assets.thawAsset"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsTransferOwnership": {
+        "dataType": "refEnum",
+        "enums": ["assets.transferOwnership"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsSetMinBalance": {
+        "dataType": "refEnum",
+        "enums": ["assets.setMinBalance"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.AssetsSetMetadata": {
+        "dataType": "refEnum",
+        "enums": ["assets.setMetadata"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsCreateCollection": {
+        "dataType": "refEnum",
+        "enums": ["nfts.create"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsDestroyCollection": {
+        "dataType": "refEnum",
+        "enums": ["nfts.destroy"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsTransferCollectionOwnership": {
+        "dataType": "refEnum",
+        "enums": ["nfts.transferOwnership"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsAcceptCollectionOwnership": {
+        "dataType": "refEnum",
+        "enums": ["nfts.setAcceptOwnership"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsSetCollectionMetadata": {
+        "dataType": "refEnum",
+        "enums": ["nfts.setCollectionMetadata"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsClearCollectionMetadata": {
+        "dataType": "refEnum",
+        "enums": ["nfts.clearCollectionMetadata"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsMintItem": {
+        "dataType": "refEnum",
+        "enums": ["nfts.mint"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsBurnItem": {
+        "dataType": "refEnum",
+        "enums": ["nfts.burn"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsLockItemTransfer": {
+        "dataType": "refEnum",
+        "enums": ["nfts.lockItemTransfer"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsUnlockItemTransfer": {
+        "dataType": "refEnum",
+        "enums": ["nfts.unlockItemTransfer"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsSetItemMetadata": {
+        "dataType": "refEnum",
+        "enums": ["nfts.setMetadata"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ExtrinsicType.NftsClearItemMetadata": {
+        "dataType": "refEnum",
+        "enums": ["nfts.clearMetadata"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "ActionType": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"ref":"ExtrinsicType.AppTransferChannelsEstablishTransferChannel"},{"ref":"ExtrinsicType.AppTransferChannelsRemoveTransferChannel"},{"ref":"ExtrinsicType.AssetsCreate"},{"ref":"ExtrinsicType.AssetsStartDestroy"},{"ref":"ExtrinsicType.AssetsDestroyAccounts"},{"ref":"ExtrinsicType.AssetsDestroyApprovals"},{"ref":"ExtrinsicType.AssetsFinishDestroy"},{"ref":"ExtrinsicType.AssetsMint"},{"ref":"ExtrinsicType.AssetsBurn"},{"ref":"ExtrinsicType.AssetsTransfer"},{"ref":"ExtrinsicType.AssetsTransferKeepAlive"},{"ref":"ExtrinsicType.AssetsForceTransfer"},{"ref":"ExtrinsicType.AssetsFreezeAccount"},{"ref":"ExtrinsicType.AssetsThawAccount"},{"ref":"ExtrinsicType.AssetsFreezeAsset"},{"ref":"ExtrinsicType.AssetsThawAsset"},{"ref":"ExtrinsicType.AssetsTransferOwnership"},{"ref":"ExtrinsicType.AssetsSetMinBalance"},{"ref":"ExtrinsicType.AssetsSetMetadata"},{"ref":"ExtrinsicType.BalancesTransfer"},{"ref":"ExtrinsicType.BalancesTransferKeepAlive"},{"ref":"ExtrinsicType.BalancesTransferAll"},{"ref":"ExtrinsicType.NftsCreateCollection"},{"ref":"ExtrinsicType.NftsDestroyCollection"},{"ref":"ExtrinsicType.NftsTransferCollectionOwnership"},{"ref":"ExtrinsicType.NftsAcceptCollectionOwnership"},{"ref":"ExtrinsicType.NftsSetCollectionMetadata"},{"ref":"ExtrinsicType.NftsClearCollectionMetadata"},{"ref":"ExtrinsicType.NftsMintItem"},{"ref":"ExtrinsicType.NftsBurnItem"},{"ref":"ExtrinsicType.NftsTransferItem"},{"ref":"ExtrinsicType.NftsLockItemTransfer"},{"ref":"ExtrinsicType.NftsUnlockItemTransfer"},{"ref":"ExtrinsicType.NftsSetItemMetadata"},{"ref":"ExtrinsicType.NftsClearItemMetadata"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsCreateArgs": {
         "dataType": "refObject",
         "properties": {
             "minBalance": {"ref":"BlockchainGenericBalance","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsStartDestroyArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
     },
@@ -653,6 +1195,26 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsMintArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"ref":"BlockchainGenericId","required":true},
+            "beneficiary": {"ref":"BlockchainGenericAccountId","required":true},
+            "amount": {"ref":"BlockchainGenericBalance","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsBurnArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"ref":"BlockchainGenericId","required":true},
+            "who": {"ref":"BlockchainGenericAccountId","required":true},
+            "amount": {"ref":"BlockchainGenericBalance","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsForceTransferArgs": {
         "dataType": "refObject",
         "properties": {
@@ -673,6 +1235,15 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsThawAccountArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"ref":"BlockchainGenericId","required":true},
+            "who": {"ref":"BlockchainGenericAccountId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "AssetsFreezeAssetArgs": {
         "dataType": "refObject",
         "properties": {
@@ -681,12 +1252,19 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsMintArgs": {
+    "AssetsThawAssetArgs": {
         "dataType": "refObject",
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
-            "beneficiary": {"ref":"BlockchainGenericAccountId","required":true},
-            "amount": {"ref":"BlockchainGenericBalance","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AssetsTransferOwnershipArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "id": {"ref":"BlockchainGenericId","required":true},
+            "owner": {"ref":"BlockchainGenericAccountId","required":true},
         },
         "additionalProperties": false,
     },
@@ -705,113 +1283,6 @@ const models: TsoaRoute.Models = {
         "properties": {
             "id": {"ref":"BlockchainGenericId","required":true},
             "minBalance": {"ref":"BlockchainGenericBalance","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsStartDestroyArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsThawAccountArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"ref":"BlockchainGenericId","required":true},
-            "who": {"ref":"BlockchainGenericAccountId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsThawAssetArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsTransferArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"ref":"BlockchainGenericId","required":true},
-            "target": {"ref":"BlockchainGenericAccountId","required":true},
-            "amount": {"ref":"BlockchainGenericBalance","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsTransferKeepAliveArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"ref":"BlockchainGenericId","required":true},
-            "target": {"ref":"BlockchainGenericAccountId","required":true},
-            "amount": {"ref":"BlockchainGenericBalance","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsTransferOwnershipArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"ref":"BlockchainGenericId","required":true},
-            "owner": {"ref":"BlockchainGenericAccountId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BalancesTransferAllArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "dest": {"ref":"BlockchainGenericAccountId","required":true},
-            "keepAlive": {"ref":"BlockchainGenericBoolean","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BalancesTransferAllowDeathArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "dest": {"ref":"BlockchainGenericAccountId","required":true},
-            "value": {"ref":"BlockchainGenericBalance","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BalancesTransferKeepAliveArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "dest": {"ref":"BlockchainGenericAccountId","required":true},
-            "value": {"ref":"BlockchainGenericBalance","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsBurnItemArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "collection": {"ref":"BlockchainGenericId","required":true},
-            "item": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsClearCollectionMetadataArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "collection": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsClearItemMetadataArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "collection": {"ref":"BlockchainGenericId","required":true},
-            "item": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
     },
@@ -837,15 +1308,6 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsLockItemTransferArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "collection": {"ref":"BlockchainGenericId","required":true},
-            "item": {"ref":"BlockchainGenericId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "NftsMintItemArgs": {
         "dataType": "refObject",
         "properties": {
@@ -856,19 +1318,38 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsAcceptCollectionOwnershipArgs": {
+    "NftsBurnItemArgs": {
         "dataType": "refObject",
         "properties": {
-            "maybeCollection": {"ref":"BlockchainGenericId"},
+            "collection": {"ref":"BlockchainGenericId","required":true},
+            "item": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsSetCollectionMetadataArgs": {
+    "NftsLockItemTransferArgs": {
         "dataType": "refObject",
         "properties": {
             "collection": {"ref":"BlockchainGenericId","required":true},
-            "data": {"ref":"BlockchainGenericText","required":true},
+            "item": {"ref":"BlockchainGenericId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsUnlockItemTransferArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "collection": {"ref":"BlockchainGenericId","required":true},
+            "item": {"ref":"BlockchainGenericId","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "NftsTransferCollectionOwnershipArgs": {
+        "dataType": "refObject",
+        "properties": {
+            "collection": {"ref":"BlockchainGenericId","required":true},
+            "newOwner": {"ref":"BlockchainGenericAccountId","required":true},
         },
         "additionalProperties": false,
     },
@@ -883,26 +1364,7 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsTransferItemArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "collection": {"ref":"BlockchainGenericId","required":true},
-            "item": {"ref":"BlockchainGenericId","required":true},
-            "dest": {"ref":"BlockchainGenericAccountId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsTransferCollectionOwnershipArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "collection": {"ref":"BlockchainGenericId","required":true},
-            "newOwner": {"ref":"BlockchainGenericAccountId","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsUnlockItemTransferArgs": {
+    "NftsClearItemMetadataArgs": {
         "dataType": "refObject",
         "properties": {
             "collection": {"ref":"BlockchainGenericId","required":true},
@@ -911,1408 +1373,59 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BlockchainGenericAccountList": {
-        "dataType": "refAlias",
-        "type": {"dataType":"array","array":{"dataType":"refAlias","ref":"BlockchainGenericAccount"},"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsAppAgentBlacklistAddressArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "addresses": {"ref":"BlockchainGenericAccountList","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsAppAgentUnblacklistAddressArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "appAgentId": {"ref":"BlockchainGenericId","required":true},
-            "addresses": {"ref":"BlockchainGenericAccountList","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsBlacklistAddressArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "addresses": {"ref":"BlockchainGenericAccountList","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs": {
-        "dataType": "refObject",
-        "properties": {
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsClearAssetLastTransferBlocksArgs": {
-        "dataType": "refObject",
-        "properties": {
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsClearNftLastTransferBlocksArgs": {
-        "dataType": "refObject",
-        "properties": {
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsClearUserFreeTransferInfosArgs": {
-        "dataType": "refObject",
-        "properties": {
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsSetFreeTransfersEnabledArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "enabled": {"ref":"BlockchainGenericBoolean","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsUnblacklistAddressArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "addresses": {"ref":"BlockchainGenericAccountList","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserTransactionsSubmitTransferAllBalancesArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "dest": {"ref":"BlockchainGenericAccount","required":true},
-            "keepAlive": {"ref":"BlockchainGenericBoolean","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserTransactionsSubmitTransferAssetsArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "id": {"ref":"BlockchainGenericId","required":true},
-            "target": {"ref":"BlockchainGenericAccount","required":true},
-            "amount": {"ref":"BlockchainGenericBalance","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserTransactionsSubmitTransferBalancesArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "dest": {"ref":"BlockchainGenericAccount","required":true},
-            "value": {"ref":"BlockchainGenericBalance","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserTransactionsSubmitTransferNftsArgs": {
+    "NftsSetCollectionMetadataArgs": {
         "dataType": "refObject",
         "properties": {
             "collection": {"ref":"BlockchainGenericId","required":true},
-            "item": {"ref":"BlockchainGenericId","required":true},
-            "dest": {"ref":"BlockchainGenericAccount","required":true},
+            "data": {"ref":"BlockchainGenericText","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserLevel": {
-        "dataType": "refEnum",
-        "enums": ["Anonymous","Registered","Level1","Level2","Level3"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserVerificationSetUserLevelArgs": {
-        "dataType": "refObject",
-        "properties": {
-            "user": {"ref":"BlockchainGenericAccount","required":true},
-            "level": {"ref":"UserLevel","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionArgs": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"ref":"AdminsAddAdminArgs"},{"ref":"AdminsRemoveAdminArgs"},{"ref":"AppAgentsAddAdminArgs"},{"ref":"AppAgentsAddAdminToNamedAddressArgs"},{"ref":"AppAgentsAllowAdminColdWalletArgs"},{"ref":"AppAgentsChangeHotWalletArgs"},{"ref":"AppAgentsChangeOwnerCancelArgs"},{"ref":"AppAgentsChangeOwnerCompleteArgs"},{"ref":"AppAgentsChangeOwnerInitArgs"},{"ref":"AppAgentsClearAdminDispatchFilterArgs"},{"ref":"AppAgentsClearAppAgentMetadataArgs"},{"ref":"AppAgentsCompleteDestroyAppAgentArgs"},{"ref":"AppAgentsCreateAppAgentArgs"},{"ref":"AppAgentsDisableAdminColdWalletDispatchArgs"},{"ref":"AppAgentsDisableHotWalletArgs"},{"ref":"AppAgentsEnableHotWalletArgs"},{"ref":"AppAgentsForceCreateAppAgentArgs"},{"ref":"AppAgentsForceInitiateAppAgentDestroyArgs"},{"ref":"AppAgentsForceInitiateAppAgentSuspensionArgs"},{"ref":"AppAgentsForceInitiateAppAgentUnsuspensionArgs"},{"ref":"AppAgentsInitiateDestroyAppAgentArgs"},{"ref":"AppAgentsPauseAppAgentArgs"},{"ref":"AppAgentsProcessDestroyArgs"},{"ref":"AppAgentsReactivateAppAgentArgs"},{"ref":"AppAgentsRemoveAdminArgs"},{"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchArgs"},{"ref":"AppAgentsSetAdminDispatchFilterArgs"},{"ref":"AppAgentsSetAppAgentMetadataArgs"},{"ref":"AppAgentsUnpauseAppAgentArgs"},{"ref":"AppResourcesSetActionPointsBalanceArgs"},{"ref":"AppResourcesSetClearingPointsBalanceArgs"},{"ref":"AppSubscriptionsCreateAppSubscriptionTierArgs"},{"ref":"AppSubscriptionsObsoleteAppSubscriptionTierArgs"},{"ref":"AppSubscriptionsSetAppPayOnDemandModeArgs"},{"ref":"AppSubscriptionsSetAppSubscriptionTierArgs"},{"ref":"AppTransactionsForceSubmitClearingTransactionArgs"},{"ref":"AppTransactionsSubmitClearingTransactionArgs"},{"ref":"AppTransferChannelsEstablishTransferChannelArgs"},{"ref":"AppTransferChannelsRemoveTransferChannelArgs"},{"ref":"AppTransferFiltersBlockAddressDepositsArgs"},{"ref":"AppTransferFiltersSetAppDepositPermissionsArgs"},{"ref":"AppTransferFiltersUnblockAddressDepositsArgs"},{"ref":"AssetsBurnArgs"},{"ref":"AssetsCreateArgs"},{"ref":"AssetsDestroyAccountsArgs"},{"ref":"AssetsDestroyApprovalsArgs"},{"ref":"AssetsFinishDestroyArgs"},{"ref":"AssetsForceTransferArgs"},{"ref":"AssetsFreezeAccountArgs"},{"ref":"AssetsFreezeAssetArgs"},{"ref":"AssetsMintArgs"},{"ref":"AssetsSetMetadataArgs"},{"ref":"AssetsSetMinBalanceArgs"},{"ref":"AssetsStartDestroyArgs"},{"ref":"AssetsThawAccountArgs"},{"ref":"AssetsThawAssetArgs"},{"ref":"AssetsTransferArgs"},{"ref":"AssetsTransferKeepAliveArgs"},{"ref":"AssetsTransferOwnershipArgs"},{"ref":"BalancesTransferAllArgs"},{"ref":"BalancesTransferAllowDeathArgs"},{"ref":"BalancesTransferKeepAliveArgs"},{"ref":"NftsBurnItemArgs"},{"ref":"NftsClearCollectionMetadataArgs"},{"ref":"NftsClearItemMetadataArgs"},{"ref":"NftsCreateCollectionArgs"},{"ref":"NftsDestroyCollectionArgs"},{"ref":"NftsLockItemTransferArgs"},{"ref":"NftsMintItemArgs"},{"ref":"NftsAcceptCollectionOwnershipArgs"},{"ref":"NftsSetCollectionMetadataArgs"},{"ref":"NftsSetItemMetadataArgs"},{"ref":"NftsTransferItemArgs"},{"ref":"NftsTransferCollectionOwnershipArgs"},{"ref":"NftsUnlockItemTransferArgs"},{"ref":"UserFreeTransactionsAppAgentBlacklistAddressArgs"},{"ref":"UserFreeTransactionsAppAgentUnblacklistAddressArgs"},{"ref":"UserFreeTransactionsBlacklistAddressArgs"},{"ref":"UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs"},{"ref":"UserFreeTransactionsClearAssetLastTransferBlocksArgs"},{"ref":"UserFreeTransactionsClearNftLastTransferBlocksArgs"},{"ref":"UserFreeTransactionsClearUserFreeTransferInfosArgs"},{"ref":"UserFreeTransactionsSetFreeTransfersEnabledArgs"},{"ref":"UserFreeTransactionsUnblacklistAddressArgs"},{"ref":"UserTransactionsSubmitTransferAllBalancesArgs"},{"ref":"UserTransactionsSubmitTransferAssetsArgs"},{"ref":"UserTransactionsSubmitTransferBalancesArgs"},{"ref":"UserTransactionsSubmitTransferNftsArgs"},{"ref":"UserVerificationSetUserLevelArgs"}],"validators":{}},
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AdminsAddAdminTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AdminsAddAdmin","required":true},
-            "arguments": {"ref":"AdminsAddAdminArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AdminsRemoveAdmin": {
-        "dataType": "refEnum",
-        "enums": ["admins.removePalletAdmin"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AdminsRemoveAdminTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AdminsRemoveAdmin","required":true},
-            "arguments": {"ref":"AdminsRemoveAdminArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsAddAdmin": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.addAdmin"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsAddAdminTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsAddAdmin","required":true},
-            "arguments": {"ref":"AppAgentsAddAdminArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsAddAdminToNamedAddress": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.addAdminToNamedAddressDispatch"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsAddAdminToNamedAddressTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsAddAdminToNamedAddress","required":true},
-            "arguments": {"ref":"AppAgentsAddAdminToNamedAddressArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsAllowAdminColdWallet": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.allowAdminColdWalletDispatch"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsAllowAdminColdWalletTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsAllowAdminColdWallet","required":true},
-            "arguments": {"ref":"AppAgentsAllowAdminColdWalletArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsChangeHotWallet": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.changeHotWallet"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsChangeHotWalletTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsChangeHotWallet","required":true},
-            "arguments": {"ref":"AppAgentsChangeHotWalletArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsChangeOwnerCancel": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.changeOwnerCancel"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsChangeOwnerCancelTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsChangeOwnerCancel","required":true},
-            "arguments": {"ref":"AppAgentsChangeOwnerCancelArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsChangeOwnerComplete": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.changeOwnerComplete"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsChangeOwnerCompleteTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsChangeOwnerComplete","required":true},
-            "arguments": {"ref":"AppAgentsChangeOwnerCompleteArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsChangeOwnerInit": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.changeOwnerInit"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsChangeOwnerInitTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsChangeOwnerInit","required":true},
-            "arguments": {"ref":"AppAgentsChangeOwnerInitArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsClearAdminDispatchFilter": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.clearAdminDispatchFilter"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsClearAdminDispatchFilterTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsClearAdminDispatchFilter","required":true},
-            "arguments": {"ref":"AppAgentsClearAdminDispatchFilterArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsClearAppAgentMetadata": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.clearAppAgentMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsClearAppAgentMetadataTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsClearAppAgentMetadata","required":true},
-            "arguments": {"ref":"AppAgentsClearAppAgentMetadataArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsCompleteDestroyAppAgent": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.completeDestroyAppAgent"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsCompleteDestroyAppAgentTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsCompleteDestroyAppAgent","required":true},
-            "arguments": {"ref":"AppAgentsCompleteDestroyAppAgentArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsCreateAppAgent": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.createAppAgent"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsCreateAppAgentTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsCreateAppAgent","required":true},
-            "arguments": {"ref":"AppAgentsCreateAppAgentArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsDisableAdminColdWalletDispatch": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.disableAdminColdWalletDispatch"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsDisableAdminColdWalletDispatchTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsDisableAdminColdWalletDispatch","required":true},
-            "arguments": {"ref":"AppAgentsDisableAdminColdWalletDispatchArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsDisableHotWallet": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.disableHotWallet"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsDisableHotWalletTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsDisableHotWallet","required":true},
-            "arguments": {"ref":"AppAgentsDisableHotWalletArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsEnableHotWallet": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.enableHotWallet"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsEnableHotWalletTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsEnableHotWallet","required":true},
-            "arguments": {"ref":"AppAgentsEnableHotWalletArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsForceCreateAppAgent": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.forceCreateAppAgent"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsForceCreateAppAgentTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsForceCreateAppAgent","required":true},
-            "arguments": {"ref":"AppAgentsForceCreateAppAgentArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsForceInitiateAppAgentDestroy": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.forceInitiateAppAgentDestroy"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsForceInitiateAppAgentDestroyTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsForceInitiateAppAgentDestroy","required":true},
-            "arguments": {"ref":"AppAgentsForceInitiateAppAgentDestroyArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsForceInitiateAppAgentSuspension": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.forceInitiateAppAgentSuspension"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsForceInitiateAppAgentSuspensionTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsForceInitiateAppAgentSuspension","required":true},
-            "arguments": {"ref":"AppAgentsForceInitiateAppAgentSuspensionArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsForceInitiateAppAgentUnsuspension": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.forceInitiateAppAgentUnsuspension"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsForceInitiateAppAgentUnsuspensionTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsForceInitiateAppAgentUnsuspension","required":true},
-            "arguments": {"ref":"AppAgentsForceInitiateAppAgentUnsuspensionArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsInitiateDestroyAppAgent": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.initiateDestroyAppAgent"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsInitiateDestroyAppAgentTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsInitiateDestroyAppAgent","required":true},
-            "arguments": {"ref":"AppAgentsInitiateDestroyAppAgentArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsPauseAppAgent": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.pauseAppAgent"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsPauseAppAgentTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsPauseAppAgent","required":true},
-            "arguments": {"ref":"AppAgentsPauseAppAgentArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsProcessDestroy": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.processDestroy"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsProcessDestroyTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsProcessDestroy","required":true},
-            "arguments": {"ref":"AppAgentsProcessDestroyArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsReactivateAppAgent": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.reactivateAppAgent"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsReactivateAppAgentTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsReactivateAppAgent","required":true},
-            "arguments": {"ref":"AppAgentsReactivateAppAgentArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsRemoveAdmin": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.removeAdmin"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsRemoveAdminTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsRemoveAdmin","required":true},
-            "arguments": {"ref":"AppAgentsRemoveAdminArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.removeAdminFromNamedAddressDispatch"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsRemoveAdminFromNamedAddressDispatchTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsRemoveAdminFromNamedAddressDispatch","required":true},
-            "arguments": {"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsSetAdminDispatchFilter": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.setAdminDispatchFilter"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsSetAdminDispatchFilterTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsSetAdminDispatchFilter","required":true},
-            "arguments": {"ref":"AppAgentsSetAdminDispatchFilterArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsSetAppAgentMetadata": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.setAppAgentMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsSetAppAgentMetadataTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsSetAppAgentMetadata","required":true},
-            "arguments": {"ref":"AppAgentsSetAppAgentMetadataArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppAgentsUnpauseAppAgent": {
-        "dataType": "refEnum",
-        "enums": ["appAgents.unpauseAppAgent"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppAgentsUnpauseAppAgentTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppAgentsUnpauseAppAgent","required":true},
-            "arguments": {"ref":"AppAgentsUnpauseAppAgentArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppResourcesSetActionPointsBalance": {
-        "dataType": "refEnum",
-        "enums": ["appResources.setActionPointsBalance"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppResourcesSetActionPointsBalanceTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppResourcesSetActionPointsBalance","required":true},
-            "arguments": {"ref":"AppResourcesSetActionPointsBalanceArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppResourcesSetClearingPointsBalance": {
-        "dataType": "refEnum",
-        "enums": ["appResources.setClearingPointsBalance"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppResourcesSetClearingPointsBalanceTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppResourcesSetClearingPointsBalance","required":true},
-            "arguments": {"ref":"AppResourcesSetClearingPointsBalanceArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppSubscriptionsCreateAppSubscriptionTier": {
-        "dataType": "refEnum",
-        "enums": ["appSubscriptions.createAppSubscriptionTier"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppSubscriptionsCreateAppSubscriptionTierTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppSubscriptionsCreateAppSubscriptionTier","required":true},
-            "arguments": {"ref":"AppSubscriptionsCreateAppSubscriptionTierArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier": {
-        "dataType": "refEnum",
-        "enums": ["appSubscriptions.obsoleteAppSubscriptionTier"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppSubscriptionsObsoleteAppSubscriptionTierTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppSubscriptionsObsoleteAppSubscriptionTier","required":true},
-            "arguments": {"ref":"AppSubscriptionsObsoleteAppSubscriptionTierArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppSubscriptionsSetAppPayOnDemandMode": {
-        "dataType": "refEnum",
-        "enums": ["appSubscriptions.setAppPayOnDemandMode"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppSubscriptionsSetAppPayOnDemandModeTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppSubscriptionsSetAppPayOnDemandMode","required":true},
-            "arguments": {"ref":"AppSubscriptionsSetAppPayOnDemandModeArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppSubscriptionsSetAppSubscriptionTier": {
-        "dataType": "refEnum",
-        "enums": ["appSubscriptions.setAppSubscriptionTier"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppSubscriptionsSetAppSubscriptionTierTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppSubscriptionsSetAppSubscriptionTier","required":true},
-            "arguments": {"ref":"AppSubscriptionsSetAppSubscriptionTierArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppTransactionsForceSubmitClearingTransaction": {
-        "dataType": "refEnum",
-        "enums": ["appTransactions.forceSubmitClearingTransaction"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransactionsForceSubmitClearingTransactionTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppTransactionsForceSubmitClearingTransaction","required":true},
-            "arguments": {"ref":"AppTransactionsForceSubmitClearingTransactionArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppTransactionsSubmitClearingTransaction": {
-        "dataType": "refEnum",
-        "enums": ["appTransactions.submitClearingTransaction"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransactionsSubmitClearingTransactionTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppTransactionsSubmitClearingTransaction","required":true},
-            "arguments": {"ref":"AppTransactionsSubmitClearingTransactionArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppTransferChannelsEstablishTransferChannel": {
-        "dataType": "refEnum",
-        "enums": ["appTransferChannels.establishTransferChannel"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransferChannelsEstablishTransferChannelTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppTransferChannelsEstablishTransferChannel","required":true},
-            "arguments": {"ref":"AppTransferChannelsEstablishTransferChannelArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppTransferChannelsRemoveTransferChannel": {
-        "dataType": "refEnum",
-        "enums": ["appTransferChannels.removeTransferChannel"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransferChannelsRemoveTransferChannelTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppTransferChannelsRemoveTransferChannel","required":true},
-            "arguments": {"ref":"AppTransferChannelsRemoveTransferChannelArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppTransferFiltersBlockAddressDeposits": {
-        "dataType": "refEnum",
-        "enums": ["appTransferFilters.blockAddressDeposits"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransferFiltersBlockAddressDepositsTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppTransferFiltersBlockAddressDeposits","required":true},
-            "arguments": {"ref":"AppTransferFiltersBlockAddressDepositsArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppTransferFiltersSetAppDepositPermissions": {
-        "dataType": "refEnum",
-        "enums": ["appTransferFilters.setAppDepositPermissions"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransferFiltersSetAppDepositPermissionsTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppTransferFiltersSetAppDepositPermissions","required":true},
-            "arguments": {"ref":"AppTransferFiltersSetAppDepositPermissionsArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AppTransferFiltersUnblockAddressDeposits": {
-        "dataType": "refEnum",
-        "enums": ["appTransferFilters.unblockAddressDeposits"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AppTransferFiltersUnblockAddressDepositsTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AppTransferFiltersUnblockAddressDeposits","required":true},
-            "arguments": {"ref":"AppTransferFiltersUnblockAddressDepositsArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsBurn": {
-        "dataType": "refEnum",
-        "enums": ["assets.burn"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsBurnTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsBurn","required":true},
-            "arguments": {"ref":"AssetsBurnArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsCreate": {
-        "dataType": "refEnum",
-        "enums": ["assets.create"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsCreateTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsCreate","required":true},
-            "arguments": {"ref":"AssetsCreateArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsDestroyAccounts": {
-        "dataType": "refEnum",
-        "enums": ["assets.destroyAccounts"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsDestroyAccountsTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsDestroyAccounts","required":true},
-            "arguments": {"ref":"AssetsDestroyAccountsArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsDestroyApprovals": {
-        "dataType": "refEnum",
-        "enums": ["assets.destroyApprovals"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsDestroyApprovalsTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsDestroyApprovals","required":true},
-            "arguments": {"ref":"AssetsDestroyApprovalsArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsFinishDestroy": {
-        "dataType": "refEnum",
-        "enums": ["assets.finishDestroy"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsFinishDestroyTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsFinishDestroy","required":true},
-            "arguments": {"ref":"AssetsFinishDestroyArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsForceTransfer": {
-        "dataType": "refEnum",
-        "enums": ["assets.forceTransfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsForceTransferTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsForceTransfer","required":true},
-            "arguments": {"ref":"AssetsForceTransferArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsFreezeAccount": {
-        "dataType": "refEnum",
-        "enums": ["assets.freeze"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsFreezeAccountTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsFreezeAccount","required":true},
-            "arguments": {"ref":"AssetsFreezeAccountArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsFreezeAsset": {
-        "dataType": "refEnum",
-        "enums": ["assets.freezeAsset"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsFreezeAssetTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsFreezeAsset","required":true},
-            "arguments": {"ref":"AssetsFreezeAssetArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsMint": {
-        "dataType": "refEnum",
-        "enums": ["assets.mint"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsMintTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsMint","required":true},
-            "arguments": {"ref":"AssetsMintArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsSetMetadata": {
-        "dataType": "refEnum",
-        "enums": ["assets.setMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsSetMetadataTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsSetMetadata","required":true},
-            "arguments": {"ref":"AssetsSetMetadataArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsSetMinBalance": {
-        "dataType": "refEnum",
-        "enums": ["assets.setMinBalance"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsSetMinBalanceTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsSetMinBalance","required":true},
-            "arguments": {"ref":"AssetsSetMinBalanceArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsStartDestroy": {
-        "dataType": "refEnum",
-        "enums": ["assets.startDestroy"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsStartDestroyTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsStartDestroy","required":true},
-            "arguments": {"ref":"AssetsStartDestroyArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsThawAccount": {
-        "dataType": "refEnum",
-        "enums": ["assets.thaw"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsThawAccountTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsThawAccount","required":true},
-            "arguments": {"ref":"AssetsThawAccountArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsThawAsset": {
-        "dataType": "refEnum",
-        "enums": ["assets.thawAsset"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsThawAssetTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsThawAsset","required":true},
-            "arguments": {"ref":"AssetsThawAssetArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsTransfer": {
-        "dataType": "refEnum",
-        "enums": ["assets.transfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsTransferTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsTransfer","required":true},
-            "arguments": {"ref":"AssetsTransferArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsTransferKeepAlive": {
-        "dataType": "refEnum",
-        "enums": ["assets.transferKeepAlive"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsTransferKeepAliveTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsTransferKeepAlive","required":true},
-            "arguments": {"ref":"AssetsTransferKeepAliveArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.AssetsTransferOwnership": {
-        "dataType": "refEnum",
-        "enums": ["assets.transferOwnership"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "AssetsTransferOwnershipTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.AssetsTransferOwnership","required":true},
-            "arguments": {"ref":"AssetsTransferOwnershipArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.BalancesTransferAll": {
-        "dataType": "refEnum",
-        "enums": ["balances.transferAll"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BalancesTransferAllTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.BalancesTransferAll","required":true},
-            "arguments": {"ref":"BalancesTransferAllArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.BalancesTransferAllowDeath": {
-        "dataType": "refEnum",
-        "enums": ["balances.transferAllowDeath"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BalancesTransferAllowDeathTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.BalancesTransferAllowDeath","required":true},
-            "arguments": {"ref":"BalancesTransferAllowDeathArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.BalancesTransferKeepAlive": {
-        "dataType": "refEnum",
-        "enums": ["balances.transferKeepAlive"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BalancesTransferKeepAliveTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.BalancesTransferKeepAlive","required":true},
-            "arguments": {"ref":"BalancesTransferKeepAliveArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsBurnItem": {
-        "dataType": "refEnum",
-        "enums": ["nfts.burn"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsBurnItemTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsBurnItem","required":true},
-            "arguments": {"ref":"NftsBurnItemArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsClearCollectionMetadata": {
-        "dataType": "refEnum",
-        "enums": ["nfts.clearCollectionMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsClearCollectionMetadataTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsClearCollectionMetadata","required":true},
-            "arguments": {"ref":"NftsClearCollectionMetadataArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsClearItemMetadata": {
-        "dataType": "refEnum",
-        "enums": ["nfts.clearMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsClearItemMetadataTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsClearItemMetadata","required":true},
-            "arguments": {"ref":"NftsClearItemMetadataArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsCreateCollection": {
-        "dataType": "refEnum",
-        "enums": ["nfts.create"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsCreateCollectionTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsCreateCollection","required":true},
-            "arguments": {"ref":"NftsCreateCollectionArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsDestroyCollection": {
-        "dataType": "refEnum",
-        "enums": ["nfts.destroy"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsDestroyCollectionTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsDestroyCollection","required":true},
-            "arguments": {"ref":"NftsDestroyCollectionArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsLockItemTransfer": {
-        "dataType": "refEnum",
-        "enums": ["nfts.lockItemTransfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsLockItemTransferTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsLockItemTransfer","required":true},
-            "arguments": {"ref":"NftsLockItemTransferArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsMintItem": {
-        "dataType": "refEnum",
-        "enums": ["nfts.mint"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsMintItemTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsMintItem","required":true},
-            "arguments": {"ref":"NftsMintItemArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsAcceptCollectionOwnership": {
-        "dataType": "refEnum",
-        "enums": ["nfts.setAcceptOwnership"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsAcceptCollectionOwnershipTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsAcceptCollectionOwnership","required":true},
-            "arguments": {"ref":"NftsAcceptCollectionOwnershipArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsSetCollectionMetadata": {
-        "dataType": "refEnum",
-        "enums": ["nfts.setCollectionMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsSetCollectionMetadataTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsSetCollectionMetadata","required":true},
-            "arguments": {"ref":"NftsSetCollectionMetadataArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsSetItemMetadata": {
-        "dataType": "refEnum",
-        "enums": ["nfts.setMetadata"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsSetItemMetadataTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsSetItemMetadata","required":true},
-            "arguments": {"ref":"NftsSetItemMetadataArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsTransferItem": {
-        "dataType": "refEnum",
-        "enums": ["nfts.transfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsTransferItemTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsTransferItem","required":true},
-            "arguments": {"ref":"NftsTransferItemArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsTransferCollectionOwnership": {
-        "dataType": "refEnum",
-        "enums": ["nfts.transferOwnership"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsTransferCollectionOwnershipTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsTransferCollectionOwnership","required":true},
-            "arguments": {"ref":"NftsTransferCollectionOwnershipArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.NftsUnlockItemTransfer": {
-        "dataType": "refEnum",
-        "enums": ["nfts.unlockItemTransfer"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "NftsUnlockItemTransferTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.NftsUnlockItemTransfer","required":true},
-            "arguments": {"ref":"NftsUnlockItemTransferArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserFreeTransactionsAppAgentBlacklistAddress": {
-        "dataType": "refEnum",
-        "enums": ["userFreeTransactions.appAgentBlacklistAddress"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsAppAgentBlacklistAddressTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserFreeTransactionsAppAgentBlacklistAddress","required":true},
-            "arguments": {"ref":"UserFreeTransactionsAppAgentBlacklistAddressArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress": {
-        "dataType": "refEnum",
-        "enums": ["userFreeTransactions.appAgentUnblacklistAddress"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsAppAgentUnblacklistAddressTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserFreeTransactionsAppAgentUnblacklistAddress","required":true},
-            "arguments": {"ref":"UserFreeTransactionsAppAgentUnblacklistAddressArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserFreeTransactionsBlacklistAddress": {
-        "dataType": "refEnum",
-        "enums": ["userFreeTransactions.blacklistAddress"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsBlacklistAddressTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserFreeTransactionsBlacklistAddress","required":true},
-            "arguments": {"ref":"UserFreeTransactionsBlacklistAddressArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos": {
-        "dataType": "refEnum",
-        "enums": ["userFreeTransactions.clearAppAgentsFreeTransferInfos"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsClearAppAgentsFreeTransferInfosTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserFreeTransactionsClearAppAgentsFreeTransferInfos","required":true},
-            "arguments": {"ref":"UserFreeTransactionsClearAppAgentsFreeTransferInfosArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks": {
-        "dataType": "refEnum",
-        "enums": ["userFreeTransactions.clearAssetLastTransferBlocks"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsClearAssetLastTransferBlocksTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserFreeTransactionsClearAssetLastTransferBlocks","required":true},
-            "arguments": {"ref":"UserFreeTransactionsClearAssetLastTransferBlocksArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserFreeTransactionsClearNftLastTransferBlocks": {
-        "dataType": "refEnum",
-        "enums": ["userFreeTransactions.clearNftLastTransferBlocks"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsClearNftLastTransferBlocksTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserFreeTransactionsClearNftLastTransferBlocks","required":true},
-            "arguments": {"ref":"UserFreeTransactionsClearNftLastTransferBlocksArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserFreeTransactionsClearUserFreeTransferInfos": {
-        "dataType": "refEnum",
-        "enums": ["userFreeTransactions.clearUserFreeTransferInfos"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsClearUserFreeTransferInfosTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserFreeTransactionsClearUserFreeTransferInfos","required":true},
-            "arguments": {"ref":"UserFreeTransactionsClearUserFreeTransferInfosArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserFreeTransactionsSetFreeTransfersEnabled": {
-        "dataType": "refEnum",
-        "enums": ["userFreeTransactions.setFreeTransfersEnabled"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsSetFreeTransfersEnabledTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserFreeTransactionsSetFreeTransfersEnabled","required":true},
-            "arguments": {"ref":"UserFreeTransactionsSetFreeTransfersEnabledArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserFreeTransactionsUnblacklistAddress": {
-        "dataType": "refEnum",
-        "enums": ["userFreeTransactions.unblacklistAddress"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserFreeTransactionsUnblacklistAddressTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserFreeTransactionsUnblacklistAddress","required":true},
-            "arguments": {"ref":"UserFreeTransactionsUnblacklistAddressArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserTransactionsSubmitTransferAllBalances": {
-        "dataType": "refEnum",
-        "enums": ["userTransactions.submitTransferAllBalances"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserTransactionsSubmitTransferAllBalancesTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserTransactionsSubmitTransferAllBalances","required":true},
-            "arguments": {"ref":"UserTransactionsSubmitTransferAllBalancesArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserTransactionsSubmitTransferAssets": {
-        "dataType": "refEnum",
-        "enums": ["userTransactions.submitTransferAssets"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserTransactionsSubmitTransferAssetsTx": {
-        "dataType": "refObject",
-        "properties": {
-            "actionType": {"ref":"TransactionType.UserTransactionsSubmitTransferAssets","required":true},
-            "arguments": {"ref":"UserTransactionsSubmitTransferAssetsArgs","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserTransactionsSubmitTransferBalances": {
-        "dataType": "refEnum",
-        "enums": ["userTransactions.submitTransferBalances"],
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserTransactionsSubmitTransferBalancesTx": {
+    "NftsClearCollectionMetadataArgs": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.UserTransactionsSubmitTransferBalances","required":true},
-            "arguments": {"ref":"UserTransactionsSubmitTransferBalancesArgs","required":true},
+            "collection": {"ref":"BlockchainGenericId","required":true},
         },
         "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserTransactionsSubmitTransferNfts": {
-        "dataType": "refEnum",
-        "enums": ["userTransactions.submitTransferNfts"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserTransactionsSubmitTransferNftsTx": {
+    "NftsAcceptCollectionOwnershipArgs": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.UserTransactionsSubmitTransferNfts","required":true},
-            "arguments": {"ref":"UserTransactionsSubmitTransferNftsArgs","required":true},
+            "maybeCollection": {"ref":"BlockchainGenericId"},
         },
         "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionType.UserVerificationSetUserLevel": {
-        "dataType": "refEnum",
-        "enums": ["userVerification.setUserLevel"],
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserVerificationSetUserLevelTx": {
+    "AppTransferChannelsEstablishTransferChannelArgs": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.UserVerificationSetUserLevel","required":true},
-            "arguments": {"ref":"UserVerificationSetUserLevelArgs","required":true},
+            "senderAccount": {"ref":"BlockchainGenericAccount","required":true},
+            "transfersLimitResetPeriod": {"ref":"BlockchainGenericId","required":true},
+            "transfersLimitPerPeriod": {"ref":"BlockchainGenericBalance","required":true},
         },
         "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TxAction": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"ref":"AdminsAddAdminTx"},{"ref":"AdminsRemoveAdminTx"},{"ref":"AppAgentsAddAdminTx"},{"ref":"AppAgentsAddAdminToNamedAddressTx"},{"ref":"AppAgentsAllowAdminColdWalletTx"},{"ref":"AppAgentsChangeHotWalletTx"},{"ref":"AppAgentsChangeOwnerCancelTx"},{"ref":"AppAgentsChangeOwnerCompleteTx"},{"ref":"AppAgentsChangeOwnerInitTx"},{"ref":"AppAgentsClearAdminDispatchFilterTx"},{"ref":"AppAgentsClearAppAgentMetadataTx"},{"ref":"AppAgentsCompleteDestroyAppAgentTx"},{"ref":"AppAgentsCreateAppAgentTx"},{"ref":"AppAgentsDisableAdminColdWalletDispatchTx"},{"ref":"AppAgentsDisableHotWalletTx"},{"ref":"AppAgentsEnableHotWalletTx"},{"ref":"AppAgentsForceCreateAppAgentTx"},{"ref":"AppAgentsForceInitiateAppAgentDestroyTx"},{"ref":"AppAgentsForceInitiateAppAgentSuspensionTx"},{"ref":"AppAgentsForceInitiateAppAgentUnsuspensionTx"},{"ref":"AppAgentsInitiateDestroyAppAgentTx"},{"ref":"AppAgentsPauseAppAgentTx"},{"ref":"AppAgentsProcessDestroyTx"},{"ref":"AppAgentsReactivateAppAgentTx"},{"ref":"AppAgentsRemoveAdminTx"},{"ref":"AppAgentsRemoveAdminFromNamedAddressDispatchTx"},{"ref":"AppAgentsSetAdminDispatchFilterTx"},{"ref":"AppAgentsSetAppAgentMetadataTx"},{"ref":"AppAgentsUnpauseAppAgentTx"},{"ref":"AppResourcesSetActionPointsBalanceTx"},{"ref":"AppResourcesSetClearingPointsBalanceTx"},{"ref":"AppSubscriptionsCreateAppSubscriptionTierTx"},{"ref":"AppSubscriptionsObsoleteAppSubscriptionTierTx"},{"ref":"AppSubscriptionsSetAppPayOnDemandModeTx"},{"ref":"AppSubscriptionsSetAppSubscriptionTierTx"},{"ref":"AppTransactionsForceSubmitClearingTransactionTx"},{"ref":"AppTransactionsSubmitClearingTransactionTx"},{"ref":"AppTransferChannelsEstablishTransferChannelTx"},{"ref":"AppTransferChannelsRemoveTransferChannelTx"},{"ref":"AppTransferFiltersBlockAddressDepositsTx"},{"ref":"AppTransferFiltersSetAppDepositPermissionsTx"},{"ref":"AppTransferFiltersUnblockAddressDepositsTx"},{"ref":"AssetsBurnTx"},{"ref":"AssetsCreateTx"},{"ref":"AssetsDestroyAccountsTx"},{"ref":"AssetsDestroyApprovalsTx"},{"ref":"AssetsFinishDestroyTx"},{"ref":"AssetsForceTransferTx"},{"ref":"AssetsFreezeAccountTx"},{"ref":"AssetsFreezeAssetTx"},{"ref":"AssetsMintTx"},{"ref":"AssetsSetMetadataTx"},{"ref":"AssetsSetMinBalanceTx"},{"ref":"AssetsStartDestroyTx"},{"ref":"AssetsThawAccountTx"},{"ref":"AssetsThawAssetTx"},{"ref":"AssetsTransferTx"},{"ref":"AssetsTransferKeepAliveTx"},{"ref":"AssetsTransferOwnershipTx"},{"ref":"BalancesTransferAllTx"},{"ref":"BalancesTransferAllowDeathTx"},{"ref":"BalancesTransferKeepAliveTx"},{"ref":"NftsBurnItemTx"},{"ref":"NftsClearCollectionMetadataTx"},{"ref":"NftsClearItemMetadataTx"},{"ref":"NftsCreateCollectionTx"},{"ref":"NftsDestroyCollectionTx"},{"ref":"NftsLockItemTransferTx"},{"ref":"NftsMintItemTx"},{"ref":"NftsAcceptCollectionOwnershipTx"},{"ref":"NftsSetCollectionMetadataTx"},{"ref":"NftsSetItemMetadataTx"},{"ref":"NftsTransferItemTx"},{"ref":"NftsTransferCollectionOwnershipTx"},{"ref":"NftsUnlockItemTransferTx"},{"ref":"UserFreeTransactionsAppAgentBlacklistAddressTx"},{"ref":"UserFreeTransactionsAppAgentUnblacklistAddressTx"},{"ref":"UserFreeTransactionsBlacklistAddressTx"},{"ref":"UserFreeTransactionsClearAppAgentsFreeTransferInfosTx"},{"ref":"UserFreeTransactionsClearAssetLastTransferBlocksTx"},{"ref":"UserFreeTransactionsClearNftLastTransferBlocksTx"},{"ref":"UserFreeTransactionsClearUserFreeTransferInfosTx"},{"ref":"UserFreeTransactionsSetFreeTransfersEnabledTx"},{"ref":"UserFreeTransactionsUnblacklistAddressTx"},{"ref":"UserTransactionsSubmitTransferAllBalancesTx"},{"ref":"UserTransactionsSubmitTransferAssetsTx"},{"ref":"UserTransactionsSubmitTransferBalancesTx"},{"ref":"UserTransactionsSubmitTransferNftsTx"},{"ref":"UserVerificationSetUserLevelTx"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "TransactionPayload": {
+    "AppTransferChannelsRemoveTransferChannelArgs": {
         "dataType": "refObject",
         "properties": {
-            "signatory": {"dataType":"string","required":true},
-            "tx": {"ref":"TxAction","required":true},
+            "senderAccount": {"ref":"BlockchainGenericAccount","required":true},
         },
         "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ActionType": {
-        "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"ref":"TransactionType.AssetsCreate"},{"ref":"TransactionType.AssetsStartDestroy"},{"ref":"TransactionType.AssetsDestroyAccounts"},{"ref":"TransactionType.AssetsDestroyApprovals"},{"ref":"TransactionType.AssetsFinishDestroy"},{"ref":"TransactionType.AssetsMint"},{"ref":"TransactionType.AssetsBurn"},{"ref":"TransactionType.AssetsTransfer"},{"ref":"TransactionType.AssetsTransferKeepAlive"},{"ref":"TransactionType.AssetsForceTransfer"},{"ref":"TransactionType.AssetsFreezeAccount"},{"ref":"TransactionType.AssetsThawAccount"},{"ref":"TransactionType.AssetsFreezeAsset"},{"ref":"TransactionType.AssetsThawAsset"},{"ref":"TransactionType.AssetsTransferOwnership"},{"ref":"TransactionType.AssetsSetMinBalance"},{"ref":"TransactionType.AssetsSetMetadata"},{"ref":"TransactionType.BalancesTransferAllowDeath"},{"ref":"TransactionType.BalancesTransferKeepAlive"},{"ref":"TransactionType.BalancesTransferAll"},{"ref":"TransactionType.NftsCreateCollection"},{"ref":"TransactionType.NftsDestroyCollection"},{"ref":"TransactionType.NftsTransferCollectionOwnership"},{"ref":"TransactionType.NftsAcceptCollectionOwnership"},{"ref":"TransactionType.NftsSetCollectionMetadata"},{"ref":"TransactionType.NftsClearCollectionMetadata"},{"ref":"TransactionType.NftsMintItem"},{"ref":"TransactionType.NftsBurnItem"},{"ref":"TransactionType.NftsTransferItem"},{"ref":"TransactionType.NftsLockItemTransfer"},{"ref":"TransactionType.NftsUnlockItemTransfer"},{"ref":"TransactionType.NftsSetItemMetadata"},{"ref":"TransactionType.NftsClearItemMetadata"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ActionArgs": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"ref":"BalancesTransferAllowDeathArgs"},{"ref":"BalancesTransferKeepAliveArgs"},{"ref":"BalancesTransferAllArgs"},{"ref":"AssetsCreateArgs"},{"ref":"AssetsStartDestroyArgs"},{"ref":"AssetsDestroyAccountsArgs"},{"ref":"AssetsDestroyApprovalsArgs"},{"ref":"AssetsFinishDestroyArgs"},{"ref":"AssetsMintArgs"},{"ref":"AssetsBurnArgs"},{"ref":"AssetsTransferArgs"},{"ref":"AssetsTransferKeepAliveArgs"},{"ref":"AssetsForceTransferArgs"},{"ref":"AssetsFreezeAccountArgs"},{"ref":"AssetsThawAccountArgs"},{"ref":"AssetsFreezeAssetArgs"},{"ref":"AssetsThawAssetArgs"},{"ref":"AssetsTransferOwnershipArgs"},{"ref":"AssetsSetMetadataArgs"},{"ref":"AssetsSetMinBalanceArgs"},{"ref":"NftsCreateCollectionArgs"},{"ref":"NftsDestroyCollectionArgs"},{"ref":"NftsMintItemArgs"},{"ref":"NftsBurnItemArgs"},{"ref":"NftsTransferItemArgs"},{"ref":"NftsLockItemTransferArgs"},{"ref":"NftsUnlockItemTransferArgs"},{"ref":"NftsTransferCollectionOwnershipArgs"},{"ref":"NftsSetItemMetadataArgs"},{"ref":"NftsClearItemMetadataArgs"},{"ref":"NftsSetCollectionMetadataArgs"},{"ref":"NftsClearCollectionMetadataArgs"},{"ref":"NftsAcceptCollectionOwnershipArgs"}],"validators":{}},
+        "type": {"dataType":"union","subSchemas":[{"ref":"BalancesTransferArgs"},{"ref":"BalancesTransferKeepAliveArgs"},{"ref":"BalancesTransferAllArgs"},{"ref":"AssetsCreateArgs"},{"ref":"AssetsStartDestroyArgs"},{"ref":"AssetsDestroyAccountsArgs"},{"ref":"AssetsDestroyApprovalsArgs"},{"ref":"AssetsFinishDestroyArgs"},{"ref":"AssetsMintArgs"},{"ref":"AssetsBurnArgs"},{"ref":"AssetsTransferArgs"},{"ref":"AssetsTransferKeepAliveArgs"},{"ref":"AssetsForceTransferArgs"},{"ref":"AssetsFreezeAccountArgs"},{"ref":"AssetsThawAccountArgs"},{"ref":"AssetsFreezeAssetArgs"},{"ref":"AssetsThawAssetArgs"},{"ref":"AssetsTransferOwnershipArgs"},{"ref":"AssetsSetMetadataArgs"},{"ref":"AssetsSetMinBalanceArgs"},{"ref":"NftsCreateCollectionArgs"},{"ref":"NftsDestroyCollectionArgs"},{"ref":"NftsMintItemArgs"},{"ref":"NftsBurnItemArgs"},{"ref":"NftsTransferItemArgs"},{"ref":"NftsLockItemTransferArgs"},{"ref":"NftsUnlockItemTransferArgs"},{"ref":"NftsTransferCollectionOwnershipArgs"},{"ref":"NftsSetItemMetadataArgs"},{"ref":"NftsClearItemMetadataArgs"},{"ref":"NftsSetCollectionMetadataArgs"},{"ref":"NftsClearCollectionMetadataArgs"},{"ref":"NftsAcceptCollectionOwnershipArgs"},{"ref":"AppTransferChannelsEstablishTransferChannelArgs"},{"ref":"AppTransferChannelsRemoveTransferChannelArgs"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "BalancesTransferAllowDeathAction": {
+    "BalancesTransferAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.BalancesTransferAllowDeath","required":true},
-            "arguments": {"ref":"BalancesTransferAllowDeathArgs","required":true},
+            "actionType": {"ref":"ExtrinsicType.BalancesTransfer","required":true},
+            "arguments": {"ref":"BalancesTransferArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
         "additionalProperties": false,
@@ -2321,7 +1434,7 @@ const models: TsoaRoute.Models = {
     "BalancesTransferKeepAliveAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.BalancesTransferKeepAlive","required":true},
+            "actionType": {"ref":"ExtrinsicType.BalancesTransferKeepAlive","required":true},
             "arguments": {"ref":"BalancesTransferKeepAliveArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2331,7 +1444,7 @@ const models: TsoaRoute.Models = {
     "BalancesTransferAllAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.BalancesTransferAll","required":true},
+            "actionType": {"ref":"ExtrinsicType.BalancesTransferAll","required":true},
             "arguments": {"ref":"BalancesTransferAllArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2341,7 +1454,7 @@ const models: TsoaRoute.Models = {
     "AssetsCreateAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsCreate","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsCreate","required":true},
             "arguments": {"ref":"AssetsCreateArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2351,7 +1464,7 @@ const models: TsoaRoute.Models = {
     "AssetsStartDestroyAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsStartDestroy","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsStartDestroy","required":true},
             "arguments": {"ref":"AssetsStartDestroyArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2361,7 +1474,7 @@ const models: TsoaRoute.Models = {
     "AssetsDestroyAccountsAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsDestroyAccounts","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsDestroyAccounts","required":true},
             "arguments": {"ref":"AssetsDestroyAccountsArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2371,7 +1484,7 @@ const models: TsoaRoute.Models = {
     "AssetsDestroyApprovalsAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsDestroyApprovals","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsDestroyApprovals","required":true},
             "arguments": {"ref":"AssetsDestroyApprovalsArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2381,7 +1494,7 @@ const models: TsoaRoute.Models = {
     "AssetsFinishDestroyAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsFinishDestroy","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsFinishDestroy","required":true},
             "arguments": {"ref":"AssetsFinishDestroyArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2391,7 +1504,7 @@ const models: TsoaRoute.Models = {
     "AssetsMintAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsMint","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsMint","required":true},
             "arguments": {"ref":"AssetsMintArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2401,7 +1514,7 @@ const models: TsoaRoute.Models = {
     "AssetsBurnAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsBurn","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsBurn","required":true},
             "arguments": {"ref":"AssetsBurnArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2411,7 +1524,7 @@ const models: TsoaRoute.Models = {
     "AssetsTransferAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsTransfer","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsTransfer","required":true},
             "arguments": {"ref":"AssetsTransferArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2421,7 +1534,7 @@ const models: TsoaRoute.Models = {
     "AssetsTransferKeepAliveAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsTransferKeepAlive","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsTransferKeepAlive","required":true},
             "arguments": {"ref":"AssetsTransferKeepAliveArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2431,7 +1544,7 @@ const models: TsoaRoute.Models = {
     "AssetsForceTransferAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsForceTransfer","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsForceTransfer","required":true},
             "arguments": {"ref":"AssetsForceTransferArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2441,7 +1554,7 @@ const models: TsoaRoute.Models = {
     "AssetsFreezeAccountAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsFreezeAccount","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsFreezeAccount","required":true},
             "arguments": {"ref":"AssetsFreezeAccountArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2451,7 +1564,7 @@ const models: TsoaRoute.Models = {
     "AssetsThawAccountAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsThawAccount","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsThawAccount","required":true},
             "arguments": {"ref":"AssetsThawAccountArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2461,7 +1574,7 @@ const models: TsoaRoute.Models = {
     "AssetsFreezeAssetAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsFreezeAsset","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsFreezeAsset","required":true},
             "arguments": {"ref":"AssetsFreezeAssetArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2471,7 +1584,7 @@ const models: TsoaRoute.Models = {
     "AssetsThawAssetAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsThawAsset","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsThawAsset","required":true},
             "arguments": {"ref":"AssetsThawAssetArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2481,7 +1594,7 @@ const models: TsoaRoute.Models = {
     "AssetsTransferOwnershipAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsTransferOwnership","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsTransferOwnership","required":true},
             "arguments": {"ref":"AssetsTransferOwnershipArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2491,7 +1604,7 @@ const models: TsoaRoute.Models = {
     "AssetsSetMetadataAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsSetMetadata","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsSetMetadata","required":true},
             "arguments": {"ref":"AssetsSetMetadataArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2501,7 +1614,7 @@ const models: TsoaRoute.Models = {
     "AssetsSetMinBalanceAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.AssetsSetMinBalance","required":true},
+            "actionType": {"ref":"ExtrinsicType.AssetsSetMinBalance","required":true},
             "arguments": {"ref":"AssetsSetMinBalanceArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2511,7 +1624,7 @@ const models: TsoaRoute.Models = {
     "NftsCreateCollectionAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsCreateCollection","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsCreateCollection","required":true},
             "arguments": {"ref":"NftsCreateCollectionArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2521,7 +1634,7 @@ const models: TsoaRoute.Models = {
     "NftsDestroyCollectionAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsDestroyCollection","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsDestroyCollection","required":true},
             "arguments": {"ref":"NftsDestroyCollectionArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2531,7 +1644,7 @@ const models: TsoaRoute.Models = {
     "NftsMintItemAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsMintItem","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsMintItem","required":true},
             "arguments": {"ref":"NftsMintItemArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2541,7 +1654,7 @@ const models: TsoaRoute.Models = {
     "NftsBurnItemAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsBurnItem","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsBurnItem","required":true},
             "arguments": {"ref":"NftsBurnItemArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2551,7 +1664,7 @@ const models: TsoaRoute.Models = {
     "NftsTransferItemAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsTransferItem","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsTransferItem","required":true},
             "arguments": {"ref":"NftsTransferItemArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2561,7 +1674,7 @@ const models: TsoaRoute.Models = {
     "NftsLockItemTransferAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsLockItemTransfer","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsLockItemTransfer","required":true},
             "arguments": {"ref":"NftsLockItemTransferArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2571,7 +1684,7 @@ const models: TsoaRoute.Models = {
     "NftsUnlockItemTransferAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsUnlockItemTransfer","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsUnlockItemTransfer","required":true},
             "arguments": {"ref":"NftsUnlockItemTransferArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2581,7 +1694,7 @@ const models: TsoaRoute.Models = {
     "NftsTransferCollectionOwnershipAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsTransferCollectionOwnership","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsTransferCollectionOwnership","required":true},
             "arguments": {"ref":"NftsTransferCollectionOwnershipArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2591,7 +1704,7 @@ const models: TsoaRoute.Models = {
     "NftsSetItemMetadataAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsSetItemMetadata","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsSetItemMetadata","required":true},
             "arguments": {"ref":"NftsSetItemMetadataArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2601,7 +1714,7 @@ const models: TsoaRoute.Models = {
     "NftsClearItemMetadataAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsClearItemMetadata","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsClearItemMetadata","required":true},
             "arguments": {"ref":"NftsClearItemMetadataArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2611,7 +1724,7 @@ const models: TsoaRoute.Models = {
     "NftsSetCollectionMetadataAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsSetCollectionMetadata","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsSetCollectionMetadata","required":true},
             "arguments": {"ref":"NftsSetCollectionMetadataArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2621,7 +1734,7 @@ const models: TsoaRoute.Models = {
     "NftsClearCollectionMetadataAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsClearCollectionMetadata","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsClearCollectionMetadata","required":true},
             "arguments": {"ref":"NftsClearCollectionMetadataArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
@@ -2631,8 +1744,28 @@ const models: TsoaRoute.Models = {
     "NftsAcceptCollectionOwnershipAction": {
         "dataType": "refObject",
         "properties": {
-            "actionType": {"ref":"TransactionType.NftsAcceptCollectionOwnership","required":true},
+            "actionType": {"ref":"ExtrinsicType.NftsAcceptCollectionOwnership","required":true},
             "arguments": {"ref":"NftsAcceptCollectionOwnershipArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppTransferChannelsEstablishTransferChannelAction": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppTransferChannelsEstablishTransferChannel","required":true},
+            "arguments": {"ref":"AppTransferChannelsEstablishTransferChannelArgs","required":true},
+            "origin": {"ref":"CTActionOrigin","required":true},
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "AppTransferChannelsRemoveTransferChannelAction": {
+        "dataType": "refObject",
+        "properties": {
+            "actionType": {"ref":"ExtrinsicType.AppTransferChannelsRemoveTransferChannel","required":true},
+            "arguments": {"ref":"AppTransferChannelsRemoveTransferChannelArgs","required":true},
             "origin": {"ref":"CTActionOrigin","required":true},
         },
         "additionalProperties": false,
@@ -2640,7 +1773,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomicAction": {
         "dataType": "refAlias",
-        "type": {"dataType":"union","subSchemas":[{"ref":"BalancesTransferAllowDeathAction"},{"ref":"BalancesTransferKeepAliveAction"},{"ref":"BalancesTransferAllAction"},{"ref":"AssetsCreateAction"},{"ref":"AssetsStartDestroyAction"},{"ref":"AssetsDestroyAccountsAction"},{"ref":"AssetsDestroyApprovalsAction"},{"ref":"AssetsFinishDestroyAction"},{"ref":"AssetsMintAction"},{"ref":"AssetsBurnAction"},{"ref":"AssetsTransferAction"},{"ref":"AssetsTransferKeepAliveAction"},{"ref":"AssetsForceTransferAction"},{"ref":"AssetsFreezeAccountAction"},{"ref":"AssetsThawAccountAction"},{"ref":"AssetsFreezeAssetAction"},{"ref":"AssetsThawAssetAction"},{"ref":"AssetsTransferOwnershipAction"},{"ref":"AssetsSetMetadataAction"},{"ref":"AssetsSetMinBalanceAction"},{"ref":"NftsCreateCollectionAction"},{"ref":"NftsDestroyCollectionAction"},{"ref":"NftsMintItemAction"},{"ref":"NftsBurnItemAction"},{"ref":"NftsTransferItemAction"},{"ref":"NftsLockItemTransferAction"},{"ref":"NftsUnlockItemTransferAction"},{"ref":"NftsTransferCollectionOwnershipAction"},{"ref":"NftsSetItemMetadataAction"},{"ref":"NftsClearItemMetadataAction"},{"ref":"NftsSetCollectionMetadataAction"},{"ref":"NftsClearCollectionMetadataAction"},{"ref":"NftsAcceptCollectionOwnershipAction"}],"validators":{}},
+        "type": {"dataType":"union","subSchemas":[{"ref":"BalancesTransferAction"},{"ref":"BalancesTransferKeepAliveAction"},{"ref":"BalancesTransferAllAction"},{"ref":"AssetsCreateAction"},{"ref":"AssetsStartDestroyAction"},{"ref":"AssetsDestroyAccountsAction"},{"ref":"AssetsDestroyApprovalsAction"},{"ref":"AssetsFinishDestroyAction"},{"ref":"AssetsMintAction"},{"ref":"AssetsBurnAction"},{"ref":"AssetsTransferAction"},{"ref":"AssetsTransferKeepAliveAction"},{"ref":"AssetsForceTransferAction"},{"ref":"AssetsFreezeAccountAction"},{"ref":"AssetsThawAccountAction"},{"ref":"AssetsFreezeAssetAction"},{"ref":"AssetsThawAssetAction"},{"ref":"AssetsTransferOwnershipAction"},{"ref":"AssetsSetMetadataAction"},{"ref":"AssetsSetMinBalanceAction"},{"ref":"NftsCreateCollectionAction"},{"ref":"NftsDestroyCollectionAction"},{"ref":"NftsMintItemAction"},{"ref":"NftsBurnItemAction"},{"ref":"NftsTransferItemAction"},{"ref":"NftsLockItemTransferAction"},{"ref":"NftsUnlockItemTransferAction"},{"ref":"NftsTransferCollectionOwnershipAction"},{"ref":"NftsSetItemMetadataAction"},{"ref":"NftsClearItemMetadataAction"},{"ref":"NftsSetCollectionMetadataAction"},{"ref":"NftsClearCollectionMetadataAction"},{"ref":"NftsAcceptCollectionOwnershipAction"},{"ref":"AppTransferChannelsEstablishTransferChannelAction"},{"ref":"AppTransferChannelsRemoveTransferChannelAction"}],"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "CTAtomic": {

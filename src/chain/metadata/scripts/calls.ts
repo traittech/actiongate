@@ -7,7 +7,7 @@ import lookupDefinitions from '@polkadot/types-augment/lookup/definitions';
 import { stringCamelCase, stringPascalCase } from '@polkadot/util';
 import Handlebars from 'handlebars';
 
-import { TransactionType, AllowedActions } from '../../../types/api/actions';
+import { ExtrinsicType, AllowedActions, AllowedTxs } from '../../../types/api/actions';
 import metadataJson from '../generated/latest.json';
 import { BlockchainOverridesMap } from '../overrides';
 
@@ -106,6 +106,7 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
   const { lookup, pallets } = metadata.asLatest;
 
   const ctAtomicActions: Array<{ function: string; actionName: string }> = [];
+  const txActions: Array<{ function: string; actionName: string }> = [];
 
   const modules = pallets
     .reduce<any[]>((acc, pallet) => {
@@ -123,22 +124,28 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
           const functionName = `${palletName}${stringPascalCase(method)}`;
           const actionValue = `${palletName}.${method}`;
 
-          let actionName = stringPascalCase(functionName);
+          const txTuple = Object.entries(ExtrinsicType).find(([key, val]) => val === actionValue);
 
-          const txTuple = Object.entries(TransactionType).find(([key, val]) => val === actionValue);
+          if (!txTuple) return acc;
+
+          const actionName = txTuple[0];
+
           const isAllowedAction = !!AllowedActions.find((action) => action === actionValue);
 
-          if (txTuple) {
-            actionName = txTuple[0];
+          if (AllowedActions.find((action) => action === actionValue)) {
+            ctAtomicActions.push({
+              function: functionName,
+              actionName,
+            });
+          }
 
-            if (isAllowedAction) {
-              ctAtomicActions.push({
-                function: functionName,
-                actionName,
-              });
-            }
-          } else {
-            return acc;
+          const isAllowedTx = !!AllowedTxs.find((action) => action === actionValue);
+
+          if (isAllowedTx) {
+            txActions.push({
+              function: functionName,
+              actionName,
+            });
           }
 
           const typesInfo = fields.map(({ name, type, typeName }, index) => {
@@ -186,7 +193,9 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
             palletName,
             methodName: method,
             actionName,
+            isAllowed: isAllowedTx || isAllowedAction,
             isAllowedAction,
+            isAllowedTx,
             params,
             // for ordering
             name: method,
@@ -209,6 +218,7 @@ function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) 
     imports,
     modules,
     ctAtomicActions,
+    txActions,
     types: [
       ...Object.keys(imports.localTypes)
         .sort()

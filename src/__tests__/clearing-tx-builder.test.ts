@@ -5,7 +5,7 @@ import Keyring from '@polkadot/keyring';
 
 import { createClearingTransactionAndBroadcast } from '../functions/builders/clearing-tx-builder';
 import logger from '../functions/logger';
-import { TransactionType } from '../types/api/actions';
+import { ExtrinsicType } from '../types/api/actions';
 import { u32_MIN, u32_MAX, u128_MAX, ss58_LENGTH, text_MAX_LENGTH } from '../validator/consts';
 
 import type { CTAtomicAction } from '../txwrapper';
@@ -78,13 +78,13 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.BalancesTransferKeepAlive,
+                actionType: ExtrinsicType.BalancesTransferKeepAlive,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   dest: {
                     id: appAgentAddress,
                   },
-                  value: 1000,
+                  value: '1000',
                 },
               },
             ],
@@ -104,13 +104,13 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.BalancesTransferAllowDeath,
+                actionType: ExtrinsicType.BalancesTransferAllowDeath,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   dest: {
                     id: appAgentAddress,
                   },
-                  value: 1000,
+                  value: '1000',
                 },
               },
             ],
@@ -132,7 +132,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.NftsCreateCollection,
+                actionType: ExtrinsicType.NftsCreateCollection,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   metadata:
@@ -158,7 +158,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.NftsMintItem,
+                actionType: ExtrinsicType.NftsMintItem,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   collection: 1,
@@ -187,10 +187,10 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.AssetsCreate,
+                actionType: ExtrinsicType.AssetsCreate,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
-                  minBalance: 1,
+                  minBalance: '1',
                 },
               },
             ],
@@ -210,14 +210,14 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.AssetsTransfer,
+                actionType: ExtrinsicType.AssetsTransfer,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   id: 1,
                   target: {
                     id: appAgentAddress,
                   },
-                  amount: 1000,
+                  amount: '1000',
                 },
               },
             ],
@@ -239,7 +239,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: 'unknown_action' as TransactionType,
+                actionType: 'unknown_action' as ExtrinsicType,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   dest: appAgentAddress,
@@ -266,7 +266,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.NftsLockItemTransfer,
+                actionType: ExtrinsicType.NftsLockItemTransfer,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   collection: Number(u32_MIN - BigInt(1)), // error: fewer than min
@@ -298,7 +298,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.BalancesTransferKeepAlive,
+                actionType: ExtrinsicType.BalancesTransferKeepAlive,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   dest: {
@@ -332,7 +332,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.BalancesTransferAll,
+                actionType: ExtrinsicType.BalancesTransferAll,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   dest: {
@@ -364,7 +364,7 @@ describe('Clearing Transaction Builder', () => {
           {
             actions: [
               {
-                actionType: TransactionType.AssetsSetMetadata,
+                actionType: ExtrinsicType.AssetsSetMetadata,
                 origin: { AppAgentAddress: appAgentAddress },
                 arguments: {
                   id: 1,

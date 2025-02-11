@@ -1,16 +1,16 @@
-import type { TransactionType } from './actions';
-import type { TxAction, TransactionArgs } from '../../txwrapper';
+import type { TxType } from './actions';
+import type { Tx, TxArgs } from '../../txwrapper';
 
-export interface ITxAction {
+export interface ITx {
   /**
    * The type of transaction to be performed
    */
-  actionType: TransactionType;
+  actionType: TxType;
 
   /**
    * The arguments for the transaction.
    */
-  arguments: TransactionArgs;
+  arguments: TxArgs;
 }
 
 /**
@@ -25,7 +25,7 @@ export interface TransactionPayload {
   /**
    * Transaction data
    */
-  tx: TxAction;
+  tx: Tx;
 }
 
 export interface BaseTransactionResponse {
