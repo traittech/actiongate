@@ -1,0 +1,29 @@
+{
+  "entryFile": "src/app.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/controllers/**/*.ts"],
+  "spec": {
+    "outputDirectory": "src/docs",
+    "securityDefinitions": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "name": "X-API-KEY",
+        "in": "header"
+      }
+    },
+    "specVersion": 3,
+    "spec": {
+      "servers": [
+        {
+          "url": "http://localhost:8080",
+          "description": "Local server"
+        }
+      ]
+    }
+  },
+  "routes": {
+    "authenticationModule": "src/routes/auth.ts",
+    "routesDir": "src/routes",
+    "routesFileName": "api.ts"
+  }
+}

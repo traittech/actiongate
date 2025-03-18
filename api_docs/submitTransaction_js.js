@@ -7,10 +7,14 @@ const transactionHeaders = new Headers({
 
 const transactionPayload = {
   signatory: 'ADMIN_1',
-  module_name: 'assets',
-  function_name: 'transfer',
-  arguments: ['5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty', '200', '200'],
-  origin: '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY',
+  tx: {
+    actionType: 'assets.transfer',
+    arguments: {
+      id: 200,
+      target: 'ttrENnXUfsdTDFwweKjK1dSvCXcAtVVQ9xgARy8iBisAFfc5e',
+      amount: '200',
+    },
+  },
 };
 
 const transactionRequest = {

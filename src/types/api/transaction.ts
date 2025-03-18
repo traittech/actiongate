@@ -1,3 +1,18 @@
+import type { TxType } from './actions';
+import type { Tx, TxArgs } from '../../txwrapper';
+
+export interface ITx {
+  /**
+   * The type of transaction to be performed
+   */
+  actionType: TxType;
+
+  /**
+   * The arguments for the transaction.
+   */
+  arguments: TxArgs;
+}
+
 /**
  * Payload for a transaction.
  */
@@ -8,35 +23,19 @@ export interface TransactionPayload {
   signatory: string;
 
   /**
-   * The name of the module where the function to be executed is defined.
+   * Transaction data
    */
-  module_name: string;
-
-  /**
-   * The name of the function to be executed.
-   */
-  function_name: string;
-
-  /**
-   * The arguments to be passed to the function.
-   */
-  arguments: any[];
+  tx: Tx;
 }
 
-/**
- * Response from a transaction request.
- */
-export interface TransactionResponse {
+export interface BaseTransactionResponse {
   /**
    * The status of the transaction.
    */
   status: string;
+}
 
-  /**
-   * The transaction hash, if available.
-   */
-  tx_hash?: string;
-
+export interface TransactionErrorResponse extends BaseTransactionResponse {
   /**
    * An error code, if the transaction failed.
    */
@@ -46,4 +45,21 @@ export interface TransactionResponse {
    * A description of the error, if the transaction failed.
    */
   error_description?: string;
+
+  /**
+   * A details of the error
+   */
+  error_details?: any;
 }
+
+export interface TransactionSuccessResponse extends BaseTransactionResponse {
+  /**
+   * The transaction hash, if available.
+   */
+  tx_hash: string;
+}
+
+/**
+ * Response from a transaction request.
+ */
+export type TransactionResponse = TransactionSuccessResponse | TransactionErrorResponse;

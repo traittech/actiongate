@@ -1,6 +1,7 @@
 import { createLogger, format, transports } from 'winston';
 
 import { loadConfig } from './config';
+
 const config = loadConfig();
 
 // logger will write to console and actiongate.log

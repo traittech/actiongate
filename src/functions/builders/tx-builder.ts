@@ -1,12 +1,13 @@
 import { construct } from '@substrate/txwrapper-polkadot';
 
-import { TransactionService } from '../adapter/datagate';
-import { loadConfig } from '../functions/config';
+import { TransactionService } from '../../adapter/datagate';
+import { buildUnsignedTransaction } from '../../txwrapper';
+import { loadConfig } from '../config';
+import logger from '../logger';
+import { signWith } from '../signer';
+import { generateTxMetadata } from '../tx-helper';
 
-import logger from './logger';
-import { signWith } from './signer';
-import { generateTxMetadata, buildUnsignedTransaction } from './tx-helper';
-
+import type { TransactionPayload } from '../../types/api';
 import type { KeyringPair } from '@polkadot/keyring/types';
 
 const config = loadConfig();
@@ -16,29 +17,25 @@ const txService = new TransactionService(config.datagate_api.uri);
  * Creates a signed transaction and broadcasts it.
  *
  * @param pair - The keyring pair to sign with.
- * @param moduleName - The module name of the extrinsic.
- * @param functionName - The function name of the extrinsic.
- * @param params - The parameters for the extrinsic function.
+ * @param payload - The payload of the extrinsic.
  * @returns The transaction hash.
  *
  * @throws Will throw an error if there is an issue during transaction creation or broadcasting.
  */
 export async function createSignedTransactionAndBroadcast(
   pair: KeyringPair,
-  moduleName: string,
-  functionName: string,
-  params: any[]
+  payload: TransactionPayload
 ): Promise<string> {
   try {
+    const { actionType, arguments: args } = payload.tx;
+
     // Generate metadata, base transaction info, and options
     logger.debug('Generating transaction metadata...');
     const { registry, baseTxInfo, options } = await generateTxMetadata(pair);
 
     // Build the unsigned transaction
-    logger.info(
-      `Building unsigned transaction for module: ${moduleName}, function: ${functionName} with params ${params}`
-    );
-    const unsigned = buildUnsignedTransaction(moduleName, functionName, params, baseTxInfo, options);
+    logger.info(`Building unsigned transaction for: ${actionType}, with args: ${JSON.stringify(args)}`);
+    const unsigned = buildUnsignedTransaction(payload.tx, baseTxInfo, options);
 
     // Construct the signing payload from the unsigned transaction
     logger.debug('Constructing signing payload...');
@@ -67,11 +64,11 @@ export async function createSignedTransactionAndBroadcast(
     const broadcast = await txService.submitTransaction(tx);
 
     logger.info('Transaction broadcasted successfully');
-    logger.debug(broadcast);
+    logger.debug(`Submit response: ${JSON.stringify(broadcast)}`);
 
     return expectedTxHash;
   } catch (error) {
     logger.error('Error creating and broadcasting signed transaction:', error);
-    throw new Error('Failed to create and broadcast signed transaction');
+    throw error;
   }
 }

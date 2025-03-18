@@ -7,9 +7,9 @@ import lookupDefinitions from '@polkadot/types-augment/lookup/definitions';
 import { stringCamelCase, stringPascalCase } from '@polkadot/util';
 import Handlebars from 'handlebars';
 
-import { ActionType } from '../../../types/api/actions';
-import { BlockchainOverridesMap } from '../../../types/api/overrides';
+import { ExtrinsicType, AllowedActions, AllowedTxs } from '../../../types/api/actions';
 import metadataJson from '../generated/latest.json';
+import { BlockchainOverridesMap } from '../overrides';
 
 import type { Vec, Text } from '@polkadot/types';
 
@@ -33,7 +33,7 @@ function mapName(_name: any) {
 }
 
 function getFunctionDescription(docs: Vec<Text>) {
-  const description: string[] = [];
+  const desc: string[] = [];
   const args: Record<string, string> = {};
 
   const parts = docs.toArray();
@@ -62,27 +62,28 @@ function getFunctionDescription(docs: Vec<Text>) {
       currentArgDesc.push(argDescription);
     } else if (currentArgName) {
       currentArgDesc.push(text);
-    } else if (!headerPartsCollected && text) {
-      description.push(text);
+    } else if (!headerPartsCollected && text && !text.startsWith('#')) {
+      desc.push(text);
     }
   }
 
-  const full = description.join(' ');
-  const short = description[0] ? description[0].charAt(0).toLowerCase() + description[0].slice(1) : '';
+  const fullDescription = desc.join(' ');
+  const dotIndex = fullDescription.indexOf('.');
+
+  const short = dotIndex !== -1 ? fullDescription.substring(0, dotIndex + 1) : '';
+  const full = fullDescription !== short ? fullDescription.replace(short, '').trim() : '';
+
+  const summary = full ? short : '';
+  const description = summary ? full : fullDescription;
 
   return {
-    full,
-    short,
+    summary,
+    description,
     args,
   };
 }
 
-function generator(
-  meta: string,
-  allowedFunctions: [string, ActionType][],
-  extraTypes = {},
-  customLookupDefinitions = {}
-) {
+function generator(meta: string, extraTypes = {}, customLookupDefinitions = {}) {
   const { metadata, registry } = initMeta(meta as any, extraTypes);
 
   const allTypes = {
@@ -104,7 +105,8 @@ function generator(
 
   const { lookup, pallets } = metadata.asLatest;
 
-  const ctAtomicActions: string[] = [];
+  const ctAtomicActions: Array<string> = [];
+  const txActions: Array<string> = [];
 
   const modules = pallets
     .reduce<any[]>((acc, pallet) => {
@@ -118,17 +120,27 @@ function generator(
 
       const items = palletCalls
         .reduce<any[]>((acc, { docs, fields, name: methodName }) => {
-          const functionName = `${palletName}${stringPascalCase(methodName)}`;
+          const method = stringCamelCase(methodName);
+          const functionName = `${palletName}${stringPascalCase(method)}`;
+          const actionValue = `${palletName}.${method}`;
 
-          const actionName = allowedFunctions.find(([key, val]) => val === functionName)?.[0];
+          const txTuple = Object.entries(ExtrinsicType).find(([key, val]) => val === actionValue);
 
-          if (!actionName) return acc;
+          if (!txTuple) return acc;
 
-          const name = stringCamelCase(methodName);
-          const argsTypeName = `${stringPascalCase(functionName)}Args`;
-          const actionTypeName = `${stringPascalCase(functionName)}Action`;
+          const actionName = txTuple[0];
 
-          ctAtomicActions.push(actionTypeName);
+          const isAllowedAction = !!AllowedActions.find((action) => action === actionValue);
+
+          if (AllowedActions.find((action) => action === actionValue)) {
+            ctAtomicActions.push(actionName);
+          }
+
+          const isAllowedTx = !!AllowedTxs.find((action) => action === actionValue);
+
+          if (isAllowedTx) {
+            txActions.push(actionName);
+          }
 
           const typesInfo = fields.map(({ name, type, typeName }, index) => {
             const typeDef = registry.lookup.getTypeDef(type);
@@ -142,13 +154,22 @@ function generator(
           const documentation = getFunctionDescription(docs);
 
           const params = typesInfo.map(([name, , typeStr]) => {
-            const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
+            let isOptional = false;
+            let type = typeStr;
 
-            let type = similarTypes.join(' | ');
+            const regex = /^(.*?)?<(.*?)>$/g;
+            const matches = regex.exec(typeStr);
+
+            if (matches && ['Compact', 'Option'].includes(matches[1])) {
+              isOptional = matches[1] === 'Option';
+              type = matches[2] ?? type;
+            }
 
             if (BlockchainOverridesMap.has(type)) {
               type = BlockchainOverridesMap.get(type) as string;
             } else {
+              const similarTypes = getSimilarTypes(registry, allDefs, typeStr, imports);
+              type = similarTypes.join(' | ');
               setImports(allDefs, imports, [typeStr, ...similarTypes]);
             }
 
@@ -156,6 +177,7 @@ function generator(
               name,
               type,
               description: documentation.args[name] ?? '',
+              isOptional,
             };
           });
 
@@ -163,13 +185,14 @@ function generator(
             documentation,
             functionName,
             palletName,
-            methodName,
-            argsTypeName,
+            methodName: method,
             actionName,
-            actionTypeName,
+            isAllowed: isAllowedTx || isAllowedAction,
+            isAllowedAction,
+            isAllowedTx,
             params,
             // for ordering
-            name,
+            name: method,
           });
 
           return acc;
@@ -189,6 +212,7 @@ function generator(
     imports,
     modules,
     ctAtomicActions,
+    txActions,
     types: [
       ...Object.keys(imports.localTypes)
         .sort()
@@ -201,13 +225,11 @@ function generator(
 }
 
 (async function main() {
-  console.log(Object.entries(ActionType));
-
   const metadataHex = metadataJson.latest as any;
 
-  const dest = path.join(process.cwd(), './src/txwrapper/calls.ts');
+  const dest = path.join(process.cwd(), './src/txwrapper/generated/calls.ts');
 
-  const templateGenerator = () => generator(metadataHex, Object.entries(ActionType));
+  const templateGenerator = () => generator(metadataHex);
 
   writeFile(dest, templateGenerator);
 })();

@@ -1,0 +1,4501 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"TransactionSuccessResponse": {
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "The status of the transaction."
+					},
+					"tx_hash": {
+						"type": "string",
+						"description": "The transaction hash, if available."
+					}
+				},
+				"required": [
+					"status",
+					"tx_hash"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionErrorResponse": {
+				"properties": {
+					"status": {
+						"type": "string",
+						"description": "The status of the transaction."
+					},
+					"error_code": {
+						"type": "number",
+						"format": "double",
+						"description": "An error code, if the transaction failed."
+					},
+					"error_description": {
+						"type": "string",
+						"description": "A description of the error, if the transaction failed."
+					},
+					"error_details": {
+						"description": "A details of the error"
+					}
+				},
+				"required": [
+					"status"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TransactionResponse": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/TransactionSuccessResponse"
+					},
+					{
+						"$ref": "#/components/schemas/TransactionErrorResponse"
+					}
+				],
+				"description": "Response from a transaction request."
+			},
+			"ExtrinsicType.BalancesTransfer": {
+				"enum": [
+					"balances.transferAllowDeath"
+				],
+				"type": "string"
+			},
+			"BlockchainGenericAccount": {
+				"type": "string",
+				"example": "ttmojTij44xvCLsMZ1KHEyRfgcc26aJVdiy8xttuyoUQ8Li8s",
+				"description": "The account address on the blockchain.\nIt is a string of alphanumeric characters, encoded in SS58 format, using `5335` prefix.",
+				"minLength": 49,
+				"maxLength": 49,
+				"pattern": "^tt[1-9a-zA-Z]{47}$"
+			},
+			"UINT128": {
+				"type": "string",
+				"description": "A numeric `integer` value represented with `string` type\n\nminimum: `0`\n\nmaximum: `340282366920938463463374607431768211455`",
+				"pattern": "^\\d{1,39}$"
+			},
+			"BlockchainGenericBalance": {
+				"$ref": "#/components/schemas/UINT128",
+				"description": "The balance, represented as a numeric value."
+			},
+			"AnyJson": {
+				"anyOf": [
+					{
+						"type": "string"
+					},
+					{
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"type": "boolean"
+					},
+					{
+						"items": {
+							"$ref": "#/components/schemas/AnyJson"
+						},
+						"type": "array"
+					},
+					{
+						"properties": {},
+						"additionalProperties": {
+							"$ref": "#/components/schemas/AnyJson"
+						},
+						"type": "object"
+					}
+				],
+				"nullable": true
+			},
+			"Record_string.AnyJson_": {
+				"properties": {},
+				"additionalProperties": {
+					"$ref": "#/components/schemas/AnyJson"
+				},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"BalancesTransferArgs": {
+				"description": "`dest`\n\n`value`",
+				"properties": {
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					},
+					"value": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"dest",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ExtrinsicType.AppAgentsAddAdmin": {
+				"enum": [
+					"appAgents.addAdmin"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsAddAdminToNamedAddress": {
+				"enum": [
+					"appAgents.addAdminToNamedAddressDispatch"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsAllowAdminColdWallet": {
+				"enum": [
+					"appAgents.allowAdminColdWalletDispatch"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsChangeHotWallet": {
+				"enum": [
+					"appAgents.changeHotWallet"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsChangeOwnerCancel": {
+				"enum": [
+					"appAgents.changeOwnerCancel"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsChangeOwnerComplete": {
+				"enum": [
+					"appAgents.changeOwnerComplete"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsChangeOwnerInit": {
+				"enum": [
+					"appAgents.changeOwnerInit"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsClearAdminDispatchFilter": {
+				"enum": [
+					"appAgents.clearAdminDispatchFilter"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsClearAppAgentMetadata": {
+				"enum": [
+					"appAgents.clearAppAgentMetadata"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsCompleteDestroyAppAgent": {
+				"enum": [
+					"appAgents.completeDestroyAppAgent"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsCreateAppAgent": {
+				"enum": [
+					"appAgents.createAppAgent"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsDisableAdminColdWalletDispatch": {
+				"enum": [
+					"appAgents.disableAdminColdWalletDispatch"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsDisableHotWallet": {
+				"enum": [
+					"appAgents.disableHotWallet"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsEnableHotWallet": {
+				"enum": [
+					"appAgents.enableHotWallet"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsInitiateDestroyAppAgent": {
+				"enum": [
+					"appAgents.initiateDestroyAppAgent"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsPauseAppAgent": {
+				"enum": [
+					"appAgents.pauseAppAgent"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsProcessDestroy": {
+				"enum": [
+					"appAgents.processDestroy"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsReactivateAppAgent": {
+				"enum": [
+					"appAgents.reactivateAppAgent"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsRemoveAdmin": {
+				"enum": [
+					"appAgents.removeAdmin"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsRemoveAdminFromNamedAddressDispatch": {
+				"enum": [
+					"appAgents.removeAdminFromNamedAddressDispatch"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsSetAdminDispatchFilter": {
+				"enum": [
+					"appAgents.setAdminDispatchFilter"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsSetAppAgentMetadata": {
+				"enum": [
+					"appAgents.setAppAgentMetadata"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppAgentsUnpauseAppAgent": {
+				"enum": [
+					"appAgents.unpauseAppAgent"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppSubscriptionsSetAppPayOnDemandMode": {
+				"enum": [
+					"appSubscriptions.setAppPayOnDemandMode"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppSubscriptionsSetAppSubscriptionTier": {
+				"enum": [
+					"appSubscriptions.setAppSubscriptionTier"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppTransferFiltersBlockAddressDeposits": {
+				"enum": [
+					"appTransferFilters.blockAddressDeposits"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppTransferFiltersSetAppDepositPermissions": {
+				"enum": [
+					"appTransferFilters.setAppDepositPermissions"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppTransferFiltersUnblockAddressDeposits": {
+				"enum": [
+					"appTransferFilters.unblockAddressDeposits"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsTransfer": {
+				"enum": [
+					"assets.transfer"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsTransferKeepAlive": {
+				"enum": [
+					"assets.transferKeepAlive"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.BalancesTransferKeepAlive": {
+				"enum": [
+					"balances.transferKeepAlive"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.BalancesTransferAll": {
+				"enum": [
+					"balances.transferAll"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsTransferItem": {
+				"enum": [
+					"nfts.transfer"
+				],
+				"type": "string"
+			},
+			"TxType": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsAddAdmin"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsAddAdminToNamedAddress"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsAllowAdminColdWallet"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsChangeHotWallet"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsChangeOwnerCancel"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsChangeOwnerComplete"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsChangeOwnerInit"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsClearAdminDispatchFilter"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsClearAppAgentMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsCompleteDestroyAppAgent"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsCreateAppAgent"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsDisableAdminColdWalletDispatch"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsDisableHotWallet"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsEnableHotWallet"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsInitiateDestroyAppAgent"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsPauseAppAgent"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsProcessDestroy"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsReactivateAppAgent"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsRemoveAdmin"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsRemoveAdminFromNamedAddressDispatch"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsSetAdminDispatchFilter"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsSetAppAgentMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsUnpauseAppAgent"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppSubscriptionsSetAppPayOnDemandMode"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppSubscriptionsSetAppSubscriptionTier"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferFiltersBlockAddressDeposits"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferFiltersSetAppDepositPermissions"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferFiltersUnblockAddressDeposits"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransferKeepAlive"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransferKeepAlive"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransferAll"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsTransferItem"
+					}
+				]
+			},
+			"BalancesTransferKeepAliveArgs": {
+				"description": "`dest`\n\n`value`",
+				"properties": {
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					},
+					"value": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"dest",
+					"value"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainGenericBoolean": {
+				"type": "boolean",
+				"example": true,
+				"description": "Boolean type for blockchain (bool)"
+			},
+			"BalancesTransferAllArgs": {
+				"description": "`dest` - The recipient of the transfer.\n\n`keepAlive`",
+				"properties": {
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The recipient of the transfer."
+					},
+					"keepAlive": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					}
+				},
+				"required": [
+					"dest",
+					"keepAlive"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UINT32": {
+				"type": "integer",
+				"format": "int32",
+				"description": "A numeric `integer` value represented with `number` type",
+				"minimum": 0,
+				"maximum": 4294967295
+			},
+			"BlockchainGenericId": {
+				"$ref": "#/components/schemas/UINT32",
+				"description": "A unique identifier (AssetId, CollectionId, AppAgentId).\nTypically, it is a numeric value."
+			},
+			"AssetsTransferArgs": {
+				"description": "`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount transferred."
+					},
+					"target": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero."
+					}
+				},
+				"required": [
+					"id",
+					"target",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferKeepAliveArgs": {
+				"description": "`id` - The identifier of the asset to have some amount transferred.\n\n`target` - The account to be credited.\n\n`amount` - The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount transferred."
+					},
+					"target": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount by which the sender's balance of assets should be reduced and `target`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the sender balance above zero but below the minimum balance. Must be greater than zero."
+					}
+				},
+				"required": [
+					"id",
+					"target",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsTransferItemArgs": {
+				"description": "`collection` - The collection of the item to be transferred.\n\n`item` - The item to be transferred.\n\n`dest` - The account to receive ownership of the item.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be transferred."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to be transferred."
+					},
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to receive ownership of the item."
+					}
+				},
+				"required": [
+					"collection",
+					"item",
+					"dest"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsCreateAppAgentArgs": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsInitiateDestroyAppAgentArgs": {
+				"description": "`appAgentId` - The identifier of the App Agent to be deleted.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent to be deleted."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"OwnFungibleDestroyDetail": {
+				"properties": {
+					"finishDestroy": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					},
+					"approvals": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"accounts": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"finishDestroy",
+					"approvals",
+					"accounts",
+					"id"
+				],
+				"type": "object"
+			},
+			"OwnNonFungibleDestroyDetail": {
+				"properties": {
+					"finishDestroy": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					},
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/BlockchainGenericId"
+						},
+						"type": "array"
+					},
+					"collectionId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"finishDestroy",
+					"items",
+					"collectionId"
+				],
+				"type": "object"
+			},
+			"FungibleDestroyDetail": {
+				"properties": {
+					"approvals": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"accounts": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"approvals",
+					"accounts",
+					"id"
+				],
+				"type": "object"
+			},
+			"NonFungibleDestroyDetail": {
+				"properties": {
+					"itemId": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"collectionId": {
+						"$ref": "#/components/schemas/UINT32"
+					}
+				},
+				"required": [
+					"itemId",
+					"collectionId"
+				],
+				"type": "object"
+			},
+			"PoolAddressDestroyInfo": {
+				"properties": {
+					"nonFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/NonFungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"fungibles": {
+						"items": {
+							"$ref": "#/components/schemas/FungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"address": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"nonFungibles",
+					"fungibles",
+					"address"
+				],
+				"type": "object"
+			},
+			"AppAgentDestroyInfo": {
+				"properties": {
+					"appAgentNonFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/NonFungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"appAgentFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/FungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"controlledAddressesInfos": {
+						"items": {
+							"$ref": "#/components/schemas/PoolAddressDestroyInfo"
+						},
+						"type": "array"
+					},
+					"ownNonFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/OwnNonFungibleDestroyDetail"
+						},
+						"type": "array"
+					},
+					"ownFungibles": {
+						"items": {
+							"$ref": "#/components/schemas/OwnFungibleDestroyDetail"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"appAgentNonFungibles",
+					"appAgentFungibles",
+					"controlledAddressesInfos",
+					"ownNonFungibles",
+					"ownFungibles"
+				],
+				"type": "object"
+			},
+			"AppAgentsProcessDestroyArgs": {
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`destroyInfo`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"destroyInfo": {
+						"$ref": "#/components/schemas/AppAgentDestroyInfo"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"destroyInfo"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsCompleteDestroyAppAgentArgs": {
+				"description": "`appAgentId` - The identifier of the App Agent to be destroyed.\n\n`destroyInfos`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent to be destroyed."
+					},
+					"destroyInfos": {
+						"$ref": "#/components/schemas/AppAgentDestroyInfo"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"destroyInfos"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsReactivateAppAgentArgs": {
+				"description": "`appAgentId` - The identifier of the App Agent to be reactivated.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent to be reactivated."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsPauseAppAgentArgs": {
+				"description": "`appAgentId` - The ID of the App Agent to be paused.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent to be paused."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsUnpauseAppAgentArgs": {
+				"description": "`appAgentId` - The ID of the App Agent to be resumed.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent to be resumed."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeOwnerInitArgs": {
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`proposedOwner` - The account ID of the proposed owner.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"proposedOwner": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the proposed owner."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"proposedOwner"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeOwnerCompleteArgs": {
+				"description": "`appAgentId` - The ID of the App Agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeOwnerCancelArgs": {
+				"description": "`appAgentId` - The ID of the App Agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainGenericText": {
+				"type": "string",
+				"description": "Text or metadata represented by string.\nCharacters limit is defined in `StringLimit` const on blockchain.",
+				"maxLength": 256
+			},
+			"AppAgentsSetAppAgentMetadataArgs": {
+				"description": "`appAgentId`\n\n`data` - The general information of this asset. Limited in length by `StringLimit`.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The general information of this asset. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsClearAppAgentMetadataArgs": {
+				"description": "`appAgentId`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsEnableHotWalletArgs": {
+				"description": "`appAgentId` - Identifier of the App Agent for which the hot wallet needs to be enabled.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "Identifier of the App Agent for which the hot wallet needs to be enabled."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsDisableHotWalletArgs": {
+				"description": "`appAgentId` - Identifier of the App Agent for which the hot wallet needs to be disabled.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "Identifier of the App Agent for which the hot wallet needs to be disabled."
+					}
+				},
+				"required": [
+					"appAgentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainAddressName": {
+				"type": "string",
+				"description": "String of unicode chars exactly 10 chars long.\nOnly a subset of chars can be used: https://github.com/traittech/trait-keyless/blob/main/keyless-ts/src/keyless.ts#L39",
+				"minLength": 10,
+				"maxLength": 10,
+				"pattern": "^[0-9a-zA-Z\\-#]+$"
+			},
+			"NamedAddressInput": {
+				"anyOf": [
+					{
+						"properties": {
+							"Address": {
+								"$ref": "#/components/schemas/BlockchainGenericAccount"
+							}
+						},
+						"required": [
+							"Address"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"Name": {
+								"$ref": "#/components/schemas/BlockchainAddressName"
+							}
+						},
+						"required": [
+							"Name"
+						],
+						"type": "object"
+					}
+				]
+			},
+			"AppAgentsChangeHotWalletArgs": {
+				"description": "`appAgentId` - The identifier of the App Agent whose hot wallet is being changed.\n\n`newHotWallet` - The new hot wallet to be set for the specified App Agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent whose hot wallet is being changed."
+					},
+					"newHotWallet": {
+						"$ref": "#/components/schemas/NamedAddressInput",
+						"description": "The new hot wallet to be set for the specified App Agent."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"newHotWallet"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsAddAdminArgs": {
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin to be added.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin to be added."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsRemoveAdminArgs": {
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin to be removed.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin to be removed."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UINT64": {
+				"type": "integer",
+				"format": "int64",
+				"description": "A numeric `integer` value represented with `number` or `string` type",
+				"minimum": 0,
+				"maximum": 18446744073709552000
+			},
+			"AppAgentsSetAdminDispatchFilterArgs": {
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin.\n\n`newPermissions`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin."
+					},
+					"newPermissions": {
+						"$ref": "#/components/schemas/UINT64"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"newPermissions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsClearAdminDispatchFilterArgs": {
+				"description": "`appAgentId` - The ID of the App Agent.\n\n`admin` - The account ID of the admin.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsAllowAdminColdWalletArgs": {
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`admin` - The admin address to be added to the list.\n\n`coldWallet`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The admin address to be added to the list."
+					},
+					"coldWallet": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"coldWallet"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsDisableAdminColdWalletDispatchArgs": {
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`admin` - The admin address to be removed from the list.\n\n`coldWallet`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The admin address to be removed from the list."
+					},
+					"coldWallet": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"coldWallet"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsAddAdminToNamedAddressArgs": {
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`admin` - The account ID of the admin being added.\n\n`namedAddress` - The named address to which the admin is being added.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin being added."
+					},
+					"namedAddress": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The named address to which the admin is being added."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"namedAddress"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsRemoveAdminFromNamedAddressDispatchArgs": {
+				"description": "`appAgentId` - The identifier of the App Agent.\n\n`admin` - The account ID of the admin being removed.\n\n`namedAddress` - The named address from which the admin is being removed.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the App Agent."
+					},
+					"admin": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the admin being removed."
+					},
+					"namedAddress": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The named address from which the admin is being removed."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"admin",
+					"namedAddress"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppSubscriptionsSetAppSubscriptionTierArgs": {
+				"description": "`appAgentId` - The identifier of the app agent whose subscription tier is to be changed.\n\n`subscriptionTierId` - The identifier of the new subscription tier to be assigned to the app agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the app agent whose subscription tier is to be changed."
+					},
+					"subscriptionTierId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the new subscription tier to be assigned to the app agent."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"subscriptionTierId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppPayOnDemandMode": {
+				"enum": [
+					"AppAgent",
+					"Admin",
+					"Disabled"
+				],
+				"type": "string"
+			},
+			"AppSubscriptionsSetAppPayOnDemandModeArgs": {
+				"description": "`appAgentId` - The identifier of the subscriber (app agent).\n\n`payOnDemandMode` - The pay-on-demand mode to be set for the subscription.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the subscriber (app agent)."
+					},
+					"payOnDemandMode": {
+						"$ref": "#/components/schemas/AppPayOnDemandMode",
+						"description": "The pay-on-demand mode to be set for the subscription."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"payOnDemandMode"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferFiltersBlockAddressDepositsArgs": {
+				"description": "`appAgentId`\n\n`keylessAddress`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"keylessAddress": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"keylessAddress"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferFiltersUnblockAddressDepositsArgs": {
+				"description": "`appAgentId`\n\n`keylessAddress`",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"keylessAddress": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"appAgentId",
+					"keylessAddress"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NativeDepositPermissionsDetails": {
+				"properties": {
+					"maxDeposit": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"minDeposit": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"allowed": {
+						"$ref": "#/components/schemas/BlockchainGenericBoolean"
+					}
+				},
+				"required": [
+					"allowed"
+				],
+				"type": "object"
+			},
+			"FungibleDepositAllowAll": {
+				"type": "string",
+				"enum": [
+					"AllowAll"
+				],
+				"nullable": false
+			},
+			"FungibleTokenDetails": {
+				"properties": {
+					"maxDeposit": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"minDeposit": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					},
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object"
+			},
+			"FungibleDepositAllowFungible": {
+				"properties": {
+					"AllowedFungibleTokens": {
+						"properties": {
+							"allowedTokens": {
+								"items": {
+									"$ref": "#/components/schemas/FungibleTokenDetails"
+								},
+								"type": "array"
+							},
+							"allowOwnTokens": {
+								"$ref": "#/components/schemas/BlockchainGenericBoolean"
+							}
+						},
+						"required": [
+							"allowedTokens",
+							"allowOwnTokens"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"AllowedFungibleTokens"
+				],
+				"type": "object"
+			},
+			"FungibleDepositDisallowFungible": {
+				"properties": {
+					"DisallowedFungibleTokens": {
+						"properties": {
+							"disallowedTokens": {
+								"items": {
+									"$ref": "#/components/schemas/BlockchainGenericId"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"disallowedTokens"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"DisallowedFungibleTokens"
+				],
+				"type": "object"
+			},
+			"FungibleDepositPermissionsType": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/FungibleDepositAllowAll"
+					},
+					{
+						"$ref": "#/components/schemas/FungibleDepositAllowFungible"
+					},
+					{
+						"$ref": "#/components/schemas/FungibleDepositDisallowFungible"
+					}
+				]
+			},
+			"NftsDepositAllowAll": {
+				"type": "string",
+				"enum": [
+					"AllowAll"
+				],
+				"nullable": false
+			},
+			"NftsDepositAllowNftCollections": {
+				"properties": {
+					"AllowedNftCollections": {
+						"properties": {
+							"allowedCollections": {
+								"items": {
+									"$ref": "#/components/schemas/BlockchainGenericId"
+								},
+								"type": "array"
+							},
+							"allowOwnCollections": {
+								"$ref": "#/components/schemas/BlockchainGenericBoolean"
+							}
+						},
+						"required": [
+							"allowedCollections",
+							"allowOwnCollections"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"AllowedNftCollections"
+				],
+				"type": "object"
+			},
+			"NftsDepositDisallowNftCollections": {
+				"properties": {
+					"DisallowedNftCollections": {
+						"properties": {
+							"disallowedCollections": {
+								"items": {
+									"$ref": "#/components/schemas/BlockchainGenericId"
+								},
+								"type": "array"
+							}
+						},
+						"required": [
+							"disallowedCollections"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"DisallowedNftCollections"
+				],
+				"type": "object"
+			},
+			"NftsDepositPermissionType": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/NftsDepositAllowAll"
+					},
+					{
+						"$ref": "#/components/schemas/NftsDepositAllowNftCollections"
+					},
+					{
+						"$ref": "#/components/schemas/NftsDepositDisallowNftCollections"
+					}
+				]
+			},
+			"AppDepositPermissions": {
+				"properties": {
+					"nftCollections": {
+						"$ref": "#/components/schemas/NftsDepositPermissionType"
+					},
+					"fungibles": {
+						"$ref": "#/components/schemas/FungibleDepositPermissionsType"
+					},
+					"native": {
+						"$ref": "#/components/schemas/NativeDepositPermissionsDetails"
+					}
+				},
+				"required": [
+					"nftCollections",
+					"fungibles",
+					"native"
+				],
+				"type": "object"
+			},
+			"AppTransferFiltersSetAppDepositPermissionsArgs": {
+				"description": "`appAgentId` - The identifier of the application agent for which the deposit permissions are being set.\n\n`permissions` - The deposit permissions to be set for the application agent.",
+				"properties": {
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the application agent for which the deposit permissions are being set."
+					},
+					"permissions": {
+						"$ref": "#/components/schemas/AppDepositPermissions",
+						"description": "The deposit permissions to be set for the application agent."
+					}
+				},
+				"required": [
+					"appAgentId",
+					"permissions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TxArgs": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/BalancesTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveArgs"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferItemArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsCreateAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsInitiateDestroyAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsProcessDestroyArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsCompleteDestroyAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsReactivateAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsPauseAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsUnpauseAppAgentArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerInitArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCompleteArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCancelArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsSetAppAgentMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsClearAppAgentMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsEnableHotWalletArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsDisableHotWalletArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeHotWalletArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAddAdminArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsSetAdminDispatchFilterArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsClearAdminDispatchFilterArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAllowAdminColdWalletArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAddAdminToNamedAddressArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminFromNamedAddressDispatchArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppSubscriptionTierArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppPayOnDemandModeArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersBlockAddressDepositsArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersUnblockAddressDepositsArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersSetAppDepositPermissionsArgs"
+					}
+				],
+				"description": "Represents a transaction args"
+			},
+			"BalancesTransferTx": {
+				"description": "Transfer some liquid free balance to another account.`transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BalancesTransferKeepAliveTx": {
+				"description": "Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account.99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransferKeepAlive",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BalancesTransferAllTx": {
+				"description": "Transfer the entire transferable balance from the caller account.NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransferAll",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferAllArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferTx": {
+				"description": "Move some assets from the sender account to another.Origin must be Signed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferKeepAliveTx": {
+				"description": "Move some assets from the sender account to another, keeping the sender account alive.Origin must be Signed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransferKeepAlive",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsTransferItemTx": {
+				"description": "Move an item from the sender account to another.Origin must be Signed and the signing account must be either:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsTransferItem",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsTransferItemArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsCreateAppAgentTx": {
+				"description": "Creates a new App Agent.This function is used to create a new App Agent with the specified owner. It generates the necessary addresses, reserves the required deposit, creates a cold address, and adds the App Agent details to storage. Additionally, it evaluates the subscription payment, and creates a transfer filter record for the App Agent. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsCreateAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsCreateAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsInitiateDestroyAppAgentTx": {
+				"description": "Initiate destroy of an App Agent.This function marks the specified `app_agent_id` as ready for deletion. It first checks if the App Agent exists in the storage. If the App Agent exists and is active, it sets the status to \"destroy initiated\" to prepare it for deletion. It then emits an event to indicate that the deletion process has been initiated for the App Agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsInitiateDestroyAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsInitiateDestroyAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsProcessDestroyTx": {
+				"description": "Processes the destruction of assets owned by the App Agent.This function is used to process the destruction of assets owned by the specified app agent. This extrinsic can be called multiple times to destroy all entities related to the app agent. On the first call the status of app agent changes to DestroyInProcess - after that app agent can not be reactivated. It emits `AppAgentDestroyProcessed` after the destruction process is completed. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsProcessDestroy",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsProcessDestroyArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsCompleteDestroyAppAgentTx": {
+				"description": "Completes the destruction process of the App Agent.This function is used to complete the destruction process of the specified App Agent. It marks the App Agent as Destroyed and removes its metadata storage. After completion, it emits an event to indicate the status change of the App Agent. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsCompleteDestroyAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsCompleteDestroyAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsReactivateAppAgentTx": {
+				"description": "Reactivates the specified App Agent.This function is used to reactivate a previously deactivated App Agent. It checks if the App Agent exists and is in the DestroyInitiated state. If so, it verifies whether the deletion window has passed. If the deletion was initiated by the system, it attempts to process a subscription payment to prevent deletion and sets the App Agent to active status. If the deletion was triggered by the owner, it resets the App Agent to active without any checks. After reactivation, it emits an event to indicate the status change of the App Agent. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsReactivateAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsReactivateAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsPauseAppAgentTx": {
+				"description": "Pauses the specified App Agent.This function verifies that the caller has the necessary permissions to pause the app agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsPauseAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsPauseAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsUnpauseAppAgentTx": {
+				"description": "Resumes the specified App Agent.This function verifies that the caller has the necessary permissions to resume the app agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsUnpauseAppAgent",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsUnpauseAppAgentArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeOwnerInitTx": {
+				"description": "Initializes the process to change the ownership of an App Agent.This function is used to initiate the process of changing the ownership of an app agent. The caller must be the current owner of the App Agent, and the proposed owner must not be a keyless address.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsChangeOwnerInit",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerInitArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeOwnerCompleteTx": {
+				"description": "Completes a change of owner for an App Agent.This function is used to complete a previously proposed change of owner for an app agent. The caller must be the proposed owner of the App Agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsChangeOwnerComplete",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCompleteArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeOwnerCancelTx": {
+				"description": "Cancels a change of owner for an App Agent.This function is used to cancel a previously proposed change of owner for an app agent. The caller must be the current owner of the App Agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsChangeOwnerCancel",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCancelArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsSetAppAgentMetadataTx": {
+				"description": "Set the metadata for an asset class.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsSetAppAgentMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsSetAppAgentMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsClearAppAgentMetadataTx": {
+				"description": "Clear the metadata for an asset class.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Owner of the asset `class`. Any deposit is freed for the asset class owner.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsClearAppAgentMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsClearAppAgentMetadataArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsEnableHotWalletTx": {
+				"description": "Enables the hot wallet for a specified App Agent.This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to enable the hot wallet associated with it.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsEnableHotWallet",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsEnableHotWalletArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsDisableHotWalletTx": {
+				"description": "Disables the hot wallet for a specified App Agent.This function is a dispatchable call that allows the owner of the app agent identified by `app_agent_id` to disable the hot wallet associated with it.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsDisableHotWallet",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsDisableHotWalletArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsChangeHotWalletTx": {
+				"description": "Change the hot wallet associated with an App Agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsChangeHotWallet",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsChangeHotWalletArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsAddAdminTx": {
+				"description": "Adds an admin to the App Agent.This function is used to add an admin to the App Agent. The caller must be the current owner of the App Agent, and the admin must not be a keyless address. The function also checks that the admin is not already present in the list of admins for the App Agent. The caller is also required to reserve the admin deposit amount.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsAddAdmin",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsAddAdminArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsRemoveAdminTx": {
+				"description": "Removes an admin from the App Agent.This function is used to remove an admin from the App Agent. The caller must be the current owner of the App Agent, and the admin must be present in the list of admins. The function also releases the reserved admin deposit amount.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsRemoveAdmin",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsSetAdminDispatchFilterTx": {
+				"description": "Sets the list of dispatchables callable by the specified `admin` account.The dispatch filter allows restricting the functions that can be called by an admin. If the dispatch filter is not set for an admin, the admin can call all functions. If the dispatch filter is set, the admin can only call the functions allowed by the filter.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsSetAdminDispatchFilter",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsSetAdminDispatchFilterArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsClearAdminDispatchFilterTx": {
+				"description": "Clears the dispatch filter for the specified `admin` account.The dispatch filter allows restricting the functions that can be called by an admin. By clearing the dispatch filter, the admin will have access to all functions.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsClearAdminDispatchFilter",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsClearAdminDispatchFilterArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsAllowAdminColdWalletTx": {
+				"description": "Pallet function to add an AppAgent' admin to the list of addresses allowed to spend from a cold wallet associated with a specific App Agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsAllowAdminColdWallet",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsAllowAdminColdWalletArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsDisableAdminColdWalletDispatchTx": {
+				"description": "Pallet function to remove an AppAgent' admin from the list of addresses allowed to spend from a cold wallet associated with a specific App Agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsDisableAdminColdWalletDispatch",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsAddAdminToNamedAddressTx": {
+				"description": "Adds an admin to the list of permitted administrators for a named address under a specific App Agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsAddAdminToNamedAddress",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsAddAdminToNamedAddressArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppAgentsRemoveAdminFromNamedAddressDispatchTx": {
+				"description": "Removes an admin from the list of permitted administrators for a named address under a specific App Agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppAgentsRemoveAdminFromNamedAddressDispatch",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminFromNamedAddressDispatchArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppSubscriptionsSetAppSubscriptionTierTx": {
+				"description": "Changes the subscription tier of an app agent.This function allows changing the subscription tier of an app agent identified by its subscriber ID. It calculates the difference in price between the current and new tiers and adjusts the subscription limits accordingly. If the new tier is more expensive, it charges the delta payment and updates the action points and clearing points balances for the current billing period. After the adjustment, it updates the subscription tier information for the app agent and emits an event indicating the change in subscription tier. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppSubscriptionsSetAppSubscriptionTier",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppSubscriptionTierArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppSubscriptionsSetAppPayOnDemandModeTx": {
+				"description": "Sets the pay-on-demand mode for an app agent's subscription.This function allows setting the pay-on-demand mode for an app agent's subscription. Parameters:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppSubscriptionsSetAppPayOnDemandMode",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppPayOnDemandModeArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferFiltersBlockAddressDepositsTx": {
+				"description": "Blocks deposits to a keyless address controlled by a specific app agent.* `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address (controlled by AppAgent) to block. * `DispatchResult` - Indicates whether the transaction was successful or failed. Returns an error if: * The keyless address is already blocked (`Error::<T>::KeylessAddressDepositsAlreadyBlocked`).",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferFiltersBlockAddressDeposits",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferFiltersBlockAddressDepositsArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferFiltersUnblockAddressDepositsTx": {
+				"description": "Unblocks deposits to a keyless address controlled by a specific app agent.* `app_agent_id` - The ID of the app agent. * `keyless_address` - The keyless address to unblock. * `DispatchResult` - Indicates whether the transaction was successful or failed. Returns an error if: * The keyless address is not blocked (`Error::<T>::KeylessAddressDepositsAreNotBlocked`).",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferFiltersUnblockAddressDeposits",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferFiltersUnblockAddressDepositsArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferFiltersSetAppDepositPermissionsTx": {
+				"description": "Sets the transdepositfer permissions for the specified app_agent_id under the authority of the caller's origin.This function allows the owner/admin of the app_agent_id to set the deposit permissions for the application agent. The caller must provide a valid origin that proves their authority over the app_agent_id. The permissions parameter represents the new deposit permissions to be set for the application agent.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferFiltersSetAppDepositPermissions",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferFiltersSetAppDepositPermissionsArgs",
+						"description": "The arguments for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Tx": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/BalancesTransferTx"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveTx"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferTx"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveTx"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferItemTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsCreateAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsInitiateDestroyAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsProcessDestroyTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsCompleteDestroyAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsReactivateAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsPauseAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsUnpauseAppAgentTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerInitTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCompleteTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeOwnerCancelTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsSetAppAgentMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsClearAppAgentMetadataTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsEnableHotWalletTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsDisableHotWalletTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsChangeHotWalletTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAddAdminTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsSetAdminDispatchFilterTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsClearAdminDispatchFilterTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAllowAdminColdWalletTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsDisableAdminColdWalletDispatchTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsAddAdminToNamedAddressTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppAgentsRemoveAdminFromNamedAddressDispatchTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppSubscriptionTierTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppSubscriptionsSetAppPayOnDemandModeTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersBlockAddressDepositsTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersUnblockAddressDepositsTx"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferFiltersSetAppDepositPermissionsTx"
+					}
+				],
+				"description": "Represents a single transaction"
+			},
+			"TransactionPayload": {
+				"description": "Payload for a transaction.",
+				"properties": {
+					"signatory": {
+						"type": "string",
+						"description": "The signatory responsible for the transaction."
+					},
+					"tx": {
+						"$ref": "#/components/schemas/Tx",
+						"description": "Transaction data"
+					}
+				},
+				"required": [
+					"signatory",
+					"tx"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BlockchainGenericAddressId": {
+				"$ref": "#/components/schemas/UINT128",
+				"description": "Unique address id on blockchain (TransactionalAddressId)\nTypically, it is a numeric value."
+			},
+			"CTActionOrigin": {
+				"anyOf": [
+					{
+						"properties": {
+							"AppAgentId": {
+								"$ref": "#/components/schemas/BlockchainGenericId",
+								"description": "The ID of the application agent."
+							}
+						},
+						"required": [
+							"AppAgentId"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"AppAgentAddress": {
+								"$ref": "#/components/schemas/BlockchainGenericAccount",
+								"description": "The address of the application agent."
+							}
+						},
+						"required": [
+							"AppAgentAddress"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"TransactionalAddressId": {
+								"$ref": "#/components/schemas/BlockchainGenericAddressId",
+								"description": "The ID of the transactional address."
+							}
+						},
+						"required": [
+							"TransactionalAddressId"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"TransactionalAddress": {
+								"$ref": "#/components/schemas/BlockchainGenericAccount",
+								"description": "The transactional address."
+							}
+						},
+						"required": [
+							"TransactionalAddress"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"NamedAddress": {
+								"$ref": "#/components/schemas/BlockchainGenericAccount",
+								"description": "The named address."
+							}
+						},
+						"required": [
+							"NamedAddress"
+						],
+						"type": "object"
+					},
+					{
+						"properties": {
+							"NamedAddressName": {
+								"$ref": "#/components/schemas/BlockchainAddressName",
+								"description": "The name of the named address."
+							}
+						},
+						"required": [
+							"NamedAddressName"
+						],
+						"type": "object"
+					}
+				],
+				"description": "The origin type for each Action in CT"
+			},
+			"ExtrinsicType.AppTransferChannelsEstablishTransferChannel": {
+				"enum": [
+					"appTransferChannels.establishTransferChannel"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AppTransferChannelsRemoveTransferChannel": {
+				"enum": [
+					"appTransferChannels.removeTransferChannel"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsCreate": {
+				"enum": [
+					"assets.create"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsStartDestroy": {
+				"enum": [
+					"assets.startDestroy"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsDestroyAccounts": {
+				"enum": [
+					"assets.destroyAccounts"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsDestroyApprovals": {
+				"enum": [
+					"assets.destroyApprovals"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsFinishDestroy": {
+				"enum": [
+					"assets.finishDestroy"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsMint": {
+				"enum": [
+					"assets.mint"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsBurn": {
+				"enum": [
+					"assets.burn"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsForceTransfer": {
+				"enum": [
+					"assets.forceTransfer"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsFreezeAccount": {
+				"enum": [
+					"assets.freeze"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsThawAccount": {
+				"enum": [
+					"assets.thaw"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsFreezeAsset": {
+				"enum": [
+					"assets.freezeAsset"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsThawAsset": {
+				"enum": [
+					"assets.thawAsset"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsTransferOwnership": {
+				"enum": [
+					"assets.transferOwnership"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsSetMinBalance": {
+				"enum": [
+					"assets.setMinBalance"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.AssetsSetMetadata": {
+				"enum": [
+					"assets.setMetadata"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsCreateCollection": {
+				"enum": [
+					"nfts.create"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsDestroyCollection": {
+				"enum": [
+					"nfts.destroy"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsTransferCollectionOwnership": {
+				"enum": [
+					"nfts.transferOwnership"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsAcceptCollectionOwnership": {
+				"enum": [
+					"nfts.setAcceptOwnership"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsSetCollectionMetadata": {
+				"enum": [
+					"nfts.setCollectionMetadata"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsClearCollectionMetadata": {
+				"enum": [
+					"nfts.clearCollectionMetadata"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsMintItem": {
+				"enum": [
+					"nfts.mint"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsBurnItem": {
+				"enum": [
+					"nfts.burn"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsLockItemTransfer": {
+				"enum": [
+					"nfts.lockItemTransfer"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsUnlockItemTransfer": {
+				"enum": [
+					"nfts.unlockItemTransfer"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsSetItemMetadata": {
+				"enum": [
+					"nfts.setMetadata"
+				],
+				"type": "string"
+			},
+			"ExtrinsicType.NftsClearItemMetadata": {
+				"enum": [
+					"nfts.clearMetadata"
+				],
+				"type": "string"
+			},
+			"ActionType": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferChannelsEstablishTransferChannel"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferChannelsRemoveTransferChannel"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsCreate"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsStartDestroy"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsDestroyAccounts"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsDestroyApprovals"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsFinishDestroy"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsMint"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsBurn"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransferKeepAlive"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsForceTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsFreezeAccount"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsThawAccount"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsFreezeAsset"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsThawAsset"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransferOwnership"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsSetMinBalance"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsSetMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransferKeepAlive"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransferAll"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsCreateCollection"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsDestroyCollection"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsTransferCollectionOwnership"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsAcceptCollectionOwnership"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsSetCollectionMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsClearCollectionMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsMintItem"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsBurnItem"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsTransferItem"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsLockItemTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsUnlockItemTransfer"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsSetItemMetadata"
+					},
+					{
+						"$ref": "#/components/schemas/ExtrinsicType.NftsClearItemMetadata"
+					}
+				]
+			},
+			"AssetsCreateArgs": {
+				"description": "`minBalance`",
+				"properties": {
+					"minBalance": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance"
+					}
+				},
+				"required": [
+					"minBalance"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsStartDestroyArgs": {
+				"description": "`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsDestroyAccountsArgs": {
+				"description": "`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsDestroyApprovalsArgs": {
+				"description": "`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsFinishDestroyArgs": {
+				"description": "`id` - The identifier of the asset to be destroyed. This must identify an existing asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be destroyed. This must identify an existing asset."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsMintArgs": {
+				"description": "`id` - The identifier of the asset to have some amount minted.\n\n`beneficiary` - The account to be credited with the minted assets.\n\n`amount` - The amount of the asset to be minted.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount minted."
+					},
+					"beneficiary": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited with the minted assets."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount of the asset to be minted."
+					}
+				},
+				"required": [
+					"id",
+					"beneficiary",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsBurnArgs": {
+				"description": "`id` - The identifier of the asset to have some amount burned.\n\n`who` - The account to be debited from.\n\n`amount` - The maximum amount by which `who`'s balance should be reduced.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount burned."
+					},
+					"who": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be debited from."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The maximum amount by which `who`'s balance should be reduced."
+					}
+				},
+				"required": [
+					"id",
+					"who",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsForceTransferArgs": {
+				"description": "`id` - The identifier of the asset to have some amount transferred.\n\n`source` - The account to be debited.\n\n`dest` - The account to be credited.\n\n`amount` - The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to have some amount transferred."
+					},
+					"source": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be debited."
+					},
+					"dest": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be credited."
+					},
+					"amount": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The amount by which the `source`'s balance of assets should be reduced and `dest`'s balance increased. The amount actually transferred may be slightly greater in the case that the transfer would otherwise take the `source` balance above zero but below the minimum balance. Must be greater than zero."
+					}
+				},
+				"required": [
+					"id",
+					"source",
+					"dest",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsFreezeAccountArgs": {
+				"description": "`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be frozen.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be frozen."
+					},
+					"who": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be frozen."
+					}
+				},
+				"required": [
+					"id",
+					"who"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsThawAccountArgs": {
+				"description": "`id` - The identifier of the asset to be frozen.\n\n`who` - The account to be unfrozen.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be frozen."
+					},
+					"who": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account to be unfrozen."
+					}
+				},
+				"required": [
+					"id",
+					"who"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsFreezeAssetArgs": {
+				"description": "`id` - The identifier of the asset to be frozen.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be frozen."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsThawAssetArgs": {
+				"description": "`id` - The identifier of the asset to be thawed.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to be thawed."
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferOwnershipArgs": {
+				"description": "`id` - The identifier of the asset.\n\n`owner` - The new Owner of this asset.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset."
+					},
+					"owner": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The new Owner of this asset."
+					}
+				},
+				"required": [
+					"id",
+					"owner"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsSetMetadataArgs": {
+				"description": "`id` - The identifier of the asset to update.\n\n`data` - The data of metadata. Limited in length by `StringLimit`.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset to update."
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The data of metadata. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"id",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsSetMinBalanceArgs": {
+				"description": "`id` - The identifier of the asset.\n\n`minBalance` - The new value of `min_balance`.",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the asset."
+					},
+					"minBalance": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The new value of `min_balance`."
+					}
+				},
+				"required": [
+					"id",
+					"minBalance"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsCreateCollectionArgs": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftWitness": {
+				"properties": {
+					"attributes": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"itemConfigs": {
+						"$ref": "#/components/schemas/UINT32"
+					},
+					"itemMetadatas": {
+						"$ref": "#/components/schemas/UINT32"
+					}
+				},
+				"required": [
+					"attributes",
+					"itemConfigs",
+					"itemMetadatas"
+				],
+				"type": "object"
+			},
+			"NftsDestroyCollectionArgs": {
+				"description": "`collection` - The identifier of the collection to be destroyed.\n\n`witness` - Information on the items minted in the collection. This must be correct.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection to be destroyed."
+					},
+					"witness": {
+						"$ref": "#/components/schemas/NftWitness",
+						"description": "Information on the items minted in the collection. This must be correct."
+					}
+				},
+				"required": [
+					"collection",
+					"witness"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsMintItemArgs": {
+				"description": "`collection`\n\n`item`\n\n`mintTo`",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId"
+					},
+					"mintTo": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"collection",
+					"item",
+					"mintTo"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsBurnItemArgs": {
+				"description": "`collection` - The collection of the item to be burned.\n\n`item` - The item to be burned.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be burned."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to be burned."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsLockItemTransferArgs": {
+				"description": "`collection` - The collection of the item to be changed.\n\n`item` - The item to become non-transferable.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be changed."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to become non-transferable."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsUnlockItemTransferArgs": {
+				"description": "`collection` - The collection of the item to be changed.\n\n`item` - The item to become transferable.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection of the item to be changed."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The item to become transferable."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsTransferCollectionOwnershipArgs": {
+				"description": "`collection` - The collection whose owner should be changed.\n\n`newOwner`",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The collection whose owner should be changed."
+					},
+					"newOwner": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount"
+					}
+				},
+				"required": [
+					"collection",
+					"newOwner"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsSetItemMetadataArgs": {
+				"description": "`collection` - The identifier of the collection whose item's metadata to set.\n\n`item` - The identifier of the item whose metadata to set.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose item's metadata to set."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the item whose metadata to set."
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The general information of this item. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"collection",
+					"item",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsClearItemMetadataArgs": {
+				"description": "`collection` - The identifier of the collection whose item's metadata to clear.\n\n`item` - The identifier of the item whose metadata to clear.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose item's metadata to clear."
+					},
+					"item": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the item whose metadata to clear."
+					}
+				},
+				"required": [
+					"collection",
+					"item"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsSetCollectionMetadataArgs": {
+				"description": "`collection` - The identifier of the item whose metadata to update.\n\n`data` - The general information of this item. Limited in length by `StringLimit`.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the item whose metadata to update."
+					},
+					"data": {
+						"$ref": "#/components/schemas/BlockchainGenericText",
+						"description": "The general information of this item. Limited in length by `StringLimit`."
+					}
+				},
+				"required": [
+					"collection",
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsClearCollectionMetadataArgs": {
+				"description": "`collection` - The identifier of the collection whose metadata to clear.",
+				"properties": {
+					"collection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose metadata to clear."
+					}
+				},
+				"required": [
+					"collection"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsAcceptCollectionOwnershipArgs": {
+				"description": "`maybeCollection` - The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal.",
+				"properties": {
+					"maybeCollection": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The identifier of the collection whose ownership the signer is willing to accept, or if `None`, an indication that the signer is willing to accept no ownership transferal."
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferChannelsEstablishTransferChannelArgs": {
+				"description": "`senderAccount` - The account ID of the sender address for the new transfer channel.\n\n`transfersLimitResetPeriod` - The number of blocks after which the transfer limit resets\n\n`transfersLimitPerPeriod` - The number of transfers allowed per period",
+				"properties": {
+					"senderAccount": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the sender address for the new transfer channel."
+					},
+					"transfersLimitResetPeriod": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The number of blocks after which the transfer limit resets"
+					},
+					"transfersLimitPerPeriod": {
+						"$ref": "#/components/schemas/BlockchainGenericBalance",
+						"description": "The number of transfers allowed per period"
+					}
+				},
+				"required": [
+					"senderAccount",
+					"transfersLimitResetPeriod",
+					"transfersLimitPerPeriod"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferChannelsRemoveTransferChannelArgs": {
+				"description": "`senderAccount` - The account ID of the sender address for the transfer channel to be removed.",
+				"properties": {
+					"senderAccount": {
+						"$ref": "#/components/schemas/BlockchainGenericAccount",
+						"description": "The account ID of the sender address for the transfer channel to be removed."
+					}
+				},
+				"required": [
+					"senderAccount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ActionArgs": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/BalancesTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveArgs"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsCreateArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsStartDestroyArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyAccountsArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyApprovalsArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFinishDestroyArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsMintArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsBurnArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsForceTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAccountArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAccountArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAssetArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAssetArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferOwnershipArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMinBalanceArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsCreateCollectionArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsDestroyCollectionArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsMintItemArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsBurnItemArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferItemArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsLockItemTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsUnlockItemTransferArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetItemMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearItemMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetCollectionMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearCollectionMetadataArgs"
+					},
+					{
+						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferChannelsEstablishTransferChannelArgs"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferChannelsRemoveTransferChannelArgs"
+					}
+				],
+				"description": "Represents a CT action args."
+			},
+			"BalancesTransferAction": {
+				"description": "Transfer some liquid free balance to another account.`transfer_allow_death` will set the `FreeBalance` of the sender and receiver. If the sender's account is below the existential deposit as a result of the transfer, the account will be reaped. The dispatch origin for this call must be `Signed` by the transactor.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BalancesTransferKeepAliveAction": {
+				"description": "Same as the [`transfer_allow_death`] call, but with a check that the transfer will not kill the origin account.99% of the time you want [`transfer_allow_death`] instead. [`transfer_allow_death`]: struct.Pallet.html#method.transfer",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransferKeepAlive",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"BalancesTransferAllAction": {
+				"description": "Transfer the entire transferable balance from the caller account.NOTE: This function only attempts to transfer _transferable_ balances. This means that any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be transferred by this function. To ensure that this function results in a killed account, you might need to prepare the account by removing any reference counters, storage deposits, etc... The dispatch origin of this call must be Signed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.BalancesTransferAll",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/BalancesTransferAllArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsCreateAction": {
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsCreate",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsCreateArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsStartDestroyAction": {
+				"description": "Start the process of destroying a fungible asset class.`start_destroy` is the first in a series of extrinsics that should be called, to allow destruction of an asset class. The origin must conform to `ForceOrigin` or must be `Signed` by the asset's `owner`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsStartDestroy",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsStartDestroyArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsDestroyAccountsAction": {
+				"description": "Destroy all accounts associated with a given asset.`destroy_accounts` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all accounts. It will destroy `RemoveItemsLimit` accounts at a time.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsDestroyAccounts",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsDestroyAccountsArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsDestroyApprovalsAction": {
+				"description": "Destroy all approvals associated with a given asset up to the max (T::RemoveItemsLimit).`destroy_approvals` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. Due to weight restrictions, this function may need to be called multiple times to fully destroy all approvals. It will destroy `RemoveItemsLimit` approvals at a time.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsDestroyApprovals",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsDestroyApprovalsArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsFinishDestroyAction": {
+				"description": "Complete destroying asset and unreserve currency.`finish_destroy` should only be called after `start_destroy` has been called, and the asset is in a `Destroying` state. All accounts or approvals should be destroyed before hand.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsFinishDestroy",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsFinishDestroyArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsMintAction": {
+				"description": "Mint assets of a particular class.The origin must be Signed and the sender must be the Issuer of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsMint",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsMintArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsBurnAction": {
+				"description": "Reduce the balance of `who` by as much as possible up to `amount` assets of `id`.Origin must be Signed and the sender should be the Manager of the asset `id`. Bails with `NoAccount` if the `who` is already dead.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsBurn",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsBurnArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferAction": {
+				"description": "Move some assets from the sender account to another.Origin must be Signed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferKeepAliveAction": {
+				"description": "Move some assets from the sender account to another, keeping the sender account alive.Origin must be Signed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransferKeepAlive",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsForceTransferAction": {
+				"description": "Move some assets from one account to another.Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsForceTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsForceTransferArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsFreezeAccountAction": {
+				"description": "Disallow further unprivileged transfers of an asset `id` from an account `who`.`who` must already exist as an entry in `Account`s of the asset. If you want to freeze an account that does not have an entry, use `touch_other` first. Origin must be Signed and the sender should be the Freezer of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsFreezeAccount",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsFreezeAccountArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsThawAccountAction": {
+				"description": "Allow unprivileged transfers to and from an account again.Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsThawAccount",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsThawAccountArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsFreezeAssetAction": {
+				"description": "Disallow further unprivileged transfers for the asset class.Origin must be Signed and the sender should be the Freezer of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsFreezeAsset",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsFreezeAssetArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsThawAssetAction": {
+				"description": "Allow unprivileged transfers for the asset again.Origin must be Signed and the sender should be the Admin of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsThawAsset",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsThawAssetArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsTransferOwnershipAction": {
+				"description": "Change the Owner of an asset.Origin must be Signed and the sender should be the Owner of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsTransferOwnership",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsTransferOwnershipArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsSetMetadataAction": {
+				"description": "Set the raw metadata for an asset.Origin must be Signed and the sender should be the Owner of the asset `id`. Funds of sender are reserved according to the formula: `MetadataDepositBase + MetadataDepositPerByte * (data.len)` taking into account any already reserved funds.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsSetMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsSetMetadataArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AssetsSetMinBalanceAction": {
+				"description": "Sets the minimum balance of an asset.Only works if there aren't any accounts that are holding the asset or if the new value of `min_balance` is less than the old one. Origin must be Signed and the sender has to be the Owner of the asset `id`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AssetsSetMinBalance",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AssetsSetMinBalanceArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsCreateCollectionAction": {
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsCreateCollection",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsCreateCollectionArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsDestroyCollectionAction": {
+				"description": "Destroy a collection of fungible items.The origin must conform to `ForceOrigin` or must be `Signed` and the sender must be the owner of the `collection`. NOTE: The collection must have 0 items to be destroyed.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsDestroyCollection",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsDestroyCollectionArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsMintItemAction": {
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsMintItem",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsMintItemArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsBurnItemAction": {
+				"description": "Destroy a single item.The origin must conform to `ForceOrigin` or must be Signed and the signing account must be the owner of the `item`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsBurnItem",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsBurnItemArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsTransferItemAction": {
+				"description": "Move an item from the sender account to another.Origin must be Signed and the signing account must be either:",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsTransferItem",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsTransferItemArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsLockItemTransferAction": {
+				"description": "Disallow further unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsLockItemTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsLockItemTransferArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsUnlockItemTransferAction": {
+				"description": "Re-allow unprivileged transfer of an item.Origin must be Signed and the sender should be the Freezer of the `collection`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsUnlockItemTransfer",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsUnlockItemTransferArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsTransferCollectionOwnershipAction": {
+				"description": "Change the Owner of a collection.Origin must be Signed and the sender should be the Owner of the `collection`.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsTransferCollectionOwnership",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsSetItemMetadataAction": {
+				"description": "Set the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. If the origin is Signed, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsSetItemMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsSetItemMetadataArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsClearItemMetadataAction": {
+				"description": "Clear the metadata for an item.Origin must be either `ForceOrigin` or Signed and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsClearItemMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsClearItemMetadataArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsSetCollectionMetadataAction": {
+				"description": "Set the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. If the origin is `Signed`, then funds of signer are reserved according to the formula: `MetadataDepositBase + DepositPerByte * data.len` taking into account any already reserved funds.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsSetCollectionMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsSetCollectionMetadataArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsClearCollectionMetadataAction": {
+				"description": "Clear the metadata for a collection.Origin must be either `ForceOrigin` or `Signed` and the sender should be the Admin of the `collection`. Any deposit is freed for the collection's owner.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsClearCollectionMetadata",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsClearCollectionMetadataArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"NftsAcceptCollectionOwnershipAction": {
+				"description": "Set (or reset) the acceptance of ownership for a particular account.Origin must be `Signed` and if `maybe_collection` is `Some`, then the signer must have a provider reference.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.NftsAcceptCollectionOwnership",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferChannelsEstablishTransferChannelAction": {
+				"description": "Establishes a new transfer channel between two accounts.This extrinsic allows the account specified by `origin` to establish a new transfer channel between itself (`recipient_account`) and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that the recipient is a valid transactional address (TA). If all conditions are met, a new transfer channel is created with an initial set of parameters, and an event is emitted to indicate the successful channel establishment. This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferChannelsEstablishTransferChannel",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferChannelsEstablishTransferChannelArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"AppTransferChannelsRemoveTransferChannelAction": {
+				"description": "Removes a transfer channel between two accounts.This extrinsic allows the account specified by `origin` to remove a previously created transfer channel between itself and the `sender_account`. The function checks various conditions, including ensuring that the recipient is not the same as the sender address and that a transfer channel exists between them. If all conditions are met, the transfer channel is removed, and an event is emitted to indicate the successful removal. This method can be called only by a Transactional address. Which means this call can be submitted only within a Clearing transaction. Thus implicit cost of creation of a Transfer channel - 1 Action point, cost of adding an action in a Clearing transaction.",
+				"properties": {
+					"actionType": {
+						"$ref": "#/components/schemas/ExtrinsicType.AppTransferChannelsRemoveTransferChannel",
+						"description": "The type of transaction to be performed"
+					},
+					"arguments": {
+						"$ref": "#/components/schemas/AppTransferChannelsRemoveTransferChannelArgs",
+						"description": "The arguments for the transaction."
+					},
+					"origin": {
+						"$ref": "#/components/schemas/CTActionOrigin",
+						"description": "The origin responsible for the transaction."
+					}
+				},
+				"required": [
+					"actionType",
+					"arguments",
+					"origin"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CTAtomicAction": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/BalancesTransferAction"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferKeepAliveAction"
+					},
+					{
+						"$ref": "#/components/schemas/BalancesTransferAllAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsCreateAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsStartDestroyAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyAccountsAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsDestroyApprovalsAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFinishDestroyAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsMintAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsBurnAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferKeepAliveAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsForceTransferAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAccountAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAccountAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsFreezeAssetAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsThawAssetAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsTransferOwnershipAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/AssetsSetMinBalanceAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsCreateCollectionAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsDestroyCollectionAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsMintItemAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsBurnItemAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferItemAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsLockItemTransferAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsUnlockItemTransferAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsTransferCollectionOwnershipAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetItemMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearItemMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsSetCollectionMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsClearCollectionMetadataAction"
+					},
+					{
+						"$ref": "#/components/schemas/NftsAcceptCollectionOwnershipAction"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferChannelsEstablishTransferChannelAction"
+					},
+					{
+						"$ref": "#/components/schemas/AppTransferChannelsRemoveTransferChannelAction"
+					}
+				],
+				"description": "Represents a single action within an atomic operation."
+			},
+			"CTAtomic": {
+				"description": "Represents an atomic operation.",
+				"properties": {
+					"actions": {
+						"items": {
+							"$ref": "#/components/schemas/CTAtomicAction"
+						},
+						"type": "array",
+						"description": "A list of actions that make up the atomic operation."
+					}
+				},
+				"required": [
+					"actions"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ClearingTransactionPayload": {
+				"description": "Payload for a clearing transaction.",
+				"properties": {
+					"signatory": {
+						"type": "string",
+						"description": "The signatory responsible for the transaction."
+					},
+					"appAgentId": {
+						"$ref": "#/components/schemas/BlockchainGenericId",
+						"description": "The ID of the application agent initiating the transaction."
+					},
+					"atomics": {
+						"items": {
+							"$ref": "#/components/schemas/CTAtomic"
+						},
+						"type": "array",
+						"description": "A list of atomic operations included in the transaction."
+					}
+				},
+				"required": [
+					"signatory",
+					"appAgentId",
+					"atomics"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"ApiKeyAuth": {
+				"type": "apiKey",
+				"name": "X-API-KEY",
+				"in": "header"
+			}
+		}
+	},
+	"info": {
+		"title": "@traittech/actiongate",
+		"version": "0.1.0",
+		"description": "The app provides a convenient REST API to submit new transactions to the TRAIT blockchain.",
+		"license": {
+			"name": "Apache-2.0"
+		},
+		"contact": {
+			"name": "TRAIT Team"
+		}
+	},
+	"paths": {
+		"/submit/transaction": {
+			"post": {
+				"operationId": "SubmitTransaction",
+				"responses": {
+					"200": {
+						"description": "Submitted transaction hash",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 422,
+											"error_description": "Validation Error"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 500,
+											"error_description": "Internal Server Error"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"summary": "Submit a transaction",
+				"tags": [
+					"Transactions"
+				],
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "Payload for submitting a transaction",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TransactionPayload",
+								"description": "Payload for submitting a transaction"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/submit/clearing_transaction": {
+			"post": {
+				"operationId": "SubmitClearingTransaction",
+				"responses": {
+					"200": {
+						"description": "Submitted transaction hash",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Unprocessable Entity",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 422,
+											"error_description": "Validation Error"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TransactionErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"status": "failed",
+											"error_code": 500,
+											"error_description": "Internal Server Error"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"summary": "Submit a clearing transaction",
+				"tags": [
+					"Transactions"
+				],
+				"security": [
+					{
+						"ApiKeyAuth": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "Payload for submitting a clearing transaction",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ClearingTransactionPayload",
+								"description": "Payload for submitting a clearing transaction"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "http://localhost:8080",
+			"description": "Local server"
+		}
+	]
+}
