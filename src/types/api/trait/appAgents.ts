@@ -17,7 +17,7 @@ type FungibleDestroyDetail = {
 type NonFungibleDestroyDetail = {
   collectionId: UINT32;
   itemId: UINT32;
-}
+};
 
 type OwnFungibleDestroyDetail = {
   id: BlockchainGenericId;

@@ -1,3 +1,4 @@
+import { HttpError, HttpStatusCode } from '../http';
 import { loadConfig } from '../functions/config';
 
 import type { Request } from 'express';
@@ -10,8 +11,16 @@ export async function expressAuthentication(req: Request, securityName: string):
     if (securityName === 'ApiKeyAuth') {
       const apiKey = req.headers['x-api-key'] as string | undefined;
 
-      if (!(apiKey && apiKeys.includes(apiKey))) {
-        return Promise.reject(new Error('Access is forbidden due to the wrong API key.'));
+      if (!apiKey) {
+        return Promise.reject(
+          new HttpError('Access denied without API key in "X-API-KEY" header.', HttpStatusCode.Unauthorized)
+        );
+      }
+
+      if (!apiKeys.includes(apiKey)) {
+        return Promise.reject(
+          new HttpError('Access is forbidden due to the wrong API key.', HttpStatusCode.Forbidden)
+        );
       }
     }
   }

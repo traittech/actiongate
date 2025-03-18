@@ -21,18 +21,17 @@ const FungibleDestroyDetailSchema = z.object({
 
 /**
  * Override `{ collectionId: UINT32; itemId: UINT32; }` is used for API.
- * 
+ *
  * Tuple `[UINT32, UINT32]` used in blockchain.
  */
-const NonFungibleDestroyDetailSchema = z.object({
-  collectionId: UINT32Schema,
-  itemId: UINT32Schema,
-}).transform((v) => {
-  return [
-    v.collectionId,
-    v.itemId
-  ];
-});
+const NonFungibleDestroyDetailSchema = z
+  .object({
+    collectionId: UINT32Schema,
+    itemId: UINT32Schema,
+  })
+  .transform((v) => {
+    return [v.collectionId, v.itemId];
+  });
 
 const OwnFungibleDestroyDetailSchema = z.object({
   id: BlockchainGenericIdSchema,
